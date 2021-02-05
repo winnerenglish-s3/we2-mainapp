@@ -350,6 +350,7 @@
 import { db } from "src/router";
 import getColorTheme from "../../public/themeColor.json";
 import { ref, reactive, computed, onMounted, onUnmounted, onBeforeUnmount } from "vue";
+import { useRouter, useRoute } from "vue-router";
 export default {
   setup(props) {
     // Set Router
