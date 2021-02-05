@@ -1,0 +1,5285 @@
+<template>
+  <svg
+    style="width:100%;height:100%;"
+    width="1240"
+    height="347"
+    viewBox="0 0 1240 347"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="Frame 1" clip-path="url(#clip0)">
+      <g id="bg">
+        <g id="Group 2795">
+          <rect
+            id="Rectangle 3952"
+            y="51"
+            width="1241"
+            height="299"
+            fill="#DDCCBD"
+          />
+          <rect
+            id="Rectangle 3953"
+            x="36"
+            y="51"
+            width="3"
+            height="299"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3954"
+            x="89"
+            y="51"
+            width="3"
+            height="299"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3955"
+            x="142"
+            y="51"
+            width="3"
+            height="299"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3956"
+            x="195"
+            y="51"
+            width="3"
+            height="299"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3957"
+            x="248"
+            y="51"
+            width="3"
+            height="299"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3958"
+            x="301"
+            y="51"
+            width="3"
+            height="299"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3959"
+            x="354"
+            y="51"
+            width="3"
+            height="299"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3960"
+            x="407"
+            y="51"
+            width="3"
+            height="294.114"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3961"
+            x="460"
+            y="51"
+            width="3"
+            height="294.114"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3962"
+            x="513"
+            y="51"
+            width="3"
+            height="294.114"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3963"
+            x="566"
+            y="51"
+            width="3"
+            height="294.114"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3964"
+            x="619"
+            y="51"
+            width="3"
+            height="294.114"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3965"
+            x="672"
+            y="51"
+            width="3"
+            height="294.114"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3966"
+            x="725"
+            y="51"
+            width="3"
+            height="294.114"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3967"
+            x="778"
+            y="51"
+            width="3"
+            height="294.114"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3968"
+            x="831"
+            y="51"
+            width="3"
+            height="294.114"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3969"
+            x="884"
+            y="51"
+            width="3"
+            height="299"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3970"
+            x="937"
+            y="51"
+            width="3"
+            height="299"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3971"
+            x="990"
+            y="51"
+            width="3"
+            height="299"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3972"
+            x="1043"
+            y="51"
+            width="3"
+            height="299"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3973"
+            x="1096"
+            y="51"
+            width="3"
+            height="299"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3974"
+            x="1149"
+            y="51"
+            width="3"
+            height="299"
+            fill="#EADED4"
+          />
+          <rect
+            id="Rectangle 3975"
+            x="1202"
+            y="51"
+            width="3"
+            height="299"
+            fill="#EADED4"
+          />
+        </g>
+      </g>
+      <g id="label-theme-2" v-if="themeSync == 2">
+        <g id="label-theme-2_2" filter="url(#filter0_d)">
+          <g id="label-theme-2_3">
+            <rect
+              id="Rectangle 3432"
+              y="115.735"
+              width="57.861"
+              height="43.9834"
+              transform="rotate(-68.7469 0 115.735)"
+              fill="#2D3081"
+            />
+            <rect
+              id="Rectangle 3433"
+              x="15.6512"
+              y="121.822"
+              width="57.861"
+              height="11.1958"
+              transform="rotate(-68.7469 15.6512 121.822)"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3434"
+              x="49.8115"
+              y="109.005"
+              width="43.9834"
+              height="9.20516"
+              transform="rotate(-158.747 49.8115 109.005)"
+              fill="white"
+            />
+            <path
+              id="Vector 494"
+              d="M4.47186 117.474L0 115.735L2.38341 109.607L57.1215 75.8682L61.966 77.7524L59.8209 83.2676L4.47186 117.474Z"
+              fill="white"
+            />
+            <path
+              id="Vector 495"
+              d="M25.4472 63.5485L20.9753 61.8092L18.5919 67.9372L36.1489 129.794L40.9934 131.678L43.1385 126.163L25.4472 63.5485Z"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3435"
+              x="17.8875"
+              y="122.691"
+              width="57.861"
+              height="6.39759"
+              transform="rotate(-68.7469 17.8875 122.691)"
+              fill="#E34554"
+            />
+            <rect
+              id="Rectangle 3436"
+              x="50.526"
+              y="107.166"
+              width="43.9834"
+              height="5.26009"
+              transform="rotate(-158.747 50.526 107.166)"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 496"
+              d="M23.5167 101.6L0 115.735L2.98124 116.894L22.0867 105.277L23.5167 101.6Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 498"
+              d="M33.2052 105.368L40.9915 131.678L38.0102 130.518L31.7752 109.045L33.2052 105.368Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 497"
+              d="M28.7616 88.1189L20.9753 61.8092L23.9566 62.9688L30.1916 84.4422L28.7616 88.1189Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 499"
+              d="M38.4488 91.888L61.9656 77.7533L58.9843 76.5938L39.8789 88.2112L38.4488 91.888Z"
+              fill="#E34554"
+            />
+          </g>
+          <g id="label-theme-2_4">
+            <rect
+              id="Rectangle 3432_2"
+              x="77.0552"
+              y="140.817"
+              width="57.861"
+              height="43.9834"
+              transform="rotate(-79.5736 77.0552 140.817)"
+              fill="#2D3081"
+            />
+            <rect
+              id="Rectangle 3433_2"
+              x="93.5717"
+              y="143.857"
+              width="57.861"
+              height="11.1958"
+              transform="rotate(-79.5736 93.5717 143.857)"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3434_2"
+              x="124.716"
+              y="124.851"
+              width="43.9834"
+              height="9.20516"
+              transform="rotate(-169.574 124.716 124.851)"
+              fill="white"
+            />
+            <path
+              id="Vector 494_2"
+              d="M81.7741 141.686L77.0552 140.817L78.2451 134.351L125.671 90.9309L130.784 91.8716L129.713 97.6915L81.7741 141.686Z"
+              fill="white"
+            />
+            <path
+              id="Vector 495_2"
+              d="M92.247 84.7799L87.5281 83.9116L86.3382 90.3781L115.202 147.836L120.314 148.777L121.385 142.957L92.247 84.7799Z"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3435_2"
+              x="95.9303"
+              y="144.29"
+              width="57.861"
+              height="6.39759"
+              transform="rotate(-79.5736 95.9303 144.29)"
+              fill="#E34554"
+            />
+            <rect
+              id="Rectangle 3436_2"
+              x="125.072"
+              y="122.91"
+              width="43.9834"
+              height="5.26009"
+              transform="rotate(-169.574 125.072 122.91)"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 496_2"
+              d="M97.4983 122.517L77.0552 140.817L80.2012 141.396L96.7843 126.397L97.4983 122.517Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 498_2"
+              d="M107.723 124.398L120.312 148.777L117.167 148.198L107.009 128.278L107.723 124.398Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 497_2"
+              d="M100.118 108.29L87.5281 83.9116L90.6741 84.4905L100.832 104.41L100.118 108.29Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 499_2"
+              d="M110.341 110.173L130.784 91.8725L127.638 91.2936L111.055 106.293L110.341 110.173Z"
+              fill="#E34554"
+            />
+          </g>
+          <g id="label-theme-2_5">
+            <rect
+              id="Rectangle 3432_3"
+              x="156.021"
+              y="151"
+              width="57.861"
+              height="43.9834"
+              transform="rotate(-90.4787 156.021 151)"
+              fill="#2D3081"
+            />
+            <rect
+              id="Rectangle 3433_3"
+              x="172.814"
+              y="150.86"
+              width="57.861"
+              height="11.1958"
+              transform="rotate(-90.4787 172.814 150.86)"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3434_3"
+              x="199.8"
+              y="126.306"
+              width="43.9834"
+              height="9.20516"
+              transform="rotate(179.521 199.8 126.306)"
+              fill="white"
+            />
+            <path
+              id="Vector 494_3"
+              d="M160.819 150.96L156.021 151L155.966 144.425L194.322 92.8169L199.52 92.7735L199.569 98.6909L160.819 150.96Z"
+              fill="white"
+            />
+            <path
+              id="Vector 495_3"
+              d="M160.337 93.1009L155.539 93.141L155.594 99.7159L194.806 150.676L200.004 150.633L199.955 144.715L160.337 93.1009Z"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3435_3"
+              x="175.213"
+              y="150.839"
+              width="57.861"
+              height="6.39759"
+              transform="rotate(-90.4787 175.213 150.839)"
+              fill="#E34554"
+            />
+            <rect
+              id="Rectangle 3436_3"
+              x="199.783"
+              y="124.332"
+              width="43.9834"
+              height="5.26009"
+              transform="rotate(179.521 199.783 124.332)"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 496_3"
+              d="M172.633 129.163L156.021 151L159.22 150.973L172.666 133.107L172.633 129.163Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 498_3"
+              d="M183.028 129.075L200.003 150.632L196.804 150.658L183.061 133.02L183.028 129.075Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 497_3"
+              d="M172.513 114.698L155.539 93.141L158.738 93.1143L172.48 110.753L172.513 114.698Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 499_3"
+              d="M182.907 114.612L199.519 92.7745L196.321 92.8012L182.875 110.667L182.907 114.612Z"
+              fill="#E34554"
+            />
+          </g>
+          <g id="label-theme-2_6">
+            <rect
+              id="Rectangle 3432_4"
+              x="237.33"
+              y="147.027"
+              width="57.861"
+              height="43.9834"
+              transform="rotate(-99.5905 237.33 147.027)"
+              fill="#2D3081"
+            />
+            <rect
+              id="Rectangle 3433_4"
+              x="253.888"
+              y="144.229"
+              width="57.861"
+              height="11.1958"
+              transform="rotate(-99.5905 253.888 144.229)"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3434_4"
+              x="276.646"
+              y="115.711"
+              width="43.9834"
+              height="9.20516"
+              transform="rotate(170.409 276.646 115.711)"
+              fill="white"
+            />
+            <path
+              id="Vector 494_4"
+              d="M242.061 146.228L237.33 147.027L236.234 140.544L265.933 83.5129L271.058 82.6468L272.044 88.4817L242.061 146.228Z"
+              fill="white"
+            />
+            <path
+              id="Vector 495_4"
+              d="M232.422 89.1747L227.691 89.9741L228.787 96.4573L275.574 140.564L280.7 139.698L279.714 133.864L232.422 89.1747Z"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3435_4"
+              x="256.254"
+              y="143.829"
+              width="57.861"
+              height="6.39759"
+              transform="rotate(-99.5905 256.254 143.829)"
+              fill="#E34554"
+            />
+            <rect
+              id="Rectangle 3436_4"
+              x="276.316"
+              y="113.765"
+              width="43.9834"
+              height="5.26009"
+              transform="rotate(170.409 276.316 113.765)"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 496_4"
+              d="M250.274 122.834L237.33 147.027L240.484 146.494L250.931 126.724L250.274 122.834Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 498_4"
+              d="M260.524 121.102L280.698 139.698L277.544 140.231L261.181 124.992L260.524 121.102Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 497_4"
+              d="M247.865 108.571L227.691 89.9741L230.845 89.4411L247.208 104.681L247.865 108.571Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 499_4"
+              d="M258.115 106.84L271.058 82.6473L267.904 83.1802L257.457 102.95L258.115 106.84Z"
+              fill="#E34554"
+            />
+          </g>
+          <g id="label-theme-2_7">
+            <rect
+              id="Rectangle 3432_5"
+              x="323.676"
+              y="127.595"
+              width="57.861"
+              height="43.9834"
+              transform="rotate(-108.929 323.676 127.595)"
+              fill="#2D3081"
+            />
+            <rect
+              id="Rectangle 3433_5"
+              x="339.562"
+              y="122.148"
+              width="57.861"
+              height="11.1958"
+              transform="rotate(-108.929 339.562 122.148)"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3434_5"
+              x="357.39"
+              y="90.3157"
+              width="43.9834"
+              height="9.20516"
+              transform="rotate(161.071 357.39 90.3157)"
+              fill="white"
+            />
+            <path
+              id="Vector 494_5"
+              d="M328.215 126.039L323.676 127.595L321.543 121.375L341.595 60.2813L346.512 58.5951L348.431 64.1927L328.215 126.039Z"
+              fill="white"
+            />
+            <path
+              id="Vector 495_5"
+              d="M309.446 71.3063L304.907 72.8628L307.04 79.0823L360.365 115.013L365.282 113.327L363.362 107.729L309.446 71.3063Z"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3435_5"
+              x="341.83"
+              y="121.369"
+              width="57.861"
+              height="6.39759"
+              transform="rotate(-108.929 341.83 121.369)"
+              fill="#E34554"
+            />
+            <rect
+              id="Rectangle 3436_5"
+              x="356.75"
+              y="88.4491"
+              width="43.9834"
+              height="5.26009"
+              transform="rotate(161.071 356.75 88.4491)"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 496_5"
+              d="M332.523 101.623L323.676 127.595L326.702 126.557L333.803 105.355L332.523 101.623Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 498_5"
+              d="M342.356 98.2502L365.281 113.327L362.255 114.365L343.636 101.982L342.356 98.2502Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 497_5"
+              d="M327.831 87.9396L304.907 72.8628L307.933 71.8251L326.551 84.2079L327.831 87.9396Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 499_5"
+              d="M337.665 84.5684L346.512 58.5962L343.486 59.6338L336.385 80.8367L337.665 84.5684Z"
+              fill="#E34554"
+            />
+          </g>
+          <path
+            id="label-theme-2_8"
+            d="M1.1051 51C51.003 82.5355 192.952 126.685 361.567 51"
+            stroke="#6E3907"
+            stroke-width="3"
+            stroke-linecap="round"
+          />
+        </g>
+        <g id="label-theme-2_9" filter="url(#filter1_d)">
+          <g id="label-theme-2_10">
+            <rect
+              id="Rectangle 3432_6"
+              x="876"
+              y="115.735"
+              width="57.861"
+              height="43.9834"
+              transform="rotate(-68.7469 876 115.735)"
+              fill="#2D3081"
+            />
+            <rect
+              id="Rectangle 3433_6"
+              x="891.651"
+              y="121.822"
+              width="57.861"
+              height="11.1958"
+              transform="rotate(-68.7469 891.651 121.822)"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3434_6"
+              x="925.812"
+              y="109.005"
+              width="43.9834"
+              height="9.20516"
+              transform="rotate(-158.747 925.812 109.005)"
+              fill="white"
+            />
+            <path
+              id="Vector 494_6"
+              d="M880.472 117.474L876 115.735L878.383 109.607L933.121 75.8682L937.966 77.7524L935.821 83.2676L880.472 117.474Z"
+              fill="white"
+            />
+            <path
+              id="Vector 495_6"
+              d="M901.447 63.5485L896.975 61.8092L894.592 67.9372L912.149 129.794L916.993 131.678L919.138 126.163L901.447 63.5485Z"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3435_6"
+              x="893.887"
+              y="122.691"
+              width="57.861"
+              height="6.39759"
+              transform="rotate(-68.7469 893.887 122.691)"
+              fill="#E34554"
+            />
+            <rect
+              id="Rectangle 3436_6"
+              x="926.526"
+              y="107.166"
+              width="43.9834"
+              height="5.26009"
+              transform="rotate(-158.747 926.526 107.166)"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 496_6"
+              d="M899.517 101.6L876 115.735L878.981 116.894L898.087 105.277L899.517 101.6Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 498_6"
+              d="M909.205 105.368L916.991 131.678L914.01 130.518L907.775 109.045L909.205 105.368Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 497_6"
+              d="M904.762 88.1189L896.975 61.8092L899.957 62.9688L906.192 84.4422L904.762 88.1189Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 499_6"
+              d="M914.449 91.888L937.966 77.7533L934.984 76.5938L915.879 88.2112L914.449 91.888Z"
+              fill="#E34554"
+            />
+          </g>
+          <g id="label-theme-2_11">
+            <rect
+              id="Rectangle 3432_7"
+              x="953.055"
+              y="140.817"
+              width="57.861"
+              height="43.9834"
+              transform="rotate(-79.5736 953.055 140.817)"
+              fill="#2D3081"
+            />
+            <rect
+              id="Rectangle 3433_7"
+              x="969.572"
+              y="143.857"
+              width="57.861"
+              height="11.1958"
+              transform="rotate(-79.5736 969.572 143.857)"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3434_7"
+              x="1000.72"
+              y="124.851"
+              width="43.9834"
+              height="9.20516"
+              transform="rotate(-169.574 1000.72 124.851)"
+              fill="white"
+            />
+            <path
+              id="Vector 494_7"
+              d="M957.774 141.686L953.055 140.817L954.245 134.351L1001.67 90.9309L1006.78 91.8716L1005.71 97.6915L957.774 141.686Z"
+              fill="white"
+            />
+            <path
+              id="Vector 495_7"
+              d="M968.247 84.7799L963.528 83.9116L962.338 90.3781L991.202 147.836L996.314 148.777L997.385 142.957L968.247 84.7799Z"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3435_7"
+              x="971.93"
+              y="144.29"
+              width="57.861"
+              height="6.39759"
+              transform="rotate(-79.5736 971.93 144.29)"
+              fill="#E34554"
+            />
+            <rect
+              id="Rectangle 3436_7"
+              x="1001.07"
+              y="122.91"
+              width="43.9834"
+              height="5.26009"
+              transform="rotate(-169.574 1001.07 122.91)"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 496_7"
+              d="M973.499 122.517L953.055 140.817L956.201 141.396L972.785 126.397L973.499 122.517Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 498_7"
+              d="M983.723 124.398L996.313 148.777L993.167 148.198L983.009 128.278L983.723 124.398Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 497_7"
+              d="M976.118 108.29L963.528 83.9116L966.674 84.4905L976.832 104.41L976.118 108.29Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 499_7"
+              d="M986.341 110.173L1006.78 91.8725L1003.64 91.2936L987.055 106.293L986.341 110.173Z"
+              fill="#E34554"
+            />
+          </g>
+          <g id="label-theme-2_12">
+            <rect
+              id="Rectangle 3432_8"
+              x="1032.02"
+              y="151"
+              width="57.861"
+              height="43.9834"
+              transform="rotate(-90.4787 1032.02 151)"
+              fill="#2D3081"
+            />
+            <rect
+              id="Rectangle 3433_8"
+              x="1048.81"
+              y="150.86"
+              width="57.861"
+              height="11.1958"
+              transform="rotate(-90.4787 1048.81 150.86)"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3434_8"
+              x="1075.8"
+              y="126.306"
+              width="43.9834"
+              height="9.20516"
+              transform="rotate(179.521 1075.8 126.306)"
+              fill="white"
+            />
+            <path
+              id="Vector 494_8"
+              d="M1036.82 150.96L1032.02 151L1031.97 144.425L1070.32 92.8169L1075.52 92.7735L1075.57 98.6909L1036.82 150.96Z"
+              fill="white"
+            />
+            <path
+              id="Vector 495_8"
+              d="M1036.34 93.1009L1031.54 93.141L1031.59 99.7159L1070.81 150.676L1076 150.633L1075.95 144.715L1036.34 93.1009Z"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3435_8"
+              x="1051.21"
+              y="150.839"
+              width="57.861"
+              height="6.39759"
+              transform="rotate(-90.4787 1051.21 150.839)"
+              fill="#E34554"
+            />
+            <rect
+              id="Rectangle 3436_8"
+              x="1075.78"
+              y="124.332"
+              width="43.9834"
+              height="5.26009"
+              transform="rotate(179.521 1075.78 124.332)"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 496_8"
+              d="M1048.63 129.163L1032.02 151L1035.22 150.973L1048.67 133.107L1048.63 129.163Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 498_8"
+              d="M1059.03 129.075L1076 150.632L1072.8 150.658L1059.06 133.02L1059.03 129.075Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 497_8"
+              d="M1048.51 114.698L1031.54 93.141L1034.74 93.1143L1048.48 110.753L1048.51 114.698Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 499_8"
+              d="M1058.91 114.612L1075.52 92.7745L1072.32 92.8012L1058.87 110.667L1058.91 114.612Z"
+              fill="#E34554"
+            />
+          </g>
+          <g id="label-theme-2_13">
+            <rect
+              id="Rectangle 3432_9"
+              x="1113.33"
+              y="147.027"
+              width="57.861"
+              height="43.9834"
+              transform="rotate(-99.5905 1113.33 147.027)"
+              fill="#2D3081"
+            />
+            <rect
+              id="Rectangle 3433_9"
+              x="1129.89"
+              y="144.229"
+              width="57.861"
+              height="11.1958"
+              transform="rotate(-99.5905 1129.89 144.229)"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3434_9"
+              x="1152.65"
+              y="115.711"
+              width="43.9834"
+              height="9.20516"
+              transform="rotate(170.409 1152.65 115.711)"
+              fill="white"
+            />
+            <path
+              id="Vector 494_9"
+              d="M1118.06 146.228L1113.33 147.027L1112.23 140.544L1141.93 83.5129L1147.06 82.6468L1148.04 88.4817L1118.06 146.228Z"
+              fill="white"
+            />
+            <path
+              id="Vector 495_9"
+              d="M1108.42 89.1747L1103.69 89.9741L1104.79 96.4573L1151.57 140.564L1156.7 139.698L1155.71 133.864L1108.42 89.1747Z"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3435_9"
+              x="1132.25"
+              y="143.829"
+              width="57.861"
+              height="6.39759"
+              transform="rotate(-99.5905 1132.25 143.829)"
+              fill="#E34554"
+            />
+            <rect
+              id="Rectangle 3436_9"
+              x="1152.32"
+              y="113.765"
+              width="43.9834"
+              height="5.26009"
+              transform="rotate(170.409 1152.32 113.765)"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 496_9"
+              d="M1126.27 122.834L1113.33 147.027L1116.48 146.494L1126.93 126.724L1126.27 122.834Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 498_9"
+              d="M1136.52 121.102L1156.7 139.698L1153.54 140.231L1137.18 124.992L1136.52 121.102Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 497_9"
+              d="M1123.87 108.571L1103.69 89.9741L1106.85 89.4411L1123.21 104.681L1123.87 108.571Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 499_9"
+              d="M1134.11 106.84L1147.06 82.6473L1143.9 83.1802L1133.46 102.95L1134.11 106.84Z"
+              fill="#E34554"
+            />
+          </g>
+          <g id="label-theme-2_14">
+            <rect
+              id="Rectangle 3432_10"
+              x="1199.68"
+              y="127.595"
+              width="57.861"
+              height="43.9834"
+              transform="rotate(-108.929 1199.68 127.595)"
+              fill="#2D3081"
+            />
+            <rect
+              id="Rectangle 3433_10"
+              x="1215.56"
+              y="122.148"
+              width="57.861"
+              height="11.1958"
+              transform="rotate(-108.929 1215.56 122.148)"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3434_10"
+              x="1233.39"
+              y="90.3157"
+              width="43.9834"
+              height="9.20516"
+              transform="rotate(161.071 1233.39 90.3157)"
+              fill="white"
+            />
+            <path
+              id="Vector 494_10"
+              d="M1204.21 126.039L1199.68 127.595L1197.54 121.375L1217.59 60.2813L1222.51 58.5951L1224.43 64.1927L1204.21 126.039Z"
+              fill="white"
+            />
+            <path
+              id="Vector 495_10"
+              d="M1185.45 71.3063L1180.91 72.8628L1183.04 79.0823L1236.36 115.013L1241.28 113.327L1239.36 107.729L1185.45 71.3063Z"
+              fill="white"
+            />
+            <rect
+              id="Rectangle 3435_10"
+              x="1217.83"
+              y="121.369"
+              width="57.861"
+              height="6.39759"
+              transform="rotate(-108.929 1217.83 121.369)"
+              fill="#E34554"
+            />
+            <rect
+              id="Rectangle 3436_10"
+              x="1232.75"
+              y="88.4491"
+              width="43.9834"
+              height="5.26009"
+              transform="rotate(161.071 1232.75 88.4491)"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 496_10"
+              d="M1208.52 101.623L1199.68 127.595L1202.7 126.557L1209.8 105.355L1208.52 101.623Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 498_10"
+              d="M1218.36 98.2502L1241.28 113.327L1238.25 114.365L1219.64 101.982L1218.36 98.2502Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 497_10"
+              d="M1203.83 87.9396L1180.91 72.8628L1183.93 71.8251L1202.55 84.2079L1203.83 87.9396Z"
+              fill="#E34554"
+            />
+            <path
+              id="Vector 499_10"
+              d="M1213.66 84.5684L1222.51 58.5962L1219.49 59.6338L1212.39 80.8367L1213.66 84.5684Z"
+              fill="#E34554"
+            />
+          </g>
+          <path
+            id="label-theme-2_15"
+            d="M877.105 51C927.003 82.5355 1068.95 126.685 1237.57 51"
+            stroke="#6E3907"
+            stroke-width="3"
+            stroke-linecap="round"
+          />
+        </g>
+      </g>
+      <g id="label-theme-1" v-if="themeSync == 1">
+        <g id="label-theme-1_2" filter="url(#filter2_d)">
+          <g id="label-theme-1_3">
+            <rect
+              id="Rectangle 3832"
+              x="20.983"
+              y="63.1742"
+              width="43.3553"
+              height="57.229"
+              transform="rotate(21.5092 20.983 63.1742)"
+              fill="white"
+            />
+            <circle
+              id="Ellipse 1091"
+              cx="30.6584"
+              cy="97.7427"
+              r="11.2724"
+              transform="rotate(21.5092 30.6584 97.7427)"
+              fill="#E71818"
+            />
+          </g>
+          <g id="label-theme-1_4">
+            <rect
+              id="Rectangle 3832_2"
+              x="88.1171"
+              y="83.8708"
+              width="43.3553"
+              height="57.229"
+              transform="rotate(10.2683 88.1171 83.8708)"
+              fill="white"
+            />
+            <circle
+              id="Ellipse 1091_2"
+              cx="104.346"
+              cy="115.89"
+              r="11.2724"
+              transform="rotate(10.2683 104.346 115.89)"
+              fill="#E71818"
+            />
+          </g>
+          <g id="label-theme-1_5">
+            <rect
+              id="Rectangle 3832_3"
+              x="158.267"
+              y="92.7732"
+              width="43.3553"
+              height="57.229"
+              transform="rotate(-0.502719 158.267 92.7732)"
+              fill="white"
+            />
+            <circle
+              id="Ellipse 1091_3"
+              cx="180.195"
+              cy="121.195"
+              r="11.2724"
+              transform="rotate(-0.502719 180.195 121.195)"
+              fill="#E71818"
+            />
+          </g>
+          <g id="label-theme-1_6">
+            <rect
+              id="Rectangle 3832_4"
+              x="230.095"
+              y="89.901"
+              width="43.3553"
+              height="57.229"
+              transform="rotate(-9.62262 230.095 89.901)"
+              fill="white"
+            />
+            <circle
+              id="Ellipse 1091_4"
+              cx="256.25"
+              cy="114.489"
+              r="11.2724"
+              transform="rotate(-9.62262 256.25 114.489)"
+              fill="#E71818"
+            />
+          </g>
+          <g id="label-theme-1_7">
+            <rect
+              id="Rectangle 3832_5"
+              x="309.228"
+              y="70.8024"
+              width="43.3553"
+              height="57.229"
+              transform="rotate(-18.4412 309.228 70.8024)"
+              fill="white"
+            />
+            <circle
+              id="Ellipse 1091_5"
+              cx="338.844"
+              cy="91.0897"
+              r="11.2724"
+              transform="rotate(-18.4412 338.844 91.0897)"
+              fill="#E71818"
+            />
+          </g>
+          <path
+            id="label-theme-1_8"
+            d="M0 51C50.7264 83.0591 195.033 127.942 366.447 51"
+            stroke="#895200"
+            stroke-width="3"
+            stroke-linecap="round"
+          />
+        </g>
+        <g id="label-theme-1_9" filter="url(#filter3_d)">
+          <g id="label-theme-1_10">
+            <rect
+              id="Rectangle 3832_6"
+              x="892.983"
+              y="63.1742"
+              width="43.3553"
+              height="57.229"
+              transform="rotate(21.5092 892.983 63.1742)"
+              fill="white"
+            />
+            <circle
+              id="Ellipse 1091_6"
+              cx="902.659"
+              cy="97.7427"
+              r="11.2724"
+              transform="rotate(21.5092 902.659 97.7427)"
+              fill="#E71818"
+            />
+          </g>
+          <g id="label-theme-1_11">
+            <rect
+              id="Rectangle 3832_7"
+              x="960.117"
+              y="83.8708"
+              width="43.3553"
+              height="57.229"
+              transform="rotate(10.2683 960.117 83.8708)"
+              fill="white"
+            />
+            <circle
+              id="Ellipse 1091_7"
+              cx="976.346"
+              cy="115.89"
+              r="11.2724"
+              transform="rotate(10.2683 976.346 115.89)"
+              fill="#E71818"
+            />
+          </g>
+          <g id="label-theme-1_12">
+            <rect
+              id="Rectangle 3832_8"
+              x="1030.27"
+              y="92.7732"
+              width="43.3553"
+              height="57.229"
+              transform="rotate(-0.502719 1030.27 92.7732)"
+              fill="white"
+            />
+            <circle
+              id="Ellipse 1091_8"
+              cx="1052.19"
+              cy="121.195"
+              r="11.2724"
+              transform="rotate(-0.502719 1052.19 121.195)"
+              fill="#E71818"
+            />
+          </g>
+          <g id="label-theme-1_13">
+            <rect
+              id="Rectangle 3832_9"
+              x="1102.09"
+              y="89.901"
+              width="43.3553"
+              height="57.229"
+              transform="rotate(-9.62262 1102.09 89.901)"
+              fill="white"
+            />
+            <circle
+              id="Ellipse 1091_9"
+              cx="1128.25"
+              cy="114.489"
+              r="11.2724"
+              transform="rotate(-9.62262 1128.25 114.489)"
+              fill="#E71818"
+            />
+          </g>
+          <g id="label-theme-1_14">
+            <rect
+              id="Rectangle 3832_10"
+              x="1181.23"
+              y="70.8024"
+              width="43.3553"
+              height="57.229"
+              transform="rotate(-18.4412 1181.23 70.8024)"
+              fill="white"
+            />
+            <circle
+              id="Ellipse 1091_10"
+              cx="1210.84"
+              cy="91.0897"
+              r="11.2724"
+              transform="rotate(-18.4412 1210.84 91.0897)"
+              fill="#E71818"
+            />
+          </g>
+          <path
+            id="label-theme-1_15"
+            d="M872 51C922.726 83.0591 1067.03 127.942 1238.45 51"
+            stroke="#895200"
+            stroke-width="3"
+            stroke-linecap="round"
+          />
+        </g>
+      </g>
+      <g
+        id="clamp"
+        :class="isSendAnswer ? 'clamp-start' : ''"
+        filter="url(#filter4_d)"
+      >
+        <g id="Group 1446">
+          <circle
+            id="Ellipse 1055"
+            cx="620.92"
+            cy="109.069"
+            r="17.6733"
+            fill="#5F6D93"
+          />
+          <circle
+            id="Ellipse 1056"
+            cx="655.005"
+            cy="134.738"
+            r="7.99505"
+            fill="#5F6D93"
+          />
+          <circle
+            id="Ellipse 1057"
+            cx="585.995"
+            cy="134.738"
+            r="7.99505"
+            fill="#5F6D93"
+          />
+          <rect
+            id="Rectangle 3495"
+            x="606.478"
+            y="104.065"
+            width="11.7507"
+            height="35.8113"
+            transform="rotate(45.1218 606.478 104.065)"
+            fill="#5F6D93"
+          />
+          <rect
+            id="Rectangle 3497"
+            width="11.7507"
+            height="35.8113"
+            transform="matrix(0.705602 -0.708609 -0.708609 -0.705602 606.478 165.58)"
+            fill="#5F6D93"
+          />
+          <rect
+            id="Rectangle 3496"
+            width="11.7507"
+            height="35.8113"
+            transform="matrix(-0.705602 0.708609 0.708609 0.705602 634.685 104.065)"
+            fill="#5F6D93"
+          />
+          <rect
+            id="Rectangle 3498"
+            x="634.685"
+            y="165.58"
+            width="11.7507"
+            height="35.8113"
+            transform="rotate(-134.878 634.685 165.58)"
+            fill="#5F6D93"
+          />
+          <circle
+            id="Ellipse 1058"
+            cx="620.5"
+            cy="108.5"
+            r="10.5"
+            fill="#7281A9"
+          />
+        </g>
+        <rect
+          id="Rectangle 3499"
+          x="617"
+          y="-70"
+          width="8"
+          height="166"
+          fill="#5F6D93"
+        />
+      </g>
+      <g
+        id="doll-fake"
+        :class="
+          isSendAnswer
+            ? isCorrectAnswer
+              ? 'doll-fake-correct'
+              : 'doll-fake-incorrect'
+            : ''
+        "
+      >
+        <g id="doll-fake_3" filter="url(#filter5_d)">
+          <ellipse
+            id="Ellipse 1061"
+            cx="622.164"
+            cy="205.608"
+            rx="20.9552"
+            ry="22.4856"
+            fill="#844518"
+          />
+          <path
+            id="Ellipse 1066"
+            d="M634.97 210.401C634.97 216.947 629.367 222.253 622.455 222.253C615.544 222.253 609.94 216.947 609.94 210.401C609.94 203.856 615.544 193.635 622.455 193.635C629.367 193.635 634.97 203.856 634.97 210.401Z"
+            fill="#C47943"
+          />
+          <ellipse
+            id="Ellipse 1062"
+            cx="606.739"
+            cy="222.253"
+            rx="7.85821"
+            ry="9.34468"
+            fill="#844518"
+          />
+          <ellipse
+            id="Ellipse 1063"
+            cx="638.754"
+            cy="222.253"
+            rx="7.85821"
+            ry="9.34468"
+            fill="#844518"
+          />
+          <ellipse
+            id="Ellipse 1064"
+            cx="606.448"
+            cy="223.713"
+            rx="5.82089"
+            ry="6.13245"
+            fill="#FFC79F"
+          />
+          <ellipse
+            id="Ellipse 1065"
+            cx="638.463"
+            cy="223.713"
+            rx="5.82089"
+            ry="6.13245"
+            fill="#FFC79F"
+          />
+          <path
+            id="Rectangle 3501"
+            d="M605.699 186.684C607.564 185.388 610.131 185.909 611.349 187.832V187.832C612.274 189.295 612.16 191.188 611.064 192.526L598.639 207.697C596.281 210.575 592.043 210.99 589.173 208.623V208.623C585.723 205.778 585.94 200.414 589.609 197.864L605.699 186.684Z"
+            fill="#844518"
+          />
+          <path
+            id="Rectangle 3502"
+            d="M605.407 185.931C607.273 184.634 609.84 185.156 611.057 187.079V187.079C611.983 188.542 611.868 190.435 610.772 191.773L598.347 206.944C595.99 209.822 591.752 210.236 588.881 207.87V207.87C585.431 205.025 585.649 199.66 589.318 197.111L605.407 185.931Z"
+            fill="#844518"
+          />
+          <path
+            id="Rectangle 3503"
+            d="M639.494 185.931C637.628 184.634 635.061 185.156 633.844 187.079V187.079C632.918 188.542 633.033 190.435 634.129 191.773L646.554 206.944C648.911 209.822 653.149 210.236 656.02 207.87V207.87C659.47 205.025 659.252 199.66 655.583 197.111L639.494 185.931Z"
+            fill="#844518"
+          />
+          <ellipse
+            id="Ellipse 1059"
+            cx="606.157"
+            cy="159.469"
+            rx="8.4403"
+            ry="8.46862"
+            fill="#844518"
+          />
+          <ellipse
+            id="Ellipse 1075"
+            cx="607.321"
+            cy="160.637"
+            rx="6.69403"
+            ry="6.71649"
+            fill="#C47943"
+          />
+          <ellipse
+            id="Ellipse 1060"
+            cx="638.172"
+            cy="159.469"
+            rx="8.4403"
+            ry="8.46862"
+            fill="#844518"
+          />
+          <ellipse
+            id="Ellipse 1067"
+            rx="4.14814"
+            ry="5.67141"
+            transform="matrix(0.736682 -0.676239 0.673777 0.738935 592.37 204.135)"
+            fill="#FFC79F"
+          />
+          <ellipse
+            id="Ellipse 1068"
+            rx="4.14814"
+            ry="5.67141"
+            transform="matrix(-0.736682 -0.676239 -0.673777 0.738935 652.325 203.551)"
+            fill="#FFC79F"
+          />
+          <ellipse
+            id="Ellipse 1076"
+            cx="637.008"
+            cy="160.637"
+            rx="6.69403"
+            ry="6.71649"
+            fill="#C47943"
+          />
+          <ellipse
+            id="Ellipse 1058_2"
+            cx="622.164"
+            cy="174.07"
+            rx="20.9552"
+            ry="18.3973"
+            fill="#844518"
+          />
+          <g id="Group 1447">
+            <path
+              id="Ellipse 1069"
+              d="M629.732 179.151C629.732 182.441 626.79 183.122 622.772 183.122C618.753 183.122 615.179 182.441 615.179 179.151C615.179 175.861 618.437 173.194 622.455 173.194C626.474 173.194 629.732 175.861 629.732 179.151Z"
+              fill="#FFC79F"
+            />
+            <path
+              id="Ellipse 1070"
+              d="M623.91 176.114C623.91 176.759 622.455 177.282 622.455 177.282C622.455 177.282 621 176.759 621 176.114C621 175.469 621.652 174.946 622.455 174.946C623.259 174.946 623.91 175.469 623.91 176.114Z"
+              fill="black"
+            />
+            <rect
+              id="Rectangle 3504"
+              x="622.164"
+              y="176.698"
+              width="0.582089"
+              height="2.92021"
+              rx="0.291045"
+              fill="black"
+            />
+            <path
+              id="Rectangle 3505"
+              d="M622.164 179.31C622.164 179.054 622.506 178.949 622.666 179.149C623.584 180.298 624.222 180.25 625.147 179.129C625.313 178.927 625.657 179.037 625.657 179.299V179.299C625.657 179.366 625.631 179.432 625.584 179.482C624.213 180.932 623.534 181.007 622.226 179.477C622.186 179.431 622.164 179.371 622.164 179.31V179.31Z"
+              fill="black"
+            />
+            <path
+              id="Rectangle 3506"
+              d="M622.746 179.31C622.746 179.054 622.405 178.949 622.245 179.149C621.326 180.298 620.689 180.25 619.764 179.129C619.597 178.927 619.254 179.037 619.254 179.299V179.299C619.254 179.366 619.28 179.432 619.327 179.482C620.698 180.932 621.377 181.007 622.685 179.477C622.724 179.431 622.746 179.371 622.746 179.31V179.31Z"
+              fill="black"
+            />
+          </g>
+          <ellipse
+            id="Ellipse 1073"
+            cx="631.187"
+            cy="168.813"
+            rx="1.45522"
+            ry="2.04415"
+            fill="black"
+          />
+          <ellipse
+            id="Ellipse 1074"
+            cx="613.724"
+            cy="168.813"
+            rx="1.45522"
+            ry="2.04415"
+            fill="black"
+          />
+        </g>
+      </g>
+      <g id="bg-doll">
+        <g id="Group 1500">
+          <g id="Group 1482" filter="url(#filter6_d)">
+            <ellipse
+              id="Ellipse 1061_2"
+              cx="502.038"
+              cy="273.41"
+              rx="23.6359"
+              ry="25.2772"
+              transform="rotate(-51.6654 502.038 273.41)"
+              fill="#844518"
+            />
+            <path
+              id="Ellipse 1066_2"
+              d="M515.224 265.422C520.996 269.986 521.755 278.643 516.92 284.758C512.084 290.874 503.485 292.131 497.713 287.567C491.942 283.003 486.849 270.919 491.685 264.804C496.52 258.689 509.452 260.858 515.224 265.422Z"
+              fill="#C57A43"
+            />
+            <ellipse
+              id="Ellipse 1062_2"
+              cx="505.924"
+              cy="298.663"
+              rx="8.86345"
+              ry="10.5048"
+              transform="rotate(-51.6654 505.924 298.663)"
+              fill="#844518"
+            />
+            <ellipse
+              id="Ellipse 1063_2"
+              cx="528.323"
+              cy="270.339"
+              rx="8.86345"
+              ry="10.5048"
+              transform="rotate(-51.6654 528.323 270.339)"
+              fill="#844518"
+            />
+            <ellipse
+              id="Ellipse 1064_2"
+              cx="507.01"
+              cy="299.939"
+              rx="6.56552"
+              ry="6.89379"
+              transform="rotate(-51.6654 507.01 299.939)"
+              fill="#FFC89F"
+            />
+            <ellipse
+              id="Ellipse 1065_2"
+              cx="529.406"
+              cy="271.614"
+              rx="6.56552"
+              ry="6.89379"
+              transform="rotate(-51.6654 529.406 271.614)"
+              fill="#FFC89F"
+            />
+            <path
+              id="Rectangle 3501_2"
+              d="M473.832 274.784C473.994 272.229 476.249 270.321 478.796 270.585C480.734 270.786 482.324 272.209 482.738 274.113L487.421 295.676C488.31 299.771 485.712 303.812 481.617 304.701C476.695 305.77 472.116 301.833 472.435 296.806L473.832 274.784Z"
+              fill="#844518"
+            />
+            <path
+              id="Rectangle 3502_2"
+              d="M472.964 274.517C473.126 271.961 475.381 270.053 477.928 270.317C479.866 270.518 481.456 271.941 481.869 273.845L486.553 295.409C487.442 299.504 484.843 303.544 480.749 304.433C475.826 305.502 471.248 301.566 471.567 296.539L472.964 274.517Z"
+              fill="#844518"
+            />
+            <path
+              id="Rectangle 3503_2"
+              d="M496.812 244.358C494.363 245.104 493.027 247.739 493.871 250.156C494.513 251.996 496.264 253.215 498.212 253.178L520.275 252.763C524.464 252.684 527.796 249.224 527.718 245.035C527.623 239.998 522.737 236.451 517.919 237.92L496.812 244.358Z"
+              fill="#844518"
+            />
+            <circle
+              id="Ellipse 1059_2"
+              cx="450.155"
+              cy="255.401"
+              r="9.52"
+              transform="rotate(-51.6654 450.155 255.401)"
+              fill="#844518"
+            />
+            <circle
+              id="Ellipse 1075_2"
+              cx="452"
+              cy="255.186"
+              r="7.55035"
+              transform="rotate(-51.6654 452 255.186)"
+              fill="#C57A43"
+            />
+            <circle
+              id="Ellipse 1060_2"
+              cx="472.552"
+              cy="227.076"
+              r="9.52"
+              transform="rotate(-51.6654 472.552 227.076)"
+              fill="#844518"
+            />
+            <ellipse
+              id="Ellipse 1067_2"
+              cx="479.896"
+              cy="298.743"
+              rx="4.67163"
+              ry="6.38524"
+              transform="rotate(-94.1202 479.896 298.743)"
+              fill="#FFC89F"
+            />
+            <ellipse
+              id="Ellipse 1068_2"
+              rx="4.67163"
+              ry="6.38524"
+              transform="matrix(-0.987107 0.160063 0.160063 0.987107 521.324 245.291)"
+              fill="#FFC89F"
+            />
+            <circle
+              id="Ellipse 1076_2"
+              cx="472.769"
+              cy="228.921"
+              r="7.55035"
+              transform="rotate(-51.6654 472.769 228.921)"
+              fill="#C57A43"
+            />
+            <ellipse
+              id="Ellipse 1058_3"
+              cx="474.229"
+              cy="251.419"
+              rx="23.6359"
+              ry="20.6814"
+              transform="rotate(-51.6654 474.229 251.419)"
+              fill="#844518"
+            />
+            <g id="Group 1447_2">
+              <path
+                id="Ellipse 1069_2"
+                d="M484.004 248.267C486.905 250.561 485.448 253.639 482.637 257.194C479.825 260.749 476.724 263.436 473.823 261.142C470.922 258.848 470.849 254.106 473.66 250.551C476.472 246.996 481.103 245.973 484.004 248.267Z"
+                fill="#FFC89F"
+              />
+              <path
+                id="Ellipse 1070_2"
+                d="M477.253 251.299C477.822 251.749 477.265 253.401 477.265 253.401C477.265 253.401 475.786 254.324 475.217 253.874C474.648 253.425 474.643 252.483 475.205 251.772C475.768 251.061 476.685 250.85 477.253 251.299Z"
+                fill="black"
+              />
+              <rect
+                id="Rectangle 3504_2"
+                x="476.546"
+                y="253.252"
+                width="0.656552"
+                height="3.28276"
+                rx="0.328276"
+                transform="rotate(-51.6654 476.546 253.252)"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3505_2"
+                d="M478.849 255.073C478.623 254.895 478.769 254.52 479.057 254.518C480.715 254.507 481.119 253.909 480.776 252.307C480.715 252.019 481.052 251.793 481.283 251.976C481.343 252.023 481.383 252.093 481.393 252.168C481.713 254.392 481.304 255.046 479.04 255.136C478.972 255.138 478.903 255.116 478.849 255.073Z"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3506_2"
+                d="M479.257 254.558C479.031 254.379 478.7 254.607 478.764 254.888C479.136 256.504 478.647 257.035 477.009 257.071C476.715 257.078 476.573 257.458 476.804 257.64C476.863 257.688 476.94 257.711 477.016 257.704C479.254 257.502 479.796 256.953 479.361 254.73C479.348 254.662 479.311 254.601 479.257 254.558Z"
+                fill="black"
+              />
+            </g>
+            <ellipse
+              id="Ellipse 1073_2"
+              cx="475.905"
+              cy="239.772"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(-51.6654 475.905 239.772)"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1074_2"
+              cx="463.688"
+              cy="255.222"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(-51.6654 463.688 255.222)"
+              fill="black"
+            />
+          </g>
+          <g id="Group 1484" filter="url(#filter7_d)">
+            <ellipse
+              id="Ellipse 1061_3"
+              cx="565.349"
+              cy="290.487"
+              rx="23.6359"
+              ry="25.2772"
+              transform="rotate(136 565.349 290.487)"
+              fill="#844518"
+            />
+            <path
+              id="Ellipse 1066_3"
+              d="M551.215 296.644C546.103 291.351 546.506 282.67 552.114 277.255C557.722 271.839 566.411 271.74 571.523 277.033C576.634 282.326 580.069 294.981 574.461 300.397C568.853 305.812 556.326 301.937 551.215 296.644Z"
+              fill="#C57A43"
+            />
+            <ellipse
+              id="Ellipse 1062_3"
+              cx="564.865"
+              cy="264.94"
+              rx="8.86345"
+              ry="10.5048"
+              transform="rotate(136 564.865 264.94)"
+              fill="#844518"
+            />
+            <ellipse
+              id="Ellipse 1063_3"
+              cx="538.889"
+              cy="290.024"
+              rx="8.86345"
+              ry="10.5048"
+              transform="rotate(136 538.889 290.024)"
+              fill="#844518"
+            />
+            <ellipse
+              id="Ellipse 1064_3"
+              cx="563.96"
+              cy="263.532"
+              rx="6.56552"
+              ry="6.89379"
+              transform="rotate(136 563.96 263.532)"
+              fill="#FFC89F"
+            />
+            <ellipse
+              id="Ellipse 1065_3"
+              cx="537.985"
+              cy="288.616"
+              rx="6.56552"
+              ry="6.89379"
+              transform="rotate(136 537.985 288.616)"
+              fill="#FFC89F"
+            />
+            <path
+              id="Rectangle 3501_3"
+              d="M593.485 292.887C592.984 295.398 590.494 296.988 588.005 296.387C586.111 295.929 584.726 294.307 584.57 292.365L582.805 270.369C582.47 266.192 585.584 262.535 589.761 262.2C594.782 261.797 598.794 266.309 597.808 271.248L593.485 292.887Z"
+              fill="#844518"
+            />
+            <path
+              id="Rectangle 3502_3"
+              d="M594.31 293.268C593.809 295.779 591.319 297.369 588.83 296.768C586.937 296.31 585.551 294.688 585.395 292.746L583.63 270.75C583.295 266.573 586.409 262.916 590.586 262.58C595.607 262.178 599.619 266.69 598.633 271.629L594.31 293.268Z"
+              fill="#844518"
+            />
+            <path
+              id="Rectangle 3503_3"
+              d="M566.652 319.977C569.179 319.563 570.855 317.131 570.341 314.622C569.95 312.713 568.377 311.272 566.441 311.048L544.521 308.516C540.358 308.036 536.594 311.02 536.113 315.183C535.535 320.187 539.904 324.354 544.875 323.541L566.652 319.977Z"
+              fill="#844518"
+            />
+            <circle
+              id="Ellipse 1059_3"
+              cx="614.366"
+              cy="315.255"
+              r="9.52"
+              transform="rotate(136 614.366 315.255)"
+              fill="#844518"
+            />
+            <circle
+              id="Ellipse 1075_3"
+              cx="612.508"
+              cy="315.223"
+              r="7.55034"
+              transform="rotate(136 612.508 315.223)"
+              fill="#C57A43"
+            />
+            <circle
+              id="Ellipse 1060_3"
+              cx="588.39"
+              cy="340.339"
+              r="9.52"
+              transform="rotate(136 588.39 340.339)"
+              fill="#844518"
+            />
+            <ellipse
+              id="Ellipse 1067_3"
+              cx="590.672"
+              cy="268.333"
+              rx="4.67163"
+              ry="6.38524"
+              transform="rotate(93.5456 590.672 268.333)"
+              fill="#FFC89F"
+            />
+            <ellipse
+              id="Ellipse 1068_3"
+              rx="4.67163"
+              ry="6.38524"
+              transform="matrix(0.999637 -0.026958 -0.026958 -0.999637 542.484 315.782)"
+              fill="#FFC89F"
+            />
+            <circle
+              id="Ellipse 1076_3"
+              cx="588.422"
+              cy="338.483"
+              r="7.55034"
+              transform="rotate(136 588.422 338.483)"
+              fill="#C57A43"
+            />
+            <ellipse
+              id="Ellipse 1058_4"
+              cx="589.975"
+              cy="315.99"
+              rx="23.6359"
+              ry="20.6814"
+              transform="rotate(136 589.975 315.99)"
+              fill="#844518"
+            />
+            <g id="Group 1447_3">
+              <path
+                id="Ellipse 1069_3"
+                d="M579.868 317.811C577.299 315.15 579.153 312.294 582.413 309.146C585.674 305.997 589.106 303.748 591.675 306.409C594.244 309.069 593.684 313.778 590.423 316.927C587.163 320.075 582.437 320.471 579.868 317.811Z"
+                fill="#FFC89F"
+              />
+              <path
+                id="Ellipse 1070_3"
+                d="M586.962 315.706C586.458 315.184 587.231 313.621 587.231 313.621C587.231 313.621 588.82 312.904 589.324 313.425C589.827 313.947 589.707 314.88 589.055 315.51C588.403 316.14 587.466 316.227 586.962 315.706Z"
+                fill="black"
+              />
+              <rect
+                id="Rectangle 3504_3"
+                x="587.923"
+                y="313.865"
+                width="0.656552"
+                height="3.28276"
+                rx="0.328276"
+                transform="rotate(136 587.923 313.865)"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3505_3"
+                d="M585.884 311.753C586.084 311.96 585.89 312.312 585.604 312.275C583.96 312.065 583.48 312.604 583.605 314.237C583.628 314.531 583.264 314.71 583.059 314.498C583.006 314.443 582.976 314.369 582.975 314.292C582.955 312.046 583.448 311.453 585.703 311.666C585.771 311.672 585.836 311.703 585.884 311.753Z"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3506_3"
+                d="M585.411 312.209C585.612 312.416 585.97 312.235 585.944 311.948C585.791 310.297 586.346 309.836 587.974 310.018C588.267 310.051 588.458 309.693 588.254 309.482C588.201 309.427 588.128 309.394 588.051 309.39C585.807 309.292 585.197 309.763 585.331 312.025C585.335 312.094 585.364 312.16 585.411 312.209Z"
+                fill="black"
+              />
+            </g>
+            <ellipse
+              id="Ellipse 1073_3"
+              cx="586.761"
+              cy="327.31"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(136 586.761 327.31)"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1074_3"
+              cx="600.929"
+              cy="313.628"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(136 600.929 313.628)"
+              fill="black"
+            />
+          </g>
+          <g id="Group 1477">
+            <ellipse
+              id="Ellipse 1061_4"
+              cx="688.049"
+              cy="310.887"
+              rx="23.6359"
+              ry="25.2772"
+              transform="rotate(49.9733 688.049 310.887)"
+              fill="#C4C4C4"
+            />
+            <path
+              id="Ellipse 1066_4"
+              d="M693.213 325.413C687.578 330.146 678.946 329.143 673.932 323.173C668.918 317.203 669.421 308.527 675.055 303.795C680.69 299.063 693.553 296.513 698.566 302.482C703.58 308.452 698.847 320.681 693.213 325.413Z"
+              fill="#EDEDED"
+            />
+            <ellipse
+              id="Ellipse 1062_4"
+              cx="662.531"
+              cy="309.599"
+              rx="8.86345"
+              ry="10.5048"
+              transform="rotate(49.9733 662.531 309.599)"
+              fill="#C4C4C4"
+            />
+            <ellipse
+              id="Ellipse 1063_4"
+              cx="685.755"
+              cy="337.25"
+              rx="8.86345"
+              ry="10.5048"
+              transform="rotate(49.9733 685.755 337.25)"
+              fill="#C4C4C4"
+            />
+            <ellipse
+              id="Ellipse 1064_4"
+              cx="661.062"
+              cy="310.403"
+              rx="6.56552"
+              ry="6.89379"
+              transform="rotate(49.9733 661.062 310.403)"
+              fill="#ADA8A8"
+            />
+            <ellipse
+              id="Ellipse 1065_4"
+              cx="684.287"
+              cy="338.054"
+              rx="6.56552"
+              ry="6.89379"
+              transform="rotate(49.9733 684.287 338.054)"
+              fill="#ADA8A8"
+            />
+            <path
+              id="Rectangle 3501_4"
+              d="M692.394 282.984C694.864 283.658 696.277 286.252 695.505 288.693C694.918 290.551 693.203 291.821 691.255 291.842L669.19 292.079C665 292.124 661.567 288.763 661.522 284.573C661.468 279.537 666.247 275.846 671.106 277.173L692.394 282.984Z"
+              fill="#C4C4C4"
+            />
+            <path
+              id="Rectangle 3502_4"
+              d="M692.83 282.187C695.3 282.862 696.713 285.455 695.941 287.897C695.353 289.754 693.639 291.024 691.691 291.045L669.625 291.282C665.435 291.327 662.002 287.967 661.958 283.777C661.903 278.74 666.683 275.05 671.542 276.376L692.83 282.187Z"
+              fill="#C4C4C4"
+            />
+            <path
+              id="Rectangle 3503_4"
+              d="M717.559 311.63C717.321 309.08 715.011 307.24 712.473 307.579C710.542 307.837 708.995 309.306 708.637 311.221L704.593 332.914C703.825 337.033 706.542 340.995 710.661 341.763C715.613 342.686 720.073 338.617 719.606 333.601L717.559 311.63Z"
+              fill="#C4C4C4"
+            />
+            <circle
+              id="Ellipse 1059_4"
+              cx="716.154"
+              cy="263.703"
+              r="9.52"
+              transform="rotate(49.9733 716.154 263.703)"
+              fill="#C4C4C4"
+            />
+            <circle
+              id="Ellipse 1075_4"
+              cx="715.993"
+              cy="265.553"
+              r="7.55035"
+              transform="rotate(49.9733 715.993 265.553)"
+              fill="#EDEDED"
+            />
+            <circle
+              id="Ellipse 1060_4"
+              cx="739.379"
+              cy="291.354"
+              r="9.52"
+              transform="rotate(49.9733 739.379 291.354)"
+              fill="#C4C4C4"
+            />
+            <ellipse
+              id="Ellipse 1067_4"
+              cx="667.704"
+              cy="284.089"
+              rx="4.67163"
+              ry="6.38524"
+              transform="rotate(7.51841 667.704 284.089)"
+              fill="#ADA8A8"
+            />
+            <ellipse
+              id="Ellipse 1068_4"
+              rx="4.67163"
+              ry="6.38524"
+              transform="matrix(0.0423655 -0.999102 -0.999102 -0.0423655 711.697 335.45)"
+              fill="#ADA8A8"
+            />
+            <circle
+              id="Ellipse 1076_4"
+              cx="737.528"
+              cy="291.194"
+              r="7.55035"
+              transform="rotate(49.9733 737.528 291.194)"
+              fill="#EDEDED"
+            />
+            <ellipse
+              id="Ellipse 1058_5"
+              cx="715.196"
+              cy="288.086"
+              rx="23.6359"
+              ry="20.6814"
+              transform="rotate(49.9733 715.196 288.086)"
+              fill="#C4C4C4"
+            />
+            <g id="Group 1447_4">
+              <path
+                id="Ellipse 1069_4"
+                d="M716.313 298.295C713.481 300.674 710.761 298.626 707.846 295.155C704.931 291.685 702.924 288.105 705.757 285.726C708.589 283.348 713.248 284.233 716.163 287.704C719.078 291.175 719.145 295.916 716.313 298.295Z"
+                fill="#ADA8A8"
+              />
+              <path
+                id="Ellipse 1070_4"
+                d="M714.703 291.072C714.148 291.538 712.642 290.66 712.642 290.66C712.642 290.66 712.037 289.025 712.592 288.558C713.147 288.092 714.07 288.276 714.653 288.971C715.236 289.665 715.259 290.606 714.703 291.072Z"
+                fill="#797979"
+              />
+              <rect
+                id="Rectangle 3504_4"
+                x="712.935"
+                y="289.986"
+                width="0.656552"
+                height="3.28276"
+                rx="0.328276"
+                transform="rotate(49.9733 712.935 289.986)"
+                fill="#797979"
+              />
+              <path
+                id="Rectangle 3505_4"
+                d="M710.686 291.874C710.907 291.689 711.245 291.907 711.189 292.189C710.865 293.815 711.369 294.331 713.007 294.319C713.302 294.317 713.455 294.693 713.23 294.882C713.171 294.931 713.095 294.957 713.019 294.952C710.776 294.816 710.218 294.284 710.587 292.048C710.598 291.981 710.634 291.918 710.686 291.874Z"
+                fill="#797979"
+              />
+              <path
+                id="Rectangle 3506_4"
+                d="M711.109 292.377C711.33 292.192 711.173 291.822 710.885 291.828C709.228 291.866 708.806 291.28 709.101 289.669C709.154 289.379 708.811 289.163 708.585 289.353C708.527 289.402 708.489 289.472 708.48 289.548C708.226 291.781 708.654 292.422 710.92 292.445C710.989 292.446 711.056 292.421 711.109 292.377Z"
+                fill="#797979"
+              />
+            </g>
+            <ellipse
+              id="Ellipse 1073_4"
+              cx="726.268"
+              cy="292.078"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(49.9733 726.268 292.078)"
+              fill="#797979"
+            />
+            <ellipse
+              id="Ellipse 1074_4"
+              cx="713.6"
+              cy="276.996"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(49.9733 713.6 276.996)"
+              fill="#797979"
+            />
+          </g>
+          <g id="Group 1471" filter="url(#filter8_d)">
+            <ellipse
+              id="Ellipse 1061_5"
+              cx="475.048"
+              cy="331.508"
+              rx="23.6359"
+              ry="25.2772"
+              transform="rotate(-19.3034 475.048 331.508)"
+              fill="#844518"
+            />
+            <path
+              id="Ellipse 1066_5"
+              d="M490.462 331.818C492.894 338.763 488.902 346.482 481.544 349.059C474.186 351.636 466.25 348.095 463.817 341.151C461.385 334.206 463.551 321.274 470.909 318.696C478.267 316.119 488.029 324.874 490.462 331.818Z"
+              fill="#C57A43"
+            />
+            <ellipse
+              id="Ellipse 1062_5"
+              cx="464.814"
+              cy="354.919"
+              rx="8.86345"
+              ry="10.5048"
+              transform="rotate(-19.3034 464.814 354.919)"
+              fill="#844518"
+            />
+            <ellipse
+              id="Ellipse 1063_5"
+              cx="498.894"
+              cy="342.982"
+              rx="8.86345"
+              ry="10.5048"
+              transform="rotate(-19.3034 498.894 342.982)"
+              fill="#844518"
+            />
+            <ellipse
+              id="Ellipse 1064_5"
+              cx="465.046"
+              cy="356.577"
+              rx="6.56552"
+              ry="6.89379"
+              transform="rotate(-19.3034 465.046 356.577)"
+              fill="#FFC89F"
+            />
+            <ellipse
+              id="Ellipse 1065_5"
+              cx="499.126"
+              cy="344.64"
+              rx="6.56552"
+              ry="6.89379"
+              transform="rotate(-19.3034 499.126 344.64)"
+              fill="#FFC89F"
+            />
+            <path
+              id="Rectangle 3501_5"
+              d="M450.488 317.571C451.993 315.499 454.919 315.095 456.929 316.681C458.458 317.888 459.039 319.941 458.37 321.77L450.783 342.492C449.342 346.426 444.985 348.448 441.05 347.008C436.32 345.276 434.56 339.5 437.52 335.425L450.488 317.571Z"
+              fill="#844518"
+            />
+            <path
+              id="Rectangle 3502_5"
+              d="M449.897 316.88C451.402 314.808 454.328 314.404 456.338 315.99C457.868 317.197 458.449 319.25 457.779 321.08L450.192 341.801C448.752 345.736 444.394 347.758 440.459 346.317C435.729 344.585 433.969 338.81 436.929 334.734L449.897 316.88Z"
+              fill="#844518"
+            />
+            <path
+              id="Rectangle 3503_5"
+              d="M486.184 304.17C483.715 303.49 481.177 305 480.596 307.493C480.153 309.391 480.98 311.358 482.645 312.37L501.503 323.829C505.084 326.004 509.751 324.865 511.927 321.285C514.543 316.98 512.315 311.368 507.458 310.03L486.184 304.17Z"
+              fill="#844518"
+            />
+            <circle
+              id="Ellipse 1059_5"
+              cx="440.863"
+              cy="288.525"
+              r="9.52"
+              transform="rotate(-19.3034 440.863 288.525)"
+              fill="#844518"
+            />
+            <circle
+              id="Ellipse 1075_5"
+              cx="442.536"
+              cy="289.33"
+              r="7.55035"
+              transform="rotate(-19.3034 442.536 289.33)"
+              fill="#C57A43"
+            />
+            <circle
+              id="Ellipse 1060_5"
+              cx="474.943"
+              cy="276.587"
+              r="9.52"
+              transform="rotate(-19.3034 474.943 276.587)"
+              fill="#844518"
+            />
+            <ellipse
+              id="Ellipse 1067_5"
+              cx="442.784"
+              cy="341.054"
+              rx="4.67163"
+              ry="6.38524"
+              transform="rotate(-61.7582 442.784 341.054)"
+              fill="#FFC89F"
+            />
+            <ellipse
+              id="Ellipse 1068_5"
+              rx="4.67163"
+              ry="6.38524"
+              transform="matrix(-0.919469 -0.393163 -0.393163 0.919469 506.39 318.08)"
+              fill="#FFC89F"
+            />
+            <circle
+              id="Ellipse 1076_5"
+              cx="474.137"
+              cy="278.261"
+              r="7.55035"
+              transform="rotate(-19.3034 474.137 278.261)"
+              fill="#C57A43"
+            />
+            <ellipse
+              id="Ellipse 1058_6"
+              cx="463.328"
+              cy="298.047"
+              rx="23.6359"
+              ry="20.6814"
+              transform="rotate(-19.3034 463.328 298.047)"
+              fill="#844518"
+            />
+            <g id="Group 1447_5">
+              <path
+                id="Ellipse 1069_5"
+                d="M473.272 300.616C474.494 304.107 471.617 305.926 467.339 307.425C463.061 308.923 459.003 309.533 457.781 306.042C456.558 302.551 459.035 298.507 463.313 297.009C467.59 295.51 472.049 297.125 473.272 300.616Z"
+                fill="#FFC89F"
+              />
+              <path
+                id="Ellipse 1070_5"
+                d="M465.947 299.565C466.187 300.249 464.832 301.347 464.832 301.347C464.832 301.347 463.089 301.334 462.849 300.65C462.609 299.966 463.108 299.168 463.964 298.868C464.82 298.568 465.707 298.88 465.947 299.565Z"
+                fill="black"
+              />
+              <rect
+                id="Rectangle 3504_5"
+                x="464.305"
+                y="300.835"
+                width="0.656552"
+                height="3.28276"
+                rx="0.328276"
+                transform="rotate(-19.3034 464.305 300.835)"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3505_5"
+                d="M465.276 303.606C465.181 303.334 465.505 303.095 465.749 303.248C467.155 304.126 467.817 303.837 468.385 302.301C468.487 302.025 468.893 302.014 468.99 302.292C469.015 302.364 469.012 302.444 468.981 302.514C468.06 304.563 467.365 304.897 465.405 303.761C465.345 303.726 465.299 303.671 465.276 303.606Z"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3506_5"
+                d="M465.895 303.389C465.8 303.117 465.398 303.133 465.303 303.404C464.752 304.968 464.055 305.155 462.652 304.309C462.4 304.157 462.076 304.402 462.173 304.68C462.199 304.752 462.251 304.812 462.319 304.847C464.317 305.874 465.069 305.701 465.892 303.59C465.917 303.526 465.918 303.454 465.895 303.389Z"
+                fill="black"
+              />
+            </g>
+            <ellipse
+              id="Ellipse 1073_5"
+              cx="470.98"
+              cy="289.106"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(-19.3034 470.98 289.106)"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1074_5"
+              cx="452.39"
+              cy="295.617"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(-19.3034 452.39 295.617)"
+              fill="black"
+            />
+          </g>
+          <g id="Group 1481" filter="url(#filter9_d)">
+            <ellipse
+              id="Ellipse 1077"
+              cx="702.565"
+              cy="272.976"
+              rx="23.6359"
+              ry="25.2772"
+              transform="rotate(36.3427 702.565 272.976)"
+              fill="#FF9FAB"
+            />
+            <path
+              id="Ellipse 1078"
+              d="M711.006 285.876C706.645 291.803 698.02 292.863 691.74 288.243C685.461 283.623 683.905 275.073 688.266 269.146C692.626 263.219 704.526 257.709 710.805 262.329C717.085 266.949 715.367 279.949 711.006 285.876Z"
+              fill="#FFE0E0"
+            />
+            <ellipse
+              id="Ellipse 1079"
+              cx="676.809"
+              cy="276.481"
+              rx="7.24828"
+              ry="14.4041"
+              transform="rotate(-10.5758 676.809 276.481)"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1093"
+              rx="7.24828"
+              ry="14.4041"
+              transform="matrix(-0.117344 -0.993091 -0.993091 0.117344 707.481 299.048)"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1092"
+              cx="676.609"
+              cy="278.434"
+              rx="4.65549"
+              ry="11.0014"
+              transform="rotate(-10.5758 676.609 278.434)"
+              fill="#FF7585"
+            />
+            <ellipse
+              id="Ellipse 1094"
+              rx="4.65549"
+              ry="11.0014"
+              transform="matrix(-0.117344 -0.993091 -0.993091 0.117344 705.678 299.82)"
+              fill="#FF7585"
+            />
+            <path
+              id="Rectangle 3504_6"
+              d="M700.212 244.835C702.772 244.908 704.757 247.096 704.582 249.65C704.448 251.594 703.081 253.232 701.193 253.712L679.805 259.142C675.744 260.173 671.615 257.716 670.584 253.655C669.345 248.773 673.12 244.06 678.155 244.204L700.212 244.835Z"
+              fill="#FF9FAB"
+            />
+            <path
+              id="Rectangle 3505_6"
+              d="M700.449 243.958C703.008 244.031 704.993 246.218 704.818 248.773C704.685 250.717 703.318 252.355 701.429 252.834L680.041 258.264C675.98 259.296 671.852 256.839 670.821 252.778C669.581 247.895 673.356 243.183 678.391 243.327L700.449 243.958Z"
+              fill="#FF9FAB"
+            />
+            <path
+              id="Rectangle 3506_6"
+              d="M731.419 266.743C730.588 264.321 727.908 263.077 725.522 264.005C723.706 264.71 722.548 266.503 722.653 268.448L723.834 290.483C724.059 294.667 727.633 297.878 731.817 297.653C736.847 297.383 740.222 292.377 738.586 287.613L731.419 266.743Z"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1086"
+              cx="676.477"
+              cy="251.728"
+              rx="4.67163"
+              ry="6.38524"
+              transform="rotate(-6.11216 676.477 251.728)"
+              fill="#FF7585"
+            />
+            <ellipse
+              id="Ellipse 1087"
+              rx="4.67163"
+              ry="6.38524"
+              transform="matrix(-0.194277 -0.980947 -0.980947 0.194277 731.337 291.274)"
+              fill="#FF7585"
+            />
+            <ellipse
+              id="Ellipse 1095"
+              cx="688.099"
+              cy="292.084"
+              rx="5.58069"
+              ry="4.59586"
+              transform="rotate(36.3427 688.099 292.084)"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1096"
+              cx="730.614"
+              cy="210.142"
+              rx="6.56552"
+              ry="20.0248"
+              transform="rotate(18.8696 730.614 210.142)"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1099"
+              rx="6.56552"
+              ry="20.0248"
+              transform="matrix(-0.590383 -0.807123 -0.807123 0.590383 752.825 226.484)"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1098"
+              cx="728.816"
+              cy="215.043"
+              rx="3.67848"
+              ry="16.5532"
+              transform="rotate(18.8696 728.816 215.043)"
+              fill="#FFE0E0"
+            />
+            <ellipse
+              id="Ellipse 1117"
+              rx="3.67848"
+              ry="16.5532"
+              transform="matrix(-0.590383 -0.807123 -0.807123 0.590383 748.384 229.44)"
+              fill="#FFE0E0"
+            />
+            <ellipse
+              id="Ellipse 1089"
+              cx="723.575"
+              cy="244.418"
+              rx="23.6359"
+              ry="20.6814"
+              transform="rotate(36.3427 723.575 244.418)"
+              fill="#FF9FAB"
+            />
+            <g id="Group 1448">
+              <path
+                id="Ellipse 1070_6"
+                d="M723.799 247.438C723.369 248.022 721.699 247.523 721.699 247.523C721.699 247.523 720.725 246.076 721.155 245.492C721.585 244.908 722.525 244.87 723.255 245.407C723.985 245.944 724.229 246.854 723.799 247.438Z"
+                fill="black"
+              />
+              <rect
+                id="Rectangle 3504_7"
+                x="721.824"
+                y="246.8"
+                width="0.656552"
+                height="3.28276"
+                rx="0.328276"
+                transform="rotate(36.3427 721.824 246.8)"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3505_7"
+                d="M720.083 249.164C720.254 248.932 720.634 249.064 720.646 249.352C720.714 251.009 721.326 251.391 722.915 250.994C723.201 250.922 723.438 251.251 723.264 251.488C723.219 251.55 723.151 251.592 723.075 251.606C720.864 252.002 720.196 251.616 720.028 249.357C720.023 249.288 720.043 249.219 720.083 249.164Z"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3506_7"
+                d="M720.612 249.554C720.783 249.321 720.544 248.998 720.266 249.073C718.664 249.5 718.116 249.03 718.023 247.395C718.006 247.101 717.621 246.972 717.447 247.209C717.402 247.27 717.381 247.348 717.391 247.424C717.67 249.653 718.238 250.176 720.445 249.664C720.512 249.648 720.572 249.609 720.612 249.554Z"
+                fill="black"
+              />
+            </g>
+            <ellipse
+              id="Ellipse 1090"
+              cx="735.274"
+              cy="245.689"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(36.3427 735.274 245.689)"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1091_11"
+              cx="719.409"
+              cy="234.017"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(36.3427 719.409 234.017)"
+              fill="black"
+            />
+          </g>
+          <g id="Group 1472" filter="url(#filter10_d)">
+            <ellipse
+              id="Ellipse 1077_2"
+              cx="504.573"
+              cy="327.648"
+              rx="23.6359"
+              ry="25.2772"
+              fill="#FF9FAB"
+            />
+            <path
+              id="Ellipse 1078_2"
+              d="M519.018 333.037C519.018 340.395 512.699 346.36 504.903 346.36C497.107 346.36 490.787 340.395 490.787 333.037C490.787 325.678 497.107 314.189 504.903 314.189C512.699 314.189 519.018 325.678 519.018 333.037Z"
+              fill="#FFE0E0"
+            />
+            <ellipse
+              id="Ellipse 1079_2"
+              cx="485.905"
+              cy="345.735"
+              rx="7.24828"
+              ry="14.4041"
+              transform="rotate(-46.9185 485.905 345.735)"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1093_2"
+              rx="7.24828"
+              ry="14.4041"
+              transform="matrix(-0.683038 -0.730383 -0.730383 0.683038 523.983 345.735)"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1092_2"
+              cx="486.9"
+              cy="347.426"
+              rx="4.65549"
+              ry="11.0014"
+              transform="rotate(-46.9185 486.9 347.426)"
+              fill="#FF7585"
+            />
+            <ellipse
+              id="Ellipse 1094_2"
+              rx="4.65549"
+              ry="11.0014"
+              transform="matrix(-0.683038 -0.730383 -0.730383 0.683038 522.988 347.426)"
+              fill="#FF7585"
+            />
+            <path
+              id="Rectangle 3504_8"
+              d="M486.001 306.375C488.106 304.917 491.001 305.503 492.374 307.665C493.419 309.309 493.289 311.439 492.052 312.944L478.042 329.993C475.381 333.23 470.6 333.698 467.363 331.038C463.471 327.84 463.719 321.807 467.86 318.939L486.001 306.375Z"
+              fill="#FF9FAB"
+            />
+            <path
+              id="Rectangle 3505_8"
+              d="M485.672 305.528C487.777 304.071 490.672 304.656 492.045 306.818C493.089 308.463 492.959 310.592 491.722 312.098L477.712 329.146C475.052 332.384 470.271 332.851 467.034 330.191C463.142 326.993 463.39 320.96 467.531 318.092L485.672 305.528Z"
+              fill="#FF9FAB"
+            />
+            <path
+              id="Rectangle 3506_8"
+              d="M524.122 305.528C522.017 304.071 519.122 304.656 517.749 306.818C516.704 308.463 516.834 310.592 518.072 312.098L532.081 329.146C534.742 332.384 539.523 332.851 542.76 330.191C546.652 326.993 546.404 320.96 542.263 318.092L524.122 305.528Z"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1086_2"
+              cx="470.968"
+              cy="325.993"
+              rx="4.67163"
+              ry="6.38524"
+              transform="rotate(-42.4548 470.968 325.993)"
+              fill="#FF7585"
+            />
+            <ellipse
+              id="Ellipse 1087_2"
+              rx="4.67163"
+              ry="6.38524"
+              transform="matrix(-0.73781 -0.675009 -0.675009 0.73781 538.592 325.336)"
+              fill="#FF7585"
+            />
+            <ellipse
+              id="Ellipse 1095_2"
+              cx="504.245"
+              cy="351.612"
+              rx="5.58069"
+              ry="4.59586"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1096_2"
+              cx="489.93"
+              cy="260.414"
+              rx="6.56552"
+              ry="20.0248"
+              transform="rotate(-17.4731 489.93 260.414)"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1099_2"
+              rx="6.56552"
+              ry="20.0248"
+              transform="matrix(-0.953858 -0.300258 -0.300258 0.953858 517.505 260.414)"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1098_2"
+              cx="491.386"
+              cy="265.428"
+              rx="3.67848"
+              ry="16.5532"
+              transform="rotate(-17.4731 491.386 265.428)"
+              fill="#FFE0E0"
+            />
+            <ellipse
+              id="Ellipse 1117_2"
+              rx="3.67848"
+              ry="16.5532"
+              transform="matrix(-0.953858 -0.300258 -0.300258 0.953858 515.68 265.428)"
+              fill="#FFE0E0"
+            />
+            <ellipse
+              id="Ellipse 1089_2"
+              cx="504.573"
+              cy="292.194"
+              rx="23.6359"
+              ry="20.6814"
+              fill="#FF9FAB"
+            />
+            <g id="Group 1448_2">
+              <path
+                id="Ellipse 1070_7"
+                d="M506.544 294.492C506.544 295.217 504.902 295.805 504.902 295.805C504.902 295.805 503.261 295.217 503.261 294.492C503.261 293.767 503.996 293.179 504.902 293.179C505.809 293.179 506.544 293.767 506.544 294.492Z"
+                fill="black"
+              />
+              <rect
+                id="Rectangle 3504_9"
+                x="504.573"
+                y="295.148"
+                width="0.656552"
+                height="3.28276"
+                rx="0.328276"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3505_9"
+                d="M504.573 298.085C504.573 297.797 504.957 297.678 505.138 297.903C506.175 299.197 506.894 299.143 507.939 297.881C508.126 297.654 508.513 297.778 508.513 298.072C508.513 298.149 508.483 298.223 508.43 298.279C506.884 299.908 506.118 299.993 504.643 298.273C504.598 298.221 504.573 298.153 504.573 298.085Z"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3506_9"
+                d="M505.231 298.085C505.231 297.797 504.846 297.678 504.666 297.903C503.629 299.197 502.91 299.143 501.865 297.881C501.678 297.654 501.291 297.778 501.291 298.072C501.291 298.149 501.321 298.223 501.374 298.279C502.92 299.908 503.686 299.993 505.161 298.273C505.206 298.221 505.231 298.153 505.231 298.085Z"
+                fill="black"
+              />
+            </g>
+            <ellipse
+              id="Ellipse 1090_2"
+              cx="514.751"
+              cy="286.285"
+              rx="1.64138"
+              ry="2.29793"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1091_12"
+              cx="495.053"
+              cy="286.285"
+              rx="1.64138"
+              ry="2.29793"
+              fill="black"
+            />
+          </g>
+          <g id="Group 1483" filter="url(#filter11_d)">
+            <ellipse
+              id="Ellipse 1118"
+              cx="555.128"
+              cy="281.69"
+              rx="23.6359"
+              ry="25.2772"
+              fill="#FF9FAB"
+            />
+            <path
+              id="Ellipse 1119"
+              d="M569.573 287.078C569.573 294.436 563.253 300.401 555.457 300.401C547.661 300.401 541.341 294.436 541.341 287.078C541.341 279.72 547.661 268.23 555.457 268.23C563.253 268.23 569.573 279.72 569.573 287.078Z"
+              fill="#FFE0E0"
+            />
+            <ellipse
+              id="Ellipse 1120"
+              cx="536.46"
+              cy="299.777"
+              rx="7.24828"
+              ry="14.4041"
+              transform="rotate(-46.9185 536.46 299.777)"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1121"
+              rx="7.24828"
+              ry="14.4041"
+              transform="matrix(-0.683038 -0.730383 -0.730383 0.683038 574.538 299.777)"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1122"
+              cx="537.455"
+              cy="301.468"
+              rx="4.65549"
+              ry="11.0014"
+              transform="rotate(-46.9185 537.455 301.468)"
+              fill="#FF7585"
+            />
+            <ellipse
+              id="Ellipse 1123"
+              rx="4.65549"
+              ry="11.0014"
+              transform="matrix(-0.683038 -0.730383 -0.730383 0.683038 573.543 301.468)"
+              fill="#FF7585"
+            />
+            <path
+              id="Rectangle 3507"
+              d="M536.556 260.417C538.661 258.959 541.556 259.545 542.929 261.707C543.973 263.351 543.843 265.481 542.606 266.986L528.596 284.035C525.936 287.272 521.155 287.74 517.918 285.08C514.026 281.882 514.274 275.849 518.415 272.981L536.556 260.417Z"
+              fill="#FF9FAB"
+            />
+            <path
+              id="Rectangle 3508"
+              d="M536.227 259.57C538.332 258.112 541.227 258.698 542.6 260.86C543.644 262.504 543.514 264.634 542.277 266.139L528.267 283.188C525.607 286.425 520.826 286.893 517.588 284.233C513.697 281.035 513.945 275.002 518.086 272.134L536.227 259.57Z"
+              fill="#FF9FAB"
+            />
+            <path
+              id="Rectangle 3509"
+              d="M574.677 259.57C572.572 258.112 569.677 258.698 568.304 260.86C567.259 262.504 567.389 264.634 568.626 266.139L582.636 283.188C585.297 286.425 590.078 286.893 593.315 284.233C597.207 281.035 596.959 275.002 592.818 272.134L574.677 259.57Z"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1124"
+              cx="521.523"
+              cy="280.034"
+              rx="4.67163"
+              ry="6.38524"
+              transform="rotate(-42.4548 521.523 280.034)"
+              fill="#FF7585"
+            />
+            <ellipse
+              id="Ellipse 1125"
+              rx="4.67163"
+              ry="6.38524"
+              transform="matrix(-0.73781 -0.675009 -0.675009 0.73781 589.147 279.378)"
+              fill="#FF7585"
+            />
+            <ellipse
+              id="Ellipse 1126"
+              cx="554.8"
+              cy="305.654"
+              rx="5.58069"
+              ry="4.59586"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1127"
+              cx="530.063"
+              cy="245.546"
+              rx="6.56552"
+              ry="20.0248"
+              transform="rotate(-134.265 530.063 245.546)"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1134"
+              rx="6.56552"
+              ry="20.0248"
+              transform="matrix(0.697984 -0.716113 -0.716113 -0.697984 579.96 244.89)"
+              fill="#FF9FAB"
+            />
+            <ellipse
+              id="Ellipse 1129"
+              cx="533.881"
+              cy="241.987"
+              rx="3.67848"
+              ry="16.5532"
+              transform="rotate(-134.265 533.881 241.987)"
+              fill="#FFE0E0"
+            />
+            <ellipse
+              id="Ellipse 1135"
+              rx="3.67848"
+              ry="16.5532"
+              transform="matrix(0.697984 -0.716113 -0.716113 -0.697984 576.141 241.33)"
+              fill="#FFE0E0"
+            />
+            <ellipse
+              id="Ellipse 1131"
+              cx="555.128"
+              cy="246.236"
+              rx="23.6359"
+              ry="20.6814"
+              fill="#FF9FAB"
+            />
+            <g id="Group 1449">
+              <path
+                id="Ellipse 1070_8"
+                d="M557.099 248.534C557.099 249.259 555.458 249.847 555.458 249.847C555.458 249.847 553.816 249.259 553.816 248.534C553.816 247.808 554.551 247.22 555.458 247.22C556.364 247.22 557.099 247.808 557.099 248.534Z"
+                fill="black"
+              />
+              <rect
+                id="Rectangle 3504_10"
+                x="555.129"
+                y="249.19"
+                width="0.656552"
+                height="3.28276"
+                rx="0.328276"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3505_10"
+                d="M555.129 252.126C555.129 251.838 555.513 251.72 555.693 251.945C556.73 253.238 557.45 253.184 558.494 251.922C558.682 251.695 559.068 251.819 559.068 252.114C559.068 252.19 559.038 252.265 558.986 252.32C557.44 253.95 556.673 254.035 555.199 252.315C555.154 252.263 555.129 252.195 555.129 252.126Z"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3506_10"
+                d="M555.786 252.126C555.786 251.838 555.402 251.72 555.222 251.945C554.185 253.238 553.465 253.184 552.421 251.922C552.233 251.695 551.847 251.819 551.847 252.114C551.847 252.19 551.877 252.265 551.929 252.32C553.475 253.95 554.242 254.035 555.716 252.315C555.761 252.263 555.786 252.195 555.786 252.126Z"
+                fill="black"
+              />
+            </g>
+            <ellipse
+              id="Ellipse 1132"
+              cx="565.305"
+              cy="240.327"
+              rx="1.64138"
+              ry="2.29793"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1133"
+              cx="545.608"
+              cy="240.327"
+              rx="1.64138"
+              ry="2.29793"
+              fill="black"
+            />
+          </g>
+          <g id="Group 1480" filter="url(#filter12_d)">
+            <ellipse
+              id="Ellipse 1061_6"
+              cx="637.302"
+              cy="279.579"
+              rx="23.6359"
+              ry="25.2772"
+              fill="#FFB74F"
+            />
+            <path
+              id="Ellipse 1066_6"
+              d="M651.747 284.967C651.747 292.326 645.427 298.291 637.631 298.291C629.835 298.291 623.515 292.326 623.515 284.967C623.515 277.609 629.835 266.12 637.631 266.12C645.427 266.12 651.747 277.609 651.747 284.967Z"
+              fill="#FFDFB0"
+            />
+            <ellipse
+              id="Ellipse 1062_6"
+              cx="619.904"
+              cy="298.291"
+              rx="8.86345"
+              ry="10.5048"
+              fill="#FFB74F"
+            />
+            <ellipse
+              id="Ellipse 1063_6"
+              cx="656.015"
+              cy="298.291"
+              rx="8.86345"
+              ry="10.5048"
+              fill="#FFB74F"
+            />
+            <ellipse
+              id="Ellipse 1064_6"
+              cx="619.575"
+              cy="299.933"
+              rx="6.56552"
+              ry="6.89379"
+              fill="#CD7900"
+            />
+            <ellipse
+              id="Ellipse 1065_6"
+              cx="655.686"
+              cy="299.933"
+              rx="6.56552"
+              ry="6.89379"
+              fill="#CD7900"
+            />
+            <path
+              id="Rectangle 3501_6"
+              d="M618.73 258.306C620.835 256.849 623.73 257.434 625.103 259.596C626.147 261.241 626.017 263.37 624.78 264.876L610.77 281.924C608.11 285.161 603.329 285.629 600.092 282.969C596.2 279.771 596.448 273.738 600.589 270.87L618.73 258.306Z"
+              fill="#FFB74F"
+            />
+            <path
+              id="Rectangle 3502_6"
+              d="M618.4 257.46C620.505 256.002 623.401 256.588 624.773 258.749C625.818 260.394 625.688 262.523 624.451 264.029L610.441 281.077C607.781 284.315 603 284.782 599.762 282.122C595.871 278.924 596.119 272.891 600.26 270.023L618.4 257.46Z"
+              fill="#FFB74F"
+            />
+            <path
+              id="Rectangle 3503_6"
+              d="M656.851 257.46C654.745 256.002 651.85 256.588 650.478 258.749C649.433 260.394 649.563 262.523 650.8 264.029L664.81 281.077C667.47 284.315 672.251 284.782 675.489 282.122C679.38 278.924 679.132 272.891 674.991 270.023L656.851 257.46Z"
+              fill="#FFB74F"
+            />
+            <ellipse
+              id="Ellipse 1067_6"
+              cx="603.696"
+              cy="277.923"
+              rx="4.67163"
+              ry="6.38524"
+              transform="rotate(-42.4548 603.696 277.923)"
+              fill="#CD7900"
+            />
+            <ellipse
+              id="Ellipse 1068_6"
+              rx="4.67163"
+              ry="6.38524"
+              transform="matrix(-0.73781 -0.675009 -0.675009 0.73781 671.321 277.267)"
+              fill="#CD7900"
+            />
+            <path
+              id="Polygon 3"
+              d="M616.485 223.597C616.027 220.074 620.045 217.746 622.872 219.896L628.668 224.303C630.941 226.032 630.723 229.517 628.252 230.948L623.396 233.762C620.925 235.193 617.793 233.648 617.424 230.816L616.485 223.597Z"
+              fill="#FFB74F"
+            />
+            <path
+              id="Polygon 5"
+              d="M657.658 223.597C658.116 220.074 654.098 217.746 651.27 219.896L645.475 224.303C643.201 226.032 643.42 229.517 645.891 230.948L650.747 233.762C653.218 235.193 656.35 233.648 656.719 230.816L657.658 223.597Z"
+              fill="#CD7900"
+            />
+            <path
+              id="Polygon 4"
+              d="M619.543 228.234C619.085 224.711 623.103 222.384 625.931 224.534L627.189 225.49C629.462 227.219 629.244 230.704 626.773 232.136L625.719 232.747C623.247 234.178 620.115 232.633 619.747 229.801L619.543 228.234Z"
+              fill="#FFDFB0"
+            />
+            <path
+              id="Polygon 6"
+              d="M654.601 228.234C655.059 224.711 651.041 222.384 648.213 224.534L646.955 225.49C644.681 227.219 644.9 230.704 647.371 232.136L648.425 232.747C650.896 234.178 654.028 232.633 654.397 229.801L654.601 228.234Z"
+              fill="#FFDFB0"
+            />
+            <ellipse
+              id="Ellipse 1131_2"
+              cx="637.302"
+              cy="245.439"
+              rx="23.6359"
+              ry="20.6814"
+              fill="#FFB74F"
+            />
+            <path
+              id="Intersect"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M637.585 224.757C648.067 224.864 656.908 230.942 659.874 239.285C657.07 241.257 653.141 242.482 648.791 242.482C640.27 242.482 633.362 237.779 633.362 231.977C633.362 229.181 634.967 226.639 637.585 224.757Z"
+              fill="#CD7900"
+            />
+            <g id="Group 1449_2">
+              <path
+                id="Ellipse 1070_9"
+                d="M639.271 247.736C639.271 248.461 637.63 249.049 637.63 249.049C637.63 249.049 635.989 248.461 635.989 247.736C635.989 247.011 636.723 246.423 637.63 246.423C638.536 246.423 639.271 247.011 639.271 247.736Z"
+                fill="black"
+              />
+              <rect
+                id="Rectangle 3504_11"
+                x="637.301"
+                y="248.393"
+                width="0.656552"
+                height="3.28276"
+                rx="0.328276"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3505_11"
+                d="M637.301 251.329C637.301 251.041 637.685 250.922 637.866 251.147C638.903 252.441 639.622 252.387 640.666 251.125C640.854 250.898 641.24 251.022 641.24 251.317C641.24 251.393 641.211 251.467 641.158 251.523C639.612 253.153 638.846 253.238 637.371 251.517C637.326 251.465 637.301 251.398 637.301 251.329Z"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3506_11"
+                d="M637.958 251.329C637.958 251.041 637.574 250.922 637.394 251.147C636.357 252.441 635.638 252.387 634.593 251.125C634.405 250.898 634.019 251.022 634.019 251.317C634.019 251.393 634.049 251.467 634.101 251.523C635.648 253.153 636.414 253.238 637.889 251.517C637.933 251.465 637.958 251.398 637.958 251.329Z"
+                fill="black"
+              />
+            </g>
+            <ellipse
+              id="Ellipse 1132_2"
+              cx="647.479"
+              cy="239.53"
+              rx="1.64138"
+              ry="2.29793"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1133_2"
+              cx="627.782"
+              cy="239.53"
+              rx="1.64138"
+              ry="2.29793"
+              fill="black"
+            />
+            <rect
+              id="Rectangle 3510"
+              x="617.721"
+              y="243.141"
+              width="11.8179"
+              height="0.656552"
+              rx="0.328276"
+              transform="rotate(10.1013 617.721 243.141)"
+              fill="black"
+            />
+            <rect
+              id="Rectangle 3513"
+              width="11.8179"
+              height="0.656552"
+              rx="0.328276"
+              transform="matrix(-0.984499 0.175389 0.175389 0.984499 656.883 243.141)"
+              fill="black"
+            />
+            <rect
+              id="Rectangle 3512"
+              width="11.8179"
+              height="0.656552"
+              rx="0.328276"
+              transform="matrix(-0.984499 0.175389 0.175389 0.984499 629.241 249.05)"
+              fill="black"
+            />
+            <rect
+              id="Rectangle 3514"
+              x="645.365"
+              y="249.05"
+              width="11.8179"
+              height="0.656552"
+              rx="0.328276"
+              transform="rotate(10.1013 645.365 249.05)"
+              fill="black"
+            />
+            <rect
+              id="Rectangle 3511"
+              x="617.606"
+              y="247.08"
+              width="11.8179"
+              height="0.656552"
+              rx="0.328276"
+              fill="black"
+            />
+            <rect
+              id="Rectangle 3515"
+              width="11.8179"
+              height="0.656552"
+              rx="0.328276"
+              transform="matrix(-1 0 0 1 656.999 247.08)"
+              fill="black"
+            />
+          </g>
+          <g id="Group 1475" filter="url(#filter13_d)">
+            <ellipse
+              id="Ellipse 1061_7"
+              cx="627.476"
+              cy="309.053"
+              rx="23.6359"
+              ry="25.2772"
+              transform="rotate(-36.6507 627.476 309.053)"
+              fill="#FFB74F"
+            />
+            <path
+              id="Ellipse 1066_7"
+              d="M642.282 304.753C646.674 310.657 645.165 319.215 638.91 323.868C632.655 328.522 624.024 327.509 619.632 321.606C615.239 315.702 613.451 302.712 619.706 298.058C625.961 293.404 637.889 298.85 642.282 304.753Z"
+              fill="#FFDFB0"
+            />
+            <ellipse
+              id="Ellipse 1062_7"
+              cx="624.688"
+              cy="334.452"
+              rx="8.86345"
+              ry="10.5048"
+              transform="rotate(-36.6507 624.688 334.452)"
+              fill="#FFB74F"
+            />
+            <ellipse
+              id="Ellipse 1063_7"
+              cx="653.659"
+              cy="312.895"
+              rx="8.86345"
+              ry="10.5048"
+              transform="rotate(-36.6507 653.659 312.895)"
+              fill="#FFB74F"
+            />
+            <ellipse
+              id="Ellipse 1064_7"
+              cx="625.404"
+              cy="335.964"
+              rx="6.56552"
+              ry="6.89379"
+              transform="rotate(-36.6507 625.404 335.964)"
+              fill="#CD7900"
+            />
+            <ellipse
+              id="Ellipse 1065_7"
+              cx="654.375"
+              cy="314.409"
+              rx="6.56552"
+              ry="6.89379"
+              transform="rotate(-36.6507 654.375 314.409)"
+              fill="#CD7900"
+            />
+            <path
+              id="Rectangle 3501_7"
+              d="M599.877 303.073C600.696 300.647 603.368 299.389 605.76 300.303C607.58 300.999 608.746 302.786 608.653 304.732L607.589 326.773C607.388 330.958 603.831 334.187 599.646 333.985C594.614 333.743 591.212 328.755 592.822 323.982L599.877 303.073Z"
+              fill="#FFB74F"
+            />
+            <path
+              id="Rectangle 3502_7"
+              d="M599.108 302.59C599.927 300.163 602.599 298.905 604.991 299.82C606.81 300.516 607.977 302.302 607.883 304.248L606.82 326.289C606.618 330.475 603.062 333.704 598.877 333.502C593.845 333.259 590.443 328.271 592.053 323.498L599.108 302.59Z"
+              fill="#FFB74F"
+            />
+            <path
+              id="Rectangle 3503_7"
+              d="M629.956 279.638C627.397 279.725 625.424 281.923 625.613 284.477C625.756 286.42 627.132 288.051 629.023 288.52L650.44 293.835C654.507 294.844 658.622 292.366 659.631 288.299C660.844 283.41 657.044 278.718 652.01 278.889L629.956 279.638Z"
+              fill="#FFB74F"
+            />
+            <ellipse
+              id="Ellipse 1067_7"
+              cx="599.526"
+              cy="327.784"
+              rx="4.67163"
+              ry="6.38524"
+              transform="rotate(-79.1055 599.526 327.784)"
+              fill="#CD7900"
+            />
+            <ellipse
+              id="Ellipse 1068_7"
+              rx="4.67163"
+              ry="6.38524"
+              transform="matrix(-0.994873 -0.101129 -0.101129 0.994873 653.389 286.89)"
+              fill="#CD7900"
+            />
+            <path
+              id="Polygon 3_2"
+              d="M577.357 276.566C574.886 274.014 576.721 269.748 580.273 269.784L587.553 269.86C590.409 269.89 592.314 272.817 591.186 275.44L588.969 280.596C587.841 283.22 584.406 283.85 582.42 281.798L577.357 276.566Z"
+              fill="#FFB74F"
+            />
+            <path
+              id="Polygon 5_2"
+              d="M610.39 251.988C608.655 248.888 604.042 249.419 603.056 252.832L601.037 259.827C600.245 262.571 602.501 265.237 605.338 264.91L610.913 264.268C613.75 263.942 615.341 260.833 613.946 258.341L610.39 251.988Z"
+              fill="#CD7900"
+            />
+            <path
+              id="Polygon 4_2"
+              d="M582.578 278.461C580.108 275.908 581.942 271.642 585.494 271.679L587.075 271.696C589.93 271.726 591.836 274.652 590.708 277.276L590.226 278.395C589.098 281.019 585.663 281.649 583.677 279.597L582.578 278.461Z"
+              fill="#FFDFB0"
+            />
+            <path
+              id="Polygon 6_2"
+              d="M610.705 257.533C608.97 254.434 604.357 254.965 603.372 258.378L602.934 259.897C602.141 262.64 604.397 265.306 607.234 264.98L608.445 264.84C611.282 264.514 612.872 261.405 611.478 258.913L610.705 257.533Z"
+              fill="#FFDFB0"
+            />
+            <ellipse
+              id="Ellipse 1131_3"
+              cx="607.097"
+              cy="281.663"
+              rx="23.6359"
+              ry="20.6814"
+              transform="rotate(-36.6507 607.097 281.663)"
+              fill="#FFB74F"
+            />
+            <path
+              id="Intersect_2"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M594.979 264.901C603.452 258.73 614.174 258.329 621.534 263.252C620.461 266.507 618.04 269.836 614.55 272.432C607.714 277.519 599.364 277.869 595.901 273.214C594.232 270.971 594.003 267.973 594.979 264.901Z"
+              fill="#CD7900"
+            />
+            <g id="Group 1449_3">
+              <path
+                id="Ellipse 1070_10"
+                d="M610.05 282.331C610.482 282.913 609.516 284.364 609.516 284.364C609.516 284.364 607.849 284.872 607.416 284.291C606.983 283.709 607.222 282.798 607.949 282.257C608.676 281.716 609.617 281.749 610.05 282.331Z"
+                fill="black"
+              />
+              <rect
+                id="Rectangle 3504_12"
+                x="608.861"
+                y="284.034"
+                width="0.656552"
+                height="3.28276"
+                rx="0.328276"
+                transform="rotate(-36.6507 608.861 284.034)"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3505_12"
+                d="M610.614 286.39C610.442 286.158 610.679 285.834 610.958 285.907C612.562 286.326 613.107 285.853 613.192 284.217C613.207 283.923 613.591 283.792 613.767 284.028C613.812 284.089 613.833 284.167 613.824 284.243C613.556 286.473 612.992 286.999 610.782 286.499C610.715 286.484 610.655 286.445 610.614 286.39Z"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3506_12"
+                d="M611.14 285.998C610.968 285.767 610.589 285.901 610.579 286.189C610.519 287.846 609.91 288.232 608.319 287.843C608.033 287.773 607.797 288.103 607.972 288.339C608.018 288.4 608.086 288.443 608.162 288.456C610.375 288.84 611.04 288.451 611.197 286.19C611.202 286.122 611.181 286.053 611.14 285.998Z"
+                fill="black"
+              />
+            </g>
+            <ellipse
+              id="Ellipse 1132_3"
+              cx="611.734"
+              cy="270.847"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(-36.6507 611.734 270.847)"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1133_3"
+              cx="595.932"
+              cy="282.604"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(-36.6507 595.932 282.604)"
+              fill="black"
+            />
+            <rect
+              id="Rectangle 3510_2"
+              x="590.016"
+              y="291.507"
+              width="11.8179"
+              height="0.656552"
+              rx="0.328276"
+              transform="rotate(-26.5494 590.016 291.507)"
+              fill="black"
+            />
+            <rect
+              id="Rectangle 3513_2"
+              width="11.8179"
+              height="0.656552"
+              rx="0.328276"
+              transform="matrix(-0.685158 0.728395 0.728395 0.685158 621.435 268.129)"
+              fill="black"
+            />
+            <rect
+              id="Rectangle 3512_2"
+              width="11.8179"
+              height="0.656552"
+              rx="0.328276"
+              transform="matrix(-0.685158 0.728395 0.728395 0.685158 602.784 289.371)"
+              fill="black"
+            />
+            <rect
+              id="Rectangle 3514_2"
+              x="615.721"
+              y="279.747"
+              width="11.8179"
+              height="0.656552"
+              rx="0.328276"
+              transform="rotate(-26.5494 615.721 279.747)"
+              fill="black"
+            />
+            <rect
+              id="Rectangle 3511_2"
+              x="592.274"
+              y="294.737"
+              width="11.8179"
+              height="0.656552"
+              rx="0.328276"
+              transform="rotate(-36.6507 592.274 294.737)"
+              fill="black"
+            />
+            <rect
+              id="Rectangle 3515_2"
+              width="11.8179"
+              height="0.656552"
+              rx="0.328276"
+              transform="matrix(-0.80229 0.596934 0.596934 0.80229 623.879 271.221)"
+              fill="black"
+            />
+          </g>
+          <g id="Group 1469" filter="url(#filter14_d)">
+            <ellipse
+              id="Ellipse 1136"
+              cx="749.724"
+              cy="273.188"
+              rx="18.0552"
+              ry="21.9945"
+              transform="rotate(-44.1567 749.724 273.188)"
+              fill="#359750"
+            />
+            <ellipse
+              id="Ellipse 1137"
+              cx="759.551"
+              cy="283.779"
+              rx="25.6055"
+              ry="14.7724"
+              transform="rotate(-44.1567 759.551 283.779)"
+              fill="#359750"
+            />
+            <path
+              id="Polygon 7"
+              d="M747.223 302.878C747.895 302.996 748.486 302.423 748.387 301.748L747.814 297.843C747.696 297.036 746.714 296.702 746.128 297.271L742.815 300.488C742.229 301.057 742.534 302.049 743.337 302.191L747.223 302.878Z"
+              fill="white"
+            />
+            <path
+              id="Polygon 10"
+              d="M779.004 272.019C779.103 272.694 778.512 273.267 777.841 273.148L773.954 272.461C773.151 272.319 772.847 271.327 773.432 270.759L776.746 267.542C777.331 266.973 778.313 267.307 778.432 268.114L779.004 272.019Z"
+              fill="white"
+            />
+            <path
+              id="Polygon 8"
+              d="M750.097 298.52C751.44 298.757 752.622 297.61 752.424 296.26L752.336 295.661C752.1 294.047 750.134 293.38 748.964 294.516L748.455 295.01C747.285 296.147 747.894 298.131 749.5 298.414L750.097 298.52Z"
+              fill="white"
+            />
+            <path
+              id="Polygon 11"
+              d="M774.563 274.764C774.761 276.114 773.579 277.261 772.236 277.024L771.639 276.918C770.033 276.634 769.424 274.65 770.594 273.514L771.103 273.02C772.273 271.883 774.239 272.551 774.475 274.165L774.563 274.764Z"
+              fill="white"
+            />
+            <path
+              id="Polygon 9"
+              d="M753.88 293.933C755.223 294.17 756.404 293.023 756.207 291.673L756.119 291.074C755.882 289.46 753.917 288.793 752.747 289.929L752.238 290.423C751.068 291.559 751.677 293.543 753.283 293.827L753.88 293.933Z"
+              fill="white"
+            />
+            <path
+              id="Polygon 12"
+              d="M769.867 278.409C770.065 279.759 768.884 280.906 767.54 280.668L766.944 280.563C765.337 280.279 764.728 278.295 765.899 277.159L766.407 276.664C767.578 275.528 769.543 276.195 769.779 277.809L769.867 278.409Z"
+              fill="white"
+            />
+            <path
+              id="Intersect_3"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M778.696 266.853C778.466 266.541 778.215 266.244 777.942 265.963C777.851 265.87 777.759 265.779 777.665 265.691L740.937 301.353C741.023 301.45 741.111 301.545 741.201 301.638C741.474 301.919 741.763 302.179 742.068 302.418L778.696 266.853Z"
+              fill="white"
+            />
+            <ellipse
+              id="Ellipse 1133_4"
+              cx="737.197"
+              cy="272.539"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(-44.1567 737.197 272.539)"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1150"
+              cx="752.131"
+              cy="283.206"
+              rx="0.984828"
+              ry="1.3131"
+              transform="rotate(-44.1567 752.131 283.206)"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1138"
+              cx="748.974"
+              cy="261.105"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(-44.1567 748.974 261.105)"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1151"
+              cx="759.196"
+              cy="276.345"
+              rx="0.984828"
+              ry="1.3131"
+              transform="rotate(-44.1567 759.196 276.345)"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1061_8"
+              cx="782.419"
+              cy="307.331"
+              rx="23.6359"
+              ry="25.2772"
+              transform="rotate(-44.1567 782.419 307.331)"
+              fill="#359750"
+            />
+            <path
+              id="Ellipse 1066_8"
+              d="M796.536 301.135C801.662 306.414 801.283 315.096 795.69 320.527C790.097 325.958 781.408 326.081 776.282 320.801C771.156 315.522 767.686 302.877 773.279 297.446C778.872 292.015 791.41 295.855 796.536 301.135Z"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1063_8"
+              cx="784.143"
+              cy="332.197"
+              rx="7.55035"
+              ry="12.8028"
+              transform="rotate(-44.1567 784.143 332.197)"
+              fill="#359750"
+            />
+            <ellipse
+              id="Ellipse 1145"
+              cx="807.694"
+              cy="309.328"
+              rx="7.55035"
+              ry="12.8028"
+              transform="rotate(-44.1567 807.694 309.328)"
+              fill="#359750"
+            />
+            <ellipse
+              id="Ellipse 1141"
+              cx="791.454"
+              cy="340.197"
+              rx="7.87862"
+              ry="2.62621"
+              transform="rotate(-44.1567 791.454 340.197)"
+              fill="#359750"
+            />
+            <ellipse
+              id="Ellipse 1146"
+              cx="815.006"
+              cy="317.329"
+              rx="7.87862"
+              ry="2.62621"
+              transform="rotate(-44.1567 815.006 317.329)"
+              fill="#359750"
+            />
+            <ellipse
+              id="Ellipse 1140"
+              cx="788.614"
+              cy="343.87"
+              rx="1.3131"
+              ry="2.62621"
+              transform="rotate(-44.1567 788.614 343.87)"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1147"
+              cx="812.166"
+              cy="321.002"
+              rx="1.3131"
+              ry="2.62621"
+              transform="rotate(-44.1567 812.166 321.002)"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1143"
+              cx="792.826"
+              cy="341.61"
+              rx="1.3131"
+              ry="2.62621"
+              transform="rotate(-44.1567 792.826 341.61)"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1148"
+              cx="816.378"
+              cy="318.742"
+              rx="1.3131"
+              ry="2.62621"
+              transform="rotate(-44.1567 816.378 318.742)"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1144"
+              cx="795.208"
+              cy="337.467"
+              rx="1.3131"
+              ry="2.62621"
+              transform="rotate(-44.1567 795.208 337.467)"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1149"
+              cx="818.76"
+              cy="314.598"
+              rx="1.3131"
+              ry="2.62621"
+              transform="rotate(-44.1567 818.76 314.598)"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1152"
+              cx="764.206"
+              cy="314.491"
+              rx="4.92414"
+              ry="9.19172"
+              transform="rotate(-44.1567 764.206 314.491)"
+              fill="#1D6F34"
+            />
+            <ellipse
+              id="Ellipse 1155"
+              cx="790.583"
+              cy="288.879"
+              rx="4.92414"
+              ry="9.19172"
+              transform="rotate(-44.1567 790.583 288.879)"
+              fill="#1D6F34"
+            />
+            <ellipse
+              id="Ellipse 1153"
+              cx="768.517"
+              cy="321.288"
+              rx="1.3131"
+              ry="2.62621"
+              transform="rotate(-44.1567 768.517 321.288)"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1156"
+              cx="794.895"
+              cy="295.675"
+              rx="1.3131"
+              ry="2.62621"
+              transform="rotate(-44.1567 794.895 295.675)"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1154"
+              cx="770.871"
+              cy="319"
+              rx="1.3131"
+              ry="2.62621"
+              transform="rotate(-44.1567 770.871 319)"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1157"
+              cx="797.25"
+              cy="293.388"
+              rx="1.3131"
+              ry="2.62621"
+              transform="rotate(-44.1567 797.25 293.388)"
+              fill="#60BF7A"
+            />
+          </g>
+          <g id="Group 1476" filter="url(#filter15_d)">
+            <ellipse
+              id="Ellipse 1136_2"
+              cx="665.1"
+              cy="265.932"
+              rx="18.0552"
+              ry="21.9945"
+              fill="#359750"
+            />
+            <ellipse
+              id="Ellipse 1137_2"
+              cx="664.772"
+              cy="280.376"
+              rx="25.6055"
+              ry="14.7724"
+              fill="#359750"
+            />
+            <path
+              id="Polygon 7_2"
+              d="M642.623 285.49C643.022 286.043 643.846 286.043 644.245 285.49L646.554 282.29C647.031 281.628 646.559 280.704 645.743 280.704H641.124C640.309 280.704 639.836 281.628 640.313 282.29L642.623 285.49Z"
+              fill="white"
+            />
+            <path
+              id="Polygon 10_2"
+              d="M686.92 285.49C686.521 286.043 685.697 286.043 685.298 285.49L682.989 282.29C682.511 281.628 682.984 280.704 683.8 280.704H688.419C689.234 280.704 689.707 281.628 689.23 282.29L686.92 285.49Z"
+              fill="white"
+            />
+            <path
+              id="Polygon 8_2"
+              d="M647.721 284.366C648.52 285.472 650.167 285.472 650.965 284.366L651.32 283.875C652.274 282.552 651.329 280.704 649.698 280.704H648.989C647.357 280.704 646.412 282.552 647.367 283.875L647.721 284.366Z"
+              fill="white"
+            />
+            <path
+              id="Polygon 11_2"
+              d="M681.822 284.366C681.023 285.472 679.376 285.472 678.578 284.366L678.223 283.875C677.269 282.552 678.214 280.704 679.845 280.704H680.554C682.186 280.704 683.131 282.552 682.176 283.875L681.822 284.366Z"
+              fill="white"
+            />
+            <path
+              id="Polygon 9_2"
+              d="M653.629 283.71C654.428 284.816 656.075 284.816 656.873 283.71L657.227 283.219C658.182 281.896 657.237 280.048 655.606 280.048H654.896C653.265 280.048 652.32 281.896 653.275 283.219L653.629 283.71Z"
+              fill="white"
+            />
+            <path
+              id="Polygon 12_2"
+              d="M675.914 283.71C675.116 284.816 673.469 284.816 672.67 283.71L672.316 283.219C671.361 281.896 672.306 280.048 673.937 280.048H674.647C676.278 280.048 677.223 281.896 676.268 283.219L675.914 283.71Z"
+              fill="white"
+            />
+            <path
+              id="Intersect_4"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M690.3 281.57C690.352 281.186 690.378 280.798 690.378 280.406C690.378 280.276 690.375 280.147 690.369 280.018H639.176C639.17 280.147 639.167 280.276 639.167 280.406C639.167 280.798 639.194 281.186 639.246 281.57H690.3Z"
+              fill="white"
+            />
+            <ellipse
+              id="Ellipse 1133_5"
+              cx="656.565"
+              cy="256.74"
+              rx="1.64138"
+              ry="2.29793"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1150_2"
+              cx="659.847"
+              cy="274.795"
+              rx="0.984828"
+              ry="1.3131"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1138_2"
+              cx="672.978"
+              cy="256.74"
+              rx="1.64138"
+              ry="2.29793"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1151_2"
+              cx="669.696"
+              cy="274.795"
+              rx="0.984828"
+              ry="1.3131"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1061_9"
+              cx="664.772"
+              cy="313.203"
+              rx="23.6359"
+              ry="25.2772"
+              fill="#359750"
+            />
+            <path
+              id="Ellipse 1066_9"
+              d="M679.216 318.592C679.216 325.95 672.896 331.915 665.1 331.915C657.304 331.915 650.984 325.95 650.984 318.592C650.984 311.234 657.304 299.744 665.1 299.744C672.896 299.744 679.216 311.234 679.216 318.592Z"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1063_9"
+              cx="648.686"
+              cy="332.244"
+              rx="7.55035"
+              ry="12.8028"
+              fill="#359750"
+            />
+            <ellipse
+              id="Ellipse 1145_2"
+              cx="681.513"
+              cy="332.244"
+              rx="7.55035"
+              ry="12.8028"
+              fill="#359750"
+            />
+            <ellipse
+              id="Ellipse 1141_2"
+              cx="648.358"
+              cy="343.077"
+              rx="7.87862"
+              ry="2.62621"
+              fill="#359750"
+            />
+            <ellipse
+              id="Ellipse 1146_2"
+              cx="681.185"
+              cy="343.077"
+              rx="7.87862"
+              ry="2.62621"
+              fill="#359750"
+            />
+            <ellipse
+              id="Ellipse 1140_2"
+              cx="643.762"
+              cy="343.733"
+              rx="1.3131"
+              ry="2.62621"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1147_2"
+              cx="676.59"
+              cy="343.733"
+              rx="1.3131"
+              ry="2.62621"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1143_2"
+              cx="648.358"
+              cy="345.046"
+              rx="1.3131"
+              ry="2.62621"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1148_2"
+              cx="681.186"
+              cy="345.046"
+              rx="1.3131"
+              ry="2.62621"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1144_2"
+              cx="652.954"
+              cy="343.733"
+              rx="1.3131"
+              ry="2.62621"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1149_2"
+              cx="685.781"
+              cy="343.733"
+              rx="1.3131"
+              ry="2.62621"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1152_2"
+              cx="646.717"
+              cy="305.653"
+              rx="4.92414"
+              ry="9.19172"
+              fill="#1D6F34"
+            />
+            <ellipse
+              id="Ellipse 1155_2"
+              cx="683.483"
+              cy="305.653"
+              rx="4.92414"
+              ry="9.19172"
+              fill="#1D6F34"
+            />
+            <ellipse
+              id="Ellipse 1153_2"
+              cx="645.075"
+              cy="313.532"
+              rx="1.3131"
+              ry="2.62621"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1156_2"
+              cx="681.842"
+              cy="313.532"
+              rx="1.3131"
+              ry="2.62621"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1154_2"
+              cx="648.358"
+              cy="313.532"
+              rx="1.3131"
+              ry="2.62621"
+              fill="#60BF7A"
+            />
+            <ellipse
+              id="Ellipse 1157_2"
+              cx="685.124"
+              cy="313.532"
+              rx="1.3131"
+              ry="2.62621"
+              fill="#60BF7A"
+            />
+          </g>
+          <g id="Group 1479" filter="url(#filter16_d)">
+            <path
+              id="Rectangle 3522"
+              d="M801.333 297.775H830.221V313.532C830.221 321.51 823.754 327.977 815.777 327.977C807.8 327.977 801.333 321.51 801.333 313.533V297.775Z"
+              fill="#604343"
+            />
+            <path
+              id="Rectangle 3523"
+              d="M806.585 299.745H824.312V315.174C824.312 320.069 820.344 324.038 815.448 324.038C810.553 324.038 806.585 320.069 806.585 315.174V299.745Z"
+              fill="#FFECD1"
+            />
+            <ellipse
+              id="Ellipse 1162"
+              cx="799.692"
+              cy="318.066"
+              rx="5.58069"
+              ry="11.1614"
+              transform="rotate(-6.97314 799.692 318.066)"
+              fill="#604343"
+            />
+            <ellipse
+              id="Ellipse 1164"
+              rx="5.58069"
+              ry="11.1614"
+              transform="matrix(-0.992603 -0.121404 -0.121404 0.992603 831.134 318.066)"
+              fill="#604343"
+            />
+            <ellipse
+              id="Ellipse 1163"
+              cx="798.344"
+              cy="326.439"
+              rx="5.58069"
+              ry="6.97711"
+              transform="rotate(60.184 798.344 326.439)"
+              fill="#604343"
+            />
+            <ellipse
+              id="Ellipse 1165"
+              rx="5.58069"
+              ry="6.97711"
+              transform="matrix(-0.497216 0.867627 0.867627 0.497216 832.483 326.439)"
+              fill="#604343"
+            />
+            <path
+              id="Rectangle 3520"
+              d="M802.647 297.119H813.152V327.32C813.152 330.221 810.8 332.572 807.899 332.572C804.999 332.572 802.647 330.221 802.647 327.32V297.119Z"
+              fill="#805A5A"
+            />
+            <path
+              id="Rectangle 3521"
+              d="M818.403 297.119H828.908V327.32C828.908 330.221 826.556 332.572 823.655 332.572C820.755 332.572 818.403 330.221 818.403 327.32V297.119Z"
+              fill="#805A5A"
+            />
+            <path
+              id="Polygon 13"
+              d="M803.912 246.167C806.21 249.121 813.512 261.486 814.431 267.341C805.906 268.026 802.066 271.114 795.705 278.01C793.862 266.222 801.613 243.212 803.912 246.167Z"
+              fill="#805A5A"
+            />
+            <path
+              id="Polygon 14"
+              d="M828.266 246.167C825.968 249.121 818.666 261.486 817.747 267.341C826.272 268.026 830.112 271.114 836.473 278.01C838.316 266.222 830.564 243.212 828.266 246.167Z"
+              fill="#805A5A"
+            />
+            <path
+              id="Polygon 15"
+              d="M801.925 258.241C802.203 256.505 804.424 255.947 805.49 257.345L810.767 264.265C811.638 265.407 811.057 267.067 809.664 267.417L803.011 269.09C801.619 269.44 800.322 268.252 800.549 266.834L801.925 258.241Z"
+              fill="#FFECD1"
+            />
+            <path
+              id="Polygon 16"
+              d="M830.623 258.241C830.345 256.505 828.123 255.947 827.058 257.345L821.781 264.265C820.91 265.407 821.491 267.067 822.884 267.417L829.536 269.09C830.929 269.44 832.226 268.252 831.999 266.834L830.623 258.241Z"
+              fill="#FFECD1"
+            />
+            <ellipse
+              id="Ellipse 1058_7"
+              cx="815.777"
+              cy="282.346"
+              rx="23.6359"
+              ry="20.6814"
+              fill="#FFECD1"
+            />
+            <g id="Group 1447_6">
+              <path
+                id="Ellipse 1069_6"
+                d="M824.312 292.654C824.312 296.353 820.995 297.119 816.462 297.119C811.93 297.119 807.898 296.353 807.898 292.654C807.898 288.955 811.573 285.957 816.105 285.957C820.638 285.957 824.312 288.955 824.312 292.654Z"
+                fill="#805A5A"
+              />
+              <path
+                id="Ellipse 1070_11"
+                d="M817.747 289.24C817.747 289.965 816.105 290.553 816.105 290.553C816.105 290.553 814.464 289.965 814.464 289.24C814.464 288.514 815.199 287.926 816.105 287.926C817.012 287.926 817.747 288.514 817.747 289.24Z"
+                fill="black"
+              />
+              <rect
+                id="Rectangle 3504_13"
+                x="815.776"
+                y="289.896"
+                width="0.656552"
+                height="3.28276"
+                rx="0.328276"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3505_13"
+                d="M815.776 292.832C815.776 292.544 816.16 292.426 816.341 292.651C817.378 293.944 818.097 293.89 819.141 292.628C819.329 292.401 819.715 292.525 819.715 292.82C819.715 292.896 819.686 292.971 819.633 293.026C818.087 294.656 817.321 294.741 815.846 293.021C815.801 292.969 815.776 292.901 815.776 292.832Z"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3506_13"
+                d="M816.433 292.832C816.433 292.544 816.049 292.426 815.869 292.651C814.832 293.944 814.112 293.89 813.068 292.628C812.88 292.401 812.494 292.525 812.494 292.82C812.494 292.896 812.524 292.971 812.576 293.026C814.122 294.656 814.889 294.741 816.363 293.021C816.408 292.969 816.433 292.901 816.433 292.832Z"
+                fill="black"
+              />
+            </g>
+            <ellipse
+              id="Ellipse 1073_6"
+              cx="823.985"
+              cy="279.063"
+              rx="1.64138"
+              ry="2.29793"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1074_6"
+              cx="807.57"
+              cy="279.063"
+              rx="1.64138"
+              ry="2.29793"
+              fill="black"
+            />
+            <path
+              id="Subtract"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M829.646 299.095C835.565 295.337 839.413 289.235 839.413 282.347C839.413 270.924 828.831 261.665 815.777 261.665C802.724 261.665 792.142 270.924 792.142 282.347C792.142 289.235 795.991 295.337 801.909 299.096C801.761 298.517 801.639 297.925 801.547 297.321C799.421 294.563 798.049 290.205 798.049 285.301C798.049 276.961 802.018 270.2 806.913 270.2C810.283 270.2 813.214 273.404 814.713 278.122C815.064 278.093 815.419 278.079 815.778 278.079C816.135 278.079 816.489 278.093 816.84 278.122C818.339 273.404 821.269 270.2 824.639 270.2C829.535 270.2 833.503 276.961 833.503 285.301C833.503 290.202 832.132 294.558 830.009 297.316C829.916 297.921 829.795 298.515 829.646 299.095Z"
+              fill="#805A5A"
+            />
+          </g>
+          <g id="Group 1478" filter="url(#filter17_d)">
+            <path
+              id="Rectangle 3522_2"
+              d="M737.951 322.002L741.003 293.275L756.672 294.94C764.605 295.783 770.352 302.897 769.51 310.829C768.667 318.762 761.553 324.509 753.62 323.667L737.951 322.002Z"
+              fill="#604343"
+            />
+            <path
+              id="Rectangle 3523_2"
+              d="M740.465 316.987L742.338 299.359L757.681 300.989C762.548 301.506 766.075 305.872 765.558 310.739C765.041 315.607 760.675 319.134 755.808 318.617L740.465 316.987Z"
+              fill="#FFECD1"
+            />
+            <ellipse
+              id="Ellipse 1162_2"
+              cx="757.955"
+              cy="325.777"
+              rx="5.58069"
+              ry="11.1614"
+              transform="rotate(-90.9083 757.955 325.777)"
+              fill="#604343"
+            />
+            <ellipse
+              id="Ellipse 1164_2"
+              rx="5.58069"
+              ry="11.1614"
+              transform="matrix(-0.225598 0.974221 0.974221 0.225598 761.277 294.51)"
+              fill="#604343"
+            />
+            <ellipse
+              id="Ellipse 1163_2"
+              cx="766.139"
+              cy="328.003"
+              rx="5.58069"
+              ry="6.97712"
+              transform="rotate(-23.7511 766.139 328.003)"
+              fill="#604343"
+            />
+            <ellipse
+              id="Ellipse 1165_2"
+              rx="5.58069"
+              ry="6.97711"
+              transform="matrix(0.810238 0.586102 0.586102 -0.810238 769.746 294.054)"
+              fill="#604343"
+            />
+            <path
+              id="Rectangle 3520_2"
+              d="M737.436 320.627L738.546 310.181L768.579 313.372C771.463 313.678 773.553 316.265 773.247 319.15C772.94 322.034 770.353 324.124 767.469 323.818L737.436 320.627Z"
+              fill="#805A5A"
+            />
+            <path
+              id="Rectangle 3521_2"
+              d="M739.101 304.957L740.211 294.511L770.243 297.702C773.128 298.009 775.218 300.596 774.911 303.48C774.605 306.365 772.018 308.455 769.133 308.148L739.101 304.957Z"
+              fill="#805A5A"
+            />
+            <path
+              id="Polygon 13_2"
+              d="M686.904 313.985C690.085 312.012 703.152 306.057 709.071 305.762C708.852 314.311 711.517 318.456 717.702 325.51C705.785 326.097 683.723 315.958 686.904 313.985Z"
+              fill="#805A5A"
+            />
+            <path
+              id="Polygon 14_2"
+              d="M689.477 289.767C692.172 292.364 703.696 300.932 709.421 302.464C711.003 294.059 714.48 290.567 722.009 284.97C710.481 281.892 686.782 287.169 689.477 289.767Z"
+              fill="#805A5A"
+            />
+            <path
+              id="Polygon 15_2"
+              d="M698.701 317.236C697.004 316.776 696.684 314.508 698.186 313.596L705.625 309.08C706.853 308.334 708.442 309.087 708.643 310.509L709.604 317.302C709.805 318.723 708.486 319.888 707.1 319.512L698.701 317.236Z"
+              fill="#FFECD1"
+            />
+            <path
+              id="Polygon 16_2"
+              d="M701.733 288.698C699.977 288.791 699.187 290.941 700.465 292.149L706.789 298.127C707.832 299.113 709.544 298.711 710.04 297.363L712.406 290.925C712.901 289.577 711.857 288.161 710.423 288.237L701.733 288.698Z"
+              fill="#FFECD1"
+            />
+            <ellipse
+              id="Ellipse 1058_8"
+              cx="724.133"
+              cy="306.008"
+              rx="23.6359"
+              ry="20.6814"
+              transform="rotate(-83.9351 724.133 306.008)"
+              fill="#FFECD1"
+            />
+            <g id="Group 1447_7">
+              <path
+                id="Ellipse 1069_7"
+                d="M735.286 298.61C738.964 299.001 739.375 302.381 738.896 306.888C738.417 311.395 737.23 315.323 733.552 314.932C729.874 314.541 727.281 310.571 727.76 306.063C728.239 301.556 731.608 298.219 735.286 298.61Z"
+                fill="#805A5A"
+              />
+              <path
+                id="Ellipse 1070_12"
+                d="M731.197 304.778C731.918 304.854 732.329 306.549 732.329 306.549C732.329 306.549 731.571 308.119 730.85 308.042C730.129 307.966 729.622 307.173 729.718 306.271C729.813 305.37 730.476 304.701 731.197 304.778Z"
+                fill="black"
+              />
+              <rect
+                id="Rectangle 3504_14"
+                x="731.641"
+                y="306.805"
+                width="0.656552"
+                height="3.28276"
+                rx="0.328276"
+                transform="rotate(-83.9351 731.641 306.805)"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3505_14"
+                d="M734.561 307.116C734.275 307.085 734.197 306.691 734.44 306.535C735.836 305.641 735.858 304.92 734.714 303.748C734.508 303.537 734.672 303.166 734.965 303.197C735.041 303.205 735.112 303.243 735.161 303.301C736.619 305.011 736.622 305.782 734.756 307.066C734.699 307.105 734.629 307.123 734.561 307.116Z"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3506_14"
+                d="M734.63 306.463C734.344 306.432 734.185 306.802 734.39 307.005C735.567 308.173 735.437 308.882 734.072 309.788C733.826 309.95 733.909 310.348 734.202 310.379C734.277 310.387 734.355 310.365 734.415 310.319C736.2 308.953 736.365 308.2 734.81 306.552C734.763 306.502 734.699 306.47 734.63 306.463Z"
+                fill="black"
+              />
+            </g>
+            <ellipse
+              id="Ellipse 1073_7"
+              cx="721.737"
+              cy="297.5"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(-83.9351 721.737 297.5)"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1074_7"
+              cx="720.003"
+              cy="313.822"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(-83.9351 720.003 313.822)"
+              fill="black"
+            />
+            <path
+              id="Subtract_2"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M742.256 293.988C739.144 287.705 733.482 283.232 726.632 282.504C715.274 281.298 704.948 290.842 703.569 303.823C702.19 316.804 710.28 328.305 721.638 329.512C728.487 330.239 734.961 327.057 739.324 321.569C738.732 321.656 738.13 321.714 737.52 321.742C734.552 323.563 730.075 324.467 725.2 323.949C716.907 323.067 710.603 318.407 711.12 313.539C711.476 310.188 714.972 307.613 719.821 306.62C719.83 306.268 719.852 305.914 719.89 305.558C719.928 305.202 719.98 304.851 720.046 304.505C715.513 302.516 712.637 299.263 712.993 295.912C713.51 291.044 720.652 287.812 728.945 288.693C733.821 289.211 738.008 291.035 740.527 293.44C741.118 293.595 741.695 293.779 742.256 293.988Z"
+              fill="#805A5A"
+            />
+          </g>
+          <g id="Group 1473" filter="url(#filter18_d)">
+            <path
+              id="Rectangle 3522_3"
+              d="M526.711 300.079L552.415 313.263L545.224 327.283C541.583 334.381 532.878 337.184 525.78 333.544C518.682 329.903 515.879 321.197 519.52 314.099L526.711 300.079Z"
+              fill="#604343"
+            />
+            <path
+              id="Rectangle 3523_3"
+              d="M530.485 304.228L546.258 312.319L539.217 326.047C536.983 330.403 531.641 332.123 527.285 329.889C522.93 327.655 521.21 322.313 523.444 317.957L530.485 304.228Z"
+              fill="#FFECD1"
+            />
+            <ellipse
+              id="Ellipse 1162_3"
+              cx="515.989"
+              cy="317.385"
+              rx="5.58069"
+              ry="11.1614"
+              transform="rotate(20.1808 515.989 317.385)"
+              fill="#604343"
+            />
+            <ellipse
+              id="Ellipse 1164_3"
+              rx="5.58069"
+              ry="11.1614"
+              transform="matrix(-0.827795 -0.56103 -0.56103 0.827795 543.967 331.735)"
+              fill="#604343"
+            />
+            <ellipse
+              id="Ellipse 1163_3"
+              cx="510.969"
+              cy="324.219"
+              rx="5.58069"
+              ry="6.97711"
+              transform="rotate(87.338 510.969 324.219)"
+              fill="#604343"
+            />
+            <ellipse
+              id="Ellipse 1165_3"
+              rx="5.58069"
+              ry="6.97711"
+              transform="matrix(-0.838384 0.54508 0.54508 0.838384 541.346 339.8)"
+              fill="#604343"
+            />
+            <path
+              id="Rectangle 3520_3"
+              d="M528.179 300.093L537.526 304.888L523.743 331.76C522.419 334.341 519.253 335.361 516.672 334.037C514.091 332.713 513.072 329.547 514.396 326.966L528.179 300.093Z"
+              fill="#805A5A"
+            />
+            <path
+              id="Rectangle 3521_3"
+              d="M542.199 307.285L551.546 312.079L537.763 338.952C536.439 341.533 533.273 342.552 530.692 341.228C528.111 339.905 527.092 336.739 528.416 334.158L542.199 307.285Z"
+              fill="#805A5A"
+            />
+            <path
+              id="Polygon 13_3"
+              d="M552.557 255.335C553.254 259.013 554.108 273.347 552.253 278.976C544.355 275.695 539.529 276.69 530.722 279.923C534.462 268.593 551.86 251.657 552.557 255.335Z"
+              fill="#805A5A"
+            />
+            <path
+              id="Polygon 14_3"
+              d="M574.228 266.45C570.835 268.03 558.694 275.699 555.205 280.489C562.477 284.99 564.485 289.49 566.998 298.529C574.018 288.881 577.621 264.87 574.228 266.45Z"
+              fill="#805A5A"
+            />
+            <path
+              id="Polygon 15_3"
+              d="M545.28 265.172C546.319 263.754 548.55 264.271 548.861 266.001L550.398 274.567C550.651 275.981 549.377 277.193 547.978 276.869L541.295 275.321C539.896 274.997 539.284 273.348 540.133 272.19L545.28 265.172Z"
+              fill="#FFECD1"
+            />
+            <path
+              id="Polygon 16_3"
+              d="M570.814 278.269C571.359 276.598 569.638 275.087 568.051 275.845L560.198 279.594C558.902 280.213 558.661 281.955 559.74 282.902L564.896 287.427C565.976 288.374 567.672 287.909 568.117 286.543L570.814 278.269Z"
+              fill="#FFECD1"
+            />
+            <ellipse
+              id="Ellipse 1058_9"
+              cx="546.604"
+              cy="292.943"
+              rx="23.6359"
+              ry="20.6814"
+              transform="rotate(27.1539 546.604 292.943)"
+              fill="#FFECD1"
+            />
+            <g id="Group 1447_8">
+              <path
+                id="Ellipse 1069_8"
+                d="M549.494 306.009C547.806 309.3 544.504 308.467 540.471 306.399C536.438 304.33 533.201 301.809 534.889 298.518C536.577 295.227 541.215 294.236 545.248 296.305C549.281 298.373 551.182 302.718 549.494 306.009Z"
+                fill="#805A5A"
+              />
+              <path
+                id="Ellipse 1070_13"
+                d="M545.209 299.975C544.878 300.62 543.149 300.394 543.149 300.394C543.149 300.394 541.957 299.122 542.288 298.477C542.619 297.832 543.541 297.644 544.348 298.058C545.154 298.471 545.54 299.33 545.209 299.975Z"
+                fill="black"
+              />
+              <rect
+                id="Rectangle 3504_15"
+                x="543.158"
+                y="299.66"
+                width="0.656552"
+                height="3.28276"
+                rx="0.328276"
+                transform="rotate(27.1539 543.158 299.66)"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3505_15"
+                d="M541.817 302.273C541.949 302.016 542.345 302.086 542.402 302.369C542.735 303.993 543.399 304.273 544.905 303.627C545.175 303.511 545.463 303.797 545.328 304.059C545.293 304.127 545.233 304.18 545.161 304.205C543.041 304.95 542.32 304.676 541.793 302.472C541.777 302.405 541.786 302.334 541.817 302.273Z"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3506_15"
+                d="M542.401 302.572C542.533 302.315 542.245 302.035 541.982 302.153C540.469 302.83 539.853 302.454 539.5 300.854C539.437 300.567 539.036 300.501 538.902 300.763C538.867 300.831 538.86 300.911 538.881 300.984C539.513 303.14 540.156 303.565 542.253 302.708C542.317 302.682 542.37 302.633 542.401 302.572Z"
+                fill="black"
+              />
+            </g>
+            <ellipse
+              id="Ellipse 1073_8"
+              cx="555.404"
+              cy="293.767"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(27.1539 555.404 293.767)"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1074_8"
+              cx="540.8"
+              cy="286.276"
+              rx="1.64138"
+              ry="2.29793"
+              transform="rotate(27.1539 540.8 286.276)"
+              fill="black"
+            />
+            <path
+              id="Subtract_3"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M551.301 314.174C558.282 313.531 564.491 309.858 567.635 303.729C572.848 293.566 567.658 280.498 556.043 274.54C544.428 268.583 530.786 271.992 525.573 282.155C522.43 288.285 523.07 295.471 526.621 301.516C526.753 300.933 526.915 300.351 527.109 299.771C526.477 296.347 527.245 291.844 529.483 287.481C533.289 280.06 539.905 275.855 544.261 278.089C547.259 279.627 548.405 283.816 547.585 288.698C547.911 288.832 548.234 288.981 548.553 289.144C548.871 289.308 549.179 289.482 549.478 289.668C552.965 286.155 557.035 284.642 560.033 286.179C564.389 288.414 564.834 296.24 561.028 303.661C558.791 308.022 555.583 311.273 552.434 312.758C552.076 313.254 551.698 313.726 551.301 314.174Z"
+              fill="#805A5A"
+            />
+          </g>
+        </g>
+        <g id="Group 2807">
+          <rect
+            id="Rectangle 3976"
+            x="384"
+            y="63"
+            width="469"
+            height="261"
+            fill="#B6E1FF"
+            fill-opacity="0.3"
+          />
+          <g id="Subtract_4" filter="url(#filter19_d)">
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M870 51H366V352H870V51ZM854 64H384V322H854V64Z"
+              fill="#754D22"
+            />
+          </g>
+          <rect
+            id="Rectangle 3977"
+            x="412"
+            y="143.334"
+            width="90"
+            height="5.21026"
+            rx="2.60513"
+            transform="rotate(-34.7763 412 143.334)"
+            fill="white"
+            fill-opacity="0.5"
+          />
+          <rect
+            id="Rectangle 3980"
+            x="768.691"
+            y="270.301"
+            width="28.579"
+            height="5.21026"
+            rx="2.60513"
+            transform="rotate(-34.7763 768.691 270.301)"
+            fill="white"
+            fill-opacity="0.5"
+          />
+          <rect
+            id="Rectangle 3978"
+            x="480"
+            y="113.067"
+            width="45.7027"
+            height="5.21026"
+            rx="2.60513"
+            transform="rotate(-34.7763 480 113.067)"
+            fill="white"
+            fill-opacity="0.5"
+          />
+          <rect
+            id="Rectangle 3981"
+            x="786.241"
+            y="275.067"
+            width="45.7027"
+            height="5.21026"
+            rx="2.60513"
+            transform="rotate(-34.7763 786.241 275.067)"
+            fill="white"
+            fill-opacity="0.5"
+          />
+          <rect
+            id="Rectangle 3979"
+            x="458.759"
+            y="128.347"
+            width="21.6476"
+            height="5.21026"
+            rx="2.60513"
+            transform="rotate(-34.7763 458.759 128.347)"
+            fill="white"
+            fill-opacity="0.5"
+          />
+          <rect
+            id="Rectangle 3982"
+            x="765"
+            y="290.347"
+            width="21.6476"
+            height="5.21026"
+            rx="2.60513"
+            transform="rotate(-34.7763 765 290.347)"
+            fill="white"
+            fill-opacity="0.5"
+          />
+        </g>
+      </g>
+      <g id="Lever" filter="url(#filter20_d)">
+        <ellipse
+          id="Ellipse 1166"
+          cx="521"
+          cy="335.5"
+          rx="25"
+          ry="9.5"
+          fill="black"
+        />
+        <rect
+          id="Rectangle 3524"
+          x="518"
+          y="306"
+          width="7"
+          height="32"
+          fill="#ADA8A8"
+        />
+        <circle
+          id="Ellipse 1167"
+          cx="521.587"
+          cy="295.374"
+          r="12.3742"
+          fill="url(#paint0_radial)"
+        />
+      </g>
+      <g id="button">
+        <ellipse
+          id="button_2"
+          cx="715.245"
+          cy="333.17"
+          rx="35.7553"
+          ry="14.7228"
+          fill="black"
+        />
+        <path
+          id="button_3"
+          d="M747.394 329.865C747.394 337.996 733.134 344.588 715.544 344.588C697.955 344.588 683.695 337.996 683.695 329.865C683.695 321.734 696.753 307.631 714.343 307.631C731.932 307.631 747.394 321.734 747.394 329.865Z"
+          fill="url(#paint1_linear)"
+        />
+        <ellipse
+          id="button_4"
+          cx="704.127"
+          cy="313.34"
+          rx="3.00465"
+          ry="2.70418"
+          fill="white"
+        />
+        <ellipse
+          id="button_5"
+          cx="694.577"
+          cy="320.549"
+          rx="3.00465"
+          ry="6.61022"
+          transform="rotate(42.3672 694.577 320.549)"
+          fill="white"
+        />
+      </g>
+      <g
+        id="correct"
+        v-if="isSendAnswer && isCorrectAnswer"
+        class="show-correct"
+      >
+        <rect
+          id="backdrop"
+          y="51"
+          width="1240"
+          height="299"
+          fill="black"
+          fill-opacity="0.5"
+        />
+        <g id="light" class="light-rotate">
+          <path
+            id="Rectangle 3544"
+            d="M582.86 73H659.139L643.883 191.216H598.116L582.86 73Z"
+            fill="url(#paint2_linear)"
+          />
+          <path
+            id="Rectangle 3548"
+            d="M510.593 134.737L564.53 80.6181L637.055 175.033L604.692 207.505L510.593 134.737Z"
+            fill="url(#paint3_linear)"
+          />
+          <path
+            id="Rectangle 3546"
+            d="M739 153.128L739 229.664L620.821 214.356L620.821 168.435L739 153.128Z"
+            fill="url(#paint4_linear)"
+          />
+          <path
+            id="Rectangle 3549"
+            d="M677.47 80.6181L731.407 134.737L637.055 207.759L604.692 175.287L677.47 80.6181Z"
+            fill="url(#paint5_linear)"
+          />
+          <path
+            id="Rectangle 3545"
+            d="M582.86 309.792H659.139L643.883 191.216H598.116L582.86 309.792Z"
+            fill="url(#paint6_linear)"
+          />
+          <path
+            id="Rectangle 3550"
+            d="M677.47 302.174L731.407 248.055L637.055 175.033L604.692 207.504L677.47 302.174Z"
+            fill="url(#paint7_linear)"
+          />
+          <path
+            id="Rectangle 3547"
+            d="M503 153.128L503 229.663L620.821 214.356L620.821 168.435L503 153.128Z"
+            fill="url(#paint8_linear)"
+          />
+          <path
+            id="Rectangle 3551"
+            d="M510.593 248.055L564.53 302.174L637.055 207.759L604.692 175.287L510.593 248.055Z"
+            fill="url(#paint9_linear)"
+          />
+        </g>
+        <g id="doll">
+          <ellipse
+            id="Ellipse 1212"
+            cx="622.391"
+            cy="191.102"
+            rx="38.276"
+            ry="38.4044"
+            fill="#FFAA2E"
+          />
+          <g id="Group 1516" filter="url(#filter21_d)">
+            <ellipse
+              id="Ellipse 1061_10"
+              cx="622.164"
+              cy="205.608"
+              rx="20.9552"
+              ry="22.4856"
+              fill="#844518"
+            />
+            <path
+              id="Ellipse 1066_10"
+              d="M634.97 210.401C634.97 216.947 629.367 222.253 622.455 222.253C615.544 222.253 609.94 216.947 609.94 210.401C609.94 203.856 615.544 193.635 622.455 193.635C629.367 193.635 634.97 203.856 634.97 210.401Z"
+              fill="#C47943"
+            />
+            <ellipse
+              id="Ellipse 1062_8"
+              cx="606.739"
+              cy="222.253"
+              rx="7.85821"
+              ry="9.34468"
+              fill="#844518"
+            />
+            <ellipse
+              id="Ellipse 1063_10"
+              cx="638.754"
+              cy="222.253"
+              rx="7.85821"
+              ry="9.34468"
+              fill="#844518"
+            />
+            <ellipse
+              id="Ellipse 1064_8"
+              cx="606.448"
+              cy="223.713"
+              rx="5.82089"
+              ry="6.13245"
+              fill="#FFC79F"
+            />
+            <ellipse
+              id="Ellipse 1065_8"
+              cx="638.463"
+              cy="223.713"
+              rx="5.82089"
+              ry="6.13245"
+              fill="#FFC79F"
+            />
+            <path
+              id="Rectangle 3501_8"
+              d="M605.699 186.684C607.564 185.388 610.131 185.909 611.349 187.832V187.832C612.274 189.295 612.16 191.188 611.064 192.526L598.639 207.697C596.281 210.575 592.043 210.99 589.173 208.623V208.623C585.723 205.778 585.94 200.414 589.609 197.864L605.699 186.684Z"
+              fill="#844518"
+            />
+            <path
+              id="Rectangle 3502_8"
+              d="M605.407 185.931C607.273 184.634 609.84 185.156 611.057 187.079V187.079C611.983 188.542 611.868 190.435 610.772 191.773L598.347 206.944C595.99 209.822 591.752 210.236 588.881 207.87V207.87C585.431 205.025 585.649 199.66 589.318 197.111L605.407 185.931Z"
+              fill="#844518"
+            />
+            <path
+              id="Rectangle 3503_8"
+              d="M639.494 185.931C637.628 184.634 635.061 185.156 633.844 187.079V187.079C632.918 188.542 633.033 190.435 634.129 191.773L646.554 206.944C648.911 209.822 653.149 210.236 656.02 207.87V207.87C659.47 205.025 659.252 199.66 655.583 197.111L639.494 185.931Z"
+              fill="#844518"
+            />
+            <ellipse
+              id="Ellipse 1059_6"
+              cx="606.157"
+              cy="159.469"
+              rx="8.4403"
+              ry="8.46862"
+              fill="#844518"
+            />
+            <ellipse
+              id="Ellipse 1075_6"
+              cx="607.321"
+              cy="160.637"
+              rx="6.69403"
+              ry="6.71649"
+              fill="#C47943"
+            />
+            <ellipse
+              id="Ellipse 1060_6"
+              cx="638.172"
+              cy="159.469"
+              rx="8.4403"
+              ry="8.46862"
+              fill="#844518"
+            />
+            <ellipse
+              id="Ellipse 1067_8"
+              rx="4.14814"
+              ry="5.67141"
+              transform="matrix(0.736682 -0.676239 0.673777 0.738935 592.37 204.135)"
+              fill="#FFC79F"
+            />
+            <ellipse
+              id="Ellipse 1068_8"
+              rx="4.14814"
+              ry="5.67141"
+              transform="matrix(-0.736682 -0.676239 -0.673777 0.738935 652.325 203.551)"
+              fill="#FFC79F"
+            />
+            <ellipse
+              id="Ellipse 1076_6"
+              cx="637.008"
+              cy="160.637"
+              rx="6.69403"
+              ry="6.71649"
+              fill="#C47943"
+            />
+            <ellipse
+              id="Ellipse 1058_10"
+              cx="622.164"
+              cy="174.07"
+              rx="20.9552"
+              ry="18.3973"
+              fill="#844518"
+            />
+            <g id="Group 1447_9">
+              <path
+                id="Ellipse 1069_9"
+                d="M629.732 179.151C629.732 182.441 626.79 183.122 622.772 183.122C618.753 183.122 615.179 182.441 615.179 179.151C615.179 175.861 618.437 173.194 622.455 173.194C626.474 173.194 629.732 175.861 629.732 179.151Z"
+                fill="#FFC79F"
+              />
+              <path
+                id="Ellipse 1070_14"
+                d="M623.91 176.114C623.91 176.759 622.455 177.282 622.455 177.282C622.455 177.282 621 176.759 621 176.114C621 175.469 621.652 174.946 622.455 174.946C623.259 174.946 623.91 175.469 623.91 176.114Z"
+                fill="black"
+              />
+              <rect
+                id="Rectangle 3504_16"
+                x="622.164"
+                y="176.698"
+                width="0.582089"
+                height="2.92021"
+                rx="0.291045"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3505_16"
+                d="M622.164 179.31C622.164 179.054 622.506 178.949 622.666 179.149C623.584 180.298 624.222 180.25 625.147 179.129C625.313 178.927 625.657 179.037 625.657 179.299V179.299C625.657 179.366 625.631 179.432 625.584 179.482C624.213 180.932 623.534 181.007 622.226 179.477C622.186 179.431 622.164 179.371 622.164 179.31V179.31Z"
+                fill="black"
+              />
+              <path
+                id="Rectangle 3506_16"
+                d="M622.746 179.31C622.746 179.054 622.405 178.949 622.245 179.149C621.326 180.298 620.689 180.25 619.764 179.129C619.597 178.927 619.254 179.037 619.254 179.299V179.299C619.254 179.366 619.28 179.432 619.327 179.482C620.698 180.932 621.377 181.007 622.685 179.477C622.724 179.431 622.746 179.371 622.746 179.31V179.31Z"
+                fill="black"
+              />
+            </g>
+            <ellipse
+              id="Ellipse 1073_9"
+              cx="631.187"
+              cy="168.813"
+              rx="1.45522"
+              ry="2.04415"
+              fill="black"
+            />
+            <ellipse
+              id="Ellipse 1074_9"
+              cx="613.724"
+              cy="168.813"
+              rx="1.45522"
+              ry="2.04415"
+              fill="black"
+            />
+          </g>
+        </g>
+      </g>
+    </g>
+    <defs>
+      <filter
+        id="filter0_d"
+        x="-4.39514"
+        y="49.4996"
+        width="373.677"
+        height="109.5"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter1_d"
+        x="871.605"
+        y="49.4996"
+        width="373.677"
+        height="109.5"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter2_d"
+        x="-5.50024"
+        y="49.4996"
+        width="377.96"
+        height="108.5"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter3_d"
+        x="866.5"
+        y="49.4996"
+        width="377.96"
+        height="108.5"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter4_d"
+        x="574"
+        y="-70"
+        width="93"
+        height="243.58"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter5_d"
+        x="582.424"
+        y="151"
+        width="80.0526"
+        height="88.5978"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter6_d"
+        x="436.634"
+        y="217.556"
+        width="105.595"
+        height="98.636"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter7_d"
+        x="525.198"
+        y="255.193"
+        width="102.687"
+        height="102.667"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter8_d"
+        x="427.34"
+        y="267.065"
+        width="89.6947"
+        height="106.195"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter9_d"
+        x="665.208"
+        y="191.073"
+        width="108.242"
+        height="123.371"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter10_d"
+        x="460.264"
+        y="241.21"
+        width="89.2667"
+        height="123.7"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter11_d"
+        x="510.818"
+        y="225.554"
+        width="89.2667"
+        height="93.3973"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter12_d"
+        x="592.992"
+        y="219.069"
+        width="89.2667"
+        height="97.7263"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter13_d"
+        x="572.223"
+        y="249.941"
+        width="94.9172"
+        height="102.463"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter14_d"
+        x="725.66"
+        y="253.008"
+        width="99.2889"
+        height="100.994"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter15_d"
+        x="635.166"
+        y="243.938"
+        width="59.2121"
+        height="111.735"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter16_d"
+        x="787.683"
+        y="245.907"
+        width="55.7305"
+        height="94.6649"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter17_d"
+        x="682.594"
+        y="282.401"
+        width="97.2484"
+        height="60.3738"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter18_d"
+        x="499.994"
+        y="254.822"
+        width="79.5246"
+        height="99.5722"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter19_d"
+        x="362"
+        y="51"
+        width="512"
+        height="309"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter20_d"
+        x="492"
+        y="283"
+        width="58"
+        height="70"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter21_d"
+        x="582.424"
+        y="151"
+        width="80.0526"
+        height="88.5978"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+        />
+        <feOffset dy="4" />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+      <radialGradient
+        id="paint0_radial"
+        cx="0"
+        cy="0"
+        r="1"
+        gradientUnits="userSpaceOnUse"
+        gradientTransform="translate(521.587 295.374) rotate(90) scale(12.3742)"
+      >
+        <stop stop-color="#FF0000" />
+        <stop offset="1" stop-color="#970000" />
+      </radialGradient>
+      <linearGradient
+        id="paint1_linear"
+        x1="715.544"
+        y1="307.631"
+        x2="715.544"
+        y2="344.588"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#4DFFA9" />
+        <stop offset="1" stop-color="#1D7249" />
+      </linearGradient>
+      <linearGradient
+        id="paint2_linear"
+        x1="621"
+        y1="73"
+        x2="621"
+        y2="191.216"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="white" stop-opacity="0" />
+        <stop offset="1" stop-color="#FFEBCE" />
+      </linearGradient>
+      <linearGradient
+        id="paint3_linear"
+        x1="537.561"
+        y1="107.677"
+        x2="621.153"
+        y2="190.989"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="white" stop-opacity="0" />
+        <stop offset="1" stop-color="#FFEBCE" />
+      </linearGradient>
+      <linearGradient
+        id="paint4_linear"
+        x1="739"
+        y1="191.396"
+        x2="620.821"
+        y2="191.396"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="white" stop-opacity="0" />
+        <stop offset="1" stop-color="#FFEBCE" />
+      </linearGradient>
+      <linearGradient
+        id="paint5_linear"
+        x1="704.439"
+        y1="107.677"
+        x2="620.593"
+        y2="191.242"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="white" stop-opacity="0" />
+        <stop offset="1" stop-color="#FFEBCE" />
+      </linearGradient>
+      <linearGradient
+        id="paint6_linear"
+        x1="621"
+        y1="309.792"
+        x2="621"
+        y2="191.216"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="white" stop-opacity="0" />
+        <stop offset="1" stop-color="#FFEBCE" />
+      </linearGradient>
+      <linearGradient
+        id="paint7_linear"
+        x1="704.439"
+        y1="275.115"
+        x2="620.593"
+        y2="191.55"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="white" stop-opacity="0" />
+        <stop offset="1" stop-color="#FFEBCE" />
+      </linearGradient>
+      <linearGradient
+        id="paint8_linear"
+        x1="503"
+        y1="191.396"
+        x2="620.821"
+        y2="191.396"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="white" stop-opacity="0" />
+        <stop offset="1" stop-color="#FFEBCE" />
+      </linearGradient>
+      <linearGradient
+        id="paint9_linear"
+        x1="537.561"
+        y1="275.115"
+        x2="621.153"
+        y2="191.803"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="white" stop-opacity="0" />
+        <stop offset="1" stop-color="#FFEBCE" />
+      </linearGradient>
+      <clipPath id="clip0">
+        <rect width="1240" height="350" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+</template>
+
+<script>
+export default {
+  props: {
+    themeSync: {
+      type: Number,
+      default: 0
+    },
+    isSendAnswer: {
+      type: Boolean,
+      default: () => false
+    },
+    isCorrectAnswer: {
+      type: Boolean,
+      default: () => false
+    }
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+.clamp-start {
+  animation: getDoll 2s linear alternate-reverse;
+  transform: translateY(0%);
+}
+
+@keyframes getDoll {
+  50% {
+    transform: translateY(30%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+#doll-fake {
+  transform: translateY(50%);
+}
+
+.doll-fake-correct {
+  animation: dollCorrect 1.45s linear forwards 0.5s;
+}
+
+@keyframes dollCorrect {
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.doll-fake-incorrect {
+  animation: dollIncorrect 2.85s linear forwards 0.5s;
+}
+
+@keyframes dollIncorrect {
+  50% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(50%);
+  }
+}
+
+.show-correct {
+  animation: showCorrect 0.2s linear forwards 2s;
+  opacity: 0;
+}
+
+@keyframes showCorrect {
+  to {
+    opacity: 1;
+  }
+}
+
+.light-rotate {
+  animation: lightRotate 2.5s linear infinite 2s;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes lightRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>
