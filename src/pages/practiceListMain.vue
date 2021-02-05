@@ -1,60 +1,192 @@
 <template>
   <q-page class="bg-practice-main row">
     <div class="col q-pa-xl" align="center">
-      <div class="box-container-pracitcelist">
-        <div class="row box-content-practicelist q-py-md q-px-md">
-          <div class="col-3 self-center" style="width: 100px" algin="center"></div>
-          <div class="col self-center" algin="center">
-            <span class="f20 text-amber-5">คำศัพท์</span>
+      <div class="row relative-position">
+        <!-- ปุ่มกดย้อนกลับ -->
+        <div class="col self-center">
+          <q-img
+            class="cursor-pointer"
+            width="40px"
+            src="../../public/images/practicelist/previous-list-btn.png"
+          ></q-img>
+        </div>
+        <!-- รายละเอียด Unit ทั้งหมด -->
+        <div class="col-6 box-container-pracitcelist">
+          <div class="row box-content-practicelist q-py-sm q-px-md">
+            <div class="col-3 self-center" style="width: 100px" algin="center"></div>
+            <div class="col self-center" algin="center">
+              <span class="f20 text-amber-5">คำศัพท์</span>
+            </div>
+            <div class="col-3 self-center" style="width: 100px" algin="center">
+              <q-select
+                v-model="selectLevel"
+                :options="levelList"
+                dense=""
+                bg-color="amber-5"
+                round=""
+                outlined=""
+              />
+            </div>
           </div>
-          <div class="col-3 self-center" style="width: 100px" algin="center">
-            <q-select
-              v-model="selectLevel"
-              :options="levelList"
-              dense=""
-              bg-color="amber-5"
-              round=""
-              outlined=""
-            />
+          <div class="q-pl-lg q-pt-md q-pb-sm q-pr-md">
+            <div class="row">
+              <div class="col self-center">
+                <div class="box-content-progress-practice" align="left">
+                  <div class="progress-bar" style="width: 80%"></div>
+                </div>
+              </div>
+              <div class="col-2" style="width: 50px">
+                <span class="f16">5/20</span>
+              </div>
+            </div>
+            <div class="q-my-md box-content-practice-list">
+              <div
+                v-ripple
+                class="relative-position row q-mr-sm q-mb-md bg-white box-content cursor-pointer"
+                :class="
+                  activeUnit == i
+                    ? 'content-current'
+                    : unitCompleteList[i - 1]
+                    ? 'content-success'
+                    : 'content-default'
+                "
+                v-for="i in 15"
+                @click="activeUnit = i"
+                :key="i"
+              >
+                <div
+                  class="col-2 q-pa-sm"
+                  :class="
+                    activeUnit == i
+                      ? 'bg-current'
+                      : unitCompleteList[i - 1]
+                      ? 'bg-success text-white'
+                      : 'bg-default'
+                  "
+                >
+                  <span class="f24 text-bold">
+                    {{ i }}
+                  </span>
+                </div>
+                <div class="col self-center q-px-sm" align="left">
+                  <span class="f16"> xxxxxxxxxxxxxxx </span>
+                </div>
+                <div class="col-2 self-center" style="width: 60px">
+                  <q-icon
+                    v-if="unitCompleteList[i - 1]"
+                    size="22px"
+                    name="fas fa-check"
+                    class="text-success"
+                  ></q-icon>
+                  <span v-else class="f16">3/4</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="q-pa-md">
-          <div class="row">
-            <div class="col self-center">
-              <div class="box-content-progress-practice" align="left">
-                <div class="progress-bar" style="width: 80%"></div>
-              </div>
-            </div>
-            <div class="col-2" style="width: 50px">
-              <span class="f16">5/20</span>
-            </div>
-          </div>
-          <div class="q-mt-md box-content-practice-list">
-            <div
-              class="row q-mr-sm q-mb-md bg-white box-content"
-              v-for="i in 15"
-              :key="i"
-            >
-              <div class="col-2 q-pa-md">{{ i }}</div>
-              <div class="col self-center brx">
-                <span>
-                  {{ i + 1 }}
-                </span>
-              </div>
-              <div class="col-2 self-center">
-                <span class="f16">3/4</span>
-              </div>
-            </div>
-          </div>
+        <!-- ปุ่มกดไปข้างหน้า -->
+        <div class="col self-center" align="center">
+          <q-img
+            class="cursor-pointer"
+            width="40px"
+            src="../../public/images/practicelist/next-list-btn.png"
+          ></q-img>
         </div>
       </div>
     </div>
-    <div class="col row q-pa-md bg-map">
+
+    <!-- แบบฝึกหัดต่างๆ -->
+    <div class="col row q-pa-xs bg-map">
       <div class="self-center col-12">
         <q-img
           style="width: 100%"
           src="../../public/images/practicelist/bg-map-theme-1.png"
         >
+          <div
+            class="transparent absolute-center row box-content-menu"
+            style="max-width: 800px; width: 90%"
+          >
+            <div class="col q-px-lg" align="center">
+              <div>
+                <q-img
+                  contain=""
+                  style="max-width: 150px"
+                  class="cursor-pointer"
+                  src="../../public//images/practicelist/teaching-1-btn.png"
+                >
+                  <div
+                    class="transparent absolute-bottom no-padding"
+                    style="width: 80%; bottom: 13px; margin: auto"
+                    align="left"
+                  >
+                    <div class="q-px-sm"><span>xx</span></div>
+                  </div>
+                </q-img>
+              </div>
+              <div>
+                <q-img
+                  style="max-width: 150px"
+                  class="cursor-pointer"
+                  src="../../public//images/practicelist/teaching-2-btn.png"
+                >
+                  <div
+                    class="transparent absolute-bottom no-padding"
+                    style="width: 80%; bottom: 13px; margin: auto"
+                    align="left"
+                  >
+                    <div class="q-px-sm"><span>xx</span></div>
+                  </div></q-img
+                >
+              </div>
+            </div>
+            <div class="col q-px-lg" align="center">
+              <div>
+                <q-img
+                  style="max-width: 150px"
+                  class="cursor-pointer"
+                  src="../../public//images/practicelist/action-1-btn.png"
+                >
+                  <div
+                    class="transparent absolute-bottom no-padding"
+                    style="width: 80%; bottom: 13px; margin: auto"
+                    align="left"
+                  >
+                    <div class="q-px-sm"><span>xx</span></div>
+                  </div></q-img
+                >
+              </div>
+              <div>
+                <q-img
+                  style="max-width: 150px"
+                  class="cursor-pointer"
+                  src="../../public//images/practicelist/action-1-btn.png"
+                >
+                  <div
+                    class="transparent absolute-bottom no-padding"
+                    style="width: 80%; bottom: 13px; margin: auto"
+                    align="left"
+                  >
+                    <div class="q-px-sm"><span>xx</span></div>
+                  </div></q-img
+                >
+              </div>
+              <div>
+                <q-img
+                  style="max-width: 150px"
+                  class="cursor-pointer"
+                  src="../../public//images/practicelist/action-1-btn.png"
+                >
+                  <div
+                    class="transparent absolute-bottom no-padding"
+                    style="width: 80%; bottom: 13px; margin: auto"
+                    align="left"
+                  >
+                    <div class="q-px-sm"><span>xx</span></div>
+                  </div></q-img
+                >
+              </div>
+            </div>
+          </div>
         </q-img>
       </div>
     </div>
@@ -65,15 +197,17 @@
 import { ref } from "vue";
 export default {
   setup(props) {
+    const activeUnit = ref(null);
+
     const levelList = ref([]);
     const selectLevel = ref("ระดับ7");
 
     const unitCompleteList = ref([
       false,
-      false,
-      false,
-      false,
-      false,
+      true,
+      true,
+      true,
+      true,
       false,
       false,
       false,
@@ -87,7 +221,7 @@ export default {
       false,
     ]);
 
-    return { selectLevel, levelList, unitCompleteList };
+    return { selectLevel, levelList, unitCompleteList, activeUnit };
   },
 };
 </script>
@@ -98,13 +232,13 @@ export default {
 }
 
 .bg-map {
-  background-color: #81caff;
+  background-color: #d2ecff;
   background-size: contain;
 }
 
 .box-container-pracitcelist {
   max-width: 450px;
-  width: 100%;
+  width: 75%;
   background-color: #ffe6cf;
   border-radius: 10px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
@@ -154,11 +288,64 @@ export default {
 
 /* Handle on hover */
 .box-content-practice-list::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: rgb(197, 111, 111);
 }
 
 .box-content {
   border-radius: 10px;
   overflow: hidden;
+}
+
+.content-success {
+  box-shadow: 0 3px 0px #428c25;
+}
+
+.content-default {
+  box-shadow: 0 3px 0px #db8200;
+}
+
+.content-current {
+  box-shadow: 0 3px 0px #55aabe;
+}
+
+.text-success {
+  color: #428c25;
+}
+
+.bg-success {
+  background-color: #64a74a;
+}
+.bg-default {
+  background-color: #ffaa2e;
+}
+.bg-current {
+  background-color: #4adcfe;
+}
+
+.box-content-menu {
+  height: 90%;
+  overflow-y: auto;
+}
+
+/* width */
+.box-content-menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+.box-content-menu::-webkit-scrollbar-track {
+  background: #7b6060;
+  border-radius: 20px;
+}
+
+/* Handle */
+.box-content-menu::-webkit-scrollbar-thumb {
+  background: #e57373;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+.box-content-menu::-webkit-scrollbar-thumb:hover {
+  background: rgb(197, 111, 111);
 }
 </style>
