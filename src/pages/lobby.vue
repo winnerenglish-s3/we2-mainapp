@@ -3,32 +3,24 @@
     class="relative-position row"
     :style="mode ? 'background-color:#694532' : 'background-color:#1E263B'"
   >
-    <lobby-room
-      class="absolute-top"
-      v-if="mode"
-      style="margin-top:-30px;"
-    ></lobby-room>
-    <lobby-room-night class="absolute-top" v-else style="margin-top:-30px;">
+    <lobby-room class="absolute-top" v-if="mode" style="margin-top: -30px"></lobby-room>
+    <lobby-room-night class="absolute-top" v-else style="margin-top: -30px">
     </lobby-room-night>
     <div class="col-12 self-start q-py-lg row z-top">
       <div class="col self-center row q-px-md">
         <div class="row relative-position q-mr-md">
           <div class="box-container-level relative-position">
-            <div align="center" class="absolute-center" style="top:21%;">
+            <div align="center" class="absolute-center" style="top: 21%">
               <span class="f16 text-bold">LEVEL</span>
             </div>
             <div class="level-bar absolute-center" align="center">
-              <span class="text-grey-9 f36 " style="line-height:1;">23</span>
+              <span class="text-grey-9 f36" style="line-height: 1">23</span>
             </div>
           </div>
-          <div class="self-center relative-position" style="margin-left:-20px;">
-            <q-img
-              contain=""
-              width="210px"
-              src="../../public/images/lobby/name-bar.png"
-            >
-              <div class="transparent fit no-padding ">
-                <div style="padding-left:30px;" class="q-pa-xs">
+          <div class="self-center relative-position" style="margin-left: -20px">
+            <q-img contain="" width="210px" src="../../public/images/lobby/name-bar.png">
+              <div class="transparent fit no-padding">
+                <div style="padding-left: 30px" class="q-pa-xs">
                   <div class="">
                     <span>XXXXX XXX</span>
                   </div>
@@ -36,7 +28,7 @@
                     <div class="exp-bar relative-position">
                       <div
                         class="bg-primary full-height"
-                        style="margin-left:-5px;width:80%;border-radius:20px;"
+                        style="margin-left: -5px; width: 80%; border-radius: 20px"
                       ></div>
                     </div>
                   </div>
@@ -45,28 +37,25 @@
             </q-img>
           </div>
         </div>
-        <q-img
-          contain=""
-          width="160px"
-          src="../../public/images/lobby/heart-bar.png"
-        >
-          <div class="transparent fit relative-position no-padding">
-            <div class="absolute-center " style="height:45%;left:65%;">
-              <span class="f16">5</span>
+        <div class="self-center q-mx-xs">
+          <q-img contain="" width="150px" src="../../public/images/lobby/heart-bar.png">
+            <div class="transparent fit relative-position no-padding">
+              <div class="absolute-center" style="height: 55%; left: 65%">
+                <span class="f16">5</span>
+              </div>
             </div>
-          </div>
-        </q-img>
-        <q-img
-          contain=""
-          width="160px"
-          src="../../public/images/lobby/star-bar.png"
-        >
-          <div class="transparent fit relative-position no-padding">
-            <div class="absolute-center" style="height:45%;left:65%;">
-              <span class="f16">9999</span>
+          </q-img>
+        </div>
+
+        <div class="self-center q-mx-xs">
+          <q-img contain="" width="150px" src="../../public/images/lobby/star-bar.png">
+            <div class="transparent fit relative-position no-padding">
+              <div class="absolute-center" style="height: 55%; left: 65%">
+                <span class="f16">9999</span>
+              </div>
             </div>
-          </div>
-        </q-img>
+          </q-img>
+        </div>
       </div>
       <div class="col-3 q-pr-md" align="right">
         <q-img
@@ -77,7 +66,14 @@
           <div class="transparent fit" v-if="isNewNotify">
             <div
               class="bg-red absolute-top-right"
-              style="width:15px;height:15px;border-radius:50%;border:1px solid#fff;right:7px;top:2px"
+              style="
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                border: 1px solid#fff;
+                right: 7px;
+                top: 2px;
+              "
             ></div>
           </div>
         </q-img>
@@ -93,13 +89,13 @@
         ></q-img>
       </div>
     </div>
-    <div class="col-12 row  z-top">
+    <div class="col-12 row z-top">
       <div class="col-6"></div>
       <div class="col-3">
         <character></character>
       </div>
     </div>
-    <div class="col-12  self-end q-py-lg row z-top">
+    <div class="col-12 self-end q-py-lg row z-top">
       <div class="col row self-end q-px-md">
         <q-img
           contain=""
@@ -163,33 +159,26 @@
     </div>
 
     <!-- dialog questionnaire -->
-    <q-dialog
-      persistent
-      v-model="isShowPopupQuestionnaire"
-      data-cy="dialog-question"
-    >
-      <q-card flat class="bg-transparent" style="width:320px;height:370px">
+    <q-dialog persistent v-model="isShowPopupQuestionnaire" data-cy="dialog-question">
+      <q-card flat class="bg-transparent" style="width: 320px; height: 370px">
         <q-card-section class="bg-transparent text-dark no-padding">
           <!-- รูปพื้นหลัง Error -->
           <q-img src="../../public/images/warning.png" class="fit">
             <div class="absolute-center bg-transparent full-width">
               <div
-                style="font-size:24px"
+                style="font-size: 24px"
                 align="center"
                 class="text-weight-bold text-dark relative-position q-px-md"
               >
                 อย่าลืม! ทำแบบสอบถาม
               </div>
-              <div
-                align="center"
-                class="text-dark relative-position q-px-md q-mt-md"
-              >
+              <div align="center" class="text-dark relative-position q-px-md q-mt-md">
                 คุณสามารถเข้าทำแบบสอบถาม
                 <br />ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ค. 2563
               </div>
             </div>
             <div
-              style="width:100%;bottom:30px; z-index:1000"
+              style="width: 100%; bottom: 30px; z-index: 1000"
               class="bg-transparent absolute-bottom row justify-center"
               align="center"
             >
@@ -197,13 +186,13 @@
               <div
                 @click="isShowPopupQuestionnaire = false"
                 class="cursor-pointer btn-close z-top col-6"
-                style="width:120px"
+                style="width: 120px"
               ></div>
               <!-- ปุ่มตกลง -->
               <div
                 @click="toQuestionnaire(), (isShowPopupQuestionnaire = false)"
                 class="cursor-pointer btn-exam z-top col-6"
-                style="width:120px"
+                style="width: 120px"
               ></div>
             </div>
           </q-img>
@@ -213,37 +202,34 @@
 
     <!-- dialog exam -->
     <q-dialog persistent v-model="isShowPopupExam" data-cy="dialog-exam">
-      <q-card flat class="bg-transparent" style="width:320px;height:370px">
+      <q-card flat class="bg-transparent" style="width: 320px; height: 370px">
         <q-card-section class="bg-transparent text-dark no-padding">
           <!-- รูปพื้นหลัง Error -->
           <q-img src="../../public/images/warning.png" class="fit">
             <div class="absolute-center bg-transparent full-width">
               <div
-                style="font-size:24px"
+                style="font-size: 24px"
                 align="center"
                 class="text-weight-bold text-dark relative-position q-px-md"
               >
                 หัวข้อการสอบที่ครูตั้ง
               </div>
-              <div
-                align="center"
-                class="text-dark relative-position q-px-md q-mt-md"
-              >
+              <div align="center" class="text-dark relative-position q-px-md q-mt-md">
                 คุณสามารถเข้าสอบก่อนเรียน
                 <br />
                 ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ย. 2563
               </div>
             </div>
             <div
-              style="width:100%;bottom:30px; z-index:1000"
-              class="bg-transparent absolute-bottom "
+              style="width: 100%; bottom: 30px; z-index: 1000"
+              class="bg-transparent absolute-bottom"
               align="center"
             >
               <!-- ปุ่มตกลง -->
               <div
                 @click="toExam(), (isShowPopupExam = false)"
                 class="cursor-pointer btn-exam z-top"
-                style="width:120px"
+                style="width: 120px"
               ></div>
             </div>
           </q-img>
@@ -253,31 +239,26 @@
 
     <!-- dialog pretest -->
     <q-dialog persistent v-model="isShowPopupPretest" data-cy="dialog-pretest">
-      <q-card flat class="bg-transparent" style="width:320px;height:370px">
+      <q-card flat class="bg-transparent" style="width: 320px; height: 370px">
         <q-card-section class="bg-transparent text-dark no-padding">
           <!-- รูปพื้นหลัง Error -->
           <q-img src="../../public/images/warning.png" class="fit">
             <div class="absolute-center bg-transparent full-width">
               <div
-                style="font-size:24px"
+                style="font-size: 24px"
                 align="center"
                 class="text-weight-bold text-dark relative-position q-px-md"
               >
                 อย่าลืม! สอบก่อนเรียน
               </div>
-              <div
-                align="center"
-                class="text-dark relative-position q-px-md q-mt-md"
-              >
+              <div align="center" class="text-dark relative-position q-px-md q-mt-md">
                 คุณสามารถเข้าสอบก่อนเรียน
                 <br class="" />
-                <div class=" q-my-sm">
-                  ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ค. 2563
-                </div>
+                <div class="q-my-sm">ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ค. 2563</div>
               </div>
             </div>
             <div
-              style="width:100%;bottom:30px; z-index:1000"
+              style="width: 100%; bottom: 30px; z-index: 1000"
               class="bg-transparent absolute-bottom row justify-center"
               align="center"
             >
@@ -285,13 +266,13 @@
               <div
                 @click="isShowPopupPretest = false"
                 class="cursor-pointer btn-close z-top col-6"
-                style="width:120px"
+                style="width: 120px"
               ></div>
               <!-- ปุ่มตกลง -->
               <div
                 @click="toPretest(), (isShowPopupPretest = false)"
                 class="cursor-pointer btn-prepost z-top col-6"
-                style="width:120px"
+                style="width: 120px"
               ></div>
             </div>
           </q-img>
@@ -300,33 +281,26 @@
     </q-dialog>
 
     <!-- dialog psottest -->
-    <q-dialog
-      persistent
-      v-model="isShowPopupPosttest"
-      data-cy="dialog-posttest"
-    >
-      <q-card flat class="bg-transparent" style="width:320px;height:370px">
+    <q-dialog persistent v-model="isShowPopupPosttest" data-cy="dialog-posttest">
+      <q-card flat class="bg-transparent" style="width: 320px; height: 370px">
         <q-card-section class="bg-transparent text-dark no-padding">
           <!-- รูปพื้นหลัง Error -->
           <q-img src="../../public/images/warning.png" class="fit">
             <div class="absolute-center bg-transparent full-width">
               <div
-                style="font-size:24px"
+                style="font-size: 24px"
                 align="center"
                 class="text-weight-bold text-dark relative-position q-px-md"
               >
                 อย่าลืม! ทดสอบหลังเรียน
               </div>
-              <div
-                align="center"
-                class="text-dark relative-position q-px-md q-mt-md"
-              >
+              <div align="center" class="text-dark relative-position q-px-md q-mt-md">
                 คุณสามารถเข้าทำแบบทดสอบหลังเรียน
                 <br />ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ค. 2563
               </div>
             </div>
             <div
-              style="width:100%;bottom:30px; z-index:1000"
+              style="width: 100%; bottom: 30px; z-index: 1000"
               class="bg-transparent absolute-bottom row justify-center"
               align="center"
             >
@@ -334,13 +308,13 @@
               <div
                 @click="isShowPopupPosttest = false"
                 class="cursor-pointer btn-close z-top col-6"
-                style="width:120px"
+                style="width: 120px"
               ></div>
               <!-- ปุ่มตกลง -->
               <div
                 @click="toPosttest(), (isShowPopupPosttest = false)"
                 class="cursor-pointer btn-exam z-top col-6"
-                style="width:120px"
+                style="width: 120px"
               ></div>
             </div>
           </q-img>
@@ -358,7 +332,7 @@ export default {
   components: {
     lobbyRoom,
     lobbyRoomNight,
-    character
+    character,
   },
   data() {
     return {
@@ -368,59 +342,59 @@ export default {
       isShowPopupPosttest: false,
       isShowPopupExam: false,
       isShowPopupQuestionnaire: false,
-      mode: false
+      mode: false,
     };
   },
-  methods: {
-    closeBtn() {
-      this.show = false;
-    },
-    toPretest() {
-      window.open(
-        "http://localhost:8081/pretest",
-        "__blank",
-        "resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1200,height=700"
-      );
-    },
-    toPosttest() {
-      window.open(
-        "http://localhost:8081/posttest",
-        "__blank",
-        "resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1200,height=700"
-      );
-    },
-    toExam() {
-      window.open(
-        "http://localhost:8084/",
-        "__blank",
-        "resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1200,height=700"
-      );
-    },
-    toQuestionnaire() {
-      window.open(
-        "http://localhost:8083/",
-        "__blank",
-        "resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1200,height=700"
-      );
-    }
-  },
-  created() {
-    let config = this.$q.sessionStorage.getItem("config");
+  // methods: {
+  //   closeBtn() {
+  //     this.show = false;
+  //   },
+  //   toPretest() {
+  //     window.open(
+  //       "http://localhost:8081/pretest",
+  //       "__blank",
+  //       "resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1200,height=700"
+  //     );
+  //   },
+  //   toPosttest() {
+  //     window.open(
+  //       "http://localhost:8081/posttest",
+  //       "__blank",
+  //       "resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1200,height=700"
+  //     );
+  //   },
+  //   toExam() {
+  //     window.open(
+  //       "http://localhost:8084/",
+  //       "__blank",
+  //       "resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1200,height=700"
+  //     );
+  //   },
+  //   toQuestionnaire() {
+  //     window.open(
+  //       "http://localhost:8083/",
+  //       "__blank",
+  //       "resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1200,height=700"
+  //     );
+  //   },
+  // },
+  // created() {
+  //   let config = this.$q.sessionStorage.getItem("config");
 
-    if (config.includes("exam")) {
-      this.isShowPopupExam = true;
-    }
-    if (config.includes("questionnaire")) {
-      this.isShowPopupQuestionnaire = true;
-    }
+  //   if (config.includes("exam")) {
+  //     this.isShowPopupExam = true;
+  //   }
+  //   if (config.includes("questionnaire")) {
+  //     this.isShowPopupQuestionnaire = true;
+  //   }
 
-    if (config.includes("pretest")) {
-      this.isShowPopupPretest = true;
-    }
-    if (config.includes("posttest")) {
-      this.isShowPopupPosttest = true;
-    }
-  }
+  //   if (config.includes("pretest")) {
+  //     this.isShowPopupPretest = true;
+  //   }
+  //   if (config.includes("posttest")) {
+  //     this.isShowPopupPosttest = true;
+  //   }
+  // },
 };
 </script>
 

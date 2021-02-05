@@ -354,8 +354,10 @@ import { useRouter, useRoute } from "vue-router";
 export default {
   setup(props) {
     // Set Router
-    // const route = useRoute();
-    // const router = useRouter();
+    const route = useRoute();
+    const router = useRouter();
+
+    console.log(route);
 
     // TODO : Set Theme START ----------------------------
     // เซ็ทสีของ Theme ที่ใช้
@@ -415,7 +417,7 @@ export default {
     };
 
     const checkRouter = () => {
-      let routeName = "";
+      let routeName = route.name;
       if (routeName != "flashcard" && routeName != "practicemain") {
         isStartPractice.value = true;
       } else {
@@ -461,7 +463,7 @@ export default {
 
     onMounted(loadSynchronizeData);
 
-    onBeforeUnmount(() => {
+    onUnmounted(() => {
       if (typeof snapSyncData.value == "function") {
         snapSyncData();
       }
