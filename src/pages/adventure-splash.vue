@@ -105,11 +105,12 @@ import game from "../hooks/checkGameMode.js";
 import { ref, onMounted } from "vue";
 import Axios from "axios";
 import { auth } from "src/router/index.js";
+import { useRouter, useRoute } from "vue-router";
 export default {
   setup(props) {
     // ********************** Router **********************
-    // const router = root.$router;
-    // const route = root.$route;
+    const router = useRouter();
+    const route = useRoute();
 
     // ********************** Progress Bar Percentage **********************
     const progress = ref(0);
@@ -131,7 +132,7 @@ export default {
       let isEnableGameMode = game.gameInfomation().isEnable();
       if (isEnableGameMode) {
         console.log("game mode is enable");
-        // router.push("/character")
+        // router.push("/character");
       } else {
         console.log("game mode is disable");
       }
@@ -143,7 +144,7 @@ export default {
       const apiUrl =
         "http://localhost:5000/winnerenglish2-e0f1b/us-central1/wfunctions/mainAppLogin";
       const postData = {
-        uid: route.params.uid,
+        uid: "0hbp16muXk8V3vc7ekq0",
       };
       const response = await Axios.post(apiUrl, postData);
 

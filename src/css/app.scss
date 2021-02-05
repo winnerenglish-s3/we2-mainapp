@@ -1,1 +1,180 @@
 // app global css in SCSS form
+@font-face {
+  font-family: Sarabun-r;
+  src: url("../../public/fonts/Sarabun-Regular.ttf");
+}
+
+@font-face {
+  font-family: Sarabun-m;
+  src: url("../../public/fonts/Sarabun-Medium.ttf");
+}
+
+@font-face {
+  font-family: prompt-black;
+  src: url("../../public/fonts/Prompt-Black.ttf");
+}
+
+.f12 {
+  font-size: 12px;
+}
+
+.f14 {
+  font-size: 14px;
+}
+
+.f16 {
+  font-size: 16px;
+}
+
+.f18 {
+  font-size: 18px;
+}
+
+.f20 {
+  font-size: 20px;
+}
+
+.f24 {
+  font-size: 24px;
+}
+
+.f32 {
+  font-size: 32px;
+}
+
+.f36 {
+  font-size: 36px;
+}
+
+.f48 {
+  font-size: 48px;
+}
+
+body {
+  font-family: Sarabun-r;
+}
+
+.font-medium {
+  font-family: Sarabun-m;
+}
+
+.brx {
+  border: 1px solid red;
+}
+
+.container-login {
+  width: 320px;
+}
+
+.userPwd {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #512a08;
+}
+
+.fontColor {
+  color: #512a08;
+}
+
+.forgotPassword {
+  font-size: 12px;
+  color: #512a08;
+}
+
+// หน้าโหลด
+.adventureLanding {
+  background-image: url("../../public/images/school/splash-bg1.png");
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.tutorLanding {
+  background-image: url("../../public/images/tutor/splash-bg2.png");
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.discoveryLanding {
+  background-image: url("../../public/images/online/splash-bg3.png");
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+// หน้าล็อกอิน
+.bgAdventure {
+  background-image: url("../../public/images/bg-adventure.png");
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.bgTutor {
+  background-image: url("../../public/images/bg-tutor.png");
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.bgDiscovery {
+  background-image: url("../../public/images/dis-bg.png");
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+//LOBBY
+.bgLobby {
+  background-image: url("../../public/images/bg-lobby.png");
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.btn-login:hover {
+  background-image: url("../../public/images/hover.png");
+  transform: scale(0.99);
+  background-size: cover;
+  cursor: pointer;
+}
+
+.btn-login:active {
+  transform: scale(0.95);
+}
+
+.btn-login {
+  background-image: url("../../public/images/login-btn.png");
+  width: 100%;
+  height: 35px;
+  background-size: cover;
+}
+
+.font-16 {
+  font-size: 16px;
+}
+
+.bgCharacter {
+  background-image: url("../../public/images/bg-character.png");
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+}
+
+.box-container-main {
+  max-width: 1600px;
+  width: 100%;
+  min-height: calc(100vh - 50px);
+  max-height: fit-content;
+  margin: auto;
+}
