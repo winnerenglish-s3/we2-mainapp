@@ -141,7 +141,7 @@ export default {
 
     // ********************** Check GameMode From hook **********************
     const checkGameMode = async (schoolId) => {
-      let isEnableGameMode = await game.gameInfomation(schoolId);
+      let isEnableGameMode = await game.gameStatus(schoolId);
 
       if (isEnableGameMode) {
         console.log("game mode is enable");

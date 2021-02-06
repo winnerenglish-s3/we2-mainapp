@@ -31,6 +31,7 @@ export const ts = firebase.firestore.FieldValue.serverTimestamp()
  
 
 
+
 export default route(function (/* { store, ssrContext } */) {
   const createHistory = process.env.MODE === 'ssr'
     ? createMemoryHistory
