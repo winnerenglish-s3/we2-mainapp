@@ -3,31 +3,23 @@
     <!-- Self Learning -->
     <div v-if="!isSynchronize">
       <div
-        @click="!isShowDetails ? openDialog() : null"
+        @click="!isShowDetails ? openDialog(index) : null"
         v-ripple
         class="relative-position row cursor-pointer bg-white q-mb-xs"
         v-for="(item, index) in vocabDataList"
         :key="index"
       >
         <div class="col-3" style="width: 100px">
-          <q-img
-            src="../../../public/images/flashcard/draft-img-flashcard.png"
-          ></q-img>
+          <q-img src="../../../public/images/flashcard/draft-img-flashcard.png"></q-img>
         </div>
         <div class="col self-center q-px-md">
           <span style="font-size: max(3vw, 24px)"> {{ item.vocab }}</span>
-          <span
-            class="relative-position q-mx-sm"
-            style="font-size: max(2vw, 14px)"
+          <span class="relative-position q-mx-sm" style="font-size: max(2vw, 14px)"
             >(v.)</span
           >
         </div>
         <div class="col-1 self-center">
-          <q-icon
-            name="fas fa-chevron-right"
-            class="text-grey-5"
-            size="24px"
-          ></q-icon>
+          <q-icon name="fas fa-chevron-right" class="text-grey-5" size="24px"></q-icon>
         </div>
       </div>
     </div>
@@ -54,7 +46,6 @@
         </div>
       </div>
     </div>
-
     <!-- Dialog For Self Learning -->
     <q-dialog
       maximized
@@ -68,26 +59,52 @@
             <div class="row">
               <div class="col self-center">
                 <span
-                  ><span style="font-size: max(5vw, 24px); line-height: 0"
-                    >attack</span
-                  >
+                  ><span style="font-size: max(5vw, 24px); line-height: 0">{{
+                    vocabDataList[currentFlashcardIndex].vocab
+                  }}</span>
                   <span
                     class="relative-position q-mx-sm"
                     style="font-size: max(2vw, 12px)"
-                    >(verb)</span
+                    >({{ vocabDataList[currentFlashcardIndex].wordingType }})</span
                   ></span
                 >
               </div>
               <div class="col" align="right">
-                <q-btn round class="bg-warning q-mx-sm"></q-btn>
-                <q-btn class="bg-warning" round></q-btn>
+                <q-btn
+                  round
+                  class="bg-warning"
+                  :class="
+                    !vocabDataList[currentFlashcardIndex].soundVocabUrl
+                      ? 'invisible'
+                      : null
+                  "
+                  @click="
+                    $emit('playSound', vocabDataList[currentFlashcardIndex].soundVocabUrl)
+                  "
+                >
+                  <q-icon name="fas fa-volume-up"></q-icon
+                ></q-btn>
+                <q-btn
+                  round
+                  class="q-ml-sm bg-warning"
+                  :class="
+                    !vocabDataList[currentFlashcardIndex].soundSpellUrl
+                      ? 'invisible'
+                      : null
+                  "
+                  @click="
+                    $emit('playSound', vocabDataList[currentFlashcardIndex].soundSpellUrl)
+                  "
+                >
+                  <q-icon name="fas fa-volume-up"></q-icon>
+                </q-btn>
               </div>
             </div>
             <div class="q-mt-sm">
-              <span>อะ-แทค</span>
+              <span v-html="vocabDataList[currentFlashcardIndex].readingWord"></span>
             </div>
             <div class="q-mt-md">
-              <span>โจมตี, รุกราน, บุก </span>
+              <span v-html="vocabDataList[currentFlashcardIndex].meaning"> </span>
             </div>
             <div align="center" class="q-pa-md q-my-md">
               <div
@@ -100,26 +117,36 @@
                 "
               >
                 <q-img
-                  src="../../../public/images/flashcard/draft-img-flashcard.png"
+                  :src="vocabDataList[currentFlashcardIndex].imageSentenceUrl"
                 ></q-img>
               </div>
             </div>
             <div class="q-mt-md row q-py-sm">
               <div class="col">
-                <span
-                  >The terrorists <span class="text-blue-5">attacked</span> the
-                  government air base in the north.
-                </span>
+                <span v-html="vocabDataList[currentFlashcardIndex].sentenceEng"> </span>
               </div>
               <div class="col-2" align="right" style="width: 70px">
-                <q-btn class="bg-warning" round></q-btn>
+                <q-btn
+                  round
+                  class="bg-warning"
+                  :class="
+                    !vocabDataList[currentFlashcardIndex].soundSentenceUrl
+                      ? 'invisible'
+                      : null
+                  "
+                  @click="
+                    $emit(
+                      'playSound',
+                      vocabDataList[currentFlashcardIndex].soundSentenceUrl
+                    )
+                  "
+                >
+                  <q-icon name="fas fa-volume-up"></q-icon>
+                </q-btn>
               </div>
             </div>
             <div class="q-mt-md">
-              <span
-                >พวกก่อการร้าย<span class="text-blue-5">โจมตี</span
-                >ฐานทัพอากาศของรัฐบาลใน ภาคเหนือ
-              </span>
+              <span v-html="vocabDataList[currentFlashcardIndex].sentenceTh"> </span>
             </div>
           </div>
         </q-card-section>
@@ -135,6 +162,7 @@ export default {
 
   setup(props, { emit }) {
     const isShowDetails = ref(false);
+    const currentFlashcardIndex = ref(0);
 
     const showDialog = computed(() => {
       if (props.backToPage) {
@@ -149,13 +177,19 @@ export default {
       }
     });
 
-    const openDialog = () => {
+    const openDialog = (index) => {
       isShowDetails.value = true;
+      currentFlashcardIndex.value = index;
       emit("sendBackPopup");
     };
 
-    return { isShowDetails, showDialog, openDialog };
-  }
+    return {
+      isShowDetails: isShowDetails,
+      showDialog: showDialog,
+      openDialog: openDialog,
+      currentFlashcardIndex: currentFlashcardIndex,
+    };
+  },
 };
 </script>
 
