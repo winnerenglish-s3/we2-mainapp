@@ -53,7 +53,7 @@
           <q-img contain="" width="150px" src="../../public/images/lobby/star-bar.png">
             <div class="transparent fit relative-position no-padding">
               <div class="absolute-center" style="height: 55%; left: 65%">
-                <span class="f16">9999</span>
+                <span class="f16">{{ characterData.star }}</span>
               </div>
             </div>
           </q-img>
