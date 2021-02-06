@@ -305,15 +305,17 @@ export default {
     // ******************* Create Character *******************
     // button
     const createCharacter = () => {
-      db.collection("character")
-        .add({
-          userId: $q.sessionStorage.getItem("uid"),
-          hat: currentHat,
-          top: currentTop,
-          bottom: currentBottom,
-          color: selectColor,
-          name: characterName.value,
-          timestamp: ts,
+      db.collection("appAccounts")
+        .doc(uid)
+        .update({
+          character: {
+            hat: currentHat,
+            top: currentTop,
+            bottom: currentBottom,
+            color: selectColor,
+            name: characterName.value,
+            star: 0,
+          },
         })
         .then(() => {
           router.push("/lobby");
