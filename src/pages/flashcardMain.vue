@@ -7,6 +7,7 @@
       :isSynchronize="isSynchronize"
       :vocabDataList="vocabDataList"
       :themeSync="themeSync"
+      @playSound="(val) => playSound(val)"
       v-if="$q.platform.is.desktop && isLoadPractice"
     ></flashcard-pc>
     <flashcard-mobile
@@ -14,6 +15,7 @@
       :vocabDataList="vocabDataList"
       :backToPage="backToPage"
       v-if="$q.platform.is.mobile && isLoadPractice"
+      @playSound="(val) => playSound(val)"
       @sendBackPopup="sendBackPopup()"
     ></flashcard-mobile>
   </q-page>
@@ -24,47 +26,46 @@ import flashcardPc from "../components/flashcard/flashcardPc";
 import flashcardMobile from "../components/flashcard/flashcardMobile";
 import { db } from "src/router";
 import { onMounted, ref, computed } from "vue";
+import axios from "axios";
+
 export default {
   components: {
     flashcardPc,
-    flashcardMobile
+    flashcardMobile,
   },
   props: {
     backToPage: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     themeSync: {
       type: Number,
-      default: 0
+      default: 0,
     },
     isSynchronize: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     synchronizeData: {
       type: Object,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   setup(props, { emit }) {
     const flashcardList = ref([]);
     const isLoadPractice = ref(false);
 
     // โหลดข้อมูล Flashcard
-    const loadFlashcard = () => {
-      db.collection("flashcard_test")
-        .where("practiceListId", "==", "test")
-        .get()
-        .then(doc => {
-          let temp = [];
-          doc.forEach(res => {
-            temp.push({ ...res.data(), id: res.id });
-          });
+    const loadFlashcard = async () => {
+      const apiURL =
+        "http://localhost:5000/winnerenglish2-e0f1b/us-central1/wfunctions/getFlashcard";
+      const postData = {
+        practiceListId: "beTFT3GzbERuWavuDBka",
+      };
 
-          flashcardList.value = temp;
-          isLoadPractice.value = true;
-        });
+      const response = await axios.post(apiURL, postData);
+      flashcardList.value = response.data;
+      isLoadPractice.value = true;
     };
 
     // ส่งข้อมูลเข้าไปที่ Component Vocab
@@ -73,7 +74,7 @@ export default {
 
       if (props.isSynchronize) {
         temp = flashcardList.value.filter(
-          x => x.id == props.synchronizeData.practiceId
+          (x) => x.id == props.synchronizeData.practiceId
         )[0];
       } else {
         temp = flashcardList.value;
@@ -81,6 +82,12 @@ export default {
 
       return temp;
     });
+
+    // Play sound
+    const playSound = (url) => {
+      let audio = new Audio(url);
+      audio.play();
+    };
 
     // เรียกใช้งาน Function
     onMounted(loadFlashcard);
@@ -95,9 +102,10 @@ export default {
       flashcardList: flashcardList,
       isLoadPractice: isLoadPractice,
       vocabDataList: vocabDataList,
-      sendBackPopup: sendBackPopup
+      sendBackPopup: sendBackPopup,
+      playSound: playSound,
     };
-  }
+  },
 };
 </script>
 
