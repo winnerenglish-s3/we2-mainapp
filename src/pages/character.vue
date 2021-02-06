@@ -224,6 +224,7 @@ export default {
       let response = await game.characterInfomation(uid);
       if (response) {
         // ป้องกัน หากมีตัวละครเเล้ว ให้ไป lobby เลย
+
         router.push("/lobby");
       }
       $q.loading.hide();
@@ -311,10 +312,11 @@ export default {
           top: currentTop,
           bottom: currentBottom,
           color: selectColor,
+          name: characterName.value,
           timestamp: ts,
         })
         .then(() => {
-          $router.push("/lobby");
+          router.push("/lobby");
           console.log("added");
         })
         .catch((error) => {

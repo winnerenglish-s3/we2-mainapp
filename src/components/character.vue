@@ -1,6 +1,6 @@
 <template>
   <svg
-    style="width:100%;height:100%;"
+    style="width: 100%; height: 100%"
     width="447"
     height="437"
     viewBox="0 0 447 437"
@@ -20,13 +20,7 @@
         d="M272.104 319.821C272.104 316.507 274.791 313.821 278.104 313.821H305.555C308.868 313.821 311.555 316.507 311.555 319.821V403.629C311.555 406.942 308.868 409.629 305.555 409.629H278.104C274.791 409.629 272.104 406.942 272.104 403.629V319.821Z"
         fill="#FFB690"
       />
-      <rect
-        x="300.283"
-        y="178.564"
-        width="33.8145"
-        height="9.39292"
-        fill="#FFB690"
-      />
+      <rect x="300.283" y="178.564" width="33.8145" height="9.39292" fill="#FFB690" />
       <rect
         x="326.583"
         y="313.821"
@@ -59,27 +53,9 @@
         d="M258.954 261.221H377.305V320.215C377.305 321.871 375.962 323.215 374.305 323.215H261.954C260.297 323.215 258.954 321.871 258.954 320.215V261.221Z"
         fill="#FFB690"
       />
-      <rect
-        x="300.283"
-        y="178.564"
-        width="33.8145"
-        height="3.75717"
-        fill="#FF955E"
-      />
-      <rect
-        x="272.104"
-        y="323.215"
-        width="39.4503"
-        height="3.75717"
-        fill="#FF955E"
-      />
-      <rect
-        x="326.583"
-        y="323.215"
-        width="39.4503"
-        height="3.75717"
-        fill="#FF955E"
-      />
+      <rect x="300.283" y="178.564" width="33.8145" height="3.75717" fill="#FF955E" />
+      <rect x="272.104" y="323.215" width="39.4503" height="3.75717" fill="#FF955E" />
+      <rect x="326.583" y="323.215" width="39.4503" height="3.75717" fill="#FF955E" />
       <rect
         x="258.955"
         y="191.713"
@@ -151,10 +127,7 @@
         d="M259.134 261.993H376.989V320.727C376.989 322.384 375.645 323.727 373.989 323.727H262.134C260.477 323.727 259.134 322.384 259.134 320.727V261.993Z"
         fill="#FE6363"
       />
-      <path
-        d="M259.134 267.606H376.989V278.83H259.134V267.606Z"
-        fill="#623E3E"
-      />
+      <path d="M259.134 267.606H376.989V278.83H259.134V267.606Z" fill="#623E3E" />
     </g>
     <ellipse
       cx="131.5"
@@ -253,11 +226,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -286,11 +255,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"

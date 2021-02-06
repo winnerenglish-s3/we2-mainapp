@@ -109,7 +109,7 @@ export default {
 
     const loadingShow = () => {
       $q.loading.show({
-        delay: 400,
+        delay: 0,
       });
     };
 
@@ -124,12 +124,11 @@ export default {
 
     router.replace("login");
 
-    console.log(route.params.uid);
     // ********************** Progress Bar Percentage **********************
     const progress = ref(0);
     const loadingProgress = () => {
       let percentage = 0;
-      let interval = setInterval(async () => {
+      var interval = setInterval(async () => {
         if (percentage >= 100) {
           clearInterval(interval);
           await checkLogin();
@@ -146,11 +145,19 @@ export default {
 
       if (isEnableGameMode) {
         console.log("game mode is enable");
-        router.push("/character");
+        const checkCreateCharacter = await game.characterInfomation(uid);
+        loadingHide();
+        if (checkCreateCharacter) {
+          // หากมี ตัวละครแล้ว ไปที่ Lobby เลย
+          router.push("/lobby");
+        } else {
+          // หากยังไม่มีตัวละคร ไปสร้างตัวละคร
+          router.push("/character");
+        }
       } else {
         console.log("game mode is disable");
+        loadingHide();
       }
-      loadingHide();
     };
 
     // Check Login
@@ -168,6 +175,8 @@ export default {
           login(response.data.customToken, response.data.user.schoolId);
         } else {
           // user not found
+          console.log("user not found");
+          alert("user not found");
           loadingHide();
         }
       } catch (err) {

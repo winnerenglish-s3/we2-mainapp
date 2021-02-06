@@ -1,6 +1,6 @@
 <template>
   <svg
-    style="width:100%;height:100%;"
+    style="width: 100%; height: 100%"
     width="1920"
     height="1080"
     viewBox="0 0 1920 1080"
@@ -28,18 +28,8 @@
       fill-opacity="0.4"
     />
     <rect y="6.10352e-05" width="1920" height="565.2" fill="#2B3652" />
-    <rect
-      x="135.6"
-      y="57.6"
-      width="1651.2"
-      height="447.6"
-      rx="66"
-      fill="#565B6F"
-    />
-    <path
-      d="M187.5 665L12.5001 838.75H978.75L823.75 665H187.5Z"
-      fill="#872B2C"
-    />
+    <rect x="135.6" y="57.6" width="1651.2" height="447.6" rx="66" fill="#565B6F" />
+    <path d="M187.5 665L12.5001 838.75H978.75L823.75 665H187.5Z" fill="#872B2C" />
     <rect
       x="12.5001"
       y="580"
@@ -53,14 +43,7 @@
     <rect x="192.5" y="572.5" width="642.5" height="75" rx="7" fill="#2E3955" />
     <rect x="210" y="572.5" width="610" height="30" rx="7" fill="#5E4144" />
     <rect x="385" y="572.5" width="435" height="30" rx="7" fill="#5E4144" />
-    <rect
-      x="202.5"
-      y="629.999"
-      width="622.5"
-      height="17.5"
-      rx="7"
-      fill="#161B2F"
-    />
+    <rect x="202.5" y="629.999" width="622.5" height="17.5" rx="7" fill="#161B2F" />
     <rect x="265" y="155" width="490" height="65" rx="7" fill="#5E4144" />
     <rect
       x="295"
@@ -152,40 +135,16 @@
       fill-opacity="0.62"
     />
     <rect x="40" y="490" width="127.5" height="55" rx="11" fill="#565B6F" />
-    <rect
-      x="37.4996"
-      y="39.9999"
-      width="97.5"
-      height="55"
-      rx="11"
-      fill="#565B6F"
-    />
-    <rect
-      x="1516.2"
-      y="292.5"
-      width="97.5"
-      height="55"
-      rx="11"
-      fill="#2B3652"
-    />
+    <rect x="37.4996" y="39.9999" width="97.5" height="55" rx="11" fill="#565B6F" />
+    <rect x="1516.2" y="292.5" width="97.5" height="55" rx="11" fill="#2B3652" />
     <rect x="1471.2" y="220" width="52.5" height="30" rx="11" fill="#2B3652" />
     <rect x="1613.7" y="195" width="52.5" height="30" rx="11" fill="#2B3652" />
     <rect x="1072.5" y="460" width="52.5" height="30" rx="11" fill="#2B3652" />
     <rect x="1072.5" y="460" width="52.5" height="30" rx="11" fill="#2B3652" />
     <rect x="305" y="64.9998" width="52.5" height="30" rx="11" fill="#2B3652" />
     <rect x="67.5" y="57.4998" width="45" height="30" rx="11" fill="#14192D" />
-    <path
-      d="M220.757 675L64.9998 827.5H925L787.044 675H220.757Z"
-      fill="#AE3D39"
-    />
-    <rect
-      x="57.4998"
-      y="462.5"
-      width="122.5"
-      height="147.5"
-      rx="12"
-      fill="#975851"
-    />
+    <path d="M220.757 675L64.9998 827.5H925L787.044 675H220.757Z" fill="#AE3D39" />
+    <rect x="57.4998" y="462.5" width="122.5" height="147.5" rx="12" fill="#975851" />
     <path
       d="M57.4998 474.5C57.4998 467.872 62.8723 462.5 69.4998 462.5H122.5V610H69.4998C62.8723 610 57.4998 604.627 57.4998 598V474.5Z"
       fill="#825250"
@@ -200,14 +159,7 @@
       d="M121.25 490C100.416 494.583 58.4998 515.25 57.4998 561.25V490H121.25Z"
       fill="#5C424B"
     />
-    <rect
-      x="252.5"
-      y="107.5"
-      width="530"
-      height="22.5"
-      rx="4.5"
-      fill="#171829"
-    />
+    <rect x="252.5" y="107.5" width="530" height="22.5" rx="4.5" fill="#171829" />
     <rect
       x="807.5"
       y="135"
@@ -238,22 +190,8 @@
       d="M229.224 675C191.899 696.638 183.46 739.403 448.31 737.359C589.904 738.892 854.349 728.567 779.373 675H229.224Z"
       fill="#E65853"
     />
-    <rect
-      x="82.5"
-      y="80.0004"
-      width="12.5"
-      height="162.5"
-      rx="2"
-      fill="#6E8C66"
-    />
-    <rect
-      x="82.5"
-      y="80.0004"
-      width="7.5"
-      height="162.5"
-      rx="2"
-      fill="#5E7B65"
-    />
+    <rect x="82.5" y="80.0004" width="12.5" height="162.5" rx="2" fill="#6E8C66" />
+    <rect x="82.5" y="80.0004" width="7.5" height="162.5" rx="2" fill="#5E7B65" />
     <ellipse cx="108.75" cy="177.5" rx="16.25" ry="7.5" fill="#A1BB62" />
     <ellipse
       cx="105.214"
@@ -305,22 +243,8 @@
       transform="rotate(-23.0188 72.8889 108.257)"
       fill="#A1BB62"
     />
-    <rect
-      x="1587.6"
-      y="412.5"
-      width="222.5"
-      height="55"
-      rx="11"
-      fill="#2B3652"
-    />
-    <rect
-      x="665"
-      y="37.4998"
-      width="147.5"
-      height="55"
-      rx="11"
-      fill="#2B3652"
-    />
+    <rect x="1587.6" y="412.5" width="222.5" height="55" rx="11" fill="#2B3652" />
+    <rect x="665" y="37.4998" width="147.5" height="55" rx="11" fill="#2B3652" />
     <ellipse cx="71.25" cy="140" rx="16.25" ry="7.5" fill="#A1BB62" />
     <ellipse
       cx="72.6509"
@@ -379,14 +303,7 @@
       d="M0.999999 565C0.447715 565 -1.95703e-08 564.552 -4.37114e-08 564L-2.43691e-05 7.49986C-2.45502e-05 3.35773 3.35784 -0.000122217 7.49998 -0.000122398L30 -0.000123382C34.1421 -0.000123563 37.5 3.35774 37.5 7.49988L37.5 564C37.5 564.552 37.0523 565 36.5 565L0.999999 565Z"
       fill="#28324C"
     />
-    <rect
-      x="22.4996"
-      y="640"
-      width="142.5"
-      height="35"
-      rx="6.5"
-      fill="#28324D"
-    />
+    <rect x="22.4996" y="640" width="142.5" height="35" rx="6.5" fill="#28324D" />
     <rect
       x="172.728"
       y="657.681"
@@ -408,14 +325,7 @@
     <ellipse cx="886.25" cy="793.75" rx="26.25" ry="8.75" fill="#872B2C" />
     <ellipse cx="161.25" cy="746.25" rx="41.25" ry="13.75" fill="#872B2C" />
     <ellipse cx="99.9998" cy="691.25" rx="20" ry="6.25" fill="#4D5977" />
-    <rect
-      x="862.499"
-      y="602.5"
-      width="442.5"
-      height="72.5"
-      rx="14.5"
-      fill="#28324C"
-    />
+    <rect x="862.499" y="602.5" width="442.5" height="72.5" rx="14.5" fill="#28324C" />
     <rect
       x="898.113"
       y="590.944"
@@ -433,13 +343,7 @@
     <ellipse cx="1061.25" cy="633.75" rx="38.75" ry="11.25" fill="#4D5977" />
     <ellipse cx="1083.75" cy="798.75" rx="38.75" ry="11.25" fill="#1E263B" />
     <ellipse cx="1291.25" cy="628.75" rx="38.75" ry="11.25" fill="#1E263B" />
-    <ellipse
-      cx="34.8087"
-      cy="656.327"
-      rx="29.9845"
-      ry="11.3275"
-      fill="#1E263B"
-    />
+    <ellipse cx="34.8087" cy="656.327" rx="29.9845" ry="11.3275" fill="#1E263B" />
     <ellipse cx="958.75" cy="756.25" rx="38.75" ry="11.25" fill="#1E263B" />
     <ellipse cx="1076.25" cy="683.75" rx="38.75" ry="18.75" fill="#1E263B" />
     <ellipse cx="1076.25" cy="873.75" rx="38.75" ry="11.25" fill="#1E263B" />
@@ -493,14 +397,7 @@
       fill="#5E4144"
       fill-opacity="0.5"
     />
-    <rect
-      x="1187.7"
-      y="122.5"
-      width="165"
-      height="17.5"
-      rx="7"
-      fill="#1B243B"
-    />
+    <rect x="1187.7" y="122.5" width="165" height="17.5" rx="7" fill="#1B243B" />
     <rect
       x="990.2"
       y="140"
@@ -518,14 +415,7 @@
       d="M1218.52 303.249C1227.4 315.357 1247.76 337.776 1258.18 330.589C1255.16 334.278 1247.77 340.278 1241.35 336.241C1241.02 336.01 1240.7 335.784 1240.4 335.567C1240.71 335.817 1241.03 336.041 1241.35 336.241C1247.42 340.518 1258.08 346.944 1262.57 345.943C1260.11 347.238 1255.56 348.997 1249.5 349.664C1254.06 355.201 1265.01 365.169 1272.28 360.744C1268.35 364.197 1259.54 370.302 1255.73 367.097C1261.06 373.053 1273.35 384.181 1279.91 381.043C1275.37 385.569 1263.48 394.329 1252.14 393.162C1246.46 393.788 1234.33 393.916 1231.25 389.424L1218.52 303.249Z"
       fill="#2E3955"
     />
-    <rect
-      x="1150.2"
-      y="392.5"
-      width="202.5"
-      height="17.5"
-      rx="7"
-      fill="#1B243B"
-    />
+    <rect x="1150.2" y="392.5" width="202.5" height="17.5" rx="7" fill="#1B243B" />
     <rect
       x="972.7"
       y="210"
@@ -590,14 +480,7 @@
     />
     <rect x="1052.7" y="367.5" width="12.5" height="25" fill="#2E3955" />
     <ellipse cx="1253.95" cy="202.5" rx="18.75" ry="20" fill="#2E3955" />
-    <rect
-      x="1215.2"
-      y="202.5"
-      width="77.5"
-      height="27.5"
-      rx="7"
-      fill="#2E3955"
-    />
+    <rect x="1215.2" y="202.5" width="77.5" height="27.5" rx="7" fill="#2E3955" />
     <rect x="1227.7" y="175" width="10" height="10" />
     <rect x="1197.7" y="262.5" width="10" height="10" />
     <rect x="1277.7" y="262.5" width="10" height="10" />
@@ -614,6 +497,7 @@
       fill-opacity="0.15"
     />
     <circle
+      id="circle1"
       cx="505.15"
       cy="398.75"
       r="388.75"
@@ -621,6 +505,7 @@
       fill-opacity="0.05"
     />
     <circle
+      id="circle2"
       cx="502.649"
       cy="428.75"
       r="256.25"
@@ -640,34 +525,10 @@
       fill="#FCB44D"
       fill-opacity="0.16"
     />
-    <circle
-      cx="1565.33"
-      cy="159.564"
-      r="22.4612"
-      fill="#FCB44D"
-      fill-opacity="0.28"
-    />
-    <rect
-      x="1550.68"
-      y="178.938"
-      width="26.2145"
-      height="57.6469"
-      fill="#FCB44D"
-    />
-    <rect
-      x="1562.24"
-      y="167.612"
-      width="3.09842"
-      height="11.3258"
-      fill="#FEE7C9"
-    />
-    <rect
-      x="1572.62"
-      y="178.938"
-      width="4.27056"
-      height="57.6469"
-      fill="#FB9927"
-    />
+    <circle cx="1565.33" cy="159.564" r="22.4612" fill="#FCB44D" fill-opacity="0.28" />
+    <rect x="1550.68" y="178.938" width="26.2145" height="57.6469" fill="#FCB44D" />
+    <rect x="1562.24" y="167.612" width="3.09842" height="11.3258" fill="#FEE7C9" />
+    <rect x="1572.62" y="178.938" width="4.27056" height="57.6469" fill="#FB9927" />
     <path
       d="M1564.47 153.158C1554.52 163.109 1560.95 169.311 1565.4 171.168C1565.4 169.535 1568 166.155 1569.3 164.67C1574.2 159.471 1569.61 151.363 1566.7 147.959C1567.74 149.89 1565.65 152.23 1564.47 153.158Z"
       fill="#FCB44D"
@@ -894,38 +755,28 @@
       fill="black"
       fill-opacity="0.2"
     />
-    <rect
-      x="1682.4"
-      y="585.6"
-      width="174"
-      height="19.2"
-      rx="7.5"
-      fill="#090A1E"
-      fill-opacity="0.5"
-    />
-    <rect
-      x="416.896"
-      y="360"
-      width="177.209"
-      height="27.3716"
-      rx="7.08102"
-      fill="black"
-    />
-    <ellipse cx="505.501" cy="437.568" rx="92.9315" ry="77.5673" fill="black" />
-    <ellipse
-      cx="494.406"
-      cy="447.632"
-      rx="76.2484"
-      ry="63.6424"
-      fill="#232323"
-    />
-    <rect
-      x="446.73"
-      y="519.277"
-      width="117.838"
-      height="37.8542"
-      fill="#B1712C"
-    />
+    <g id="pot">
+      <rect
+        x="1682.4"
+        y="585.6"
+        width="174"
+        height="19.2"
+        rx="7.5"
+        fill="#090A1E"
+        fill-opacity="0.5"
+      />
+      <rect
+        x="416.896"
+        y="360"
+        width="177.209"
+        height="27.3716"
+        rx="7.08102"
+        fill="black"
+      />
+      <ellipse cx="505.501" cy="437.568" rx="92.9315" ry="77.5673" fill="black" />
+      <ellipse cx="494.406" cy="447.632" rx="76.2484" ry="63.6424" fill="#232323" />
+    </g>
+    <rect x="446.73" y="519.277" width="117.838" height="37.8542" fill="#B1712C" />
     <rect
       x="375.6"
       y="546.271"
@@ -960,17 +811,9 @@
     />
     <circle cx="436.952" cy="551.153" r="17.7394" fill="#E3A15B" />
     <circle cx="436.951" cy="551.154" r="5.97803" fill="#D69651" />
-    <circle
-      r="17.7394"
-      transform="matrix(-1 0 0 1 574.345 551.153)"
-      fill="#E3A15B"
-    />
+    <circle r="17.7394" transform="matrix(-1 0 0 1 574.345 551.153)" fill="#E3A15B" />
     <circle cx="400.037" cy="551.153" r="17.7394" fill="#C78640" />
-    <circle
-      r="17.7394"
-      transform="matrix(-1 0 0 1 611.262 551.153)"
-      fill="#C78640"
-    />
+    <circle r="17.7394" transform="matrix(-1 0 0 1 611.262 551.153)" fill="#C78640" />
     <circle cx="400.038" cy="551.154" r="5.97803" fill="#B1712C" />
     <circle cx="611.262" cy="551.154" r="5.97803" fill="#B1712C" />
     <circle cx="574.346" cy="551.154" r="5.97803" fill="#D69651" />
@@ -1002,7 +845,8 @@
       transform="matrix(-0.8272 0.561907 0.561907 0.8272 449.695 525.84)"
       fill="#B1712C"
     />
-    <g filter="url(#filter1_d)">
+
+    <g filter="url(#filter1_d)" id="fire3">
       <path
         d="M531.976 466.236C515.461 495.899 535.439 508.332 546.189 509.976C571.234 513.807 577.134 495.363 578.503 486.223C576.43 490.583 571.288 492.781 568.977 493.335C579.863 480.092 568.589 457.178 561.591 447.376C561.067 452.64 554.218 457.265 550.859 458.919C537.599 465.611 536.632 475.76 537.806 479.998C535.358 475.496 532.899 468.948 531.976 466.236Z"
         fill="#F79703"
@@ -1012,7 +856,7 @@
         fill="#FFC42E"
       />
     </g>
-    <g filter="url(#filter2_d)">
+    <g filter="url(#filter2_d)" id="fire1">
       <path
         d="M478.137 466.236C494.652 495.899 474.674 508.332 463.924 509.976C438.879 513.807 432.978 495.363 431.61 486.223C433.683 490.583 438.824 492.781 441.136 493.335C430.25 480.092 441.524 457.178 448.522 447.376C449.046 452.64 455.895 457.265 459.254 458.919C472.513 465.611 473.48 475.76 472.307 479.998C474.755 475.496 477.213 468.948 478.137 466.236Z"
         fill="#F79703"
@@ -1022,7 +866,7 @@
         fill="#FFC42E"
       />
     </g>
-    <g filter="url(#filter3_d)">
+    <g filter="url(#filter3_d)" id="fire2">
       <path
         d="M482.606 471.925C472.165 504.23 494.178 512.547 505.043 512.072C530.354 510.966 532.561 491.728 532.128 482.496C530.941 487.176 526.325 490.331 524.165 491.323C532.272 476.218 516.762 455.929 507.994 447.672C508.502 452.938 502.682 458.805 499.708 461.081C488 470.22 489.023 480.364 490.997 484.293C487.721 480.352 484.038 474.406 482.606 471.925Z"
         fill="#F79703"
@@ -1054,11 +898,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -1087,11 +927,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -1120,11 +956,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -1153,11 +985,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -1173,4 +1001,75 @@
 export default {};
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#fire1 {
+  animation-name: fire;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  transform-origin: top;
+  transform-box: fill-box;
+  animation-timing-function: ease-in-out;
+}
+
+#fire2 {
+  animation-name: fire;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  transform-origin: top;
+  transform-box: fill-box;
+  animation-timing-function: ease-in-out;
+}
+
+#fire3 {
+  animation-name: fire;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  transform-origin: top;
+  transform-box: fill-box;
+  animation-timing-function: ease-in-out;
+}
+
+#circle1 {
+  animation-name: circle1;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  transform-origin: top;
+  transform-box: fill-box;
+}
+#circle2 {
+  animation-name: circle2;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  transform-origin: top;
+  transform-box: fill-box;
+}
+@keyframes fire {
+  50% {
+    transform: scale(0.94, 1) translate(0, 5px) rotate(-1deg);
+  }
+}
+
+@keyframes circle1 {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes circle2 {
+  0% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}
+</style>

@@ -14,7 +14,9 @@
               <span class="f16 text-bold">LEVEL</span>
             </div>
             <div class="level-bar absolute-center" align="center">
-              <span class="text-grey-9 f36" style="line-height: 1">23</span>
+              <span class="text-grey-9 f36" style="line-height: 1">
+                {{ characterData.level }}
+              </span>
             </div>
           </div>
           <div class="self-center relative-position" style="margin-left: -20px">
@@ -22,7 +24,7 @@
               <div class="transparent fit no-padding">
                 <div style="padding-left: 30px" class="q-pa-xs">
                   <div class="">
-                    <span>XXXXX XXX</span>
+                    <span>{{ characterData.name }}</span>
                   </div>
                   <div class="q-pr-md q-py-xs">
                     <div class="exp-bar relative-position">
@@ -328,7 +330,40 @@
 import lobbyRoom from "../components/lobbyRoom";
 import lobbyRoomNight from "../components/lobbyRoomNight";
 import character from "../components/character";
+import game from "../hooks/gameHooks.js";
+import { useQuasar } from "quasar";
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 export default {
+  setup() {
+    // Quasar
+    const $q = useQuasar();
+    // loading
+    const loadingShow = () => {
+      $q.loading.show({
+        delay: 0,
+      });
+    };
+    const loadingHide = () => {
+      $q.loading.hide();
+    };
+    // Router
+    const router = useRouter();
+    // uid
+    const uid = $q.sessionStorage.getItem("uid");
+    // Character Data
+    const characterData = ref({});
+    const getCharacterData = async () => {
+      loadingShow();
+      characterData.value = await game.characterInfomation(uid);
+      loadingHide();
+    };
+    onMounted(() => {
+      getCharacterData();
+    });
+
+    return { characterData: characterData };
+  },
   components: {
     lobbyRoom,
     lobbyRoomNight,
