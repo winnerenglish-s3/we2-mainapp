@@ -29,7 +29,7 @@
       <rect x="39.9999" y="490" width="127.5" height="55" rx="11" fill="#875941" />
       <rect x="37.4997" y="39.9999" width="97.5" height="55" rx="11" fill="#F8C1A4" />
       <rect x="1509" y="292.5" width="97.5" height="55" rx="11" fill="#AB6F4F" />
-      <rect x="1464" y="220" width="52.5" height="30" rx="11" fill="#AB6F4F" />
+      <rect x="1464" y="220" width="52.5" height="30" rx="11" fill="#AB\6F4F" />
       <rect x="1606.5" y="195" width="52.5" height="30" rx="11" fill="#AB6F4F" />
       <rect x="1072.5" y="460" width="52.5" height="30" rx="11" fill="#2B3652" />
       <rect x="1072.5" y="460" width="52.5" height="30" rx="11" fill="#AB6F4F" />

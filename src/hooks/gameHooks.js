@@ -1,6 +1,6 @@
 import { db } from "src/router";
 
-const gameInfomation = async schoolId => {
+const gameStatus = async schoolId => {
   let gameRef = await db
     .collection("school")
     .doc(schoolId)
@@ -10,16 +10,19 @@ const gameInfomation = async schoolId => {
   return { isEnable };
 };
 
+
+// ข้อมูลตัวละครทั่วไป 
+// {"hat":2,"bottom":2,"color":6,"star":0,"top":2,"name":"lnwza5678"}
 const characterInfomation = async userId => {
-   let characterRef = await db.collection("character")
-      .where("userId", "==", userId)
+   let characterRef = await db.collection("appAccounts")
+      .doc(userId)
         .get()
     
-    if (characterRef.size) {
-        return characterRef.docs[0].data()
+    if (characterRef.data().character) {
+      return characterRef.data().character;
     } else {
-        return false
+      return false;
     }
 };
 
-export default { gameInfomation, characterInfomation };
+export default { gameStatus, characterInfomation };
