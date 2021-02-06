@@ -162,12 +162,15 @@ export default {
         uid: uid,
       };
 
-      const response = await Axios.post(apiUrl, postData);
-
-      if (response.data != "user not found") {
-        login(response.data.customToken, response.data.user.schoolId);
-      } else {
-        console.log("user not found");
+      try {
+        let response = await Axios.post(apiUrl, postData);
+        if (response.data != "user not found") {
+          login(response.data.customToken, response.data.user.schoolId);
+        } else {
+          // user not found
+          loadingHide();
+        }
+      } catch (err) {
         loadingHide();
       }
     };
