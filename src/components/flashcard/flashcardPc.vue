@@ -20,7 +20,7 @@
               :key="index"
             >
               <q-img
-                @click="(isShowDetails = true), (currentFlashcardIndex = index)"
+                @click="openFlashcardDetails(index)"
                 class="cursor-pointer"
                 style="max-width: 350px; width: 100%"
                 src="../../../public/images/flashcard/card-flashcard.png"
@@ -29,14 +29,13 @@
                   <div align="center">
                     <div>
                       <span style="font-size: max(2vw, 16px); line-height: 0">{{
-                        item.vocabulary
+                        item.vocab
                       }}</span>
                     </div>
                     <div class="q-mt-sm">
-                      <span
-                        style="font-size: max(0.5vw, 14px); line-height: 0"
-                        >{{ `(${item.meaning})` }}</span
-                      >
+                      <span style="font-size: max(0.5vw, 14px); line-height: 0">{{
+                        `(${item.meaning})`
+                      }}</span>
                     </div>
                   </div>
                 </div>
@@ -108,51 +107,90 @@
               </div>
               <div class="col row q-pr-md q-py-lg" style="font-size: 16px">
                 <div class="col-3 q-px-sm" align="right" style="width: 120px">
-                  <q-btn round class="bg-warning">
+                  <q-btn
+                    round
+                    class="bg-warning"
+                    :class="
+                      !vocabDataList[currentFlashcardIndex].soundVocabUrl
+                        ? 'invisible'
+                        : null
+                    "
+                    @click="
+                      $emit(
+                        'playSound',
+                        vocabDataList[currentFlashcardIndex].soundVocabUrl
+                      )
+                    "
+                  >
                     <q-icon name="fas fa-volume-up"></q-icon
                   ></q-btn>
-                  <q-btn round class="q-ml-sm bg-warning">
+                  <q-btn
+                    round
+                    class="q-ml-sm bg-warning"
+                    :class="
+                      !vocabDataList[currentFlashcardIndex].soundSpellUrl
+                        ? 'invisible'
+                        : null
+                    "
+                    @click="
+                      $emit(
+                        'playSound',
+                        vocabDataList[currentFlashcardIndex].soundSpellUrl
+                      )
+                    "
+                  >
                     <q-icon name="fas fa-volume-up"></q-icon>
                   </q-btn>
                 </div>
                 <div class="col q-pr-xl q-pa-sm">
                   <div class="q-px-sm">
                     <span
-                      ><span style="font-size: 32px; line-height: 0"
-                        >attack</span
-                      >
-                      (v.)</span
+                      ><span style="font-size: 32px; line-height: 0">{{
+                        vocabDataList[currentFlashcardIndex].vocab
+                      }}</span>
+                      ({{ vocabDataList[currentFlashcardIndex].wordingType }})</span
                     >
                   </div>
-                  <div class="q-mt-xs q-px-sm"><span>อะ-แทค</span></div>
                   <div class="q-mt-xs q-px-sm">
-                    <span>โจมตี, รุกราน, บุก</span>
+                    <span> {{ vocabDataList[currentFlashcardIndex].readingWord }}</span>
+                  </div>
+                  <div class="q-mt-xs q-px-sm">
+                    <span>{{ vocabDataList[currentFlashcardIndex].meaning }}</span>
                   </div>
                 </div>
 
                 <div class="col-12">
                   <div class="row q-my-lg">
-                    <div
-                      class="col-3 q-px-sm"
-                      align="right"
-                      style="width: 120px"
-                    >
-                      <q-btn round class="bg-warning">
+                    <div class="col-3 q-px-sm" align="right" style="width: 120px">
+                      <q-btn
+                        round
+                        class="bg-warning"
+                        :class="
+                          !vocabDataList[currentFlashcardIndex].soundSentenceUrl
+                            ? 'invisible'
+                            : null
+                        "
+                        @click="
+                          $emit(
+                            'playSound',
+                            vocabDataList[currentFlashcardIndex].soundSentenceUrl
+                          )
+                        "
+                      >
                         <q-icon name="fas fa-volume-up"></q-icon>
                       </q-btn>
                     </div>
                     <div class="col q-pr-xl q-pa-xs">
                       <div class="q-px-sm">
                         <span
-                          >The terrorists
-                          <span class="text-blue-5">attacked</span> the
-                          government air base in the north.
+                          v-html="vocabDataList[currentFlashcardIndex].sentenceEng || '-'"
+                        >
                         </span>
                       </div>
                       <div class="q-mt-xs q-px-sm">
                         <span
-                          >พวกก่อการร้าย<span class="text-blue-5">โจมตี</span
-                          >ฐานทัพอากาศของรัฐบาลในภาคเหนือ
+                          v-html="vocabDataList[currentFlashcardIndex].sentenceTh || '-'"
+                        >
                         </span>
                       </div>
                     </div>
@@ -163,13 +201,10 @@
                     <div class="row">
                       <div
                         class="col-6 q-mt-xs"
-                        v-for="(item, index) in vocabDataList[
-                          currentFlashcardIndex
-                        ].extraVocab"
+                        v-for="(item, index) in vocabDataList[currentFlashcardIndex]
+                          .extraVocab"
                       >
-                        {{
-                          `${item.vocab} (${item.partOfSpeech}) ${item.meaning}`
-                        }}
+                        {{ `${item.vocab} (${item.partOfSpeech}) ${item.meaning}` }}
                       </div>
                     </div>
                   </div>
@@ -202,12 +237,19 @@ export default {
     const currentFlashcardIndex = ref(0);
     const isShowDetails = ref(false);
 
+    // open flashcard details card
+    const openFlashcardDetails = (index) => {
+      isShowDetails.value = true;
+      currentFlashcardIndex.value = index;
+    };
+
     return {
       colorTheme: colorTheme,
       currentFlashcardIndex: currentFlashcardIndex,
-      isShowDetails: isShowDetails
+      isShowDetails: isShowDetails,
+      openFlashcardDetails: openFlashcardDetails,
     };
-  }
+  },
 };
 </script>
 
