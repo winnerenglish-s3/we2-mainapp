@@ -28,6 +28,8 @@
 import matchingPc from "../components/matching/matchingPc";
 import matchingMobile from "../components/matching/matchingMobile";
 import { reactive, onMounted, ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { useQuasar } from "quasar";
 export default {
   props: {
     themeSync: {
@@ -39,10 +41,11 @@ export default {
     matchingPc,
     matchingMobile,
   },
-  setup(props, { emit, root }) {
-    // set route
-    const route = root._route;
-    const router = root._router;
+  setup(props, { emit }) {
+    // initial
+    const $q = useQuasar();
+    const route = useRoute();
+    const router = useRouter();
 
     // State Practice Data
     const state = reactive({

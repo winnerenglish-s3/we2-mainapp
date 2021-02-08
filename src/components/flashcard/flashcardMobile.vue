@@ -10,7 +10,7 @@
         :key="index"
       >
         <div class="col-3" style="width: 100px">
-          <q-img src="../../../public/images/flashcard/draft-img-flashcard.png"></q-img>
+          <q-img :src="item.imageSentenceUrl"></q-img>
         </div>
         <div class="col self-center q-px-md">
           <span style="font-size: max(3vw, 24px)"> {{ item.vocab }}</span>

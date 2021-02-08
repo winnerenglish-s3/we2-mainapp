@@ -27,6 +27,8 @@ import flashcardMobile from "../components/flashcard/flashcardMobile";
 import { db } from "src/router";
 import { onMounted, ref, computed } from "vue";
 import axios from "axios";
+import { useQuasar } from "quasar";
+import { useRouter, useRoute } from "vue-router";
 
 export default {
   components: {
@@ -52,6 +54,11 @@ export default {
     },
   },
   setup(props, { emit }) {
+    // Initial
+    const $q = useQuasar();
+    const router = useRouter();
+    const route = useRoute();
+
     const flashcardList = ref([]);
     const isLoadPractice = ref(false);
 
@@ -59,8 +66,9 @@ export default {
     const loadFlashcard = async () => {
       const apiURL =
         "http://localhost:5000/winnerenglish2-e0f1b/us-central1/wfunctions/getFlashcard";
+
       const postData = {
-        practiceListId: "beTFT3GzbERuWavuDBka",
+        practiceListId: route.params.practiceListId,
       };
 
       const response = await axios.post(apiURL, postData);

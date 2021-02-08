@@ -9,6 +9,7 @@
               :disable="isSynchronize"
               v-if="isBackPopup && $route.name == 'flashcard'"
               class="shadow-2 btn-header q-mr-md btn-width-mobile"
+              @click="$router.push('/practicemain')"
             ></q-btn>
             <q-btn
               icon="fas fa-arrow-left"
@@ -357,7 +358,26 @@ export default {
     const route = useRoute();
     const router = useRouter();
 
-    console.log(route);
+    // Get Level
+    const unitList = ref([]);
+    const setLevel = ref("5");
+
+    const getLevel = () => {
+      db.collection("level")
+        .where("level", "==", setLevel.value)
+        .get()
+        .then((doc) => {
+          let tempLevel = [];
+
+          for (let i = 0; i < Number(doc.docs[0].data().unit); i++) {
+            tempLevel.push(i + 1);
+          }
+
+          unitList.value = tempLevel;
+        });
+    };
+
+    onMounted(getLevel);
 
     // TODO : Set Theme START ----------------------------
     // เซ็ทสีของ Theme ที่ใช้
@@ -463,11 +483,11 @@ export default {
 
     onMounted(loadSynchronizeData);
 
-    onUnmounted(() => {
-      if (typeof snapSyncData.value == "function") {
-        snapSyncData();
-      }
-    });
+    // onUnmounted(() => {
+    //   if (typeof snapSyncData.value == "function") {
+    //     snapSyncData();
+    //   }
+    // });
 
     // TODO : END
 
@@ -513,6 +533,11 @@ export default {
     const isShowSetting = ref(false);
 
     return {
+      // LevelSet and set Unit List
+      unitList,
+      setLevel,
+
+      //
       totalStar,
       colorTheme,
       themeColor,

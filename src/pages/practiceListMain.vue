@@ -15,7 +15,7 @@
           <div class="row box-content-practicelist q-py-sm q-px-md">
             <div class="col-3 self-center" style="width: 100px" algin="center"></div>
             <div class="col self-center" algin="center">
-              <span class="f20 text-amber-5">คำศัพท์</span>
+              <span class="f20 text-amber-5">{{ selectSkill }}</span>
             </div>
             <div class="col-3 self-center" style="width: 100px" algin="center">
               <q-select
@@ -50,8 +50,8 @@
                     ? 'content-success'
                     : 'content-default'
                 "
-                v-for="i in 15"
-                @click="activeUnit = i"
+                v-for="i in totalUnit"
+                @click="showPracticeList(i), (activeUnit = i)"
                 :key="i"
               >
                 <div
@@ -69,7 +69,9 @@
                   </span>
                 </div>
                 <div class="col self-center q-px-sm" align="left">
-                  <span class="f16"> xxxxxxxxxxxxxxx </span>
+                  <span class="f16" v-if="showPracticeListName(i)">
+                    {{ showPracticeListName(i).nameEng }}
+                  </span>
                 </div>
                 <div class="col-2 self-center" style="width: 60px">
                   <q-icon
@@ -78,7 +80,11 @@
                     name="fas fa-check"
                     class="text-success"
                   ></q-icon>
-                  <span v-else class="f16">3/4</span>
+                  <span v-else class="f16">
+                    <span v-if="showPracticeListName(i)">{{
+                      `0/${showPracticeListName(i).totalPractice}`
+                    }}</span>
+                  </span>
                 </div>
               </div>
             </div>
@@ -103,87 +109,33 @@
           src="../../public/images/practicelist/bg-map-theme-1.png"
         >
           <div
-            class="transparent absolute-center row box-content-menu"
-            style="max-width: 800px; width: 90%"
+            class="transparent absolute-center row box-content-menu justify-center items-start"
+            style="max-width: 800px; width: 50%"
           >
-            <div class="col q-px-lg" align="center">
-              <div>
+            <div
+              class="col-6 self-start"
+              align="center"
+              v-for="(item, index) in practiceListShow"
+              :key="index"
+            >
+              <div class="">
                 <q-img
                   contain=""
                   style="max-width: 150px"
                   class="cursor-pointer"
-                  src="../../public//images/practicelist/teaching-1-btn.png"
+                  :src="showIconPractice(item.practicetype)"
+                  @click="gotoPractice(item)"
                 >
                   <div
                     class="transparent absolute-bottom no-padding"
                     style="width: 80%; bottom: 13px; margin: auto"
                     align="left"
                   >
-                    <div class="q-px-sm"><span>xx</span></div>
+                    <div class="" align="center">
+                      <span>{{ `${index + 1}. ${item.practiceType} ` }}</span>
+                    </div>
                   </div>
                 </q-img>
-              </div>
-              <div>
-                <q-img
-                  style="max-width: 150px"
-                  class="cursor-pointer"
-                  src="../../public//images/practicelist/teaching-2-btn.png"
-                >
-                  <div
-                    class="transparent absolute-bottom no-padding"
-                    style="width: 80%; bottom: 13px; margin: auto"
-                    align="left"
-                  >
-                    <div class="q-px-sm"><span>xx</span></div>
-                  </div></q-img
-                >
-              </div>
-            </div>
-            <div class="col q-px-lg" align="center">
-              <div>
-                <q-img
-                  style="max-width: 150px"
-                  class="cursor-pointer"
-                  src="../../public//images/practicelist/action-1-btn.png"
-                >
-                  <div
-                    class="transparent absolute-bottom no-padding"
-                    style="width: 80%; bottom: 13px; margin: auto"
-                    align="left"
-                  >
-                    <div class="q-px-sm"><span>xx</span></div>
-                  </div></q-img
-                >
-              </div>
-              <div>
-                <q-img
-                  style="max-width: 150px"
-                  class="cursor-pointer"
-                  src="../../public//images/practicelist/action-1-btn.png"
-                >
-                  <div
-                    class="transparent absolute-bottom no-padding"
-                    style="width: 80%; bottom: 13px; margin: auto"
-                    align="left"
-                  >
-                    <div class="q-px-sm"><span>xx</span></div>
-                  </div></q-img
-                >
-              </div>
-              <div>
-                <q-img
-                  style="max-width: 150px"
-                  class="cursor-pointer"
-                  src="../../public//images/practicelist/action-1-btn.png"
-                >
-                  <div
-                    class="transparent absolute-bottom no-padding"
-                    style="width: 80%; bottom: 13px; margin: auto"
-                    align="left"
-                  >
-                    <div class="q-px-sm"><span>xx</span></div>
-                  </div></q-img
-                >
               </div>
             </div>
           </div>
@@ -194,20 +146,131 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import studentHooks from "../hooks/studentHooks.js";
+import practiceHooks from "../hooks/practiceHooks";
+import { db } from "src/router/index.js";
+import { useQuasar } from "quasar";
+import { useRouter } from "vue-router";
 export default {
-  setup(props) {
+  props: {
+    unitList: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  setup(props, context) {
+    // Router
+    const $q = useQuasar();
+    const router = useRouter();
+
+    // Course Data
+    const selectLevel = ref("");
+    const totalUnit = ref(0);
+
+    const getCourse = async () => {
+      let course = await studentHooks.student().course();
+
+      selectLevel.value = course.level;
+
+      let getUnit = await db.collection("level").where("level", "==", course.level).get();
+
+      totalUnit.value = Number(getUnit.docs[0].data().unit);
+    };
+
+    // Practice Data
+    const practiceList = ref([]);
+    const practiceName = ref([]);
+    const selectSkill = ref("Vocabulary");
+
+    const getPractice = async () => {
+      practiceList.value = await practiceHooks.practice(selectLevel.value).practiceList();
+
+      practiceName.value = await practiceHooks.practice(selectLevel.value).practiceName();
+    };
+
+    const showPracticeListName = (unit) => {
+      let totalPractice = practiceList.value.filter(
+        (x) =>
+          x.level == selectLevel.value.toString() &&
+          x.unit == unit.toString() &&
+          x.skill == selectSkill.value
+      ).length;
+
+      let filter = practiceName.value.filter(
+        (x) =>
+          x.level == selectLevel.value.toString() &&
+          x.unit == unit.toString() &&
+          x.skill == selectSkill.value
+      )[0];
+
+      if (filter) {
+        filter.totalPractice = totalPractice;
+        return filter;
+      }
+    };
+
+    const practiceListShow = ref([]);
+
+    const showPracticeList = (unit) => {
+      let temp = [];
+      temp = practiceList.value.filter(
+        (x) =>
+          x.level == selectLevel.value.toString() &&
+          x.unit == unit.toString() &&
+          x.skill == selectSkill.value
+      );
+
+      temp.sort((a, b) => a.order - b.order);
+
+      practiceListShow.value = temp;
+    };
+
+    const showIconPractice = (type) => {
+      let nameImage = require("../../public/images/practicelist/action-1-btn.png");
+
+      console.log(type);
+
+      if (type == "flashcard") {
+        nameImage = require("../../public/images/practicelist/teaching-btn.png");
+      } else if (type == "matching") {
+        nameImage = require("../../public/images/practicelist/matching-1-btn.png");
+      } else if (type == "multiplechoices") {
+        nameImage = require("../../public/images/practicelist/multiple-1-btn.png");
+      }
+
+      return nameImage;
+    };
+
+    const gotoPractice = (data) => {
+      let routerName = "";
+
+      if (data.practicetype == "flashcard") {
+        routerName = "/flashcard/";
+      } else if (data.practicetype == "matching") {
+        routerName = "/matching/";
+      }
+
+      router.push(routerName + data.practiceListId);
+    };
+
+    onMounted(async () => {
+      await getCourse();
+      await getPractice();
+    });
+
+    // --------------------------------------------
+
     const activeUnit = ref(null);
 
     const levelList = ref([]);
-    const selectLevel = ref("ระดับ7");
 
     const unitCompleteList = ref([
       false,
-      true,
-      true,
-      true,
-      true,
+      false,
+      false,
+      false,
+      false,
       false,
       false,
       false,
@@ -221,7 +284,25 @@ export default {
       false,
     ]);
 
-    return { selectLevel, levelList, unitCompleteList, activeUnit };
+    return {
+      // Course Data
+      selectLevel,
+      totalUnit,
+
+      // Practice Data
+      selectSkill,
+      practiceList,
+      showPracticeListName,
+      showPracticeList,
+      practiceListShow,
+      showIconPractice,
+      gotoPractice,
+
+      //
+      levelList,
+      unitCompleteList,
+      activeUnit,
+    };
   },
 };
 </script>

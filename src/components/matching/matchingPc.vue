@@ -1,30 +1,30 @@
 <template>
-  <div class="relative-position row  box-content-answer ">
+  <div class="relative-position row box-content-answer">
     <div class="absolute full-width">
       <header-bar
         :totalQuestion="totalQuestion"
         :currentQuestion="currentQuestion"
       ></header-bar>
     </div>
-    <div class="col-12 self-start bg-sky ">
+    <div class="col-12 self-start bg-sky">
       <theme-animation
         :isCorrectAnswer="isCorrectAnswer"
         :isSendAnswer="isSendAnswer"
         :themeSync="themeSync"
-        style="margin-bottom: -5px;z-index:3"
+        style="margin-bottom: -5px; z-index: 3"
       ></theme-animation>
     </div>
-    <div class="col-12  q-py-sm" style="z-index:1">
+    <div class="col-12 q-py-sm" style="z-index: 1">
       <div>
         <div class="row justify-center self-start">
-          <div class="col-3 self-center ">
+          <div class="col-3 self-center">
             <div class="q-mt-md" v-for="(item, index) in choicesLeft">
               <q-img
                 contain=""
                 v-if="item.vocab != ''"
                 @click="activeLeftIndex = index"
                 @mousedown="activeLeftIndex = null"
-                class="cursor-pointer "
+                class="cursor-pointer"
                 style="max-width: 315px; width: 95%"
                 :src="
                   require(`../../../public/images/matching/matching-choices${
@@ -33,11 +33,9 @@
                 "
               >
                 <div class="absolute-center transparent">
-                  <span
-                    style="font-size: max(1.2vw, 14px)"
-                    class="text-black"
-                    >{{ item.vocab }}</span
-                  >
+                  <span style="font-size: max(1.2vw, 14px)" class="text-black">{{
+                    item.vocab
+                  }}</span>
                 </div></q-img
               >
               <q-img
@@ -56,20 +54,18 @@
                 style="max-width: 315px; width: 95%"
                 :src="
                   require(`../../../public/images/matching/matching-answer${
-                    activeLeftIndex != null || activeRightIndex != null
-                      ? '-active'
-                      : ''
+                    activeLeftIndex != null || activeRightIndex != null ? '-active' : ''
                   }.png`)
                 "
               >
               </q-img>
             </div>
           </div>
-          <div class="col-8 self-center " align="right">
+          <div class="col-8 self-center" align="right">
             <div class="q-mt-md" v-for="(item, index) in choicesRight">
               <q-img
                 contain=""
-                class="relative-position cursor-pointer "
+                class="relative-position cursor-pointer"
                 style="max-width: 315px; width: 35%; margin-right: -5%"
                 v-if="!isSendAnswer && item.vocab != ''"
                 @click="activeRightIndex = index"
@@ -81,11 +77,9 @@
                 "
               >
                 <div class="absolute-center transparent">
-                  <span
-                    style="font-size: max(1.1vw, 12px)"
-                    class="text-black"
-                    >{{ item.vocab }}</span
-                  >
+                  <span style="font-size: max(1.1vw, 12px)" class="text-black">{{
+                    item.vocab
+                  }}</span>
                 </div>
               </q-img>
               <q-img
@@ -102,31 +96,24 @@
                     : ''
                 "
                 class=""
-                style="max-width: 315px; width: 35%;  margin-right: -5%"
+                style="max-width: 315px; width: 35%; margin-right: -5%"
                 :src="
                   require(`../../../public/images/matching/matching-answer${
-                    activeLeftIndex != null || activeRightIndex != null
-                      ? '-active'
-                      : ''
+                    activeLeftIndex != null || activeRightIndex != null ? '-active' : ''
                   }.png`)
                 "
               ></q-img>
               <q-img
                 contain=""
                 v-if="isSendAnswer"
-                style="max-width: 315px; width: 35%;margin-right: -5%"
+                style="max-width: 315px; width: 35%; margin-right: -5%"
                 :src="
                   require(`../../../public/images/matching/matching-choices${
-                    randomQuestion[index].vocab == item.vocab
-                      ? '-correct'
-                      : '-incorrect'
+                    randomQuestion[index].vocab == item.vocab ? '-correct' : '-incorrect'
                   }.png`)
                 "
               >
-                <div
-                  class="absolute-center transparent full-width"
-                  align="center"
-                >
+                <div class="absolute-center transparent full-width" align="center">
                   <div class="" style="font-size: max(1.1vw, 12px)">
                     <span class="text-black">
                       {{ item.vocab }}
@@ -150,11 +137,9 @@
                   class="absolute-center transparent full-width q-px-lg"
                   align="center"
                 >
-                  <span
-                    style="font-size: max(1.1vw, 12px)"
-                    class="text-black"
-                    >{{ randomQuestion[index].meaning }}</span
-                  >
+                  <span style="font-size: max(1.1vw, 12px)" class="text-black">{{
+                    randomQuestion[index].meaning
+                  }}</span>
                 </div></q-img
               >
             </div>
@@ -163,11 +148,11 @@
       </div>
     </div>
 
-    <div class="col-12 self-center  q-py-lg" align="center">
+    <div class="col-12 self-center q-py-lg" align="center">
       <q-img
         v-if="!isSendAnswer"
         :class="
-          choicesRight.filter(x => x.vocab != '').length == choices.length
+          choicesRight.filter((x) => x.vocab != '').length == choices.length
             ? 'cursor-pointer'
             : ''
         "
@@ -175,7 +160,7 @@
         width="200px"
         :src="
           require(`../../../public/images/matching/btn-matching-${
-            choicesRight.filter(x => x.vocab != '').length == choices.length
+            choicesRight.filter((x) => x.vocab != '').length == choices.length
               ? ''
               : 'not'
           }active.png`)
@@ -208,8 +193,8 @@ export default {
   props: {
     themeSync: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   setup(props) {
     const testCount = ref(0);
@@ -220,12 +205,12 @@ export default {
 
     return {
       testCount,
-      getThemeSync
+      getThemeSync,
     };
   },
   components: {
     headerBar,
-    themeAnimation
+    themeAnimation,
   },
   data() {
     return {
@@ -238,21 +223,21 @@ export default {
       choices: [
         {
           vocab: "electrician",
-          meaning: "นักวิชาการ, ผู้คงแก่เรียน, ผู้ได้รับทุนการศึกษา"
+          meaning: "นักวิชาการ, ผู้คงแก่เรียน, ผู้ได้รับทุนการศึกษา",
         },
         {
           vocab: "mathematician",
-          meaning: "นักคณิตศาสตร์"
+          meaning: "นักคณิตศาสตร์",
         },
         {
           vocab: "naturalist",
-          meaning: "นักธรรมชาติวิทยา"
-        }
+          meaning: "นักธรรมชาติวิทยา",
+        },
       ],
       randomQuestion: [],
 
       isSendAnswer: false,
-      isCorrectAnswer: false
+      isCorrectAnswer: false,
     };
   },
 
@@ -317,11 +302,11 @@ export default {
 
       let tempRandom = temp.sort(() => Math.random() - 0.5);
       this.randomQuestion = tempRandom;
-    }
+    },
   },
   created() {
     this.startPractice();
-  }
+  },
 };
 </script>
 

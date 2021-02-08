@@ -53,10 +53,7 @@
           >
             <div class="row q-pa-xl">
               <div class="col-4 q-pa-md q-py-lg" style="width: 300px">
-                <q-img
-                  contain
-                  src="../../../public/images/flashcard/draft-img-flashcard.png"
-                ></q-img>
+                <q-img contain :src="vocabDataList.imageSentenceUrl"></q-img>
               </div>
               <div class="col self-center">
                 <span style="font-size: max(3vw, 16px)">{{
@@ -102,7 +99,7 @@
               <div class="col-3 q-pa-md">
                 <q-img
                   contain
-                  src="../../../public/images/flashcard/draft-img-flashcard.png"
+                  :src="vocabDataList[currentFlashcardIndex].imageSentenceUrl"
                 ></q-img>
               </div>
               <div class="col row q-pr-md q-py-lg" style="font-size: 16px">
