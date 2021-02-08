@@ -1,17 +1,20 @@
 <template>
   <div class="row relative-position q-pt-sm">
-    <div class="col-3 self-center row q-py-sm brx" style="max-width: 300px; width: 60%">
+    <div
+      class="col-3 self-center row q-py-sm q-pb-md"
+      style="max-width: 300px; width: 60%"
+    >
       <!-- <question-star
         :currentQuestion="currentQuestion"
         :totalQuestion="totalQuestion"
         :totalStar="totalStar"
       ></question-star> -->
       <div class="box-current-question self-center q-mx-md">
-        <span style="font-size: max(2vw, 20px)">1/99</span>
+        <span class="text-white" style="font-size: max(1.1vw, 14px)">99/99</span>
       </div>
       <div class="box-start self-center" align="center">
         <q-rating
-          style="font-size: max(2vw, 26px)"
+          style="font-size: max(1.6vw, 22px)"
           :max="3"
           :value="1"
           color="brown-6"

@@ -1,6 +1,10 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header :class="$q.platform.is.mobile && $route.name == 'flashcard' ? 'z-max' : ''">
+    <q-header
+      :class="
+        $q.platform.is.mobile && $route.name == 'flashcard' ? 'z-max' : ''
+      "
+    >
       <q-toolbar class="header-bar" :style="themeColor">
         <div class="row header-container">
           <div class="col-6">
@@ -14,7 +18,11 @@
             <q-btn
               icon="fas fa-arrow-left"
               :disable="isSynchronize"
-              v-if="$q.platform.is.mobile && !isBackPopup && $route.name == 'flashcard'"
+              v-if="
+                $q.platform.is.mobile &&
+                !isBackPopup &&
+                $route.name == 'flashcard'
+              "
               class="shadow-2 btn-header btn-width-mobile"
               @click="returnClosePopup()"
             ></q-btn>
@@ -86,7 +94,8 @@
                 >
                   {{
                     practiceNameList.filter((x) => x.type == $route.name).length
-                      ? practiceNameList.filter((x) => x.type == $route.name)[0].name
+                      ? practiceNameList.filter((x) => x.type == $route.name)[0]
+                          .name
                       : ""
                   }}
                 </span>
@@ -94,7 +103,9 @@
             </div>
             <div
               :class="
-                $q.platform.is.desktop ? 'box-instruction-pc' : 'box-instruction-mobile'
+                $q.platform.is.desktop
+                  ? 'box-instruction-pc'
+                  : 'box-instruction-mobile'
               "
               class="absolute-bottom row full-width"
             >
@@ -104,7 +115,10 @@
                 <span>{{ instruction.th }}</span>
               </div>
               <div class="col-12 q-py-sm self-end" align="center">
-                <div @click="startPractice()" class="btn-start cursor-pointer"></div>
+                <div
+                  @click="startPractice()"
+                  class="btn-start cursor-pointer"
+                ></div>
               </div>
             </div>
           </q-img>
@@ -160,14 +174,20 @@
                 </div>
 
                 <div v-else align="center">
-                  <span style="font-size: max(1vw, 24px)">คะแนนไม่ผ่านเกณฑ์</span>
+                  <span style="font-size: max(1vw, 24px)"
+                    >คะแนนไม่ผ่านเกณฑ์</span
+                  >
                 </div>
               </div>
             </div>
             <div align="center">
               <q-btn-group
                 spread
-                style="width: 292px; height: 40px; border-radius: 0px 0px 5px 5px"
+                style="
+                  width: 292px;
+                  height: 40px;
+                  border-radius: 0px 0px 5px 5px;
+                "
               >
                 <q-btn
                   push
@@ -192,7 +212,10 @@
               </q-btn-group>
             </div>
             <div style="" v-if="!isNotProgress">
-              <q-img width="350px" src="../../public/images/flower_2.png"></q-img>
+              <q-img
+                width="350px"
+                src="../../public/images/flower_2.png"
+              ></q-img>
             </div>
           </div>
         </q-card-section>
@@ -350,7 +373,14 @@
 <script>
 import { db } from "src/router";
 import getColorTheme from "../../public/themeColor.json";
-import { ref, reactive, computed, onMounted, onUnmounted, onBeforeUnmount } from "vue";
+import {
+  ref,
+  reactive,
+  computed,
+  onMounted,
+  onUnmounted,
+  onBeforeUnmount,
+} from "vue";
 import { useRouter, useRoute } from "vue-router";
 export default {
   setup(props) {
