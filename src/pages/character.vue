@@ -305,7 +305,7 @@ export default {
     // ******************* Create Character *******************
     // button
     const createCharacter = () => {
-      db.collection("appAccounts")
+      db.collection("student")
         .doc(uid)
         .update({
           character: {
@@ -315,6 +315,7 @@ export default {
             color: selectColor,
             name: characterName.value,
             star: 0,
+            level: 1,
           },
         })
         .then(() => {
