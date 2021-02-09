@@ -243,8 +243,6 @@ export default {
     const showIconPractice = (type) => {
       let nameImage = require("../../public/images/practicelist/action-1-btn.png");
 
-      console.log(type);
-
       if (type == "flashcard") {
         nameImage = require("../../public/images/practicelist/teaching-btn.png");
       } else if (type == "matching") {
