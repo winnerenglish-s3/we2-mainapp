@@ -1,145 +1,155 @@
 <template>
-  <q-page class="bg-practice-main row">
-    <div class="col q-pa-xl" align="center">
-      <div class="row relative-position">
-        <!-- ปุ่มกดย้อนกลับ -->
-        <div class="col self-center">
-          <q-img
-            class="cursor-pointer"
-            width="40px"
-            src="../../public/images/practicelist/previous-list-btn.png"
-          ></q-img>
-        </div>
-        <!-- รายละเอียด Unit ทั้งหมด -->
-        <div class="col-6 box-container-pracitcelist">
-          <div class="row box-content-practicelist q-py-sm q-px-md">
-            <div class="col-3 self-center" style="width: 100px" algin="center"></div>
-            <div class="col self-center" algin="center">
-              <span class="f20 text-amber-5">{{ selectSkill }}</span>
-            </div>
-            <div class="col-3 self-center" style="width: 100px" algin="center">
-              <q-select
-                v-model="selectLevel"
-                :options="levelList"
-                dense=""
-                bg-color="amber-5"
-                round=""
-                outlined=""
-              />
-            </div>
-          </div>
-          <div class="q-pl-lg q-pt-md q-pb-sm q-pr-md">
-            <div class="row">
-              <div class="col self-center">
-                <div class="box-content-progress-practice" align="left">
-                  <div class="progress-bar" style="width: 80%"></div>
-                </div>
-              </div>
-              <div class="col-2" style="width: 50px">
-                <span class="f16">5/20</span>
-              </div>
-            </div>
-            <div class="q-my-md box-content-practice-list">
-              <div
-                v-ripple
-                class="relative-position row q-mr-sm q-mb-md bg-white box-content cursor-pointer"
-                :class="
-                  activeUnit == i
-                    ? 'content-current'
-                    : unitCompleteList[i - 1]
-                    ? 'content-success'
-                    : 'content-default'
-                "
-                v-for="i in totalUnit"
-                @click="showPracticeList(i), (activeUnit = i)"
-                :key="i"
-              >
-                <div
-                  class="col-2 q-pa-sm"
-                  :class="
-                    activeUnit == i
-                      ? 'bg-current'
-                      : unitCompleteList[i - 1]
-                      ? 'bg-success text-white'
-                      : 'bg-default'
-                  "
-                >
-                  <span class="f24 text-bold">
-                    {{ i }}
-                  </span>
-                </div>
-                <div class="col self-center q-px-sm" align="left">
-                  <span class="f16" v-if="showPracticeListName(i)">
-                    {{ showPracticeListName(i).nameEng }}
-                  </span>
-                </div>
-                <div class="col-2 self-center" style="width: 60px">
-                  <q-icon
-                    v-if="unitCompleteList[i - 1]"
-                    size="22px"
-                    name="fas fa-check"
-                    class="text-success"
-                  ></q-icon>
-                  <span v-else class="f16">
-                    <span v-if="showPracticeListName(i)">{{
-                      `0/${showPracticeListName(i).totalPractice}`
-                    }}</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ปุ่มกดไปข้างหน้า -->
-        <div class="col self-center" align="center">
-          <q-img
-            class="cursor-pointer"
-            width="40px"
-            src="../../public/images/practicelist/next-list-btn.png"
-          ></q-img>
-        </div>
-      </div>
+  <q-page class="row full-height">
+    <div class="col-12 self-start">
+      <app-bar></app-bar>
     </div>
 
-    <!-- แบบฝึกหัดต่างๆ -->
-    <div class="col row q-pa-xs bg-map">
-      <div class="self-center col-12">
-        <q-img
-          style="width: 100%"
-          src="../../public/images/practicelist/bg-map-theme-1.png"
-        >
-          <div
-            class="transparent absolute-center row box-content-menu justify-center items-start"
-            style="max-width: 800px; width: 50%"
-          >
-            <div
-              class="col-6 self-start"
-              align="center"
-              v-for="(item, index) in practiceListShow"
-              :key="index"
-            >
-              <div class="">
-                <q-img
-                  contain=""
-                  style="max-width: 150px"
-                  class="cursor-pointer"
-                  :src="showIconPractice(item.practicetype)"
-                  @click="gotoPractice(item)"
+    <div
+      class="col-12 row bg-practice-main"
+      style="max-height: fit-content; min-height: calc(100vh - 50px)"
+    >
+      <!-- รายการแบบฝึกหัด -->
+      <div class="col self-center" align="center">
+        <div class="row relative-position">
+          <!-- ปุ่มกดย้อนกลับ -->
+          <div class="col self-center">
+            <q-img
+              class="cursor-pointer"
+              width="40px"
+              src="../../public/images/practicelist/previous-list-btn.png"
+            ></q-img>
+          </div>
+          <!-- รายละเอียด Unit ทั้งหมด -->
+          <div class="col-6 box-container-pracitcelist">
+            <div class="row box-content-practicelist q-py-sm q-px-md">
+              <div class="col-3 self-center" style="width: 100px" algin="center"></div>
+              <div class="col self-center" algin="center">
+                <span class="f20 text-amber-5">{{ selectSkill }}</span>
+              </div>
+              <div class="col-3 self-center" style="width: 100px" algin="center">
+                <q-select
+                  v-model="selectLevel"
+                  :options="levelList"
+                  dense=""
+                  bg-color="amber-5"
+                  round=""
+                  outlined=""
+                />
+              </div>
+            </div>
+            <div class="q-pl-lg q-pt-md q-pb-sm q-pr-md">
+              <div class="row">
+                <div class="col self-center">
+                  <div class="box-content-progress-practice" align="left">
+                    <div class="progress-bar" style="width: 80%"></div>
+                  </div>
+                </div>
+                <div class="col-2" style="width: 50px">
+                  <span class="f16">5/20</span>
+                </div>
+              </div>
+              <div class="q-my-md box-content-practice-list">
+                <div
+                  v-ripple
+                  class="relative-position row q-mr-sm q-mb-md bg-white box-content cursor-pointer"
+                  :class="
+                    activeUnit == i
+                      ? 'content-current'
+                      : unitCompleteList[i - 1]
+                      ? 'content-success'
+                      : 'content-default'
+                  "
+                  v-for="i in totalUnit"
+                  @click="showPracticeList(i), (activeUnit = i)"
+                  :key="i"
                 >
                   <div
-                    class="transparent absolute-bottom no-padding"
-                    style="width: 80%; bottom: 13px; margin: auto"
-                    align="left"
+                    class="col-2 q-pa-sm"
+                    :class="
+                      activeUnit == i
+                        ? 'bg-current'
+                        : unitCompleteList[i - 1]
+                        ? 'bg-success text-white'
+                        : 'bg-default'
+                    "
                   >
-                    <div class="" align="center">
-                      <span>{{ `${index + 1}. ${item.practiceType} ` }}</span>
-                    </div>
+                    <span class="f24 text-bold">
+                      {{ i }}
+                    </span>
                   </div>
-                </q-img>
+                  <div class="col self-center q-px-sm" align="left">
+                    <span class="f16" v-if="showPracticeListName(i)">
+                      {{ showPracticeListName(i).nameEng }}
+                    </span>
+                  </div>
+                  <div class="col-2 self-center" style="width: 60px">
+                    <q-icon
+                      v-if="unitCompleteList[i - 1]"
+                      size="22px"
+                      name="fas fa-check"
+                      class="text-success"
+                    ></q-icon>
+                    <span v-else class="f16">
+                      <span v-if="showPracticeListName(i)">{{
+                        `0/${showPracticeListName(i).totalPractice}`
+                      }}</span>
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </q-img>
+          <!-- ปุ่มกดไปข้างหน้า -->
+          <div class="col self-center" align="center">
+            <q-img
+              class="cursor-pointer"
+              width="40px"
+              src="../../public/images/practicelist/next-list-btn.png"
+            ></q-img>
+          </div>
+        </div>
+      </div>
+
+      <!-- แบบฝึกหัดต่างๆ -->
+      <div class="col self-start row bg-map full-height justify-center">
+        <div class="self-center col" align="center">
+          <q-img
+            style="max-width: 800px; width: 100%"
+            src="../../public/images/practicelist/bg-map-theme-1.png"
+          >
+            <div
+              class="transparent absolute-center row box-content-menu justify-center items-start"
+              style="max-width: 800px; width: 50%"
+            >
+              <div
+                class="col-6 self-start"
+                align="center"
+                v-for="(item, index) in practiceListShow"
+                :key="index"
+              >
+                <div class="">
+                  <q-img
+                    contain=""
+                    style="max-width: 150px"
+                    class="cursor-pointer"
+                    :src="showIconPractice(item.practicetype)"
+                    @click="gotoPractice(item)"
+                  >
+                    <div
+                      class="transparent absolute-bottom no-padding"
+                      style="width: 80%; bottom: 13px; margin: auto"
+                      align="left"
+                    >
+                      <div class="" align="center">
+                        <span>{{ `${index + 1}. ${item.practiceType} ` }}</span>
+                      </div>
+                    </div>
+                  </q-img>
+                </div>
+              </div>
+            </div>
+          </q-img>
+        </div>
       </div>
     </div>
   </q-page>
@@ -152,12 +162,16 @@ import practiceHooks from "../hooks/practiceHooks";
 import { db } from "src/router/index.js";
 import { useQuasar } from "quasar";
 import { useRouter } from "vue-router";
+import appBar from "../components/app-bar";
 export default {
   props: {
     unitList: {
       type: Array,
       default: () => [],
     },
+  },
+  components: {
+    appBar,
   },
   setup(props, context) {
     // Router

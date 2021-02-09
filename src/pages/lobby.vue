@@ -1,7 +1,7 @@
 <template>
   <q-page
     class="relative-position row"
-    :class="platPc ? 'bg-lobby-day' : 'bg-lobby-night'"
+    :class="!platPc ? (!mode ? 'bg-lobby-night' : 'bg-lobby-day') : ''"
     :style="mode ? 'background-color:#694532' : 'background-color:#1E263B'"
   >
     <!-- Platform Device -->
@@ -45,11 +45,11 @@
         <div :class="!platPc ? 'col-12' : ''" class="self-center" align="left">
           <q-img
             contain=""
-            :width="platPc ? '150px' : '130px'"
+            :width="platPc ? '150px' : '110px'"
             src="../../public/images/lobby/heart-bar.png"
           >
             <div class="transparent fit relative-position no-padding">
-              <div class="absolute-center" style="height: 55%; left: 65%">
+              <div class="absolute-center" style="top: 45%; left: 65%">
                 <span class="f16">5</span>
               </div>
             </div>
@@ -59,11 +59,11 @@
         <div :class="!platPc ? 'col-12' : ''" class="self-center">
           <q-img
             contain=""
-            :width="platPc ? '150px' : '130px'"
-            src="../../public/images/lobby/star-bar.png"
+            :width="platPc ? '150px' : '110px'"
+            src="../../public/images/lobby/coin-bar.png"
           >
             <div class="transparent fit relative-position no-padding">
-              <div class="absolute-center" style="height: 55%; left: 65%">
+              <div class="absolute-center" style="top: 45%; left: 65%">
                 <span class="f16">{{ characterData.star }}</span>
               </div>
             </div>
@@ -105,7 +105,7 @@
 
     <div class="col-12 row z-top">
       <div class="col-6" v-if="platPc"></div>
-      <div :class="platPc ? 'col-3' : 'col-12'" align="center">
+      <div :class="platPc ? 'col-4' : 'col-12'" align="center">
         <character></character>
       </div>
     </div>
@@ -157,11 +157,11 @@
       >
         <div
           :style="platPc ? '' : 'width:170px;'"
-          :class="platPc ? 'col' : 'col-3'"
+          :class="platPc ? 'col q-mx-md' : 'col-3'"
           class="self-end"
         >
           <q-img
-            :width="platPc ? '120px' : '100px'"
+            :style="platPc ? 'width:120px' : 'width:110px'"
             contain=""
             class="cursor-pointer"
             :class="activeMenu == 'boss' ? 'hover-menu' : 'menu-icon'"
@@ -172,11 +172,11 @@
         </div>
         <div
           :style="platPc ? '' : 'width:170px;'"
-          :class="platPc ? 'col' : 'col-3'"
+          :class="platPc ? 'col q-mx-md q-mr-lg ' : 'col-3'"
           class="self-end"
         >
           <q-img
-            :width="platPc ? '120px' : '110px'"
+            :style="platPc ? 'width:130px' : 'width:min(130px,50vw)'"
             contain=""
             class="cursor-pointer"
             :class="activeMenu == 'leaning' ? 'hover-menu' : 'menu-icon'"
@@ -369,7 +369,7 @@ export default {
     const $q = useQuasar();
     const platPc = $q.platform.is.desktop;
 
-    const mode = ref(true);
+    const mode = ref(false);
     const activeMenu = ref(null);
     const isNewNotify = ref(false);
     const isShowPopupPretest = ref(false);
