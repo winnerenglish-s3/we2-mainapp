@@ -1,14 +1,16 @@
 <template>
   <q-page
     class="relative-position row"
+    :class="platPc ? 'bg-lobby-day' : 'bg-lobby-night'"
     :style="mode ? 'background-color:#694532' : 'background-color:#1E263B'"
   >
-    <lobby-room class="absolute-top" v-if="mode" style="margin-top: -30px"></lobby-room>
-    <lobby-room-night class="absolute-top" v-else style="margin-top: -30px">
-    </lobby-room-night>
+    <!-- Platform Device -->
+    <lobby-pc :mode="mode" v-if="$q.platform.is.desktop"></lobby-pc>
+    <lobby-mobile :mode="mode" v-if="$q.platform.is.mobile"></lobby-mobile>
+
     <div class="col-12 self-start q-py-lg row z-top">
-      <div class="col self-center row q-px-md">
-        <div class="row relative-position q-mr-md">
+      <div class="col self-center row">
+        <div class="row relative-position q-mr-md" v-if="platPc">
           <div class="box-container-level relative-position">
             <div align="center" class="absolute-center" style="top: 21%">
               <span class="f16 text-bold">LEVEL</span>
@@ -39,8 +41,13 @@
             </q-img>
           </div>
         </div>
-        <div class="self-center q-mx-xs">
-          <q-img contain="" width="150px" src="../../public/images/lobby/heart-bar.png">
+
+        <div :class="!platPc ? 'col-12' : ''" class="self-center" align="left">
+          <q-img
+            contain=""
+            :width="platPc ? '150px' : '130px'"
+            src="../../public/images/lobby/heart-bar.png"
+          >
             <div class="transparent fit relative-position no-padding">
               <div class="absolute-center" style="height: 55%; left: 65%">
                 <span class="f16">5</span>
@@ -49,8 +56,12 @@
           </q-img>
         </div>
 
-        <div class="self-center q-mx-xs">
-          <q-img contain="" width="150px" src="../../public/images/lobby/star-bar.png">
+        <div :class="!platPc ? 'col-12' : ''" class="self-center">
+          <q-img
+            contain=""
+            :width="platPc ? '150px' : '130px'"
+            src="../../public/images/lobby/star-bar.png"
+          >
             <div class="transparent fit relative-position no-padding">
               <div class="absolute-center" style="height: 55%; left: 65%">
                 <span class="f16">{{ characterData.star }}</span>
@@ -59,10 +70,10 @@
           </q-img>
         </div>
       </div>
-      <div class="col-3 q-pr-md" align="right">
+      <div :class="!platPc ? 'col-6' : 'col-3 q-px-md'" class="" align="right">
         <q-img
-          width="60px"
-          class="cursor-pointer q-mx-xs"
+          style="width: max(3.5vw, 50px)"
+          class="cursor-pointer"
           src="../../public/images/lobby/noti-btn.png"
         >
           <div class="transparent fit" v-if="isNewNotify">
@@ -80,25 +91,27 @@
           </div>
         </q-img>
         <q-img
-          width="60px"
+          style="width: max(3.5vw, 50px)"
           class="cursor-pointer q-mx-xs"
           src="../../public/images/lobby/setting-btn.png"
         ></q-img>
         <q-img
-          width="60px"
-          class="cursor-pointer q-mx-xs"
+          style="width: max(3.5vw, 50px)"
+          class="cursor-pointer"
           src="../../public/images/lobby/logout-btn.png"
         ></q-img>
       </div>
     </div>
+
     <div class="col-12 row z-top">
-      <div class="col-6"></div>
-      <div class="col-3">
+      <div class="col-6" v-if="platPc"></div>
+      <div :class="platPc ? 'col-3' : 'col-12'" align="center">
         <character></character>
       </div>
     </div>
+
     <div class="col-12 self-end q-py-lg row z-top">
-      <div class="col row self-end q-px-md">
+      <div class="col row self-end q-px-md" v-if="platPc">
         <q-img
           contain=""
           width="120px"
@@ -137,26 +150,42 @@
         ></q-img>
       </div>
       <q-space></q-space>
-      <div class="col-4 q-px-md" align="right">
-        <q-img
-          width="120px"
-          contain=""
-          class="cursor-pointer q-mx-md"
-          :class="activeMenu == 'boss' ? 'hover-menu' : 'menu-icon'"
-          @mouseenter="activeMenu = 'boss'"
-          @mouseleave="activeMenu = null"
-          src="../../public/images/lobby/boss-btn.png"
-        ></q-img>
-        <q-img
-          width="120px"
-          contain=""
-          class="cursor-pointer q-mx-md"
-          :class="activeMenu == 'leaning' ? 'hover-menu' : 'menu-icon'"
-          @mouseenter="activeMenu = 'leaning'"
-          @mouseleave="activeMenu = null"
-          src="../../public/images/lobby/leaning-btn.png"
-          @click="$router.push('/practicemain')"
-        ></q-img>
+      <div
+        :class="platPc ? ' justify-center ' : 'col-12 justify-center'"
+        class="row"
+        align="center"
+      >
+        <div
+          :style="platPc ? '' : 'width:170px;'"
+          :class="platPc ? 'col' : 'col-3'"
+          class="self-end"
+        >
+          <q-img
+            :width="platPc ? '120px' : '100px'"
+            contain=""
+            class="cursor-pointer"
+            :class="activeMenu == 'boss' ? 'hover-menu' : 'menu-icon'"
+            @mouseenter="activeMenu = 'boss'"
+            @mouseleave="activeMenu = null"
+            src="../../public/images/lobby/boss-btn.png"
+          ></q-img>
+        </div>
+        <div
+          :style="platPc ? '' : 'width:170px;'"
+          :class="platPc ? 'col' : 'col-3'"
+          class="self-end"
+        >
+          <q-img
+            :width="platPc ? '120px' : '110px'"
+            contain=""
+            class="cursor-pointer"
+            :class="activeMenu == 'leaning' ? 'hover-menu' : 'menu-icon'"
+            @mouseenter="activeMenu = 'leaning'"
+            @mouseleave="activeMenu = null"
+            src="../../public/images/lobby/leaning-btn.png"
+            @click="$router.push('/practicemain')"
+          ></q-img>
+        </div>
       </div>
     </div>
 
@@ -327,8 +356,8 @@
 </template>
 
 <script>
-import lobbyRoom from "../components/lobbyRoom";
-import lobbyRoomNight from "../components/lobbyRoomNight";
+import lobbyPc from "../components/lobby/lobbyPc";
+import lobbyMobile from "../components/lobby/lobbyMobile";
 import character from "../components/character";
 import game from "../hooks/gameHooks.js";
 import { useQuasar } from "quasar";
@@ -336,8 +365,18 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 export default {
   setup() {
-    // Quasar
+    // Initial Data
     const $q = useQuasar();
+    const platPc = $q.platform.is.desktop;
+
+    const mode = ref(true);
+    const activeMenu = ref(null);
+    const isNewNotify = ref(false);
+    const isShowPopupPretest = ref(false);
+    const isShowPopupPosttest = ref(false);
+    const isShowPopupExam = ref(false);
+    const isShowPopupQuestionnaire = ref(false);
+
     // loading
     const loadingShow = () => {
       $q.loading.show({
@@ -362,24 +401,24 @@ export default {
       getCharacterData();
     });
 
-    return { characterData: characterData };
-  },
-  components: {
-    lobbyRoom,
-    lobbyRoomNight,
-    character,
-  },
-  data() {
     return {
-      activeMenu: null,
-      isNewNotify: false,
-      isShowPopupPretest: false,
-      isShowPopupPosttest: false,
-      isShowPopupExam: false,
-      isShowPopupQuestionnaire: false,
-      mode: false,
+      platPc,
+      characterData,
+      mode,
+      activeMenu,
+      isNewNotify,
+      isShowPopupPretest,
+      isShowPopupPosttest,
+      isShowPopupExam,
+      isShowPopupQuestionnaire,
     };
   },
+  components: {
+    lobbyPc,
+    lobbyMobile,
+    character,
+  },
+
   // methods: {
   //   closeBtn() {
   //     this.show = false;
@@ -434,6 +473,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.bg-lobby-day {
+  background-image: url("../../public/images/lobby/bg-lobby-day.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.bg-lobby-night {
+  background-image: url("../../public/images/lobby/bg-lobby-night.png");
+  background-position: center;
+  background-size: cover;
+}
+
 //ปุ่ม login
 .btn-close {
   background-image: url("../../public/images/close-btn-m.png");

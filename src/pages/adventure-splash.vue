@@ -164,7 +164,7 @@ export default {
     const checkLogin = async () => {
       loadingShow();
       const apiUrl =
-        "http://localhost:5000/winnerenglish2-e0f1b/us-central1/wfunctions/mainAppLogin";
+        "https://us-central1-winnerenglish2-e0f1b.cloudfunctions.net/wfunctions/mainAppLogin";
       const postData = {
         uid: uid,
       };

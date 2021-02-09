@@ -267,7 +267,7 @@
   </svg> -->
 
   <svg
-    style="width: 100%; height: 100%; position: relative; left: 50px; top: 50px"
+    style="width: 90%; height: 100%"
     width="450"
     height="340"
     viewBox="0 0 450 340"

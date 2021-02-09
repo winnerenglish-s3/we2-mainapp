@@ -1,9 +1,16 @@
 <template>
-  <div></div>
+  <div>
+    <!-- <lobby-night class="absolute-top"></lobby-night> -->
+  </div>
 </template>
 
 <script>
-export default {};
+import lobbyNight from "../lobby/lobbyNightMobile";
+export default {
+  components: {
+    lobbyNight,
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>
