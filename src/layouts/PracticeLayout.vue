@@ -28,9 +28,11 @@
           </div>
 
           <div align="right" class="col-6">
+            <!-- @click="isShowDialogInstruction = true" -->
+
             <q-btn
+              @click="isOpenInstructionDialog = true"
               v-if="hasInstruction"
-              @click="isShowDialogInstruction = true"
               icon="fas fa-info-circle"
               class="shadow-2 btn-header q-mr-md"
               :class="{ 'btn-width-mobile': $q.platform.is.mobile }"
@@ -342,6 +344,8 @@
         @closeHelp="(val) => (isShowDialogHelp = false)"
         @sendBackPopup="(val) => (isBackPopup = false)"
         @numberOfPractice="(val) => (numberOfPractice = val)"
+        :openInstruction="isOpenInstructionDialog"
+        :closeInstructionPopup="() => (isOpenInstructionDialog = false)"
       />
     </q-page-container>
   </q-layout>
@@ -392,12 +396,13 @@ export default {
 
     // TODO : เปิด Dialog Start Practice START -------------------
 
+    const isOpenInstructionDialog = ref(false);
     const instruction = reactive({
       en: "Eng ?????????????????????????????????",
       th: "ไทย ?????????????????????????????????",
     });
 
-    const isStartPractice = ref(true);
+    const isStartPractice = ref(false);
     const isShowDialogHelp = ref(false);
     const hasHelp = ref(false);
     const hasInstruction = ref(false);
@@ -439,7 +444,7 @@ export default {
     const checkRouter = () => {
       let routeName = route.name;
       if (routeName != "flashcard" && routeName != "practicemain") {
-        isStartPractice.value = true;
+        isStartPractice.value = false;
       } else {
         isStartPractice.value = false;
         isShowDialogHelp.value = false;
@@ -561,6 +566,7 @@ export default {
       numberOfPractice,
       resetBtn,
       closeInstructionBtn,
+      isOpenInstructionDialog,
     };
   },
 };

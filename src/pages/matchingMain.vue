@@ -82,6 +82,12 @@
         </q-card-section>
       </q-card>
     </q-dialog>
+
+    <instruction-dialog
+      :isShowDialogInstruction="true"
+      en="1234"
+      th="123"
+    ></instruction-dialog>
   </q-page>
 </template>
 
@@ -91,6 +97,7 @@ import matchingMobile from "../components/matching/matchingMobile";
 import { reactive, onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useQuasar } from "quasar";
+import instructionDialog from "../components/instructionDialog";
 export default {
   props: {
     themeSync: {
@@ -105,6 +112,7 @@ export default {
   components: {
     matchingPc,
     matchingMobile,
+    instructionDialog,
   },
   setup(props, { emit }) {
     // initial
