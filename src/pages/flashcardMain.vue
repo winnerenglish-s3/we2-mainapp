@@ -65,7 +65,7 @@ export default {
     // โหลดข้อมูล Flashcard
     const loadFlashcard = async () => {
       const apiURL =
-        "http://localhost:5000/winnerenglish2-e0f1b/us-central1/wfunctions/getFlashcard";
+        "https://us-central1-winnerenglish2-e0f1b.cloudfunctions.net/wfunctions/getFlashcard";
 
       const postData = {
         practiceListId: route.params.practiceListId,

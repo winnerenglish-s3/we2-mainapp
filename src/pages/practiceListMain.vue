@@ -22,14 +22,24 @@
           <!-- รายละเอียด Unit ทั้งหมด -->
           <div class="col-6 box-container-pracitcelist">
             <div class="row box-content-practicelist q-py-sm q-px-md">
-              <div class="col-3 self-center" style="width: 100px" algin="center"></div>
+              <div
+                class="col-3 self-center"
+                style="width: 100px"
+                algin="center"
+              ></div>
               <div class="col self-center" algin="center">
                 <span class="f20 text-amber-5">{{ selectSkill }}</span>
               </div>
-              <div class="col-3 self-center" style="width: 100px" algin="center">
+              <div
+                class="col-3 self-center"
+                style="width: 100px"
+                algin="center"
+              >
                 <q-select
                   v-model="selectLevel"
                   :options="levelList"
+                  map-options
+                  emit-value
                   dense=""
                   bg-color="amber-5"
                   round=""
@@ -91,7 +101,9 @@
                     ></q-icon>
                     <span v-else class="f16">
                       <span v-if="showPracticeListName(i)">{{
-                        `0/${showPracticeListName(i).totalPractice}`
+                        `${showPassedPracticeNumber(i)}/${
+                          showPracticeListName(i).totalPractice
+                        }`
                       }}</span>
                     </span>
                   </div>
@@ -132,7 +144,7 @@
                     contain=""
                     style="max-width: 150px"
                     class="cursor-pointer"
-                    :src="showIconPractice(item.practicetype)"
+                    :src="showIconPractice(item.practiceType)"
                     @click="gotoPractice(item)"
                   >
                     <div
@@ -156,7 +168,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import studentHooks from "../hooks/studentHooks.js";
 import practiceHooks from "../hooks/practiceHooks";
 import { db } from "src/router/index.js";
@@ -173,36 +185,74 @@ export default {
   components: {
     appBar,
   },
-  setup(props, context) {
+  method: {
+    testInput() {
+      console.log("1234");
+    },
+  },
+  setup() {
     // Router
     const $q = useQuasar();
     const router = useRouter();
+    // UID
+    const uid = $q.sessionStorage.getItem("uid");
 
     // Course Data
     const selectLevel = ref("");
-    const totalUnit = ref(0);
 
+    // level changed
+    watch(selectLevel, (newValue, oldValue) => {
+      getPractice();
+    });
+
+    const totalUnit = ref(0);
+    const levelList = ref([]);
+    // Get Course
     const getCourse = async () => {
       let course = await studentHooks.student().course();
-
-      selectLevel.value = course.level;
-
-      let getUnit = await db.collection("level").where("level", "==", course.level).get();
-
-      totalUnit.value = Number(getUnit.docs[0].data().unit);
+      let allLevel = await practiceHooks.level();
+      course.forEach(async (element) => {
+        levelList.value.push({
+          label:
+            "ระดับ" + allLevel.filter((x) => x.level == element.level)[0].level,
+          value: allLevel.filter((x) => x.level == element.level)[0].level,
+          unit: Number(
+            allLevel.filter((x) => x.level == element.level)[0].unit
+          ),
+        });
+      });
+      selectLevel.value = levelList.value[0].value;
+      totalUnit.value = levelList.value[0].unit;
     };
 
     // Practice Data
     const practiceList = ref([]);
     const practiceName = ref([]);
     const selectSkill = ref("Vocabulary");
+    const practiceLog = ref([]);
 
     const getPractice = async () => {
-      practiceList.value = await practiceHooks.practice(selectLevel.value).practiceList();
+      $q.loading.show({
+        delay: 0,
+      });
+      // Get Practice List
+      practiceList.value = await practiceHooks
+        .practice(selectLevel.value)
+        .practiceList();
 
-      practiceName.value = await practiceHooks.practice(selectLevel.value).practiceName();
+      // Get Practice Name
+      practiceName.value = await practiceHooks
+        .practice(selectLevel.value)
+        .practiceName();
+
+      // Get PracticeLog
+      practiceLog.value = await practiceHooks
+        .practice(selectLevel.value)
+        .log(uid);
+      $q.loading.hide();
     };
 
+    // โชว์ชื่อยูนิต
     const showPracticeListName = (unit) => {
       let totalPractice = practiceList.value.filter(
         (x) =>
@@ -224,8 +274,20 @@ export default {
       }
     };
 
-    const practiceListShow = ref([]);
+    // โชว์จำนวนแบบฝึกหัดที่ทำไปแล้ว ภายใน เลเวล ยูนิต ทักษะ
+    const showPassedPracticeNumber = (unit) => {
+      let result =
+        practiceLog.value.filter(
+          (x) =>
+            x.level == selectLevel.value &&
+            x.skill == selectSkill.value &&
+            x.unit == unit
+        ).length || 0;
+      return result;
+    };
 
+    // โชว์แบบฝึกหัด ที่ถูกเลือกจากลิสท์ด้านซ้าย
+    const practiceListShow = ref([]);
     const showPracticeList = (unit) => {
       let temp = [];
       temp = practiceList.value.filter(
@@ -236,15 +298,12 @@ export default {
       );
 
       temp.sort((a, b) => a.order - b.order);
-
       practiceListShow.value = temp;
     };
 
+    // แสดงผลไอคอนแบบฝึกหัด
     const showIconPractice = (type) => {
       let nameImage = require("../../public/images/practicelist/action-1-btn.png");
-
-      console.log(type);
-
       if (type == "flashcard") {
         nameImage = require("../../public/images/practicelist/teaching-btn.png");
       } else if (type == "matching") {
@@ -255,13 +314,13 @@ export default {
 
       return nameImage;
     };
+    // route to แบบฝึกหัด
 
     const gotoPractice = (data) => {
       let routerName = "";
-
-      if (data.practicetype == "flashcard") {
+      if (data.practiceType == "flashcard") {
         routerName = "/flashcard/";
-      } else if (data.practicetype == "matching") {
+      } else if (data.practiceType == "matching") {
         routerName = "/matching/";
       }
 
@@ -269,15 +328,17 @@ export default {
     };
 
     onMounted(async () => {
+      $q.loading.show({
+        delay: 0,
+      });
       await getCourse();
       await getPractice();
+      $q.loading.hide();
     });
 
     // --------------------------------------------
 
     const activeUnit = ref(null);
-
-    const levelList = ref([]);
 
     const unitCompleteList = ref([
       false,
@@ -311,6 +372,7 @@ export default {
       practiceListShow,
       showIconPractice,
       gotoPractice,
+      showPassedPracticeNumber,
 
       //
       levelList,
@@ -420,6 +482,12 @@ export default {
 .box-content-menu {
   height: 90%;
   overflow-y: auto;
+}
+
+.bg-r-img {
+  background-image: url("../../public/images/practicelist/bg-map-theme-1.png");
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* width */

@@ -9,7 +9,13 @@ const student = () => {
       .where("studentId", "==", uid)
       .get();
 
-    return getCourse.docs[0].data();
+    let temp = [];
+
+    getCourse.forEach((element) => {
+      temp.push(element.data());
+    });
+    temp.sort((a, b) => a.timestamp.seconds - b.timestamp.seconds);
+    return temp;
   };
 
   return { course };
