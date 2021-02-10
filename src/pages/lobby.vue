@@ -18,29 +18,23 @@
           <div class="transparent absolute-center" style="top: 53%">
             <span class="text-grey-9 f32">{{ characterData.level }}</span>
           </div>
-          <div class="self-center relative-position" style="margin-left: -20px">
-            <q-img
-              contain=""
-              width="210px"
-              src="../../public/images/lobby/name-bar.png"
-            >
-              <div class="transparent fit no-padding">
-                <div style="padding-left: 30px" class="q-pa-xs">
-                  <div class="">
-                    <span>{{ characterData.name }}</span>
-                  </div>
-                  <div class="q-pr-md q-py-xs">
-                    <div class="exp-bar relative-position">
-                      <div
-                        class="bg-primary full-height"
-                        style="
-                          margin-left: -5px;
-                          width: 80%;
-                          border-radius: 20px;
-                        "
-                      ></div>
-                    </div>
-                  </div>
+        </q-img>
+        <q-img
+          contain=""
+          width="210px"
+          src="../../public/images/lobby/name-bar.png"
+        >
+          <div class="transparent fit no-padding">
+            <div style="padding-left: 30px" class="q-pa-xs">
+              <div class="">
+                <span>{{ characterData.name }}</span>
+              </div>
+              <div class="q-pr-md q-py-xs">
+                <div class="exp-bar relative-position">
+                  <div
+                    class="bg-primary full-height"
+                    style="margin-left: -5px; width: 80%; border-radius: 20px"
+                  ></div>
                 </div>
               </div>
             </div>
@@ -112,7 +106,12 @@
           src="../../public/images/lobby/logout-btn.png"
         ></q-img>
 
-        <div align="right" class="relative-position" style="z-index: 2" v-if="!platPc">
+        <div
+          align="right"
+          class="relative-position"
+          style="z-index: 2"
+          v-if="!platPc"
+        >
           <div>
             <q-img
               fit="contain"
