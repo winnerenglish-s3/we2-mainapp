@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-toolbar :style="themeColor">
+    <q-toolbar :style="themeColor" :class="$route.name == 'flashcard' ? 'z-top' : ''">
       <div class="row header-container">
         <div class="col-6">
           <q-btn
@@ -11,9 +11,11 @@
           ></q-btn>
           <q-btn
             icon="fas fa-arrow-left"
-            v-if="$q.platform.is.mobile && $route.name == 'flashcard'"
+            v-if="
+              $q.platform.is.mobile && isShowDialogFlashcard && $route.name == 'flashcard'
+            "
             class="shadow-2 btn-header btn-width-mobile"
-            @click="returnClosePopup()"
+            @click="returnCloseDialog()"
           ></q-btn>
           <q-btn
             icon="fas fa-pause"
@@ -328,10 +330,20 @@ import { db } from "src/router";
 import { ref, reactive, computed, onMounted, onUnmounted, onBeforeUnmount } from "vue";
 import { useRouter, useRoute } from "vue-router";
 export default {
-  setup(props) {
+  props: {
+    isShowDialogFlashcard: {
+      type: Boolean,
+      default: () => false,
+    },
+  },
+  setup(props, { emit }) {
     // Set Router
     const route = useRoute();
     const router = useRouter();
+
+    const returnCloseDialog = () => {
+      emit("showDialogFlashcard");
+    };
 
     // เซ็ทสีของ Theme ที่ใช้
     const colorTheme = ref(getColorTheme);
@@ -414,6 +426,7 @@ export default {
     return {
       colorTheme,
       themeColor,
+      returnCloseDialog,
     };
   },
 };

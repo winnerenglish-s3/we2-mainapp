@@ -83,6 +83,7 @@
         v-if="!isSynchronize"
       >
         <q-img
+          @click="$router.push('/practicemain')"
           class="cursor-pointer"
           style="max-width: 200px; width: 15%; margin: auto"
           src="../../../public/images/flashcard/btn-back.png"
