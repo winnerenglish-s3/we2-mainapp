@@ -159,6 +159,7 @@
       <div class="col-6" v-if="platPc"></div>
       <div :class="platPc ? 'col-4' : 'col-12'" align="center">
         <character
+          :equipment="equipment"
           :style="!platPc ? 'top:55%;z-index:1;' : ''"
           :class="!platPc ? 'absolute-center' : ''"
         ></character>
@@ -416,13 +417,20 @@ import lobbyMobile from "../components/lobby/lobbyMobile";
 import character from "../components/character";
 import game from "../hooks/gameHooks.js";
 import { useQuasar } from "quasar";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
 import { useRouter } from "vue-router";
 export default {
   setup() {
     // Initial Data
     const $q = useQuasar();
     const platPc = $q.platform.is.desktop;
+
+    // Set Equipment Character
+    const equipment = reactive({
+      head: ref(2),
+      body: ref(2),
+      footer: ref(1),
+    });
 
     const mode = ref(false);
     const activeMenu = ref(null);
@@ -472,6 +480,9 @@ export default {
       isShowPopupPosttest,
       isShowPopupExam,
       isShowPopupQuestionnaire,
+
+      // equipment
+      equipment,
     };
   },
   components: {
