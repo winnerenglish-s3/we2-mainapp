@@ -1,14 +1,16 @@
 <template>
-  <q-page class="row full-height">
+  <q-page class="full-height" :class="{ row: $q.platform.is.desktop }">
     <div class="col-12 self-start">
       <app-bar></app-bar>
     </div>
 
+    <!-- DESKTOP -->
     <div
-      class="col-12 row bg-practice-main"
+      class="col-12 row bg-practice-main desktop-only"
       style="max-height: fit-content; min-height: calc(100vh - 50px)"
     >
       <!-- รายการแบบฝึกหัด -->
+
       <div class="col self-center" align="center">
         <div class="row relative-position">
           <!-- ปุ่มกดย้อนกลับ -->
@@ -20,6 +22,7 @@
             ></q-img>
           </div>
           <!-- รายละเอียด Unit ทั้งหมด -->
+
           <div class="col-6 box-container-pracitcelist">
             <div class="row box-content-practicelist q-py-sm q-px-md">
               <div
@@ -121,7 +124,6 @@
           </div>
         </div>
       </div>
-
       <!-- แบบฝึกหัดต่างๆ -->
       <div class="col self-start row bg-map full-height justify-center">
         <div class="self-center col" align="center">
@@ -164,6 +166,96 @@
         </div>
       </div>
     </div>
+
+    <!-- Mobile -->
+    <div style="background-color: #ffe6cf">
+      <div class="q-pt-md row q-px-md">
+        <div style="width: 100px" algin="center">
+          <q-select
+            v-model="selectLevel"
+            :options="levelList"
+            map-options
+            emit-value
+            dense=""
+            bg-color="amber-5"
+            round=""
+            outlined=""
+          />
+        </div>
+        <div class="col q-pl-md">
+          <q-select
+            bg-color="white"
+            round
+            outlined
+            dense
+            :options="['การอ่าน', 'การเขียน']"
+          ></q-select>
+        </div>
+      </div>
+      <div class="q-pl-lg q-pt-md q-pb-sm q-pr-md">
+        <div class="row">
+          <div class="col self-center">
+            <div class="box-content-progress-practice" align="left">
+              <div class="progress-bar" style="width: 80%"></div>
+            </div>
+          </div>
+          <div class="col-2 offset-1" style="width: 50px">
+            <span class="f16">5/20</span>
+          </div>
+        </div>
+        <div class="q-my-md">
+          <div
+            v-ripple
+            class="relative-position row q-mr-sm q-mb-md bg-white box-content cursor-pointer"
+            :class="
+              activeUnit == i
+                ? 'content-current'
+                : unitCompleteList[i - 1]
+                ? 'content-success'
+                : 'content-default'
+            "
+            v-for="i in totalUnit"
+            @click="showPracticeList(i), (activeUnit = i)"
+            :key="i"
+          >
+            <div
+              class="col-2 q-pa-sm"
+              :class="
+                activeUnit == i
+                  ? 'bg-current'
+                  : unitCompleteList[i - 1]
+                  ? 'bg-success text-white'
+                  : 'bg-default'
+              "
+            >
+              <span class="f24 text-bold">
+                {{ i }}
+              </span>
+            </div>
+            <div class="col self-center q-px-sm" align="left">
+              <span class="f16" v-if="showPracticeListName(i)">
+                {{ showPracticeListName(i).nameEng }}
+              </span>
+            </div>
+            <div class="col-2 self-center" style="width: 60px">
+              <q-icon
+                v-if="unitCompleteList[i - 1]"
+                size="22px"
+                name="fas fa-check"
+                class="text-success"
+              ></q-icon>
+              <span v-else class="f16">
+                <span v-if="showPracticeListName(i)">{{
+                  `${showPassedPracticeNumber(i)}/${
+                    showPracticeListName(i).totalPractice
+                  }`
+                }}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </q-page>
 </template>
 
@@ -172,7 +264,7 @@ import { ref, onMounted, watch } from "vue";
 import studentHooks from "../hooks/studentHooks.js";
 import practiceHooks from "../hooks/practiceHooks";
 import { db } from "src/router/index.js";
-import { useQuasar } from "quasar";
+import { useQuasar, scroll } from "quasar";
 import { useRouter } from "vue-router";
 import appBar from "../components/app-bar";
 export default {
@@ -196,6 +288,7 @@ export default {
     const router = useRouter();
     // UID
     const uid = $q.sessionStorage.getItem("uid");
+    const { getScrollTarget, setVerticalScrollPosition } = scroll;
 
     // Course Data
     const selectLevel = ref("");
@@ -383,7 +476,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .bg-practice-main {
   background-image: url("../../public/images/practicelist/bg-practicelist.png");
 }
