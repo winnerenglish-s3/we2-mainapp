@@ -3,7 +3,7 @@
     <!-- Self Learning -->
     <div v-if="!isSynchronize">
       <div
-        @click="!isShowDetails ? openDialog(index) : null"
+        @click="!isShowDialog ? openDialog(index) : null"
         v-ripple
         class="relative-position row cursor-pointer bg-white q-mb-xs"
         v-for="(item, index) in vocabDataList"
@@ -158,36 +158,43 @@
 <script>
 import { computed, ref } from "vue";
 export default {
-  props: ["vocabDataList", "isSynchronize", "backToPage"],
+  props: {
+    vocabDataList: {
+      type: Array,
+      default: () => [],
+    },
+    isShowDialogFlashcard: {
+      type: Boolean,
+      default: () => false,
+    },
+  },
 
   setup(props, { emit }) {
-    const isShowDetails = ref(false);
     const currentFlashcardIndex = ref(0);
 
     const showDialog = computed(() => {
-      if (props.backToPage) {
-        isShowDetails.value = false;
-        return false;
+      if (props.isShowDialogFlashcard) {
+        return true;
       } else {
-        if (isShowDetails.value) {
-          return true;
-        } else {
-          return false;
-        }
+        isShowDialog.value = false;
+        return false;
       }
     });
 
+    // Dialog Flashcard
+    const isShowDialog = ref(props.isShowDialogFlashcard);
+
     const openDialog = (index) => {
-      isShowDetails.value = true;
+      isShowDialog.value = true;
       currentFlashcardIndex.value = index;
-      emit("sendBackPopup");
+      emit("showDialogFlashcard");
     };
 
     return {
-      isShowDetails: isShowDetails,
-      showDialog: showDialog,
-      openDialog: openDialog,
-      currentFlashcardIndex: currentFlashcardIndex,
+      isShowDialog,
+      showDialog,
+      openDialog,
+      currentFlashcardIndex,
     };
   },
 };

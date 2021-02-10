@@ -1,22 +1,29 @@
 <template>
   <q-page :class="`bg-theme-${themeSync}`">
+    <div class="col-12 self-start">
+      <app-bar
+        :isShowDialogFlashcard="isShowDialogFlashcard"
+        @showDialogFlashcard="isShowDialogFlashcard = false"
+      ></app-bar>
+    </div>
+
     <div class="absolute-center" v-if="!isLoadPractice">
       <q-spinner-facebook color="light-blue" size="100px" />
     </div>
+
     <flashcard-pc
-      :isSynchronize="isSynchronize"
       :vocabDataList="vocabDataList"
       :themeSync="themeSync"
       @playSound="(val) => playSound(val)"
       v-if="$q.platform.is.desktop && isLoadPractice"
     ></flashcard-pc>
+
     <flashcard-mobile
-      :isSynchronize="isSynchronize"
       :vocabDataList="vocabDataList"
-      :backToPage="backToPage"
       v-if="$q.platform.is.mobile && isLoadPractice"
       @playSound="(val) => playSound(val)"
-      @sendBackPopup="sendBackPopup()"
+      :isShowDialogFlashcard="isShowDialogFlashcard"
+      @showDialogFlashcard="isShowDialogFlashcard = true"
     ></flashcard-mobile>
   </q-page>
 </template>
@@ -29,28 +36,17 @@ import { onMounted, ref, computed } from "vue";
 import axios from "axios";
 import { useQuasar } from "quasar";
 import { useRouter, useRoute } from "vue-router";
-
+import appBar from "../components/app-bar";
 export default {
   components: {
     flashcardPc,
     flashcardMobile,
+    appBar,
   },
   props: {
-    backToPage: {
-      type: Boolean,
-      default: () => false,
-    },
     themeSync: {
       type: Number,
       default: 0,
-    },
-    isSynchronize: {
-      type: Boolean,
-      default: () => false,
-    },
-    synchronizeData: {
-      type: Object,
-      default: () => {},
     },
   },
   setup(props, { emit }) {
@@ -97,21 +93,26 @@ export default {
       audio.play();
     };
 
+    // Close Flashcard Dialog
+    const isShowDialogFlashcard = ref(false);
+    // const showDialogFlashcard = () => {
+    //   isShowDialogFlashcard.value = true;
+    // };
+
+    const closeDialogFlashcard = () => {
+      isShowDialogFlashcard.value = false;
+    };
+
     // เรียกใช้งาน Function
     onMounted(loadFlashcard);
 
-    // Other Function ---------------
-    // For Mobile
-    const sendBackPopup = () => {
-      emit("sendBackPopup");
-    };
-
     return {
-      flashcardList: flashcardList,
-      isLoadPractice: isLoadPractice,
-      vocabDataList: vocabDataList,
-      sendBackPopup: sendBackPopup,
-      playSound: playSound,
+      flashcardList,
+      isLoadPractice,
+      vocabDataList,
+      playSound,
+      isShowDialogFlashcard,
+      closeDialogFlashcard,
     };
   },
 };

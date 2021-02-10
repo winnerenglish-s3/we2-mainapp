@@ -1,25 +1,24 @@
 <template>
   <div>
-    <q-toolbar :style="themeColor">
+    <q-toolbar :style="themeColor" :class="$route.name == 'flashcard' ? 'z-top' : ''">
       <div class="row header-container">
         <div class="col-6">
           <q-btn
             icon="fas fa-home"
-            :disable="isSynchronize"
-            v-if="isBackPopup && $route.name != 'flashcard'"
+            v-if="$route.name != 'flashcard'"
             class="shadow-2 btn-header q-mr-md btn-width-mobile"
             @click="$router.push('/practicemain')"
           ></q-btn>
           <q-btn
             icon="fas fa-arrow-left"
-            :disable="isSynchronize"
-            v-if="$q.platform.is.mobile && !isBackPopup && $route.name == 'flashcard'"
+            v-if="
+              $q.platform.is.mobile && isShowDialogFlashcard && $route.name == 'flashcard'
+            "
             class="shadow-2 btn-header btn-width-mobile"
-            @click="returnClosePopup()"
+            @click="returnCloseDialog()"
           ></q-btn>
           <q-btn
             icon="fas fa-pause"
-            :disable="isSynchronize"
             @click="isShowSetting = true"
             v-if="$route.name != 'flashcard'"
             class="shadow-2 btn-header btn-width-mobile"
@@ -28,7 +27,6 @@
 
         <div align="right" class="col-6">
           <q-btn
-            v-if="hasInstruction"
             @click="isShowDialogInstruction = true"
             icon="fas fa-info-circle"
             class="shadow-2 btn-header q-mr-md"
@@ -36,7 +34,6 @@
             :label="!$q.platform.is.mobile ? 'คำสั่ง' : ''"
           ></q-btn>
           <q-btn
-            v-if="hasHelp"
             @click="isShowDialogHelp = true"
             icon="fas fa-lightbulb"
             class="shadow-2 btn-header"
@@ -126,7 +123,7 @@
               <q-img
                 v-if="!isNotProgress"
                 class="absolute-center"
-                contain=""
+                fit="contain"
                 width="320px"
                 style="top: 24px"
                 src="../../public/images/bg-success-start.png"
@@ -333,33 +330,21 @@ import { db } from "src/router";
 import { ref, reactive, computed, onMounted, onUnmounted, onBeforeUnmount } from "vue";
 import { useRouter, useRoute } from "vue-router";
 export default {
-  setup(props) {
+  props: {
+    isShowDialogFlashcard: {
+      type: Boolean,
+      default: () => false,
+    },
+  },
+  setup(props, { emit }) {
     // Set Router
     const route = useRoute();
     const router = useRouter();
 
-    // Get Level
-    const unitList = ref([]);
-    const setLevel = ref("5");
-
-    const getLevel = () => {
-      db.collection("level")
-        .where("level", "==", setLevel.value)
-        .get()
-        .then((doc) => {
-          let tempLevel = [];
-
-          for (let i = 0; i < Number(doc.docs[0].data().unit); i++) {
-            tempLevel.push(i + 1);
-          }
-
-          unitList.value = tempLevel;
-        });
+    const returnCloseDialog = () => {
+      emit("showDialogFlashcard");
     };
 
-    onMounted(getLevel);
-
-    // TODO : Set Theme START ----------------------------
     // เซ็ทสีของ Theme ที่ใช้
     const colorTheme = ref(getColorTheme);
     const setTheme = ref(1);
@@ -368,10 +353,6 @@ export default {
       return `background-color:${colorTheme.value[setTheme.value - 1].hex}`;
     });
 
-    // TODO : Set Theme End -------------------------
-
-    // TODO : เปิด Dialog Start Practice START -------------------
-
     const instruction = reactive({
       en: "Eng ?????????????????????????????????",
       th: "ไทย ?????????????????????????????????",
@@ -379,10 +360,6 @@ export default {
 
     const isStartPractice = ref(true);
     const isShowDialogHelp = ref(false);
-    const hasHelp = ref(false);
-    const hasInstruction = ref(false);
-    const isPracticeTimeout = ref(false);
-    const funcPracticeTime = ref("");
     const isFinishPractice = ref(false);
     const isNotProgress = ref(true);
 
@@ -404,72 +381,6 @@ export default {
     const closeInstructionBtn = () => {
       isShowDialogInstruction.value = false;
     };
-
-    const backToPage = ref(false);
-    const isBackPopup = ref(true);
-
-    const returnClosePopup = () => {
-      isBackPopup.value = true;
-      backToPage.value = true;
-      setTimeout(() => {
-        backToPage.value = false;
-      }, 100);
-    };
-
-    const checkRouter = () => {
-      let routeName = route.name;
-      if (routeName != "flashcard" && routeName != "practicemain") {
-        isStartPractice.value = true;
-      } else {
-        isStartPractice.value = false;
-        isShowDialogHelp.value = false;
-        isShowDialogInstruction.value = false;
-        backToPage.value = false;
-        isBackPopup.value = true;
-        hasHelp.value = false;
-        hasInstruction.value = false;
-
-        isPracticeTimeout.value = false;
-        funcPracticeTime.value = "";
-
-        isFinishPractice.value = false;
-        isNotProgress.value = false;
-      }
-    };
-
-    onMounted(checkRouter);
-
-    // TODO : เปิด Dialog Start Practice END --------------------
-
-    // TODO :  START -------------------------
-
-    const isSynchronize = ref(false);
-    const synchronizeData = reactive({});
-    const snapSyncData = ref("");
-
-    const loadSynchronizeData = () => {
-      snapSyncData.value = db
-        .collection("synchronize")
-        .doc("test")
-        .onSnapshot((doc) => {
-          synchronizeData.value = doc.data() || [];
-          if (doc.data().mode == "control") {
-            isSynchronize.value = true;
-          } else {
-            isSynchronize.value = false;
-          }
-        });
-    };
-
-    onMounted(loadSynchronizeData);
-
-    // onUnmounted(() => {
-    //   if (typeof snapSyncData.value == "function") {
-    //     snapSyncData();
-    //   }
-    // });
-
-    // TODO : END
 
     const totalStar = ref(0);
     const numberOfPractice = ref(0);
@@ -513,34 +424,9 @@ export default {
     const isShowSetting = ref(false);
 
     return {
-      // LevelSet and set Unit List
-      unitList,
-      setLevel,
-
-      //
-      totalStar,
       colorTheme,
       themeColor,
-      isBackPopup,
-      hasInstruction,
-      isStartPractice,
-      practiceNameList,
-      hasHelp,
-      instruction,
-      isFinishPractice,
-      isNotProgress,
-      isShowDialogInstruction,
-      isShowSetting,
-      isSynchronize,
-      synchronizeData,
-      setTheme,
-      isShowDialogHelp,
-      backToPage,
-      startPractice,
-      returnClosePopup,
-      numberOfPractice,
-      resetBtn,
-      closeInstructionBtn,
+      returnCloseDialog,
     };
   },
 };

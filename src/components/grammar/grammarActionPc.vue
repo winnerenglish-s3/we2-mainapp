@@ -49,7 +49,7 @@
                 @mouseenter="activeChoices = i"
                 @mouseleave="activeChoices = null"
                 @click="activeByTeacher == 'start' ? sendAnswer(i) : null"
-                contain=""
+                fit="contain"
                 :src="
                   require(`../../../public/images/grammar/choices-action-${i}${
                     activeByTeacher == 'start'
