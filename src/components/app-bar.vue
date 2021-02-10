@@ -5,9 +5,9 @@
         <div class="col-6">
           <q-btn
             icon="fas fa-home"
-            v-if="$route.name != 'flashcard'"
+            v-if="!isShowDialogFlashcard"
             class="shadow-2 btn-header q-mr-md btn-width-mobile"
-            @click="$router.push('/practicemain')"
+            @click="$router.push('/lobby')"
           ></q-btn>
           <q-btn
             icon="fas fa-arrow-left"
