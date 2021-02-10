@@ -20,14 +20,14 @@
           </div>
         </q-img>
         <q-img
-          contain=""
-          width="210px"
+          fit="contain"
+          style="max-width: 230px; width: 80%; margin-left: -25px"
           src="../../public/images/lobby/name-bar.png"
         >
-          <div class="transparent fit no-padding">
-            <div style="padding-left: 30px" class="q-pa-xs">
+          <div class="transparent full-width absolute-center no-padding" style="top: 45%">
+            <div style="padding-left: 30px" class="q-px-xs">
               <div class="">
-                <span>{{ characterData.name }}</span>
+                <span class="f16" style="line-height: 0">{{ characterData.name }}</span>
               </div>
               <div class="q-pr-md q-py-xs">
                 <div class="exp-bar relative-position">
@@ -73,7 +73,7 @@
       <div
         :class="!platPc ? 'col-3 q-pr-sm ' : 'col-3 q-px-md'"
         align="right"
-        class="q-pt-sm"
+        class="q-pt-md"
         :style="!platPc ? 'width:160px;' : ''"
       >
         <q-img
@@ -106,12 +106,7 @@
           src="../../public/images/lobby/logout-btn.png"
         ></q-img>
 
-        <div
-          align="right"
-          class="relative-position"
-          style="z-index: 2"
-          v-if="!platPc"
-        >
+        <div align="right" class="relative-position" style="z-index: 2" v-if="!platPc">
           <div>
             <q-img
               fit="contain"
@@ -250,11 +245,7 @@
     </div>
 
     <!-- dialog questionnaire -->
-    <q-dialog
-      persistent
-      v-model="isShowPopupQuestionnaire"
-      data-cy="dialog-question"
-    >
+    <q-dialog persistent v-model="isShowPopupQuestionnaire" data-cy="dialog-question">
       <q-card flat class="bg-transparent" style="width: 320px; height: 370px">
         <q-card-section class="bg-transparent text-dark no-padding">
           <!-- รูปพื้นหลัง Error -->
@@ -267,10 +258,7 @@
               >
                 อย่าลืม! ทำแบบสอบถาม
               </div>
-              <div
-                align="center"
-                class="text-dark relative-position q-px-md q-mt-md"
-              >
+              <div align="center" class="text-dark relative-position q-px-md q-mt-md">
                 คุณสามารถเข้าทำแบบสอบถาม
                 <br />ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ค. 2563
               </div>
@@ -312,10 +300,7 @@
               >
                 หัวข้อการสอบที่ครูตั้ง
               </div>
-              <div
-                align="center"
-                class="text-dark relative-position q-px-md q-mt-md"
-              >
+              <div align="center" class="text-dark relative-position q-px-md q-mt-md">
                 คุณสามารถเข้าสอบก่อนเรียน
                 <br />
                 ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ย. 2563
@@ -352,15 +337,10 @@
               >
                 อย่าลืม! สอบก่อนเรียน
               </div>
-              <div
-                align="center"
-                class="text-dark relative-position q-px-md q-mt-md"
-              >
+              <div align="center" class="text-dark relative-position q-px-md q-mt-md">
                 คุณสามารถเข้าสอบก่อนเรียน
                 <br class="" />
-                <div class="q-my-sm">
-                  ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ค. 2563
-                </div>
+                <div class="q-my-sm">ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ค. 2563</div>
               </div>
             </div>
             <div
@@ -387,11 +367,7 @@
     </q-dialog>
 
     <!-- dialog psottest -->
-    <q-dialog
-      persistent
-      v-model="isShowPopupPosttest"
-      data-cy="dialog-posttest"
-    >
+    <q-dialog persistent v-model="isShowPopupPosttest" data-cy="dialog-posttest">
       <q-card flat class="bg-transparent" style="width: 320px; height: 370px">
         <q-card-section class="bg-transparent text-dark no-padding">
           <!-- รูปพื้นหลัง Error -->
@@ -404,10 +380,7 @@
               >
                 อย่าลืม! ทดสอบหลังเรียน
               </div>
-              <div
-                align="center"
-                class="text-dark relative-position q-px-md q-mt-md"
-              >
+              <div align="center" class="text-dark relative-position q-px-md q-mt-md">
                 คุณสามารถเข้าทำแบบทดสอบหลังเรียน
                 <br />ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ค. 2563
               </div>
