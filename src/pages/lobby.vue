@@ -8,49 +8,48 @@
     <lobby-pc :mode="mode" v-if="$q.platform.is.desktop"></lobby-pc>
     <lobby-mobile :mode="mode" v-if="$q.platform.is.mobile"></lobby-mobile>
 
-    <div class="col-12 self-start q-py-lg row z-top">
-      <div class="col self-center row">
-        <div class="row relative-position q-mr-md" v-if="platPc">
-          <div class="box-container-level relative-position">
-            <div align="center" class="absolute-center" style="top: 21%">
-              <span class="f16 text-bold">LEVEL</span>
-            </div>
-            <div class="level-bar absolute-center" align="center">
-              <span class="text-grey-9 f36" style="line-height: 1">
-                {{ characterData.level }}
-              </span>
-            </div>
+    <div class="col-12 self-start row z-top">
+      <div class="col self-start row q-px-xs q-pt-sm">
+        <q-img
+          fit="contain"
+          style="max-width: 120px; width: 30%; font-size: 100%; z-index: 2"
+          src="../../public/images/lobby/box-level.png"
+        >
+          <div class="transparent absolute-center" style="top: 53%">
+            <span class="text-grey-9 f32">{{ characterData.level }}</span>
           </div>
-          <div class="self-center relative-position" style="margin-left: -20px">
-            <q-img contain="" width="210px" src="../../public/images/lobby/name-bar.png">
-              <div class="transparent fit no-padding">
-                <div style="padding-left: 30px" class="q-pa-xs">
-                  <div class="">
-                    <span>{{ characterData.name }}</span>
-                  </div>
-                  <div class="q-pr-md q-py-xs">
-                    <div class="exp-bar relative-position">
-                      <div
-                        class="bg-primary full-height"
-                        style="margin-left: -5px; width: 80%; border-radius: 20px"
-                      ></div>
-                    </div>
-                  </div>
+        </q-img>
+        <q-img
+          style="max-width: 230px; width: 80%; margin-left: -25px"
+          fit="contain"
+          src="../../public/images/lobby/box-name.png"
+        >
+          <div class="transparent full-width absolute-center no-padding" style="top: 42%">
+            <div style="padding-left: 30px" class="q-px-xs">
+              <div class="">
+                <span class="f16" style="line-height: 0">{{ characterData.name }}</span>
+              </div>
+              <div class="q-pr-md q-py-xs">
+                <div class="exp-bar relative-position">
+                  <div
+                    class="bg-primary full-height"
+                    style="margin-left: -5px; width: 80%; border-radius: 20px"
+                  ></div>
                 </div>
               </div>
-            </q-img>
+            </div>
           </div>
-        </div>
+        </q-img>
 
         <div :class="!platPc ? 'col-12' : ''" class="self-center" align="left">
           <q-img
-            contain=""
-            :width="platPc ? '150px' : '110px'"
+            fit="contain"
+            :style="platPc ? 'width:150px' : 'width:max(20vw,130px)'"
             src="../../public/images/lobby/heart-bar.png"
           >
             <div class="transparent fit relative-position no-padding">
-              <div class="absolute-center" style="top: 45%; left: 65%">
-                <span class="f16">5</span>
+              <div class="absolute-center" style="top: 40%; left: 65%">
+                <span class="f16">{{ 5 }}</span>
               </div>
             </div>
           </q-img>
@@ -58,21 +57,27 @@
 
         <div :class="!platPc ? 'col-12' : ''" class="self-center">
           <q-img
-            contain=""
-            :width="platPc ? '150px' : '110px'"
+            fit="contain"
+            :style="platPc ? 'width:150px' : 'width:max(20vw,130px)'"
             src="../../public/images/lobby/coin-bar.png"
           >
             <div class="transparent fit relative-position no-padding">
-              <div class="absolute-center" style="top: 45%; left: 65%">
-                <span class="f16">{{ characterData.star }}</span>
+              <div class="absolute-center" style="top: 40%; left: 65%">
+                <span class="f16">{{ 99999 }}</span>
               </div>
             </div>
           </q-img>
         </div>
       </div>
-      <div :class="!platPc ? 'col-6' : 'col-3 q-px-md'" class="" align="right">
+
+      <div
+        :class="!platPc ? 'col-3 q-pr-sm ' : 'col-3 q-px-md'"
+        align="right"
+        class="q-pt-sm"
+        :style="!platPc ? 'width:160px;' : ''"
+      >
         <q-img
-          style="width: max(3.5vw, 50px)"
+          style="width: max(5vw, 45px)"
           class="cursor-pointer"
           src="../../public/images/lobby/noti-btn.png"
         >
@@ -91,29 +96,79 @@
           </div>
         </q-img>
         <q-img
-          style="width: max(3.5vw, 50px)"
+          style="width: max(5vw, 45px)"
           class="cursor-pointer q-mx-xs"
           src="../../public/images/lobby/setting-btn.png"
         ></q-img>
         <q-img
-          style="width: max(3.5vw, 50px)"
+          style="width: max(5vw, 45px)"
           class="cursor-pointer"
           src="../../public/images/lobby/logout-btn.png"
         ></q-img>
+
+        <div align="right" class="relative-position" style="z-index: 2" v-if="!platPc">
+          <div>
+            <q-img
+              fit="contain"
+              width="max(15vw,100px)"
+              class="cursor-pointer"
+              :class="activeMenu == 'ranking' ? 'hover-menu' : 'menu-icon'"
+              @mouseenter="activeMenu = 'ranking'"
+              @mouseleave="activeMenu = null"
+              src="../../public/images/lobby/ranking-btn.png"
+            ></q-img>
+          </div>
+          <div>
+            <q-img
+              width="max(15vw,100px)"
+              fit="contain"
+              class="cursor-pointer"
+              :class="activeMenu == 'mission' ? 'hover-menu' : 'menu-icon'"
+              @mouseenter="activeMenu = 'mission'"
+              @mouseleave="activeMenu = null"
+              src="../../public/images/lobby/mission-btn.png"
+            ></q-img>
+          </div>
+          <div>
+            <q-img
+              width="max(15vw,100px)"
+              fit="contain"
+              class="cursor-pointer"
+              :class="activeMenu == 'achievement' ? 'hover-menu' : 'menu-icon'"
+              @mouseenter="activeMenu = 'achievement'"
+              @mouseleave="activeMenu = null"
+              src="../../public/images/lobby/achievement-btn.png"
+            ></q-img>
+          </div>
+          <div>
+            <q-img
+              width="max(15vw,100px)"
+              fit="contain"
+              class="cursor-pointer"
+              :class="activeMenu == 'equipment' ? 'hover-menu' : 'menu-icon'"
+              @mouseenter="activeMenu = 'equipment'"
+              @mouseleave="activeMenu = null"
+              src="../../public/images/lobby/equipment-btn.png"
+            ></q-img>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="col-12 row z-top">
+    <div class="col-12 row" style="z-index: 2">
       <div class="col-6" v-if="platPc"></div>
       <div :class="platPc ? 'col-4' : 'col-12'" align="center">
-        <character></character>
+        <character
+          :style="!platPc ? 'top:55%;z-index:1;' : ''"
+          :class="!platPc ? 'absolute-center' : ''"
+        ></character>
       </div>
     </div>
 
     <div class="col-12 self-end q-py-lg row z-top">
       <div class="col row self-end q-px-md" v-if="platPc">
         <q-img
-          contain=""
+          fit="contain"
           width="120px"
           class="cursor-pointer q-mx-xs"
           :class="activeMenu == 'ranking' ? 'hover-menu' : 'menu-icon'"
@@ -123,7 +178,7 @@
         ></q-img>
         <q-img
           width="120px"
-          contain=""
+          fit="contain"
           class="cursor-pointer q-mx-xs"
           :class="activeMenu == 'mission' ? 'hover-menu' : 'menu-icon'"
           @mouseenter="activeMenu = 'mission'"
@@ -132,7 +187,7 @@
         ></q-img>
         <q-img
           width="120px"
-          contain=""
+          fit="contain"
           class="cursor-pointer q-mx-xs"
           :class="activeMenu == 'achievement' ? 'hover-menu' : 'menu-icon'"
           @mouseenter="activeMenu = 'achievement'"
@@ -141,7 +196,7 @@
         ></q-img>
         <q-img
           width="120px"
-          contain=""
+          fit="contain"
           class="cursor-pointer q-mx-xs"
           :class="activeMenu == 'equipment' ? 'hover-menu' : 'menu-icon'"
           @mouseenter="activeMenu = 'equipment'"
@@ -162,7 +217,7 @@
         >
           <q-img
             :style="platPc ? 'width:120px' : 'width:110px'"
-            contain=""
+            fit="contain"
             class="cursor-pointer"
             :class="activeMenu == 'boss' ? 'hover-menu' : 'menu-icon'"
             @mouseenter="activeMenu = 'boss'"
@@ -177,7 +232,7 @@
         >
           <q-img
             :style="platPc ? 'width:130px' : 'width:min(130px,50vw)'"
-            contain=""
+            fit="contain"
             class="cursor-pointer"
             :class="activeMenu == 'leaning' ? 'hover-menu' : 'menu-icon'"
             @mouseenter="activeMenu = 'leaning'"
@@ -540,7 +595,7 @@ export default {
 
 .box-container-level {
   width: 85px;
-  height: 85px;
+  min-height: 85px;
   background-color: #fff;
   border: 5px solid#FFC42E;
   border-radius: 50%;

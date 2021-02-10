@@ -20,7 +20,7 @@
           <div class="col-3 self-center">
             <div class="q-mt-md" v-for="(item, index) in choicesLeft">
               <q-img
-                contain=""
+                fit="contain"
                 v-if="item.vocab != ''"
                 @click="activeLeftIndex = index"
                 @mousedown="activeLeftIndex = null"
@@ -39,7 +39,7 @@
                 </div></q-img
               >
               <q-img
-                contain=""
+                fit="contain"
                 v-if="item.vocab == ''"
                 :class="
                   activeLeftIndex != null || activeRightIndex != null
@@ -64,7 +64,7 @@
           <div class="col-8 self-center" align="right">
             <div class="q-mt-md" v-for="(item, index) in choicesRight">
               <q-img
-                contain=""
+                fit="contain"
                 class="relative-position cursor-pointer"
                 style="max-width: 315px; width: 35%; margin-right: -5%"
                 v-if="!isSendAnswer && item.vocab != ''"
@@ -83,7 +83,7 @@
                 </div>
               </q-img>
               <q-img
-                contain=""
+                fit="contain"
                 v-if="!isSendAnswer && item.vocab == ''"
                 :class="
                   activeLeftIndex != null || activeRightIndex != null
@@ -104,7 +104,7 @@
                 "
               ></q-img>
               <q-img
-                contain=""
+                fit="contain"
                 v-if="isSendAnswer"
                 style="max-width: 315px; width: 35%; margin-right: -5%"
                 :src="
@@ -129,7 +129,7 @@
               </q-img>
               <q-img
                 class=""
-                contain=""
+                fit="contain"
                 style="max-width: 600px; width: 68%"
                 src="../../../public/images/matching/matching-question.png"
               >

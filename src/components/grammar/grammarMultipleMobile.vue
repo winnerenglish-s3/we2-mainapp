@@ -19,7 +19,7 @@
         <q-img
           @click="isSendAnswer ? null : sendAnswer(i)"
           class="cursor-pointer"
-          contain=""
+          fit="contain"
           :src="
             require(`../../../public/images/languagetip/languagetip-choices-${
               isSendAnswer

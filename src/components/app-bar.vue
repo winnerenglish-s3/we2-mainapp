@@ -123,7 +123,7 @@
               <q-img
                 v-if="!isNotProgress"
                 class="absolute-center"
-                contain=""
+                fit="contain"
                 width="320px"
                 style="top: 24px"
                 src="../../public/images/bg-success-start.png"

@@ -120,7 +120,7 @@ export default {
     const router = useRouter();
     const route = useRoute();
 
-    const uid = route.params.uid;
+    const uid = "TRk4Rf4DPC3DajHryM1A";
 
     router.replace("login");
 
@@ -129,6 +129,7 @@ export default {
     const loadingProgress = () => {
       let percentage = 0;
       var interval = setInterval(async () => {
+        0;
         if (percentage >= 100) {
           clearInterval(interval);
           await checkLogin();
