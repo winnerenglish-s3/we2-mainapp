@@ -1,5 +1,8 @@
 <template>
   <q-page class="bg-matching">
+    <div>
+      <app-bar></app-bar>
+    </div>
     <matching-pc
       :themeSync="themeSync"
       :totalQuestion="state.totalQuestion"
@@ -8,6 +11,7 @@
       :numberOfPractice="state.numberOfPractice"
       :practiceTime="state.practiceTime"
       :isCorrectAnswer="state.isCorrectAnswer"
+      :questionList="questionList"
       class="box-container-main"
       v-if="$q.platform.is.desktop"
     ></matching-pc>
@@ -19,6 +23,7 @@
       :numberOfPractice="state.numberOfPractice"
       :practiceTime="state.practiceTime"
       :isCorrectAnswer="state.isCorrectAnswer"
+      :questionList="questionList"
       v-if="$q.platform.is.mobile"
     ></matching-mobile>
 
@@ -65,6 +70,7 @@
               style="border-radius: 0px 0px 7px 7px"
             >
               <q-img
+                fit="contain"
                 @click="closeHelpBtn()"
                 class="cursor-pointer"
                 style="width: 200px"
@@ -98,6 +104,7 @@ import { reactive, onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useQuasar } from "quasar";
 import instructionDialog from "../components/instructionDialog";
+import appBar from "../components/app-bar";
 export default {
   props: {
     themeSync: {
@@ -110,6 +117,7 @@ export default {
     },
   },
   components: {
+    appBar,
     matchingPc,
     matchingMobile,
     instructionDialog,
@@ -119,6 +127,9 @@ export default {
     const $q = useQuasar();
     const route = useRoute();
     const router = useRouter();
+
+    // Test Matching
+    const questionList = ref([]);
 
     // Extra Vocab
     const tab = ref("vocab");
@@ -169,6 +180,16 @@ export default {
       },
     ]);
 
+    const loadFlashcard = () => {
+      let setVocab = vocabList.value;
+
+      let randomData = setVocab.sort(() => Math.random() - 0.5);
+
+      questionList.value = randomData.slice(0, 6);
+
+      console.log(questionList.value);
+    };
+
     // State Practice Data
     const state = reactive({
       totalStar: 0,
@@ -202,6 +223,8 @@ export default {
       if (isHasInstruction) {
         emit("isShowButtonInstruction");
       }
+
+      loadFlashcard();
     });
 
     return {
@@ -212,6 +235,7 @@ export default {
       tab,
       vocabList,
       closeHelpBtn,
+      questionList,
     };
   },
 };

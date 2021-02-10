@@ -14,136 +14,139 @@
         style="margin-bottom: -5px; z-index: 3"
       ></theme-animation>
     </div>
-    <div class="col-12 q-py-sm" style="z-index: 1">
-      <div>
-        <div class="row justify-center self-start">
-          <div class="col-3 self-center">
-            <div class="q-mt-md" v-for="(item, index) in choicesLeft">
-              <q-img
-                fit="contain"
-                v-if="item.vocab != ''"
-                @click="activeLeftIndex = index"
-                @mousedown="activeLeftIndex = null"
-                class="cursor-pointer"
-                style="max-width: 315px; width: 95%"
-                :src="
-                  require(`../../../public/images/matching/matching-choices${
-                    index == activeLeftIndex ? '-active' : ''
-                  }.png`)
-                "
-              >
-                <div class="absolute-center transparent">
-                  <span style="font-size: max(1.2vw, 14px)" class="text-black">{{
-                    item.vocab
-                  }}</span>
-                </div></q-img
-              >
-              <q-img
-                fit="contain"
-                v-if="item.vocab == ''"
-                :class="
-                  activeLeftIndex != null || activeRightIndex != null
-                    ? 'cursor-pointer'
-                    : ''
-                "
-                @click="
-                  activeLeftIndex != null || activeRightIndex != null
-                    ? selectAnswer(index, 'left')
-                    : ''
-                "
-                style="max-width: 315px; width: 95%"
-                :src="
-                  require(`../../../public/images/matching/matching-answer${
-                    activeLeftIndex != null || activeRightIndex != null ? '-active' : ''
-                  }.png`)
-                "
-              >
-              </q-img>
-            </div>
-          </div>
-          <div class="col-8 self-center" align="right">
-            <div class="q-mt-md" v-for="(item, index) in choicesRight">
-              <q-img
-                fit="contain"
-                class="relative-position cursor-pointer"
-                style="max-width: 315px; width: 35%; margin-right: -5%"
-                v-if="!isSendAnswer && item.vocab != ''"
-                @click="activeRightIndex = index"
-                @mousedown="activeRightIndex = null"
-                :src="
-                  require(`../../../public/images/matching/matching-choices${
-                    index == activeRightIndex ? '-active' : ''
-                  }.png`)
-                "
-              >
-                <div class="absolute-center transparent">
-                  <span style="font-size: max(1.1vw, 12px)" class="text-black">{{
-                    item.vocab
-                  }}</span>
-                </div>
-              </q-img>
-              <q-img
-                fit="contain"
-                v-if="!isSendAnswer && item.vocab == ''"
-                :class="
-                  activeLeftIndex != null || activeRightIndex != null
-                    ? 'cursor-pointer'
-                    : ''
-                "
-                @click="
-                  activeLeftIndex != null || activeRightIndex != null
-                    ? selectAnswer(index, 'right')
-                    : ''
-                "
-                class=""
-                style="max-width: 315px; width: 35%; margin-right: -5%"
-                :src="
-                  require(`../../../public/images/matching/matching-answer${
-                    activeLeftIndex != null || activeRightIndex != null ? '-active' : ''
-                  }.png`)
-                "
-              ></q-img>
-              <q-img
-                fit="contain"
-                v-if="isSendAnswer"
-                style="max-width: 315px; width: 35%; margin-right: -5%"
-                :src="
-                  require(`../../../public/images/matching/matching-choices${
-                    randomQuestion[index].vocab == item.vocab ? '-correct' : '-incorrect'
-                  }.png`)
-                "
-              >
-                <div class="absolute-center transparent full-width" align="center">
-                  <div class="" style="font-size: max(1.1vw, 12px)">
-                    <span class="text-black">
-                      {{ item.vocab }}
-                    </span>
+    <div class="col-12 row justify-center brx" style="z-index: 1">
+      <!-- ตัวเลือกตอบด้านซ้าย -->
+      <div class="col-3 self-center">
+        <div class="q-mt-md" v-for="(item, index) in choicesLeft">
+          <q-img
+            fit="contain"
+            v-if="item.vocab != ''"
+            @click="
+              activeLeftIndex == null
+                ? ((activeLeftIndex = index), (activeRightIndex = null))
+                : ''
+            "
+            @mousedown="activeLeftIndex = null"
+            class="cursor-pointer"
+            style="max-width: 315px; width: 95%"
+            :src="
+              require(`../../../public/images/matching/matching-choices${
+                index == activeLeftIndex ? '-active' : ''
+              }.png`)
+            "
+          >
+            <div class="absolute-center transparent">
+              <span style="font-size: max(1.2vw, 14px)" class="text-black">{{
+                item.vocab
+              }}</span>
+            </div></q-img
+          >
+          <q-img
+            fit="contain"
+            v-if="item.vocab == ''"
+            :class="
+              activeLeftIndex != null || activeRightIndex != null ? 'cursor-pointer' : ''
+            "
+            @click="
+              activeLeftIndex != null || activeRightIndex != null
+                ? selectAnswer(index, 'left')
+                : ''
+            "
+            style="max-width: 315px; width: 95%"
+            :src="
+              require(`../../../public/images/matching/matching-answer${
+                activeLeftIndex != null || activeRightIndex != null ? '-active' : ''
+              }.png`)
+            "
+          >
+          </q-img>
+        </div>
+      </div>
 
-                    <div v-if="randomQuestion[index].vocab != item.vocab">
-                      <span class="text-black">คำตอบที่ถูกต้องคือ</span>
-                      <br />
-                      <span>{{ randomQuestion[index].vocab }}</span>
-                    </div>
-                  </div>
-                </div>
-              </q-img>
-              <q-img
-                class=""
-                fit="contain"
-                style="max-width: 600px; width: 68%"
-                src="../../../public/images/matching/matching-question.png"
-              >
-                <div
-                  class="absolute-center transparent full-width q-px-lg"
-                  align="center"
-                >
-                  <span style="font-size: max(1.1vw, 12px)" class="text-black">{{
-                    randomQuestion[index].meaning
-                  }}</span>
-                </div></q-img
-              >
+      <!-- ตัวเลือกตอบด้านขวา -->
+      <div class="col-8 self-center" align="right">
+        <div class="q-mt-md" v-for="(item, index) in choicesRight">
+          <q-img
+            fit="contain"
+            class="relative-position cursor-pointer"
+            style="max-width: 315px; width: 35%; margin-right: -5%"
+            v-if="!isSendAnswer && item.vocab != ''"
+            @click="
+              activeRightIndex == null
+                ? ((activeRightIndex = index), (activeLeftIndex = null))
+                : ''
+            "
+            @mousedown="activeRightIndex = null"
+            :src="
+              require(`../../../public/images/matching/matching-choices${
+                index == activeRightIndex ? '-active' : ''
+              }.png`)
+            "
+          >
+            <div class="absolute-center transparent">
+              <span style="font-size: max(1.1vw, 12px)" class="text-black">{{
+                item.vocab
+              }}</span>
             </div>
-          </div>
+          </q-img>
+
+          <q-img
+            fit="contain"
+            v-if="!isSendAnswer && item.vocab == ''"
+            :class="
+              activeLeftIndex != null || activeRightIndex != null ? 'cursor-pointer' : ''
+            "
+            @click="
+              activeLeftIndex != null || activeRightIndex != null
+                ? selectAnswer(index, 'right')
+                : ''
+            "
+            class=""
+            style="max-width: 315px; width: 35%; margin-right: -5%"
+            :src="
+              require(`../../../public/images/matching/matching-answer${
+                activeLeftIndex != null || activeRightIndex != null ? '-active' : ''
+              }.png`)
+            "
+          ></q-img>
+
+          <q-img
+            fit="contain"
+            v-if="isSendAnswer"
+            style="max-width: 315px; width: 35%; margin-right: -5%"
+            :src="
+              require(`../../../public/images/matching/matching-choices${
+                randomQuestion[index].vocab == item.vocab ? '-correct' : '-incorrect'
+              }.png`)
+            "
+          >
+            <div class="absolute-center transparent full-width" align="center">
+              <div class="" style="font-size: max(1.1vw, 12px)">
+                <span class="text-black">
+                  {{ item.vocab }}
+                </span>
+
+                <div v-if="randomQuestion[index].vocab != item.vocab">
+                  <span class="text-black">คำตอบที่ถูกต้องคือ</span>
+                  <br />
+                  <span>{{ randomQuestion[index].vocab }}</span>
+                </div>
+              </div>
+            </div>
+          </q-img>
+
+          <q-img
+            class=""
+            fit="contain"
+            style="max-width: 600px; width: 68%"
+            src="../../../public/images/matching/matching-question.png"
+          >
+            <div class="absolute-center transparent full-width q-px-lg" align="center">
+              <span style="font-size: max(1.1vw, 12px)" class="text-black">{{
+                randomQuestion[index].meaning
+              }}</span>
+            </div></q-img
+          >
         </div>
       </div>
     </div>
@@ -270,13 +273,18 @@ export default {
 
       if (this.activeLeftIndex != null) {
         selectActive = { ...this.choicesLeft[this.activeLeftIndex] };
+
         this.choicesLeft[this.activeLeftIndex].vocab = "";
         this.choicesLeft[this.activeLeftIndex].meaning = "";
       } else {
         selectActive = { ...this.choicesRight[this.activeRightIndex] };
+
         this.choicesRight[this.activeRightIndex].vocab = "";
         this.choicesRight[this.activeRightIndex].meaning = "";
       }
+
+      this.activeLeftIndex = null;
+      this.activeRightIndex = null;
 
       if (moveTo == "right") {
         this.choicesRight[index] = selectActive;
@@ -285,9 +293,6 @@ export default {
       if (moveTo == "left") {
         this.choicesLeft[index] = selectActive;
       }
-
-      this.activeLeftIndex = null;
-      this.activeRightIndex = null;
     },
     startPractice() {
       let temp = [...this.choices];

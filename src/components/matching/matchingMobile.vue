@@ -2,11 +2,7 @@
   <div class="box-container-matching row">
     <div class="col-12">
       <div>
-        <header-bar
-          :totalQuestion="10"
-          :currentQuestion="5"
-          :totalStar="2"
-        ></header-bar>
+        <header-bar :totalQuestion="10" :currentQuestion="5" :totalStar="2"></header-bar>
       </div>
       <div class="q-mt-xs box-question row justify-center">
         <div class="self-center">
@@ -20,11 +16,11 @@
       </div>
     </div>
 
-    <div class="col-12 relative-position" style="height:fit-content">
-      <div class="box-choices row no-wrap ">
+    <div class="col-12 relative-position" style="height: fit-content">
+      <div class="box-choices row no-wrap">
         <div
           name="section"
-          class="col-7 relative-position section "
+          class="col-7 relative-position section"
           :class="index == currentQuestion ? null : 'section-notactive '"
           align="center"
           :id="`section` + index"
@@ -32,7 +28,8 @@
           :key="index"
         >
           <q-img
-            style="width:95%;"
+            v-if="item != ''"
+            style="width: 95%"
             :src="
               require(`../../../public/images/matching/button-theme/matching-theme-${themeSync}-choices-${
                 isSendAnswer && index == currentQuestion
@@ -53,7 +50,7 @@
                     : 'text-black'
                 "
                 style="font-size: 16px"
-                >{{ `Choice ` + item }}</span
+                >{{ `Choice ${item} : index ${index} ` }}</span
               >
               <div
                 v-if="isSendAnswer && index == currentQuestion && !isCorrect"
@@ -69,14 +66,16 @@
 
         <div class="btn btn-left">
           <q-img
-            @click="isSendAnswer || isPrevious ? null : backChoice()"
+            v-if="currentQuestion != 1"
+            @click="isSendAnswer ? null : backChoice()"
             width="10vw"
             src="../../../public/images/matching/btn-left.png"
           ></q-img>
         </div>
         <div class="btn btn-right">
           <q-img
-            @click="isSendAnswer || isNext ? null : nextChoice()"
+            v-if="currentQuestion != testCount"
+            @click="isSendAnswer ? null : nextChoice()"
             width="10vw"
             src="../../../public/images/matching/btn-right.png"
           ></q-img>
@@ -106,17 +105,17 @@ import headerBar from "../header-time-progress";
 import { onMounted, ref } from "vue";
 export default {
   components: {
-    headerBar
+    headerBar,
   },
   props: {
     themeSync: {
       type: Number,
-      require: true
-    }
+      require: true,
+    },
   },
   setup(props) {
     const testCount = ref(5);
-    const dataList = ref([]);
+    const dataList = ref([""]);
     const currentQuestion = ref(0);
 
     const isNext = ref(false);
@@ -151,29 +150,6 @@ export default {
         el.scrollIntoView();
       }, 100);
 
-      let firstChoiceLength = dataList.value
-        .map((x, index) => {
-          return { data: x, index: index };
-        })
-        .filter((x, index) => x.data != "")[0];
-
-      console.log(firstChoiceLength);
-
-      // if (
-      //   dataList.value[firstChoiceLength.index - 1] == "" ||
-      //   currentQuestion.value == 2
-      // ) {
-      //   let lastChoice = dataList.value
-      //     .map((x, index) => {
-      //       return { data: x, index: index };
-      //     })
-      //     .filter((x, index) => x.data != "");
-
-      //   console.log();
-
-      //   dataList.unshift(lastChoice[lastChoice.length -1].data)
-      // }
-
       setTimeout(() => {
         currentQuestion.value = active;
         isPrevious.value = false;
@@ -190,21 +166,6 @@ export default {
         el.scrollIntoView();
       }, 100);
 
-      let lastChoiceLength = dataList.value.length - 2;
-
-      if (lastChoiceLength == active) {
-        let dataFirst = dataList.value
-          .map((x, index) => {
-            return { data: x, index: index };
-          })
-          .filter((x, index) => x.data != "")[0];
-
-        console.log(dataFirst);
-        dataList.value.push(dataFirst.data);
-
-        dataList.value[dataFirst.index] = "";
-      }
-
       setTimeout(() => {
         currentQuestion.value = active;
         isNext.value = false;
@@ -217,6 +178,8 @@ export default {
 
         dataList.value.push(randomNumber);
       }
+
+      dataList.value.push("");
 
       currentQuestion.value = Math.ceil(testCount.value / 2) - 1;
 
@@ -239,9 +202,9 @@ export default {
       nextQuestion,
       sendAnswer,
       backChoice,
-      nextChoice
+      nextChoice,
     };
-  }
+  },
 };
 </script>
 
