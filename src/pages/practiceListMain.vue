@@ -50,6 +50,7 @@
                 />
               </div>
             </div>
+
             <div class="q-pl-lg q-pt-md q-pb-sm q-pr-md">
               <div class="row">
                 <div class="col self-center">
@@ -115,6 +116,7 @@
             </div>
           </div>
           <!-- ปุ่มกดไปข้างหน้า -->
+
           <div class="col self-center" align="center">
             <q-img
               class="cursor-pointer"
@@ -184,12 +186,23 @@
         </div>
         <div class="col q-pl-md">
           <q-select
+            v-model="skillSelect"
             bg-color="white"
             round
             outlined
+            emit-value
+            map-options
             dense
-            :options="['การอ่าน', 'การเขียน']"
-          ></q-select>
+            :options="skillOptions"
+          >
+            <template v-slot:selected>
+              <div class="absolute-center">
+                {{
+                  skillOptions.filter((x) => x.value == skillSelect)[0].label
+                }}
+              </div>
+            </template>
+          </q-select>
         </div>
       </div>
       <div class="q-pl-lg q-pt-md q-pb-sm q-pr-md">
@@ -256,6 +269,101 @@
         </div>
       </div>
     </div>
+
+    <q-dialog
+      v-model="isShowPracticeDialogMobile"
+      persistent
+      maximized
+      transition-show="slide-left"
+      transition-hide="slide-right"
+    >
+      <q-card class="bg-mobile-practice">
+        <q-toolbar style="background-color: #9f220c">
+          <div class="row header-container">
+            <div class="col-6">
+              <q-btn
+                v-close-popup
+                icon="fas fa-arrow-left"
+                class="shadow-2 btn-header btn-width-mobile"
+              ></q-btn>
+            </div>
+          </div>
+        </q-toolbar>
+        <q-card-section>
+          <!-- <div class="self-start row bg-map full-height justify-center">
+            <div class="self-center col" align="center">
+              <q-img
+                style="max-width: 800px; width: 100%"
+                src="../../public/images/practicelist/bg-map-theme-1.png"
+              >
+                <div
+                  class="transparent absolute-center row box-content-menu justify-center items-start"
+                  style="max-width: 800px; width: 50%"
+                >
+                  <div
+                    class="col-6 self-start"
+                    align="center"
+                    v-for="(item, index) in practiceListShow"
+                    :key="index"
+                  >
+                    <div class="">
+                      <q-img
+                        contain=""
+                        style="max-width: 150px"
+                        class="cursor-pointer"
+                        :src="showIconPractice(item.practiceType)"
+                        @click="gotoPractice(item)"
+                      >
+                        <div
+                          class="transparent absolute-bottom no-padding"
+                          style="width: 80%; bottom: 13px; margin: auto"
+                          align="left"
+                        >
+                          <div class="" align="center">
+                            <span>{{
+                              `${index + 1}. ${item.practiceType} `
+                            }}</span>
+                          </div>
+                        </div>
+                      </q-img>
+                    </div>
+                  </div>
+                </div>
+              </q-img>
+            </div>
+          </div> -->
+
+          <div class="row">
+            <div
+              class="col-6 self-start"
+              align="center"
+              v-for="(item, index) in practiceListShow"
+              :key="index"
+            >
+              <div class="">
+                <q-img
+                  contain=""
+                  style="max-width: 150px"
+                  class="cursor-pointer"
+                  :src="showIconPractice(item.practiceType)"
+                  @click="gotoPractice(item)"
+                >
+                  <div
+                    class="transparent absolute-bottom no-padding"
+                    style="width: 80%; bottom: 13px; margin: auto"
+                    align="left"
+                  >
+                    <div class="" align="center">
+                      <span>{{ `${index + 1}. ${item.practiceType} ` }}</span>
+                    </div>
+                  </div>
+                </q-img>
+              </div>
+            </div>
+          </div>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -297,6 +405,35 @@ export default {
     watch(selectLevel, (newValue, oldValue) => {
       getPractice();
     });
+
+    // skill change
+    const skillSelect = ref("Vocabulary");
+    const skillOptions = [
+      {
+        label: "คำศัพท์",
+        value: "Vocabulary",
+      },
+      {
+        label: "ไวยากรณ์",
+        value: "Grammar",
+      },
+      {
+        label: "การอ่าน",
+        value: "Reading",
+      },
+      {
+        label: "การเขียน",
+        value: "Writing",
+      },
+      {
+        label: "การออกเสียง",
+        value: "Phonics",
+      },
+      {
+        label: "การฟังและการพูด",
+        value: "Listening & Speaking",
+      },
+    ];
 
     const totalUnit = ref(0);
     const levelList = ref([]);
@@ -380,6 +517,7 @@ export default {
     };
 
     // โชว์แบบฝึกหัด ที่ถูกเลือกจากลิสท์ด้านซ้าย
+    const isShowPracticeDialogMobile = ref(false);
     const practiceListShow = ref([]);
     const showPracticeList = (unit) => {
       let temp = [];
@@ -392,6 +530,10 @@ export default {
 
       temp.sort((a, b) => a.order - b.order);
       practiceListShow.value = temp;
+
+      if ($q.platform.is.mobile) {
+        isShowPracticeDialogMobile.value = true;
+      }
     };
 
     // แสดงผลไอคอนแบบฝึกหัด
@@ -466,17 +608,33 @@ export default {
       showIconPractice,
       gotoPractice,
       showPassedPracticeNumber,
+      // SKill select for mobile
+      skillSelect,
+      skillOptions,
 
       //
       levelList,
       unitCompleteList,
       activeUnit,
+      // mobile dialog
+      isShowPracticeDialogMobile,
     };
   },
 };
 </script>
 
 <style scoped>
+.bg-mobile-practice {
+  background-image: url("../../public/images/practicelist/bg-map-theme-1.png");
+  background-position: center;
+}
+.btn-header {
+  border: 1px solid#FFC52E;
+  background-color: #6d4300;
+  border-radius: 10px;
+  color: #ffc52e;
+}
+
 .bg-practice-main {
   background-image: url("../../public/images/practicelist/bg-practicelist.png");
 }
