@@ -12,7 +12,7 @@
       <div class="col-12 self-start">
         <!-- Self Learning -->
         <div class="box-container-flashcard q-pa-md" v-if="!isSynchronize">
-          <div class="row justify-center q-pa-lg">
+          <div class="row q-pa-lg">
             <div
               class="col-3 q-pa-sm"
               align="center"
@@ -25,7 +25,7 @@
                 style="max-width: 350px; width: 100%"
                 src="../../../public/images/flashcard/card-flashcard.png"
               >
-                <div class="absolute-center transparent text-black">
+                <div class="absolute-center transparent text-black full-width">
                   <div align="center">
                     <div>
                       <span style="font-size: max(2vw, 16px); line-height: 0">{{
@@ -33,10 +33,9 @@
                       }}</span>
                     </div>
                     <div class="q-mt-sm">
-                      <span
-                        style="font-size: max(0.5vw, 14px); line-height: 0"
-                        >{{ `(${item.meaning})` }}</span
-                      >
+                      <span style="font-size: max(0.5vw, 14px); line-height: 0">{{
+                        `(${item.meaning})`
+                      }}</span>
                     </div>
                   </div>
                 </div>
@@ -61,7 +60,7 @@
                   vocabDataList.vocabulary
                 }}</span>
                 <span style="font-size: max(1.2vw, 16px)" class="q-mx-md"
-                  >({{ vocabDataList.partOfSpeech }})</span
+                  >({{ vocabDataList.partOfSpeech.partOfSpeech }})</span
                 >
                 <br />
                 <span style="font-size: max(1.2vw, 16px)">
@@ -98,7 +97,7 @@
         <q-card-section class="fit">
           <div class="absolute-center box-dialog-details">
             <div class="row">
-              <div class="col-3 q-pa-md">
+              <div class="col-3 q-pa-sm" style="width: 300px">
                 <q-img
                   contain
                   :src="vocabDataList[currentFlashcardIndex].imageSentenceUrl"
@@ -148,7 +147,7 @@
                         vocabDataList[currentFlashcardIndex].vocab
                       }}</span>
                       ({{
-                        vocabDataList[currentFlashcardIndex].wordingType
+                        vocabDataList[currentFlashcardIndex].partOfSpeech.partOfSpeech
                       }})</span
                     >
                   </div>
@@ -158,19 +157,13 @@
                     ></span>
                   </div>
                   <div class="q-mt-xs q-px-sm">
-                    <span
-                      v-html="vocabDataList[currentFlashcardIndex].meaning"
-                    ></span>
+                    <span v-html="vocabDataList[currentFlashcardIndex].meaning"></span>
                   </div>
                 </div>
 
                 <div class="col-12">
                   <div class="row q-my-lg">
-                    <div
-                      class="col-3 q-px-sm"
-                      align="right"
-                      style="width: 120px"
-                    >
+                    <div class="col-3 q-px-sm" align="right" style="width: 120px">
                       <q-btn
                         round
                         class="bg-warning"
@@ -182,8 +175,7 @@
                         @click="
                           $emit(
                             'playSound',
-                            vocabDataList[currentFlashcardIndex]
-                              .soundSentenceUrl
+                            vocabDataList[currentFlashcardIndex].soundSentenceUrl
                           )
                         "
                       >
@@ -193,19 +185,13 @@
                     <div class="col q-pr-xl q-pa-xs">
                       <div class="q-px-sm">
                         <span
-                          v-html="
-                            vocabDataList[currentFlashcardIndex].sentenceEng ||
-                            '-'
-                          "
+                          v-html="vocabDataList[currentFlashcardIndex].sentenceEng || '-'"
                         >
                         </span>
                       </div>
                       <div class="q-mt-xs q-px-sm">
                         <span
-                          v-html="
-                            vocabDataList[currentFlashcardIndex].sentenceTh ||
-                            '-'
-                          "
+                          v-html="vocabDataList[currentFlashcardIndex].sentenceTh || '-'"
                         >
                         </span>
                       </div>
@@ -214,14 +200,13 @@
 
                   <div>
                     <hr />
-                    <div class="row">
+                    <div class="row q-px-md">
                       <div
                         class="col-6 q-mt-xs"
-                        v-for="(item, index) in vocabDataList[
-                          currentFlashcardIndex
-                        ].extraVocab"
+                        v-for="(item, index) in vocabDataList[currentFlashcardIndex]
+                          .extraVocab"
                         v-html="
-                          `${item.vocab} (${item.wordingType}) ${item.meaning}`
+                          `${item.vocab} (${item.partOfSpeech.partOfSpeech}) ${item.meaning}`
                         "
                       ></div>
                     </div>

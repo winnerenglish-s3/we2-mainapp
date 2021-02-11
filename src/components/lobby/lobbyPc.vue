@@ -17,9 +17,9 @@
         <q-img
           fit="contain"
           style="max-width: 220px; width: 100%; margin-left: -25px"
-          src="../../../public/images/lobby/name-bar.png"
+          src="../../../public/images/lobby/box-name.png"
         >
-          <div class="transparent full-width absolute-center no-padding" style="top: 50%">
+          <div class="transparent full-width absolute-center no-padding" style="top: 45%">
             <div style="padding-left: 30px" class="q-px-xs">
               <div class="">
                 <span class="f16" style="line-height: 0">{{ characterData.name }}</span>

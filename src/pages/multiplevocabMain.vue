@@ -27,94 +27,6 @@
       v-if="$q.platform.is.mobile"
     ></multiplevocab-mobile>
 
-    <!-- Start Practice -->
-    <!-- <q-dialog maximized v-model="isStartPractice" persistent>
-      <q-card class="transparent shadow-0">
-        <q-card-section class="fit">
-          <q-img
-            contain
-            class="absolute-center"
-            :style="
-              $q.platform.is.desktop
-                ? 'max-width:800px;width:100%'
-                : 'max-width:340px;width:100%'
-            "
-            :src="
-              require($q.platform.is.desktop
-                ? '../../public/images/multiplevocab/multiple-start-pc.png'
-                : '../../public/images/multiplevocab/multiple-start-mobile.png')
-            "
-          >
-            <div
-              :class="
-                $q.platform.is.desktop ? 'box-instruction-pc' : 'box-instruction-mobile'
-              "
-              class="absolute-bottom row"
-            >
-              <div class="col-12 self-center q-py-md" align="center">
-                <span>{{ instruction.en }}</span>
-                <div class="q-py-xs"></div>
-                <span>{{ instruction.th }}</span>
-              </div>
-              <div class="col-12 self-end" align="center">
-                <div @click="startPractice()" class="btn-start cursor-pointer"></div>
-              </div>
-            </div>
-          </q-img>
-        </q-card-section>
-      </q-card>
-    </q-dialog> -->
-
-    <!-- Finish Practice -->
-    <!-- <q-dialog maximized v-model="isFinishPractice" persistent>
-      <q-card class="transparent shadow-0">
-        <q-card-section class="fit">
-          <div class="absolute-center">
-            <div>
-              <q-img width="350px" src="../../public/images/flower_1.png"></q-img>
-            </div>
-            <div style="max-width: 320px; width: 100%; margin: auto">
-              <q-img contain src="../../public/images/dialog-finish.png">
-                <div class="box-finish absolute-bottom">
-                  <div align="center">
-                    <span>จบแบบฝึกหัด</span>
-                    <br />
-                    <span>ระดับที่ 5 - บทที่ 12</span>
-                    <div class="q-mt-md">
-                      <span>จำนวนครั้งในการทำ : {{ numberOfPractice }}/2</span>
-                    </div>
-                  </div>
-                </div>
-              </q-img>
-              <div align="center">
-                <q-btn-group
-                  spread
-                  style="width: 291px; height: 40px; border-radius: 0px 0px 5px 5px"
-                >
-                  <q-btn
-                    push
-                    @click="resetBtn()"
-                    label="ทำใหม่อีกครั้ง"
-                    text-color="white"
-                    style="background-color: #014270"
-                  />
-                  <q-btn
-                    push
-                    @click="finishBtn()"
-                    label="จบแบบฝึกหัด"
-                    style="background-color: #ffbd13"
-                  />
-                </q-btn-group>
-              </div>
-            </div>
-            <div style="">
-              <q-img width="350px" src="../../public/images/flower_2.png"></q-img>
-            </div>
-          </div>
-        </q-card-section>
-      </q-card>
-    </q-dialog> -->
-
     <!-- Help Popup -->
     <q-dialog maximized v-model="isShowDialogHelp" persistent>
       <q-card class="transparent shadow-0">
@@ -137,9 +49,7 @@
                   <div class="row">
                     <div
                       :class="$q.platform.is.desktop ? 'col-6' : 'col-12'"
-                      :style="
-                        index % 2 == 0 ? 'border-right:1px solid #C4C4C4' : ''
-                      "
+                      :style="index % 2 == 0 ? 'border-right:1px solid #C4C4C4' : ''"
                       style="border-bottom: 1px solid #c4c4c4"
                       v-for="(item, index) in vocabList"
                       :key="index"
@@ -157,9 +67,7 @@
                   <div class="row">
                     <div
                       :class="$q.platform.is.desktop ? 'col-6' : 'col-12'"
-                      :style="
-                        index % 2 == 0 ? 'border-right:1px solid #C4C4C4;' : ''
-                      "
+                      :style="index % 2 == 0 ? 'border-right:1px solid #C4C4C4;' : ''"
                       style="border-bottom: 1px solid #c4c4c4"
                       v-for="(item, index) in extravocabList"
                       :key="index"
@@ -207,28 +115,28 @@ import multiplevocabMobile from "../components/multiplevocab/multiplevocabMobile
 export default {
   components: {
     multiplevocabPc,
-    multiplevocabMobile
+    multiplevocabMobile,
   },
   props: {
     isStartPractice: {
       type: Boolean,
-      default: () => true
+      default: () => true,
     },
     isShowDialogHelp: {
       type: Boolean,
-      default: () => true
+      default: () => false,
     },
     themeSync: {
       type: Number,
-      default: () => false
-    }
+      default: () => false,
+    },
   },
   data() {
     return {
       tab: "vocab",
       instruction: {
         th: "เลือกคำต้องที่ถูกต้อง",
-        en: "Choose the best correct answer"
+        en: "Choose the best correct answer",
       },
       totalStar: 0,
       numberOfPractice: 0,
@@ -239,93 +147,93 @@ export default {
       vocabList: [
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
-        }
+          meaning: "ทดสอบ",
+        },
       ],
       extravocabList: [
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
+          meaning: "ทดสอบ",
         },
         {
           vocab: "test",
-          meaning: "ทดสอบ"
-        }
+          meaning: "ทดสอบ",
+        },
       ],
 
       isPracticeTimeout: false,
       funcPracticeTime: "",
 
       isHasHelp: true,
-      isHasInstruction: true
+      isHasInstruction: true,
     };
   },
   methods: {
@@ -384,7 +292,7 @@ export default {
         this.currentTimeStart();
       }
 
-      this.choices.sort(x => Math.random() - 0.5);
+      this.choices.sort((x) => Math.random() - 0.5);
       let randomStar = Math.ceil(Math.random() * 10);
 
       if (randomStar % 2 == 0) {
@@ -394,7 +302,7 @@ export default {
           this.totalStar = 0;
         }
       }
-    }
+    },
   },
   mounted() {
     if (this.isHasHelp) {
@@ -404,7 +312,7 @@ export default {
     if (this.isHasInstruction) {
       this.$emit("isShowButtonInstruction");
     }
-  }
+  },
 };
 </script>
 
