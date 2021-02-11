@@ -170,7 +170,7 @@
     </div>
 
     <!-- Mobile -->
-    <div style="background-color: #ffe6cf">
+    <div style="background-color: #ffe6cf" v-if="$q.platform.is.mobile">
       <div class="q-pt-md row q-px-md">
         <div style="width: 100px" algin="center">
           <q-select
@@ -565,6 +565,8 @@ export default {
         } else if (data.skill == "Grammar") {
           routerName = "/grammarmultiple/";
         }
+      } else if (data.practiceType == "spellingbee") {
+        routerName = "/spellingbee/";
       }
 
       router.push(routerName + data.practiceListId);
