@@ -56,19 +56,22 @@
                 <q-img contain :src="vocabDataList.imageSentenceUrl"></q-img>
               </div>
               <div class="col self-center">
-                <span style="font-size: max(3vw, 16px)">{{
-                  vocabDataList.vocabulary
-                }}</span>
+                <span style="font-size: max(3vw, 16px)">{{ vocabDataList.vocab }}</span>
                 <span style="font-size: max(1.2vw, 16px)" class="q-mx-md"
-                  >({{ vocabDataList.partOfSpeech.partOfSpeech }})</span
+                  >(
+                  <span v-html="vocabDataList.partOfSpeech.partOfSpeech"> </span>
+                  )</span
                 >
                 <br />
-                <span style="font-size: max(1.2vw, 16px)">
-                  {{ vocabDataList.meaning }}
+                <div style="height: 10px"></div>
+                <span
+                  style="font-size: max(1.2vw, 16px)"
+                  v-html="vocabDataList.readingWord"
+                >
                 </span>
                 <br />
-                <span style="font-size: max(1.2vw, 16px)">
-                  {{ vocabDataList.meaning }}
+                <div style="height: 10px"></div>
+                <span style="font-size: max(1.2vw, 16px)" v-html="vocabDataList.meaning">
                 </span>
               </div>
             </div>
@@ -262,7 +265,7 @@ export default {
 }
 
 .box-dialog-details {
-  max-width: 800px;
+  max-width: 900px;
   width: 100%;
   background-color: #ffffff;
   border-radius: 10px;

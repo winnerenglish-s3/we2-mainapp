@@ -16,6 +16,7 @@
       :themeSync="themeSync"
       @playSound="(val) => playSound(val)"
       v-if="$q.platform.is.desktop && isLoadPractice"
+      :isSynchronize="isSynchronize"
     ></flashcard-pc>
 
     <flashcard-mobile
@@ -24,6 +25,7 @@
       @playSound="(val) => playSound(val)"
       :isShowDialogFlashcard="isShowDialogFlashcard"
       @showDialogFlashcard="isShowDialogFlashcard = true"
+      :isSynchronize="isSynchronize"
     ></flashcard-mobile>
   </q-page>
 </template>
@@ -31,12 +33,12 @@
 <script>
 import flashcardPc from "../components/flashcard/flashcardPc";
 import flashcardMobile from "../components/flashcard/flashcardMobile";
-import { db } from "src/router";
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref } from "vue";
 import axios from "axios";
 import { useQuasar } from "quasar";
 import { useRouter, useRoute } from "vue-router";
 import appBar from "../components/app-bar";
+import { db } from "src/router";
 export default {
   components: {
     flashcardPc,
@@ -49,7 +51,7 @@ export default {
       default: 0,
     },
   },
-  setup(props, { emit }) {
+  setup() {
     // Initial
     const $q = useQuasar();
     const router = useRouter();
@@ -57,6 +59,11 @@ export default {
 
     const flashcardList = ref([]);
     const isLoadPractice = ref(false);
+
+    // สถานะ synchronize
+    const isSynchronize = ref(false);
+    // ข้อมูลที่ได้จาก synchonize
+    const synchronizeData = ref([]);
 
     // โหลดข้อมูล Flashcard
     const loadFlashcard = async () => {
@@ -73,19 +80,7 @@ export default {
     };
 
     // ส่งข้อมูลเข้าไปที่ Component Vocab
-    const vocabDataList = computed(() => {
-      let temp = "";
-
-      if (props.isSynchronize) {
-        temp = flashcardList.value.filter(
-          (x) => x.id == props.synchronizeData.practiceId
-        )[0];
-      } else {
-        temp = flashcardList.value;
-      }
-
-      return temp;
-    });
+    const vocabDataList = ref([]);
 
     // Play sound
     const playSound = (url) => {
@@ -93,18 +88,36 @@ export default {
       audio.play();
     };
 
+    // SnapSynchronize Data
+    const snapSynchronize = () => {
+      db.collection("synchronize")
+        .doc("test")
+        .onSnapshot((doc) => {
+          synchronizeData.value = doc.data();
+          if (doc.data().mode == "control") {
+            isSynchronize.value = true;
+            vocabDataList.value = flashcardList.value.filter(
+              (x) => x.id == doc.data().practiceId
+            )[0];
+            isShowDialogFlashcard.value = false;
+          } else {
+            isSynchronize.value = false;
+            vocabDataList.value = flashcardList.value;
+          }
+        });
+    };
+
     // Close Flashcard Dialog
     const isShowDialogFlashcard = ref(false);
-    // const showDialogFlashcard = () => {
-    //   isShowDialogFlashcard.value = true;
-    // };
-
     const closeDialogFlashcard = () => {
       isShowDialogFlashcard.value = false;
     };
 
     // เรียกใช้งาน Function
-    onMounted(loadFlashcard);
+    onMounted(async () => {
+      await loadFlashcard();
+      snapSynchronize();
+    });
 
     return {
       flashcardList,
@@ -113,6 +126,8 @@ export default {
       playSound,
       isShowDialogFlashcard,
       closeDialogFlashcard,
+      synchronizeData,
+      isSynchronize,
     };
   },
 };

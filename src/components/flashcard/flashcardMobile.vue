@@ -14,9 +14,9 @@
         </div>
         <div class="col self-center q-px-md">
           <span style="font-size: max(3vw, 24px)"> {{ item.vocab }}</span>
-          <span class="relative-position q-mx-sm" style="font-size: max(2vw, 14px)"
-            >(v.)</span
-          >
+          <span class="relative-position q-mx-sm" style="font-size: max(2vw, 14px)">
+            ({{ item.partOfSpeech.partOfSpeech }})
+          </span>
         </div>
         <div class="col-1 self-center">
           <q-icon name="fas fa-chevron-right" class="text-grey-5" size="24px"></q-icon>
@@ -30,18 +30,19 @@
         <div class="col-12 q-pa-md" align="center">
           <q-img
             style="max-width: 300px; width: 100%"
-            src="../../../public/images/flashcard/draft-img-flashcard.png"
+            contain
+            :src="vocabDataList.imageSentenceUrl"
           ></q-img>
         </div>
         <div class="col-12 q-pa-md f18" align="center">
-          <span class="f36">attack</span>
-          <span class="q-mx-sm">(v.)</span>
+          <span class="f36" v-html="vocabDataList.vocab"> </span>
+          <span class="q-mx-sm">( {{ vocabDataList.partOfSpeech.partOfSpeech }} )</span>
           <br />
           <div class="q-my-md">
-            <span>อะ-แทค</span>
+            <span v-html="vocabDataList.readingWord"></span>
           </div>
           <div>
-            <span>โจมตี, รุกราน, บุก</span>
+            <span v-html="vocabDataList.meaning"></span>
           </div>
         </div>
       </div>
@@ -65,7 +66,9 @@
                   <span
                     class="relative-position q-mx-sm"
                     style="font-size: max(2vw, 12px)"
-                    >({{ vocabDataList[currentFlashcardIndex].wordingType }})</span
+                    >({{
+                      vocabDataList[currentFlashcardIndex].partOfSpeech.partOfSpeech
+                    }})</span
                   ></span
                 >
               </div>
@@ -156,19 +159,10 @@
 </template>
 
 <script>
-import { computed, ref } from "vue";
-export default {
-  props: {
-    vocabDataList: {
-      type: Array,
-      default: () => [],
-    },
-    isShowDialogFlashcard: {
-      type: Boolean,
-      default: () => false,
-    },
-  },
+import { computed, ref, watch } from "vue";
 
+export default {
+  props: ["vocabDataList", "isShowDialogFlashcard", "isSynchronize"],
   setup(props, { emit }) {
     const currentFlashcardIndex = ref(0);
 
