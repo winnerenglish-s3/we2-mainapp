@@ -116,6 +116,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -127,23 +128,29 @@ export default {
   },
   methods: {
     //เข้าสู่ระบบ
-    toAdventure() {
-      // let config = this.$q.sessionStorage.getItem("config");
-      if (this.username == "admin" && this.password == "1234") {
-        if (config.includes("firstentry")) {
-          this.$router.push("/character");
-        }
-        // else {
-        //   this.$router.push("/lobby");
-        // }
-        else if (config.includes("placement")) {
-          // window.open("http://localhost:8082/welcome");
-          this.$router.push("/landing");
+    async toAdventure() {
+      let url =
+        "https://us-central1-winnerenglish2-e0f1b.cloudfunctions.net/wfunctions/adventuresLogin";
+      let postData = {
+        username: this.username,
+        password: this.password,
+      };
+
+      try {
+        this.$q.loading.show({
+          delay: 0,
+        });
+        let response = await axios.post(url, postData);
+        let uid = response.data;
+
+        this.$q.loading.hide();
+        if (response.data != "user not found") {
+          this.$router.push("/splash/" + uid);
         } else {
-          this.$router.push("/lobby");
+          alert("user not found");
         }
-      } else {
-        this.isShowErrorDialog = true;
+      } catch (error) {
+        alert(error);
       }
     },
     //ตกลง
@@ -151,9 +158,7 @@ export default {
       this.isShowErrorDialog = false;
     },
   },
-  created() {
-    // this.$q.localStorage.set("pf", "A");
-  },
+  created() {},
 };
 </script>
 

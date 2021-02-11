@@ -172,7 +172,11 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -201,7 +205,11 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -230,7 +238,11 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -259,7 +271,11 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -288,7 +304,11 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -317,7 +337,11 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -346,7 +370,11 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -1708,10 +1736,10 @@ export default {
     transform: translateX(-15px) translateY(5px);
   }
   60% {
-    transform: translateX(0px) translateY(0px);
+    transform: translateX(-10px) translateY(0px);
   }
   75% {
-    transform: translateX(5px) translateY(5px);
+    transform: translateX(-5px) translateY(5px);
   }
   100% {
     transform: translateX(0px) translateY(0px);
