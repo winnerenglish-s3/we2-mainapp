@@ -1,6 +1,6 @@
 <template>
   <svg
-    style="width: 95%; height: 100%"
+    style="width: 100%"
     width="428"
     height="342"
     viewBox="0 0 428 342"

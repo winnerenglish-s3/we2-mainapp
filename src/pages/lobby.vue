@@ -1,249 +1,23 @@
 <template>
   <q-page
-    class="relative-position row"
-    :class="!platPc ? (!mode ? 'bg-lobby-night' : 'bg-lobby-day') : ''"
+    class="relative-position"
     :style="mode ? 'background-color:#694532' : 'background-color:#1E263B'"
   >
     <!-- Platform Device -->
-    <lobby-pc :mode="mode" v-if="$q.platform.is.desktop"></lobby-pc>
-    <lobby-mobile :mode="mode" v-if="$q.platform.is.mobile"></lobby-mobile>
-
-    <div class="col-12 self-start row z-top">
-      <div class="col self-start row q-px-xs q-pt-sm">
-        <q-img
-          fit="contain"
-          style="max-width: 120px; width: 30%; font-size: 100%; z-index: 2"
-          src="../../public/images/lobby/box-level.png"
-        >
-          <div class="transparent absolute-center" style="top: 53%">
-            <span class="text-grey-9 f32">{{ characterData.level }}</span>
-          </div>
-        </q-img>
-        <q-img
-          fit="contain"
-          style="max-width: 230px; width: 80%; margin-left: -25px"
-          src="../../public/images/lobby/name-bar.png"
-        >
-          <div class="transparent full-width absolute-center no-padding" style="top: 45%">
-            <div style="padding-left: 30px" class="q-px-xs">
-              <div class="">
-                <span class="f16" style="line-height: 0">{{ characterData.name }}</span>
-              </div>
-              <div class="q-pr-md q-py-xs">
-                <div class="exp-bar relative-position">
-                  <div
-                    class="bg-primary full-height"
-                    style="margin-left: -5px; width: 80%; border-radius: 20px"
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </q-img>
-
-        <div :class="!platPc ? 'col-12' : ''" class="self-center" align="left">
-          <q-img
-            fit="contain"
-            :style="platPc ? 'width:150px' : 'width:max(20vw,130px)'"
-            src="../../public/images/lobby/heart-bar.png"
-          >
-            <div class="transparent fit relative-position no-padding">
-              <div class="absolute-center" style="top: 40%; left: 65%">
-                <span class="f16">{{ 5 }}</span>
-              </div>
-            </div>
-          </q-img>
-        </div>
-
-        <div :class="!platPc ? 'col-12' : ''" class="self-center">
-          <q-img
-            fit="contain"
-            :style="platPc ? 'width:150px' : 'width:max(20vw,130px)'"
-            src="../../public/images/lobby/coin-bar.png"
-          >
-            <div class="transparent fit relative-position no-padding">
-              <div class="absolute-center" style="top: 40%; left: 65%">
-                <span class="f16">{{ 99999 }}</span>
-              </div>
-            </div>
-          </q-img>
-        </div>
-      </div>
-
-      <div
-        :class="!platPc ? 'col-3 q-pr-sm ' : 'col-3 q-px-md'"
-        align="right"
-        class="q-pt-md"
-        :style="!platPc ? 'width:160px;' : ''"
-      >
-        <q-img
-          style="width: max(5vw, 45px)"
-          class="cursor-pointer"
-          src="../../public/images/lobby/noti-btn.png"
-        >
-          <div class="transparent fit" v-if="isNewNotify">
-            <div
-              class="bg-red absolute-top-right"
-              style="
-                width: 15px;
-                height: 15px;
-                border-radius: 50%;
-                border: 1px solid#fff;
-                right: 7px;
-                top: 2px;
-              "
-            ></div>
-          </div>
-        </q-img>
-        <q-img
-          style="width: max(5vw, 45px)"
-          class="cursor-pointer q-mx-xs"
-          src="../../public/images/lobby/setting-btn.png"
-        ></q-img>
-        <q-img
-          style="width: max(5vw, 45px)"
-          class="cursor-pointer"
-          src="../../public/images/lobby/logout-btn.png"
-        ></q-img>
-
-        <div align="right" class="relative-position" style="z-index: 2" v-if="!platPc">
-          <div>
-            <q-img
-              fit="contain"
-              width="max(15vw,100px)"
-              class="cursor-pointer"
-              :class="activeMenu == 'ranking' ? 'hover-menu' : 'menu-icon'"
-              @mouseenter="activeMenu = 'ranking'"
-              @mouseleave="activeMenu = null"
-              src="../../public/images/lobby/ranking-btn.png"
-            ></q-img>
-          </div>
-          <div>
-            <q-img
-              width="max(15vw,100px)"
-              fit="contain"
-              class="cursor-pointer"
-              :class="activeMenu == 'mission' ? 'hover-menu' : 'menu-icon'"
-              @mouseenter="activeMenu = 'mission'"
-              @mouseleave="activeMenu = null"
-              src="../../public/images/lobby/mission-btn.png"
-            ></q-img>
-          </div>
-          <div>
-            <q-img
-              width="max(15vw,100px)"
-              fit="contain"
-              class="cursor-pointer"
-              :class="activeMenu == 'achievement' ? 'hover-menu' : 'menu-icon'"
-              @mouseenter="activeMenu = 'achievement'"
-              @mouseleave="activeMenu = null"
-              src="../../public/images/lobby/achievement-btn.png"
-            ></q-img>
-          </div>
-          <div>
-            <q-img
-              width="max(15vw,100px)"
-              fit="contain"
-              class="cursor-pointer"
-              :class="activeMenu == 'equipment' ? 'hover-menu' : 'menu-icon'"
-              @mouseenter="activeMenu = 'equipment'"
-              @mouseleave="activeMenu = null"
-              src="../../public/images/lobby/equipment-btn.png"
-            ></q-img>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12 row" style="z-index: 2">
-      <div class="col-6" v-if="platPc"></div>
-      <div :class="platPc ? 'col-4' : 'col-12'" align="center">
-        <character
-          :equipment="equipment"
-          :style="!platPc ? 'top:55%;z-index:1;' : ''"
-          :class="!platPc ? 'absolute-center' : ''"
-        ></character>
-      </div>
-    </div>
-
-    <div class="col-12 self-end q-py-lg row z-top">
-      <div class="col row self-end q-px-md" v-if="platPc">
-        <q-img
-          fit="contain"
-          width="120px"
-          class="cursor-pointer q-mx-xs"
-          :class="activeMenu == 'ranking' ? 'hover-menu' : 'menu-icon'"
-          @mouseenter="activeMenu = 'ranking'"
-          @mouseleave="activeMenu = null"
-          src="../../public/images/lobby/ranking-btn.png"
-        ></q-img>
-        <q-img
-          width="120px"
-          fit="contain"
-          class="cursor-pointer q-mx-xs"
-          :class="activeMenu == 'mission' ? 'hover-menu' : 'menu-icon'"
-          @mouseenter="activeMenu = 'mission'"
-          @mouseleave="activeMenu = null"
-          src="../../public/images/lobby/mission-btn.png"
-        ></q-img>
-        <q-img
-          width="120px"
-          fit="contain"
-          class="cursor-pointer q-mx-xs"
-          :class="activeMenu == 'achievement' ? 'hover-menu' : 'menu-icon'"
-          @mouseenter="activeMenu = 'achievement'"
-          @mouseleave="activeMenu = null"
-          src="../../public/images/lobby/achievement-btn.png"
-        ></q-img>
-        <q-img
-          width="120px"
-          fit="contain"
-          class="cursor-pointer q-mx-xs"
-          :class="activeMenu == 'equipment' ? 'hover-menu' : 'menu-icon'"
-          @mouseenter="activeMenu = 'equipment'"
-          @mouseleave="activeMenu = null"
-          src="../../public/images/lobby/equipment-btn.png"
-        ></q-img>
-      </div>
-      <q-space></q-space>
-      <div
-        :class="platPc ? ' justify-center ' : 'col-12 justify-center'"
-        class="row"
-        align="center"
-      >
-        <div
-          :style="platPc ? '' : 'width:170px;'"
-          :class="platPc ? 'col q-mx-md' : 'col-3'"
-          class="self-end"
-        >
-          <q-img
-            :style="platPc ? 'width:120px' : 'width:110px'"
-            fit="contain"
-            class="cursor-pointer"
-            :class="activeMenu == 'boss' ? 'hover-menu' : 'menu-icon'"
-            @mouseenter="activeMenu = 'boss'"
-            @mouseleave="activeMenu = null"
-            src="../../public/images/lobby/boss-btn.png"
-          ></q-img>
-        </div>
-        <div
-          :style="platPc ? '' : 'width:170px;'"
-          :class="platPc ? 'col q-mx-md q-mr-lg ' : 'col-3'"
-          class="self-end"
-        >
-          <q-img
-            :style="platPc ? 'width:130px' : 'width:min(130px,50vw)'"
-            fit="contain"
-            class="cursor-pointer"
-            :class="activeMenu == 'leaning' ? 'hover-menu' : 'menu-icon'"
-            @mouseenter="activeMenu = 'leaning'"
-            @mouseleave="activeMenu = null"
-            src="../../public/images/lobby/leaning-btn.png"
-            @click="$router.push('/practicemain')"
-          ></q-img>
-        </div>
-      </div>
-    </div>
+    <lobby-pc
+      :characterData="characterData"
+      :equipment="equipment"
+      class=""
+      :mode="mode"
+      v-if="$q.platform.is.desktop"
+    ></lobby-pc>
+    <lobby-mobile
+      :characterData="characterData"
+      :equipment="equipment"
+      class=""
+      :mode="mode"
+      v-if="$q.platform.is.mobile"
+    ></lobby-mobile>
 
     <!-- dialog questionnaire -->
     <q-dialog persistent v-model="isShowPopupQuestionnaire" data-cy="dialog-question">
@@ -545,19 +319,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bg-lobby-day {
-  background-image: url("../../public/images/lobby/bg-lobby-day.png");
-  background-position: center;
-  background-size: cover;
-}
-
-.bg-lobby-night {
-  background-image: url("../../public/images/lobby/bg-lobby-night.png");
-  background-position: center;
-  background-size: cover;
-}
-
-//ปุ่ม login
 .btn-close {
   background-image: url("../../public/images/close-btn-m.png");
   width: 100%;
@@ -572,7 +333,6 @@ export default {
   cursor: pointer;
 }
 
-//ปุ่ม login
 .btn-exam {
   background-image: url("../../public/images/a.png");
   width: 100%;
@@ -599,38 +359,5 @@ export default {
   width: 70%;
   height: 35px;
   background-size: cover;
-}
-
-.hover-menu {
-  transition: 0.3s;
-  transform: translateY(-10px);
-}
-
-.menu-icon {
-  transition: 0.3s;
-}
-
-.box-container-level {
-  width: 85px;
-  min-height: 85px;
-  background-color: #fff;
-  border: 5px solid#FFC42E;
-  border-radius: 50%;
-  overflow: hidden;
-  box-shadow: 0 5px 7px rgba(65, 65, 65, 0.7);
-  z-index: 2;
-}
-
-.level-bar {
-  width: 110px;
-  background-color: #ffc42e;
-  top: 60%;
-}
-
-.exp-bar {
-  background-color: #fff;
-  border-radius: 70px;
-  height: 6px;
-  overflow: hidden;
 }
 </style>
