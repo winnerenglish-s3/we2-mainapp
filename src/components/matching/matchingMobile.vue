@@ -2,11 +2,13 @@
   <div class="box-container-matching row">
     <div class="col-12">
       <div>
-        <header-bar :totalQuestion="10" :currentQuestion="5" :totalStar="2"></header-bar>
+        <header-bar :totalQuestion="10" :currentChoice="5" :totalStar="1"></header-bar>
       </div>
       <div class="q-mt-xs box-question row justify-center">
         <div class="self-center">
-          <span> นักวิชาการ, ผู้คงแก่เรียน, ผู้ได้รับทุนการศึกษา </span>
+          <span style="font-size: max(3vw, 16px)">
+            {{ questionList[currentQuestion].meaning }}
+          </span>
         </div>
       </div>
       <div class="q-mt-md q-pa-md" align="center">
@@ -20,8 +22,8 @@
       <div class="box-choices row no-wrap">
         <div
           name="section"
-          class="col-7 relative-position section"
-          :class="index == currentQuestion ? null : 'section-notactive '"
+          class="col-8 relative-position section"
+          :class="index == currentChoice ? null : 'section-notactive '"
           align="center"
           :id="`section` + index"
           v-for="(item, index) in dataList"
@@ -32,7 +34,7 @@
             style="width: 95%"
             :src="
               require(`../../../public/images/matching/button-theme/matching-theme-${themeSync}-choices-${
-                isSendAnswer && index == currentQuestion
+                isSendAnswer && index == currentChoice
                   ? isCorrect
                     ? 'correct'
                     : 'incorrect'
@@ -43,22 +45,22 @@
             <div class="transparent absolute-center full-width">
               <span
                 :class="
-                  isSendAnswer && index == currentQuestion
+                  isSendAnswer && index == currentChoice
                     ? isCorrect
                       ? 'text-black'
                       : 'text-red'
                     : 'text-black'
                 "
                 style="font-size: 16px"
-                >{{ `Choice ${item} : index ${index} ` }}</span
+                >{{ `${item.vocab}` }}</span
               >
               <div
-                v-if="isSendAnswer && index == currentQuestion && !isCorrect"
-                class="text-black q-mt-sm"
+                v-if="isSendAnswer && index == currentChoice && !isCorrect"
+                class="text-black q-my-sm"
               >
                 <span>คำตอบที่ถูกต้องคือ</span>
                 <br />
-                <span> What the ... </span>
+                <span> {{ questionList[currentQuestion].vocab }} </span>
               </div>
             </div>
           </q-img>
@@ -66,7 +68,7 @@
 
         <div class="btn btn-left">
           <q-img
-            v-if="currentQuestion != 1"
+            v-if="!isSendAnswer && currentChoice != 1"
             @click="isSendAnswer ? null : backChoice()"
             width="10vw"
             src="../../../public/images/matching/btn-left.png"
@@ -74,7 +76,7 @@
         </div>
         <div class="btn btn-right">
           <q-img
-            v-if="currentQuestion != testCount"
+            v-if="!isSendAnswer && currentChoice != dataList.length - 2"
             @click="isSendAnswer ? null : nextChoice()"
             width="10vw"
             src="../../../public/images/matching/btn-right.png"
@@ -83,15 +85,15 @@
       </div>
     </div>
 
-    <div class="col-12 self-end q-pt-md q-pb-sm" align="center">
+    <div class="col-12 self-end q-pt-md q-pb-lg" align="center">
       <q-img
-        width="200px"
+        style="width: max(40vw, 200px)"
         v-if="!isSendAnswer"
         @click="sendAnswer()"
         src="../../../public/images/matching/btn-matching-active.png"
       ></q-img>
       <q-img
-        width="200px"
+        style="width: max(40vw, 200px)"
         v-if="isSendAnswer"
         @click="nextQuestion()"
         src="../../../public/images/next-question-btn.png"
@@ -112,11 +114,20 @@ export default {
       type: Number,
       require: true,
     },
+    questionList: {
+      tyoe: Array,
+      default: () => [],
+    },
+    answerList: {
+      tyoe: Array,
+      default: () => [],
+    },
   },
   setup(props) {
-    const testCount = ref(5);
     const dataList = ref([""]);
+
     const currentQuestion = ref(0);
+    const currentChoice = ref(0);
 
     const isNext = ref(false);
     const isPrevious = ref(false);
@@ -126,14 +137,42 @@ export default {
 
     const nextQuestion = () => {
       isSendAnswer.value = false;
+
+      let indexAnswer = dataList.value
+        .map((x) => x.vocab)
+        .indexOf(props.questionList[currentQuestion.value].vocab);
+
+      dataList.value.splice(indexAnswer, 1);
+
+      if (currentChoice.value == dataList.value.length - 1) {
+        let active = 0;
+
+        if (dataList.value.length == 3) {
+          active = 1;
+        } else {
+          active = currentChoice.value - 1;
+        }
+
+        setTimeout(() => {
+          let el = document.getElementById("section" + active);
+          el.scrollIntoView();
+        }, 100);
+
+        setTimeout(() => {
+          currentChoice.value = active;
+        }, 300);
+      }
+
+      currentQuestion.value++;
     };
 
     const sendAnswer = () => {
       isSendAnswer.value = true;
 
-      let randomAnswer = Math.ceil(Math.random() * 10);
-
-      if (randomAnswer % 2 == 0) {
+      if (
+        props.questionList[currentQuestion.value].vocab ==
+        dataList.value[currentChoice.value].vocab
+      ) {
         isCorrect.value = true;
       } else {
         isCorrect.value = false;
@@ -143,7 +182,7 @@ export default {
     // TODO : Function กดเลือกการ์ดใบก่อนหน้านี้
     const backChoice = () => {
       isPrevious.value = true;
-      let active = currentQuestion.value - 1;
+      let active = currentChoice.value - 1;
 
       setTimeout(() => {
         let el = document.getElementById("section" + active);
@@ -151,7 +190,7 @@ export default {
       }, 100);
 
       setTimeout(() => {
-        currentQuestion.value = active;
+        currentChoice.value = active;
         isPrevious.value = false;
       }, 300);
     };
@@ -159,7 +198,7 @@ export default {
     // TODO : Function กดเลือกการ์ดใบถัดไป
     const nextChoice = () => {
       isNext.value = true;
-      let active = currentQuestion.value + 1;
+      let active = currentChoice.value + 1;
 
       setTimeout(() => {
         let el = document.getElementById("section" + active);
@@ -167,24 +206,20 @@ export default {
       }, 100);
 
       setTimeout(() => {
-        currentQuestion.value = active;
+        currentChoice.value = active;
         isNext.value = false;
       }, 300);
     };
 
     const loadPracticeData = () => {
-      for (let i = 0; i < testCount.value; i++) {
-        let randomNumber = Math.ceil(Math.random() * testCount.value);
-
-        dataList.value.push(randomNumber);
-      }
+      dataList.value.push(...props.answerList);
 
       dataList.value.push("");
 
-      currentQuestion.value = Math.ceil(testCount.value / 2) - 1;
+      currentChoice.value = Math.ceil(props.answerList.length / 2) - 1;
 
       setTimeout(() => {
-        let el = document.getElementById("section" + currentQuestion.value);
+        let el = document.getElementById("section" + currentChoice.value);
         el.scrollIntoView();
       }, 100);
     };
@@ -192,9 +227,9 @@ export default {
     onMounted(loadPracticeData);
 
     return {
-      testCount,
       dataList,
       currentQuestion,
+      currentChoice,
       isNext,
       isPrevious,
       isSendAnswer,
