@@ -58,8 +58,14 @@
         <div class="text-center z-top">
           <!-- โหลด  -->
           <!-- โลโก้ -->
-          <transition appear enter-active-class="animatedLogo animate__bounceIn">
-            <q-img style="width: 144px" src="../../public/images/logo-adventures.png" />
+          <transition
+            appear
+            enter-active-class="animatedLogo animate__bounceIn"
+          >
+            <q-img
+              style="width: 144px"
+              src="../../public/images/logo-adventures.png"
+            />
           </transition>
           <div style="height: 40px"></div>
           <div>
@@ -75,7 +81,11 @@
               >
                 <div
                   class="fit"
-                  style="background-color: #d38a14; border-radius: 50px; padding: 2px"
+                  style="
+                    background-color: #d38a14;
+                    border-radius: 50px;
+                    padding: 2px;
+                  "
                 >
                   <div
                     class="full-height loading-bar"
@@ -85,7 +95,9 @@
                 </div>
               </div>
             </div>
-            <div class="q-py-sm appendMovingDots f16 animate">Loading {{ progress }}</div>
+            <div class="q-py-sm appendMovingDots f16 animate">
+              Loading {{ progress }}
+            </div>
           </div>
         </div>
       </div>
@@ -120,10 +132,9 @@ export default {
     const router = useRouter();
     const route = useRoute();
 
-    const uid = "TRk4Rf4DPC3DajHryM1A";
+    const uid = route.params.uid;
 
     router.replace("login");
-
     // ********************** Progress Bar Percentage **********************
     const progress = ref(0);
     const loadingProgress = () => {
@@ -145,7 +156,7 @@ export default {
       let isEnableGameMode = await game.gameStatus(schoolId);
 
       if (isEnableGameMode) {
-        console.log("game mode is enable");
+        // console.log("game mode is enable");
         const checkCreateCharacter = await game.characterInfomation(uid);
         loadingHide();
         if (checkCreateCharacter) {
@@ -156,7 +167,7 @@ export default {
           router.push("/character");
         }
       } else {
-        console.log("game mode is disable");
+        // console.log("game mode is disable");
         loadingHide();
       }
     };
@@ -176,7 +187,7 @@ export default {
           login(response.data.customToken, response.data.user.schoolId);
         } else {
           // user not found
-          console.log("user not found");
+          // console.log("user not found");
           alert("user not found");
           loadingHide();
         }
@@ -208,7 +219,11 @@ export default {
 <style lang="scss" scoped>
 .loading-bar {
   background: rgb(204, 36, 36);
-  background: linear-gradient(180deg, rgba(204, 36, 36, 1) 0%, rgba(255, 84, 84, 1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(204, 36, 36, 1) 0%,
+    rgba(255, 84, 84, 1) 100%
+  );
   border-radius: 50px;
 }
 .cloud1 {
