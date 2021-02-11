@@ -33,9 +33,10 @@
                       }}</span>
                     </div>
                     <div class="q-mt-sm">
-                      <span style="font-size: max(0.5vw, 14px); line-height: 0">{{
-                        `(${item.meaning})`
-                      }}</span>
+                      <span
+                        style="font-size: max(0.5vw, 14px); line-height: 0"
+                        >{{ `(${item.meaning})` }}</span
+                      >
                     </div>
                   </div>
                 </div>
@@ -146,20 +147,30 @@
                       ><span style="font-size: 32px; line-height: 0">{{
                         vocabDataList[currentFlashcardIndex].vocab
                       }}</span>
-                      ({{ vocabDataList[currentFlashcardIndex].wordingType }})</span
+                      ({{
+                        vocabDataList[currentFlashcardIndex].wordingType
+                      }})</span
                     >
                   </div>
                   <div class="q-mt-xs q-px-sm">
-                    <span> {{ vocabDataList[currentFlashcardIndex].readingWord }}</span>
+                    <span
+                      v-html="vocabDataList[currentFlashcardIndex].readingWord"
+                    ></span>
                   </div>
                   <div class="q-mt-xs q-px-sm">
-                    <span>{{ vocabDataList[currentFlashcardIndex].meaning }}</span>
+                    <span
+                      v-html="vocabDataList[currentFlashcardIndex].meaning"
+                    ></span>
                   </div>
                 </div>
 
                 <div class="col-12">
                   <div class="row q-my-lg">
-                    <div class="col-3 q-px-sm" align="right" style="width: 120px">
+                    <div
+                      class="col-3 q-px-sm"
+                      align="right"
+                      style="width: 120px"
+                    >
                       <q-btn
                         round
                         class="bg-warning"
@@ -171,7 +182,8 @@
                         @click="
                           $emit(
                             'playSound',
-                            vocabDataList[currentFlashcardIndex].soundSentenceUrl
+                            vocabDataList[currentFlashcardIndex]
+                              .soundSentenceUrl
                           )
                         "
                       >
@@ -181,13 +193,19 @@
                     <div class="col q-pr-xl q-pa-xs">
                       <div class="q-px-sm">
                         <span
-                          v-html="vocabDataList[currentFlashcardIndex].sentenceEng || '-'"
+                          v-html="
+                            vocabDataList[currentFlashcardIndex].sentenceEng ||
+                            '-'
+                          "
                         >
                         </span>
                       </div>
                       <div class="q-mt-xs q-px-sm">
                         <span
-                          v-html="vocabDataList[currentFlashcardIndex].sentenceTh || '-'"
+                          v-html="
+                            vocabDataList[currentFlashcardIndex].sentenceTh ||
+                            '-'
+                          "
                         >
                         </span>
                       </div>
@@ -199,11 +217,13 @@
                     <div class="row">
                       <div
                         class="col-6 q-mt-xs"
-                        v-for="(item, index) in vocabDataList[currentFlashcardIndex]
-                          .extraVocab"
-                      >
-                        {{ `${item.vocab} (${item.partOfSpeech}) ${item.meaning}` }}
-                      </div>
+                        v-for="(item, index) in vocabDataList[
+                          currentFlashcardIndex
+                        ].extraVocab"
+                        v-html="
+                          `${item.vocab} (${item.wordingType}) ${item.meaning}`
+                        "
+                      ></div>
                     </div>
                   </div>
                 </div>

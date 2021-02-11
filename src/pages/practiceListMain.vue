@@ -16,6 +16,8 @@
           <!-- ปุ่มกดย้อนกลับ -->
           <div class="col self-center">
             <q-img
+              v-if="selectSkill != 'Vocabulary'"
+              @click="previousSkill()"
               class="cursor-pointer"
               width="40px"
               src="../../public/images/practicelist/previous-list-btn.png"
@@ -59,7 +61,11 @@
                   </div>
                 </div>
                 <div class="col-2" style="width: 50px">
-                  <span class="f16">5/20</span>
+                  <span class="f16"
+                    >{{ showAllPassedPractice() }}/{{
+                      showNumberOfAllPracticeInLevel()
+                    }}</span
+                  >
                 </div>
               </div>
               <div class="q-my-md box-content-practice-list">
@@ -119,6 +125,8 @@
 
           <div class="col self-center" align="center">
             <q-img
+              v-if="selectSkill != 'Listening & Speaking'"
+              @click="nextSkill()"
               class="cursor-pointer"
               width="40px"
               src="../../public/images/practicelist/next-list-btn.png"
@@ -134,11 +142,11 @@
             src="../../public/images/practicelist/bg-map-theme-1.png"
           >
             <div
-              class="transparent absolute-center row box-content-menu justify-center items-start"
+              class="transparent absolute-center row box-content-menu justify-center items-center"
               style="max-width: 800px; width: 50%"
             >
               <div
-                class="col-6 self-start"
+                class="col-6 self-center"
                 align="center"
                 v-for="(item, index) in practiceListShow"
                 :key="index"
@@ -186,7 +194,7 @@
         </div>
         <div class="col q-pl-md">
           <q-select
-            v-model="skillSelect"
+            v-model="selectSkill"
             bg-color="white"
             round
             outlined
@@ -198,7 +206,7 @@
             <template v-slot:selected>
               <div class="absolute-center">
                 {{
-                  skillOptions.filter((x) => x.value == skillSelect)[0].label
+                  skillOptions.filter((x) => x.value == selectSkill)[0].label
                 }}
               </div>
             </template>
@@ -213,7 +221,11 @@
             </div>
           </div>
           <div class="col-2 offset-1" style="width: 50px">
-            <span class="f16">5/20</span>
+            <span class="f16"
+              >{{ showAllPassedPractice() }}/{{
+                showNumberOfAllPracticeInLevel()
+              }}</span
+            >
           </div>
         </div>
         <div class="q-my-md">
@@ -241,14 +253,18 @@
                   : 'bg-default'
               "
             >
-              <span class="f24 text-bold">
-                {{ i }}
-              </span>
+              <div align="center">
+                <span class="f24 text-bold">
+                  {{ i }}
+                </span>
+              </div>
             </div>
             <div class="col self-center q-px-sm" align="left">
-              <span class="f16" v-if="showPracticeListName(i)">
-                {{ showPracticeListName(i).nameEng }}
-              </span>
+              <div class="q-py-sm">
+                <span class="f16" v-if="showPracticeListName(i)">
+                  {{ showPracticeListName(i).nameEng }}
+                </span>
+              </div>
             </div>
             <div class="col-2 self-center" style="width: 60px">
               <q-icon
@@ -270,6 +286,7 @@
       </div>
     </div>
 
+    <!-- Sohw Practice Dialog Mobile -->
     <q-dialog
       v-model="isShowPracticeDialogMobile"
       persistent
@@ -290,52 +307,9 @@
           </div>
         </q-toolbar>
         <q-card-section>
-          <!-- <div class="self-start row bg-map full-height justify-center">
-            <div class="self-center col" align="center">
-              <q-img
-                style="max-width: 800px; width: 100%"
-                src="../../public/images/practicelist/bg-map-theme-1.png"
-              >
-                <div
-                  class="transparent absolute-center row box-content-menu justify-center items-start"
-                  style="max-width: 800px; width: 50%"
-                >
-                  <div
-                    class="col-6 self-start"
-                    align="center"
-                    v-for="(item, index) in practiceListShow"
-                    :key="index"
-                  >
-                    <div class="">
-                      <q-img
-                        contain=""
-                        style="max-width: 150px"
-                        class="cursor-pointer"
-                        :src="showIconPractice(item.practiceType)"
-                        @click="gotoPractice(item)"
-                      >
-                        <div
-                          class="transparent absolute-bottom no-padding"
-                          style="width: 80%; bottom: 13px; margin: auto"
-                          align="left"
-                        >
-                          <div class="" align="center">
-                            <span>{{
-                              `${index + 1}. ${item.practiceType} `
-                            }}</span>
-                          </div>
-                        </div>
-                      </q-img>
-                    </div>
-                  </div>
-                </div>
-              </q-img>
-            </div>
-          </div> -->
-
           <div class="row">
             <div
-              class="col-6 self-start"
+              class="col-6 self-center"
               align="center"
               v-for="(item, index) in practiceListShow"
               :key="index"
@@ -353,7 +327,7 @@
                     style="width: 80%; bottom: 13px; margin: auto"
                     align="left"
                   >
-                    <div class="" align="center">
+                    <div align="center">
                       <span>{{ `${index + 1}. ${item.practiceType} ` }}</span>
                     </div>
                   </div>
@@ -394,6 +368,7 @@ export default {
     // Router
     const $q = useQuasar();
     const router = useRouter();
+
     // UID
     const uid = $q.sessionStorage.getItem("uid");
     const { getScrollTarget, setVerticalScrollPosition } = scroll;
@@ -406,8 +381,6 @@ export default {
       getPractice();
     });
 
-    // skill change
-    const skillSelect = ref("Vocabulary");
     const skillOptions = [
       {
         label: "คำศัพท์",
@@ -459,6 +432,40 @@ export default {
     const practiceList = ref([]);
     const practiceName = ref([]);
     const selectSkill = ref("Vocabulary");
+
+    // Next skill (Desktop)
+    const nextSkill = () => {
+      if (selectSkill.value == "Vocabulary") {
+        selectSkill.value = "Grammar";
+      } else if (selectSkill.value == "Grammar") {
+        selectSkill.value = "Reading";
+      } else if (selectSkill.value == "Reading") {
+        selectSkill.value = "Writing";
+      } else if (selectSkill.value == "Writing") {
+        selectSkill.value = "Phonics";
+      } else if (selectSkill.value == "Phonics") {
+        selectSkill.value = "Listening & Speaking";
+      }
+    };
+
+    const previousSkill = () => {
+      if (selectSkill.value == "Grammar") {
+        selectSkill.value = "Vocabulary";
+      } else if (selectSkill.value == "Reading") {
+        selectSkill.value = "Grammar";
+      } else if (selectSkill.value == "Writing") {
+        selectSkill.value = "Reading";
+      } else if (selectSkill.value == "Phonics") {
+        selectSkill.value = "Writing";
+      } else if (selectSkill.value == "Listening & Speaking") {
+        selectSkill.value = "Phonics";
+      }
+    };
+
+    // Skill changed (Mobile)
+    watch(selectSkill, (newValue, oldValue) => {
+      getPractice();
+    });
     const practiceLog = ref([]);
 
     const getPractice = async () => {
@@ -504,6 +511,16 @@ export default {
       }
     };
 
+    // โชว์จำนวนแบบฝึกหัดที่มีทั้งหมดภายในเลเวล-ทักษะ
+    const showNumberOfAllPracticeInLevel = () => {
+      let totalPracticeInLevel = practiceList.value.filter(
+        (x) =>
+          x.level == selectLevel.value.toString() &&
+          x.skill == selectSkill.value
+      ).length;
+      return totalPracticeInLevel;
+    };
+
     // โชว์จำนวนแบบฝึกหัดที่ทำไปแล้ว ภายใน เลเวล ยูนิต ทักษะ
     const showPassedPracticeNumber = (unit) => {
       let result =
@@ -512,6 +529,15 @@ export default {
             x.level == selectLevel.value &&
             x.skill == selectSkill.value &&
             x.unit == unit
+        ).length || 0;
+      return result;
+    };
+
+    // โชว์จำนวนแบบฝึกหัดที่ทำไปแล้วทั้งหมด ภายในเลเวล
+    const showAllPassedPractice = () => {
+      let result =
+        practiceLog.value.filter(
+          (x) => x.level == selectLevel.value && x.skill == selectSkill.value
         ).length || 0;
       return result;
     };
@@ -609,8 +635,12 @@ export default {
       gotoPractice,
       showPassedPracticeNumber,
       // SKill select for mobile
-      skillSelect,
+      selectSkill,
       skillOptions,
+      showAllPassedPractice,
+      showNumberOfAllPracticeInLevel,
+      nextSkill,
+      previousSkill,
 
       //
       levelList,
