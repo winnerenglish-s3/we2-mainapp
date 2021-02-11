@@ -6,7 +6,7 @@ const routes = [
     name: "adventure-splash",
   },
   {
-    path: "/adventure/login",
+    path: "",
     component: () => import("pages/adventure-login.vue"),
     name: "adventure-login",
   },
@@ -81,14 +81,14 @@ const routes = [
 
       // Spelling Bee Main
       {
-        path: "/spellingbee",
+        path: "/spellingbee/:practiceListId?",
         component: () => import("pages/spellingMain.vue"),
         name: "spellingbee",
       },
 
       // Multiple Vocab Main
       {
-        path: "/multiplevocab",
+        path: "/multiplevocab/:practiceListId?",
         component: () => import("pages/multiplevocabMain.vue"),
         name: "multiplevocab",
       },
@@ -102,42 +102,42 @@ const routes = [
 
       // Phonics Multiple Main
       {
-        path: "/phonicsmultiple",
+        path: "/phonicsmultiple/:practiceListId?",
         component: () => import("pages/phonicsMultipleMain.vue"),
         name: "phonicsmultiple",
       },
 
       // Conversation Multiple Main
       {
-        path: "/conversationmultiple",
+        path: "/conversationmultiple/:practiceListId?",
         component: () => import("pages/conversationMultipleMain.vue"),
         name: "conversationmultiple",
       },
 
       // Language Tip Main
       {
-        path: "/languagetipmultiple",
+        path: "/languagetipmultiple/:practiceListId?",
         component: () => import("pages/languagetipMultipleMain.vue"),
         name: "languagetipmultiple",
       },
 
       // Grammar Multiple Main
       {
-        path: "/grammarmultiple",
+        path: "/grammarmultiple/:practiceListId?",
         component: () => import("pages/grammarMultipleMain.vue"),
         name: "grammarmultiple",
       },
 
       // Reading Multiple Main
       {
-        path: "/readingmultiple",
+        path: "/readingmultiple/:practiceListId?",
         component: () => import("pages/readingMultipleMain.vue"),
         name: "readingmultiple",
       },
 
       // Grammar Action
       {
-        path: "/grammaraction",
+        path: "/grammaraction/:practiceListId?",
         component: () => import("pages/grammarActionMain.vue"),
         name: "grammaraction",
       },

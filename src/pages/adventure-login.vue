@@ -14,7 +14,7 @@
           <div class="q-mt-lg relative-position">
             <!-- box-adventure -->
             <img src="../../public/images/box-adventure.png" />
-            <span style="width:270px" class="absolute-center">
+            <span style="width: 270px" class="absolute-center">
               <!-- username -->
               <div>
                 <q-input
@@ -56,7 +56,7 @@
                 <div
                   id="loginBtn"
                   @click="toAdventure()"
-                  class="text-dark btn-login relative-position "
+                  class="text-dark btn-login relative-position"
                 >
                   <span class="absolute-center">เข้าสู่ระบบ</span>
                 </div>
@@ -77,7 +77,7 @@
 
     <!-- dialog -->
     <q-dialog persistent v-model="isShowErrorDialog" data-cy="errorDialog">
-      <q-card flat class="bg-transparent" style="width:320px;height:312px">
+      <q-card flat class="bg-transparent" style="width: 320px; height: 312px">
         <q-card-section class="bg-transparent text-dark no-padding">
           <!-- รูปพื้นหลัง Error -->
           <q-img src="../../public/images/Alert.png" class="fit">
@@ -97,7 +97,7 @@
               </div>
             </div>
             <div
-              style="width:100%;bottom:30px; z-index:1000"
+              style="width: 100%; bottom: 30px; z-index: 1000"
               class="bg-transparent absolute-bottom"
               align="center"
             >
@@ -122,7 +122,7 @@ export default {
       isShowErrorDialog: false, //เรียก dialog Error
       username: "", // รหัสผู้ใช้งาน
       password: "", // รหัสผ่าน
-      isPwd: true // เปิด-ปิด ดวงตา password
+      isPwd: true, // เปิด-ปิด ดวงตา password
     };
   },
   methods: {
@@ -149,11 +149,11 @@ export default {
     //ตกลง
     confirm() {
       this.isShowErrorDialog = false;
-    }
+    },
   },
   created() {
-    this.$q.localStorage.set("pf", "A");
-  }
+    // this.$q.localStorage.set("pf", "A");
+  },
 };
 </script>
 
