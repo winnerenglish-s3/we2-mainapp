@@ -1,5 +1,5 @@
 <template>
-  <div class="relative-position row box-content-answer">
+  <div class="relative-position row justify-center box-content-answer">
     <div class="absolute full-width">
       <header-bar
         :totalQuestion="totalQuestion"
@@ -14,10 +14,10 @@
         style="margin-bottom: -5px; z-index: 3"
       ></theme-animation>
     </div>
-    <div class="col-12 row justify-center" style="z-index: 1">
+    <div class="col-10 row justify-center" style="z-index: 1">
       <!-- ตัวเลือกตอบด้านซ้าย -->
       <div class="col-3 self-center">
-        <div class="q-mt-md" v-for="(item, index) in showAnswer">
+        <div class="q-mt-md" v-for="(item, index) in choicesLeft">
           <q-img
             fit="contain"
             v-if="item.vocab != ''"
@@ -35,7 +35,11 @@
               }.png`)
             "
           >
-            <div class="absolute-center transparent full-width" align="center">
+            <div
+              class="absolute-center transparent"
+              style="width: 85%; left: 45%"
+              align="center"
+            >
               <span style="font-size: max(1.2vw, 14px)" class="text-black">{{
                 item.vocab
               }}</span>
@@ -64,12 +68,17 @@
       </div>
 
       <!-- ตัวเลือกตอบด้านขวา -->
-      <div class="col-8 self-center" align="right">
-        <div class="q-mt-md" v-for="(item, index) in choicesRight">
+      <div class="col-3 self-center" align="right">
+        <div
+          class="relative-position q-mt-md"
+          style="right: -32%"
+          v-for="(item, index) in choicesRight"
+          :key="index"
+        >
           <q-img
             fit="contain"
             class="relative-position cursor-pointer"
-            style="max-width: 315px; width: 35%; margin-right: -5%"
+            style="max-width: 315px; width: 95%"
             v-if="!isSendAnswer && item.vocab != ''"
             @click="
               activeRightIndex == null
@@ -102,7 +111,7 @@
                 : ''
             "
             class=""
-            style="max-width: 315px; width: 35%; margin-right: -5%"
+            style="max-width: 315px; width: 95%"
             :src="
               require(`../../../public/images/matching/matching-answer${
                 activeLeftIndex != null || activeRightIndex != null ? '-active' : ''
@@ -110,43 +119,50 @@
             "
           ></q-img>
 
-          <q-img
+          <!-- <q-img
             fit="contain"
             v-if="isSendAnswer"
-            style="max-width: 315px; width: 35%; margin-right: -5%"
+            style="max-width: 315px; width: 95%"
             :src="
               require(`../../../public/images/matching/matching-choices${
-                showQuestion[index].vocab == item.vocab ? '-correct' : '-incorrect'
+                item.vocab == choicesRight[index].vocab ? '-correct' : '-incorrect'
               }.png`)
             "
           >
             <div class="absolute-center transparent full-width" align="center">
               <div class="" style="font-size: max(1.1vw, 12px)">
                 <span class="text-black">
-                  {{ item.vocab }}
+                  {{ choicesRight[index].vocab }}
                 </span>
 
-                <div v-if="showQuestion[index].vocab != item.vocab">
+                <div v-if="item.vocab != choicesRight[index].vocab">
                   <span class="text-black">คำตอบที่ถูกต้องคือ</span>
                   <br />
-                  <span>{{ showQuestion[index].vocab }}</span>
+                  <span>{{ item.vocab }}</span>
                 </div>
               </div>
             </div>
-          </q-img>
-
+          </q-img> -->
+        </div>
+      </div>
+      <div class="col-6 self-center" align="right">
+        <div
+          class="q-mt-md"
+          v-for="(item, index) in testQuestion[currentQuestion]"
+          :key="index"
+        >
           <q-img
             class=""
             fit="contain"
-            style="max-width: 600px; width: 68%"
+            style="max-width: 600px; width: 92%"
             src="../../../public/images/matching/matching-question.png"
           >
             <div class="absolute-center transparent full-width q-px-lg" align="center">
               <span style="font-size: max(1.1vw, 12px)" class="text-black">{{
-                showQuestion[index].meaning
+                item.meaning
               }}</span>
-            </div></q-img
-          >
+            </div>
+          </q-img>
         </div>
       </div>
     </div>
@@ -213,26 +229,38 @@ export default {
     const currentQuestion = ref(0);
     const dataAnswerList = ref([]);
     const dataQuestionList = ref([]);
+    const testQuestion = ref([]);
     const activeLeftIndex = ref(null);
     const activeRightIndex = ref(null);
+    const isCorrectAnswer = ref(false);
+    const isSendAnswer = ref(false);
 
     const sendAnswer = () => {
-      this.isSendAnswer = true;
+      isSendAnswer = true;
 
       let countCorrect = 0;
 
-      this.choicesRight.map((x, index) => {
-        if (this.randomQuestion[index].vocab == x.vocab) {
+      choicesRight.map((x, index) => {
+        if (randomQuestion[index].vocab == x.vocab) {
           countCorrect++;
         }
       });
 
-      if (countCorrect == this.choices.length) {
-        this.isCorrectAnswer = true;
+      if (countCorrect == choices.length) {
+        isCorrectAnswer = true;
       } else {
-        this.isCorrectAnswer = false;
+        isCorrectAnswer = false;
       }
     };
+
+    const choicesLeft = ref([]);
+    const randomQuestion = ref([]);
+
+    const choicesRight = ref([
+      { vocab: "", meaning: "" },
+      { vocab: "", meaning: "" },
+      { vocab: "", meaning: "" },
+    ]);
 
     const loadData = () => {
       let setData = props.questionList;
@@ -280,15 +308,23 @@ export default {
         tempQuestion.push(setNewQuestion);
       }
 
-      dataAnswerList.value = tempAnswer;
-      dataQuestionList.value = tempQuestion;
+      dataAnswerList.value = [...tempAnswer];
+      dataQuestionList.value = [...tempQuestion];
+
+      testQuestion.value = [...tempQuestion];
+
+      funcRandom();
     };
 
     const funcRandom = () => {
       dataAnswerList.value[currentQuestion.value].sort(() => Math.random() - 0.5);
 
-      let setAnswer = dataAnswerList.value[currentQuestion.value];
-      let setQuestion = dataQuestionList.value[currentQuestion.value];
+      let setAnswer = [...dataAnswerList.value[currentQuestion.value]];
+      setAnswer = setAnswer;
+
+      let setQuestion = [...dataQuestionList.value[currentQuestion.value]];
+
+      setQuestion = setQuestion;
 
       let temp = [];
 
@@ -304,30 +340,8 @@ export default {
         funcRandom();
       }
 
-      return setAnswer;
+      choicesLeft.value = setAnswer;
     };
-
-    const choicesLeft = ref([]);
-    const choicesRight = ref([
-      { vocab: "", meaning: "" },
-      { vocab: "", meaning: "" },
-      { vocab: "", meaning: "" },
-    ]);
-
-    const showAnswer = computed(() => {
-      let setData = [];
-      if (dataAnswerList.value.length) {
-        setData = funcRandom();
-      }
-
-      return setData;
-    });
-
-    const showQuestion = computed(() => {
-      let setData = dataQuestionList.value[currentQuestion.value];
-
-      return setData;
-    });
 
     const selectAnswer = (index, moveTo) => {
       let selectActive = "";
@@ -370,10 +384,12 @@ export default {
       currentQuestion,
       dataAnswerList,
       dataQuestionList,
-      showAnswer,
-      showQuestion,
+      testQuestion,
+      randomQuestion,
       choicesLeft,
       choicesRight,
+      isCorrectAnswer,
+      isSendAnswer,
       sendAnswer,
 
       // Select Answer
@@ -400,10 +416,6 @@ export default {
           meaning: "นักธรรมชาติวิทยา",
         },
       ],
-      randomQuestion: [],
-
-      isSendAnswer: false,
-      isCorrectAnswer: false,
     };
   },
 
