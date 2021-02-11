@@ -25,13 +25,14 @@
           <q-btn
             icon="fas fa-pause"
             @click="isShowSetting = true"
-            v-if="$route.name != 'flashcard'"
+            v-if="isShowPauseBtn"
             class="shadow-2 btn-header btn-width-mobile"
           ></q-btn>
         </div>
 
         <div align="right" class="col-6">
           <q-btn
+            v-if="isShowInstructionBtn"
             @click="isShowDialogInstruction = true"
             icon="fas fa-info-circle"
             class="shadow-2 btn-header q-mr-md"
@@ -39,6 +40,7 @@
             :label="!$q.platform.is.mobile ? 'คำสั่ง' : ''"
           ></q-btn>
           <q-btn
+            v-if="isShowHelpBtn"
             @click="isShowDialogHelp = true"
             icon="fas fa-lightbulb"
             class="shadow-2 btn-header"
@@ -361,6 +363,18 @@ export default {
     isShowDialogFlashcard: {
       type: Boolean,
       default: () => false,
+    },
+    isShowInstructionBtn: {
+      type: Boolean,
+      default: false,
+    },
+    isShowHelpBtn: {
+      type: Boolean,
+      default: false,
+    },
+    isShowPauseBtn: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props, { emit }) {
