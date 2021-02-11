@@ -20,9 +20,9 @@
         <q-img
           fit="contain"
           style="max-width: 230px; width: 80%; margin-left: -25px"
-          src="../../../public/images/lobby/name-bar.png"
+          src="../../../public/images/lobby/box-name.png"
         >
-          <div class="transparent full-width absolute-center no-padding" style="top: 47%">
+          <div class="transparent full-width absolute-center no-padding" style="top: 40%">
             <div style="padding-left: 30px" class="q-px-xs">
               <div class="">
                 <span class="f14" style="line-height: 0">{{ characterData.name }}</span>
@@ -42,7 +42,7 @@
         <div class="col-12 self-center" align="left">
           <q-img
             fit="contain"
-            style="width: max(20vw, 130px)"
+            style="width: max(20vw, 115px)"
             src="../../../public/images/lobby/heart-bar.png"
           >
             <div class="transparent fit relative-position no-padding">
@@ -56,7 +56,7 @@
         <div class="col-12 self-center">
           <q-img
             fit="contain"
-            style="width: max(20vw, 130px)"
+            style="width: max(20vw, 115px)"
             src="../../../public/images/lobby/coin-bar.png"
           >
             <div class="transparent fit relative-position no-padding">
