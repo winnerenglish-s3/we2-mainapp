@@ -6,15 +6,13 @@
       </div>
       <div class="q-mt-xs box-question row justify-center">
         <div class="self-center">
-          <span style="font-size: max(3vw, 16px)">
-            {{ questionList[currentQuestion].meaning }}
-          </span>
+          <span style="font-size: max(3vw, 16px)"> เลือกจับคู่คำศัพท์ </span>
         </div>
       </div>
       <div class="q-mt-md q-pa-md" align="center">
-        <span style="font-size: max(3vw, 16px)" class="font-medium"
-          >เลือกจับคู่คำศัพท์</span
-        >
+        <span style="font-size: max(3vw, 16px)" class="font-medium">
+          {{ questionList[currentQuestion].meaning }}
+        </span>
       </div>
     </div>
 
@@ -32,6 +30,7 @@
           <q-img
             v-if="item != ''"
             style="width: 95%"
+            @click="!isSendAnswer ? sendAnswer() : ''"
             :src="
               require(`../../../public/images/matching/button-theme/matching-theme-${themeSync}-choices-${
                 isSendAnswer && index == currentChoice
@@ -136,6 +135,10 @@ export default {
     const isCorrect = ref(false);
 
     const nextQuestion = () => {
+      if (props.questionList.length - 1 == currentQuestion.value) {
+        return;
+      }
+
       isSendAnswer.value = false;
 
       let indexAnswer = dataList.value
@@ -259,21 +262,19 @@ export default {
   width: 100vw;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
-  overscroll-behavior-block: contain;
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 
 .section {
   scroll-snap-align: center;
-  scroll-snap-stop: always;
   padding: 5px;
   transition: 0.3s;
-  transform: scale(1);
+  transform: scale(0.95);
 }
 
-.section-notactive {
+.section + #section1 {
   transition: 0.1s;
-  transform: scale(0.85);
+  transform: scale(1);
 }
 
 .btn {

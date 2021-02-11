@@ -14,10 +14,10 @@
         style="margin-bottom: -5px; z-index: 3"
       ></theme-animation>
     </div>
-    <div class="col-12 row justify-center brx" style="z-index: 1">
+    <div class="col-12 row justify-center" style="z-index: 1">
       <!-- ตัวเลือกตอบด้านซ้าย -->
       <div class="col-3 self-center">
-        <div class="q-mt-md" v-for="(item, index) in choicesLeft">
+        <div class="q-mt-md" v-for="(item, index) in showAnswer">
           <q-img
             fit="contain"
             v-if="item.vocab != ''"
@@ -35,7 +35,7 @@
               }.png`)
             "
           >
-            <div class="absolute-center transparent">
+            <div class="absolute-center transparent full-width" align="center">
               <span style="font-size: max(1.2vw, 14px)" class="text-black">{{
                 item.vocab
               }}</span>
@@ -116,7 +116,7 @@
             style="max-width: 315px; width: 35%; margin-right: -5%"
             :src="
               require(`../../../public/images/matching/matching-choices${
-                randomQuestion[index].vocab == item.vocab ? '-correct' : '-incorrect'
+                showQuestion[index].vocab == item.vocab ? '-correct' : '-incorrect'
               }.png`)
             "
           >
@@ -126,10 +126,10 @@
                   {{ item.vocab }}
                 </span>
 
-                <div v-if="randomQuestion[index].vocab != item.vocab">
+                <div v-if="showQuestion[index].vocab != item.vocab">
                   <span class="text-black">คำตอบที่ถูกต้องคือ</span>
                   <br />
-                  <span>{{ randomQuestion[index].vocab }}</span>
+                  <span>{{ showQuestion[index].vocab }}</span>
                 </div>
               </div>
             </div>
@@ -143,7 +143,7 @@
           >
             <div class="absolute-center transparent full-width q-px-lg" align="center">
               <span style="font-size: max(1.1vw, 12px)" class="text-black">{{
-                randomQuestion[index].meaning
+                showQuestion[index].meaning
               }}</span>
             </div></q-img
           >
@@ -191,12 +191,16 @@
 <script>
 import themeAnimation from "../matching/theme-animation";
 import headerBar from "../header-time-progress";
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, computed } from "vue";
 export default {
   props: {
     themeSync: {
       type: Number,
       default: 0,
+    },
+    questionList: {
+      type: Array,
+      default: () => [],
     },
   },
   setup(props) {
@@ -206,9 +210,174 @@ export default {
       console.log(props.themeSync);
     };
 
+    const currentQuestion = ref(0);
+    const dataAnswerList = ref([]);
+    const dataQuestionList = ref([]);
+    const activeLeftIndex = ref(null);
+    const activeRightIndex = ref(null);
+
+    const sendAnswer = () => {
+      this.isSendAnswer = true;
+
+      let countCorrect = 0;
+
+      this.choicesRight.map((x, index) => {
+        if (this.randomQuestion[index].vocab == x.vocab) {
+          countCorrect++;
+        }
+      });
+
+      if (countCorrect == this.choices.length) {
+        this.isCorrectAnswer = true;
+      } else {
+        this.isCorrectAnswer = false;
+      }
+    };
+
+    const loadData = () => {
+      let setData = props.questionList;
+
+      setData = setData.map((x) => x);
+
+      let tempAnswer = [];
+      let tempQuestion = [];
+
+      for (let i = 0; i < props.questionList.length; i++) {
+        let currentAnswer = props.questionList[i];
+        let randomAnswer = [...setData];
+
+        randomAnswer = randomAnswer.sort(() => Math.random() - 0.5);
+
+        let findIndexCurrentAnswer = randomAnswer
+          .map((x) => x.vocab)
+          .indexOf(currentAnswer.vocab);
+
+        randomAnswer.splice(findIndexCurrentAnswer, 1);
+
+        randomAnswer = randomAnswer.slice(0, 2);
+
+        let setNewAnswer = [
+          {
+            vocab: currentAnswer.vocab,
+            meaning: currentAnswer.meaning,
+          },
+        ];
+
+        for (let i = 0; i < randomAnswer.length; i++) {
+          let newData = {
+            vocab: randomAnswer[i].vocab,
+            meaning: randomAnswer[i].meaning,
+          };
+
+          setNewAnswer.push(newData);
+        }
+
+        let setNewQuestion = [...setNewAnswer];
+
+        setNewQuestion = setNewQuestion.sort(() => Math.random() - 0.5);
+
+        tempAnswer.push(setNewAnswer);
+        tempQuestion.push(setNewQuestion);
+      }
+
+      dataAnswerList.value = tempAnswer;
+      dataQuestionList.value = tempQuestion;
+    };
+
+    const funcRandom = () => {
+      dataAnswerList.value[currentQuestion.value].sort(() => Math.random() - 0.5);
+
+      let setAnswer = dataAnswerList.value[currentQuestion.value];
+      let setQuestion = dataQuestionList.value[currentQuestion.value];
+
+      let temp = [];
+
+      for (let i = 0; i < setAnswer.length; i++) {
+        if (setAnswer[i].vocab == setQuestion[i].vocab) {
+          temp.push(true);
+        } else {
+          temp.push(false);
+        }
+      }
+
+      if (temp.every((x) => x)) {
+        funcRandom();
+      }
+
+      return setAnswer;
+    };
+
+    const choicesLeft = ref([]);
+    const choicesRight = ref([
+      { vocab: "", meaning: "" },
+      { vocab: "", meaning: "" },
+      { vocab: "", meaning: "" },
+    ]);
+
+    const showAnswer = computed(() => {
+      let setData = [];
+      if (dataAnswerList.value.length) {
+        setData = funcRandom();
+      }
+
+      return setData;
+    });
+
+    const showQuestion = computed(() => {
+      let setData = dataQuestionList.value[currentQuestion.value];
+
+      return setData;
+    });
+
+    const selectAnswer = (index, moveTo) => {
+      let selectActive = "";
+
+      if (activeLeftIndex.value != null) {
+        selectActive = { ...choicesLeft.value[activeLeftIndex.value] };
+
+        choicesLeft.value[activeLeftIndex.value].vocab = "";
+        choicesLeft.value[activeLeftIndex.value].meaning = "";
+      } else {
+        selectActive = { ...choicesRight.value[activeRightIndex.value] };
+
+        choicesRight.value[activeRightIndex.value].vocab = "";
+        choicesRight.value[activeRightIndex.value].meaning = "";
+      }
+
+      activeLeftIndex.value = null;
+      activeRightIndex.value = null;
+
+      if (moveTo == "right") {
+        choicesRight.value[index] = selectActive;
+      }
+
+      if (moveTo == "left") {
+        choicesLeft.value[index] = selectActive;
+      }
+    };
+
+    onMounted(() => {
+      loadData();
+    });
+
     return {
       testCount,
       getThemeSync,
+
+      // practice data
+      activeLeftIndex,
+      activeRightIndex,
+      currentQuestion,
+      dataAnswerList,
+      dataQuestionList,
+      showAnswer,
+      showQuestion,
+      choicesLeft,
+      choicesRight,
+      sendAnswer,
+
+      // Select Answer
+      selectAnswer,
     };
   },
   components: {
@@ -217,12 +386,6 @@ export default {
   },
   data() {
     return {
-      currentQuestion: 0,
-      totalQuestion: 10,
-      activeLeftIndex: null,
-      activeRightIndex: null,
-      choicesRight: [],
-      choicesLeft: [],
       choices: [
         {
           vocab: "electrician",
@@ -251,66 +414,6 @@ export default {
       this.isSendAnswer = false;
       this.currentQuestion++;
     },
-    sendAnswer() {
-      this.isSendAnswer = true;
-
-      let countCorrect = 0;
-
-      this.choicesRight.map((x, index) => {
-        if (this.randomQuestion[index].vocab == x.vocab) {
-          countCorrect++;
-        }
-      });
-
-      if (countCorrect == this.choices.length) {
-        this.isCorrectAnswer = true;
-      } else {
-        this.isCorrectAnswer = false;
-      }
-    },
-    selectAnswer(index, moveTo) {
-      let selectActive = "";
-
-      if (this.activeLeftIndex != null) {
-        selectActive = { ...this.choicesLeft[this.activeLeftIndex] };
-
-        this.choicesLeft[this.activeLeftIndex].vocab = "";
-        this.choicesLeft[this.activeLeftIndex].meaning = "";
-      } else {
-        selectActive = { ...this.choicesRight[this.activeRightIndex] };
-
-        this.choicesRight[this.activeRightIndex].vocab = "";
-        this.choicesRight[this.activeRightIndex].meaning = "";
-      }
-
-      this.activeLeftIndex = null;
-      this.activeRightIndex = null;
-
-      if (moveTo == "right") {
-        this.choicesRight[index] = selectActive;
-      }
-
-      if (moveTo == "left") {
-        this.choicesLeft[index] = selectActive;
-      }
-    },
-    startPractice() {
-      let temp = [...this.choices];
-
-      this.choicesRight = [];
-      this.choicesLeft = [];
-
-      for (let i = 0; i < temp.length; i++) {
-        this.choicesRight.push({ vocab: "", meaning: "" });
-        this.choicesLeft.push({ ...temp[i] });
-      }
-
-      let tempRandom = temp.sort(() => Math.random() - 0.5);
-      this.randomQuestion = tempRandom;
-    },
-  },
-  created() {
-    this.startPractice();
   },
 };
 </script>
