@@ -16,7 +16,7 @@
         <q-rating
           style="font-size: max(1.6vw, 22px)"
           :max="3"
-          :value="1"
+          v-model="totalStar"
           color="brown-6"
           color-selected="amber-5"
           class="no-pointer-events"

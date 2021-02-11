@@ -3,6 +3,11 @@
     <div>
       <app-bar></app-bar>
     </div>
+
+    <div class="absolute-center" v-if="!isLoadPractice">
+      <q-spinner color="primary" size="100px" />
+    </div>
+
     <matching-pc
       :themeSync="themeSync"
       :totalQuestion="state.totalQuestion"
@@ -12,8 +17,9 @@
       :practiceTime="state.practiceTime"
       :isCorrectAnswer="state.isCorrectAnswer"
       :questionList="questionList"
+      :answerList="answerList"
       class="box-container-main"
-      v-if="$q.platform.is.desktop"
+      v-if="$q.platform.is.desktop && isLoadPractice"
     ></matching-pc>
     <matching-mobile
       :themeSync="themeSync"
@@ -24,7 +30,8 @@
       :practiceTime="state.practiceTime"
       :isCorrectAnswer="state.isCorrectAnswer"
       :questionList="questionList"
-      v-if="$q.platform.is.mobile"
+      :answerList="answerList"
+      v-if="$q.platform.is.mobile && isLoadPractice"
     ></matching-mobile>
 
     <!-- Help Popup -->
@@ -90,6 +97,7 @@
     </q-dialog>
 
     <instruction-dialog
+      v-if="isLoadPractice"
       :isShowDialogInstruction="true"
       en="1234"
       th="123"
@@ -105,6 +113,8 @@ import { useRouter, useRoute } from "vue-router";
 import { useQuasar } from "quasar";
 import instructionDialog from "../components/instructionDialog";
 import appBar from "../components/app-bar";
+import axios from "axios";
+import { db } from "src/router";
 export default {
   props: {
     themeSync: {
@@ -128,8 +138,65 @@ export default {
     const route = useRoute();
     const router = useRouter();
 
-    // Test Matching
+    // Matching Data
     const questionList = ref([]);
+    const answerList = ref([]);
+    const isLoadPractice = ref(false);
+
+    // Load Practice Data
+    const loadFlashcard = async () => {
+      let flashcardList = [];
+
+      try {
+        let getFlashId = await db
+          .collection("practiceList")
+          .doc(route.params.practiceListId)
+          .get();
+
+        let setNumOfPractice = getFlashId.data().numOfPractice;
+
+        getFlashId = await db
+          .collection("practiceList")
+          .where("level", "==", getFlashId.data().level)
+          .where("unit", "==", getFlashId.data().unit)
+          .where("practiceType", "==", "flashcard")
+          .where("status", "==", true)
+          .get();
+
+        const apiURL =
+          "https://us-central1-winnerenglish2-e0f1b.cloudfunctions.net/wfunctions/getFlashcard";
+
+        const postData = {
+          practiceListId: getFlashId.docs[0].id,
+        };
+
+        const response = await axios.post(apiURL, postData);
+
+        flashcardList = response.data;
+
+        let setVocab = flashcardList;
+
+        let randomData = setVocab.sort(() => Math.random() - 0.5);
+
+        let setQuestion = randomData.map((x) => {
+          return { vocab: x.vocab, meaning: x.meaning };
+        });
+
+        setQuestion = setQuestion.slice(0, setNumOfPractice);
+
+        questionList.value = setQuestion;
+
+        let setAnswer = [...setQuestion];
+
+        setAnswer = setAnswer.sort(() => Math.random() - 0.5);
+
+        answerList.value = setAnswer;
+
+        isLoadPractice.value = true;
+      } catch (err) {
+        console.log(`${err} Type Matching`);
+      }
+    };
 
     // Extra Vocab
     const tab = ref("vocab");
@@ -180,16 +247,6 @@ export default {
       },
     ]);
 
-    const loadFlashcard = () => {
-      let setVocab = vocabList.value;
-
-      let randomData = setVocab.sort(() => Math.random() - 0.5);
-
-      questionList.value = randomData.slice(0, 6);
-
-      console.log(questionList.value);
-    };
-
     // State Practice Data
     const state = reactive({
       totalStar: 0,
@@ -207,9 +264,6 @@ export default {
 
     // TODO : แสดงปุ่มคำสั่งถ้ามี
     const isHasInstruction = ref(true);
-
-    // TODO : เช็คโหลดข้อมูลแบบฝึกหัดถ้าเสร็จแล้วจะเป็น True
-    const isLoadPractice = ref(false);
 
     const closeHelpBtn = () => {
       emit("closeHelp");
@@ -236,6 +290,7 @@ export default {
       vocabList,
       closeHelpBtn,
       questionList,
+      answerList,
     };
   },
 };
