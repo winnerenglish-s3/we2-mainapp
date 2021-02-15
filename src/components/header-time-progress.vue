@@ -4,13 +4,10 @@
       class="col-3 self-center row q-py-sm q-pb-md"
       style="max-width: 300px; width: 60%"
     >
-      <!-- <question-star
-        :currentQuestion="currentQuestion"
-        :totalQuestion="totalQuestion"
-        :totalStar="totalStar"
-      ></question-star> -->
       <div class="box-current-question self-center q-mx-md">
-        <span class="text-white" style="font-size: max(1.1vw, 14px)">99/99</span>
+        <span class="text-white" style="font-size: max(1.1vw, 14px)">{{
+          `${currentQuestion + 1}/${totalQuestion}`
+        }}</span>
       </div>
       <div class="box-start self-center" align="center">
         <q-rating

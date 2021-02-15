@@ -1,7 +1,7 @@
 <template>
   <q-page class="bg-matching">
     <div>
-      <app-bar></app-bar>
+      <app-bar :isFinishPractice="isFinishPractice"></app-bar>
     </div>
 
     <div class="absolute-center" v-if="!isLoadPractice">
@@ -10,7 +10,7 @@
 
     <matching-pc
       :themeSync="themeSync"
-      :totalQuestion="state.totalQuestion"
+      :totalQuestion="totalQuestion"
       :totalStar="state.totalStar"
       :currentQuestion="state.currentQuestion"
       :numberOfPractice="state.numberOfPractice"
@@ -18,12 +18,13 @@
       :isCorrectAnswer="state.isCorrectAnswer"
       :questionList="questionList"
       :answerList="answerList"
+      @finishPractice="(val) => (isFinishPractice = val)"
       class="box-container-main"
       v-if="$q.platform.is.desktop && isLoadPractice"
     ></matching-pc>
     <matching-mobile
       :themeSync="themeSync"
-      :totalQuestion="state.totalQuestion"
+      :totalQuestion="totalQuestion"
       :totalStar="state.totalStar"
       :currentQuestion="state.currentQuestion"
       :numberOfPractice="state.numberOfPractice"
@@ -31,6 +32,7 @@
       :isCorrectAnswer="state.isCorrectAnswer"
       :questionList="questionList"
       :answerList="answerList"
+      @finishPractice="(val) => (isFinishPractice = val)"
       v-if="$q.platform.is.mobile && isLoadPractice"
     ></matching-mobile>
 
@@ -142,6 +144,7 @@ export default {
     const questionList = ref([]);
     const answerList = ref([]);
     const isLoadPractice = ref(false);
+    const totalQuestion = ref(0);
 
     // Load Practice Data
     const loadFlashcard = async () => {
@@ -153,7 +156,7 @@ export default {
           .doc(route.params.practiceListId)
           .get();
 
-        let setNumOfPractice = getFlashId.data().numOfPractice;
+        totalQuestion.value = getFlashId.data().numOfPractice;
 
         getFlashId = await db
           .collection("practiceList")
@@ -182,7 +185,7 @@ export default {
           return { vocab: x.vocab, meaning: x.meaning };
         });
 
-        setQuestion = setQuestion.slice(0, setNumOfPractice);
+        setQuestion = setQuestion.slice(0, totalQuestion.value);
 
         questionList.value = setQuestion;
 
@@ -250,7 +253,6 @@ export default {
     // State Practice Data
     const state = reactive({
       totalStar: 0,
-      totalQuestion: 7,
       currentQuestion: 0,
       numberOfPractice: 0,
       isCorrectAnswer: false,
@@ -268,6 +270,9 @@ export default {
     const closeHelpBtn = () => {
       emit("closeHelp");
     };
+
+    // TODO : แสดง Dialog จบแบบฝึกหัด
+    const isFinishPractice = ref(false);
 
     onMounted(() => {
       if (isHasHelp) {
@@ -291,6 +296,8 @@ export default {
       closeHelpBtn,
       questionList,
       answerList,
+      isFinishPractice,
+      totalQuestion,
     };
   },
 };
