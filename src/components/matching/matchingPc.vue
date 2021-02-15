@@ -92,7 +92,7 @@
               }.png`)
             "
           >
-            <div class="absolute-center transparent">
+            <div class="absolute-center transparent full-width" align="center">
               <span style="font-size: max(1.1vw, 12px)" class="text-black">{{
                 item.vocab
               }}</span>
@@ -119,36 +119,38 @@
             "
           ></q-img>
 
-          <!-- <q-img
+          <q-img
             fit="contain"
             v-if="isSendAnswer"
             style="max-width: 315px; width: 95%"
             :src="
               require(`../../../public/images/matching/matching-choices${
-                item.vocab == choicesRight[index].vocab ? '-correct' : '-incorrect'
+                item.vocab == dataQuestionList[currentQuestion][index].vocab
+                  ? '-correct'
+                  : '-incorrect'
               }.png`)
             "
           >
             <div class="absolute-center transparent full-width" align="center">
               <div class="" style="font-size: max(1.1vw, 12px)">
                 <span class="text-black">
-                  {{ choicesRight[index].vocab }}
+                  {{ item.vocab }}
                 </span>
 
-                <div v-if="item.vocab != choicesRight[index].vocab">
+                <div v-if="item.vocab != dataQuestionList[currentQuestion][index].vocab">
                   <span class="text-black">คำตอบที่ถูกต้องคือ</span>
                   <br />
                   <span>{{ item.vocab }}</span>
                 </div>
               </div>
             </div>
-          </q-img> -->
+          </q-img>
         </div>
       </div>
       <div class="col-6 self-center" align="right">
         <div
           class="q-mt-md"
-          v-for="(item, index) in testQuestion[currentQuestion]"
+          v-for="(item, index) in dataQuestionList[currentQuestion]"
           :key="index"
         >
           <q-img
@@ -167,19 +169,21 @@
       </div>
     </div>
 
-    <div class="col-12 self-center q-py-lg" align="center">
+    <div class="col-12 self-center q-py-lg" align="center" v-if="dataAnswerList.length">
       <q-img
         v-if="!isSendAnswer"
         :class="
-          choicesRight.filter((x) => x.vocab != '').length == choices.length
+          choicesRight.filter((x) => x.vocab != '').length ==
+          dataAnswerList[currentQuestion].length
             ? 'cursor-pointer'
-            : ''
+            : 'no-pointer-events'
         "
         @click="sendAnswer()"
         width="200px"
         :src="
           require(`../../../public/images/matching/btn-matching-${
-            choicesRight.filter((x) => x.vocab != '').length == choices.length
+            choicesRight.filter((x) => x.vocab != '').length ==
+            dataAnswerList[currentQuestion].length
               ? ''
               : 'not'
           }active.png`)
@@ -187,7 +191,7 @@
       ></q-img>
 
       <q-img
-        v-if="isSendAnswer && currentQuestion != totalQuestion"
+        v-if="isSendAnswer && !isFinishPractice"
         @click="nextQuestion()"
         class="cursor-pointer"
         width="200px"
@@ -195,9 +199,10 @@
       ></q-img>
 
       <q-img
-        v-if="isSendAnswer && currentQuestion == totalQuestion"
+        v-if="isSendAnswer && isFinishPractice"
         class="cursor-pointer"
         width="200px"
+        @click="funcFinishPractice()"
         src="../../../public/images/finish-btn.png"
       ></q-img>
     </div>
@@ -218,10 +223,12 @@ export default {
       type: Array,
       default: () => [],
     },
+    totalQuestion: {
+      type: Number,
+      default: 0,
+    },
   },
-  setup(props) {
-    const testCount = ref(0);
-
+  setup(props, { emit }) {
     const getThemeSync = () => {
       console.log(props.themeSync);
     };
@@ -229,33 +236,35 @@ export default {
     const currentQuestion = ref(0);
     const dataAnswerList = ref([]);
     const dataQuestionList = ref([]);
-    const testQuestion = ref([]);
     const activeLeftIndex = ref(null);
     const activeRightIndex = ref(null);
     const isCorrectAnswer = ref(false);
     const isSendAnswer = ref(false);
+    const isFinishPractice = ref(false);
 
     const sendAnswer = () => {
-      isSendAnswer = true;
+      if (currentQuestion.value + 1 == props.totalQuestion) {
+        isFinishPractice.value = true;
+      }
+
+      isSendAnswer.value = true;
 
       let countCorrect = 0;
 
-      choicesRight.map((x, index) => {
-        if (randomQuestion[index].vocab == x.vocab) {
+      choicesRight.value.map((x, index) => {
+        if (dataQuestionList.value[currentQuestion.value][index].vocab == x.vocab) {
           countCorrect++;
         }
       });
 
-      if (countCorrect == choices.length) {
-        isCorrectAnswer = true;
+      if (countCorrect == dataQuestionList.value[currentQuestion.value].length) {
+        isCorrectAnswer.value = true;
       } else {
-        isCorrectAnswer = false;
+        isCorrectAnswer.value = false;
       }
     };
 
     const choicesLeft = ref([]);
-    const randomQuestion = ref([]);
-
     const choicesRight = ref([
       { vocab: "", meaning: "" },
       { vocab: "", meaning: "" },
@@ -270,6 +279,7 @@ export default {
       let tempAnswer = [];
       let tempQuestion = [];
 
+      // แปลงโจทย์คำตอบให้เป็น อย่างละ 3 Choices
       for (let i = 0; i < props.questionList.length; i++) {
         let currentAnswer = props.questionList[i];
         let randomAnswer = [...setData];
@@ -291,16 +301,28 @@ export default {
           },
         ];
 
+        let setNewQuestion = [
+          {
+            vocab: currentAnswer.vocab,
+            meaning: currentAnswer.meaning,
+          },
+        ];
+
         for (let i = 0; i < randomAnswer.length; i++) {
           let newData = {
             vocab: randomAnswer[i].vocab,
             meaning: randomAnswer[i].meaning,
           };
 
-          setNewAnswer.push(newData);
-        }
+          let setQuestion = {
+            vocab: randomAnswer[i].vocab,
+            meaning: randomAnswer[i].meaning,
+          };
 
-        let setNewQuestion = [...setNewAnswer];
+          setNewAnswer.push(newData);
+
+          setNewQuestion.push(setQuestion);
+        }
 
         setNewQuestion = setNewQuestion.sort(() => Math.random() - 0.5);
 
@@ -311,8 +333,6 @@ export default {
       dataAnswerList.value = [...tempAnswer];
       dataQuestionList.value = [...tempQuestion];
 
-      testQuestion.value = [...tempQuestion];
-
       funcRandom();
     };
 
@@ -320,11 +340,8 @@ export default {
       dataAnswerList.value[currentQuestion.value].sort(() => Math.random() - 0.5);
 
       let setAnswer = [...dataAnswerList.value[currentQuestion.value]];
-      setAnswer = setAnswer;
 
       let setQuestion = [...dataQuestionList.value[currentQuestion.value]];
-
-      setQuestion = setQuestion;
 
       let temp = [];
 
@@ -370,12 +387,31 @@ export default {
       }
     };
 
+    // Func Next Question
+    const nextQuestion = () => {
+      currentQuestion.value++;
+
+      funcRandom();
+
+      choicesRight.value = [
+        { vocab: "", meaning: "" },
+        { vocab: "", meaning: "" },
+        { vocab: "", meaning: "" },
+      ];
+
+      isSendAnswer.value = false;
+    };
+
+    // Func Finish Practice
+    const funcFinishPractice = () => {
+      emit("finishPractice", true);
+    };
+
     onMounted(() => {
       loadData();
     });
 
     return {
-      testCount,
       getThemeSync,
 
       // practice data
@@ -384,13 +420,18 @@ export default {
       currentQuestion,
       dataAnswerList,
       dataQuestionList,
-      testQuestion,
-      randomQuestion,
       choicesLeft,
       choicesRight,
       isCorrectAnswer,
+      isFinishPractice,
       isSendAnswer,
+      funcFinishPractice,
+
+      // Send Answer
       sendAnswer,
+
+      // Next Question
+      nextQuestion,
 
       // Select Answer
       selectAnswer,
@@ -399,33 +440,6 @@ export default {
   components: {
     headerBar,
     themeAnimation,
-  },
-  data() {
-    return {
-      choices: [
-        {
-          vocab: "electrician",
-          meaning: "นักวิชาการ, ผู้คงแก่เรียน, ผู้ได้รับทุนการศึกษา",
-        },
-        {
-          vocab: "mathematician",
-          meaning: "นักคณิตศาสตร์",
-        },
-        {
-          vocab: "naturalist",
-          meaning: "นักธรรมชาติวิทยา",
-        },
-      ],
-    };
-  },
-
-  methods: {
-    nextQuestion() {
-      this.startPractice();
-
-      this.isSendAnswer = false;
-      this.currentQuestion++;
-    },
   },
 };
 </script>

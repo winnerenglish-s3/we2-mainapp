@@ -1,36 +1,45 @@
 <template>
   <div class="box-container-matching row">
-    <div class="col-12">
+    <div class="col-12 self-start">
       <div>
-        <header-bar :totalQuestion="10" :currentChoice="5" :totalStar="1"></header-bar>
+        <header-bar
+          :totalQuestion="totalQuestion"
+          :currentQuestion="currentQuestion"
+        ></header-bar>
       </div>
       <div class="q-mt-xs box-question row justify-center">
         <div class="self-center">
-          <span style="font-size: max(3vw, 16px)"> เลือกจับคู่คำศัพท์ </span>
+          <span style="font-size: max(3vw, 16px)">
+            {{ questionList[currentQuestion].meaning }}
+          </span>
         </div>
       </div>
-      <div class="q-mt-md q-pa-md" align="center">
+      <!-- <div class="q-mt-md q-pa-md" align="center">
         <span style="font-size: max(3vw, 16px)" class="font-medium">
-          {{ questionList[currentQuestion].meaning }}
+          
         </span>
-      </div>
+      </div> -->
     </div>
 
-    <div class="col-12 relative-position" style="height: fit-content">
-      <div class="box-choices row no-wrap">
-        <div
-          name="section"
-          class="col-8 relative-position section"
+    <div class="col-12 relative-position q-py-md" style="height: fit-content">
+      <div
+        class="box-choices row no-wrap q-py-sm"
+        :class="dataList.length == 1 ? 'justify-center' : ''"
+      >
+        <div class="col-2" style="width: 70px"></div>
+        <section
+          class="relative-position col-8 section"
           :class="index == currentChoice ? null : 'section-notactive '"
           align="center"
-          :id="`section` + index"
           v-for="(item, index) in dataList"
           :key="index"
         >
           <q-img
+            :id="`section` + index"
             v-if="item != ''"
-            style="width: 95%"
-            @click="!isSendAnswer ? sendAnswer() : ''"
+            class=""
+            style="max-width: 400px; width: 100%"
+            @click="!isSendAnswer ? sendAnswer(index) : ''"
             :src="
               require(`../../../public/images/matching/button-theme/matching-theme-${themeSync}-choices-${
                 isSendAnswer && index == currentChoice
@@ -40,34 +49,38 @@
                   : 'default'
               }.png`)
             "
+            v-touch-swipe.mouse.right.left="currentChoice == index ? handleSwipe : null"
           >
-            <div class="transparent absolute-center full-width">
-              <span
-                :class="
-                  isSendAnswer && index == currentChoice
-                    ? isCorrect
-                      ? 'text-black'
-                      : 'text-red'
-                    : 'text-black'
-                "
-                style="font-size: 16px"
-                >{{ `${item.vocab}` }}</span
-              >
-              <div
-                v-if="isSendAnswer && index == currentChoice && !isCorrect"
-                class="text-black q-my-sm"
-              >
-                <span>คำตอบที่ถูกต้องคือ</span>
-                <br />
-                <span> {{ questionList[currentQuestion].vocab }} </span>
+            <div class="transparent absolute-center fit">
+              <div class="absolute-center" style="width: 90%">
+                <span
+                  :class="
+                    isSendAnswer && index == currentChoice
+                      ? isCorrect
+                        ? 'text-black'
+                        : 'text-red'
+                      : 'text-black'
+                  "
+                  style="font-size: 16px"
+                  >{{ `${item.vocab}` }}</span
+                >
+                <div
+                  v-if="isSendAnswer && index == currentChoice && !isCorrect"
+                  class="text-black q-my-sm"
+                >
+                  <span>คำตอบที่ถูกต้องคือ</span>
+                  <br />
+                  <span> {{ questionList[currentQuestion].vocab }} </span>
+                </div>
               </div>
             </div>
           </q-img>
-        </div>
+        </section>
+        <div class="col-2" style="width: 70px"></div>
 
-        <div class="btn btn-left">
+        <!-- <div class="btn btn-left">
           <q-img
-            v-if="!isSendAnswer && currentChoice != 1"
+            v-if="!isSendAnswer"
             @click="isSendAnswer ? null : backChoice()"
             width="10vw"
             src="../../../public/images/matching/btn-left.png"
@@ -75,29 +88,37 @@
         </div>
         <div class="btn btn-right">
           <q-img
-            v-if="!isSendAnswer && currentChoice != dataList.length - 2"
+            v-if="!isSendAnswer"
             @click="isSendAnswer ? null : nextChoice()"
             width="10vw"
             src="../../../public/images/matching/btn-right.png"
           ></q-img>
-        </div>
+        </div> -->
       </div>
-    </div>
 
-    <div class="col-12 self-end q-pt-md q-pb-lg" align="center">
-      <q-img
+      <div class="q-py-lg" style="height: 20px" align="center">
+        <!-- <q-img
         style="width: max(40vw, 200px)"
         v-if="!isSendAnswer"
         @click="sendAnswer()"
         src="../../../public/images/matching/btn-matching-active.png"
-      ></q-img>
-      <q-img
-        style="width: max(40vw, 200px)"
-        v-if="isSendAnswer"
-        @click="nextQuestion()"
-        src="../../../public/images/next-question-btn.png"
-      ></q-img>
+      ></q-img> -->
+        <q-img
+          style="width: max(40vw, 200px)"
+          v-if="isSendAnswer && !isFinish"
+          @click="nextQuestion()"
+          src="../../../public/images/next-question-btn.png"
+        ></q-img>
+
+        <q-img
+          style="width: max(40vw, 200px)"
+          v-if="isSendAnswer && isFinish"
+          @click="funcFinishPractice()"
+          src="../../../public/images/success-btn.png"
+        ></q-img>
+      </div>
     </div>
+    <div class="col-12 self-end"></div>
   </div>
 </template>
 
@@ -121,20 +142,55 @@ export default {
       tyoe: Array,
       default: () => [],
     },
+    totalQuestion: {
+      type: Number,
+      default: 0,
+    },
   },
-  setup(props) {
-    const dataList = ref([""]);
-
+  setup(props, { emit }) {
+    // ดึงข้อมูลจาก Props เป็นข้อมูล Practice
+    const dataList = ref([]);
     const currentQuestion = ref(0);
     const currentChoice = ref(0);
 
-    const isNext = ref(false);
-    const isPrevious = ref(false);
+    const loadPracticeData = () => {
+      dataList.value.push(...props.answerList);
 
+      currentChoice.value = Math.ceil(props.answerList.length / 2) - 1;
+
+      setTimeout(() => {
+        let el = document.getElementById("section" + currentChoice.value);
+        el.scrollIntoView();
+      }, 100);
+    };
+
+    onMounted(loadPracticeData);
+
+    // กดส่งคำตอบ
     const isSendAnswer = ref(false);
+    const isFinish = ref(false);
     const isCorrect = ref(false);
 
-    const nextQuestion = () => {
+    const sendAnswer = (index) => {
+      isSendAnswer.value = true;
+
+      if (currentQuestion.value + 1 == props.questionList.length) {
+        isFinish.value = true;
+      }
+
+      currentChoice.value = index;
+
+      if (
+        props.questionList[currentQuestion.value].vocab == dataList.value[index].vocab
+      ) {
+        isCorrect.value = true;
+      } else {
+        isCorrect.value = false;
+      }
+    };
+
+    // กดข้อต่อไป
+    const nextQuestion = (section) => {
       if (props.questionList.length - 1 == currentQuestion.value) {
         return;
       }
@@ -144,8 +200,6 @@ export default {
       let indexAnswer = dataList.value
         .map((x) => x.vocab)
         .indexOf(props.questionList[currentQuestion.value].vocab);
-
-      dataList.value.splice(indexAnswer, 1);
 
       if (currentChoice.value == dataList.value.length - 1) {
         let active = 0;
@@ -163,28 +217,21 @@ export default {
 
         setTimeout(() => {
           currentChoice.value = active;
-        }, 300);
+        }, 400);
       }
+
+      dataList.value.splice(indexAnswer, 1);
 
       currentQuestion.value++;
     };
 
-    const sendAnswer = () => {
-      isSendAnswer.value = true;
-
-      if (
-        props.questionList[currentQuestion.value].vocab ==
-        dataList.value[currentChoice.value].vocab
-      ) {
-        isCorrect.value = true;
-      } else {
-        isCorrect.value = false;
-      }
+    // Function จอแบบฝึกหัด Finish Practice
+    const funcFinishPractice = () => {
+      emit("finishPractice", true);
     };
 
     // TODO : Function กดเลือกการ์ดใบก่อนหน้านี้
     const backChoice = () => {
-      isPrevious.value = true;
       let active = currentChoice.value - 1;
 
       setTimeout(() => {
@@ -195,12 +242,11 @@ export default {
       setTimeout(() => {
         currentChoice.value = active;
         isPrevious.value = false;
-      }, 300);
+      }, 500);
     };
 
     // TODO : Function กดเลือกการ์ดใบถัดไป
     const nextChoice = () => {
-      isNext.value = true;
       let active = currentChoice.value + 1;
 
       setTimeout(() => {
@@ -211,36 +257,36 @@ export default {
       setTimeout(() => {
         currentChoice.value = active;
         isNext.value = false;
-      }, 300);
+      }, 500);
     };
-
-    const loadPracticeData = () => {
-      dataList.value.push(...props.answerList);
-
-      dataList.value.push("");
-
-      currentChoice.value = Math.ceil(props.answerList.length / 2) - 1;
-
-      setTimeout(() => {
-        let el = document.getElementById("section" + currentChoice.value);
-        el.scrollIntoView();
-      }, 100);
-    };
-
-    onMounted(loadPracticeData);
 
     return {
       dataList,
       currentQuestion,
       currentChoice,
-      isNext,
-      isPrevious,
       isSendAnswer,
+      isFinish,
       isCorrect,
       nextQuestion,
       sendAnswer,
       backChoice,
       nextChoice,
+      funcFinishPractice,
+
+      // เลื่อนซ้ายและขวา
+      handleSwipe({ evt, ...newInfo }) {
+        if (!isSendAnswer.value) {
+          if (newInfo.direction == "left") {
+            if (dataList.value.length - 1 != currentChoice.value) {
+              nextChoice();
+            }
+          } else {
+            if (currentChoice.value != 0) {
+              backChoice();
+            }
+          }
+        }
+      },
     };
   },
 };
@@ -248,7 +294,8 @@ export default {
 
 <style lang="scss" scoped>
 .box-container-matching {
-  height: calc(100vh - 50px);
+  min-height: calc(100vh - 50px);
+  max-height: fit-content;
 }
 
 .box-question {
@@ -262,19 +309,20 @@ export default {
   width: 100vw;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
-  overflow-x: auto;
+  overscroll-behavior: contain;
+  overflow: hidden;
 }
 
 .section {
   scroll-snap-align: center;
   padding: 5px;
-  transition: 0.3s;
-  transform: scale(0.95);
+  transition: 0.2s;
+  transform: scale(1.05);
 }
 
-.section + #section1 {
+.section-notactive {
   transition: 0.1s;
-  transform: scale(1);
+  transform: scale(0.85);
 }
 
 .btn {

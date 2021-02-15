@@ -254,7 +254,7 @@
       <q-card class="transparent shadow-0">
         <q-card-section class="fit">
           <div class="absolute-center">
-            <!-- <q-img width="300px" src="../../public/images/dialog setting.png">
+            <q-img width="300px" src="../../public/images/dialog-setting.png">
               <div class="absolute-center transparent fit">
                 <div class="q-mt-lg q-pt-sm q-px-md row">
                   <div class="q-px-md">
@@ -318,7 +318,7 @@
                   />
                 </div>
               </div>
-            </q-img> -->
+            </q-img>
           </div>
         </q-card-section>
       </q-card>
@@ -339,15 +339,19 @@ export default {
     },
     isShowInstructionBtn: {
       type: Boolean,
-      default: false,
+      default: () => false,
     },
     isShowHelpBtn: {
       type: Boolean,
-      default: false,
+      default: () => false,
     },
     isShowPauseBtn: {
       type: Boolean,
-      default: false,
+      default: () => false,
+    },
+    isFinishPractice: {
+      type: Boolean,
+      default: () => false,
     },
   },
   setup(props, { emit }) {
@@ -374,7 +378,6 @@ export default {
 
     const isStartPractice = ref(true);
     const isShowDialogHelp = ref(false);
-    const isFinishPractice = ref(false);
     const isNotProgress = ref(true);
 
     const startPractice = () => {
@@ -382,12 +385,11 @@ export default {
     };
 
     const resetBtn = () => {
-      isFinishPractice.value = false;
-      isStartPractice.value = true;
+      router.push("/practicemain");
     };
 
     const finishBtn = () => {
-      console.log("Finish");
+      router.push("/practicemain");
     };
 
     const isShowDialogInstruction = ref(false);
@@ -441,6 +443,8 @@ export default {
       colorTheme,
       themeColor,
       returnCloseDialog,
+      resetBtn,
+      finishBtn,
     };
   },
 };
