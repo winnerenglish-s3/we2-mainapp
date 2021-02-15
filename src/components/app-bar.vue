@@ -27,7 +27,7 @@
 
         <div align="right" class="col-6">
           <q-btn
-            v-if="isShowInstructionBtn"
+            v-if="isHasInstruction"
             @click="isShowDialogInstruction = true"
             icon="fas fa-info-circle"
             class="shadow-2 btn-header q-mr-md"
@@ -35,7 +35,7 @@
             :label="!$q.platform.is.mobile ? 'คำสั่ง' : ''"
           ></q-btn>
           <q-btn
-            v-if="isShowHelpBtn"
+            v-if="isHasHelp"
             @click="isShowDialogHelp = true"
             icon="fas fa-lightbulb"
             class="shadow-2 btn-header"
@@ -96,102 +96,15 @@
               class="absolute-bottom row full-width"
             >
               <div class="col-12 self-center q-py-md" align="center">
-                <span>{{ instruction.en }}</span>
+                <span>{{ instructionData.eng }}</span>
                 <div class="q-py-xs"></div>
-                <span>{{ instruction.th }}</span>
+                <span>{{ instructionData.th }}</span>
               </div>
               <div class="col-12 q-py-sm self-end" align="center">
-                <div @click="startPractice()" class="btn-start cursor-pointer"></div>
+                <div v-close-popup class="btn-start cursor-pointer"></div>
               </div>
             </div>
           </q-img>
-        </q-card-section>
-      </q-card>
-    </q-dialog>
-
-    <!-- Dialog Finish Practice -->
-    <q-dialog maximized v-model="isFinishPractice" persistent>
-      <q-card class="transparent shadow-0">
-        <q-card-section class="fit">
-          <div class="absolute-center">
-            <div v-if="!isNotProgress">
-              <q-img
-                width="350px"
-                style="margin: auto"
-                src="../../public/images/flower_1.png"
-              ></q-img>
-            </div>
-            <div class="box-content-finish">
-              <q-img
-                v-if="!isNotProgress"
-                class="absolute-center"
-                fit="contain"
-                width="320px"
-                style="top: 24px"
-                src="../../public/images/bg-success-start.png"
-              >
-                <div
-                  class="absolute-center transparent full-width"
-                  style="top: 40%"
-                  align="center"
-                >
-                  <q-rating
-                    v-model="totalStar"
-                    size="4em"
-                    color="warning"
-                    icon-selected="star"
-                    max="3"
-                    readonly
-                  />
-                </div>
-              </q-img>
-
-              <div class="box-finish absolute-bottom">
-                <div align="center" v-if="!isNotProgress">
-                  <span>จบแบบฝึกหัด</span>
-                  <br />
-                  <span>ระดับที่ 5 - บทที่ 12</span>
-                  <div class="q-mt-md">
-                    <span>จำนวนครั้งในการทำ : {{ numberOfPractice }}/2</span>
-                  </div>
-                </div>
-
-                <div v-else align="center">
-                  <span style="font-size: max(1vw, 24px)">คะแนนไม่ผ่านเกณฑ์</span>
-                </div>
-              </div>
-            </div>
-            <div align="center">
-              <q-btn-group
-                spread
-                style="width: 292px; height: 40px; border-radius: 0px 0px 5px 5px"
-              >
-                <q-btn
-                  push
-                  @click="resetBtn()"
-                  label="ทำใหม่อีกครั้ง"
-                  text-color="white"
-                  style="background-color: #014270"
-                />
-                <q-btn
-                  v-if="!isNotProgress"
-                  push
-                  @click="finishBtn()"
-                  label="จบแบบฝึกหัด"
-                  style="background-color: #ffbd13"
-                />
-                <q-btn
-                  v-if="isNotProgress"
-                  push
-                  label="ทบทวน"
-                  style="background-color: #ffbd13"
-                />
-              </q-btn-group>
-            </div>
-            <div style="" v-if="!isNotProgress">
-              <q-img width="350px" src="../../public/images/flower_2.png"></q-img>
-            </div>
-          </div>
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -215,7 +128,7 @@
             "
           >
             <div
-              class="absolute-top row transparent text-black"
+              class="absolute-center row transparent text-black full-width"
               :class="
                 $q.platform.is.desktop
                   ? 'box-content-instruction-pc'
@@ -223,21 +136,21 @@
               "
             >
               <div
-                class="self-center full-width q-py-md"
+                class="col-12 self-center full-width q-pb-md"
                 align="center"
-                style="font-size: max(0.7vw, 14px)"
+                style="font-size: max(1.1vw, 14px)"
               >
-                <div>
-                  <span>{{ instruction.en }}</span>
+                <div class="q-my-sm">
+                  <span>{{ instructionData.eng }}</span>
                 </div>
                 <div>
-                  <span>{{ instruction.th }}</span>
+                  <span>{{ instructionData.th }}</span>
                 </div>
               </div>
 
               <div class="col-12 self-end q-py-md" align="center">
                 <q-img
-                  @click="closeInstructionBtn()"
+                  @click="isShowDialogInstruction = false"
                   class="cursor-pointer"
                   width="200px"
                   src="../../public/images/close-help-btn-pc.png"
@@ -337,11 +250,11 @@ export default {
       type: Boolean,
       default: () => false,
     },
-    isShowInstructionBtn: {
+    isHasInstruction: {
       type: Boolean,
       default: () => false,
     },
-    isShowHelpBtn: {
+    isHasHelp: {
       type: Boolean,
       default: () => false,
     },
@@ -352,6 +265,10 @@ export default {
     isFinishPractice: {
       type: Boolean,
       default: () => false,
+    },
+    instructionData: {
+      type: Object,
+      default: () => {},
     },
   },
   setup(props, { emit }) {
@@ -443,6 +360,7 @@ export default {
       colorTheme,
       themeColor,
       returnCloseDialog,
+      isShowDialogInstruction,
       resetBtn,
       finishBtn,
     };
@@ -521,25 +439,6 @@ export default {
 .text-header-practice {
   line-height: 100%;
   color: #ffc022;
-}
-
-.box-finish {
-  background-color: transparent;
-  width: 80%;
-  height: 55%;
-  bottom: 16px;
-  margin: auto;
-  font-size: 16px;
-  color: #000;
-}
-
-.box-content-finish {
-  position: relative;
-  background-image: url("../../public/images/dialog-notificate-practice.png");
-  background-repeat: no-repeat;
-  width: 290px;
-  height: 214px;
-  margin: auto;
 }
 
 .btn-header-color {

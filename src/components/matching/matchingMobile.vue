@@ -149,22 +149,9 @@ export default {
   },
   setup(props, { emit }) {
     // ดึงข้อมูลจาก Props เป็นข้อมูล Practice
-    const dataList = ref([]);
+    const dataList = ref(props.answerList);
     const currentQuestion = ref(0);
     const currentChoice = ref(0);
-
-    const loadPracticeData = () => {
-      dataList.value.push(...props.answerList);
-
-      currentChoice.value = Math.ceil(props.answerList.length / 2) - 1;
-
-      setTimeout(() => {
-        let el = document.getElementById("section" + currentChoice.value);
-        el.scrollIntoView();
-      }, 100);
-    };
-
-    onMounted(loadPracticeData);
 
     // กดส่งคำตอบ
     const isSendAnswer = ref(false);

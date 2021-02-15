@@ -1,5 +1,9 @@
 <template>
   <q-page class="bg-seplling">
+    <div>
+      <app-bar :instructionData="instructionData"></app-bar>
+    </div>
+
     <spelling-pc
       :testData="testData"
       :currentAnswerList="currentAnswerList"
@@ -106,39 +110,25 @@
 <script>
 import spellingPc from "../components/spellingbee/spellingbeePc";
 import spellingMobile from "../components/spellingbee/spellingbeeMobile";
+import appBar from "../components/app-bar";
 export default {
   components: {
     spellingPc,
-    spellingMobile
+    spellingMobile,
+    appBar,
   },
   props: {
-    isStartPractice: {
-      type: Boolean,
-      default: () => true
-    },
-    isShowDialogHelp: {
-      type: Boolean,
-      default: () => false
-    },
-    isShowDialogInstruction: {
-      type: Boolean,
-      default: () => false
-    },
     themeSync: {
       type: Number,
-      default: 0
-    }
-    // vocabList: {
-    //   type: Array,
-    //   default: [],
-    // },
+      default: 0,
+    },
   },
   data() {
     return {
       tab: "vocab",
       instruction: {
         en: "xxx",
-        th: "ปปป"
+        th: "ปปป",
       },
       totalStar: 0,
       totalQuestion: 3,
@@ -170,23 +160,23 @@ export default {
         "L",
         "Z",
         "X",
-        "O"
+        "O",
       ],
       currentAnswerList: [],
       currentQuestionText: "RABBIT",
       questionList: [
         {
           question: "RABBIT",
-          correntAnswer: "RABBIT"
+          correntAnswer: "RABBIT",
         },
         {
           question: "ZPW",
-          correntAnswer: "ZPW"
+          correntAnswer: "ZPW",
         },
         {
           question: "SABBIPWOUO",
-          correntAnswer: "SABBIPWOUO"
-        }
+          correntAnswer: "SABBIPWOUO",
+        },
       ],
 
       isCorrectAnswer: false,
@@ -196,7 +186,7 @@ export default {
 
       // For Practice Layout
       isHasHelp: true,
-      isHasInstruction: true
+      isHasInstruction: true,
     };
   },
   methods: {
@@ -245,8 +235,7 @@ export default {
     },
     lineMoveBtn(item) {
       // ถ้ามีการกดปุ่มไว้อยู่แล้ว
-      let sameAnswer = this.currentAnswerList.filter(x => x.index == item.index)
-        .length;
+      let sameAnswer = this.currentAnswerList.filter((x) => x.index == item.index).length;
 
       // กรณีครั้งแรกห้ามกดตัวซ้ำ
       if (sameAnswer && this.currentAnswerList.length == 1) {
@@ -255,22 +244,18 @@ export default {
 
       if (this.currentAnswerList.length > 1) {
         // เก็บค่า Index หลังจากกด Back กลับไป
-        let backAnswer = this.currentAnswerList[
-          this.currentAnswerList.length - 2
-        ].index;
+        let backAnswer = this.currentAnswerList[this.currentAnswerList.length - 2].index;
 
         // เช็คค่า Back หลังจากกดกลับไป ว่าค่า Index ตรงกับที่กดมาหรือไม่
         if (backAnswer == item.index) {
           this.isSendAnswer = false;
-          this.currentAnswerList[this.currentAnswerList.length - 2].lineMove =
-            "center";
+          this.currentAnswerList[this.currentAnswerList.length - 2].lineMove = "center";
           this.currentAnswerList.pop();
           return;
         }
 
-        let DulpicateIndex = this.currentAnswerList.filter(
-          x => x.index == item.index
-        ).length;
+        let DulpicateIndex = this.currentAnswerList.filter((x) => x.index == item.index)
+          .length;
 
         // ถ้ากรณีมีข้อมูลที่กดอยู่แล้ว
         if (DulpicateIndex) {
@@ -292,8 +277,8 @@ export default {
           left: item.index - 1,
           right: item.index + 1,
           top: item.index - 5,
-          bottom: item.index + 5
-        }
+          bottom: item.index + 5,
+        },
       };
 
       if (item.index < 5) {
@@ -330,20 +315,15 @@ export default {
 
       for (const setLine in newData.setAround) {
         if (
-          this.currentAnswerList[this.currentAnswerList.length - 1].setAround[
-            setLine
-          ] == item.index
+          this.currentAnswerList[this.currentAnswerList.length - 1].setAround[setLine] ==
+          item.index
         ) {
           if (setLine == "right") {
-            this.currentAnswerList[this.currentAnswerList.length - 1].lineMove =
-              "left";
+            this.currentAnswerList[this.currentAnswerList.length - 1].lineMove = "left";
           } else if (setLine == "left") {
-            this.currentAnswerList[this.currentAnswerList.length - 1].lineMove =
-              "right";
+            this.currentAnswerList[this.currentAnswerList.length - 1].lineMove = "right";
           } else {
-            this.currentAnswerList[
-              this.currentAnswerList.length - 1
-            ].lineMove = setLine;
+            this.currentAnswerList[this.currentAnswerList.length - 1].lineMove = setLine;
           }
         }
       }
@@ -352,9 +332,7 @@ export default {
     },
     setStartPoint() {
       this.currentAnswerList = [];
-      this.currentQuestionText = this.questionList[
-        this.currentQuestion
-      ].question;
+      this.currentQuestionText = this.questionList[this.currentQuestion].question;
 
       let firstText = this.questionList[this.currentQuestion].question[0];
 
@@ -369,8 +347,8 @@ export default {
           right: randomPoint + 1,
           center: randomPoint,
           top: randomPoint - 5,
-          bottom: randomPoint + 5
-        }
+          bottom: randomPoint + 5,
+        },
       };
 
       if (randomPoint < 5) {
@@ -406,7 +384,7 @@ export default {
       }
 
       this.currentAnswerList.push(newData);
-    }
+    },
   },
   created() {
     if (this.isHasHelp) {
@@ -432,8 +410,8 @@ export default {
         this.totalStar = 0;
         this.setStartPoint();
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

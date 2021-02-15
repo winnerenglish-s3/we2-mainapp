@@ -25,9 +25,7 @@
 
         <q-icon
           v-if="isSendAnswer"
-          :name="
-            !isCorrectAnswer ? 'far fa-times-circle' : 'far fa-check-circle'
-          "
+          :name="!isCorrectAnswer ? 'far fa-times-circle' : 'far fa-check-circle'"
           :class="!isCorrectAnswer ? 'text-red-7' : 'text-green-7'"
           size="42px"
         ></q-icon>
@@ -55,16 +53,16 @@
         </div>
       </div>
     </div>
-    <div class="col-12 self-end ">
+    <div class="col-12 self-end">
       <q-img
         class="relative-position"
         :src="
           require(`../../../public/images/spellingbee/bg-spellingbee-theme-${themeSync}.png`)
         "
       >
-        <div class="fit row justify-center no-padding transparent ">
+        <div class="fit row justify-center no-padding transparent">
           <div
-            class="col-7 row justify-center relative-position q-pa-md "
+            class="col-7 row justify-center relative-position q-pa-md"
             style="max-width: 745px; width: 46.5%"
           >
             <div class="box-content-answer justify-between row q-mt-xs">
@@ -74,8 +72,16 @@
                 v-for="(item, index) in testData"
                 :key="index"
               >
+                <!-- :disabled="
+                checkBottom != index &&
+                  checkTop != index &&
+                  checkLeft != index &&
+                  checkRight != index &&
+                  !currentAnswerList.filter(x => x.index == index).length &&
+                  currentAnswerList.length != currentQuestionText.length
+              " -->
                 <q-img
-                  contain
+                  fit="contain"
                   v-if="currentAnswerList.length"
                   @click="
                     isSendAnswer ||
@@ -87,30 +93,33 @@
                       ? null
                       : chooseLineMove(index, item.val)
                   "
-                  :disabled="
-                    checkBottom != index &&
-                      checkTop != index &&
-                      checkLeft != index &&
-                      checkRight != index &&
-                      !currentAnswerList.filter(x => x.index == index).length &&
-                      currentAnswerList.length != currentQuestionText.length
-                  "
                   :src="
                     isCorrectAnswer &&
-                    currentAnswerList.filter(x => x.index == index).length &&
+                    currentAnswerList.filter((x) => x.index == index).length &&
                     isSendAnswer
                       ? require(`../../../public/images/spellingbee/button-theme-${themeSync}/btn-choices-correct.png`)
                       : !isCorrectAnswer &&
-                        currentAnswerList.filter(x => x.index == index)
-                          .length &&
+                        currentAnswerList.filter((x) => x.index == index).length &&
                         isSendAnswer
                       ? require(`../../../public/images/spellingbee/button-theme-${themeSync}/btn-choices-incorrect.png`)
-                      : currentAnswerList.filter(x => x.index == index).length
+                      : currentAnswerList.filter((x) => x.index == index).length
                       ? require(`../../../public/images/spellingbee/button-theme-${themeSync}/btn-choices-active.png`)
                       : require(`../../../public/images/spellingbee/button-theme-${themeSync}/btn-choices-default.png`)
                   "
                   style="z-index: 2"
-                  :class="!isSendAnswer ? 'cursor-pointer' : ''"
+                  :class="
+                    checkBottom != index &&
+                    checkTop != index &&
+                    checkLeft != index &&
+                    checkRight != index &&
+                    !currentAnswerList.filter((x) => x.index == index).length &&
+                    currentAnswerList.length != currentQuestionText.length
+                      ? 'cursor-not-allowed disabled'
+                      : currentAnswerList.length == currentQuestionText.length &&
+                        !currentAnswerList.filter((x) => x.index == index).length
+                      ? 'cursor-not-allowed'
+                      : 'cursor-pointer'
+                  "
                 >
                   <div
                     class="absolute-center text-black text-bold transparent"
@@ -118,9 +127,8 @@
                   >
                     <span
                       :class="{
-                        'text-white': currentAnswerList.filter(
-                          x => x.index == index
-                        ).length
+                        'text-white': currentAnswerList.filter((x) => x.index == index)
+                          .length,
                       }"
                       style="font-size: max(1.5vw, 14px)"
                       >{{ item.val }}</span
@@ -128,13 +136,10 @@
                   </div></q-img
                 >
                 <div
-                  v-if="currentAnswerList.filter(x => x.index == index).length"
-                  :class="
-                    `link-answer-${
-                      currentAnswerList.filter(x => x.index == index)[0]
-                        .lineMove
-                    }`
-                  "
+                  v-if="currentAnswerList.filter((x) => x.index == index).length"
+                  :class="`link-answer-${
+                    currentAnswerList.filter((x) => x.index == index)[0].lineMove
+                  }`"
                 ></div>
               </div>
             </div>
@@ -171,77 +176,72 @@ import headerBar from "../header-time-progress";
 import getColorTheme from "../../../public/themeColor.json";
 export default {
   components: {
-    headerBar
+    headerBar,
   },
   props: {
     testData: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     currentAnswerList: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     currentQuestionText: {
       type: String,
-      default: ""
+      default: "",
     },
     currentQuestion: {
       type: Number,
-      defalut: 0
+      defalut: 0,
     },
     totalQuestion: {
       type: Number,
-      default: 0
+      default: 0,
     },
     totalStar: {
       type: Number,
-      default: 0
+      default: 0,
     },
     practiceTime: {
       type: Number,
-      default: 0
+      default: 0,
     },
     isPracticeTimeout: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     isCorrectAnswer: {
       type: Boolean,
-      default: () => null
+      default: () => null,
     },
     themeSync: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   data() {
     return {
       isSendAnswer: false,
       colorTheme: getColorTheme,
-      bgColorTheme: ["#FFE6A2", "#B0DEFF"]
+      bgColorTheme: ["#FFE6A2", "#B0DEFF"],
     };
   },
   computed: {
     checkBottom() {
-      return this.currentAnswerList[this.currentAnswerList.length - 1].setAround
-        .bottom;
+      return this.currentAnswerList[this.currentAnswerList.length - 1].setAround.bottom;
     },
     checkTop() {
-      return this.currentAnswerList[this.currentAnswerList.length - 1].setAround
-        .top;
+      return this.currentAnswerList[this.currentAnswerList.length - 1].setAround.top;
     },
     checkLeft() {
-      return this.currentAnswerList[this.currentAnswerList.length - 1].setAround
-        .left;
+      return this.currentAnswerList[this.currentAnswerList.length - 1].setAround.left;
     },
     checkRight() {
-      return this.currentAnswerList[this.currentAnswerList.length - 1].setAround
-        .right;
+      return this.currentAnswerList[this.currentAnswerList.length - 1].setAround.right;
     },
     checkCenter() {
-      return this.currentAnswerList[this.currentAnswerList.length - 1].setAround
-        .center;
+      return this.currentAnswerList[this.currentAnswerList.length - 1].setAround.center;
     },
     showAnswerBtn() {
       if (this.currentAnswerList.length === this.currentQuestionText.length) {
@@ -259,10 +259,8 @@ export default {
     themeQuestion() {
       return `border-color:rgba(${
         this.colorTheme[this.themeSync - 1].rgb
-      },.95);box-shadow: 0px 4px 0px ${
-        this.colorTheme[this.themeSync - 1].hex
-      }`;
-    }
+      },.95);box-shadow: 0px 4px 0px ${this.colorTheme[this.themeSync - 1].hex}`;
+    },
   },
   methods: {
     sendAnswer() {
@@ -275,8 +273,8 @@ export default {
     },
     chooseLineMove(index, val) {
       this.$emit("chooseBtn", { index: index, val: val });
-    }
-  }
+    },
+  },
 };
 </script>
 
