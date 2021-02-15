@@ -49,7 +49,15 @@
               <div class="row">
                 <div class="col self-center">
                   <div class="box-content-progress-practice" align="left">
-                    <div class="progress-bar" style="width: 80%"></div>
+                    <div
+                      class="progress-bar"
+                      :style="
+                        'width:' +
+                        (showAllPassedPractice() / showNumberOfAllPracticeInLevel()) *
+                          100 +
+                        '%'
+                      "
+                    ></div>
                   </div>
                 </div>
                 <div class="col-2" style="width: 50px">

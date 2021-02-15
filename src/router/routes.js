@@ -6,6 +6,11 @@ const routes = [
     component: () => import("pages/tasTest.vue"),
     name: "tasTest",
   },
+  {
+    path: "/test",
+    component: () => import("pages/test.vue"),
+    name: "test",
+  },
   // ---------------- ADVENTURE SCHOOL ------------------------
   {
     path: "/splash/:uid",
