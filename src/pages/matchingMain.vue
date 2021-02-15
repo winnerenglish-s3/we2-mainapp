@@ -1,7 +1,7 @@
 <template>
   <q-page class="bg-matching">
     <div>
-      <app-bar></app-bar>
+      <app-bar :instructionData="instructionData"></app-bar>
     </div>
 
     <div class="absolute-center" v-if="!isLoadPractice">
@@ -101,8 +101,8 @@
     <instruction-dialog
       v-if="isLoadPractice"
       :isShowDialogInstruction="true"
-      en="1234"
-      th="123"
+      :en="instructionData.eng"
+      :th="instructionData.th"
     ></instruction-dialog>
 
     <finish-practice-dialog :isFinishPractice="isFinishPractice"></finish-practice-dialog>
@@ -149,6 +149,10 @@ export default {
     const answerList = ref([]);
     const isLoadPractice = ref(false);
     const totalQuestion = ref(0);
+    const instructionData = ref({
+      eng: "match the vocabulary word with its definition.",
+      th: "จับคู่คำศัพท์กับความหมาย",
+    });
 
     // Load Practice Data
     const loadFlashcard = async () => {
@@ -302,6 +306,7 @@ export default {
       answerList,
       isFinishPractice,
       totalQuestion,
+      instructionData,
     };
   },
 };

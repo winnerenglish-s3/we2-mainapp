@@ -128,6 +128,13 @@
     </q-dialog>
 
     <finish-practice-dialog :isFinishPractice="isFinishPractice"></finish-practice-dialog>
+
+    <instruction-dialog
+      v-if="isLoadPractice"
+      :isShowDialogInstruction="true"
+      :en="instructionData.eng"
+      :th="instructionData.th"
+    ></instruction-dialog>
   </q-page>
 </template>
 

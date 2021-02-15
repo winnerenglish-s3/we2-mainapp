@@ -96,12 +96,12 @@
               class="absolute-bottom row full-width"
             >
               <div class="col-12 self-center q-py-md" align="center">
-                <span>{{ instruction.eng }}</span>
+                <span>{{ instructionData.eng }}</span>
                 <div class="q-py-xs"></div>
-                <span>{{ instruction.th }}</span>
+                <span>{{ instructionData.th }}</span>
               </div>
               <div class="col-12 q-py-sm self-end" align="center">
-                <div @click="startPractice()" class="btn-start cursor-pointer"></div>
+                <div v-close-popup class="btn-start cursor-pointer"></div>
               </div>
             </div>
           </q-img>
@@ -128,8 +128,7 @@
             "
           >
             <div
-              class="absolute-center row transparent text-black"
-              style="height: 80%"
+              class="absolute-center row transparent text-black full-width"
               :class="
                 $q.platform.is.desktop
                   ? 'box-content-instruction-pc'
@@ -137,7 +136,7 @@
               "
             >
               <div
-                class="self-center full-width q-py-md"
+                class="col-12 self-center full-width q-pb-md"
                 align="center"
                 style="font-size: max(1.1vw, 14px)"
               >
