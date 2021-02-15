@@ -11,6 +11,11 @@ const routes = [
     component: () => import("pages/test.vue"),
     name: "test",
   },
+  {
+    path: "/testSpellingBee",
+    component: () => import("pages/testSpellingBee.vue"),
+    name: "testSpellingBee",
+  },
   // ---------------- ADVENTURE SCHOOL ------------------------
   {
     path: "/splash/:uid",
