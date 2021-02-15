@@ -1,30 +1,50 @@
 <template>
   <q-page class="bg-multiplevocab">
+    <div>
+      <app-bar
+        :isHasHelp="isHasHelp"
+        :isHasInstruction="isHasInstruction"
+        :instructionData="instructionData"
+      ></app-bar>
+    </div>
+
+    <div class="absolute-center" v-if="!isLoadPractice">
+      <q-spinner color="primary" size="100px" />
+    </div>
+
     <multiplevocab-pc
-      :choices="choices"
-      :extravocabs="extravocabList"
+      :showQuestion="showQuestion"
+      :showChoices="showChoices"
+      :isCorrectAnswer="isCorrectAnswer"
+      :extraVocabList="extraVocabList"
       :currentQuestion="currentQuestion"
       :totalQuestion="totalQuestion"
       :totalStar="totalStar"
       :practiceTime="practiceTime"
       :isPracticeTimeout="isPracticeTimeout"
       :themeSync="themeSync"
-      @callback="testRandom()"
-      v-if="$q.platform.is.desktop"
+      @sendAnswer="checkAnswer"
+      @nextQuestion="nextQuestion"
+      @finishPractice="(val) => (isFinishPractice = true)"
+      v-if="$q.platform.is.desktop && isLoadPractice"
       class="box-container-main"
     ></multiplevocab-pc>
 
     <multiplevocab-mobile
-      :choices="choices"
-      :extravocabs="extravocabList"
+      :showQuestion="showQuestion"
+      :showChoices="showChoices"
+      :isCorrectAnswer="isCorrectAnswer"
+      :extraVocabList="extraVocabList"
       :currentQuestion="currentQuestion"
       :totalQuestion="totalQuestion"
       :totalStar="totalStar"
       :practiceTime="practiceTime"
       :isPracticeTimeout="isPracticeTimeout"
       :themeSync="themeSync"
-      @callback="testRandom()"
-      v-if="$q.platform.is.mobile"
+      @sendAnswer="checkAnswer"
+      @nextQuestion="nextQuestion"
+      @finishPractice="(val) => (isFinishPractice = true)"
+      v-if="$q.platform.is.mobile && isLoadPractice"
     ></multiplevocab-mobile>
 
     <!-- Help Popup -->
@@ -106,16 +126,29 @@
         </q-card-section>
       </q-card>
     </q-dialog>
+
+    <finish-practice-dialog :isFinishPractice="isFinishPractice"></finish-practice-dialog>
   </q-page>
 </template>
 
 <script>
 import multiplevocabPc from "../components/multiplevocab/multiplevocabPc";
 import multiplevocabMobile from "../components/multiplevocab/multiplevocabMobile";
+import appBar from "../components/app-bar";
+import instructionDialog from "../components/instructionDialog";
+import finishPracticeDialog from "../components/finishPracticeDialog";
+import { reactive, onMounted, ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { useQuasar } from "quasar";
+import axios from "axios";
+import { db } from "src/router";
 export default {
   components: {
     multiplevocabPc,
     multiplevocabMobile,
+    appBar,
+    instructionDialog,
+    finishPracticeDialog,
   },
   props: {
     isStartPractice: {
@@ -131,6 +164,125 @@ export default {
       default: () => false,
     },
   },
+
+  setup(props) {
+    // Initial Data
+    const isLoadPractice = ref(false);
+    const route = useRoute();
+    const router = useRouter();
+
+    // Initial Practice Data
+    const totalQuestion = ref(0);
+    const totalStar = ref(2);
+    const currentQuestion = ref(0);
+    const showQuestion = ref("");
+    const showChoices = ref([]);
+    const isCorrectAnswer = ref(false);
+    const questionList = ref([]);
+    const isFinishPractice = ref(false);
+    const extraVocabList = ref([]);
+    const isHasHelp = ref(true);
+    const isHasInstruction = ref(true);
+    const instructionData = ref({
+      eng: "Choose the best answer to fill in the blank.",
+      th: "เลือกคำตอบที่เหมาะสมที่สุดเพื่อเติมลงในช่องว่าง",
+    });
+
+    // โหลดข้อมูลแบบฝึกหัด
+    const loadPractice = async () => {
+      let multipleList = [];
+
+      let practiceListId = route.params.practiceListId;
+
+      let getData = await db.collection("practiceList").doc(practiceListId).get();
+
+      totalQuestion.value = getData.data().numOfPractice;
+
+      try {
+        const apiURL =
+          "https://us-central1-winnerenglish2-e0f1b.cloudfunctions.net/wfunctions/getFlashcard";
+
+        const postData = {
+          practiceListId: practiceListId,
+        };
+
+        const response = await axios.post(apiURL, postData);
+
+        multipleList = response.data;
+
+        let setExtraVocab = response.data;
+
+        let setPracticeList = [...multipleList];
+
+        setExtraVocab = setExtraVocab.map((x) => x.extraVocab).filter((x) => x.length);
+
+        let tempExtra = [];
+
+        setExtraVocab.forEach((res) => {
+          tempExtra.push(...res);
+        });
+
+        extraVocabList.value = tempExtra;
+
+        // Random Choices
+        setPracticeList = setPracticeList.map((x) => {
+          let choices = x.choices.sort(() => Math.random() - 0.5);
+          x.choices = choices;
+
+          return x;
+        });
+
+        setPracticeList = setPracticeList.sort(() => Math.random() - 0.5);
+        setPracticeList = setPracticeList.slice(0, totalQuestion.value);
+
+        questionList.value = setPracticeList;
+
+        showQuestion.value = questionList.value[currentQuestion.value].question;
+        showChoices.value = questionList.value[currentQuestion.value].choices;
+
+        isLoadPractice.value = true;
+      } catch (err) {
+        console.log(`${error} Type Multiple Vocab`);
+      }
+    };
+
+    // Check Answer
+    const checkAnswer = (index) => {
+      if (questionList.value[currentQuestion.value].correctAnswer == index) {
+        isCorrectAnswer.value = true;
+      } else {
+        isCorrectAnswer.value = false;
+      }
+    };
+
+    // Next Question
+    const nextQuestion = () => {
+      currentQuestion.value++;
+      showQuestion.value = questionList.value[currentQuestion.value].question;
+      showChoices.value = questionList.value[currentQuestion.value].choices;
+    };
+
+    // Mounted Load Practice
+    onMounted(loadPractice);
+
+    return {
+      totalQuestion,
+      totalStar,
+      questionList,
+      extraVocabList,
+      showQuestion,
+      showChoices,
+      isCorrectAnswer,
+      currentQuestion,
+      checkAnswer,
+      nextQuestion,
+      isFinishPractice,
+      isLoadPractice,
+      instructionData,
+      isHasHelp,
+      isHasInstruction,
+    };
+  },
   data() {
     return {
       tab: "vocab",
@@ -138,12 +290,6 @@ export default {
         th: "เลือกคำต้องที่ถูกต้อง",
         en: "Choose the best correct answer",
       },
-      totalStar: 0,
-      numberOfPractice: 0,
-      currentQuestion: 0,
-      totalQuestion: 10,
-      practiceTime: 10,
-      choices: ["attack", "protest", "sign", "litter"],
       vocabList: [
         {
           vocab: "test",
@@ -186,124 +332,12 @@ export default {
           meaning: "ทดสอบ",
         },
       ],
-      extravocabList: [
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-      ],
-
-      isPracticeTimeout: false,
-      funcPracticeTime: "",
 
       isHasHelp: true,
       isHasInstruction: true,
     };
   },
-  methods: {
-    closeHelpBtn() {
-      this.$emit("closeHelp");
-    },
-    finishBtn() {
-      console.log("Finish");
-    },
-    resetBtn() {
-      this.currentQuestion = 0;
-      this.isFinishPractice = false;
 
-      this.currentTimeStart();
-    },
-    startPractice() {
-      this.isStartPractice = false;
-
-      this.currentTimeStart();
-    },
-    currentTimeStart() {
-      this.isPracticeTimeout = true;
-
-      let min = 0;
-      let sec = this.practiceTime;
-
-      this.funcPracticeTime = setInterval(() => {
-        if (sec == 0) {
-          this.isPracticeTimeout = false;
-
-          clearInterval(this.funcPracticeTime);
-
-          setTimeout(() => {
-            this.testRandom();
-          }, 500);
-        }
-
-        sec--;
-      }, 1000);
-    },
-    testRandom() {
-      if (this.currentQuestion + 1 == 10) {
-        this.$emit("isShowFinishPractice", true);
-
-        if (this.numberOfPractice != 2) {
-          this.numberOfPractice += 1;
-        } else {
-          this.numberOfPractice = 1;
-        }
-
-        this.$emit("numberOfPractice", this.numberOfPractice);
-        return;
-      } else {
-        this.currentQuestion += 1;
-
-        this.currentTimeStart();
-      }
-
-      this.choices.sort((x) => Math.random() - 0.5);
-      let randomStar = Math.ceil(Math.random() * 10);
-
-      if (randomStar % 2 == 0) {
-        if (this.totalStar != 3) {
-          this.totalStar += 1;
-        } else {
-          this.totalStar = 0;
-        }
-      }
-    },
-  },
   mounted() {
     if (this.isHasHelp) {
       this.$emit("isShowButtonHelp");

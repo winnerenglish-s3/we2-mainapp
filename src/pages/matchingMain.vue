@@ -1,7 +1,7 @@
 <template>
   <q-page class="bg-matching">
     <div>
-      <app-bar :isFinishPractice="isFinishPractice"></app-bar>
+      <app-bar></app-bar>
     </div>
 
     <div class="absolute-center" v-if="!isLoadPractice">
@@ -104,6 +104,8 @@
       en="1234"
       th="123"
     ></instruction-dialog>
+
+    <finish-practice-dialog :isFinishPractice="isFinishPractice"></finish-practice-dialog>
   </q-page>
 </template>
 
@@ -114,6 +116,7 @@ import { reactive, onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useQuasar } from "quasar";
 import instructionDialog from "../components/instructionDialog";
+import finishPracticeDialog from "../components/finishPracticeDialog";
 import appBar from "../components/app-bar";
 import axios from "axios";
 import { db } from "src/router";
@@ -133,6 +136,7 @@ export default {
     matchingPc,
     matchingMobile,
     instructionDialog,
+    finishPracticeDialog,
   },
   setup(props, { emit }) {
     // initial

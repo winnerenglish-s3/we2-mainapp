@@ -13,7 +13,7 @@
       <div class="col-12 self-start" align="center">
         <theme-animation :themeSync="themeSync"></theme-animation>
         <div class="box-question q-pa-lg font-content">
-          Most elephants won't ______ us if we don't provoke them.
+          {{ showQuestion }}
         </div>
       </div>
       <div class="col-12">
@@ -22,9 +22,9 @@
             v-if="activeBy == 'answer'"
             class="relative-position col self-center q-pa-md cursor-pointer"
             align="center"
-            v-for="(item, index) in choices"
+            v-for="(item, index) in showChoices"
             :key="index"
-            @click="isSendAnswer ? null : testClick(index)"
+            @click="isSendAnswer ? null : sendAnswer(item.index, index)"
           >
             <img
               style="width: 100%"
@@ -44,7 +44,11 @@
                 }.png`)
               "
             />
-            <div class="absolute-center font-content no-pointer-events" align="center">
+            <div
+              class="absolute-center font-content no-pointer-events"
+              style="width: 80%"
+              align="center"
+            >
               <div v-if="isSendAnswer && currentChoice == index">
                 <q-icon
                   :name="isCorrectAnswer ? 'far fa-check-circle' : 'far fa-times-circle'"
@@ -65,8 +69,8 @@
                       : null
                     : null
                 "
+                v-html="item.choice"
               >
-                {{ item }}
               </span>
             </div>
           </div>
@@ -103,10 +107,18 @@
 
               <div class="q-my-md" align="center">
                 <q-img
+                  v-if="isSendAnswer && currentQuestion + 1 != totalQuestion"
                   @click="nextQuestion()"
                   class="cursor-pointer"
                   width="200px"
                   src="../../../public/images/next-question-btn.png"
+                ></q-img>
+                <q-img
+                  v-else
+                  @click="funcFinishPractice()"
+                  class="cursor-pointer"
+                  width="200px"
+                  src="../../../public/images/success-btn.png"
                 ></q-img>
               </div>
             </div>
@@ -119,9 +131,14 @@
         <span class="absolute-center">คำศัพท์เสริม</span>
       </div>
       <div class="box-content-extravocab">
-        <div v-for="(item, index) in extravocabs" :key="index">
+        <div v-for="(item, index) in extraVocabList" :key="index">
           <div class="q-py-xs q-px-md">
-            <span>{{ item.vocab }}</span>
+            <span
+              >{{ item.vocab }}
+              <!-- <span class="relative-position q-mx-xs">{{
+                `(${item.partOfSpeech.partOfSpeech})`
+              }}</span> -->
+            </span>
             <br />
             <span>{{ item.meaning }}</span>
           </div>
@@ -136,83 +153,118 @@
 import headerBar from "../header-time-progress";
 import themeAnimation from "./theme-animation.vue";
 import boxAnswer from "./box-answer";
+import { ref } from "vue";
 export default {
   components: {
     boxAnswer,
     themeAnimation,
     headerBar,
   },
-  props: [
-    "themeSync",
-    "choices",
-    "extravocabs",
-    "currentQuestion",
-    "totalQuestion",
-    "totalStar",
-    "practiceTime",
-    "isPracticeTimeout",
-  ],
-  data() {
-    return {
-      setTheme: [
-        {
-          colorText: "text-black",
-          colorIcon: {
-            correct: "text-green",
-            incorrect: "text-red",
-          },
-          description: {
-            bgColor: "bg-blue-10",
-          },
-        },
-        {
-          colorText: "text-white",
-          colorIcon: {
-            correct: "text-white",
-            incorrect: "text-white",
-          },
-          description: {
-            bgColor: "bg-white",
-          },
-        },
-      ],
-
-      activeBy: "answer",
-
-      activeHover: null,
-
-      isSendAnswer: false,
-      currentChoice: null,
-      currentAnswer: null,
-      isCorrectAnswer: false,
-    };
-  },
-  methods: {
-    nextQuestion() {
-      this.isSendAnswer = false;
-      this.activeBy = "answer";
+  props: {
+    themeSync: {
+      type: Number,
+      default: 0,
     },
-    testClick(index) {
-      this.isSendAnswer = true;
+    currentQuestion: {
+      type: Number,
+      default: 0,
+    },
+    totalQuestion: {
+      type: Number,
+      default: 0,
+    },
+    totalStar: {
+      type: Number,
+      default: 0,
+    },
+    showQuestion: {
+      type: String,
+      default: "",
+    },
+    showChoices: {
+      type: Array,
+      default: () => [],
+    },
+    isCorrectAnswer: {
+      type: Boolean,
+      default: () => false,
+    },
+    extraVocabList: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  // props: [
+  //   "extravocabs",
+  //   "practiceTime",
+  //   "isPracticeTimeout",
+  // ],
+  setup(props, { emit }) {
+    // Initial Data
+    const activeBy = ref("answer");
+    const activeHover = ref(null);
 
-      let randomAnswer = Math.ceil(Math.random() * 4);
+    const setTheme = ref([
+      {
+        colorText: "text-black",
+        colorIcon: {
+          correct: "text-green",
+          incorrect: "text-red",
+        },
+        description: {
+          bgColor: "bg-blue-10",
+        },
+      },
+      {
+        colorText: "text-white",
+        colorIcon: {
+          correct: "text-white",
+          incorrect: "text-white",
+        },
+        description: {
+          bgColor: "bg-white",
+        },
+      },
+    ]);
 
-      if (index == randomAnswer) {
-        this.isCorrectAnswer = true;
-      } else {
-        this.isCorrectAnswer = false;
-      }
+    // Function Send Answer
+    const isSendAnswer = ref(false);
+    const currentChoice = ref(null);
 
-      this.currentAnswer = randomAnswer;
+    const sendAnswer = (indexChoices, index) => {
+      isSendAnswer.value = true;
+      currentChoice.value = index;
 
-      this.currentChoice = index;
+      emit("sendAnswer", indexChoices);
 
       setTimeout(() => {
-        this.activeBy = "description";
-      }, 1500);
+        activeBy.value = "description";
+      }, 1000);
+    };
 
-      // this.$emit("callback", "");
-    },
+    // Function Next Question
+    const nextQuestion = () => {
+      isSendAnswer.value = false;
+      activeBy.value = "answer";
+
+      emit("nextQuestion", true);
+    };
+
+    // Function Finish Practice
+    const funcFinishPractice = () => {
+      emit("finishPractice", true);
+    };
+
+    return {
+      activeBy,
+      activeHover,
+      setTheme,
+      isSendAnswer,
+      currentChoice,
+      sendAnswer,
+      nextQuestion,
+      funcFinishPractice,
+    };
   },
 };
 </script>
