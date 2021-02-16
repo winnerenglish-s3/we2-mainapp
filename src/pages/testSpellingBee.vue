@@ -32,20 +32,20 @@ export default {
     ]);
 
     const vocabularyList = [
-      "blackbirds",
-      "blackbirds",
-      "blackbirds",
-      "blackbirds",
-      "blackbirds",
-      "blackbirds",
-      "blackbirds",
-      "blackbirds",
-      "blackbirds",
-      "blackbirds",
-      "blackbirds",
-      "blackbirds",
-      "blackbirds",
-      "blackbirds",
+      "blackbirdsxczvs",
+      "blackbirdsxczvs",
+      "blackbirdsxczvs",
+      "blackbirdsxczvs",
+      "blackbirdsxczvs",
+      "blackbirdsxczvs",
+      "blackbirdsxczvs",
+      "blackbirdsxczvs",
+      "blackbirdsxczvs",
+      "blackbirdsxczvs",
+      "blackbirdsxczvs",
+      "blackbirdsxczvs",
+      "blackbirdsxczvs",
+      "blackbirdsxczvs",
     ];
     let currentQuestion = ref(0);
 
@@ -103,8 +103,24 @@ export default {
       return array;
     };
 
+    const resetBoggle = () => {
+      console.log("reset");
+      counter = 0;
+      boggle.value = [
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+      ];
+      rowBefore = null;
+      colBefore = null;
+      shuffleLetters(counter);
+    };
+
+    let countError = 0;
+
     const shuffleLetters = (counter) => {
-      $q.loading.show();
       try {
         if (counter < vocabularyList[currentQuestion.value].length) {
           if (counter == 0) {
@@ -289,30 +305,28 @@ export default {
                 }
 
                 let shuffleArr = shuffleArray(availablePosition);
-
                 let [row, col] = shuffleArr[0];
-
                 if (boggle.value[row][col] == "") {
                   boggle.value[row][col] = vocabularyList[currentQuestion.value][counter];
                   counter++;
                   rowBefore = row;
                   colBefore = col;
                   shuffleLetters(counter);
+                  countError = 0;
                 } else {
-                  findNearestColumn();
+                  countError++;
+                  console.log(countError);
+                  if (countError < 50) {
+                    findNearestColumn();
+                  } else {
+                    countError = 0;
+                    console.log(boggle.value);
+                    resetBoggle();
+                  }
                 }
               } catch (error) {
-                boggle.value = [
-                  ["", "", "", "", ""],
-                  ["", "", "", "", ""],
-                  ["", "", "", "", ""],
-                  ["", "", "", "", ""],
-                  ["", "", "", "", ""],
-                ];
-                counter = 0;
-                rowBefore = null;
-                colBefore = null;
-                shuffleLetters(counter);
+                console.log(error);
+                resetBoggle();
               }
             };
 
@@ -328,42 +342,18 @@ export default {
               }
             });
           });
-
-          setTimeout(() => {
-            $q.loading.hide();
-          }, 1000);
+          $q.loading.hide();
         }
       } catch (error) {
-        // console.log("123");
-
         console.log("error out");
-        counter = 0;
-        boggle.value = [
-          ["", "", "", "", ""],
-          ["", "", "", "", ""],
-          ["", "", "", "", ""],
-          ["", "", "", "", ""],
-          ["", "", "", "", ""],
-        ];
-        rowBefore = null;
-        colBefore = null;
-        shuffleLetters(counter);
+        resetBoggle();
       }
     };
 
     const nextQuestion = () => {
       if (currentQuestion.value < vocabularyList.length - 1) {
-        counter = 0;
         currentQuestion.value++;
-        boggle.value = [
-          ["", "", "", "", ""],
-          ["", "", "", "", ""],
-          ["", "", "", "", ""],
-          ["", "", "", "", ""],
-          ["", "", "", "", ""],
-        ];
-
-        shuffleLetters(counter);
+        resetBoggle();
       }
     };
 

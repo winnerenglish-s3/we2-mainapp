@@ -26,14 +26,14 @@ export default {
   setup() {
     const flashcardList = ref([]);
     const loadFlashcard = async () => {
-      let getFlashcard = await db
+      let getPracticeData = await db
         .collection("practiceData")
         .doc("server")
         .collection("practice")
         .where("practiceListId", "==", "nuytJ4l2dgr67m0ARobu")
         .get();
       let temp = [];
-      getFlashcard.forEach((element) => {
+      getPracticeData.forEach((element) => {
         temp.push({
           ...element.data(),
           id: element.id,

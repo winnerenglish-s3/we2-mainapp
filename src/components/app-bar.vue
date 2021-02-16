@@ -1,50 +1,54 @@
 <template>
   <div>
-    <q-toolbar :style="themeColor" :class="$route.name == 'flashcard' ? 'z-top' : ''">
-      <div class="row header-container">
-        <div class="col-6">
-          <q-btn
-            icon="fas fa-home"
-            v-if="!isShowDialogFlashcard"
-            class="shadow-2 btn-header q-mr-md btn-width-mobile"
-            @click="$router.push('/lobby')"
-          ></q-btn>
-          <q-btn
-            icon="fas fa-arrow-left"
-            v-if="
-              $q.platform.is.mobile && isShowDialogFlashcard && $route.name == 'flashcard'
-            "
-            class="shadow-2 btn-header btn-width-mobile"
-            @click="returnCloseDialog()"
-          ></q-btn>
-          <q-btn
-            icon="fas fa-pause"
-            @click="isShowSetting = true"
-            v-if="isShowPauseBtn"
-            class="shadow-2 btn-header btn-width-mobile"
-          ></q-btn>
-        </div>
+    <q-header :class="$route.name == 'flashcard' ? 'z-top' : ''">
+      <q-toolbar :style="themeColor">
+        <div class="row header-container">
+          <div class="col-6">
+            <q-btn
+              icon="fas fa-home"
+              v-if="!isShowDialogFlashcard"
+              class="shadow-2 btn-header q-mr-md btn-width-mobile"
+              @click="$router.push('/lobby')"
+            ></q-btn>
+            <q-btn
+              icon="fas fa-arrow-left"
+              v-if="
+                $q.platform.is.mobile &&
+                isShowDialogFlashcard &&
+                $route.name == 'flashcard'
+              "
+              class="shadow-2 btn-header btn-width-mobile"
+              @click="returnCloseDialog()"
+            ></q-btn>
+            <q-btn
+              icon="fas fa-pause"
+              @click="isShowSetting = true"
+              v-if="isShowPauseBtn"
+              class="shadow-2 btn-header btn-width-mobile"
+            ></q-btn>
+          </div>
 
-        <div align="right" class="col-6">
-          <q-btn
-            v-if="isHasInstruction"
-            @click="isShowDialogInstruction = true"
-            icon="fas fa-info-circle"
-            class="shadow-2 btn-header q-mr-md"
-            :class="{ 'btn-width-mobile': $q.platform.is.mobile }"
-            :label="!$q.platform.is.mobile ? 'คำสั่ง' : ''"
-          ></q-btn>
-          <q-btn
-            v-if="isHasHelp"
-            @click="isShowDialogHelp = true"
-            icon="fas fa-lightbulb"
-            class="shadow-2 btn-header"
-            :class="{ 'btn-width-mobile': $q.platform.is.mobile }"
-            :label="!$q.platform.is.mobile ? 'ตัวช่วย' : ''"
-          ></q-btn>
+          <div align="right" class="col-6">
+            <q-btn
+              v-if="isHasInstruction"
+              @click="isShowDialogInstruction = true"
+              icon="fas fa-info-circle"
+              class="shadow-2 btn-header q-mr-md"
+              :class="{ 'btn-width-mobile': $q.platform.is.mobile }"
+              :label="!$q.platform.is.mobile ? 'คำสั่ง' : ''"
+            ></q-btn>
+            <q-btn
+              v-if="isHasHelp"
+              @click="isShowDialogHelp = true"
+              icon="fas fa-lightbulb"
+              class="shadow-2 btn-header"
+              :class="{ 'btn-width-mobile': $q.platform.is.mobile }"
+              :label="!$q.platform.is.mobile ? 'ตัวช่วย' : ''"
+            ></q-btn>
+          </div>
         </div>
-      </div>
-    </q-toolbar>
+      </q-toolbar>
+    </q-header>
 
     <!-- Dialog Start Practice -->
     <q-dialog maximized v-model="isStartPractice" persistent>

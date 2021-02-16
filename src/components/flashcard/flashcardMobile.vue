@@ -13,7 +13,7 @@
           <q-img :src="item.imageSentenceUrl"></q-img>
         </div>
         <div class="col self-center q-px-md">
-          <span style="font-size: max(3vw, 24px)"> {{ item.vocab }}</span>
+          <span style="font-size: max(3vw, 24px)"> {{ item.vocab }} </span>
           <span class="relative-position q-mx-sm" style="font-size: max(2vw, 14px)">
             ({{ item.partOfSpeech.partOfSpeech }})
           </span>
@@ -60,9 +60,9 @@
             <div class="row">
               <div class="col self-center">
                 <span
-                  ><span style="font-size: max(5vw, 24px); line-height: 0">{{
-                    vocabDataList[currentFlashcardIndex].vocab
-                  }}</span>
+                  ><span style="font-size: max(5vw, 24px); line-height: 0">
+                    {{ vocabDataList[currentFlashcardIndex].vocab }}
+                  </span>
                   <span
                     class="relative-position q-mx-sm"
                     style="font-size: max(2vw, 12px)"
@@ -72,7 +72,7 @@
                   ></span
                 >
               </div>
-              <div class="col" align="right">
+              <div style="width: 100px" align="right">
                 <q-btn
                   round
                   class="bg-warning"
@@ -166,6 +166,8 @@ export default {
   setup(props, { emit }) {
     const currentFlashcardIndex = ref(0);
 
+    // const showFlashcardDetails = ref(false);
+
     const showDialog = computed(() => {
       if (props.isShowDialogFlashcard) {
         return true;
@@ -189,6 +191,7 @@ export default {
       showDialog,
       openDialog,
       currentFlashcardIndex,
+      // showFlashcardDetails,
     };
   },
 };
