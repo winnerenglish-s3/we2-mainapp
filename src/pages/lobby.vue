@@ -7,6 +7,7 @@
     <lobby-pc
       :characterData="characterData"
       :equipment="equipment"
+      :bodycolor="color"
       class=""
       :mode="mode"
       v-if="$q.platform.is.desktop"
@@ -14,6 +15,7 @@
     <lobby-mobile
       :characterData="characterData"
       :equipment="equipment"
+      :bodycolor="color"
       class=""
       :mode="mode"
       v-if="$q.platform.is.mobile"
@@ -201,10 +203,13 @@ export default {
 
     // Set Equipment Character
     const equipment = reactive({
-      head: ref(2),
-      body: ref(2),
+      head: ref(1),
+      body: ref(1),
       footer: ref(1),
     });
+
+    // Set Color Character
+    const color = ref("#FFB690");
 
     const mode = ref(false);
     const activeMenu = ref(null);
@@ -257,6 +262,7 @@ export default {
 
       // equipment
       equipment,
+      color,
     };
   },
   components: {

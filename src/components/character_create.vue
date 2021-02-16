@@ -782,8 +782,6 @@ export default {
     const changeColor = () => {
       let elHeader = document.getElementById("header-color");
 
-      console.log(elHeader);
-
       for (let i = 0; i < elHeader.children.length; i++) {
         elHeader.children[i].attributes.fill.value = props.bodycolor;
       }
@@ -835,44 +833,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.animation-pet {
-  animation-name: dogMove;
-  animation-duration: 2s;
-  transform-origin: center;
-  animation-iteration-count: infinite;
-  transform-box: fill-box;
-  animation-timing-function: linear;
-}
-@keyframes dogMove {
-  0% {
-    transform: translateX(0px) translateY(0px);
-  }
-  15% {
-    transform: translateX(-5px) translateY(5px);
-  }
-  30% {
-    transform: translateX(-10px) translateY(0px);
-  }
-  45% {
-    transform: translateX(-15px) translateY(5px);
-  }
-  60% {
-    transform: translateX(-10px) translateY(0px);
-  }
-  75% {
-    transform: translateX(-5px) translateY(5px);
-  }
-  100% {
-    transform: translateX(0px) translateY(0px);
-  }
-}
-
-#character {
-  animation-name: characterMove;
-  animation-duration: 2s;
-}
-
-@keyframes characterMove {
-}
-</style>
+<style lang="scss" scoped></style>

@@ -133,7 +133,11 @@
 
     <div class="col-12 self-end row" style="z-index: 2">
       <div class="col-12 self-end" align="center">
-        <character :equipment="equipment" style="z-index: 1"></character>
+        <character
+          :equipment="equipment"
+          :bodycolor="bodycolor"
+          style="z-index: 1"
+        ></character>
       </div>
     </div>
 
@@ -180,6 +184,10 @@ export default {
     equipment: {
       type: Object,
       default: () => {},
+    },
+    bodycolor: {
+      type: String,
+      default: "",
     },
   },
   setup(props) {
