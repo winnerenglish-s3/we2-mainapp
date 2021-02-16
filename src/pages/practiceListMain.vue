@@ -561,7 +561,6 @@ export default {
     // route to แบบฝึกหัด
 
     const gotoPractice = (data) => {
-      console.log(data.practiceType);
       let routerName = "";
       if (data.practiceType == "flashcard") {
         routerName = "/flashcard/";
