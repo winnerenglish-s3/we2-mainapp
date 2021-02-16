@@ -150,7 +150,7 @@ export default {
     const isLoadPractice = ref(false);
     const totalQuestion = ref(0);
     const instructionData = ref({
-      eng: "match the vocabulary word with its definition.",
+      eng: "Match the vocabulary word with its definition.",
       th: "จับคู่คำศัพท์กับความหมาย",
     });
 

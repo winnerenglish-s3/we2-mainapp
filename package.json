@@ -13,7 +13,9 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "quasar": "^2.0.0-beta.3",
-    "vue-i18n": "^9.0.0-beta.0"
+    "vue-draggable-next": "^2.0.1",
+    "vue-i18n": "^9.0.0-beta.0",
+    "vuedraggable": "^2.24.3"
   },
   "devDependencies": {
     "@quasar/app": "^3.0.0-beta.1",
