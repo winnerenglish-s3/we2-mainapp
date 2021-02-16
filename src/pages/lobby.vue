@@ -240,7 +240,7 @@ export default {
         characterData.value = await game.characterInfomation(uid);
       } catch (error) {
         console.log(error);
-        router.push("/");
+        // router.push("/");
       }
 
       loadingHide();
