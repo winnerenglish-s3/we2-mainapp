@@ -13,7 +13,7 @@
       <div class="col-12 self-start" align="center">
         <theme-animation :themeSync="themeSync"></theme-animation>
         <div class="box-question q-pa-lg font-content">
-          {{ showQuestion }}
+          <span v-html="showQuestion"></span>
         </div>
       </div>
       <div class="col-12">
@@ -90,19 +90,7 @@
               </div>
 
               <div class="q-pa-lg font-16">
-                <div>
-                  <span class="text-red">{{ `"sign" ` }}</span>
-                  <span>เป็นคำตอบที่ ผิด </span>
-                </div>
-                <div>
-                  คำตอบที่ถูกต้อง คือ
-                  <span class="text-green">{{ ` "attack"` }}</span>
-                </div>
-                <div class="q-mt-md">
-                  <span>Most elephants won't attack us if we don't provoke them. </span>
-                  <br />
-                  <span> ช้างส่วนใหญ่จะไม่ทำร้ายเรา ถ้าเราไม่แหย่พวกมัน </span>
-                </div>
+                <div v-html="showDescription"></div>
               </div>
 
               <div class="q-my-md" align="center">
@@ -133,14 +121,14 @@
       <div class="box-content-extravocab">
         <div v-for="(item, index) in extraVocabList" :key="index">
           <div class="q-py-xs q-px-md">
-            <span
-              >{{ item.vocab }}
+            <span>
+              <span v-html="item.vocab"></span>
               <!-- <span class="relative-position q-mx-xs">{{
                 `(${item.partOfSpeech.partOfSpeech})`
               }}</span> -->
             </span>
             <br />
-            <span>{{ item.meaning }}</span>
+            <span v-html="item.meaning"></span>
           </div>
           <hr class="no-padding" style="border: 1px solid #ffc177" />
         </div>
@@ -192,6 +180,10 @@ export default {
     extraVocabList: {
       type: Array,
       default: () => [],
+    },
+    showDescription: {
+      type: String,
+      default: "",
     },
   },
   // props: [

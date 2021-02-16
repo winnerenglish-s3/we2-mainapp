@@ -88,10 +88,7 @@
               >
                 ไม่สามารถเข้าสู่ระบบได้
               </div>
-              <div
-                align="center"
-                class="text-dark relative-position q-px-md q-mt-md"
-              >
+              <div align="center" class="text-dark relative-position q-px-md q-mt-md">
                 รหัสผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง
                 <br />กรุณาลองใหม่อีกครั้ง
               </div>
@@ -103,9 +100,7 @@
             >
               <!-- ปุ่มตกลง -->
               <div @click="confirm()" class="cursor-pointer btn-Alert z-top">
-                <span class="text-dark absolute-center cursor-pointer"
-                  >ตกลง</span
-                >
+                <span class="text-dark absolute-center cursor-pointer">ตกลง</span>
               </div>
             </div>
           </q-img>

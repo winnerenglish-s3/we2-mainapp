@@ -23,6 +23,7 @@
       :practiceTime="practiceTime"
       :isPracticeTimeout="isPracticeTimeout"
       :themeSync="themeSync"
+      :showDescription="showDescription"
       @sendAnswer="checkAnswer"
       @nextQuestion="nextQuestion"
       @finishPractice="(val) => (isFinishPractice = true)"
@@ -41,6 +42,7 @@
       :practiceTime="practiceTime"
       :isPracticeTimeout="isPracticeTimeout"
       :themeSync="themeSync"
+      :showDescription="showDescription"
       @sendAnswer="checkAnswer"
       @nextQuestion="nextQuestion"
       @finishPractice="(val) => (isFinishPractice = true)"
@@ -184,6 +186,7 @@ export default {
     const currentQuestion = ref(0);
     const showQuestion = ref("");
     const showChoices = ref([]);
+    const showDescription = ref("");
     const isCorrectAnswer = ref(false);
     const questionList = ref([]);
     const isFinishPractice = ref(false);
@@ -246,10 +249,11 @@ export default {
 
         showQuestion.value = questionList.value[currentQuestion.value].question;
         showChoices.value = questionList.value[currentQuestion.value].choices;
+        showDescription.value = questionList.value[currentQuestion.value].description;
 
         isLoadPractice.value = true;
       } catch (err) {
-        console.log(`${error} Type Multiple Vocab`);
+        console.log(`${err} Type Multiple Vocab`);
       }
     };
 
@@ -288,6 +292,7 @@ export default {
       instructionData,
       isHasHelp,
       isHasInstruction,
+      showDescription,
     };
   },
   data() {
