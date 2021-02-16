@@ -58,14 +58,8 @@
         <div class="text-center z-top">
           <!-- โหลด  -->
           <!-- โลโก้ -->
-          <transition
-            appear
-            enter-active-class="animatedLogo animate__bounceIn"
-          >
-            <q-img
-              style="width: 144px"
-              src="../../public/images/logo-adventures.png"
-            />
+          <transition appear enter-active-class="animatedLogo animate__bounceIn">
+            <q-img style="width: 144px" src="../../public/images/logo-adventures.png" />
           </transition>
           <div style="height: 40px"></div>
           <div>
@@ -81,11 +75,7 @@
               >
                 <div
                   class="fit"
-                  style="
-                    background-color: #d38a14;
-                    border-radius: 50px;
-                    padding: 2px;
-                  "
+                  style="background-color: #d38a14; border-radius: 50px; padding: 2px"
                 >
                   <div
                     class="full-height loading-bar"
@@ -95,9 +85,7 @@
                 </div>
               </div>
             </div>
-            <div class="q-py-sm appendMovingDots f16 animate">
-              Loading {{ progress }}
-            </div>
+            <div class="q-py-sm appendMovingDots f16 animate">Loading {{ progress }}</div>
           </div>
         </div>
       </div>
@@ -161,7 +149,7 @@ export default {
         loadingHide();
         if (checkCreateCharacter) {
           // หากมี ตัวละครแล้ว ไปที่ Lobby เลย
-          router.push("/lobby");
+          router.push("/character");
         } else {
           // หากยังไม่มีตัวละคร ไปสร้างตัวละคร
           router.push("/character");
@@ -219,11 +207,7 @@ export default {
 <style lang="scss" scoped>
 .loading-bar {
   background: rgb(204, 36, 36);
-  background: linear-gradient(
-    180deg,
-    rgba(204, 36, 36, 1) 0%,
-    rgba(255, 84, 84, 1) 100%
-  );
+  background: linear-gradient(180deg, rgba(204, 36, 36, 1) 0%, rgba(255, 84, 84, 1) 100%);
   border-radius: 50px;
 }
 .cloud1 {
