@@ -1,8 +1,56 @@
 <template>
-  <div align="center">
-    <div v-for="(item, index) in boggle" :key="index" class="row justify-center">
-      <div v-for="(item2, index2) in item" class="col q-pt-md">
-        <q-btn :label="item2"> </q-btn>
+  <div align="center" v-if="isFinishBoggle">
+    <div class="text-h5" align="center">
+      {{ showVocab }}
+    </div>
+    <div v-for="(item, row) in boggle" :key="row" class="row justify-center">
+      <div v-for="(item2, col) in item" class="col q-pt-md">
+        <q-btn
+          :class="{
+            'bg-teal text-white cursor-not-allowed no-pointer-events ': selectValue.filter(
+              (x) => x.row == row && x.col == col
+            ).length,
+            'bg-red':
+              !(
+                selectValue[selectValue.length - 1].left.row == row &&
+                selectValue[selectValue.length - 1].left.col == col
+              ) &&
+              !(
+                selectValue[selectValue.length - 1].right.row == row &&
+                selectValue[selectValue.length - 1].right.col == col
+              ) &&
+              !(
+                selectValue[selectValue.length - 1].top.row == row &&
+                selectValue[selectValue.length - 1].top.col == col
+              ) &&
+              !(
+                selectValue[selectValue.length - 1].bottom.row == row &&
+                selectValue[selectValue.length - 1].bottom.col == col
+              ),
+          }"
+          @click="selectedBox(row, col)"
+          :label="item2.letter"
+          :disable="
+            !(
+              selectValue[selectValue.length - 1].left.row == row &&
+              selectValue[selectValue.length - 1].left.col == col
+            ) &&
+            !(
+              selectValue[selectValue.length - 1].right.row == row &&
+              selectValue[selectValue.length - 1].right.col == col
+            ) &&
+            !(
+              selectValue[selectValue.length - 1].top.row == row &&
+              selectValue[selectValue.length - 1].top.col == col
+            ) &&
+            !(
+              selectValue[selectValue.length - 1].bottom.row == row &&
+              selectValue[selectValue.length - 1].bottom.col == col
+            ) &&
+            !selectValue.filter((x) => x.row == row && x.col == col).length
+          "
+        >
+        </q-btn>
       </div>
     </div>
 
@@ -13,6 +61,14 @@
         class="bg-teal text-white"
         style="width: 150px"
       ></q-btn>
+      <div class="q-pt-md">
+        <q-btn
+          style="width: 150px"
+          color="negative"
+          @click="reset()"
+          label="reset"
+        ></q-btn>
+      </div>
     </div>
   </div>
 </template>
@@ -32,20 +88,29 @@ export default {
     ]);
 
     const vocabularyList = [
-      "blackbirdsxczvs",
-      "blackbirdsxczvs",
-      "blackbirdsxczvs",
-      "blackbirdsxczvs",
-      "blackbirdsxczvs",
-      "blackbirdsxczvs",
-      "blackbirdsxczvs",
-      "blackbirdsxczvs",
-      "blackbirdsxczvs",
-      "blackbirdsxczvs",
-      "blackbirdsxczvs",
-      "blackbirdsxczvs",
-      "blackbirdsxczvs",
-      "blackbirdsxczvs",
+      "Alligator",
+      "Ant",
+      "Baboon",
+      "Bat",
+      "Bear",
+      "Beetle",
+      "Bird",
+      "Camel",
+      "Cat",
+      "Centipede",
+      "Chicken",
+      "Deer",
+      "Dog",
+      "Eagle",
+      "Elephant",
+      "Eel",
+      "Eastern Gorilla",
+      "Fennec Fox",
+      "Fur Seal",
+      "King Cobra",
+      "King Crab",
+      "Leopard Cat",
+      "Little Penguin",
     ];
     let currentQuestion = ref(0);
 
@@ -83,6 +148,8 @@ export default {
     let rowBefore;
     let colBefore;
 
+    const isFinishBoggle = ref(false);
+
     const shuffleArray = (array) => {
       var currentIndex = array.length,
         temporaryValue,
@@ -105,6 +172,7 @@ export default {
 
     const resetBoggle = () => {
       console.log("reset");
+      selectValue.value = [];
       counter = 0;
       boggle.value = [
         ["", "", "", "", ""],
@@ -118,6 +186,8 @@ export default {
       shuffleLetters(counter);
     };
 
+    const selectValue = ref([]);
+
     let countError = 0;
 
     const shuffleLetters = (counter) => {
@@ -127,10 +197,32 @@ export default {
             let randomRow = Math.floor(Math.random() * 5); //random 0-4
             let randomCol = Math.floor(Math.random() * 5); //random 0-4
             //   ตัวแรก
-            boggle.value[randomRow][randomCol] =
-              vocabularyList[currentQuestion.value][counter];
+            boggle.value[randomRow][randomCol] = {
+              letter: vocabularyList[currentQuestion.value][counter],
+            };
+
             rowBefore = randomRow;
             colBefore = randomCol;
+            selectValue.value.push({
+              row: randomRow,
+              col: randomCol,
+              left: {
+                row: randomRow,
+                col: randomCol - 1,
+              },
+              right: {
+                row: randomRow,
+                col: randomCol + 1,
+              },
+              bottom: {
+                row: randomRow + 1,
+                col: randomCol,
+              },
+              top: {
+                row: randomRow - 1,
+                col: randomCol,
+              },
+            });
             counter++;
             shuffleLetters(counter);
           } else {
@@ -307,7 +399,9 @@ export default {
                 let shuffleArr = shuffleArray(availablePosition);
                 let [row, col] = shuffleArr[0];
                 if (boggle.value[row][col] == "") {
-                  boggle.value[row][col] = vocabularyList[currentQuestion.value][counter];
+                  boggle.value[row][col] = {
+                    letter: vocabularyList[currentQuestion.value][counter],
+                  };
                   counter++;
                   rowBefore = row;
                   colBefore = col;
@@ -315,8 +409,7 @@ export default {
                   countError = 0;
                 } else {
                   countError++;
-                  console.log(countError);
-                  if (countError < 50) {
+                  if (countError < 100) {
                     findNearestColumn();
                   } else {
                     countError = 0;
@@ -334,15 +427,15 @@ export default {
           }
         } else {
           // Finish
-          console.log("finish");
           boggle.value.forEach((element) => {
-            element.forEach((x) => {
+            element.forEach((x, index) => {
               if (!x) {
-                x = "1";
+                let randomNumber = Math.floor(Math.random() * 26); //raddom 0  - 25
+                element[index] = { letter: letter[randomNumber] };
               }
             });
           });
-          $q.loading.hide();
+          isFinishBoggle.value = true;
         }
       } catch (error) {
         console.log("error out");
@@ -350,9 +443,57 @@ export default {
       }
     };
 
+    const selectedBox = (row, col) => {
+      //  left: {
+      //           row: randomRow,
+      //           col: randomCol - 1,
+      //         },
+      //         right: {
+      //           row: randomRow,
+      //           col: randomCol + 1,
+      //         },
+      //         bottom: {
+      //           row: randomRow + 1,
+      //           col: randomCol,
+      //         },
+      //         top: {
+      //           row: randomRow - 1,
+      //           col: randomCol,
+      //         },
+
+      selectValue.value.push({
+        row: row,
+        col: col,
+        left: {
+          row: row,
+          col: col - 1,
+        },
+        right: {
+          row: row,
+          col: col + 1,
+        },
+        bottom: {
+          row: row + 1,
+          col: col,
+        },
+        top: {
+          row: row - 1,
+          col: col,
+        },
+      });
+    };
+
+    const reset = () => {
+      selectValue.value = [];
+      resetBoggle();
+    };
+
+    const showVocab = ref(vocabularyList[currentQuestion.value]);
     const nextQuestion = () => {
       if (currentQuestion.value < vocabularyList.length - 1) {
         currentQuestion.value++;
+        selectValue.value = [];
+        showVocab.value = vocabularyList[currentQuestion.value];
         resetBoggle();
       }
     };
@@ -360,7 +501,15 @@ export default {
     onMounted(() => {
       shuffleLetters(counter);
     });
-    return { boggle, nextQuestion };
+    return {
+      boggle,
+      nextQuestion,
+      selectedBox,
+      selectValue,
+      reset,
+      showVocab,
+      isFinishBoggle,
+    };
   },
 };
 </script>
