@@ -45,9 +45,9 @@
         >
           {{
             isSendAnswer
-              ? currentQuestionText[index]
+              ? currentQuestionText[index].toLocaleUpperCase()
               : currentAnswerList[index]
-              ? currentAnswerList[index].text
+              ? selectedLetter[index]
               : ""
           }}
         </div>
@@ -62,61 +62,62 @@
       >
         <div class="fit row justify-center no-padding transparent">
           <div
-            class="col-7 row justify-center relative-position q-pa-md"
+            class="col-7 relative-position q-pa-md"
+            align="center"
             style="max-width: 745px; width: 46.5%"
           >
-            <div class="box-content-answer justify-between row q-mt-xs">
+            <div
+              class="col-12 box-content-answer justify-between row q-mt-xs"
+              v-if="currentAnswerList.length"
+              v-for="(item, row) in boggle"
+              :key="row"
+            >
               <div
                 class="relative-position"
-                style="width: 17%"
-                v-for="(item, index) in testData"
-                :key="index"
+                style="width: 19%"
+                v-for="(item2, col) in item"
+                :key="col"
               >
-                <!-- :disabled="
-                checkBottom != index &&
-                  checkTop != index &&
-                  checkLeft != index &&
-                  checkRight != index &&
-                  !currentAnswerList.filter(x => x.index == index).length &&
-                  currentAnswerList.length != currentQuestionText.length
-              " -->
                 <q-img
                   fit="contain"
-                  v-if="currentAnswerList.length"
                   @click="
                     isSendAnswer ||
-                    (checkBottom != index &&
-                      checkTop != index &&
-                      checkLeft != index &&
-                      checkRight != index &&
-                      checkCenter != index)
+                    (!(checkBottom.row == row && checkBottom.col == col) &&
+                      !(checkTop.row == row && checkTop.col == col) &&
+                      !(checkLeft.row == row && checkLeft.col == col) &&
+                      !(checkRight.row == row && checkRight.col == col))
                       ? null
-                      : chooseLineMove(index, item.val)
+                      : chooseLineMove(row, col, item2.letter)
                   "
                   :src="
                     isCorrectAnswer &&
-                    currentAnswerList.filter((x) => x.index == index).length &&
+                    currentAnswerList.filter((x) => x.row == row && x.col == col)
+                      .length &&
                     isSendAnswer
                       ? require(`../../../public/images/spellingbee/button-theme-${themeSync}/btn-choices-correct.png`)
                       : !isCorrectAnswer &&
-                        currentAnswerList.filter((x) => x.index == index).length &&
+                        currentAnswerList.filter((x) => x.row == row && x.col == col)
+                          .length &&
                         isSendAnswer
                       ? require(`../../../public/images/spellingbee/button-theme-${themeSync}/btn-choices-incorrect.png`)
-                      : currentAnswerList.filter((x) => x.index == index).length
+                      : currentAnswerList.filter((x) => x.row == row && x.col == col)
+                          .length
                       ? require(`../../../public/images/spellingbee/button-theme-${themeSync}/btn-choices-active.png`)
                       : require(`../../../public/images/spellingbee/button-theme-${themeSync}/btn-choices-default.png`)
                   "
                   style="z-index: 2"
                   :class="
-                    checkBottom != index &&
-                    checkTop != index &&
-                    checkLeft != index &&
-                    checkRight != index &&
-                    !currentAnswerList.filter((x) => x.index == index).length &&
+                    !(checkBottom.row == row && checkBottom.col == col) &&
+                    !(checkTop.row == row && checkTop.col == col) &&
+                    !(checkLeft.row == row && checkLeft.col == col) &&
+                    !(checkRight.row == row && checkRight.col == col) &&
+                    !currentAnswerList.filter((x) => x.row == row && x.col == col)
+                      .length &&
                     currentAnswerList.length != currentQuestionText.length
                       ? 'cursor-not-allowed disabled'
                       : currentAnswerList.length == currentQuestionText.length &&
-                        !currentAnswerList.filter((x) => x.index == index).length
+                        !currentAnswerList.filter((x) => x.row == row && x.col == col)
+                          .length
                       ? 'cursor-not-allowed'
                       : 'cursor-pointer'
                   "
@@ -127,23 +128,27 @@
                   >
                     <span
                       :class="{
-                        'text-white': currentAnswerList.filter((x) => x.index == index)
-                          .length,
+                        'text-white': currentAnswerList.filter(
+                          (x) => x.row == row && x.col == col
+                        ).length,
                       }"
                       style="font-size: max(1.5vw, 14px)"
-                      >{{ item.val }}</span
+                      >{{ item2.letter }}</span
                     >
                   </div></q-img
                 >
                 <div
-                  v-if="currentAnswerList.filter((x) => x.index == index).length"
+                  v-if="
+                    currentAnswerList.filter((x) => x.row == row && x.col == col).length
+                  "
                   :class="`link-answer-${
-                    currentAnswerList.filter((x) => x.index == index)[0].lineMove
+                    currentAnswerList.filter((x) => x.row == row && x.col == col)[0]
+                      .lineMove
                   }`"
                 ></div>
               </div>
             </div>
-            <div class="col-12 self-end" align="center">
+            <div class="col-12 self-end q-my-sm" align="center">
               <q-img
                 v-if="!isSendAnswer"
                 style="max-width: 200px; width: 30%"
@@ -174,18 +179,23 @@
 <script>
 import headerBar from "../header-time-progress";
 import getColorTheme from "../../../public/themeColor.json";
+import { ref, computed, watch } from "vue";
 export default {
   components: {
     headerBar,
   },
   props: {
-    testData: {
+    boggle: {
       type: Array,
       default: () => [],
     },
-    currentAnswerList: {
+    selectValue: {
       type: Array,
       default: () => [],
+    },
+    selectedLetter: {
+      type: String,
+      default: "",
     },
     currentQuestionText: {
       type: String,
@@ -220,60 +230,90 @@ export default {
       default: 0,
     },
   },
-  data() {
-    return {
-      isSendAnswer: false,
-      colorTheme: getColorTheme,
-      bgColorTheme: ["#FFE6A2", "#B0DEFF"],
+  setup(props, { emit }) {
+    // Initial Data
+    const currentAnswerList = ref(props.selectValue);
+    const isSendAnswer = ref(false);
+    const colorTheme = ref(getColorTheme);
+    const bgColorTheme = ref(["#FFE6A2", "#B0DEFF"]);
+
+    const checkBottom = computed(() => {
+      return currentAnswerList.value[currentAnswerList.value.length - 1].bottom;
+    });
+
+    const checkTop = computed(() => {
+      return currentAnswerList.value[currentAnswerList.value.length - 1].top;
+    });
+
+    const checkLeft = computed(() => {
+      return currentAnswerList.value[currentAnswerList.value.length - 1].left;
+    });
+
+    const checkRight = computed(() => {
+      return currentAnswerList.value[currentAnswerList.value.length - 1].right;
+    });
+
+    const themeBGColor = computed(() => {
+      return `background-color:${bgColorTheme.value[props.themeSync - 1]}`;
+    });
+
+    const themeButton = computed(() => {
+      return `background-color:${colorTheme.value[props.themeSync - 1].hex}`;
+    });
+
+    const themeQuestion = computed(() => {
+      return `border-color:rgba(${
+        colorTheme.value[props.themeSync - 1].rgb
+      },.95);box-shadow: 0px 4px 0px ${colorTheme.value[props.themeSync - 1].hex}`;
+    });
+
+    const chooseLineMove = (row, col, val) => {
+      emit("chooseBtn", { row: row, col: col, val: val });
     };
-  },
-  computed: {
-    checkBottom() {
-      return this.currentAnswerList[this.currentAnswerList.length - 1].setAround.bottom;
-    },
-    checkTop() {
-      return this.currentAnswerList[this.currentAnswerList.length - 1].setAround.top;
-    },
-    checkLeft() {
-      return this.currentAnswerList[this.currentAnswerList.length - 1].setAround.left;
-    },
-    checkRight() {
-      return this.currentAnswerList[this.currentAnswerList.length - 1].setAround.right;
-    },
-    checkCenter() {
-      return this.currentAnswerList[this.currentAnswerList.length - 1].setAround.center;
-    },
-    showAnswerBtn() {
-      if (this.currentAnswerList.length === this.currentQuestionText.length) {
+
+    const sendAnswer = () => {
+      isSendAnswer.value = true;
+      emit("sendCallBack");
+    };
+
+    const showAnswerBtn = computed(() => {
+      if (currentAnswerList.value.length === props.currentQuestionText.length) {
         return true;
       } else {
         return false;
       }
-    },
-    themeBGColor() {
-      return `background-color:${this.bgColorTheme[this.themeSync - 1]}`;
-    },
-    themeButton() {
-      return `background-color:${this.colorTheme[this.themeSync - 1].hex}`;
-    },
-    themeQuestion() {
-      return `border-color:rgba(${
-        this.colorTheme[this.themeSync - 1].rgb
-      },.95);box-shadow: 0px 4px 0px ${this.colorTheme[this.themeSync - 1].hex}`;
-    },
-  },
-  methods: {
-    sendAnswer() {
-      this.isSendAnswer = true;
-      this.$emit("sendCallBack");
-    },
-    nextQuestion() {
-      this.isSendAnswer = false;
-      this.$emit("sendNextQuestion");
-    },
-    chooseLineMove(index, val) {
-      this.$emit("chooseBtn", { index: index, val: val });
-    },
+    });
+
+    watch(
+      () => props.selectValue,
+      () => {
+        currentAnswerList.value = props.selectValue;
+      }
+    );
+
+    const nextQuestion = () => {
+      isSendAnswer.value = false;
+      console.log(currentAnswerList.value);
+
+      emit("sendNextQuestion");
+    };
+
+    return {
+      currentAnswerList,
+      isSendAnswer,
+      colorTheme,
+      themeBGColor,
+      themeQuestion,
+      themeButton,
+      checkBottom,
+      checkTop,
+      checkLeft,
+      checkRight,
+      chooseLineMove,
+      sendAnswer,
+      showAnswerBtn,
+      nextQuestion,
+    };
   },
 };
 </script>

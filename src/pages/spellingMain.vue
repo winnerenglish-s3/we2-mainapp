@@ -5,34 +5,36 @@
     </div>
 
     <spelling-pc
-      :testData="testData"
-      :currentAnswerList="currentAnswerList"
+      :boggle="boggle"
+      :selectValue="selectValue"
       :currentQuestionText="currentQuestionText"
       :currentQuestion="currentQuestion"
+      :selectedLetter="selectedLetter"
       :totalQuestion="totalQuestion"
       :totalStar="totalStar"
       :practiceTime="practiceTime"
       :isPracticeTimeout="isPracticeTimeout"
       :isCorrectAnswer="isCorrectAnswer"
       :themeSync="themeSync"
-      @chooseBtn="lineMoveBtn"
+      @chooseBtn="selectedBox"
       @sendCallBack="sendAnswer"
       @sendNextQuestion="nextQuestion"
       class="box-container-main"
       v-if="$q.platform.is.desktop"
     ></spelling-pc>
     <spelling-mobile
-      :testData="testData"
-      :currentAnswerList="currentAnswerList"
+      :boggle="boggle"
+      :selectValue="selectValue"
       :currentQuestionText="currentQuestionText"
       :currentQuestion="currentQuestion"
+      :selectedLetter="selectedLetter"
       :totalQuestion="totalQuestion"
       :totalStar="totalStar"
       :practiceTime="practiceTime"
       :isPracticeTimeout="isPracticeTimeout"
       :isCorrectAnswer="isCorrectAnswer"
       :themeSync="themeSync"
-      @chooseBtn="lineMoveBtn"
+      @chooseBtn="selectedBox"
       @sendCallBack="sendAnswer"
       @sendNextQuestion="nextQuestion"
       v-if="$q.platform.is.mobile"
@@ -111,6 +113,8 @@
 import spellingPc from "../components/spellingbee/spellingbeePc";
 import spellingMobile from "../components/spellingbee/spellingbeeMobile";
 import appBar from "../components/app-bar";
+import { useQuasar } from "quasar";
+import { ref, onMounted } from "vue";
 export default {
   components: {
     spellingPc,
@@ -123,6 +127,524 @@ export default {
       default: 0,
     },
   },
+
+  setup(props) {
+    // Initial Data
+    const $q = useQuasar();
+    const isCorrectAnswer = ref(false);
+
+    let currentQuestion = ref(0);
+    const boggle = ref([
+      ["", "", "", "", ""],
+      ["", "", "", "", ""],
+      ["", "", "", "", ""],
+      ["", "", "", "", ""],
+      ["", "", "", "", ""],
+    ]);
+
+    const vocabularyList = [
+      "Alligator",
+      "Ant",
+      "Baboon",
+      "Bat",
+      "Bear",
+      "Beetle",
+      "Bird",
+      "Camel",
+      "Cat",
+      "Centipede",
+      "Chicken",
+      "Deer",
+      "Dog",
+      "Eagle",
+      "Elephant",
+      "Eel",
+      "Eastern Gorilla",
+      "Fennec Fox",
+      "Fur Seal",
+      "King Cobra",
+      "King Crab",
+      "Leopard Cat",
+      "Little Penguin",
+    ];
+
+    const letter = [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W",
+      "X",
+      "Y",
+      "Z",
+    ];
+
+    const currentQuestionText = ref(vocabularyList[currentQuestion.value]);
+
+    const selectedLetter = ref([]);
+
+    let counter = 0;
+
+    let rowBefore;
+    let colBefore;
+
+    const isFinishBoggle = ref(false);
+
+    const shuffleArray = (array) => {
+      var currentIndex = array.length,
+        temporaryValue,
+        randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
+    };
+
+    const resetBoggle = () => {
+      console.log("reset");
+      selectValue.value = [];
+      selectedLetter.value = [];
+      counter = 0;
+      boggle.value = [
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+        ["", "", "", "", ""],
+      ];
+      rowBefore = null;
+      colBefore = null;
+      shuffleLetters(counter);
+    };
+
+    const selectValue = ref([]);
+
+    let countError = 0;
+
+    const shuffleLetters = (counter) => {
+      try {
+        if (counter < vocabularyList[currentQuestion.value].length) {
+          if (counter == 0) {
+            let randomRow = Math.floor(Math.random() * 5); //random 0-4
+            let randomCol = Math.floor(Math.random() * 5); //random 0-4
+            //   ตัวแรก
+            boggle.value[randomRow][randomCol] = {
+              letter: vocabularyList[currentQuestion.value][counter].toUpperCase(),
+            };
+
+            selectedLetter.value.push(
+              vocabularyList[currentQuestion.value][counter].toUpperCase()
+            );
+
+            rowBefore = randomRow;
+            colBefore = randomCol;
+            selectValue.value.push({
+              row: randomRow,
+              col: randomCol,
+              left: {
+                row: randomRow,
+                col: randomCol - 1,
+              },
+              right: {
+                row: randomRow,
+                col: randomCol + 1,
+              },
+              bottom: {
+                row: randomRow + 1,
+                col: randomCol,
+              },
+              top: {
+                row: randomRow - 1,
+                col: randomCol,
+              },
+              lineMove: "center",
+            });
+            counter++;
+            shuffleLetters(counter);
+          } else {
+            const findNearestColumn = () => {
+              try {
+                let availablePosition;
+                if (rowBefore == 0) {
+                  if (colBefore == 0) {
+                    availablePosition = [
+                      [0, 1],
+                      [1, 0],
+                    ];
+                  } else if (colBefore == 1) {
+                    availablePosition = [
+                      [0, 0],
+                      [0, 2],
+                      [1, 1],
+                    ];
+                  } else if (colBefore == 2) {
+                    availablePosition = [
+                      [0, 1],
+                      [0, 3],
+                      [1, 2],
+                    ];
+                  } else if (colBefore == 3) {
+                    availablePosition = [
+                      [0, 2],
+                      [0, 4],
+                      [1, 3],
+                    ];
+                  } else if (colBefore == 4) {
+                    availablePosition = [
+                      [0, 3],
+                      [1, 4],
+                    ];
+                  }
+                } else if (rowBefore == 1) {
+                  if (colBefore == 0) {
+                    availablePosition = [
+                      [1, 1],
+                      [2, 0],
+                      [0, 0],
+                    ];
+                  } else if (colBefore == 1) {
+                    availablePosition = [
+                      [1, 0],
+                      [1, 2],
+                      [0, 1],
+                      [2, 1],
+                    ];
+                  } else if (colBefore == 2) {
+                    availablePosition = [
+                      [1, 1],
+                      [0, 2],
+                      [1, 3],
+                      [2, 2],
+                    ];
+                  } else if (colBefore == 3) {
+                    availablePosition = [
+                      [1, 2],
+                      [0, 3],
+                      [1, 4],
+                      [2, 3],
+                    ];
+                  } else if (colBefore == 4) {
+                    availablePosition = [
+                      [1, 3],
+                      [0, 4],
+                      [2, 4],
+                    ];
+                  }
+                } else if (rowBefore == 2) {
+                  if (colBefore == 0) {
+                    availablePosition = [
+                      [1, 0],
+                      [2, 1],
+                      [3, 0],
+                    ];
+                  } else if (colBefore == 1) {
+                    availablePosition = [
+                      [2, 0],
+                      [1, 1],
+                      [2, 2],
+                      [3, 1],
+                    ];
+                  } else if (colBefore == 2) {
+                    availablePosition = [
+                      [2, 1],
+                      [1, 2],
+                      [2, 3],
+                      [3, 2],
+                    ];
+                  } else if (colBefore == 3) {
+                    availablePosition = [
+                      [2, 2],
+                      [1, 3],
+                      [2, 4],
+                      [3, 3],
+                    ];
+                  } else if (colBefore == 4) {
+                    availablePosition = [
+                      [2, 3],
+                      [1, 4],
+                      [3, 4],
+                    ];
+                  }
+                } else if (rowBefore == 3) {
+                  if (colBefore == 0) {
+                    availablePosition = [
+                      [2, 0],
+                      [3, 1],
+                      [4, 0],
+                    ];
+                  } else if (colBefore == 1) {
+                    availablePosition = [
+                      [3, 0],
+                      [2, 1],
+                      [3, 2],
+                      [4, 1],
+                    ];
+                  } else if (colBefore == 2) {
+                    availablePosition = [
+                      [3, 1],
+                      [2, 2],
+                      [3, 3],
+                      [4, 2],
+                    ];
+                  } else if (colBefore == 3) {
+                    availablePosition = [
+                      [3, 2],
+                      [2, 3],
+                      [3, 4],
+                      [4, 3],
+                    ];
+                  } else if (colBefore == 4) {
+                    availablePosition = [
+                      [3, 3],
+                      [2, 4],
+                      [4, 4],
+                    ];
+                  }
+                } else if (rowBefore == 4) {
+                  if (colBefore == 0) {
+                    availablePosition = [
+                      [3, 0],
+                      [4, 1],
+                    ];
+                  } else if (colBefore == 1) {
+                    availablePosition = [
+                      [4, 0],
+                      [3, 1],
+                      [4, 2],
+                    ];
+                  } else if (colBefore == 2) {
+                    availablePosition = [
+                      [4, 1],
+                      [3, 2],
+                      [4, 3],
+                    ];
+                  } else if (colBefore == 3) {
+                    availablePosition = [
+                      [4, 2],
+                      [3, 3],
+                      [4, 4],
+                    ];
+                  } else if (colBefore == 4) {
+                    availablePosition = [
+                      [4, 3],
+                      [3, 4],
+                    ];
+                  }
+                }
+
+                let shuffleArr = shuffleArray(availablePosition);
+                let [row, col] = shuffleArr[0];
+                if (boggle.value[row][col] == "") {
+                  boggle.value[row][col] = {
+                    letter: vocabularyList[currentQuestion.value][counter].toUpperCase(),
+                  };
+                  counter++;
+                  rowBefore = row;
+                  colBefore = col;
+                  shuffleLetters(counter);
+                  countError = 0;
+                } else {
+                  countError++;
+                  if (countError < 100) {
+                    findNearestColumn();
+                  } else {
+                    countError = 0;
+                    console.log(boggle.value);
+                    resetBoggle();
+                  }
+                }
+              } catch (error) {
+                console.log(error);
+                resetBoggle();
+              }
+            };
+
+            findNearestColumn();
+          }
+        } else {
+          // Finish
+          boggle.value.forEach((element) => {
+            element.forEach((x, index) => {
+              if (!x) {
+                let randomNumber = Math.floor(Math.random() * 26); //raddom 0  - 25
+                element[index] = { letter: letter[randomNumber].toUpperCase() };
+              }
+            });
+          });
+          isFinishBoggle.value = true;
+        }
+      } catch (error) {
+        console.log("error out");
+        resetBoggle();
+      }
+    };
+
+    const selectedBox = (item) => {
+      // ถ้ามีการกดปุ่มไว้อยู่แล้ว
+      let sameAnswer = selectValue.value.filter(
+        (x) => x.row == item.row && x.col == item.col
+      ).length;
+
+      console.log(sameAnswer);
+
+      // กรณีครั้งแรกห้ามกดตัวซ้ำ
+      if (sameAnswer && selectValue.value.length == 1) {
+        return;
+      }
+
+      if (selectValue.value.length > 1) {
+        // เก็บค่า Index หลังจากกด Back กลับไป
+        let backAnswer = selectValue.value[selectValue.value.length - 2];
+
+        console.log(backAnswer);
+
+        // เช็คค่า Back หลังจากกดกลับไป ว่าค่า Index ตรงกับที่กดมาหรือไม่
+        if (backAnswer.row == item.row && backAnswer.col == item.col) {
+          // isSendAnswer.value = false;
+          // selectValue.value[selectValue.value.length - 2].lineMove = "center";
+          selectValue.value.pop();
+          selectedLetter.value.pop();
+          return;
+        }
+
+        let DulpicateIndex = selectValue.value.filter(
+          (x) => x.row == item.row && x.col == item.col
+        ).length;
+
+        // ถ้ากรณีมีข้อมูลที่กดอยู่แล้ว
+        if (DulpicateIndex) {
+          return;
+        }
+
+        // ไม่สามารถกดปุ่มต่อไปได้ถ้าตอบข้อตามจำนวนข้อแล้ว
+        if (selectValue.value.length == currentQuestionText.value.length) {
+          return;
+        }
+      }
+
+      let newData = {
+        setAround: {
+          left: null,
+          right: null,
+          center: null,
+          top: null,
+          bottom: null,
+        },
+      };
+
+      selectValue.value.push({
+        row: item.row,
+        col: item.col,
+        left: {
+          row: item.row,
+          col: item.col - 1,
+        },
+        right: {
+          row: item.row,
+          col: item.col + 1,
+        },
+        bottom: {
+          row: item.row + 1,
+          col: item.col,
+        },
+        top: {
+          row: item.row - 1,
+          col: item.col,
+        },
+        lineMove: "center",
+      });
+
+      if (item.row == selectValue.value[selectValue.value.length - 2].row) {
+        console.log("Same Row");
+        if (item.col > selectValue.value[selectValue.value.length - 2].col) {
+          selectValue.value[selectValue.value.length - 1].lineMove = "right";
+        } else {
+          selectValue.value[selectValue.value.length - 1].lineMove = "left";
+        }
+      } else {
+        if (item.row > selectValue.value[selectValue.value.length - 2].row) {
+          selectValue.value[selectValue.value.length - 1].lineMove = "top";
+        } else {
+          selectValue.value[selectValue.value.length - 1].lineMove = "bottom";
+        }
+      }
+
+      selectedLetter.value.push(item.val.toUpperCase());
+    };
+
+    const sendAnswer = () => {
+      let answerLetter = selectedLetter.value.join("");
+
+      if (answerLetter == currentQuestionText.value.toUpperCase()) {
+        isCorrectAnswer.value = true;
+      } else {
+        isCorrectAnswer.value = false;
+      }
+    };
+
+    const reset = () => {
+      selectValue.value = [];
+      resetBoggle();
+    };
+
+    const showVocab = ref(vocabularyList[currentQuestion.value]);
+
+    const nextQuestion = () => {
+      currentQuestion.value++;
+      selectValue.value = [];
+
+      showVocab.value = vocabularyList[currentQuestion.value];
+
+      currentQuestionText.value = showVocab.value;
+      resetBoggle();
+    };
+
+    onMounted(() => {
+      shuffleLetters(counter);
+    });
+
+    return {
+      boggle,
+      nextQuestion,
+      selectedBox,
+      selectValue,
+      reset,
+      showVocab,
+      isFinishBoggle,
+      selectedLetter,
+      currentQuestionText,
+      sendAnswer,
+      isCorrectAnswer,
+    };
+  },
   data() {
     return {
       tab: "vocab",
@@ -130,56 +652,6 @@ export default {
         en: "xxx",
         th: "ปปป",
       },
-      totalStar: 0,
-      totalQuestion: 3,
-      currentQuestion: 0,
-      numberOfPractice: 0,
-      practiceTime: 10,
-      testData: [
-        "Q",
-        "R",
-        "A",
-        "D",
-        "T",
-        "S",
-        "A",
-        "Z",
-        "P",
-        "W",
-        "E",
-        "B",
-        "B",
-        "I",
-        "O",
-        "P",
-        "F",
-        "W",
-        "T",
-        "U",
-        "H",
-        "L",
-        "Z",
-        "X",
-        "O",
-      ],
-      currentAnswerList: [],
-      currentQuestionText: "RABBIT",
-      questionList: [
-        {
-          question: "RABBIT",
-          correntAnswer: "RABBIT",
-        },
-        {
-          question: "ZPW",
-          correntAnswer: "ZPW",
-        },
-        {
-          question: "SABBIPWOUO",
-          correntAnswer: "SABBIPWOUO",
-        },
-      ],
-
-      isCorrectAnswer: false,
 
       isPracticeTimeout: false,
       funcPracticeTime: "",
@@ -195,221 +667,6 @@ export default {
     },
     closeHelpBtn() {
       this.$emit("closeHelp");
-    },
-    nextQuestion() {
-      if (this.currentQuestion + 1 != this.totalQuestion) {
-        this.currentQuestion++;
-        this.isCorrectAnswer = false;
-      } else {
-        this.$emit("isShowFinishPractice", true);
-        return;
-      }
-
-      this.setStartPoint();
-    },
-    sendAnswer() {
-      console.clear();
-      let randomStar = Math.ceil(Math.random() * 10);
-
-      if (randomStar % 2 == 0) {
-        if (this.totalStar != 3) {
-          this.totalStar += 1;
-        } else {
-          this.totalStar = 0;
-        }
-      }
-
-      if (this.numberOfPractice != 2) {
-        this.numberOfPractice += 1;
-      } else {
-        this.numberOfPractice = 1;
-      }
-
-      this.$emit("numberOfPractice", this.numberOfPractice);
-
-      if (this.currentQuestion == 1) {
-        this.isCorrectAnswer = true;
-      } else {
-        this.isCorrectAnswer = false;
-      }
-    },
-    lineMoveBtn(item) {
-      // ถ้ามีการกดปุ่มไว้อยู่แล้ว
-      let sameAnswer = this.currentAnswerList.filter((x) => x.index == item.index).length;
-
-      // กรณีครั้งแรกห้ามกดตัวซ้ำ
-      if (sameAnswer && this.currentAnswerList.length == 1) {
-        return;
-      }
-
-      if (this.currentAnswerList.length > 1) {
-        // เก็บค่า Index หลังจากกด Back กลับไป
-        let backAnswer = this.currentAnswerList[this.currentAnswerList.length - 2].index;
-
-        // เช็คค่า Back หลังจากกดกลับไป ว่าค่า Index ตรงกับที่กดมาหรือไม่
-        if (backAnswer == item.index) {
-          this.isSendAnswer = false;
-          this.currentAnswerList[this.currentAnswerList.length - 2].lineMove = "center";
-          this.currentAnswerList.pop();
-          return;
-        }
-
-        let DulpicateIndex = this.currentAnswerList.filter((x) => x.index == item.index)
-          .length;
-
-        // ถ้ากรณีมีข้อมูลที่กดอยู่แล้ว
-        if (DulpicateIndex) {
-          return;
-        }
-
-        // ไม่สามารถกดปุ่มต่อไปได้ถ้าตอบข้อตามจำนวนข้อแล้ว
-        if (this.currentAnswerList.length == this.currentQuestionText.length) {
-          return;
-        }
-      }
-
-      // เซ็ท
-      let newData = {
-        index: item.index,
-        text: item.val,
-        lineMove: "center",
-        setAround: {
-          left: item.index - 1,
-          right: item.index + 1,
-          top: item.index - 5,
-          bottom: item.index + 5,
-        },
-      };
-
-      if (item.index < 5) {
-        if (item.index == 0) {
-          newData.setAround.left = null;
-        } else if (item.index == 4) {
-          newData.setAround.right = null;
-        }
-      } else if (item.index < 10) {
-        if (item.index == 5) {
-          newData.setAround.left = null;
-        } else if (item.index == 9) {
-          newData.setAround.right = null;
-        }
-      } else if (item.index < 15) {
-        if (item.index == 10) {
-          newData.setAround.left = null;
-        } else if (item.index == 14) {
-          newData.setAround.right = null;
-        }
-      } else if (item.index < 20) {
-        if (item.index == 15) {
-          newData.setAround.left = null;
-        } else if (item.index == 19) {
-          newData.setAround.right = null;
-        }
-      } else {
-        if (item.index == 20) {
-          newData.setAround.left = null;
-        } else if (item.index == 24) {
-          newData.setAround.right = null;
-        }
-      }
-
-      for (const setLine in newData.setAround) {
-        if (
-          this.currentAnswerList[this.currentAnswerList.length - 1].setAround[setLine] ==
-          item.index
-        ) {
-          if (setLine == "right") {
-            this.currentAnswerList[this.currentAnswerList.length - 1].lineMove = "left";
-          } else if (setLine == "left") {
-            this.currentAnswerList[this.currentAnswerList.length - 1].lineMove = "right";
-          } else {
-            this.currentAnswerList[this.currentAnswerList.length - 1].lineMove = setLine;
-          }
-        }
-      }
-
-      this.currentAnswerList.push(newData);
-    },
-    setStartPoint() {
-      this.currentAnswerList = [];
-      this.currentQuestionText = this.questionList[this.currentQuestion].question;
-
-      let firstText = this.questionList[this.currentQuestion].question[0];
-
-      let randomPoint = Math.ceil(Math.random() * 24);
-
-      let newData = {
-        text: firstText,
-        index: randomPoint,
-        lineMove: "center",
-        setAround: {
-          left: randomPoint - 1,
-          right: randomPoint + 1,
-          center: randomPoint,
-          top: randomPoint - 5,
-          bottom: randomPoint + 5,
-        },
-      };
-
-      if (randomPoint < 5) {
-        if (randomPoint == 0) {
-          newData.setAround.left = null;
-        } else if (randomPoint == 4) {
-          newData.setAround.right = null;
-        }
-      } else if (randomPoint < 10) {
-        if (randomPoint == 5) {
-          newData.setAround.left = null;
-        } else if (randomPoint == 9) {
-          newData.setAround.right = null;
-        }
-      } else if (randomPoint < 15) {
-        if (randomPoint == 10) {
-          newData.setAround.left = null;
-        } else if (randomPoint == 14) {
-          newData.setAround.right = null;
-        }
-      } else if (randomPoint < 20) {
-        if (randomPoint == 15) {
-          newData.setAround.left = null;
-        } else if (randomPoint == 19) {
-          newData.setAround.right = null;
-        }
-      } else {
-        if (randomPoint == 20) {
-          newData.setAround.left = null;
-        } else if (randomPoint == 24) {
-          newData.setAround.right = null;
-        }
-      }
-
-      this.currentAnswerList.push(newData);
-    },
-  },
-  created() {
-    if (this.isHasHelp) {
-      this.$emit("isShowButtonHelp");
-    }
-
-    if (this.isHasInstruction) {
-      this.$emit("isShowButtonInstruction");
-    }
-
-    this.testData = this.testData.map((x, index) => {
-      return { val: x, index: index };
-    });
-
-    this.setStartPoint();
-  },
-  watch: {
-    isStartPractice() {
-      if (!this.isStartPractice) {
-        this.isCorrectAnswer = false;
-        this.currentAnswerList = [];
-        this.currentQuestion = 0;
-        this.totalStar = 0;
-        this.setStartPoint();
-      }
     },
   },
 };

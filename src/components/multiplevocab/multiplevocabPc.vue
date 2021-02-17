@@ -11,7 +11,11 @@
         ></header-bar>
       </div>
       <div class="col-12 self-start" align="center">
-        <theme-animation :themeSync="themeSync"></theme-animation>
+        <theme-animation
+          :themeSync="themeSync"
+          :isSendAnswer="isSendAnswer"
+          :isCorrectAnswer="isCorrectAnswer"
+        ></theme-animation>
         <div class="box-question q-pa-lg font-content">
           <span v-html="showQuestion"></span>
         </div>

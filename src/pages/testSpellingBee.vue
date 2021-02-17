@@ -479,6 +479,7 @@ export default {
     };
 
     const showVocab = ref(vocabularyList[currentQuestion.value]);
+
     const nextQuestion = () => {
       if (currentQuestion.value < vocabularyList.length - 1) {
         currentQuestion.value++;
@@ -491,6 +492,7 @@ export default {
     onMounted(() => {
       shuffleLetters(counter);
     });
+
     return {
       boggle,
       nextQuestion,

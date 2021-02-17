@@ -782,8 +782,6 @@ export default {
     const changeColor = () => {
       let elHeader = document.getElementById("header-color");
 
-      console.log(elHeader);
-
       for (let i = 0; i < elHeader.children.length; i++) {
         elHeader.children[i].attributes.fill.value = props.bodycolor;
       }
@@ -805,6 +803,12 @@ export default {
       let elHead = document.getElementById("top");
 
       elHead.innerHTML = setHat.value[props.equipment.head];
+
+      let elEyes = document.getElementById("eyes");
+
+      elEyes;
+
+      console.log(elEyes);
 
       let elBody = document.getElementById("mid");
 
@@ -868,11 +872,16 @@ export default {
   }
 }
 
-#character {
-  animation-name: characterMove;
-  animation-duration: 2s;
+#eyes {
+  animation: eyesAnimation 1s linear infinite;
 }
 
-@keyframes characterMove {
+@keyframes eyesAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>
