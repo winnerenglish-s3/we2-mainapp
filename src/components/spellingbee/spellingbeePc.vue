@@ -11,7 +11,7 @@
         ></header-bar>
       </div>
       <div class="box-question" :style="themeQuestion">
-        <span style="font-size: max(1.3vw, 20px)"> กระต่าย </span>
+        <span style="font-size: max(1.3vw, 20px)"> {{ currentQuestionTh }} </span>
       </div>
       <div class="q-my-lg row justify-center" align="center">
         <q-btn
@@ -198,6 +198,10 @@ export default {
       default: "",
     },
     currentQuestionText: {
+      type: String,
+      default: "",
+    },
+    currentQuestionTh: {
       type: String,
       default: "",
     },

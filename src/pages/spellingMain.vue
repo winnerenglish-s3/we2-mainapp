@@ -16,6 +16,7 @@
       :isPracticeTimeout="isPracticeTimeout"
       :isCorrectAnswer="isCorrectAnswer"
       :themeSync="themeSync"
+      :currentQuestionTh="currentQuestionTh"
       @chooseBtn="selectedBox"
       @sendCallBack="sendAnswer"
       @sendNextQuestion="nextQuestion"
@@ -34,6 +35,7 @@
       :isPracticeTimeout="isPracticeTimeout"
       :isCorrectAnswer="isCorrectAnswer"
       :themeSync="themeSync"
+      :currentQuestionTh="currentQuestionTh"
       @chooseBtn="selectedBox"
       @sendCallBack="sendAnswer"
       @sendNextQuestion="nextQuestion"
@@ -143,29 +145,12 @@ export default {
     ]);
 
     const vocabularyList = [
-      "Alligator",
-      "Ant",
-      "Baboon",
-      "Bat",
-      "Bear",
-      "Beetle",
-      "Bird",
-      "Camel",
-      "Cat",
-      "Centipede",
-      "Chicken",
-      "Deer",
-      "Dog",
-      "Eagle",
-      "Elephant",
-      "Eel",
-      "Eastern Gorilla",
-      "Fennec Fox",
-      "Fur Seal",
-      "King Cobra",
-      "King Crab",
-      "Leopard Cat",
-      "Little Penguin",
+      { vocab: "Alligator", meaning: "จรเข้" },
+      { vocab: "Ant", meaning: "มด" },
+      { vocab: "King Cobra", meaning: "งูจงอาง" },
+      { vocab: "King Crab", meaning: "ปูยักษ์" },
+      { vocab: "Leopard Cat", meaning: "แมวดาว" },
+      { vocab: "Little Penguin", meaning: "เพนกวินสีน้ำเงิน" },
     ];
 
     const letter = [
@@ -197,7 +182,9 @@ export default {
       "Z",
     ];
 
-    const currentQuestionText = ref(vocabularyList[currentQuestion.value]);
+    const currentQuestionText = ref(vocabularyList[currentQuestion.value].vocab);
+
+    const currentQuestionTh = ref(vocabularyList[currentQuestion.value].meaning);
 
     const selectedLetter = ref([]);
 
@@ -251,17 +238,17 @@ export default {
 
     const shuffleLetters = (counter) => {
       try {
-        if (counter < vocabularyList[currentQuestion.value].length) {
+        if (counter < vocabularyList[currentQuestion.value].vocab.length) {
           if (counter == 0) {
             let randomRow = Math.floor(Math.random() * 5); //random 0-4
             let randomCol = Math.floor(Math.random() * 5); //random 0-4
             //   ตัวแรก
             boggle.value[randomRow][randomCol] = {
-              letter: vocabularyList[currentQuestion.value][counter].toUpperCase(),
+              letter: vocabularyList[currentQuestion.value].vocab[counter].toUpperCase(),
             };
 
             selectedLetter.value.push(
-              vocabularyList[currentQuestion.value][counter].toUpperCase()
+              vocabularyList[currentQuestion.value].vocab[counter].toUpperCase()
             );
 
             rowBefore = randomRow;
@@ -464,7 +451,9 @@ export default {
                 let [row, col] = shuffleArr[0];
                 if (boggle.value[row][col] == "") {
                   boggle.value[row][col] = {
-                    letter: vocabularyList[currentQuestion.value][counter].toUpperCase(),
+                    letter: vocabularyList[currentQuestion.value].vocab[
+                      counter
+                    ].toUpperCase(),
                   };
                   counter++;
                   rowBefore = row;
@@ -620,10 +609,9 @@ export default {
     const nextQuestion = () => {
       currentQuestion.value++;
       selectValue.value = [];
-
       showVocab.value = vocabularyList[currentQuestion.value];
-
-      currentQuestionText.value = showVocab.value;
+      currentQuestionText.value = showVocab.value.vocab;
+      currentQuestionTh.value = showVocab.value.meaning;
       resetBoggle();
     };
 
@@ -641,6 +629,7 @@ export default {
       isFinishBoggle,
       selectedLetter,
       currentQuestionText,
+      currentQuestionTh,
       sendAnswer,
       isCorrectAnswer,
     };
