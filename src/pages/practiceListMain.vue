@@ -100,6 +100,8 @@
                   <div class="col self-center q-px-sm" align="left">
                     <span class="f16" v-if="showPracticeListName(i)">
                       {{ showPracticeListName(i).nameEng }}
+                      <br />
+                      {{ showPracticeListName(i).nameTh }}
                     </span>
                   </div>
                   <div class="col-2 self-center" style="width: 60px">
@@ -530,12 +532,15 @@ export default {
     const practiceListShow = ref([]);
     const showPracticeList = (unit) => {
       let temp = [];
+
       temp = practiceList.value.filter(
         (x) =>
           x.level == selectLevel.value.toString() &&
           x.unit == unit.toString() &&
           x.skill == selectSkill.value
       );
+
+      console.log(temp);
 
       temp.sort((a, b) => a.order - b.order);
       practiceListShow.value = temp;
@@ -554,6 +559,8 @@ export default {
         nameImage = require("../../public/images/practicelist/matching-1-btn.png");
       } else if (type == "multiplechoices") {
         nameImage = require("../../public/images/practicelist/multiple-1-btn.png");
+      } else if (type == "grammarlesson") {
+        nameImage = require("../../public/images/practicelist/teaching-btn.png");
       }
 
       return nameImage;
@@ -574,6 +581,8 @@ export default {
         }
       } else if (data.practiceType == "spellingbee") {
         routerName = "/spellingbee/";
+      } else if (data.practiceType == "grammarlesson") {
+        routerName = "/grammarLesson/";
       }
 
       router.push(routerName + data.practiceListId);

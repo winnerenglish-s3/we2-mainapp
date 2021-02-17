@@ -163,6 +163,12 @@ const routes = [
         component: () => import("pages/grammarActionMain.vue"),
         name: "grammaraction",
       },
+      // Grammar Lesson
+      {
+        path: "/grammarLesson/:practiceListId?",
+        component: () => import("pages/grammarLessonMain.vue"),
+        name: "grammarLesson",
+      },
     ],
   },
 
