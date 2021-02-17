@@ -3,6 +3,7 @@
     <div class="text-h5" align="center">
       {{ showVocab }}
     </div>
+    <div class="text-h5" align="center">คำที่กด : {{ selectedLetter }}</div>
     <div v-for="(item, row) in boggle" :key="row" class="row justify-center">
       <div v-for="(item2, col) in item" class="col q-pt-md">
         <q-btn
@@ -28,7 +29,7 @@
                 selectValue[selectValue.length - 1].bottom.col == col
               ),
           }"
-          @click="selectedBox(row, col)"
+          @click="selectedBox(row, col, item2.letter)"
           :label="item2.letter"
           :disable="
             !(
@@ -113,7 +114,7 @@ export default {
       "Little Penguin",
     ];
     let currentQuestion = ref(0);
-
+    const selectedLetter = ref("");
     const letter = [
       "A",
       "B",
@@ -200,6 +201,10 @@ export default {
             boggle.value[randomRow][randomCol] = {
               letter: vocabularyList[currentQuestion.value][counter],
             };
+
+            selectedLetter.value = vocabularyList[currentQuestion.value][
+              counter
+            ].toUpperCase();
 
             rowBefore = randomRow;
             colBefore = randomCol;
@@ -443,24 +448,7 @@ export default {
       }
     };
 
-    const selectedBox = (row, col) => {
-      //  left: {
-      //           row: randomRow,
-      //           col: randomCol - 1,
-      //         },
-      //         right: {
-      //           row: randomRow,
-      //           col: randomCol + 1,
-      //         },
-      //         bottom: {
-      //           row: randomRow + 1,
-      //           col: randomCol,
-      //         },
-      //         top: {
-      //           row: randomRow - 1,
-      //           col: randomCol,
-      //         },
-
+    const selectedBox = (row, col, letter) => {
       selectValue.value.push({
         row: row,
         col: col,
@@ -481,6 +469,8 @@ export default {
           col: col,
         },
       });
+
+      selectedLetter.value += letter.toUpperCase();
     };
 
     const reset = () => {
@@ -509,6 +499,7 @@ export default {
       reset,
       showVocab,
       isFinishBoggle,
+      selectedLetter,
     };
   },
 };
