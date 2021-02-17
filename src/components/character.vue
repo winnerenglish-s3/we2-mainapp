@@ -17,9 +17,9 @@
         fill="black"
         fill-opacity="0.5"
       />
-      <g id="bottom"></g>
       <g id="mid"></g>
       <g id="top"></g>
+      <g id="bottom"></g>
     </g>
     <defs>
       <filter
@@ -803,12 +803,6 @@ export default {
       let elHead = document.getElementById("top");
 
       elHead.innerHTML = setHat.value[props.equipment.head];
-
-      let elEyes = document.getElementById("eyes");
-
-      elEyes;
-
-      console.log(elEyes);
 
       let elBody = document.getElementById("mid");
 

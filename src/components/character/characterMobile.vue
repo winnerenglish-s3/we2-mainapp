@@ -1,123 +1,142 @@
 <template>
-  <div>
-    <div class="box-container-main q-pa-sm">
-      <div class="q-my-md" align="center" style="">
+  <div class="box-container-main row justify-center" style="height: 100vh">
+    <div class="col-12 self-start">
+      <div class="q-my-lg" align="center" style="">
         <q-img
-          style="max-width: 320px; width: 70%"
-          src="../../../public/images/character/create_character.png"
+          style="width: 220px"
+          src="../../../public/images/character/label-create-character-mobile.png"
         ></q-img>
       </div>
-      <div style="margin: auto" align="center">
-        <div class="brx">
-          <div>
-            <div align="center">
-              <div>
-                <span class="stroke text-white f18">ตั้งชื่อ</span>
-                <div class="q-mt-sm" style="max-width: 220px; width: 70%">
-                  <q-input
-                    dense
-                    outlined
-                    rounded
-                    bg-color="white"
-                    input-style="text-align: center;"
-                  ></q-input>
-                </div>
-              </div>
-              <div class="q-mt-md">
-                <span class="stroke text-white f18">แต่งตัว</span>
-                <!-- Header -->
-                <div class="q-pb-sm" align="center">
-                  <div class="relative-position" align="center">
-                    <div
-                      align="center"
-                      class="relative-position brx"
-                      style="max-width: 450px; width: 100%"
-                    >
-                      <div
-                        class="absolute-top full-width brx"
-                        style="top: 15%"
-                        align="left"
-                      >
-                        <q-img
-                          class="cursor-pointer btn-active"
-                          width="25px"
-                          src="../../../public/images/character/selected-left.png"
-                        ></q-img>
-                      </div>
-                      <div class="absolute-center full-width" align="left">
-                        <q-img
-                          class="cursor-pointer btn-active"
-                          width="25px"
-                          src="../../../public/images/character/selected-left.png"
-                        ></q-img>
-                      </div>
-                      <div
-                        class="absolute-bottom full-width"
-                        align="left"
-                        style="bottom: 15%"
-                      >
-                        <q-img
-                          class="cursor-pointer btn-active"
-                          width="25px"
-                          src="../../../public/images/character/selected-left.png"
-                        ></q-img>
-                      </div>
-                      <character :bodycolor="color" :equipment="equipment"></character>
-                      <div
-                        class="absolute-top full-width brx"
-                        align="right"
-                        style="top: 15%"
-                      >
-                        <q-img
-                          class="cursor-pointer btn-active"
-                          width="25px"
-                          src="../../../public/images/character/selected-right.png"
-                        ></q-img>
-                      </div>
-                      <div class="absolute-center full-width" align="right">
-                        <q-img
-                          class="cursor-pointer btn-active"
-                          width="25px"
-                          src="../../../public/images/character/selected-right.png"
-                        ></q-img>
-                      </div>
-                      <div
-                        class="absolute-bottom full-width"
-                        align="right"
-                        style="bottom: 15%"
-                      >
-                        <q-img
-                          class="cursor-pointer btn-active"
-                          width="25px"
-                          src="../../../public/images/character/selected-right.png"
-                        ></q-img>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <span class="stroke text-white f18">สีผิว</span>
-                <div class="q-mt-md">
-                  <q-btn filled push round class="bg-equipment">
-                    <q-icon name="colorize" class="cursor-pointer fit">
-                      <q-popup-proxy transition-show="scale" transition-hide="scale">
-                        <q-color v-model="color" />
-                      </q-popup-proxy>
-                    </q-icon>
-                  </q-btn>
-                </div>
-              </div>
-            </div>
+      <div align="center" style="max-width: 360px; width: 80%; margin: auto">
+        <span class="text-white stroke f18">ตั้งชื่อ</span>
+        <div class="q-mt-xs">
+          <q-input
+            dense
+            outlined
+            rounded
+            bg-color="white"
+            input-style="text-align: center;"
+            v-model="characterName"
+            ref="refsCharactername"
+            :rules="[(val) => !!val || '']"
+          ></q-input>
+        </div>
+      </div>
+    </div>
+    <div
+      class="relative-position col-12 self-end"
+      style="width: 600px; overflow: hidden; margin-top: -40px"
+    >
+      <div class="relative-position" style="margin: auto" align="center">
+        <div align="center" class="relative-position">
+          <div
+            class="absolute-top"
+            style="width: 30%; top: 15%; left: 10%; z-index: 2"
+            align="left"
+          >
+            <q-img
+              @click="funcChangeEquipment(1, 'decrease')"
+              class="cursor-pointer btn-active"
+              width="30px"
+              src="../../../public/images/character/selected-left.png"
+            ></q-img>
+          </div>
+          <div
+            class="absolute-center"
+            align="left"
+            style="width: 30%; left: 25%; z-index: 2"
+          >
+            <q-img
+              @click="funcChangeEquipment(2, 'decrease')"
+              class="cursor-pointer btn-active"
+              width="30px"
+              src="../../../public/images/character/selected-left.png"
+            ></q-img>
+          </div>
+          <div
+            class="absolute-bottom"
+            align="left"
+            style="width: 30%; bottom: 15%; left: 10%; z-index: 2"
+          >
+            <q-img
+              @click="funcChangeEquipment(3, 'decrease')"
+              class="cursor-pointer btn-active"
+              width="30px"
+              src="../../../public/images/character/selected-left.png"
+            ></q-img>
+          </div>
+          <div class="relative-position" style="max-width: 450px; width: 100%">
+            <character :bodycolor="color" :equipment="equipment"></character>
+          </div>
+          <div
+            class="absolute-top"
+            align="right"
+            style="width: 30%; top: 15%; left: 60%; z-index: 2"
+          >
+            <q-img
+              @click="funcChangeEquipment(1, 'increase')"
+              class="cursor-pointer btn-active"
+              width="30px"
+              src="../../../public/images/character/selected-right.png"
+            ></q-img>
+          </div>
+          <div class="absolute-center" align="right" style="width: 30%; left: 75%">
+            <q-img
+              @click="funcChangeEquipment(2, 'increase')"
+              class="cursor-pointer btn-active"
+              width="30px"
+              src="../../../public/images/character/selected-right.png"
+            ></q-img>
+          </div>
+          <div
+            class="absolute-bottom"
+            align="right"
+            style="width: 30%; bottom: 15%; left: 60%"
+          >
+            <q-img
+              @click="funcChangeEquipment(3, 'increase')"
+              class="cursor-pointer btn-active"
+              width="30px"
+              src="../../../public/images/character/selected-right.png"
+            ></q-img>
           </div>
         </div>
       </div>
 
-      <div class="q-py-lg" align="center">
+      <div class="row justify-center">
+        <div class="self-center q-mx-sm">
+          <q-btn
+            class="no-pointer-events"
+            filled
+            push
+            round
+            :style="`background-color:${color}`"
+          >
+          </q-btn>
+        </div>
+        <div class="self-center q-pt-sm">
+          <q-img
+            class="cursor-pointer"
+            width="180px"
+            src="../../../public/images/character/color-btn.png"
+          >
+            <div class="transparent fit">
+              <q-popup-proxy transition-show="scale" transition-hide="scale">
+                <q-color v-model="color" />
+              </q-popup-proxy>
+            </div>
+          </q-img>
+        </div>
+      </div>
+
+      <div
+        class="q-py-sm"
+        style="max-width: 200px; width: 40%; margin: auto"
+        align="center"
+      >
         <q-img
-          @click="$router.push('/lobby')"
+          @click="funcCreateCharacter()"
           class="cursor-pointer btn-active"
-          width="180px"
           src="../../../public/images/character/create_character_btn.png"
         ></q-img>
       </div>
@@ -132,65 +151,42 @@ export default {
   components: {
     character,
   },
-  setup(props) {
-    // **************** test color *******************
-    const color = ref("#FFB690");
-    const equipment = reactive({
-      head: 0,
-      body: 0,
-      footer: 0,
-    });
+  props: ["equipment", "color"],
+  setup(props, { emit }) {
+    // **************** Initial Data *******************
+    const characterName = ref("");
+    const refsCharactername = ref(null); // Validate name
 
-    const changeEquipment = (type, set) => {
-      if (type == 1) {
-        if (set == "decrease") {
-          if (equipment.head != 0) {
-            equipment.head--;
-          } else {
-            equipment.head = 1;
-          }
-        } else {
-          if (equipment.head == 1) {
-            equipment.head = 0;
-          } else {
-            equipment.head++;
-          }
-        }
-      } else if (type == 2) {
-        if (set == "decrease") {
-          if (equipment.body != 0) {
-            equipment.body--;
-          } else {
-            equipment.body = 1;
-          }
-        } else {
-          if (equipment.body == 1) {
-            equipment.body = 0;
-          } else {
-            equipment.body++;
-          }
-        }
-      } else if (type == 3) {
-        if (set == "decrease") {
-          if (equipment.footer != 0) {
-            equipment.footer--;
-          } else {
-            equipment.footer = 1;
-          }
-        } else {
-          if (equipment.footer == 1) {
-            equipment.footer = 0;
-          } else {
-            equipment.footer++;
-          }
-        }
+    const funcChangeEquipment = (type, set) => {
+      emit("changeEquipment", { type: type, set: set });
+    };
+
+    const funcCreateCharacter = () => {
+      console.clear();
+
+      if (!refsCharactername.value.validate()) {
+        console.log("ยังไม่กรอกข้อมูลแล้ว");
+        return;
       }
+
+      let newData = {
+        head: props.equipment.head,
+        body: props.equipment.body,
+        footer: props.equipment.footer,
+        level: 1,
+        name: characterName.value,
+        star: 0,
+        color: props.color,
+      };
+
+      emit("createCharacter", newData);
     };
 
     return {
-      color,
-      equipment,
-      changeEquipment,
+      characterName,
+      refsCharactername,
+      funcChangeEquipment,
+      funcCreateCharacter,
     };
   },
 };

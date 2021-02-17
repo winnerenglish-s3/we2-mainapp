@@ -1,13 +1,10 @@
 <template>
   <svg
-    id="hand-and-fish"
     xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
     viewBox="0 0 1240 300"
-    shape-rendering="geometricPrecision"
-    text-rendering="geometricPrecision"
     width="1240"
     height="300"
+    style="width: 100%; height: 100%"
   >
     <g id="hand-and-fish-hand-and-fish">
       <rect
@@ -212,13 +209,22 @@
       </g>
       <g
         id="hand-and-fish-hand_to"
+        :class="isSendAnswer ? 'handMove-animation' : ''"
         style="
           offset-path: path('M989.143433,157.455879L763.998695,87.941913');
           offset-rotate: auto;
         "
       >
-        <g id="hand-and-fish-hand_tr" transform="rotate(-186.137035)">
-          <g id="hand-and-fish-hand_ts" transform="scale(1,1)">
+        <g
+          id="handRoate-animation"
+          :class="isSendAnswer ? 'handRotate-animation' : ''"
+          transform="rotate(-186.137035)"
+        >
+          <g
+            id="hand-and-fish-hand_ts"
+            :class="isSendAnswer ? 'handScale-animation' : ''"
+            transform="scale(1,1)"
+          >
             <g id="hand-and-fish-hand" transform="translate(-989.143433,-157.455879)">
               <rect
                 id="hand-and-fish-rectangle-3290"
@@ -241,6 +247,9 @@
               />
               <ellipse
                 id="hand-and-fish-default"
+                :class="
+                  isSendAnswer ? (!isCorrectAnswer ? 'animation-hidden' : null) : null
+                "
                 rx="62.655200"
                 ry="62.611400"
                 transform="matrix(0.74985400000000 -0.66160400000000 0.66160400000000 0.74985400000000 982.31253307199984 145.25624417600000)"
@@ -251,6 +260,8 @@
               />
               <path
                 id="hand-and-fish-failed"
+                style="opacity: 0"
+                :class="isSendAnswer ? (isCorrectAnswer ? null : 'animation-show') : null"
                 d="M973.972000,191.124000L976.569000,163.867000L936.961000,188.203000C949.428000,202.481000,970.401000,207.911000,980.140000,207.997000C1009.490000,208.257000,1027.860000,190.583000,1033.380000,181.714000C1054.420000,151.082000,1042.150000,120.277000,1033.380000,108.704000C1013.640000,83.263700,985.551000,81.446500,973.972000,83.717900C938.389000,89.169400,924.516000,116.491000,922.027000,129.471000C915.274000,155.949000,927.005000,177.062000,933.714000,184.309000L958.388000,148.940000L937.610000,136.934000L962.284000,126.875000L980.140000,101.240000L997.022000,126.875000L1021.700000,120.385000L1028.840000,163.867000L1002.540000,158.026000L973.972000,191.124000Z"
                 fill="rgb(255,255,255)"
                 fill-opacity="0.5"
@@ -666,10 +677,31 @@ export default {
 };
 </script>
 
-<style>
-#hand-and-fish-hand_to {
+<style less="scss" scope>
+.animation-show {
+  animation: showObject 0.1s linear forwards 1s;
+}
+
+@keyframes showObject {
+  to {
+    opacity: 1;
+  }
+}
+
+.animation-hide {
+  animation: hiddenObject 0.1s linear forwards 1s;
+}
+
+@keyframes hiddenObject {
+  to {
+    opacity: 0;
+  }
+}
+
+.handMove-animation {
   animation: hand-and-fish-hand_to__to 1s linear 1 forwards;
 }
+
 @keyframes hand-and-fish-hand_to__to {
   0% {
     offset-distance: 0%;
@@ -678,7 +710,8 @@ export default {
     offset-distance: 100%;
   }
 }
-#hand-and-fish-hand_tr {
+
+.handRotate-animation {
   animation: hand-and-fish-hand_tr__tr 1s linear 1 forwards;
 }
 @keyframes hand-and-fish-hand_tr__tr {
@@ -692,8 +725,11 @@ export default {
     transform: rotate(-232.812966deg);
   }
 }
-#hand-and-fish-hand_ts {
-  animation: hand-and-fish-hand_ts__ts 1s linear 1 forwards;
+
+.handScale-animation {
+  position: relative;
+  animation: hand-and-fish-hand_ts__ts 1s linear 1 1s forwards;
+  z-index: 1;
 }
 @keyframes hand-and-fish-hand_ts__ts {
   0% {
@@ -707,17 +743,21 @@ export default {
   }
   100% {
     transform: scale(1.1, 1.1);
+    z-index: -1;
   }
 }
 #hand-and-fish-fish1_to {
-  animation: hand-and-fish-fish1_to__to 1s linear 1 1s;
+  position: relative;
+  animation: hand-and-fish-fish1_to__to 1s linear 1 1.5s;
   offset-path: path(
     "M751.040985,77.109740C925.637588,112.511930,1034.037342,8.814078,1075.847619,-52.179048"
   );
   offset-rotate: auto;
+  z-index: 1;
 }
 @keyframes hand-and-fish-fish1_to__to {
   0% {
+    z-index: 2;
     offset-distance: 0%;
   }
   100% {

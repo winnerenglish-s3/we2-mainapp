@@ -162,13 +162,22 @@ body {
   font-size: 16px;
 }
 
-.bg-character {
-  background-image: url("../../public/images/bg-character.png");
+.bg-character-pc {
+  background-image: url("../../public/images/character/bg-character-pc.png");
   min-height: 100vh;
   background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom;
+  background-color:#FBF0D9;
+}
+
+.bg-character-mobile {
+  background-image: url("../../public/images/character/bg-character-mobile.png");
+  background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
-  background-attachment: scroll;
+  background-position: bottom;
+  background-attachment: fixed;
+  background-color:#FBF0D9;
 }
 
 .box-container-main {
