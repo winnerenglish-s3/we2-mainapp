@@ -13,7 +13,7 @@
         </div>
         <div class="q-px-md">
           <div class="box-question" :style="themeQuestion">
-            <span style="font-size: max(1.5vw, 18px)"> กระต่าย </span>
+            <span style="font-size: max(1.5vw, 18px)"> {{ currentQuestionTh }} </span>
           </div>
         </div>
         <div class="q-mt-lg row justify-center" align="center">
@@ -196,6 +196,10 @@ export default {
     currentQuestion: {
       type: Number,
       defalut: 0,
+    },
+    currentQuestionTh:{
+         type: String,
+      default: "",
     },
     totalQuestion: {
       type: Number,
