@@ -20,7 +20,11 @@
       </div>
     </q-expansion-item>
 
-    <q-expansion-item group="skill" label="Grammar" class="col-12 brx q-pa-md">
+    <q-expansion-item
+      group="skill"
+      label="Grammar Lesson"
+      class="col-12 brx q-pa-md"
+    >
       <q-radio val="video" label="video mode" v-model="grammarMode"></q-radio>
       <q-radio val="slide" label="slide mode" v-model="grammarMode"></q-radio>
 
@@ -42,6 +46,30 @@
             class="bg-teal"
           ></q-btn>
         </div>
+      </div>
+    </q-expansion-item>
+
+    <q-expansion-item
+      label="Grammar action"
+      class="col-12 brx q-pa-md"
+      group="skill"
+    >
+      <div class="flex q-gutter-lg">
+        <q-btn @click="grammarActionSync(1)">
+          <div>Step1 ครูอธิบายโจทย์</div>
+        </q-btn>
+        <q-btn @click="grammarActionSync(2)">
+          <div>Step2 เลือกคำตอบ</div>
+        </q-btn>
+        <q-btn @click="grammarActionSync(3)">
+          <div>Step3 กราฟ</div>
+        </q-btn>
+        <q-btn @click="grammarActionSync(4)">
+          <div>Step4 เฉลยถูก / ผิด</div>
+        </q-btn>
+        <q-btn @click="grammarActionSync(5)">
+          <div>Step5 คำอธิบาย</div>
+        </q-btn>
       </div>
     </q-expansion-item>
 
@@ -131,6 +159,17 @@ export default {
         });
     };
 
+    const grammarActionSync = (index) => {
+      db.collection("synchronize")
+        .doc("test")
+        .update({
+          grammarAction: {
+            currentQuestion: 0,
+            currentStep: index,
+          },
+        });
+    };
+
     onMounted(() => {
       loadFlashcard();
     });
@@ -140,6 +179,7 @@ export default {
       mode,
       grammarMode,
       changeGrammarLesson,
+      grammarActionSync,
     };
   },
 };
