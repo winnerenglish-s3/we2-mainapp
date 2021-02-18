@@ -4,7 +4,7 @@
     <div class="box-container-main">
       <div class="row row-height">
         <div
-          v-if="$q.platform.is.desktop"
+          v-if="$q.platform.is.desktop && !isSynchronizeMode"
           class="col-md-4 col-xs-12 q-py-md q-px-lg"
           style="background-color: #fff0da"
         >
@@ -52,17 +52,18 @@
         </div>
 
         <div
-          class="q-py-md q-px-lg col-md-8 col-xs-12 right-col-bg relative-position row"
+          class="q-py-md q-px-lg right-col-bg relative-position row"
+          :class="isSynchronizeMode ? 'col-12' : 'col-md-8 col-xs-12'"
         >
           <!-- IMG -->
           <div v-if="typeSelect == 'slide'" class="col-12">
-            <q-img src="../../public/grammar-test.png"></q-img>
+            <q-img :src="grammarList[activeGrammarList].imgURL"></q-img>
           </div>
           <!-- VIDEO -->
           <div v-else class="col-12">
             <q-video
               :ratio="16 / 9"
-              src="https://www.youtube.com/embed/k3_tw44QsZQ?rel=0"
+              :src="grammarList[activeGrammarList].vdoURL"
               style="width: 100%; height: 100%"
             />
           </div>
@@ -113,6 +114,7 @@
 
           <div
             class="q-pt-md col-12 row self-end"
+            v-if="!isSynchronizeMode"
             :class="
               $q.platform.is.desktop ? 'justify-between' : ' justify-center'
             "
@@ -186,7 +188,8 @@
 
 <script>
 import appBar from "../components/app-bar";
-import { ref } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
+import { db } from "src/router";
 export default {
   components: { appBar },
   setup() {
@@ -212,71 +215,22 @@ export default {
         titleEn: "Cover",
         titleTh: "หน้าปก",
         isNew: true,
+        imgURL: require("../../public/grammar-test-only/grammar-test.png"),
+        vdoURL: "https://www.youtube.com/embed/k3_tw44QsZQ?rel=0",
       },
       {
         titleEn: "Adjectives",
         titleTh: "คำคุณศัพท์",
         isNew: true,
+        imgURL: require("../../public/grammar-test-only/grammar-test2.png"),
+        vdoURL: "https://www.youtube.com/embed/Afq5Z1NsRAI",
       },
       {
         titleEn: "Adjectives",
         titleTh: "คำคุณศัพท์",
         isNew: true,
-      },
-      {
-        titleEn: "Adjectives",
-        titleTh: "คำคุณศัพท์",
-        isNew: true,
-      },
-      {
-        titleEn: "Adjectives",
-        titleTh: "คำคุณศัพท์",
-        isNew: true,
-      },
-      {
-        titleEn: "Adjectives",
-        titleTh: "คำคุณศัพท์",
-        isNew: true,
-      },
-      {
-        titleEn: "Adjectives",
-        titleTh: "คำคุณศัพท์",
-        isNew: true,
-      },
-      {
-        titleEn: "Adjectives",
-        titleTh: "คำคุณศัพท์",
-        isNew: true,
-      },
-      {
-        titleEn: "Adjectives",
-        titleTh: "คำคุณศัพท์",
-        isNew: true,
-      },
-      {
-        titleEn: "Adjectives",
-        titleTh: "คำคุณศัพท์",
-        isNew: true,
-      },
-      {
-        titleEn: "Adjectives",
-        titleTh: "คำคุณศัพท์",
-        isNew: true,
-      },
-      {
-        titleEn: "Adjectives",
-        titleTh: "คำคุณศัพท์",
-        isNew: true,
-      },
-      {
-        titleEn: "Adjectives",
-        titleTh: "คำคุณศัพท์",
-        isNew: true,
-      },
-      {
-        titleEn: "Adjectives",
-        titleTh: "คำคุณศัพท์",
-        isNew: true,
+        imgURL: require("../../public/grammar-test-only/grammar-test3.png"),
+        vdoURL: "https://www.youtube.com/embed/LBHUmp8c9Ew",
       },
     ]);
 
@@ -296,16 +250,33 @@ export default {
     const typeSelect = ref("vdo");
     // next vdo / slice
     const nextGrammar = () => {
-      //   if (activeGrammarList.value < grammarList.value.length - 1) {
       activeGrammarList.value++;
-      //   }
       clickGrammarList(activeGrammarList.value);
     };
     const previousGrammar = () => {
-      //   if (activeGrammarList.value > 0) {
       activeGrammarList.value--;
-      //   }
     };
+
+    // Synchronize
+    const isSynchronizeMode = ref(false);
+    // const synchronizeMode = ref("vdo"); //vdo or slide
+
+    const listenSynchronize = db
+      .collection("synchronize")
+      .doc("test")
+      .onSnapshot((data) => {
+        if (data.data().mode == "control") {
+          isSynchronizeMode.value = true;
+          typeSelect.value = data.data().grammar.mode;
+          activeGrammarList.value = data.data().grammar.currentLessonIndex;
+        } else {
+          isSynchronizeMode.value = false;
+        }
+      });
+
+    onBeforeUnmount(() => {
+      listenSynchronize();
+    });
 
     return {
       grammarList,
@@ -317,6 +288,7 @@ export default {
       typeSelect,
       nextGrammar,
       previousGrammar,
+      isSynchronizeMode,
     };
   },
 };
