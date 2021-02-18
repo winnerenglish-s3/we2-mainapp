@@ -940,7 +940,7 @@
           fill="#F8D93B"
         />
       </g>
-      <g id="well-right" filter="url(#filter0_d)">
+      <g id="well-right" filter="url(#well-shadow)">
         <path
           id="Rectangle 3540_2"
           d="M1356 207.965H1112V289.668H1356V207.965Z"
@@ -2261,7 +2261,7 @@
     </g>
     <defs>
       <filter
-        id="filter0_d"
+        id="well-shadow"
         x="1108"
         y="-3"
         width="496"

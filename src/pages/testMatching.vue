@@ -6,12 +6,9 @@
           <div class="col-12 brx">
             <draggable
               v-model="list"
-              v-bind="dragOptions"
+              :group="{ name: 'vocab', pull: true, put: list.length == 1 ? false : true }"
               style="width: 100%; min-height: 100px"
-              :move="onMove"
               class="relative-position"
-              @start="isDragging = true"
-              @end="testAtEnd()"
             >
               <div v-for="element in list" :key="element.id">
                 <q-btn style="width: 100px; height: 100px">
@@ -26,7 +23,7 @@
               class=""
               style="width: 100px; min-height: 100px"
               v-model="list2"
-              v-bind="dragOptions"
+              :group="{ name: 'vocab', pull: true, put: list2.length == 1 ? false : true }"
               :move="onMove"
             >
               <div v-for="element in list2" :key="element.id">
@@ -42,7 +39,7 @@
               class=""
               style="width: 100%; min-height: 100px"
               v-model="list3"
-              v-bind="dragOptions"
+              :group="{ name: 'vocab', pull: true, put: list3.length == 1 ? false : true }"
               :move="onMove"
             >
               <div v-for="element in list3" :key="element.id">
@@ -52,6 +49,7 @@
               </div>
             </draggable>
           </div>
+          
         </div>
       </div>
       <!-- right -->
@@ -61,12 +59,11 @@
             <div class="row brx">
               <div class="col-6">
                 <draggable
-                  v-model="list4"
-                  v-bind="dragOptions"
+                  class=""
                   style="width: 100%; min-height: 100px"
+                  :group="{ name: 'vocab', pull: true, put: list4.length == 1 ? false : true }"
+                  v-model="list4"
                   :move="onMove"
-                  class="relative-position"
-                  @start="isDragging = true"
                 >
                   <div class="">
                     <div v-for="element in list4" :key="element.id">
@@ -88,7 +85,7 @@
                   class=""
                   style="width: 100px; min-height: 100px"
                   v-model="list5"
-                  v-bind="dragOptions"
+                  :group="{ name: 'vocab', pull: true, put: list5.length == 1 ? false : true }"
                   :move="onMove"
                 >
                   <div class="">
@@ -111,7 +108,7 @@
                   class=""
                   style="width: 100px; min-height: 100px"
                   v-model="list6"
-                  v-bind="dragOptions"
+                  :group="{ name: 'vocab', pull: true, put: list6.length == 1 ? false : true }"
                   :move="onMove"
                 >
                   <div class="">
@@ -170,23 +167,23 @@ export default {
   },
   computed: {
     dragOptions() {
-      return {
+
+      let options = {
         animation: 0,
         group: "description",
         ghostClass: "ghost",
-        isDragging: !this.editable,
       };
+
+      if(this.list4.length == 1){
+        options.group = "x"
+
+        return options
+      }
+
+      return  options
     },
   },
-
-  watch: {
-    // isDragging(newValue) {
-    //   if (newValue) {
-    //     this.delayedDragging = true;
-    //     return;
-    //   }
-    // },
-  },
+ 
 };
 </script>
 

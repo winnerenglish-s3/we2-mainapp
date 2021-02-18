@@ -1,5 +1,5 @@
 <template>
-  <div class="relative-position row justify-center box-content-answer">
+  <div class="relative-position row justify-center bg-content-answer">
     <div class="absolute full-width">
       <header-bar
         :totalQuestion="totalQuestion"
@@ -14,184 +14,81 @@
         style="margin-bottom: -5px; z-index: 3"
       ></theme-animation>
     </div>
-    <div class="col-10 row justify-center" style="z-index: 1">
-      <!-- ตัวเลือกตอบด้านซ้าย -->
-      <div class="col-3 self-center">
-        <div class="q-mt-md" v-for="(item, index) in choicesLeft">
-          <q-img
-            fit="contain"
-            v-if="item.vocab != ''"
-            @click="
-              activeLeftIndex == null
-                ? ((activeLeftIndex = index), (activeRightIndex = null))
-                : ''
-            "
-            @mousedown="activeLeftIndex = null"
-            class="cursor-pointer"
-            style="max-width: 315px; width: 95%"
-            :src="
-              require(`../../../public/images/matching/matching-choices${
-                index == activeLeftIndex ? '-active' : ''
-              }.png`)
-            "
-          >
-            <div
-              class="absolute-center transparent"
-              style="width: 85%; left: 45%"
-              align="center"
-            >
-              <span style="font-size: max(1.2vw, 14px)" class="text-black">{{
-                item.vocab
-              }}</span>
-            </div></q-img
-          >
-          <q-img
-            fit="contain"
-            v-if="item.vocab == ''"
-            :class="
-              activeLeftIndex != null || activeRightIndex != null ? 'cursor-pointer' : ''
-            "
-            @click="
-              activeLeftIndex != null || activeRightIndex != null
-                ? selectAnswer(index, 'left')
-                : ''
-            "
-            style="max-width: 315px; width: 95%"
-            :src="
-              require(`../../../public/images/matching/matching-answer${
-                activeLeftIndex != null || activeRightIndex != null ? '-active' : ''
-              }.png`)
-            "
-          >
-          </q-img>
-        </div>
-      </div>
-
-      <!-- ตัวเลือกตอบด้านขวา -->
-      <div class="col-3 self-center" align="right">
-        <div
-          class="relative-position q-mt-md"
-          style="right: -32%"
-          v-for="(item, index) in choicesRight"
-          :key="index"
+    <div class="col-12 q-px-md row justify-center" style="max-width:1200px;width:100%;z-index: 1" v-for="i in 3" v-if="dataAnswerList.length">
+      <div class="col-3 q-py-xs self-center " >
+        <draggable
+          v-model="choiceList[i - 1]"
+          :group="{ name: 'vocab', pull: isSendAnswer ? false : true, put: choiceList[i - 1].length == 1 ? false : true }"
+          style="width: 100%;height:100px;"
+          class="relative-position "
+          :class="!isSendAnswer ? isDrop && !choiceList[i-1].length ? 'box-move' : choiceList[i-1].length ? '' : 'box-selected' : 'box-selected no-pointer-events'"
+          @start="isDrop = true"
+          @end="isDrop = false"
         >
-          <q-img
-            fit="contain"
-            class="relative-position cursor-pointer"
-            style="max-width: 315px; width: 95%"
-            v-if="!isSendAnswer && item.vocab != ''"
-            @click="
-              activeRightIndex == null
-                ? ((activeRightIndex = index), (activeLeftIndex = null))
-                : ''
-            "
-            @mousedown="activeRightIndex = null"
-            :src="
-              require(`../../../public/images/matching/matching-choices${
-                index == activeRightIndex ? '-active' : ''
-              }.png`)
-            "
-          >
-            <div class="absolute-center transparent full-width" align="center">
-              <span style="font-size: max(1.1vw, 12px)" class="text-black">{{
-                item.vocab
-              }}</span>
-            </div>
-          </q-img>
-
-          <q-img
-            fit="contain"
-            v-if="!isSendAnswer && item.vocab == ''"
-            :class="
-              activeLeftIndex != null || activeRightIndex != null ? 'cursor-pointer' : ''
-            "
-            @click="
-              activeLeftIndex != null || activeRightIndex != null
-                ? selectAnswer(index, 'right')
-                : ''
-            "
-            class=""
-            style="max-width: 315px; width: 95%"
-            :src="
-              require(`../../../public/images/matching/matching-answer${
-                activeLeftIndex != null || activeRightIndex != null ? '-active' : ''
-              }.png`)
-            "
-          ></q-img>
-
-          <q-img
-            fit="contain"
-            v-if="isSendAnswer"
-            style="max-width: 315px; width: 95%"
-            :src="
-              require(`../../../public/images/matching/matching-choices${
-                item.vocab == dataQuestionList[currentQuestion][index].vocab
-                  ? '-correct'
-                  : '-incorrect'
-              }.png`)
-            "
-          >
-            <div class="absolute-center transparent full-width" align="center">
-              <div class="" style="font-size: max(1.1vw, 12px)">
-                <span class="text-black">
-                  {{ item.vocab }}
-                </span>
-
-                <div v-if="item.vocab != dataQuestionList[currentQuestion][index].vocab">
-                  <span class="text-black">คำตอบที่ถูกต้องคือ</span>
-                  <br />
-                  <span>{{ item.vocab }}</span>
-                </div>
+          <div class="relative-position cursor-pointer" v-for="(data,index) in choiceList[i-1]" :key="index">
+            <div class="relative-position" :class="!isSendAnswer ? isDrop && !choiceList[i-1].length ? 'box-move' : choiceList[i-1].length ? 'box-content-answer answer-default' : 'box-selected' : 'box-selected no-pointer-events'" style="width: 100%;height:100px;" no-caps>
+              <div class="absolute-center f18 full-width" align='center'>
+                 <span class=""> {{ data.vocab }}</span>
               </div>
+            
             </div>
-          </q-img>
-        </div>
+          </div>
+        </draggable>
       </div>
-      <div class="col-6 self-center" align="right">
-        <div
-          class="q-mt-md"
-          v-for="(item, index) in dataQuestionList[currentQuestion]"
-          :key="index"
+      <div class="col-1 "></div>
+      <div class="col-3 q-py-xs self-center">
+        <draggable
+          v-model="answerList[i - 1]"
+          :group="{ name: 'vocab', pull: isSendAnswer ? false : true, put: answerList[i - 1].length == 1 ? false : true }"
+          style="width: 100%;height:100px;"
+          class="relative-position"
+          :class="!isSendAnswer ? isDrop && !answerList[i-1].length ? 'box-move' : answerList[i-1].length ? '' : 'box-selected' : isCorrectAnswer ? ' answer-correct no-pointer-events' : ' answer-incorrect no-pointer-events'" 
+          @start="isDrop = true"
+          @end="isDrop = false"
         >
-          <q-img
-            class=""
-            fit="contain"
-            style="max-width: 600px; width: 92%"
-            src="../../../public/images/matching/matching-question.png"
-          >
-            <div class="absolute-center transparent full-width q-px-lg" align="center">
-              <span style="font-size: max(1.1vw, 12px)" class="text-black">{{
-                item.meaning
-              }}</span>
+          <div class="relative-position cursor-pointer" v-for="(data,index) in answerList[i-1]" :key="index">
+           
+           <div :class="!isSendAnswer ? isDrop && !answerList[i-1].length ? 'box-move' : answerList[i-1].length ? 'box-content-answer answer-default' : 'box-selected' : showQuestionList[i-1][index].vocab == data.vocab ? 'box-content-answer answer-correct no-pointer-events' : 'box-content-answer answer-incorrect no-pointer-events'"  style="width: 100%;height:100px;" no-caps>
+              <q-icon v-if="isSendAnswer" size="20px" :name="showQuestionList[i-1][index].vocab == data.vocab ? 'far fa-check-circle' : 'far fa-times-circle'" class="text-white absolute-bottom-right" style="bottom:5px;right:15px"></q-icon>
+               <div class="absolute-center f18 full-width" align='center' style="width:90%;">
+                  <div class="q-pb-xs">
+                    <span > {{ data.vocab }}</span>
+                  </div>
+                  <div v-if="isSendAnswer && showQuestionList[i-1][index].vocab != data.vocab">
+                      <div class="q-py-xs">
+                        <span>คำตอบที่ถูกต้องคือ</span>
+                      </div>
+                      <div class="q-pb-xs">
+                        <span class='text-white'>{{showQuestionList[i-1][index].vocab}}</span>
+                      </div>
+                  </div>
+               </div>
             </div>
-          </q-img>
-        </div>
+          </div>
+        </draggable>
+      </div>
+      <div class="col-5 self-center">
+        <q-btn v-for="(data,index) in showQuestionList[i-1]" :key="index" class=" no-pointer-events box-question" style="width: 100%; height: 100px;margin-left:-3px;" no-caps>
+          <span class="f20">
+            {{data.meaning}}
+          </span>
+        </q-btn>
       </div>
     </div>
 
-    <div class="col-12 self-center q-py-lg" align="center" v-if="dataAnswerList.length">
+    <div class="col-12 self-center q-py-md" align="center" v-if="dataAnswerList.length">
       <q-img
-        v-if="!isSendAnswer"
-        :class="
-          choicesRight.filter((x) => x.vocab != '').length ==
-          dataAnswerList[currentQuestion].length
-            ? 'cursor-pointer'
-            : 'no-pointer-events'
-        "
-        @click="sendAnswer()"
+        v-show="!isSendAnswer"
+        @click="checkAnswerList ? sendAnswer() : null"
+        :class="checkAnswerList ? 'cursor-pointer' : null"
         width="200px"
         :src="
-          require(`../../../public/images/matching/btn-matching-${
-            choicesRight.filter((x) => x.vocab != '').length ==
-            dataAnswerList[currentQuestion].length
-              ? ''
-              : 'not'
-          }active.png`)
+          require(`../../../public/images/matching/btn-matching-${checkAnswerList ? '' : 'not'}active.png`)
         "
       ></q-img>
 
       <q-img
-        v-if="isSendAnswer && !isFinishPractice"
+        v-show="isSendAnswer && !isFinishPractice"
         @click="nextQuestion()"
         class="cursor-pointer"
         width="200px"
@@ -199,7 +96,7 @@
       ></q-img>
 
       <q-img
-        v-if="isSendAnswer && isFinishPractice"
+        v-show="isSendAnswer && isFinishPractice"
         class="cursor-pointer"
         width="200px"
         @click="funcFinishPractice()"
@@ -213,6 +110,7 @@
 import themeAnimation from "../matching/theme-animation";
 import headerBar from "../header-time-progress";
 import { ref, reactive, onMounted, computed } from "vue";
+import { VueDraggableNext } from "vue-draggable-next";
 export default {
   props: {
     themeSync: {
@@ -229,48 +127,24 @@ export default {
     },
   },
   setup(props, { emit }) {
-    const getThemeSync = () => {
-      console.log(props.themeSync);
-    };
 
     const currentQuestion = ref(0);
     const dataAnswerList = ref([]);
     const dataQuestionList = ref([]);
-    const activeLeftIndex = ref(null);
-    const activeRightIndex = ref(null);
+    const isDrop = ref(false);
+    const showQuestionList = ref([]);
     const isCorrectAnswer = ref(false);
     const isSendAnswer = ref(false);
     const isFinishPractice = ref(false);
 
-    const sendAnswer = () => {
-      if (currentQuestion.value + 1 == props.totalQuestion) {
-        isFinishPractice.value = true;
-      }
+    const choiceList = ref([]);
 
-      isSendAnswer.value = true;
-
-      let countCorrect = 0;
-
-      choicesRight.value.map((x, index) => {
-        if (dataQuestionList.value[currentQuestion.value][index].vocab == x.vocab) {
-          countCorrect++;
-        }
-      });
-
-      if (countCorrect == dataQuestionList.value[currentQuestion.value].length) {
-        isCorrectAnswer.value = true;
-      } else {
-        isCorrectAnswer.value = false;
-      }
-    };
-
-    const choicesLeft = ref([]);
-    const choicesRight = ref([
-      { vocab: "", meaning: "" },
-      { vocab: "", meaning: "" },
-      { vocab: "", meaning: "" },
-    ]);
-
+    const answerList = ref([
+      [],
+      [],
+      [],
+    ])
+  
     const loadData = () => {
       let setData = props.questionList;
 
@@ -343,62 +217,75 @@ export default {
 
       let setQuestion = [...dataQuestionList.value[currentQuestion.value]];
 
-      let temp = [];
+      let tempBoolean = [];
+      let setTempArray = []
+      let setTempQuestion = []
 
       for (let i = 0; i < setAnswer.length; i++) {
         if (setAnswer[i].vocab == setQuestion[i].vocab) {
-          temp.push(true);
+          tempBoolean.push(true);
         } else {
-          temp.push(false);
+          tempBoolean.push(false);
         }
+        setTempArray.push([setAnswer[i]])
+        setTempQuestion.push([setQuestion[i]])
       }
 
-      if (temp.every((x) => x)) {
+
+      if (tempBoolean.every((x) => x)) {
         funcRandom();
       }
 
-      choicesLeft.value = setAnswer;
+      choiceList.value = setTempArray
+      showQuestionList.value = setTempQuestion
     };
 
-    const selectAnswer = (index, moveTo) => {
-      let selectActive = "";
+    // Check AnswerList 
+    const checkAnswerList = computed(() => {
 
-      if (activeLeftIndex.value != null) {
-        selectActive = { ...choicesLeft.value[activeLeftIndex.value] };
+      let answerAll = answerList.value.map(x => x.length ? true : false).every(x => x)
 
-        choicesLeft.value[activeLeftIndex.value].vocab = "";
-        choicesLeft.value[activeLeftIndex.value].meaning = "";
+      if(answerAll){
+        return true
+      }
+
+      return false
+
+    })
+
+    const sendAnswer = () => {
+
+      isSendAnswer.value = true;
+
+      let checkAnswerCorrrect = showQuestionList.value.map(x => x[0].vocab).every((x,index) => x == answerList.value[index][0].vocab)
+
+      if(checkAnswerCorrrect){
+        isCorrectAnswer.value = true;
       } else {
-        selectActive = { ...choicesRight.value[activeRightIndex.value] };
-
-        choicesRight.value[activeRightIndex.value].vocab = "";
-        choicesRight.value[activeRightIndex.value].meaning = "";
+        isCorrectAnswer.value = false;
       }
 
-      activeLeftIndex.value = null;
-      activeRightIndex.value = null;
+      if(currentQuestion.value + 1 ==  props.totalQuestion){
 
-      if (moveTo == "right") {
-        choicesRight.value[index] = selectActive;
+        isFinishPractice.value = true
       }
-
-      if (moveTo == "left") {
-        choicesLeft.value[index] = selectActive;
-      }
+      
     };
+
 
     // Func Next Question
     const nextQuestion = () => {
       currentQuestion.value++;
 
+      answerList.value = [
+      [],
+      [],
+      [],
+    ]
+
       funcRandom();
 
-      choicesRight.value = [
-        { vocab: "", meaning: "" },
-        { vocab: "", meaning: "" },
-        { vocab: "", meaning: "" },
-      ];
-
+      
       isSendAnswer.value = false;
     };
 
@@ -412,16 +299,16 @@ export default {
     });
 
     return {
-      getThemeSync,
+      choiceList,
+      answerList,
+      showQuestionList,
+      isDrop,
+      checkAnswerList,
 
       // practice data
-      activeLeftIndex,
-      activeRightIndex,
       currentQuestion,
       dataAnswerList,
       dataQuestionList,
-      choicesLeft,
-      choicesRight,
       isCorrectAnswer,
       isFinishPractice,
       isSendAnswer,
@@ -432,14 +319,12 @@ export default {
 
       // Next Question
       nextQuestion,
-
-      // Select Answer
-      selectAnswer,
     };
   },
   components: {
     headerBar,
     themeAnimation,
+    draggable: VueDraggableNext,
   },
 };
 </script>
@@ -451,9 +336,74 @@ export default {
   background-position: top;
 }
 
-.box-content-answer {
+.bg-content-answer {
   background-image: url("../../../public/images/matching/bg-content-matching.png");
   background-size: contain;
   width: 100%;
+}
+
+.box-selected{
+  position: relative;
+  border:3px dashed #000;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.box-move{
+  position: relative;
+  background-color:#5DDDFF;
+  opacity: .5;
+  border:3px dashed #000;
+}
+
+.box-content-answer{
+ position: relative;
+ border: 3px solid #512A08;
+ overflow: hidden;
+ box-sizing: border-box;
+}
+
+.span-circle{
+  width:50px;
+  height:50px;
+  border-radius: 50%;
+  background-color: #FFE6A2;
+  z-index:2;
+}
+
+.box-question{
+  position: relative;
+  background-color: #FFE6A2;
+  border: 3px solid #512A08;
+  border-left-style: dashed;
+  box-sizing: border-box;
+}
+
+.box-question::before{
+  content:"";
+  width:50px;
+  height:50px;
+  left:-25px;
+  top:50%;
+  transform: translate(0%,-50%) rotate(45deg);
+  background-color:#FFE6A2;
+  border:3px dashed;
+  border-radius: 50%;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  z-index: 0;
+  box-shadow: 0px 0px transparent;
+}
+
+.answer-default{
+  background: linear-gradient(180deg, #FFD362 0%, #FFB701 100%);
+}
+
+.answer-correct{
+  background-color: #4CAF50;
+}
+
+.answer-incorrect{
+  background-color: #FF5D5D;
 }
 </style>
