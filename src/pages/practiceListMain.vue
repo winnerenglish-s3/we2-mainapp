@@ -163,11 +163,11 @@
                   >
                     <div
                       class="transparent absolute-bottom no-padding"
-                      style="width: 80%; bottom: 13px; margin: auto"
+                      style="width: 80%; bottom: 15px; margin: auto"
                       align="left"
                     >
                       <div class="" align="center">
-                        <span>{{ `${index + 1}. ${item.practiceType} ` }}</span>
+                        <span>{{ `${index + 1}. ${'เลือกคำศัพท์'} ` }}</span>
                       </div>
                     </div>
                   </q-img>
@@ -326,7 +326,7 @@
                     align="left"
                   >
                     <div align="center">
-                      <span>{{ `${index + 1}. ${item.practiceType} ` }}</span>
+                      <span>{{ `${index + 1}. ${'เลือกคำศัพท์'} ` }}</span>
                     </div>
                   </div>
                 </q-img>
@@ -552,16 +552,14 @@ export default {
 
     // แสดงผลไอคอนแบบฝึกหัด
     const showIconPractice = (type) => {
-      let nameImage = require("../../public/images/practicelist/action-1-btn.png");
-      if (type == "flashcard") {
-        nameImage = require("../../public/images/practicelist/teaching-btn.png");
+      let nameImage = require("../../public/images/practicelist/action-btn-star0.png");
+      if (type == "flashcard" || type == "grammarlesson") {
+        nameImage = require("../../public/images/practicelist/teaching-btn-default.png");
       } else if (type == "matching") {
-        nameImage = require("../../public/images/practicelist/matching-1-btn.png");
+        nameImage = require("../../public/images/practicelist/matching-btn-star0.png");
       } else if (type == "multiplechoices") {
-        nameImage = require("../../public/images/practicelist/multiple-1-btn.png");
-      } else if (type == "grammarlesson") {
-        nameImage = require("../../public/images/practicelist/teaching-btn.png");
-      }
+        nameImage = require("../../public/images/practicelist/multiple-btn-star0.png");
+      } 
 
       return nameImage;
     };

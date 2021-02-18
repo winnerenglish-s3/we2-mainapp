@@ -65,7 +65,7 @@ export default {
         equipment.body = response.body;
         equipment.footer = response.footer;
         color.value = response.color;
-        // router.push("/lobby");
+        router.push("/lobby");
       }
 
       $q.loading.hide();
@@ -125,7 +125,7 @@ export default {
           character: data,
         })
         .then(function (doc) {
-          // router.push("/lobby");
+          router.push("/lobby");
         })
         .catch(function (error) {
           console.log(`${error} : Create Character`);

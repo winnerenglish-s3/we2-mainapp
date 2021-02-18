@@ -1,17 +1,18 @@
 <template>
-  <div class="box-container-main row justify-center" style="height: 100vh">
-    <div class="col-12 self-start">
+  <div class="box-container-main row justify-center" >
+    <div class="col-12 self-end " align="center">
       <div class="q-my-lg" align="center" style="">
         <q-img
-          style="width: 220px"
+          width="max(50vw,250px)"
           src="../../../public/images/character/label-create-character-mobile.png"
         ></q-img>
       </div>
-      <div align="center" style="max-width: 360px; width: 80%; margin: auto">
+      <div align="center" style="max-width: 360px; width: 70%;">
         <span class="text-white stroke f18">ตั้งชื่อ</span>
         <div class="q-mt-xs">
           <q-input
             dense
+            :autofocus='true'
             outlined
             rounded
             bg-color="white"
@@ -25,9 +26,10 @@
     </div>
     <div
       class="relative-position col-12 self-end"
-      style="width: 600px; overflow: hidden; margin-top: -40px"
+      style="max-width: 800px;width:100%; overflow: hidden;"
     >
-      <div class="relative-position" style="margin: auto" align="center">
+    
+      <div class="relative-position"  align="center" style="margin-top:-40px;">
         <div align="center" class="relative-position">
           <div
             class="absolute-top"
@@ -37,7 +39,7 @@
             <q-img
               @click="funcChangeEquipment(1, 'decrease')"
               class="cursor-pointer btn-active"
-              width="30px"
+              width="max(7vw,30px)"
               src="../../../public/images/character/selected-left.png"
             ></q-img>
           </div>
@@ -49,7 +51,7 @@
             <q-img
               @click="funcChangeEquipment(2, 'decrease')"
               class="cursor-pointer btn-active"
-              width="30px"
+              width="max(7vw,30px)"
               src="../../../public/images/character/selected-left.png"
             ></q-img>
           </div>
@@ -61,11 +63,11 @@
             <q-img
               @click="funcChangeEquipment(3, 'decrease')"
               class="cursor-pointer btn-active"
-              width="30px"
+              width="max(7vw,30px)"
               src="../../../public/images/character/selected-left.png"
             ></q-img>
           </div>
-          <div class="relative-position" style="max-width: 450px; width: 100%">
+          <div class="relative-position">
             <character :bodycolor="color" :equipment="equipment"></character>
           </div>
           <div
@@ -76,7 +78,7 @@
             <q-img
               @click="funcChangeEquipment(1, 'increase')"
               class="cursor-pointer btn-active"
-              width="30px"
+              width="max(7vw,30px)"
               src="../../../public/images/character/selected-right.png"
             ></q-img>
           </div>
@@ -84,7 +86,7 @@
             <q-img
               @click="funcChangeEquipment(2, 'increase')"
               class="cursor-pointer btn-active"
-              width="30px"
+              width="max(7vw,30px)"
               src="../../../public/images/character/selected-right.png"
             ></q-img>
           </div>
@@ -96,14 +98,14 @@
             <q-img
               @click="funcChangeEquipment(3, 'increase')"
               class="cursor-pointer btn-active"
-              width="30px"
+              width="max(7vw,30px)"
               src="../../../public/images/character/selected-right.png"
             ></q-img>
           </div>
         </div>
       </div>
 
-      <div class="row justify-center">
+      <div class="row justify-center q-pt-sm">
         <div class="self-center q-mx-sm">
           <q-btn
             class="no-pointer-events"
@@ -117,12 +119,12 @@
         <div class="self-center q-pt-sm">
           <q-img
             class="cursor-pointer"
-            width="180px"
+            width='max(30vw,170px)'
             src="../../../public/images/character/color-btn.png"
           >
             <div class="transparent fit">
               <q-popup-proxy transition-show="scale" transition-hide="scale">
-                <q-color v-model="color" />
+                <q-color no-header no-footer square v-model="color" />
               </q-popup-proxy>
             </div>
           </q-img>
@@ -130,11 +132,12 @@
       </div>
 
       <div
-        class="q-py-sm"
-        style="max-width: 200px; width: 40%; margin: auto"
+        class="q-mt-sm q-pt-md"
+        
         align="center"
-      >
+        >
         <q-img
+        width="max(30vw,170px)"
           @click="funcCreateCharacter()"
           class="cursor-pointer btn-active"
           src="../../../public/images/character/create_character_btn.png"

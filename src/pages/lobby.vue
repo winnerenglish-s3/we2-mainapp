@@ -245,8 +245,26 @@ export default {
 
       loadingHide();
     };
+
+    const checkCharacter = async () => {
+      $q.loading.show();
+
+      let response = await game.characterInfomation(uid);
+      if (response) {
+        equipment.head = response.head;
+        equipment.body = response.body;
+        equipment.footer = response.footer;
+        color.value = response.color;
+
+        console.log(response);
+      }
+
+      $q.loading.hide();
+    };
+
     onMounted(() => {
       getCharacterData();
+      checkCharacter()
     });
 
     return {

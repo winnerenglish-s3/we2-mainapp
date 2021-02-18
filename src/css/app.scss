@@ -163,8 +163,8 @@ body {
 }
 
 .bg-character-pc {
-  background-image: url("../../public/images/character/bg-character-pc.png");
   min-height: 100vh;
+  background-image: url("../../public/images/character/bg-character-pc.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: bottom;
@@ -172,11 +172,11 @@ body {
 }
 
 .bg-character-mobile {
+  min-height: 100vh;
   background-image: url("../../public/images/character/bg-character-mobile.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: bottom;
-  background-attachment: fixed;
   background-color:#FBF0D9;
 }
 
