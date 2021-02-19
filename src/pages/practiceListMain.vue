@@ -54,6 +54,7 @@
             </div>
 
             <div class="q-pl-lg q-pt-md q-pb-sm q-pr-md">
+              <!-- Progress bar -->
               <div class="row">
                 <div class="col self-center">
                   <div class="box-content-progress-practice" align="left">
@@ -77,6 +78,7 @@
                   >
                 </div>
               </div>
+              <!-- Show Practice List -->
               <div class="q-my-md box-content-practice-list">
                 <div
                   v-ripple
@@ -356,8 +358,7 @@
 import { ref, onMounted, watch } from "vue";
 import studentHooks from "../hooks/studentHooks.js";
 import practiceHooks from "../hooks/practiceHooks";
-import { db } from "src/router/index.js";
-import { useQuasar, scroll } from "quasar";
+import { useQuasar } from "quasar";
 import { useRouter } from "vue-router";
 import appBar from "../components/app-bar";
 export default {
@@ -382,7 +383,6 @@ export default {
 
     // UID
     const uid = $q.sessionStorage.getItem("uid");
-    const { getScrollTarget, setVerticalScrollPosition } = scroll;
 
     // Course Data
     const selectLevel = ref("");
@@ -725,7 +725,7 @@ export default {
 }
 
 .box-content-practice-list {
-  max-height: calc(100vh - 300px);
+  height: calc(100vh - 300px);
   min-height: fit-content;
   overflow-y: scroll;
 }
