@@ -159,7 +159,7 @@ const routes = [
 
       // Grammar Action
       {
-        path: "/grammaraction/:practiceListId?",
+        path: "/grammarAction/:practiceListId?",
         component: () => import("pages/grammarActionMain.vue"),
         name: "grammaraction",
       },
