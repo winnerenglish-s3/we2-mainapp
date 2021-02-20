@@ -3,27 +3,25 @@
     <div class="">
       <header-bar></header-bar>
     </div>
-    <div class="box-question q-pa-md f16" align="left">
-      <div class="q-mb-md">
-        A : __________________
-      </div>
-      <div>B : I'm going to London</div>
+    <div class="box-question q-pa-lg f16" align="left">
+      <span style="font-size: max(4vw, 16px)" v-html="practiceData.question"></span>
     </div>
     <div class="q-pa-md" v-if="activeBy == 'answer'" align="center">
       <div
-        v-for="i in 4"
+        v-for="(item, index) in practiceData.choices"
         class="q-mt-sm"
-        :key="i"
-        style="max-width:600px;width:100%"
+        :key="index"
+        style="max-width: 600px; width: 100%"
       >
         <q-img
-          @click="isSendAnswer ? null : sendAnswer(i)"
+          @click="isSendAnswer ? null : sendAnswer(item.index)"
           class="cursor-pointer"
           fit="contain"
+          width="max(70vw,340px)"
           :src="
             require(`../../../public/images/languagetip/languagetip-choices-${
               isSendAnswer
-                ? currentAnswer == i
+                ? currentAnswer == index
                   ? isCorrectAnswer
                     ? 'correct'
                     : 'incorrect'
@@ -33,15 +31,14 @@
           "
         >
           <div
-            class="absolute-center transparent relative-position text-black full-width "
+            class="absolute-center transparent relative-position text-black full-width"
             align="center"
-            style="top:43%"
+            style="top: 43%"
           >
-            <div class="q-pa-sm " style="width:95%;" align="left">
-              <span style="font-size:max(3vw,14px)"> {{ `Choice ${i}` }}</span>
-            </div>
-          </div></q-img
-        >
+            <div class="q-pa-sm" style="width: 95%" align="left">
+              <span style="font-size: max(3vw, 14px)" v-html="item.choice"> </span>
+            </div></div
+        ></q-img>
       </div>
     </div>
     <div v-if="activeBy == 'description'" align="center" class="q-pa-md">
@@ -57,20 +54,16 @@
         </div>
         <div class="f14 q-pa-sm">
           <div class="q-pa-sm row" align="left">
-            <div class="col-12">
-              คำตอบที่ถูกต้อง คือ
-            </div>
+            <div class="col-12">คำตอบที่ถูกต้อง คือ</div>
             <div class="col-12">
               <div class="q-mt-sm">
-                <span class="text-green-14"
-                  >Where are you going for holiday?</span
-                >
+                <span class="text-green-14">Where are you going for holiday?</span>
               </div>
               <div class="q-mt-sm">
-                Reporting Verb เป็น Past Simple ดังนันต้องเปลี่ยน tense ใน
-                reported speech will come เปลี่ยนเป็น would come, My ใน reported
-                speech เปลี่ยนเป็น her เพราะคนพูดเป็นผู้หญิง, tomorrow
-                เปลี่ยนเป็น the next day, เปลี่ยน said to เป็น told
+                Reporting Verb เป็น Past Simple ดังนันต้องเปลี่ยน tense ใน reported speech
+                will come เปลี่ยนเป็น would come, My ใน reported speech เปลี่ยนเป็น her
+                เพราะคนพูดเป็นผู้หญิง, tomorrow เปลี่ยนเป็น the next day, เปลี่ยน said to
+                เป็น told
               </div>
             </div>
           </div>
@@ -94,13 +87,17 @@ import headerBar from "../header-time-progress";
 import { ref } from "vue";
 export default {
   components: {
-    headerBar
+    headerBar,
   },
   props: {
     themeSync: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
+    practiceData: {
+      type: Object,
+      default: () => {},
+    },
   },
   setup(props) {
     const currentAnswer = ref(null);
@@ -111,27 +108,27 @@ export default {
         colorText: "text-black",
         colorIcon: {
           correct: "text-green",
-          incorrect: "text-red"
+          incorrect: "text-red",
         },
         description: {
-          bgColor: "bg-negative"
-        }
+          bgColor: "bg-negative",
+        },
       },
       {
         colorText: "text-white",
         colorIcon: {
           correct: "text-white",
-          incorrect: "text-white"
+          incorrect: "text-white",
         },
         description: {
-          bgColor: "bg-white"
-        }
-      }
+          bgColor: "bg-white",
+        },
+      },
     ]);
 
     const activeBy = ref("answer");
 
-    const sendAnswer = index => {
+    const sendAnswer = (index) => {
       isSendAnswer.value = true;
       currentAnswer.value = index;
 
@@ -161,9 +158,9 @@ export default {
       isCorrectAnswer,
       sendAnswer,
       nextQuestion,
-      setTheme
+      setTheme,
     };
-  }
+  },
 };
 </script>
 

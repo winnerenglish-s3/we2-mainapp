@@ -25,6 +25,8 @@
     <grammar-multiple-mobile
       :practiceData="practiceData"
       :themeSync="themeSync"
+      @callback-nextquestion="funcSelectPraticeData"
+      @callback-showdialoghelp="funcRefContent"
       v-if="$q.platform.is.mobile && isLoadPractice"
     ></grammar-multiple-mobile>
 
