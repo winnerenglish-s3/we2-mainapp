@@ -87,7 +87,8 @@
                 >
                   {{
                     practiceNameList.filter((x) => x.type == $route.name).length
-                      ? practiceNameList.filter((x) => x.type == $route.name)[0].name
+                      ? practiceNameList.filter((x) => x.type == $route.name)[0]
+                          .name
                       : ""
                   }}
                 </span>
@@ -95,7 +96,9 @@
             </div>
             <div
               :class="
-                $q.platform.is.desktop ? 'box-instruction-pc' : 'box-instruction-mobile'
+                $q.platform.is.desktop
+                  ? 'box-instruction-pc'
+                  : 'box-instruction-mobile'
               "
               class="absolute-bottom row full-width"
             >
@@ -367,6 +370,7 @@ export default {
       isShowDialogInstruction,
       resetBtn,
       finishBtn,
+      isShowSetting,
     };
   },
 };

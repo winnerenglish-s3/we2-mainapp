@@ -3,21 +3,25 @@
     :class="$q.platform.is.desktop ? 'bg-grammaraction' : 'bg-mobile'"
     :theme="themeSync"
   >
+    <app-bar></app-bar>
     <grammar-action-pc
       :currentQuestion="currentQuestion"
       :totalQuestion="questionList.length"
       :question="questionList[currentQuestion]"
       :currentStep="currentStep"
-      v-if="$q.platform.is.desktop"
+      :learningMode="learningMode"
+      @sendAnswer="checkAnswer"
+      @goToDescription="currentStep = 5"
+      @nextQuestion="nextQuestion"
     ></grammar-action-pc>
-    <grammar-action-mobile v-if="$q.platform.is.mobile"></grammar-action-mobile>
   </q-page>
 </template>
 
 <script>
 import grammarActionPc from "../components/grammar/grammarActionPc";
 import grammarActionMobile from "../components/grammar/grammarActionMobile";
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import appBar from "../components/app-bar";
+import { ref, onBeforeUnmount } from "vue";
 import { db } from "src/router";
 export default {
   props: {
@@ -29,7 +33,9 @@ export default {
   components: {
     grammarActionPc,
     grammarActionMobile,
+    appBar,
   },
+
   setup() {
     // const grammar action question
     const questionList = ref([
@@ -84,13 +90,14 @@ export default {
     // ข้อปัจจุบัน
     const currentQuestion = ref(0);
     // หน้าปัจจุบัน
-    // 0 = หน้าคำถาม ยังกดตอบไม่ได้
-    // 1 = กดคำตอบได้
-    // 2 = ตอบแล้ว ไปหน้ารอ
-    // 3 = กราฟ
-    // 4 = เฉลย ถูก - ผิด
-    // 5 = คำอธิบาย
-    const currentStep = ref(0);
+    // 1 = หน้าคำถาม ยังกดตอบไม่ได้
+    // 2 = กดคำตอบได้
+    // 3 = ตอบแล้ว ไปหน้ารอ
+    // 4 = กราฟ
+    // 5 = เฉลย ถูก - ผิด
+    // 6 = คำอธิบาย
+    const currentStep = ref(1);
+    const learningMode = ref("selfLearning");
     // Listen Synchronize
     const synchronize = db
       .collection("synchronize")
@@ -99,13 +106,50 @@ export default {
         if (data.data().mode == "control") {
           currentQuestion.value = data.data().grammarAction.currentQuestion;
           currentStep.value = data.data().grammarAction.currentStep;
+          learningMode.value = "control";
+        } else {
+          learningMode.value = "selfLearning";
         }
       });
+
+    const checkAnswer = (val) => {
+      if (learningMode.value == "control") {
+        // กรณี Teacher control mode
+        currentStep.value = 7; //waiting
+      } else {
+        currentStep.value = 4;
+      }
+      if (
+        questionList.value[currentQuestion.value].correctAnswer == val.index
+      ) {
+        questionList.value[currentQuestion.value].isCorrect = true;
+        console.log("ตอบถูก");
+      } else {
+        questionList.value[currentQuestion.value].isCorrect = false;
+        console.log("ตอบผิด");
+      }
+    };
+
+    const nextQuestion = () => {
+      if (currentQuestion.value < questionList.value.length - 1) {
+        currentQuestion.value++;
+        currentStep.value = 1;
+      } else {
+        alert("จบแบบฝึกหัด");
+      }
+    };
 
     onBeforeUnmount(() => {
       synchronize();
     });
-    return { currentQuestion, currentStep, questionList };
+    return {
+      currentQuestion,
+      currentStep,
+      questionList,
+      checkAnswer,
+      learningMode,
+      nextQuestion,
+    };
   },
 };
 </script>
