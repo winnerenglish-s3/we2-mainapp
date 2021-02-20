@@ -1,8 +1,8 @@
 <template>
-  <div class="row bg-grammarmultiple">
+  <div class="row bg-content">
     <div class="col self-start row">
-      <div class="col-12 relative-position " style="margin-top:-52px;">
-        <div class="absolute full-width" style="top:51px;">
+      <div class="col-12 relative-position" style="margin-top: -52px">
+        <div class="absolute full-width" style="top: 51px">
           <header-bar></header-bar>
         </div>
         <theme-animation
@@ -12,28 +12,27 @@
         ></theme-animation>
       </div>
       <div class="col-12 box-question q-pa-lg" align="center">
-        <span class="f16">
-          She said to me, "My mother will come tomorrow."
-        </span>
+        <span class="f16"> {{ practiceData.question }} </span>
       </div>
 
-      <div class="col-12" align="center" v-if="activeBy == 'answer'">
+      <div class="col-12 q-mt-md" align="center" v-if="activeBy == 'answer'">
         <div class="box-content-choices">
-          <div v-for="i in 4" :key="i" class="q-mt-sm">
+          <div v-for="(item, index) in practiceData.choices" :key="index" class="q-mt-sm">
             <q-img
-              @mouseenter="activeHover = i"
+              @mouseenter="activeHover = index"
               @mouseleave="activeHover = null"
               :class="isSendAnswer ? null : 'cursor-pointer'"
-              @click="isSendAnswer ? null : sendAnswer(i)"
+              @click="isSendAnswer ? null : sendAnswer(item.index)"
+              width="max(calc(75vw * 9 /16),570px)"
               :src="
                 require(`../../../public/images/grammar/grammarmultiple-choices-${
                   isSendAnswer
-                    ? currentAnswer == i
+                    ? currentAnswer == item.index
                       ? isCorrectAnswer
                         ? 'correct'
                         : 'incorrect'
                       : 'default'
-                    : activeHover == i
+                    : activeHover == index
                     ? 'hover'
                     : 'default'
                 }.png`)
@@ -41,11 +40,13 @@
             >
               <div
                 class="transparent"
-                style="width:90%;height:75%;top:5px;left:11%;"
+                style="width: 90%; height: 70%; top: 5px; left: 11%"
                 align="left"
               >
-                <div class="q-px-sm">
-                  <span class="text-black">{{ `Choice ${i}` }}</span>
+                <div class="absolute-center" style="left: 7%">
+                  <span class="text-black" style="font-size: max(1vw, 14px)">{{
+                    `${item.choice}`
+                  }}</span>
                 </div>
               </div>
             </q-img>
@@ -53,11 +54,7 @@
         </div>
       </div>
 
-      <div
-        class="col-12 q-my-md"
-        v-if="activeBy == 'description'"
-        align="center"
-      >
+      <div class="col-12 q-my-md" v-if="activeBy == 'description'" align="center">
         <div class="box-description">
           <div :class="setTheme[themeSync - 1].description.bgColor">
             <q-img
@@ -69,36 +66,29 @@
             ></q-img>
           </div>
           <div class="f16 q-px-md">
-            <div class="q-pa-md row " align="left">
-              <div class="col-2 ">
-                คำตอบที่ถูกต้อง คือ
-              </div>
-              <div class="col ">
-                <span class="text-green-6"
-                  >She told me that my mother would come tomorrow.</span
-                >
+            <div class="q-pa-md row" align="left">
+              <div class="col-2" style="width: 150px">คำตอบที่ถูกต้อง คือ</div>
+              <div class="col">
+                <span class="text-green-6">{{
+                  practiceData.choices[currentAnswer].choice
+                }}</span>
               </div>
               <div class="col-12 q-mt-md" align="left">
-                <span
-                  >Reporting Verb เป็น Past Simple ดังนั้นต้องเปลี่ยน tense ใน
-                  reported speech will come เปลี่ยนเป็น would come, My ใน
-                  reported speech เปลี่ยนเป็น her เพราะคนพูดเป็นผู้หญิง,
-                  tomorrow เปลี่ยนเป็น the next day, เปลี่ยน said to เป็น
-                  told</span
-                >
+                <span>{{ practiceData.description }}</span>
               </div>
             </div>
 
             <div align="left" class="row q-pa-md">
-              <div class="col-2" style="width:50px;">
+              <div class="col-2" style="width: 50px">
                 <span>อ้างอิง:</span>
               </div>
               <div class="col">
                 <div>
-                  <u class="cursor-pointer text-indigo-5">xxxxxxxxxxxxxx (1)</u>
-                </div>
-                <div>
-                  <u class="cursor-pointer text-indigo-5">xxxxxxxxxxxxxx (2)</u>
+                  <u
+                    @click="$emit('callback-showdialoghelp', { ref: '3' })"
+                    class="cursor-pointer text-indigo-5"
+                    >#Content1</u
+                  >
                 </div>
               </div>
             </div>
@@ -117,19 +107,15 @@
     <div class="col-4 box-extravocab">
       <div
         class="box-header-extravocab relative-position"
-        :style="
-          `background-color:${setColorTheme[themeSync - 1].bg};color:${
-            setColorTheme[themeSync - 1].color
-          }`
-        "
+        :style="`background-color:${setColorTheme[themeSync - 1].bg};color:${
+          setColorTheme[themeSync - 1].color
+        }`"
         align="center"
       >
-        <span class="absolute-center f16">
-          คำศัพท์เสริม
-        </span>
+        <span class="absolute-center f16"> คำศัพท์เสริม </span>
       </div>
       <div class="box-content-extravocab q-py-sm">
-        <div v-for="i in 15" :key="i">
+        <div v-for="i in practiceData.extravocab" :key="i">
           <div class="q-py-sm">
             <div class="q-px-md">
               <span>ENG !!!!!!!!!</span>
@@ -138,7 +124,7 @@
               <span>ไทย !!!!!!!!!</span>
             </div>
           </div>
-          <hr style="border:1px solid #FFC177;" />
+          <hr style="border: 1px solid #ffc177" />
         </div>
       </div>
     </div>
@@ -148,19 +134,25 @@
 <script>
 import headerBar from "../header-time-progress";
 import themeAnimation from "./themeAnimation";
+
 import { ref } from "vue";
 export default {
   components: {
     headerBar,
-    themeAnimation
+    themeAnimation,
   },
   props: {
     themeSync: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
+    practiceData: {
+      type: Object,
+      default: () => {},
+    },
   },
-  setup(props) {
+  $emit: ["callback-showdialoghelp"],
+  setup(props, { emit }) {
     const activeBy = ref("answer");
     const activeHover = ref(null);
 
@@ -169,47 +161,47 @@ export default {
         colorText: "text-black",
         colorIcon: {
           correct: "text-green",
-          incorrect: "text-red"
+          incorrect: "text-red",
         },
         description: {
-          bgColor: "bg-header-description"
-        }
+          bgColor: "bg-header-description",
+        },
       },
       {
         colorText: "text-white",
         colorIcon: {
           correct: "text-white",
-          incorrect: "text-white"
+          incorrect: "text-white",
         },
         description: {
-          bgColor: "bg-white"
-        }
-      }
+          bgColor: "bg-white",
+        },
+      },
     ]);
 
     const setColorTheme = ref([
       {
         color: "#ffffff",
-        bg: "#014270"
+        bg: "#014270",
       },
       {
         color: "#000000",
-        bg: "#FF7985"
-      }
+        bg: "#FF7985",
+      },
     ]);
 
     const currentAnswer = ref(null);
     const isSendAnswer = ref(false);
     const isCorrectAnswer = ref(false);
 
-    const sendAnswer = index => {
+    const sendAnswer = (choiceIndex) => {
       isSendAnswer.value = true;
 
-      currentAnswer.value = index;
+      console.log(choiceIndex);
 
-      let randomAnswer = Math.ceil(Math.random() * 4);
+      currentAnswer.value = choiceIndex;
 
-      if (randomAnswer == currentAnswer.value) {
+      if (Number(props.practiceData.correctAnswer) == currentAnswer.value) {
         isCorrectAnswer.value = true;
       } else {
         isCorrectAnswer.value = false;
@@ -217,11 +209,14 @@ export default {
 
       setTimeout(() => {
         activeBy.value = "description";
-      }, 3000);
+      }, 500);
     };
 
     const nextQuestion = () => {
       isSendAnswer.value = false;
+      currentAnswer.value = null;
+
+      emit("callback-nextquestion");
 
       activeBy.value = "answer";
     };
@@ -235,9 +230,9 @@ export default {
       isCorrectAnswer,
       activeBy,
       setTheme,
-      nextQuestion
+      nextQuestion,
     };
-  }
+  },
 };
 </script>
 
@@ -247,18 +242,20 @@ export default {
   background-color: #fff;
 }
 
-.bg-grammarmultiple {
-  background-image: url("../../../public/images/grammar/bg-grammarmultiple.png");
+.bg-content {
+  background-image: url("../../../public/images/grammar/bg-answer-grammarmultiple.png");
   background-position: bottom;
   background-size: contain;
 }
 
 .box-content-choices {
-  max-width: 650px;
+  max-width: 1000px;
   width: 100%;
 }
 
 .box-extravocab {
+  position: sticky;
+  top: 100px;
   width: 25%;
   background-color: #fff0da;
 }

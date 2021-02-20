@@ -260,17 +260,10 @@
             />
           </g>
         </g>
-        <!-- 
-        :class="
-            isSendAnswer
-              ? isCorrectAnswer
-                ? 'animation-hide'
-                : 'fish-fails'
-              : 'fish-move'
-          " -->
-        <!-- Fish 3 -->
+
         <g
           id="frame-5-fish3_to"
+          v-if="isSendAnswer"
           :class="
             isSendAnswer ? (isCorrectAnswer ? 'fish-correct' : 'fish-incorrect') : ''
           "

@@ -39,7 +39,7 @@
             ></q-btn>
             <q-btn
               v-if="isHasHelp"
-              @click="isShowDialogHelp = true"
+              @click="$emit('callback-showdialoghelp')"
               icon="fas fa-lightbulb"
               class="shadow-2 btn-header"
               :class="{ 'btn-width-mobile': $q.platform.is.mobile }"
@@ -274,6 +274,7 @@ export default {
       default: () => {},
     },
   },
+  $emit: ["callback-showdialoghelp"],
   setup(props, { emit }) {
     // Set Router
     const route = useRoute();
