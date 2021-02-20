@@ -6,7 +6,7 @@
     viewBox="0 0 1600 290"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-  >
+    >
     <g id="animation">
       <g id="mountain-sun">
         <ellipse
