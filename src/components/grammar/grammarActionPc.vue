@@ -1,7 +1,7 @@
 <template>
   <div>
     <div align="center" class="q-pa-md">
-      <div>
+      <div v-if="$q.platform.is.desktop">
         <q-img
           style="max-width: 500px; width: 100%"
           src="../../../public/images/grammar/label-grammaraction.png"
@@ -10,23 +10,17 @@
 
       <!-- Box Content Answer -->
       <div
-        class="box-content-main q-pa-sm q-my-lg"
-        v-if="!isSendAnswer && (currentStep == 1 || currentStep == 2)"
+        :class="{ 'q-pa-sm q-my-lg box-content-main': $q.platform.is.desktop }"
+        v-if="currentStep == 1 || currentStep == 2"
       >
-        <div class="border-dash q-py-md q-px-xl">
+        <div :class="{ 'border-dash q-py-md q-px-xl': $q.platform.is.desktop }">
           <div class="row">
             <div class="col-auto" v-for="i in totalQuestion" :key="i">
               <q-img
                 width="45px"
                 :src="
                   require(`../../../public/images/question-${
-                    currentQuestion + 1 == i
-                      ? 'current'
-                      : currentQuestion + 1 > i
-                      ? answerList[i - 1]
-                        ? 'correct'
-                        : 'incorrect'
-                      : 'default'
+                    currentQuestion + 1 == i ? 'current' : 'default'
                   }.png`)
                 "
               >
@@ -41,59 +35,47 @@
           </div>
 
           <div class="q-mt-lg box-question q-pa-md" align="center">
-            <span class="f20" @click="testActive()">
+            <span class="f20">
               {{ question.question }}
             </span>
           </div>
 
           <div class="q-mt-lg">
             <div
-              class="q-mt-sm"
+              class="q-mt-sm q-pb-md"
               v-for="(item, index) in question.choices"
               :key="index"
             >
-              <q-img
-                @mouseenter="activeChoices = index"
-                @mouseleave="activeChoices = null"
-                @click="currentStep == 2 ? sendAnswer(index) : null"
-                fit="contain"
-                :src="
-                  require(`../../../public/images/grammar/choices-action-${
-                    index + 1
-                  }${
-                    currentStep == 2
-                      ? activeChoices == index
-                        ? '-hover'
-                        : ''
-                      : '-dis'
-                  }.png`)
+              <multiplechoice-btn
+                @click="
+                  currentStep != 1 || learningMode != 'control'
+                    ? $emit('sendAnswer', item)
+                    : null
                 "
-              >
-                <div class="transparent fit no-padding">
-                  <div
-                    v-ripple="currentStep == 2"
-                    class="relative-position row"
-                    :class="currentStep == 2 ? 'cursor-pointer' : ''"
-                    style="height: 80%; width: 99%; margin: auto"
-                  >
-                    <div
-                      class="self-center"
-                      style="width: 80%; margin: auto"
-                      align="left"
-                    >
-                      <span class="text-black f18">{{ item.choice }}</span>
-                    </div>
-                  </div>
-                </div>
-              </q-img>
+                :choice="item.choice"
+                :index="index"
+                :class="{
+                  'disabled cursor-not-allowed':
+                    currentStep == 1 && learningMode == 'control',
+                }"
+              />
             </div>
           </div>
         </div>
       </div>
 
       <!-- Waiting -->
-      <div class="box-content-main q-pa-sm q-my-lg" v-if="isSendAnswer">
-        <div class="border-dash q-pa-md q-px-xl">
+      <div
+        v-if="currentStep == 7"
+        :class="{
+          'box-content-main q-pa-sm q-my-lg': $q.platform.is.desktop,
+          'absolute-center full-width': $q.platform.is.mobile,
+        }"
+      >
+        <div
+          class="q-pa-md q-px-xl"
+          :class="{ 'border-dash': $q.platform.is.desktop }"
+        >
           <div
             class="row justify-center"
             style="min-height: calc(100vh - 400px); max-height: fit-content"
@@ -113,14 +95,28 @@
       </div>
 
       <!-- Show Score -->
-      <div class="box-content-main q-pa-sm q-my-lg row" v-if="currentStep == 3">
+      <div
+        class="box-content-main row"
+        :class="$q.platform.is.desktop ? 'q-pa-sm q-my-lg ' : 'absolute-bottom'"
+        v-if="currentStep == 3"
+      >
         <div
-          class="col-12 border-dash relative-position"
+          class="col-12 relative-position"
           style="border-bottom: 0px; z-index: 2"
+          :class="{ 'border-dash': $q.platform.is.desktop }"
         >
-          <div class="q-pa-md row justify-center" style="margin-top: 120px">
+          <div
+            class="row center"
+            style="margin-top: 120px"
+            :class="
+              $q.platform.is.desktop
+                ? 'q-pa-md justify-center'
+                : 'q-pa-xs justify-around'
+            "
+          >
             <div
-              class="row justify-center relative-position q-mx-lg"
+              class="row justify-center relative-position"
+              :class="$q.platform.is.desktop ? 'q-mx-lg' : 'q-mx-sm'"
               style="margin-bottom: -40px"
               v-for="i in 4"
               :key="i"
@@ -129,6 +125,7 @@
                 class="box-show-score row relative-position self-end"
                 :data-color="colorGraph[i - 1].color"
                 style="height: 250px"
+                :style="$q.platform.is.desktop ? 'width:100px' : 'width:60px'"
               >
                 <div class="absolute-top" style="top: -90px">
                   <q-img
@@ -174,38 +171,60 @@
       </div>
 
       <!-- Show Answer Correct And Incorrect -->
-      <div class="box-content-main q-pa-sm q-my-lg" v-if="currentStep == 4">
-        <div class="border-dash q-pa-xl">
+      <div
+        :class="{ 'box-content-main q-pa-sm q-my-lg': $q.platform.is.desktop }"
+        v-if="currentStep == 4"
+      >
+        <div class="q-pa-xl" :class="{ 'border-dash': $q.platform.is.desktop }">
           <div class="q-py-md box-show-answer relative-position">
             <q-img
               class="absolute-center"
-              style="max-width: 400px; width: 40%"
+              style="max-width: 400px"
+              :style="$q.platform.is.desktop ? 'width:40%' : 'width:100%'"
               :src="
                 require(`../../../public/images/${
-                  answerList[currentQuestion] ? '' : 'in'
+                  question.isCorrect ? '' : 'in'
                 }correct-img.png`)
               "
             ></q-img>
           </div>
         </div>
+
+        <div v-if="learningMode != 'control'">
+          <q-btn
+            label="คำอธิบาย"
+            class="custom-btn"
+            @click="$emit('goToDescription')"
+          >
+            <div class="absolute-left" style="top: 5px; left: 5px">
+              <div
+                style="width: 10px; height: 10px; border-radius: 50%"
+                class="bg-white"
+              ></div>
+            </div>
+            <div class="absolute-left" style="top: 7px; left: 18px">
+              <div
+                style="width: 6px; height: 6px; border-radius: 50%"
+                class="bg-white"
+              ></div>
+            </div>
+          </q-btn>
+        </div>
       </div>
 
       <!-- Description -->
-      <div class="box-content-main q-pa-sm q-my-lg" v-if="currentStep == 5">
-        <div class="border-dash q-py-md q-px-xl">
+      <div
+        :class="{ 'box-content-main q-pa-sm q-my-lg': $q.platform.is.desktop }"
+        v-if="currentStep == 5"
+      >
+        <div :class="{ 'border-dash q-py-md q-px-xl': $q.platform.is.desktop }">
           <div class="row">
             <div class="col-auto" v-for="i in totalQuestion" :key="i">
               <q-img
                 width="45px"
                 :src="
                   require(`../../../public/images/question-${
-                    currentQuestion + 1 == i
-                      ? 'current'
-                      : currentQuestion + 1 > i
-                      ? answerList[i - 1]
-                        ? 'correct'
-                        : 'incorrect'
-                      : 'default'
+                    currentQuestion + 1 == i ? 'correct' : 'default'
                   }.png`)
                 "
               >
@@ -221,7 +240,7 @@
 
           <div class="q-py-md box-show-answer relative-position">
             <div class="q-mt-lg box-question q-pa-md" align="center">
-              <span class="f20" @click="testActive()">
+              <span class="f20">
                 {{ question.question }}
               </span>
             </div>
@@ -245,6 +264,27 @@
               </div>
             </div>
           </div>
+
+          <div v-if="learningMode != 'control'">
+            <q-btn
+              label="ข้อต่อไป"
+              class="custom-btn"
+              @click="$emit('nextQuestion')"
+            >
+              <div class="absolute-left" style="top: 5px; left: 5px">
+                <div
+                  style="width: 10px; height: 10px; border-radius: 50%"
+                  class="bg-white"
+                ></div>
+              </div>
+              <div class="absolute-left" style="top: 7px; left: 18px">
+                <div
+                  style="width: 6px; height: 6px; border-radius: 50%"
+                  class="bg-white"
+                ></div>
+              </div>
+            </q-btn>
+          </div>
         </div>
       </div>
     </div>
@@ -252,11 +292,12 @@
 </template>
 
 <script>
-import { ref, watch, watchEffect } from "vue";
 import waiting from "../waiting";
+import multiplechoiceBtn from "../../components/button/multipleChoicesBtn";
 export default {
   components: {
     waiting,
+    multiplechoiceBtn,
   },
   props: {
     currentQuestion: {
@@ -275,6 +316,10 @@ export default {
       type: Number,
       default: 0,
     },
+    learningMode: {
+      type: String,
+      default: "selfLearning",
+    },
   },
   setup(props) {
     const colorGraph = [
@@ -283,60 +328,8 @@ export default {
       { color: "purple", icon: "fas fa-dove" },
       { color: "green", icon: "fas fa-frog" },
     ];
-    const isSendAnswer = ref(null);
-
-    const currentQuestion = ref(0);
-
-    const activeChoices = ref(null);
-
-    const activeByTeacher = ref(null);
-
-    const testActive = () => {
-      activeByTeacher.value = "start";
-    };
-
-    const answerList = ref([
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-    ]);
-
-    const sendAnswer = (index) => {
-      isSendAnswer.value = true;
-      currentQuestion.value++;
-
-      let randomAnswer = Math.ceil(Math.random() * 4);
-
-      if (randomAnswer == index) {
-        answerList.value[currentQuestion.value - 1] = true;
-      } else {
-        answerList.value[currentQuestion.value - 1] = false;
-      }
-    };
-
-    watch(
-      () => props.currentStep,
-      () => {
-        // console.log("watching");
-        isSendAnswer.value = false;
-      }
-    );
 
     return {
-      currentQuestion,
-      activeByTeacher,
-      testActive,
-      activeChoices,
-      answerList,
-      sendAnswer,
-      isSendAnswer,
       colorGraph,
     };
   },
@@ -377,7 +370,6 @@ export default {
 }
 
 .box-show-score {
-  width: 100px;
   min-height: 100px;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
 
@@ -433,5 +425,24 @@ export default {
 }
 .box-show-score[data-color="green"] {
   background-color: #549745;
+}
+
+.btn-choice {
+  border-radius: 10px;
+  box-shadow: 2px 3px 0px 0px #4e3801;
+  height: 50px;
+  background-image: linear-gradient(#ffd361, #ffbb0d);
+}
+
+.btn-choice:hover {
+  background-image: linear-gradient(#4bddfe, #2c9bc0);
+  box-shadow: 0px 3px 10px 0px #0082ba;
+}
+
+.custom-btn {
+  background-image: linear-gradient(#ffd361, #ffbb0d);
+  width: 200px;
+  border-radius: 10px;
+  box-shadow: 2px 3px 0px 0px #4e3801;
 }
 </style>
