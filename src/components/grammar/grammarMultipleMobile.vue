@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="">
-      <header-bar></header-bar>
+      <header-bar
+        :themeSync="themeSync"
+        :isSendAnswer="isSendAnswer"
+        :isCorrectAnswer="isCorrectAnswer"
+        :practiceData="practiceData"
+      ></header-bar>
     </div>
     <div class="box-question q-pa-lg f16" align="left">
       <span style="font-size: max(4vw, 16px)" v-html="practiceData.question"></span>
@@ -17,11 +22,11 @@
           @click="isSendAnswer ? null : sendAnswer(item.index)"
           class="cursor-pointer"
           fit="contain"
-          width="max(70vw,340px)"
+          width="max(70vw,320px)"
           :src="
             require(`../../../public/images/languagetip/languagetip-choices-${
               isSendAnswer
-                ? currentAnswer == index
+                ? currentAnswer == item.index
                   ? isCorrectAnswer
                     ? 'correct'
                     : 'incorrect'
@@ -53,17 +58,28 @@
           ></q-img>
         </div>
         <div class="f14 q-pa-sm">
-          <div class="q-pa-sm row" align="left">
-            <div class="col-12">คำตอบที่ถูกต้อง คือ</div>
-            <div class="col-12">
-              <div class="q-mt-sm">
-                <span class="text-green-14">Where are you going for holiday?</span>
-              </div>
-              <div class="q-mt-sm">
-                Reporting Verb เป็น Past Simple ดังนันต้องเปลี่ยน tense ใน reported speech
-                will come เปลี่ยนเป็น would come, My ใน reported speech เปลี่ยนเป็น her
-                เพราะคนพูดเป็นผู้หญิง, tomorrow เปลี่ยนเป็น the next day, เปลี่ยน said to
-                เป็น told
+          <div class="q-pa-md row" align="left">
+            <div class="col-2" style="width: 150px">คำตอบที่ถูกต้อง คือ</div>
+            <div class="col">
+              <span class="text-green-6">{{
+                practiceData.choices[currentAnswer].choice
+              }}</span>
+            </div>
+            <div class="col-12 q-mt-md" align="left">
+              <span>{{ practiceData.description }}</span>
+            </div>
+          </div>
+          <div align="left" class="row q-pa-md">
+            <div class="col-2" style="width: 50px">
+              <span>อ้างอิง:</span>
+            </div>
+            <div class="col">
+              <div>
+                <u
+                  @click="$emit('callback-showdialoghelp', { ref: '3' })"
+                  class="cursor-pointer text-indigo-5"
+                  >#Content1</u
+                >
               </div>
             </div>
           </div>
@@ -100,9 +116,8 @@ export default {
     },
   },
   setup(props) {
-    const currentAnswer = ref(null);
-    const isSendAnswer = ref(false);
-    const isCorrectAnswer = ref(false);
+    const activeBy = ref("answer");
+
     const setTheme = ref([
       {
         colorText: "text-black",
@@ -126,15 +141,16 @@ export default {
       },
     ]);
 
-    const activeBy = ref("answer");
+    const currentAnswer = ref(null);
+    const isSendAnswer = ref(false);
+    const isCorrectAnswer = ref(false);
 
-    const sendAnswer = (index) => {
+    const sendAnswer = (choiceIndex) => {
       isSendAnswer.value = true;
-      currentAnswer.value = index;
 
-      let randomAnswer = Math.ceil(Math.random() * 4);
+      currentAnswer.value = choiceIndex;
 
-      if (randomAnswer == currentAnswer.value) {
+      if (Number(props.practiceData.correctAnswer) == currentAnswer.value) {
         isCorrectAnswer.value = true;
       } else {
         isCorrectAnswer.value = false;
@@ -142,23 +158,26 @@ export default {
 
       setTimeout(() => {
         activeBy.value = "description";
-      }, 2000);
+      }, 500);
     };
 
     const nextQuestion = () => {
       isSendAnswer.value = false;
+      currentAnswer.value = null;
+
+      emit("callback-nextquestion");
 
       activeBy.value = "answer";
     };
 
     return {
-      activeBy,
-      currentAnswer,
       isSendAnswer,
-      isCorrectAnswer,
       sendAnswer,
-      nextQuestion,
+      currentAnswer,
+      isCorrectAnswer,
+      activeBy,
       setTheme,
+      nextQuestion,
     };
   },
 };

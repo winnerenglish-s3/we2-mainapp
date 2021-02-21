@@ -9,6 +9,7 @@
           :themeSync="themeSync"
           :isSendAnswer="isSendAnswer"
           :isCorrectAnswer="isCorrectAnswer"
+          :practiceData="practiceData"
         ></theme-animation>
       </div>
       <div class="col-12 box-question q-pa-lg" align="center">
@@ -151,7 +152,7 @@ export default {
       default: () => {},
     },
   },
-  $emit: ["callback-showdialoghelp"],
+  emits: ["callback-showdialoghelp"],
   setup(props, { emit }) {
     const activeBy = ref("answer");
     const activeHover = ref(null);

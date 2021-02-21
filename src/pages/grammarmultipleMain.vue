@@ -30,57 +30,74 @@
       v-if="$q.platform.is.mobile && isLoadPractice"
     ></grammar-multiple-mobile>
 
+    <!-- Help Grammar Video -->
     <q-dialog maximized v-model="isShowDialogLesson" persistent>
       <q-card class="transparent shadow-0">
         <q-card-section class="fit">
           <div class="box-dialog-lesson absolute-center">
             <div class="row text-amber" align="center">
-              <div class="col-1 self-center"></div>
+              <div class="col-1 self-center" style="width: 70px"></div>
               <div class="col self-center f18">วิดีโอ</div>
-              <div class="col-1 q-pa-sm" align="right">
+              <div class="col-1 self-center q-pa-sm" style="width: 70px" align="right">
                 <q-btn v-close-popup dense round flat>
                   <q-icon name="fas fa-times"></q-icon>
                 </q-btn>
               </div>
             </div>
+
             <div class="bg-white row">
-              <div class="col-2 box-lesson-list" style="width: 250px">
+              <div
+                class="col-2 box-lesson-list"
+                style="width: 250px"
+                v-if="$q.platform.is.desktop"
+              >
                 <div class="q-pa-sm" v-for="(item, index) in showLessonVideo">
                   <div
                     v-ripple
                     class="btn-active relative-position shadow-2 q-pa-md rounded-borders cursor-pointer"
-                    :class="selectedLesson == index ? 'btn-selected' : 'bg-white'"
-                    @click="selectedLesson = index"
+                    :class="selectedLesson == item.value ? 'btn-selected' : 'bg-white'"
+                    @click="selectedLesson = item.value"
                   >
                     <div align="left">
-                      {{ item.lesson }}
+                      {{ item.label }}
                     </div>
                   </div>
                 </div>
               </div>
               <div class="col row q-pa-sm">
+                <div class="col-12 q-mt-xs q-mb-md" v-if="$q.platform.is.mobile">
+                  <q-select
+                    dense
+                    outlined
+                    filled
+                    emit-value
+                    map-options
+                    :options="showLessonVideo"
+                    v-model="selectedLesson"
+                  ></q-select>
+                </div>
                 <div class="col-12 self-start">
                   <iframe
                     id="myVideo"
                     width="100%"
                     height="315"
-                    :src="showLessonVideo[selectedLesson].vdo"
+                    :src="showLessonVideo.filter((x) => x.value == selectedLesson)[0].vdo"
                     frameborder="0"
                     allow="accelerometer; autoplay; "
                     allowfullscreen
                   ></iframe>
                 </div>
-                <div class="col-12 row">
+                <div class="col-12 row q-mb-md q-mt-sm">
                   <div class="self-center col-2 q-pa-sm" style="width: 70px">
                     <q-btn
-                      @click="selectedLesson == 0 ? null : (selectedLesson -= 1)"
-                      size="16px"
+                      @click="selectedLesson == 1 ? null : (selectedLesson -= 1)"
+                      :size="$q.platform.is.desktop ? '16px' : '12px'"
                       push
                       round
                       class="bg-amber text-white"
                     >
                       <q-icon
-                        size="50px"
+                        :size="$q.platform.is.desktop ? '50px' : '30px'"
                         name="fas fa-caret-left"
                         class=""
                         style="margin-left: -5px"
@@ -92,33 +109,41 @@
                       @click="playVideo()"
                       class="btn-active cursor-pointer"
                       width="200px"
+                      style="max-width: 200px; width: 100%"
                       src="../../public/images/btn-play-video.png"
                     ></q-img>
                   </div>
                   <div
                     class="self-center col-2 q-pa-sm"
-                    style="width: 70px"
+                    style="max-width: 70px; width: 100%"
                     align="right"
                   >
                     <q-btn
                       @click="
-                        selectedLesson == lessonList.length - 1
+                        selectedLesson == showLessonVideo.length
                           ? null
                           : (selectedLesson += 1)
                       "
-                      size="16px"
+                      :size="$q.platform.is.desktop ? '16px' : '12px'"
                       push
                       round
                       class="bg-amber text-white"
                     >
                       <q-icon
-                        size="50px"
+                        :size="$q.platform.is.desktop ? '50px' : '30px'"
                         name="fas fa-caret-right"
                         style="margin-right: -5px"
                       ></q-icon>
                     </q-btn>
                   </div>
                 </div>
+              </div>
+              <div class="col-12" v-if="$q.platform.is.mobile">
+                <q-img
+                  @click="isShowDialogLesson = false"
+                  fit="contain"
+                  src="../../public/images/close-help-btn-mobile.png"
+                ></q-img>
               </div>
             </div>
           </div>
@@ -149,6 +174,7 @@ export default {
       default: 0,
     },
   },
+  emits: [],
   setup(props, { emit }) {
     // ------------------------ Initial Data Route
     const route = useRoute();
@@ -174,47 +200,43 @@ export default {
     });
 
     const isShowDialogLesson = ref(false);
-    const selectedLesson = ref(0);
+    const selectedLesson = ref(1);
     const lessonList = ref([
       {
         vdo: "https://youtube.com/embed/TsUKSnRGfm4",
-        lesson: "#Content 1",
+        label: "#Content 1",
         ref: "1",
+        value: 1,
       },
       {
-        vdo: "https://youtube.com/embed/TsUKSnRGfm4",
-        lesson: "#Content 2",
+        vdo: "https://youtube.com/embed/vLzsow_ZxDU",
+        label: "#Content 2",
         ref: "2",
+        value: 2,
       },
       {
-        vdo: "https://youtube.com/embed/TsUKSnRGfm4",
-        lesson: "#Content 3",
+        vdo: "https://youtube.com/embed/E0IfcXBxyic",
+        label: "#Content 3",
         ref: "3",
+        value: 3,
       },
       {
-        vdo: "https://youtube.com/embed/TsUKSnRGfm4",
-        lesson: "#Content 4",
+        vdo: "https://youtube.com/embed/iF8Vv7YgjLQ",
+        label: "#Content 4",
         ref: "4",
+        value: 4,
       },
       {
-        vdo: "https://youtube.com/embed/TsUKSnRGfm4",
-        lesson: "#Content 3",
+        vdo: "https://youtube.com/embed/3aCctY3DGac",
+        label: "#Content 5",
         ref: "3",
+        value: 5,
       },
       {
-        vdo: "https://youtube.com/embed/TsUKSnRGfm4",
-        lesson: "#Content 4",
+        vdo: "https://youtube.com/embed/Hi6cxx_tdMU",
+        label: "#Content 6",
         ref: "4",
-      },
-      {
-        vdo: "https://youtube.com/embed/TsUKSnRGfm4",
-        lesson: "#Content 3",
-        ref: "3",
-      },
-      {
-        vdo: "https://youtube.com/embed/TsUKSnRGfm4",
-        lesson: "#Content 4",
-        ref: "4",
+        value: 6,
       },
     ]);
     const showLessonVideo = ref([]);
@@ -248,8 +270,6 @@ export default {
 
         try {
           let getLesson = await lessonHooks.lesson().grammar(level, unit);
-
-          console.log(getLesson);
         } catch (error) {
           console.log(`${error} : Get Hooks Grammar lesson`);
         }
@@ -315,6 +335,8 @@ export default {
 
       if (refContent.value) {
         showLessonVideo.value = lessonList.value.filter((x) => x.ref == refContent.value);
+
+        selectedLesson.value = showLessonVideo.value[0].value;
       }
     };
 
@@ -378,7 +400,7 @@ export default {
   max-width: 850px;
   width: 90%;
   background-color: #2d3081;
-  border-radius: 10px;
+  border-radius: 15px;
   overflow: hidden;
 }
 
