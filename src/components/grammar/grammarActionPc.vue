@@ -72,10 +72,7 @@
           'absolute-center full-width': $q.platform.is.mobile,
         }"
       >
-        <div
-          class="q-pa-md q-px-xl"
-          :class="{ 'border-dash': $q.platform.is.desktop }"
-        >
+        <div class="q-pa-md q-px-xl" :class="{ 'border-dash': $q.platform.is.desktop }">
           <div
             class="row justify-center"
             style="min-height: calc(100vh - 400px); max-height: fit-content"
@@ -109,9 +106,7 @@
             class="row center"
             style="margin-top: 120px"
             :class="
-              $q.platform.is.desktop
-                ? 'q-pa-md justify-center'
-                : 'q-pa-xs justify-around'
+              $q.platform.is.desktop ? 'q-pa-md justify-center' : 'q-pa-xs justify-around'
             "
           >
             <div
@@ -128,14 +123,8 @@
                 :style="$q.platform.is.desktop ? 'width:100px' : 'width:60px'"
               >
                 <div class="absolute-top" style="top: -90px">
-                  <q-img
-                    width="60px"
-                    src="../../../public/images/grammar/img-score.png"
-                  >
-                    <div
-                      class="transparent absolute-center shadow-0"
-                      style="top: 40%"
-                    >
+                  <q-img width="60px" src="../../../public/images/grammar/img-score.png">
+                    <div class="transparent absolute-center shadow-0" style="top: 40%">
                       <span class="text-black f24 text-bold">10</span>
                     </div></q-img
                   >
@@ -191,11 +180,7 @@
         </div>
 
         <div v-if="learningMode != 'control'">
-          <q-btn
-            label="คำอธิบาย"
-            class="custom-btn"
-            @click="$emit('goToDescription')"
-          >
+          <q-btn label="คำอธิบาย" class="custom-btn" @click="$emit('goToDescription')">
             <div class="absolute-left" style="top: 5px; left: 5px">
               <div
                 style="width: 10px; height: 10px; border-radius: 50%"
@@ -266,11 +251,7 @@
           </div>
 
           <div v-if="learningMode != 'control'">
-            <q-btn
-              label="ข้อต่อไป"
-              class="custom-btn"
-              @click="$emit('nextQuestion')"
-            >
+            <q-btn label="ข้อต่อไป" class="custom-btn" @click="$emit('nextQuestion')">
               <div class="absolute-left" style="top: 5px; left: 5px">
                 <div
                   style="width: 10px; height: 10px; border-radius: 50%"
@@ -321,7 +302,8 @@ export default {
       default: "selfLearning",
     },
   },
-  setup(props) {
+  emits: ["sendAnswer", "goToDescription", "nextQuestion"],
+  setup(prop) {
     const colorGraph = [
       { color: "red", icon: "fas fa-spider" },
       { color: "blue", icon: "fas fa-fish" },
@@ -437,12 +419,5 @@ export default {
 .btn-choice:hover {
   background-image: linear-gradient(#4bddfe, #2c9bc0);
   box-shadow: 0px 3px 10px 0px #0082ba;
-}
-
-.custom-btn {
-  background-image: linear-gradient(#ffd361, #ffbb0d);
-  width: 200px;
-  border-radius: 10px;
-  box-shadow: 2px 3px 0px 0px #4e3801;
 }
 </style>

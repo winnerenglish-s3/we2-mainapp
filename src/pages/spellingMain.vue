@@ -117,6 +117,7 @@ import spellingMobile from "../components/spellingbee/spellingbeeMobile";
 import appBar from "../components/app-bar";
 import { useQuasar } from "quasar";
 import { ref, onMounted } from "vue";
+import { useRouter, useRoute } from "vue-router";
 export default {
   components: {
     spellingPc,
@@ -131,6 +132,9 @@ export default {
   },
 
   setup(props) {
+    // Router and Route
+    const router = useRouter();
+    const route = useRoute();
     // Initial Data
     const $q = useQuasar();
     const isCorrectAnswer = ref(false);
@@ -182,9 +186,13 @@ export default {
       "Z",
     ];
 
-    const currentQuestionText = ref(vocabularyList[currentQuestion.value].vocab);
+    const currentQuestionText = ref(
+      vocabularyList[currentQuestion.value].vocab
+    );
 
-    const currentQuestionTh = ref(vocabularyList[currentQuestion.value].meaning);
+    const currentQuestionTh = ref(
+      vocabularyList[currentQuestion.value].meaning
+    );
 
     const selectedLetter = ref([]);
 
@@ -244,7 +252,9 @@ export default {
             let randomCol = Math.floor(Math.random() * 5); //random 0-4
             //   ตัวแรก
             boggle.value[randomRow][randomCol] = {
-              letter: vocabularyList[currentQuestion.value].vocab[counter].toUpperCase(),
+              letter: vocabularyList[currentQuestion.value].vocab[
+                counter
+              ].toUpperCase(),
             };
 
             selectedLetter.value.push(

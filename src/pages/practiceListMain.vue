@@ -178,7 +178,9 @@
                       align="left"
                     >
                       <div class="" align="center">
-                        <span>{{ `${index + 1}. ${"เลือกคำศัพท์"} ` }}</span>
+                        <span>{{
+                          `${index + 1}. ${item.practiceTypeThai} `
+                        }}</span>
                       </div>
                     </div>
                   </q-img>
@@ -606,6 +608,8 @@ export default {
         routerName = "/grammarLesson/";
       } else if (data.practiceType == "grammaraction") {
         routerName = "/grammarAction/";
+      } else if (data.practiceType == "readingmultiplechoices") {
+        routerName = "/readingmultiple/";
       }
 
       router.push(routerName + data.practiceListId);

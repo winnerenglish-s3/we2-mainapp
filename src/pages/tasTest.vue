@@ -1,10 +1,6 @@
 <template>
   <div class="row">
-    <q-expansion-item
-      group="skill"
-      label="Vocabulary"
-      class="col-12 brx q-pa-md"
-    >
+    <q-expansion-item group="skill" label="Vocabulary" class="col-12 brx q-pa-md">
       <div class="row">
         <q-card
           v-for="(item, index) in flashcardList"
@@ -20,11 +16,7 @@
       </div>
     </q-expansion-item>
 
-    <q-expansion-item
-      group="skill"
-      label="Grammar Lesson"
-      class="col-12 brx q-pa-md"
-    >
+    <q-expansion-item group="skill" label="Grammar Lesson" class="col-12 brx q-pa-md">
       <q-radio val="video" label="video mode" v-model="grammarMode"></q-radio>
       <q-radio val="slide" label="slide mode" v-model="grammarMode"></q-radio>
 
@@ -49,25 +41,21 @@
       </div>
     </q-expansion-item>
 
-    <q-expansion-item
-      label="Grammar action"
-      class="col-12 brx q-pa-md"
-      group="skill"
-    >
+    <q-expansion-item label="Grammar action" class="col-12 brx q-pa-md" group="skill">
       <div class="flex q-gutter-lg">
-        <q-btn @click="grammarActionSync(1)">
+        <q-btn :disable="mode == 'selfLearning'" @click="grammarActionSync(1)">
           <div>Step1 ครูอธิบายโจทย์</div>
         </q-btn>
-        <q-btn @click="grammarActionSync(2)">
+        <q-btn :disable="mode == 'selfLearning'" @click="grammarActionSync(2)">
           <div>Step2 เลือกคำตอบ</div>
         </q-btn>
-        <q-btn @click="grammarActionSync(3)">
+        <q-btn :disable="mode == 'selfLearning'" @click="grammarActionSync(3)">
           <div>Step3 กราฟ</div>
         </q-btn>
-        <q-btn @click="grammarActionSync(4)">
+        <q-btn :disable="mode == 'selfLearning'" @click="grammarActionSync(4)">
           <div>Step4 เฉลยถูก / ผิด</div>
         </q-btn>
-        <q-btn @click="grammarActionSync(5)">
+        <q-btn :disable="mode == 'selfLearning'" @click="grammarActionSync(5)">
           <div>Step5 คำอธิบาย</div>
         </q-btn>
       </div>
@@ -75,8 +63,7 @@
 
     <div class="col-12 q-py-md text-h5" align="center">
       <q-radio label="control" val="control" v-model="mode"> </q-radio>
-      <q-radio label="self learning" val="selflearning" v-model="mode">
-      </q-radio>
+      <q-radio label="self learning" val="selfLearning" v-model="mode"> </q-radio>
     </div>
   </div>
 </template>
