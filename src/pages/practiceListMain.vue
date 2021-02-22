@@ -27,11 +27,19 @@
 
           <div class="col-6 box-container-pracitcelist">
             <div class="row box-content-practicelist q-py-sm q-px-md">
-              <div class="col-3 self-center" style="width: 100px" algin="center"></div>
+              <div
+                class="col-3 self-center"
+                style="width: 100px"
+                algin="center"
+              ></div>
               <div class="col self-center" algin="center">
                 <span class="f20 text-amber-5">{{ selectSkill }}</span>
               </div>
-              <div class="col-3 self-center" style="width: 100px" algin="center">
+              <div
+                class="col-3 self-center"
+                style="width: 100px"
+                algin="center"
+              >
                 <q-select
                   v-model="selectLevel"
                   :options="levelList"
@@ -54,7 +62,8 @@
                       class="progress-bar"
                       :style="
                         'width:' +
-                        (showAllPassedPractice() / showNumberOfAllPracticeInLevel()) *
+                        (showAllPassedPractice() /
+                          showNumberOfAllPracticeInLevel()) *
                           100 +
                         '%'
                       "
@@ -169,7 +178,9 @@
                       align="left"
                     >
                       <div class="" align="center">
-                        <span>{{ `${index + 1}. ${"เลือกคำศัพท์"} ` }}</span>
+                        <span>{{
+                          `${index + 1}. ${item.practiceTypeThai} `
+                        }}</span>
                       </div>
                     </div>
                   </q-img>
@@ -209,7 +220,9 @@
           >
             <template v-slot:selected>
               <div class="absolute-center">
-                {{ skillOptions.filter((x) => x.value == selectSkill)[0].label }}
+                {{
+                  skillOptions.filter((x) => x.value == selectSkill)[0].label
+                }}
               </div>
             </template>
           </q-select>
@@ -224,7 +237,9 @@
           </div>
           <div class="col-2 offset-1" style="width: 50px">
             <span class="f16"
-              >{{ showAllPassedPractice() }}/{{ showNumberOfAllPracticeInLevel() }}</span
+              >{{ showAllPassedPractice() }}/{{
+                showNumberOfAllPracticeInLevel()
+              }}</span
             >
           </div>
         </div>
@@ -414,9 +429,12 @@ export default {
       let allLevel = await practiceHooks.level();
       course.forEach(async (element) => {
         levelList.value.push({
-          label: "ระดับ" + allLevel.filter((x) => x.level == element.level)[0].level,
+          label:
+            "ระดับ" + allLevel.filter((x) => x.level == element.level)[0].level,
           value: allLevel.filter((x) => x.level == element.level)[0].level,
-          unit: Number(allLevel.filter((x) => x.level == element.level)[0].unit),
+          unit: Number(
+            allLevel.filter((x) => x.level == element.level)[0].unit
+          ),
         });
       });
       selectLevel.value = levelList.value[0].value;
@@ -468,13 +486,19 @@ export default {
         delay: 0,
       });
       // Get Practice List
-      practiceList.value = await practiceHooks.practice(selectLevel.value).practiceList();
+      practiceList.value = await practiceHooks
+        .practice(selectLevel.value)
+        .practiceList();
 
       // Get Practice Name
-      practiceName.value = await practiceHooks.practice(selectLevel.value).practiceName();
+      practiceName.value = await practiceHooks
+        .practice(selectLevel.value)
+        .practiceName();
 
       // Get PracticeLog
-      practiceLog.value = await practiceHooks.practice(selectLevel.value).log(uid);
+      practiceLog.value = await practiceHooks
+        .practice(selectLevel.value)
+        .log(uid);
       $q.loading.hide();
     };
 
@@ -503,7 +527,9 @@ export default {
     // โชว์จำนวนแบบฝึกหัดที่มีทั้งหมดภายในเลเวล-ทักษะ
     const showNumberOfAllPracticeInLevel = () => {
       let totalPracticeInLevel = practiceList.value.filter(
-        (x) => x.level == selectLevel.value.toString() && x.skill == selectSkill.value
+        (x) =>
+          x.level == selectLevel.value.toString() &&
+          x.skill == selectSkill.value
       ).length;
       return totalPracticeInLevel;
     };
@@ -513,7 +539,9 @@ export default {
       let result =
         practiceLog.value.filter(
           (x) =>
-            x.level == selectLevel.value && x.skill == selectSkill.value && x.unit == unit
+            x.level == selectLevel.value &&
+            x.skill == selectSkill.value &&
+            x.unit == unit
         ).length || 0;
       return result;
     };

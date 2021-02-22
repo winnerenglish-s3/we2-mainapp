@@ -11,13 +11,41 @@ const practice = (level) => {
 
       let temp = [];
 
+      const convertPracticeTypeToThai = (type) => {
+        let result;
+        if (type == "flashcard") {
+          result = "การ์ดคำศัพท์";
+        } else if (type == "grammaraction") {
+          result = "ถามตอบ";
+        } else if (type == "grammarlesson") {
+          result = "ไวยากรณ์";
+        } else if (type.includes("multiple")) {
+          result = "เลือกคำตอบ";
+        } else if (type == "phonicslesson") {
+          result = "การออกเสียง";
+        } else if (type == "translation") {
+          result = "แต่งประโยค";
+        } else if (type == "languagetips") {
+          result = "เคล็ดลับภาษา";
+        } else if (type == "matching") {
+          result = "จับคู่";
+        } else {
+          result = type;
+        }
+
+        return result;
+      };
+
       getPractice.forEach((res) => {
-        temp.push({ practiceListId: res.id, ...res.data() });
+        temp.push({
+          practiceListId: res.id,
+          ...res.data(),
+          practiceTypeThai: convertPracticeTypeToThai(res.data().practiceType),
+        });
       });
 
       return temp;
     } catch (error) {
-      console.log(error);
       return error;
     }
   };
