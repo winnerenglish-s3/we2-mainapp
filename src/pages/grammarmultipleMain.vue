@@ -18,15 +18,15 @@
       :practiceData="practiceData"
       class="box-container-main"
       :themeSync="themeSync"
-      @callback-nextquestion="funcSelectPraticeData"
-      @callback-showdialoghelp="funcRefContent"
+      @callback-nextquestion="funcSelectedQuestion"
+      @callback-showdialoghelp="funcShowDialogHelp"
       v-if="$q.platform.is.desktop && isLoadPractice"
     ></grammar-multiple-pc>
     <grammar-multiple-mobile
       :practiceData="practiceData"
       :themeSync="themeSync"
-      @callback-nextquestion="funcSelectPraticeData"
-      @callback-showdialoghelp="funcRefContent"
+      @callback-nextquestion="funcSelectedQuestion"
+      @callback-showdialoghelp="funcShowDialogHelp"
       v-if="$q.platform.is.mobile && isLoadPractice"
     ></grammar-multiple-mobile>
 
@@ -288,7 +288,7 @@ export default {
         questionList.value.sort(() => Math.random() - 0.5);
 
         // Function : เลือกแบบฝึกหัด แล้วส่งค่า true ไปบอกว่านี้คือการโหลดครั้งแรก
-        funcSelectPraticeData(true);
+        funcSelectedQuestion(true);
 
         // Load Practice Success
         isLoadPractice.value = true;
@@ -298,7 +298,7 @@ export default {
       }
     };
 
-    const funcSelectPraticeData = (firstTime) => {
+    const funcSelectedQuestion = (firstTime) => {
       // Check : เช็คข้อมูลถ้าไม่ใช่ครั้งแรกที่โหลดข้อมูลนี้ จะเป็น false
       firstTime = firstTime || false;
 
@@ -329,7 +329,7 @@ export default {
       showLessonVideo.value = lessonList.value;
     };
 
-    const funcRefContent = (val) => {
+    const funcShowDialogHelp = (val) => {
       refContent.value = val.ref;
       isShowDialogLesson.value = true;
 
@@ -380,10 +380,10 @@ export default {
       selectedLesson,
       questionList,
       practiceData,
-      funcSelectPraticeData,
+      funcSelectedQuestion,
       playVideo,
       showLessonVideo,
-      funcRefContent,
+      funcShowDialogHelp,
     };
   },
 };
