@@ -61,11 +61,12 @@
           </div>
           <!-- VIDEO -->
           <div v-else class="col-12">
-            <q-video
-              :ratio="16 / 9"
-              :src="grammarList[activeGrammarList].vdoURL"
-              style="width: 100%; height: 100%"
-            />
+            <iframe
+              :src="grammarList[activeGrammarList].vdoURL + '&autoplay=1'"
+              frameborder="0"
+              style="width: 100%; height: 50vw"
+              allow="autoplay"
+            ></iframe>
           </div>
 
           <!-- Mobile Next Button -->
@@ -201,7 +202,6 @@ export default {
       width: "5px",
       opacity: 0.75,
     };
-
     const barStyle = {
       right: "2px",
       borderRadius: "9px",
@@ -209,7 +209,6 @@ export default {
       width: "9px",
       opacity: 0.2,
     };
-
     const grammarList = ref([
       {
         titleEn: "Cover",
@@ -223,14 +222,14 @@ export default {
         titleTh: "คำคุณศัพท์",
         isNew: true,
         imgURL: require("../../public/grammar-test-only/grammar-test2.png"),
-        vdoURL: "https://www.youtube.com/embed/Afq5Z1NsRAI",
+        vdoURL: "https://www.youtube.com/embed/8IW56tzL4CQ?rel=0",
       },
       {
         titleEn: "Adjectives",
         titleTh: "คำคุณศัพท์",
         isNew: true,
         imgURL: require("../../public/grammar-test-only/grammar-test3.png"),
-        vdoURL: "https://www.youtube.com/embed/LBHUmp8c9Ew",
+        vdoURL: "https://www.youtube.com/embed/LBHUmp8c9Ew?rel=0",
       },
     ]);
 

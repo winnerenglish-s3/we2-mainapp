@@ -48,26 +48,34 @@
                 </div>
 
                 <div v-else align="center">
-                  <span style="font-size: max(1vw, 24px)">คะแนนไม่ผ่านเกณฑ์</span>
+                  <span style="font-size: max(1vw, 24px)"
+                    >คะแนนไม่ผ่านเกณฑ์</span
+                  >
                 </div>
               </div>
             </div>
             <div align="center">
               <q-btn-group
                 spread
-                style="width: 292px; height: 40px; border-radius: 0px 0px 5px 5px"
+                style="
+                  width: 292px;
+                  height: 40px;
+                  border-radius: 0px 0px 5px 5px;
+                "
               >
+                <!-- ปุ่ม Reset -->
                 <q-btn
                   push
-                  @click="resetBtn()"
+                  @click="$emit('reStart')"
                   label="ทำใหม่อีกครั้ง"
                   text-color="white"
                   style="background-color: #014270"
                 />
+                <!-- ปุ่มจบแบบฝึกหัด -->
                 <q-btn
                   v-if="!isNotProgress"
                   push
-                  @click="finishBtn()"
+                  @click="$emit('finish')"
                   label="จบแบบฝึกหัด"
                   style="background-color: #ffbd13"
                 />
@@ -80,7 +88,10 @@
               </q-btn-group>
             </div>
             <div style="" v-if="!isNotProgress">
-              <q-img width="350px" src="../../public/images/flower_2.png"></q-img>
+              <q-img
+                width="350px"
+                src="../../public/images/flower_2.png"
+              ></q-img>
             </div>
           </div>
         </q-card-section>
@@ -90,9 +101,8 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
 export default {
+  emits: ["finish", "reStart"],
   props: {
     isFinishPractice: {
       type: Boolean,
@@ -110,23 +120,6 @@ export default {
       type: Boolean,
       default: () => false,
     },
-  },
-  setup(props, { emit }) {
-    // Initial Data
-    const route = useRoute();
-    const router = useRouter();
-
-    const resetBtn = () => {
-      router.push("/practicemain");
-      emit("resetPractice", true);
-    };
-
-    const finishBtn = () => {
-      router.push("/practicemain");
-      emit("finishPractice", true);
-    };
-
-    return { resetBtn, finishBtn };
   },
 };
 </script>

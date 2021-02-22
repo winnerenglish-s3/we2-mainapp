@@ -1,5 +1,7 @@
 <template>
-  <div :class="$q.platform.is.desktop ? 'bg-character-pc' : 'bg-character-mobile'">
+  <div
+    :class="$q.platform.is.desktop ? 'bg-character-pc' : 'bg-character-mobile'"
+  >
     <div class="absolute-right q-pa-md">
       <q-btn size="17px" round class="bg-warning" push dense>
         <q-icon name="logout" />
@@ -28,7 +30,6 @@ import characterPc from "components/character/characterPc";
 import characterMobile from "components/character/characterMobile";
 import { useQuasar } from "quasar";
 import { useRouter, useRoute } from "vue-router";
-import axios from "axios";
 import game from "../hooks/gameHooks.js";
 import { ref, onMounted, reactive } from "vue";
 import { ts, db } from "src/router";

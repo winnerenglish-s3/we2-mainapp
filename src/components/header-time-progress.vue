@@ -27,7 +27,11 @@
       style="max-width: 200px; width: 40%"
       align="right"
     >
-      <div v-if="$route.name != 'readingmultiple' && $route.name != 'grammaraction'">
+      <div
+        v-if="
+          $route.name != 'readingmultiple' && $route.name != 'grammaraction'
+        "
+      >
         <time-progress
           style="margin-top: 7px"
           align="right"
@@ -39,7 +43,7 @@
       <div v-if="$route.name == 'readingmultiple'" align="right">
         <q-btn-group rounded>
           <q-btn
-            @click="reFontSize('decrease')"
+            @click="$emit('increaseFont')"
             rounded
             :padding="$q.platform.is.mobile ? '1vw 16px' : '7px 16px'"
             class="bg-button"
@@ -47,7 +51,7 @@
             <span> A <span class="absolute" style="top: 2px">-</span> </span>
           </q-btn>
           <q-btn
-            @click="reFontSize('increase')"
+            @click="$emit('decreaseFont')"
             rounded
             :padding="$q.platform.is.mobile ? '1vw 16px' : '7px 16px'"
             class="bg-button"
@@ -60,6 +64,7 @@
           :padding="$q.platform.is.mobile ? '1vw 12px' : '7px 16px'"
           class="bg-button q-ml-md q-mr-sm"
           style="border-radius: 7px"
+          @click="$emit('playSound')"
         >
           <q-icon size="20px" name="fas fa-volume-up"></q-icon>
         </q-btn>
@@ -77,6 +82,7 @@ export default {
     questionStar,
     timeProgress,
   },
+  emit: ["increaseFont", "decreaseFont", "playSound"],
   props: {
     currentQuestion: {
       default: 0,
@@ -105,16 +111,7 @@ export default {
   },
   setup(props, { emit }) {
     const fontSize = ref(props.setFontSize);
-
-    const reFontSize = (type) => {
-      if (type == "decrease") {
-        emit("reFontSize", (fontSize.value -= 2));
-      } else {
-        emit("reFontSize", (fontSize.value += 2));
-      }
-    };
-
-    return { reFontSize, fontSize };
+    return { fontSize };
   },
 };
 </script>

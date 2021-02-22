@@ -168,7 +168,7 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: bottom;
-  background-color:#FBF0D9;
+  background-color: #fbf0d9;
 }
 
 .bg-character-mobile {
@@ -177,7 +177,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: bottom;
-  background-color:#FBF0D9;
+  background-color: #fbf0d9;
 }
 
 .box-container-main {
@@ -186,4 +186,10 @@ body {
   min-height: calc(100vh - 50px);
   max-height: fit-content;
   margin: auto;
+}
+
+.custom-btn {
+  background-image: linear-gradient(#ffd361, #ffbb0d);
+  border-radius: 10px;
+  box-shadow: 2px 3px 0px 0px #4e3801;
 }
