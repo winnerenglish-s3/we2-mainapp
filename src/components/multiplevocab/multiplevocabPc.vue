@@ -2,13 +2,7 @@
   <div class="row relative-position bg-content-main">
     <div class="col row relative-position">
       <div class="col-12 absolute">
-        <header-bar
-          :currentQuestion="currentQuestion"
-          :totalQuestion="totalQuestion"
-          :totalStar="totalStar"
-          :practiceTime="practiceTime"
-          :isPracticeTimeout="isPracticeTimeout"
-        ></header-bar>
+        <header-bar :practiceData="practiceData"></header-bar>
       </div>
       <div class="col-12 self-start" align="center">
         <theme-animation
@@ -17,7 +11,7 @@
           :isCorrectAnswer="isCorrectAnswer"
         ></theme-animation>
         <div class="box-question q-pa-lg font-content">
-          <span v-html="showQuestion"></span>
+          <span v-html="practiceData.question"></span>
         </div>
       </div>
       <div class="col-12">
@@ -26,9 +20,9 @@
             v-if="activeBy == 'answer'"
             class="relative-position col self-center q-pa-md cursor-pointer"
             align="center"
-            v-for="(item, index) in showChoices"
+            v-for="(item, index) in practiceData.choices"
             :key="index"
-            @click="isSendAnswer ? null : sendAnswer(item.index, index)"
+            @click="isSendAnswer ? null : sendAnswer(item.index)"
           >
             <img
               style="width: 100%"
@@ -37,7 +31,7 @@
               :src="
                 require(`../../../public/images/multiplevocab/button-theme/multiplevocab-theme-${themeSync}-choices-${
                   isSendAnswer
-                    ? currentChoice == index
+                    ? currentAnswer == item.index
                       ? isCorrectAnswer
                         ? 'correct'
                         : 'incorrect'
@@ -53,7 +47,7 @@
               style="width: 80%"
               align="center"
             >
-              <div v-if="isSendAnswer && currentChoice == index">
+              <div v-if="isSendAnswer && currentAnswer == item.index">
                 <q-icon
                   :name="isCorrectAnswer ? 'far fa-check-circle' : 'far fa-times-circle'"
                   size="30px"
@@ -68,7 +62,7 @@
               <span
                 :class="
                   isSendAnswer
-                    ? currentChoice == index
+                    ? currentAnswer == index
                       ? setTheme[themeSync - 1].colorText
                       : null
                     : null
@@ -93,13 +87,39 @@
                 </div>
               </div>
 
-              <div class="q-pa-lg font-16">
-                <div v-html="showDescription"></div>
+              <div class="q-px-lg q-py-md font-16">
+                <div class="q-mb-sm" v-if="!isCorrectAnswer">
+                  <span class="text-red">{{
+                    `
+                    "${
+                      practiceData.choices.filter((x) => x.index == currentAnswer)[0]
+                        .choice
+                    }"
+                  `
+                  }}</span>
+                  <span> เป็นคำตอบที่ ผิด </span>
+                </div>
+                <div class="q-pb-md">
+                  <span
+                    >คำตอบที่ถูกต้อง คือ
+                    <span class="text-green">{{
+                      `  "${
+                        practiceData.choices.filter(
+                          (x) => x.index == practiceData.correctAnswer
+                        )[0].choice
+                      }"`
+                    }}</span></span
+                  >
+                </div>
+                <div v-html="practiceData.description"></div>
               </div>
 
-              <div class="q-my-md" align="center">
+              <div class="q-mb-sm" align="center">
                 <q-img
-                  v-if="isSendAnswer && currentQuestion + 1 != totalQuestion"
+                  v-if="
+                    isSendAnswer &&
+                    practiceData.currentQuestion + 1 != practiceData.totalQuestion
+                  "
                   @click="nextQuestion()"
                   class="cursor-pointer"
                   width="200px"
@@ -107,7 +127,7 @@
                 ></q-img>
                 <q-img
                   v-else
-                  @click="$emit('finishPractice')"
+                  @click="$emit('callback-finishpractice')"
                   class="cursor-pointer"
                   width="200px"
                   src="../../../public/images/success-btn.png"
@@ -123,7 +143,7 @@
         <span class="absolute-center">คำศัพท์เสริม</span>
       </div>
       <div class="box-content-extravocab">
-        <div v-for="(item, index) in extraVocabList" :key="index">
+        <div v-for="(item, index) in practiceData.extraVocab" :key="index">
           <div class="q-py-xs q-px-md">
             <span>
               <span v-html="item.vocab"></span>
@@ -157,46 +177,12 @@ export default {
       type: Number,
       default: 0,
     },
-    currentQuestion: {
-      type: Number,
-      default: 0,
-    },
-    totalQuestion: {
-      type: Number,
-      default: 0,
-    },
-    totalStar: {
-      type: Number,
-      default: 0,
-    },
-    showQuestion: {
-      type: String,
-      default: "",
-    },
-    showChoices: {
-      type: Array,
-      default: () => [],
-    },
-    isCorrectAnswer: {
-      type: Boolean,
-      default: () => false,
-    },
-    extraVocabList: {
-      type: Array,
-      default: () => [],
-    },
-    showDescription: {
-      type: String,
-      default: "",
+    practiceData: {
+      type: Object,
+      default: () => {},
     },
   },
-  // props: [
-  //   "extravocabs",
-  //   "practiceTime",
-  //   "isPracticeTimeout",
-  // ],
-
-  emit: ["finishPractice"],
+  emits: ["callback-finishpractice"],
   setup(props, { emit }) {
     // Initial Data
     const activeBy = ref("answer");
@@ -227,17 +213,25 @@ export default {
 
     // Function Send Answer
     const isSendAnswer = ref(false);
-    const currentChoice = ref(null);
+    const currentAnswer = ref(null);
+    const isCorrectAnswer = ref(false);
 
-    const sendAnswer = (indexChoices, index) => {
+    const sendAnswer = (choiceIndex) => {
       isSendAnswer.value = true;
-      currentChoice.value = index;
 
-      emit("sendAnswer", indexChoices);
+      currentAnswer.value = choiceIndex;
+
+      if (Number(props.practiceData.correctAnswer) == currentAnswer.value) {
+        isCorrectAnswer.value = true;
+      } else {
+        isCorrectAnswer.value = false;
+      }
+
+      emit("callback-sendanswer", isCorrectAnswer.value);
 
       setTimeout(() => {
         activeBy.value = "description";
-      }, 1000);
+      }, 500);
     };
 
     // Function Next Question
@@ -245,12 +239,7 @@ export default {
       isSendAnswer.value = false;
       activeBy.value = "answer";
 
-      emit("nextQuestion", true);
-    };
-
-    // Function Finish Practice
-    const funcFinishPractice = () => {
-      // emit("finishPractice", true);
+      emit("callback-nextquestion");
     };
 
     return {
@@ -258,10 +247,10 @@ export default {
       activeHover,
       setTheme,
       isSendAnswer,
-      currentChoice,
+      currentAnswer,
       sendAnswer,
       nextQuestion,
-      funcFinishPractice,
+      isCorrectAnswer,
     };
   },
 };

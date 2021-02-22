@@ -13,39 +13,21 @@
     </div>
 
     <multiplevocab-pc
-      :showQuestion="showQuestion"
-      :showChoices="showChoices"
-      :isCorrectAnswer="isCorrectAnswer"
-      :extraVocabList="extraVocabList"
-      :currentQuestion="currentQuestion"
-      :totalQuestion="totalQuestion"
-      :totalStar="totalStar"
-      :practiceTime="practiceTime"
-      :isPracticeTimeout="isPracticeTimeout"
+      :practiceData="practiceData"
       :themeSync="themeSync"
-      :showDescription="showDescription"
-      @sendAnswer="checkAnswer"
-      @nextQuestion="nextQuestion"
-      @finishPractice="(val) => (isFinishPractice = true)"
+      @callback-sendanswer="fucnSendAnswer"
+      @callback-nextquestion="funcSelectedQuestion"
+      @callback-finishpractice="isFinishPractice = true"
       v-if="$q.platform.is.desktop && isLoadPractice"
       class="box-container-main"
     ></multiplevocab-pc>
 
     <multiplevocab-mobile
-      :showQuestion="showQuestion"
-      :showChoices="showChoices"
-      :isCorrectAnswer="isCorrectAnswer"
-      :extraVocabList="extraVocabList"
-      :currentQuestion="currentQuestion"
-      :totalQuestion="totalQuestion"
-      :totalStar="totalStar"
-      :practiceTime="practiceTime"
-      :isPracticeTimeout="isPracticeTimeout"
+      :practiceData="practiceData"
       :themeSync="themeSync"
-      :showDescription="showDescription"
-      @sendAnswer="checkAnswer"
-      @nextQuestion="nextQuestion"
-      @finishPractice="(val) => (isFinishPractice = true)"
+      @callback-sendanswer="fucnSendAnswer"
+      @callback-nextquestion="funcSelectedQuestion"
+      @callback-finishpractice="isFinishPractice = true"
       v-if="$q.platform.is.mobile && isLoadPractice"
     ></multiplevocab-mobile>
 
@@ -148,7 +130,6 @@ import instructionDialog from "../components/instructionDialog";
 import finishPracticeDialog from "../components/finishPracticeDialog";
 import { reactive, onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { useQuasar } from "quasar";
 import axios from "axios";
 import { db } from "src/router";
 export default {
@@ -181,118 +162,140 @@ export default {
     const router = useRouter();
 
     // Initial Practice Data
-    const totalQuestion = ref(0);
-    const totalStar = ref(2);
-    const currentQuestion = ref(0);
-    const showQuestion = ref("");
-    const showChoices = ref([]);
-    const showDescription = ref("");
-    const isCorrectAnswer = ref(false);
-    const questionList = ref([]);
-    const isFinishPractice = ref(false);
-    const extraVocabList = ref([]);
-    const isHasHelp = ref(true);
-    const isHasInstruction = ref(true);
     const instructionData = ref({
       eng: "Choose the best answer to fill in the blank.",
       th: "เลือกคำตอบที่เหมาะสมที่สุดเพื่อเติมลงในช่องว่าง",
     });
+    const questionList = ref([]);
+
+    // ข้อมูลแบบฝึกหัด
+    const practiceData = reactive({
+      currentQuestion: 0,
+      totalQuestion: 0,
+      totalStar: 0,
+      question: "",
+      choices: [],
+      correctAnswer: 0,
+      description: "",
+      extraVocab: [],
+    });
+    const isHasHelp = ref(true);
+    const isHasInstruction = ref(true);
+    const isFinishPractice = ref(false);
 
     // โหลดข้อมูลแบบฝึกหัด
-    const loadPractice = async () => {
-      let multipleList = [];
-
-      let practiceListId = route.params.practiceListId;
-
-      let getData = await db.collection("practiceList").doc(practiceListId).get();
-
-      totalQuestion.value = getData.data().numOfPractice;
+    const funcLoadPractice = async () => {
+      console.clear();
 
       try {
+        let multipleList = [];
+
+        // เก็บ practice list id จาก router
+        let practiceListId = route.params.practiceListId;
+
+        // ดึงข้อมูล practice list
+        let getData = await db.collection("practiceList").doc(practiceListId).get();
+
+        // เก็บจำนวนข้อของแบบฝึกหัดตามที่เลือกไว้ใน backend
+        practiceData.totalQuestion = getData.data().numOfPractice;
+
+        // Get Api
         const apiURL =
           "https://us-central1-winnerenglish2-e0f1b.cloudfunctions.net/wfunctions/getPracticeData";
-
         const postData = {
           practiceListId: practiceListId,
         };
-
         const response = await axios.post(apiURL, postData);
 
+        // เก็บข้อมูลที่ได้จาก axios
         multipleList = response.data;
 
+        // เก็บข้อมูลที่ได้จาก axios
         let setExtraVocab = response.data;
 
+        // copy แบบฝึกหัด
         let setPracticeList = [...multipleList];
 
+        // เก็บคำศัพท์เสริม
         setExtraVocab = setExtraVocab.map((x) => x.extraVocab).filter((x) => x.length);
 
         let tempExtra = [];
 
+        // เอาคำศัพท์เสริมที่ได้มาต่อกัน
         setExtraVocab.forEach((res) => {
           tempExtra.push(...res);
         });
 
-        extraVocabList.value = tempExtra;
+        // เก็บข้อมูลคำศัพท์เสริม
+        practiceData.extraVocab = tempExtra;
 
-        // Random Choices
+        // สุ่มคำตอบของแต่ละข้อ
         setPracticeList = setPracticeList.map((x) => {
           let choices = x.choices.sort(() => Math.random() - 0.5);
           x.choices = choices;
-
           return x;
         });
 
+        // สุ่มแบบฝึกหัด
         setPracticeList = setPracticeList.sort(() => Math.random() - 0.5);
-        setPracticeList = setPracticeList.slice(0, totalQuestion.value);
 
+        // ตัดจำนวนแบบฝึกหัดให้เท่ากับจำนวน TotalQuestion
+        setPracticeList = setPracticeList.slice(0, practiceData.totalQuestion);
+
+        // เก็บข้อมูลแบบฝึกหัดทั้งหมด
         questionList.value = setPracticeList;
 
-        showQuestion.value = questionList.value[currentQuestion.value].question;
-        showChoices.value = questionList.value[currentQuestion.value].choices;
-        showDescription.value = questionList.value[currentQuestion.value].description;
+        console.log(questionList.value);
+
+        // เลือกแบบฝึกหัดเมื่อโหลดครั้งแรก
+        funcSelectedQuestion(true);
 
         isLoadPractice.value = true;
-      } catch (err) {
-        console.log(`${err} Type Multiple Vocab`);
+      } catch (error) {
+        console.log(`${error} : Function Load Practice`);
       }
     };
 
-    // Check Answer
-    const checkAnswer = (index) => {
-      if (questionList.value[currentQuestion.value].correctAnswer == index) {
-        isCorrectAnswer.value = true;
-      } else {
-        isCorrectAnswer.value = false;
-      }
+    // ส่งคำตอบมาว่าเป็นจริงหรือเท็จ
+    const fucnSendAnswer = (isAnswer) => {
+      console.log(isAnswer);
     };
 
-    // Next Question
-    const nextQuestion = () => {
-      currentQuestion.value++;
-      showQuestion.value = questionList.value[currentQuestion.value].question;
-      showChoices.value = questionList.value[currentQuestion.value].choices;
+    // เลือกแบบฝึกหัดเมื่อมีการเปลื่ยนข้อ หรือ โหลดข้อมูลครั้งแรก
+    const funcSelectedQuestion = (firstTime) => {
+      firstTime = firstTime || false;
+
+      if (!firstTime) {
+        practiceData.currentQuestion++;
+      }
+
+      // Practice Data : Show Question
+      practiceData.question = questionList.value[practiceData.currentQuestion].question;
+
+      // Practice Data : Show Choices
+      practiceData.choices = questionList.value[practiceData.currentQuestion].choices;
+
+      // Practice Data : Show Description
+      practiceData.description =
+        questionList.value[practiceData.currentQuestion].description;
+
+      // Practice Data : Correct Answer
+      practiceData.correctAnswer =
+        questionList.value[practiceData.currentQuestion].correctAnswer;
     };
 
     // Mounted Load Practice
-    onMounted(loadPractice);
+    onMounted(funcLoadPractice);
 
     return {
-      totalQuestion,
-      totalStar,
-      questionList,
-      extraVocabList,
-      showQuestion,
-      showChoices,
-      isCorrectAnswer,
-      currentQuestion,
-      checkAnswer,
-      nextQuestion,
+      practiceData,
+      funcSelectedQuestion,
       isFinishPractice,
       isLoadPractice,
       instructionData,
       isHasHelp,
       isHasInstruction,
-      showDescription,
+      fucnSendAnswer,
     };
   },
   data() {
