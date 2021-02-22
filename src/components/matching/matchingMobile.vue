@@ -11,21 +11,16 @@
           </span>
         </div>
       </div>
-      <!-- <div class="q-mt-md q-pa-md" align="center">
-        <span style="font-size: max(3vw, 16px)" class="font-medium">
-          
-        </span>
-      </div> -->
     </div>
 
-    <div class="col-12 relative-position q-py-md" style="height: fit-content">
+    <div class="col-12 relative-position" align='center' style="height: fit-content">
       <div
-        class="box-choices row no-wrap q-py-sm"
+        class="box-choices row no-wrap q-py-sm " 
         :class="practiceData.choices.length == 1 ? 'justify-center' : ''"
       >
         <div class="col-2" style="width: 70px"></div>
         <section
-          class="relative-position col-8 section"
+          class="relative-position col-8 section "
           :class="index == currentAnswer ? null : 'section-notactive '"
           align="center"
           v-for="(item, index) in practiceData.choices"
@@ -35,7 +30,7 @@
             :id="`section` + index"
             v-if="item != ''"
             class=""
-            style="max-width: 400px; width: 100%"
+            style="max-width: 450px; width: 100%"
             @click="!isSendAnswer ? funcSendAnswer(index) : ''"
             :src="
               require(`../../../public/images/matching/button-theme/matching-theme-${themeSync}-choices-${
@@ -58,7 +53,7 @@
                         : 'text-red'
                       : 'text-black'
                   "
-                  style="font-size: 16px"
+                  style="font-size: max(3vw,16px)"
                   >{{ `${item.vocab}` }}</span
                 >
                 <div
@@ -84,7 +79,7 @@
 
       <div class="q-py-lg" style="height: 20px" align="center">
         <q-img
-          style="width: max(40vw, 200px)"
+          style="width: max(30vw, 200px)"
           v-if="
             isSendAnswer && practiceData.totalQuestion != practiceData.currentQuestion + 1
           "
@@ -93,7 +88,7 @@
         ></q-img>
 
         <q-img
-          style="width: max(40vw, 200px)"
+          style="width: max(30vw, 200px)"
           v-if="
             isSendAnswer && practiceData.totalQuestion == practiceData.currentQuestion + 1
           "
@@ -251,7 +246,7 @@ export default {
 .box-question {
   border: 5px solid#A36112;
   background-color: #fff0da;
-  min-height: 100px;
+  min-height: 80px;
   max-height: fit-content;
 }
 

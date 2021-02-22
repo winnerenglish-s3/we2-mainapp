@@ -6,14 +6,14 @@
     >
       <div class="box-current-question self-center q-mx-md">
         <span class="text-white" style="font-size: max(1.1vw, 14px)">{{
-          `${currentQuestion + 1}/${totalQuestion}`
+          `${practiceData.currentQuestion + 1}/${practiceData.totalQuestion}`
         }}</span>
       </div>
       <div class="box-start self-center" align="center">
         <q-rating
           style="font-size: max(1.6vw, 22px)"
           :max="3"
-          v-model="totalStar"
+          v-model="practiceData.totalStar"
           color="brown-6"
           color-selected="amber-5"
           class="no-pointer-events"
@@ -82,27 +82,31 @@ export default {
     questionStar,
     timeProgress,
   },
-  emit: ["increaseFont", "decreaseFont", "playSound"],
+  emits: ["increaseFont", "decreaseFont", "playSound"],
   props: {
-    currentQuestion: {
-      default: 0,
-      type: Number,
-    },
-    totalQuestion: {
-      default: 0,
-      type: Number,
-    },
-    totalStar: {
-      default: 0,
-      type: Number,
-    },
-    practiceTime: {
-      default: 30,
-      type: Number,
-    },
-    isPracticeTimeout: {
-      default: () => false,
-      type: Boolean,
+    // currentQuestion: {
+    //   default: 0,
+    //   type: Number,
+    // },
+    // totalQuestion: {
+    //   default: 0,
+    //   type: Number,
+    // },
+    // totalStar: {
+    //   default: 0,
+    //   type: Number,
+    // },
+    // practiceTime: {
+    //   default: 30,
+    //   type: Number,
+    // },
+    // isPracticeTimeout: {
+    //   default: () => false,
+    //   type: Boolean,
+    // },
+    practiceData:{
+      type:Object,
+      default: () => {}
     },
     setFontSize: {
       type: Number,
