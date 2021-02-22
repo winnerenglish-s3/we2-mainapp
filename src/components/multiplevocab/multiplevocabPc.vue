@@ -107,7 +107,7 @@
                 ></q-img>
                 <q-img
                   v-else
-                  @click="funcFinishPractice()"
+                  @click="$emit('finishPractice')"
                   class="cursor-pointer"
                   width="200px"
                   src="../../../public/images/success-btn.png"
@@ -195,6 +195,8 @@ export default {
   //   "practiceTime",
   //   "isPracticeTimeout",
   // ],
+
+  emit: ["finishPractice"],
   setup(props, { emit }) {
     // Initial Data
     const activeBy = ref("answer");
@@ -248,7 +250,7 @@ export default {
 
     // Function Finish Practice
     const funcFinishPractice = () => {
-      emit("finishPractice", true);
+      // emit("finishPractice", true);
     };
 
     return {

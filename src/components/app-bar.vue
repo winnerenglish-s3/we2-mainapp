@@ -28,7 +28,7 @@
             ></q-btn>
           </div>
 
-          <div align="right" class="col-6">
+          <div align="right" class="col-6" v-if="isLoadPractice">
             <q-btn
               v-if="isHasInstruction"
               @click="isShowDialogInstruction = true"
@@ -39,7 +39,7 @@
             ></q-btn>
             <q-btn
               v-if="isHasHelp"
-              @click="isShowDialogHelp = true"
+              @click="$emit('callback-showdialoghelp')"
               icon="fas fa-lightbulb"
               class="shadow-2 btn-header"
               :class="{ 'btn-width-mobile': $q.platform.is.mobile }"
@@ -87,8 +87,7 @@
                 >
                   {{
                     practiceNameList.filter((x) => x.type == $route.name).length
-                      ? practiceNameList.filter((x) => x.type == $route.name)[0]
-                          .name
+                      ? practiceNameList.filter((x) => x.type == $route.name)[0].name
                       : ""
                   }}
                 </span>
@@ -96,9 +95,7 @@
             </div>
             <div
               :class="
-                $q.platform.is.desktop
-                  ? 'box-instruction-pc'
-                  : 'box-instruction-mobile'
+                $q.platform.is.desktop ? 'box-instruction-pc' : 'box-instruction-mobile'
               "
               class="absolute-bottom row full-width"
             >
@@ -276,7 +273,12 @@ export default {
       type: Object,
       default: () => {},
     },
+    isLoadPractice: {
+      type: Boolean,
+      default: () => false,
+    },
   },
+  emits: ["callback-showdialoghelp"],
   setup(props, { emit }) {
     // Set Router
     const route = useRoute();
