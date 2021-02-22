@@ -10,29 +10,19 @@
 
     <matching-pc
       :themeSync="themeSync"
-      :totalQuestion="totalQuestion"
-      :totalStar="state.totalStar"
-      :currentQuestion="state.currentQuestion"
-      :numberOfPractice="state.numberOfPractice"
-      :practiceTime="state.practiceTime"
-      :isCorrectAnswer="state.isCorrectAnswer"
-      :questionList="questionList"
-      :answerList="answerList"
-      @finishPractice="(val) => (isFinishPractice = val)"
+      :practiceData="practiceData"
+      @callback-sendanswer=""
+      @callback-nextquestion="funcSelectedPractice()"
+      @callback-finishpractice="isFinishPractice = true"
       class="box-container-main"
       v-if="$q.platform.is.desktop && isLoadPractice"
     ></matching-pc>
     <matching-mobile
       :themeSync="themeSync"
-      :totalQuestion="totalQuestion"
-      :totalStar="state.totalStar"
-      :currentQuestion="state.currentQuestion"
-      :numberOfPractice="state.numberOfPractice"
-      :practiceTime="state.practiceTime"
-      :isCorrectAnswer="state.isCorrectAnswer"
-      :questionList="questionList"
-      :answerList="answerList"
-      @finishPractice="(val) => (isFinishPractice = val)"
+      :practiceData="practiceData"
+      @callback-sendanswer=""
+      @callback-nextquestion="funcSelectedPractice()"
+      @callback-finishpractice="isFinishPractice = true"
       v-if="$q.platform.is.mobile && isLoadPractice"
     ></matching-mobile>
 
@@ -42,7 +32,7 @@
         <q-card-section class="fit">
           <div class="absolute-center box-extravocab q-pa-md">
             <q-tabs
-              v-model="tab"
+              v-model="tabHelp"
               shrink
               dense
               class="box-header-extravocab"
@@ -80,7 +70,7 @@
             >
               <q-img
                 fit="contain"
-                @click="closeHelpBtn()"
+                v-close-popup
                 class="cursor-pointer"
                 style="width: 200px"
                 src="../../public/images/close-help-btn-pc.png"
@@ -88,7 +78,7 @@
             </div>
             <div v-if="$q.platform.is.mobile">
               <q-img
-                @click="closeHelpBtn()"
+                v-close-popup
                 class="cursor-pointer"
                 src="../../public/images/close-help-btn-mobile.png"
               ></q-img>
@@ -139,32 +129,44 @@ export default {
     finishPracticeDialog,
   },
   setup(props, { emit }) {
-    // initial
+    // Initial Data
     const $q = useQuasar();
     const route = useRoute();
     const router = useRouter();
 
-    // Matching Data
+    // Initial Practice Data
+    const tabHelp = ref("vocab");
     const questionList = ref([]);
     const answerList = ref([]);
+    const dataQuestionList = ref([]);
+    const dataAnswerList = ref([]);
     const isLoadPractice = ref(false);
-    const totalQuestion = ref(0);
     const instructionData = ref({
       eng: "Match the vocabulary word with its definition.",
       th: "จับคู่คำศัพท์กับความหมาย",
     });
 
+    const practiceData = reactive({
+      totalQuestion: 0,
+      totalStar: 0,
+      question: [],
+      choices: [],
+      currentQuestion: 0,
+    });
+
     // Load Practice Data
-    const loadFlashcard = async () => {
-      let flashcardList = [];
+    const funcLoadPractice = async () => {
+      console.clear();
 
       try {
+        let flashcardList = [];
+
         let getFlashId = await db
           .collection("practiceList")
           .doc(route.params.practiceListId)
           .get();
 
-        totalQuestion.value = getFlashId.data().numOfPractice;
+        practiceData.totalQuestion = getFlashId.data().numOfPractice;
 
         getFlashId = await db
           .collection("practiceList")
@@ -193,7 +195,7 @@ export default {
           return { vocab: x.vocab, meaning: x.meaning };
         });
 
-        setQuestion = setQuestion.slice(0, totalQuestion.value);
+        setQuestion = setQuestion.slice(0, practiceData.totalQuestion);
 
         questionList.value = setQuestion;
 
@@ -203,71 +205,130 @@ export default {
 
         answerList.value = setAnswer;
 
+        if ($q.platform.is.desktop) {
+          await funcMatchingPc();
+        } else {
+          funcSelectedPractice(true);
+        }
+
         isLoadPractice.value = true;
       } catch (err) {
         console.log(`${err} Type Matching`);
       }
     };
 
-    // Extra Vocab
-    const tab = ref("vocab");
-    const vocabList = ref([
-      {
-        vocab: "dog",
-        meaning: "สุนัข",
-      },
-      {
-        vocab: "cat",
-        meaning: "แมว",
-      },
-      {
-        vocab: "buffalo",
-        meaning: "ควาย",
-      },
-      {
-        vocab: "chicken",
-        meaning: "ไก่",
-      },
-      {
-        vocab: "cow",
-        meaning: "วัว",
-      },
-      {
-        vocab: "duck",
-        meaning: "เป็ด",
-      },
-      {
-        vocab: "goldfish",
-        meaning: "ปลาทอง",
-      },
-      {
-        vocab: "rabbit",
-        meaning: "กระต่าย",
-      },
-      {
-        vocab: "hamster",
-        meaning: "	หนูแฮมสเตอร์",
-      },
-      {
-        vocab: "elephant",
-        meaning: "ช้าง",
-      },
-      {
-        vocab: "horse",
-        meaning: "ม้า",
-      },
-    ]);
+    // ----------------------------------------- Use Platform Desktop
+    // Function : Set Question And Answer For Pc
+    const funcMatchingPc = async () => {
+      let setData = questionList.value;
 
-    // State Practice Data
-    const state = reactive({
-      totalStar: 0,
-      currentQuestion: 0,
-      numberOfPractice: 0,
-      isCorrectAnswer: false,
-      practiceTime: 10,
-      isPracticeTimeout: false,
-      funcPracticeTime: "",
-    });
+      setData = setData.map((x) => x);
+
+      let tempAnswer = [];
+      let tempQuestion = [];
+
+      // แปลงโจทย์คำตอบให้เป็น อย่างละ 3 Choices
+      for (let i = 0; i < questionList.value.length; i++) {
+        let currentAnswer = questionList.value[i];
+        let randomAnswer = [...setData];
+
+        randomAnswer = randomAnswer.sort(() => Math.random() - 0.5);
+
+        let findIndexCurrentAnswer = randomAnswer
+          .map((x) => x.vocab)
+          .indexOf(currentAnswer.vocab);
+
+        randomAnswer.splice(findIndexCurrentAnswer, 1);
+
+        randomAnswer = randomAnswer.slice(0, 2);
+
+        let setNewAnswer = [
+          {
+            vocab: currentAnswer.vocab,
+            meaning: currentAnswer.meaning,
+          },
+        ];
+
+        let setNewQuestion = [
+          {
+            vocab: currentAnswer.vocab,
+            meaning: currentAnswer.meaning,
+          },
+        ];
+
+        for (let i = 0; i < randomAnswer.length; i++) {
+          let newData = {
+            vocab: randomAnswer[i].vocab,
+            meaning: randomAnswer[i].meaning,
+          };
+
+          let setQuestion = {
+            vocab: randomAnswer[i].vocab,
+            meaning: randomAnswer[i].meaning,
+          };
+
+          setNewAnswer.push(newData);
+
+          setNewQuestion.push(setQuestion);
+        }
+
+        setNewQuestion = setNewQuestion.sort(() => Math.random() - 0.5);
+
+        tempAnswer.push(setNewAnswer);
+        tempQuestion.push(setNewQuestion);
+      }
+
+      dataAnswerList.value = [...tempAnswer];
+      dataQuestionList.value = [...tempQuestion];
+
+      await funcSelectedPractice(true);
+    };
+    // สุ่มคำจอบไม่ให้ตรงกับตำถาม
+    const funcRandomPractuce = () => {
+      dataAnswerList.value[practiceData.currentQuestion].sort(() => Math.random() - 0.5);
+
+      let setAnswer = [...dataAnswerList.value[practiceData.currentQuestion]];
+
+      let setQuestion = [...dataQuestionList.value[practiceData.currentQuestion]];
+
+      let tempBoolean = [];
+      let tempAnswer = [];
+      let tempQuestion = [];
+
+      for (let i = 0; i < setAnswer.length; i++) {
+        if (setAnswer[i].vocab == setQuestion[i].vocab) {
+          tempBoolean.push(true);
+        } else {
+          tempBoolean.push(false);
+        }
+        tempAnswer.push([setAnswer[i]]);
+        tempQuestion.push([setQuestion[i]]);
+      }
+
+      if (tempBoolean.every((x) => x)) {
+        funcRandomPractuce();
+      }
+
+      practiceData.choices = tempAnswer;
+      practiceData.question = tempQuestion;
+    };
+
+    // เลือกแบบฝึกหัด
+    const funcSelectedPractice = (firsttime) => {
+      firsttime = firsttime || false;
+
+      if (!firsttime) {
+        practiceData.currentQuestion++;
+      }
+
+      if ($q.platform.is.desktop) {
+        funcRandomPractuce();
+      } else {
+        practiceData.choices = answerList.value;
+        practiceData.question = questionList.value;
+      }
+    };
+    // ----------------------------------------- Use Platform Desktop
 
     // TODO : แสดงปุ่มตัวช่วยถ้ามี
     const isHasHelp = ref(true);
@@ -282,7 +343,7 @@ export default {
     // TODO : แสดง Dialog จบแบบฝึกหัด
     const isFinishPractice = ref(false);
 
-    onMounted(() => {
+    onMounted(async () => {
       if (isHasHelp) {
         emit("isShowButtonHelp");
       }
@@ -291,22 +352,19 @@ export default {
         emit("isShowButtonInstruction");
       }
 
-      loadFlashcard();
+      await funcLoadPractice();
     });
 
     return {
-      state,
+      tabHelp,
+      practiceData,
+      closeHelpBtn,
+      instructionData,
       isHasHelp,
       isHasInstruction,
       isLoadPractice,
-      tab,
-      vocabList,
-      closeHelpBtn,
-      questionList,
-      answerList,
       isFinishPractice,
-      totalQuestion,
-      instructionData,
+      funcSelectedPractice,
     };
   },
 };

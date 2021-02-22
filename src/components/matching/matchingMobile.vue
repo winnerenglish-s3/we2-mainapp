@@ -2,15 +2,12 @@
   <div class="box-container-matching row">
     <div class="col-12 self-start">
       <div>
-        <header-bar
-          :totalQuestion="totalQuestion"
-          :currentQuestion="currentQuestion"
-        ></header-bar>
+        <header-bar :practiceData="practiceData"></header-bar>
       </div>
       <div class="q-mt-xs box-question row justify-center">
         <div class="self-center">
           <span style="font-size: max(3vw, 16px)">
-            {{ questionList[currentQuestion].meaning }}
+            {{ practiceData.question[practiceData.currentQuestion].meaning }}
           </span>
         </div>
       </div>
@@ -24,14 +21,14 @@
     <div class="col-12 relative-position q-py-md" style="height: fit-content">
       <div
         class="box-choices row no-wrap q-py-sm"
-        :class="dataList.length == 1 ? 'justify-center' : ''"
+        :class="practiceData.choices.length == 1 ? 'justify-center' : ''"
       >
         <div class="col-2" style="width: 70px"></div>
         <section
           class="relative-position col-8 section"
-          :class="index == currentChoice ? null : 'section-notactive '"
+          :class="index == currentAnswer ? null : 'section-notactive '"
           align="center"
-          v-for="(item, index) in dataList"
+          v-for="(item, index) in practiceData.choices"
           :key="index"
         >
           <q-img
@@ -39,24 +36,24 @@
             v-if="item != ''"
             class=""
             style="max-width: 400px; width: 100%"
-            @click="!isSendAnswer ? sendAnswer(index) : ''"
+            @click="!isSendAnswer ? funcSendAnswer(index) : ''"
             :src="
               require(`../../../public/images/matching/button-theme/matching-theme-${themeSync}-choices-${
-                isSendAnswer && index == currentChoice
-                  ? isCorrect
+                isSendAnswer && index == currentAnswer
+                  ? isCorrectAnswer
                     ? 'correct'
                     : 'incorrect'
                   : 'default'
               }.png`)
             "
-            v-touch-swipe.mouse.right.left="currentChoice == index ? handleSwipe : null"
+            v-touch-swipe.mouse.right.left="currentAnswer == index ? handleSwipe : null"
           >
             <div class="transparent absolute-center fit">
               <div class="absolute-center" style="width: 90%">
                 <span
                   :class="
-                    isSendAnswer && index == currentChoice
-                      ? isCorrect
+                    isSendAnswer && index == currentAnswer
+                      ? isCorrectAnswer
                         ? 'text-black'
                         : 'text-red'
                       : 'text-black'
@@ -65,55 +62,42 @@
                   >{{ `${item.vocab}` }}</span
                 >
                 <div
-                  v-if="isSendAnswer && index == currentChoice && !isCorrect"
+                  v-if="
+                    isSendAnswer &&
+                    index == practiceData.currentAnswer &&
+                    !isCorrectAnswer
+                  "
                   class="text-black q-my-sm"
                 >
                   <span>คำตอบที่ถูกต้องคือ</span>
                   <br />
-                  <span> {{ questionList[currentQuestion].vocab }} </span>
+                  <span>
+                    {{ practiceData.question[practiceData.currentQuestion].vocab }}
+                  </span>
                 </div>
               </div>
             </div>
           </q-img>
         </section>
         <div class="col-2" style="width: 70px"></div>
-
-        <!-- <div class="btn btn-left">
-          <q-img
-            v-if="!isSendAnswer"
-            @click="isSendAnswer ? null : backChoice()"
-            width="10vw"
-            src="../../../public/images/matching/btn-left.png"
-          ></q-img>
-        </div>
-        <div class="btn btn-right">
-          <q-img
-            v-if="!isSendAnswer"
-            @click="isSendAnswer ? null : nextChoice()"
-            width="10vw"
-            src="../../../public/images/matching/btn-right.png"
-          ></q-img>
-        </div> -->
       </div>
 
       <div class="q-py-lg" style="height: 20px" align="center">
-        <!-- <q-img
-        style="width: max(40vw, 200px)"
-        v-if="!isSendAnswer"
-        @click="sendAnswer()"
-        src="../../../public/images/matching/btn-matching-active.png"
-      ></q-img> -->
         <q-img
           style="width: max(40vw, 200px)"
-          v-if="isSendAnswer && !isFinish"
-          @click="nextQuestion()"
+          v-if="
+            isSendAnswer && practiceData.totalQuestion != practiceData.currentQuestion + 1
+          "
+          @click="funcNextQuestion()"
           src="../../../public/images/next-question-btn.png"
         ></q-img>
 
         <q-img
           style="width: max(40vw, 200px)"
-          v-if="isSendAnswer && isFinish"
-          @click="funcFinishPractice()"
+          v-if="
+            isSendAnswer && practiceData.totalQuestion == practiceData.currentQuestion + 1
+          "
+          @click="$emit('callback-finishpractice')"
           src="../../../public/images/success-btn.png"
         ></q-img>
       </div>
@@ -134,67 +118,53 @@ export default {
       type: Number,
       require: true,
     },
-    questionList: {
+    practiceData: {
       tyoe: Array,
-      default: () => [],
-    },
-    answerList: {
-      tyoe: Array,
-      default: () => [],
-    },
-    totalQuestion: {
-      type: Number,
-      default: 0,
+      default: () => {},
     },
   },
+  emits: ["callback-finishpractice"],
   setup(props, { emit }) {
     // ดึงข้อมูลจาก Props เป็นข้อมูล Practice
-    const dataList = ref(props.answerList);
-    const currentQuestion = ref(0);
-    const currentChoice = ref(0);
+
+    const currentAnswer = ref(0);
 
     // กดส่งคำตอบ
     const isSendAnswer = ref(false);
-    const isFinish = ref(false);
-    const isCorrect = ref(false);
+    const isCorrectAnswer = ref(false);
 
-    const sendAnswer = (index) => {
+    const funcSendAnswer = (index) => {
       isSendAnswer.value = true;
 
-      if (currentQuestion.value + 1 == props.questionList.length) {
-        isFinish.value = true;
-      }
-
-      currentChoice.value = index;
+      currentAnswer.value = index;
 
       if (
-        props.questionList[currentQuestion.value].vocab == dataList.value[index].vocab
+        props.practiceData.question[props.practiceData.currentQuestion].vocab ==
+        props.practiceData.choices[currentAnswer.value].vocab
       ) {
-        isCorrect.value = true;
+        isCorrectAnswer.value = true;
       } else {
-        isCorrect.value = false;
+        isCorrectAnswer.value = false;
       }
+
+      emit("callback-sendanswer", isCorrectAnswer.value);
     };
 
     // กดข้อต่อไป
-    const nextQuestion = (section) => {
-      if (props.questionList.length - 1 == currentQuestion.value) {
-        return;
-      }
-
+    const funcNextQuestion = (section) => {
       isSendAnswer.value = false;
 
-      let indexAnswer = dataList.value
+      let indexAnswer = props.practiceData.choices
         .map((x) => x.vocab)
-        .indexOf(props.questionList[currentQuestion.value].vocab);
+        .indexOf(props.practiceData.question[props.practiceData.currentQuestion].vocab);
 
-      if (currentChoice.value == dataList.value.length - 1) {
+      if (currentAnswer.value == props.practiceData.choices.length - 1) {
         let active = 0;
 
-        if (dataList.value.length == 3) {
+        if (props.practiceData.choices.length == 3) {
           active = 1;
         } else {
-          active = currentChoice.value - 1;
+          active = currentAnswer.value - 1;
         }
 
         setTimeout(() => {
@@ -203,13 +173,13 @@ export default {
         }, 100);
 
         setTimeout(() => {
-          currentChoice.value = active;
+          currentAnswer.value = active;
         }, 400);
       }
 
-      dataList.value.splice(indexAnswer, 1);
+      props.practiceData.choices.splice(indexAnswer, 1);
 
-      currentQuestion.value++;
+      emit("callback-nextquestion");
     };
 
     // Function จอแบบฝึกหัด Finish Practice
@@ -218,8 +188,8 @@ export default {
     };
 
     // TODO : Function กดเลือกการ์ดใบก่อนหน้านี้
-    const backChoice = () => {
-      let active = currentChoice.value - 1;
+    const funcBackChoice = () => {
+      let active = currentAnswer.value - 1;
 
       setTimeout(() => {
         let el = document.getElementById("section" + active);
@@ -227,14 +197,13 @@ export default {
       }, 100);
 
       setTimeout(() => {
-        currentChoice.value = active;
-        isPrevious.value = false;
-      }, 500);
+        currentAnswer.value = active;
+      }, 400);
     };
 
     // TODO : Function กดเลือกการ์ดใบถัดไป
-    const nextChoice = () => {
-      let active = currentChoice.value + 1;
+    const funcNextChoice = () => {
+      let active = currentAnswer.value + 1;
 
       setTimeout(() => {
         let el = document.getElementById("section" + active);
@@ -242,34 +211,28 @@ export default {
       }, 100);
 
       setTimeout(() => {
-        currentChoice.value = active;
-        isNext.value = false;
-      }, 500);
+        currentAnswer.value = active;
+      }, 400);
     };
 
     return {
-      dataList,
-      currentQuestion,
-      currentChoice,
-      isSendAnswer,
-      isFinish,
-      isCorrect,
-      nextQuestion,
-      sendAnswer,
-      backChoice,
-      nextChoice,
+      currentAnswer,
+      funcNextQuestion,
+      funcSendAnswer,
       funcFinishPractice,
+      isSendAnswer,
+      isCorrectAnswer,
 
       // เลื่อนซ้ายและขวา
       handleSwipe({ evt, ...newInfo }) {
         if (!isSendAnswer.value) {
           if (newInfo.direction == "left") {
-            if (dataList.value.length - 1 != currentChoice.value) {
-              nextChoice();
+            if (props.practiceData.choices.length - 1 != currentAnswer.value) {
+              funcNextChoice();
             }
           } else {
-            if (currentChoice.value != 0) {
-              backChoice();
+            if (currentAnswer.value != 0) {
+              funcBackChoice();
             }
           }
         }
@@ -303,7 +266,7 @@ export default {
 .section {
   scroll-snap-align: center;
   padding: 5px;
-  transition: 0.2s;
+  transition: 0.1s;
   transform: scale(1.05);
 }
 
