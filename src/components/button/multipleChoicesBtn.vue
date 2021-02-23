@@ -2,14 +2,32 @@
   <div>
     <q-btn
       class="btn-choice q-px-md relative-position row cursor-pointer"
+      :class="isDisable ? 'btn-diable-bg' : 'btn-bg'"
       style="width: 100%"
       no-caps
       align="left"
     >
-      <div class="choice-circle" v-if="index == 0"></div>
-      <div class="choice-square" v-if="index == 1"></div>
-      <div class="choice-triangle" v-if="index == 2"></div>
-      <q-icon name="fas fa-star" v-if="index == 3" class="choice-star"></q-icon>
+      <div
+        class="choice-circle"
+        :class="isDisable ? 'choice-circle-bg-disable' : 'choice-circle-bg'"
+        v-if="index == 0"
+      ></div>
+      <div
+        class="choice-square"
+        :class="isDisable ? 'choice-square-bg-disable' : 'choice-square-bg'"
+        v-if="index == 1"
+      ></div>
+      <div
+        class="choice-triangle"
+        :class="isDisable ? 'choice-triangle-bg-disable' : 'choice-triangle-bg'"
+        v-if="index == 2"
+      ></div>
+      <q-icon
+        name="fas fa-star"
+        v-if="index == 3"
+        class="choice-star"
+        :class="isDisable ? 'choice-star-bg-disable' : 'choice-star-bg'"
+      ></q-icon>
       <span class="q-pl-md" :class="{ f20: $q.platform.is.desktop }">
         {{ choice }}
       </span>
@@ -22,7 +40,20 @@
 
 <script>
 export default {
-  props: ["choice", "index"],
+  props: {
+    choice: {
+      type: String,
+      defulat: "",
+    },
+    index: {
+      type: Number,
+      defulat: 0,
+    },
+    isDisable: {
+      type: Boolean,
+      default: false,
+    },
+  },
   setup() {
     return {};
   },
@@ -34,7 +65,12 @@ export default {
   border-radius: 10px;
   box-shadow: 2px 3px 0px 0px #4e3801;
   height: 50px;
+}
+.btn-bg {
   background-image: linear-gradient(#ffd361, #ffbb0d);
+}
+.btn-diable-bg {
+  background-image: linear-gradient(#e7e7e7, #ababab);
 }
 
 .btn-choice:hover {
@@ -46,25 +82,53 @@ export default {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-image: linear-gradient(#f66287, #f03362);
+
   box-shadow: 1px 1px 3px 1px grey;
 }
+
+.choice-circle-bg {
+  background-image: linear-gradient(#f66287, #f03362);
+}
+.choice-circle-bg-disable {
+  background-color: #8f8d8c;
+}
+
 .choice-square {
   width: 30px;
   height: 30px;
-  background-image: linear-gradient(#067fd8, #0b5f9b);
+
   box-shadow: 1px 1px 3px 1px grey;
+}
+
+.choice-square-bg {
+  background-image: linear-gradient(#067fd8, #0b5f9b);
+}
+.choice-square-bg-disable {
+  background-color: #8f8d8c;
 }
 .choice-triangle {
   border-left: 17px solid transparent;
   border-right: 17px solid transparent;
-  border-bottom: 20px solid #b43ded;
-  background-image: linear-gradient(#067fd8, #0b5f9b);
 }
+
+.choice-triangle-bg-disable {
+  border-bottom: 20px solid #8f8d8c;
+}
+.choice-triangle-bg {
+  border-bottom: 20px solid #991a99;
+}
+
 .choice-star {
   font-size: 30px;
+}
+
+.choice-star-bg {
   color: #8f5839;
 }
+.choice-star-bg-disable {
+  color: #8f8d8c;
+}
+
 .circle-1 {
   width: 9px;
   height: 9px;
