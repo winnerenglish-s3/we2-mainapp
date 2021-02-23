@@ -10,7 +10,7 @@
       :bodycolor="color"
       class=""
       :mode="mode"
-      v-if="$q.platform.is.desktop"
+      v-if="$q.platform.is.desktop && isShowCharacter"
     ></lobby-pc>
     <lobby-mobile
       :characterData="characterData"
@@ -18,11 +18,15 @@
       :bodycolor="color"
       class=""
       :mode="mode"
-      v-if="$q.platform.is.mobile"
+      v-if="$q.platform.is.mobile && isShowCharacter"
     ></lobby-mobile>
 
     <!-- dialog questionnaire -->
-    <q-dialog persistent v-model="isShowPopupQuestionnaire" data-cy="dialog-question">
+    <q-dialog
+      persistent
+      v-model="isShowPopupQuestionnaire"
+      data-cy="dialog-question"
+    >
       <q-card flat class="bg-transparent" style="width: 320px; height: 370px">
         <q-card-section class="bg-transparent text-dark no-padding">
           <!-- รูปพื้นหลัง Error -->
@@ -35,7 +39,10 @@
               >
                 อย่าลืม! ทำแบบสอบถาม
               </div>
-              <div align="center" class="text-dark relative-position q-px-md q-mt-md">
+              <div
+                align="center"
+                class="text-dark relative-position q-px-md q-mt-md"
+              >
                 คุณสามารถเข้าทำแบบสอบถาม
                 <br />ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ค. 2563
               </div>
@@ -77,7 +84,10 @@
               >
                 หัวข้อการสอบที่ครูตั้ง
               </div>
-              <div align="center" class="text-dark relative-position q-px-md q-mt-md">
+              <div
+                align="center"
+                class="text-dark relative-position q-px-md q-mt-md"
+              >
                 คุณสามารถเข้าสอบก่อนเรียน
                 <br />
                 ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ย. 2563
@@ -114,10 +124,15 @@
               >
                 อย่าลืม! สอบก่อนเรียน
               </div>
-              <div align="center" class="text-dark relative-position q-px-md q-mt-md">
+              <div
+                align="center"
+                class="text-dark relative-position q-px-md q-mt-md"
+              >
                 คุณสามารถเข้าสอบก่อนเรียน
                 <br class="" />
-                <div class="q-my-sm">ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ค. 2563</div>
+                <div class="q-my-sm">
+                  ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ค. 2563
+                </div>
               </div>
             </div>
             <div
@@ -144,7 +159,11 @@
     </q-dialog>
 
     <!-- dialog psottest -->
-    <q-dialog persistent v-model="isShowPopupPosttest" data-cy="dialog-posttest">
+    <q-dialog
+      persistent
+      v-model="isShowPopupPosttest"
+      data-cy="dialog-posttest"
+    >
       <q-card flat class="bg-transparent" style="width: 320px; height: 370px">
         <q-card-section class="bg-transparent text-dark no-padding">
           <!-- รูปพื้นหลัง Error -->
@@ -157,7 +176,10 @@
               >
                 อย่าลืม! ทดสอบหลังเรียน
               </div>
-              <div align="center" class="text-dark relative-position q-px-md q-mt-md">
+              <div
+                align="center"
+                class="text-dark relative-position q-px-md q-mt-md"
+              >
                 คุณสามารถเข้าทำแบบทดสอบหลังเรียน
                 <br />ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ค. 2563
               </div>
@@ -218,6 +240,7 @@ export default {
     const isShowPopupPosttest = ref(false);
     const isShowPopupExam = ref(false);
     const isShowPopupQuestionnaire = ref(false);
+    const isShowCharacter = ref(false);
 
     // loading
     const loadingShow = () => {
@@ -238,9 +261,9 @@ export default {
       loadingShow();
       try {
         characterData.value = await game.characterInfomation(uid);
+        isShowCharacter.value = true;
       } catch (error) {
-        console.log(error);
-        // router.push("/");
+        router.push("/");
       }
 
       loadingHide();
@@ -248,23 +271,19 @@ export default {
 
     const checkCharacter = async () => {
       $q.loading.show();
-
       let response = await game.characterInfomation(uid);
       if (response) {
         equipment.head = response.head;
         equipment.body = response.body;
         equipment.footer = response.footer;
         color.value = response.color;
-
-        console.log(response);
       }
-
       $q.loading.hide();
     };
 
     onMounted(() => {
       getCharacterData();
-      checkCharacter()
+      checkCharacter();
     });
 
     return {
@@ -279,6 +298,7 @@ export default {
       isShowPopupQuestionnaire,
 
       // equipment
+      isShowCharacter,
       equipment,
       color,
     };
