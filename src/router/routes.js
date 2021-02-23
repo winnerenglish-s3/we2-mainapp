@@ -169,6 +169,13 @@ const routes = [
         component: () => import("pages/grammarLessonMain.vue"),
         name: "grammarLesson",
       },
+
+      // Translation
+      {
+        path: "/translation/:practiceListId?",
+        component: () => import("pages/translationMain.vue"),
+        name: "translation",
+      },
     ],
   },
 
