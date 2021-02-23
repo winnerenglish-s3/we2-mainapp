@@ -10,7 +10,7 @@
         :isHasHelp="isHasHelp"
         :instructionData="instructionData"
         :isLoadPractice="isLoadPractice"
-        @callback-showdialoghelp="isShowDialogLesson = true"
+        @callback-showdialoghelp="funcShowDialogHelp"
       ></app-bar>
     </div>
 
@@ -31,118 +31,61 @@
     ></grammar-multiple-mobile>
 
     <!-- Help Grammar Video -->
-    <q-dialog maximized v-model="isShowDialogLesson" persistent>
+    <q-dialog maximized v-model="isDialogHelp" persistent>
       <q-card class="transparent shadow-0">
         <q-card-section class="fit">
           <div class="box-dialog-lesson absolute-center">
-            <div class="row text-amber" align="center">
-              <div class="col-1 self-center" style="width: 70px"></div>
-              <div class="col self-center f18">วิดีโอ</div>
-              <div class="col-1 self-center q-pa-sm" style="width: 70px" align="right">
-                <q-btn v-close-popup dense round flat>
-                  <q-icon name="fas fa-times"></q-icon>
-                </q-btn>
-              </div>
+            <div class="text-amber" style="border: 1px solid #2d3081" align="center">
+              <q-tabs
+                v-model="tabHelp"
+                no-caps
+                outside-arrows
+                mobile-arrows
+                class="text-amber shadow-0"
+              >
+                <q-tab name="content" class="f16" label="เนื้อหา" />
+                <q-tab
+                  name="extra"
+                  v-if="$q.platform.is.mobile"
+                  class="f16"
+                  label="คำศัพท์เสริม"
+                />
+              </q-tabs>
             </div>
 
-            <div class="bg-white row">
-              <div
-                class="col-2 box-lesson-list"
-                style="width: 250px"
-                v-if="$q.platform.is.desktop"
-              >
-                <div class="q-pa-sm" v-for="(item, index) in showLessonVideo">
-                  <div
-                    v-ripple
-                    class="btn-active relative-position shadow-2 q-pa-md rounded-borders cursor-pointer"
-                    :class="selectedLesson == item.value ? 'btn-selected' : 'bg-white'"
-                    @click="selectedLesson = item.value"
-                  >
-                    <div align="left">
-                      {{ item.label }}
+            <div class="bg-white">
+              <q-tab-panels v-model="tabHelp" animated class="no-padding">
+                <q-tab-panel name="content" class="no-padding">
+                  <div class="box-content-lesson">
+                    <div class="q-pa-sm" v-for="(item, index) in showLessonVideo">
+                      <q-img fit="contain" :src="item.imageUrl"></q-img>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div class="col row q-pa-sm">
-                <div class="col-12 q-mt-xs q-mb-md" v-if="$q.platform.is.mobile">
-                  <q-select
-                    dense
-                    outlined
-                    filled
-                    emit-value
-                    map-options
-                    :options="showLessonVideo"
-                    v-model="selectedLesson"
-                  ></q-select>
-                </div>
-                <div class="col-12 self-start">
-                  <iframe
-                    id="myVideo"
-                    width="100%"
-                    height="315"
-                    :src="showLessonVideo.filter((x) => x.value == selectedLesson)[0].vdo"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; "
-                    allowfullscreen
-                  ></iframe>
-                </div>
-                <div class="col-12 row q-mb-md q-mt-sm">
-                  <div class="self-center col-2 q-pa-sm" style="width: 70px">
-                    <q-btn
-                      @click="selectedLesson == 1 ? null : (selectedLesson -= 1)"
-                      :size="$q.platform.is.desktop ? '16px' : '12px'"
-                      push
-                      round
-                      class="bg-amber text-white"
-                    >
-                      <q-icon
-                        :size="$q.platform.is.desktop ? '50px' : '30px'"
-                        name="fas fa-caret-left"
-                        class=""
-                        style="margin-left: -5px"
-                      ></q-icon>
-                    </q-btn>
+                </q-tab-panel>
+
+                <q-tab-panel name="extra" class="no-padding">
+                  <div class="box-content-lesson q-pt-sm">
+                    <div v-for="(item, index) in practiceData.extraVocab">
+                      <div class="q-px-md q-py-xs">
+                        {{ item.vocab }}
+                        <br />
+                        {{ item.meaning }}
+                      </div>
+                      <hr />
+                    </div>
                   </div>
-                  <div class="col self-center q-pt-sm" align="center">
-                    <q-img
-                      @click="playVideo()"
-                      class="btn-active cursor-pointer"
-                      width="200px"
-                      style="max-width: 200px; width: 100%"
-                      src="../../public/images/btn-play-video.png"
-                    ></q-img>
-                  </div>
-                  <div
-                    class="self-center col-2 q-pa-sm"
-                    style="max-width: 70px; width: 100%"
-                    align="right"
-                  >
-                    <q-btn
-                      @click="
-                        selectedLesson == showLessonVideo.length
-                          ? null
-                          : (selectedLesson += 1)
-                      "
-                      :size="$q.platform.is.desktop ? '16px' : '12px'"
-                      push
-                      round
-                      class="bg-amber text-white"
-                    >
-                      <q-icon
-                        :size="$q.platform.is.desktop ? '50px' : '30px'"
-                        name="fas fa-caret-right"
-                        style="margin-right: -5px"
-                      ></q-icon>
-                    </q-btn>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12" v-if="$q.platform.is.mobile">
+                </q-tab-panel>
+              </q-tab-panels>
+              <div class="col-12">
                 <q-img
-                  @click="isShowDialogLesson = false"
+                  @click="isDialogHelp = false"
                   fit="contain"
-                  src="../../public/images/close-help-btn-mobile.png"
+                  class="cursor-pointer"
+                  :src="
+                    require($q.platform.is.desktop
+                      ? '../../public/images/close-popup-btn-pc.png'
+                      : '../../public/images/close-help-btn-mobile.png')
+                  "
                 ></q-img>
               </div>
             </div>
@@ -157,7 +100,7 @@
 import grammarMultiplePc from "../components/grammar/grammarMultiplePc";
 import grammarMultipleMobile from "../components/grammar/grammarMultipleMobile";
 import appBar from "../components/app-bar";
-import { ref, onMounted, reactive, computed } from "vue";
+import { ref, onMounted, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { db } from "src/router";
 import axios from "axios";
@@ -181,12 +124,14 @@ export default {
     const router = useRouter();
 
     // ------------------------ Initial Practice Data
+    const tabHelp = ref("content");
     const isHasHelp = ref(true);
     const isHasInstruction = ref(true);
     const instructionData = reactive({
       th: "เลือกคำตอบที่เหมาะสมที่สุดเพื่อเติมลงในช่องว่าง",
       eng: "Choose the best answer to fill in the blank.",
     });
+
     const questionList = ref([]);
     const practiceData = reactive({
       currentQuestion: 0,
@@ -197,50 +142,14 @@ export default {
       correctAnswer: 0,
       description: "",
       extraVocab: [],
+      refs: [],
     });
 
-    const isShowDialogLesson = ref(false);
+    const isDialogHelp = ref(false);
     const selectedLesson = ref(1);
-    const lessonList = ref([
-      {
-        vdo: "https://youtube.com/embed/TsUKSnRGfm4",
-        label: "#Content 1",
-        ref: "1",
-        value: 1,
-      },
-      {
-        vdo: "https://youtube.com/embed/vLzsow_ZxDU",
-        label: "#Content 2",
-        ref: "2",
-        value: 2,
-      },
-      {
-        vdo: "https://youtube.com/embed/E0IfcXBxyic",
-        label: "#Content 3",
-        ref: "3",
-        value: 3,
-      },
-      {
-        vdo: "https://youtube.com/embed/iF8Vv7YgjLQ",
-        label: "#Content 4",
-        ref: "4",
-        value: 4,
-      },
-      {
-        vdo: "https://youtube.com/embed/3aCctY3DGac",
-        label: "#Content 5",
-        ref: "3",
-        value: 5,
-      },
-      {
-        vdo: "https://youtube.com/embed/Hi6cxx_tdMU",
-        label: "#Content 6",
-        ref: "4",
-        value: 6,
-      },
-    ]);
+    const lessonList = ref([]);
     const showLessonVideo = ref([]);
-    const refContent = ref(null);
+    const refContent = ref([]);
 
     const isLoadPractice = ref(false);
 
@@ -259,8 +168,6 @@ export default {
         // Get Practice List
         let getData = await db.collection("practiceList").doc(practiceListId).get();
 
-        // console.log(getData.data());
-
         // Practice Data : Show Total Question
         practiceData.totalQuestion = getData.data().numOfPractice;
 
@@ -270,6 +177,8 @@ export default {
 
         try {
           let getLesson = await lessonHooks.lesson().grammar(level, unit);
+
+          lessonList.value = getLesson;
         } catch (error) {
           console.log(`${error} : Get Hooks Grammar lesson`);
         }
@@ -281,6 +190,7 @@ export default {
         const postData = {
           practiceListId: practiceListId,
         };
+
         const response = await axios.post(apiURL, postData);
 
         // Question List : Set Question
@@ -308,6 +218,19 @@ export default {
         practiceData.currentQuestion++;
       }
 
+      let helpExtra = [...questionList.value];
+      let tempExtra = [];
+
+      helpExtra.forEach((res) => {
+        tempExtra.push(...res.extraVocab);
+      });
+
+      // Practice Data : Show Ref
+      practiceData.refs = questionList.value[practiceData.currentQuestion].refs;
+
+      // Practice Data : Show Extra Vocab
+      practiceData.extraVocab = tempExtra;
+
       // Practice Data : Show Question
       practiceData.question = questionList.value[practiceData.currentQuestion].question;
 
@@ -325,45 +248,55 @@ export default {
         "ยังไม่ได้ใส่คำอธิบาย";
 
       // Grammar Lesson Video
-      refContent.value = false;
+      refContent.value = [];
       showLessonVideo.value = lessonList.value;
     };
 
-    const funcShowDialogHelp = (val) => {
-      refContent.value = val.ref;
-      isShowDialogLesson.value = true;
+    const funcShowDialogHelp = (valRefs) => {
+      isDialogHelp.value = true;
 
-      if (refContent.value) {
-        showLessonVideo.value = lessonList.value.filter((x) => x.ref == refContent.value);
+      refContent.value = valRefs || [];
+      let tempArr = [];
 
-        selectedLesson.value = showLessonVideo.value[0].value;
+      if (refContent.value.length) {
+        refContent.value.forEach((res) => {
+          let findLess = lessonList.value.filter((x) => x.id == res.value);
+
+          tempArr.push(...findLess);
+        });
+
+        showLessonVideo.value = tempArr;
+      } else {
+        showLessonVideo.value = lessonList.value;
       }
+
+      selectedLesson.value = showLessonVideo.value[0].value;
     };
 
-    const playVideo = () => {
-      console.clear();
-      let el = document.getElementById("myVideo");
+    // const playVideo = () => {
+    //   console.clear();
+    //   let el = document.getElementById("myVideo");
 
-      el.click();
+    //   el.click();
 
-      setTimeout(() => {
-        let hasAutoplay = el.src.indexOf("?autoplay=1");
+    //   setTimeout(() => {
+    //     let hasAutoplay = el.src.indexOf("?autoplay=1");
 
-        hasAutoplay = hasAutoplay == -1 ? 0 : 1;
+    //     hasAutoplay = hasAutoplay == -1 ? 0 : 1;
 
-        if (hasAutoplay) {
-          let newLink = el.src.split("?");
+    //     if (hasAutoplay) {
+    //       let newLink = el.src.split("?");
 
-          newLink = newLink[0];
+    //       newLink = newLink[0];
 
-          el.src = newLink;
-        } else {
-          var symbol = el.src.indexOf("?") > -1 ? "&" : "?";
+    //       el.src = newLink;
+    //     } else {
+    //       var symbol = el.src.indexOf("?") > -1 ? "&" : "?";
 
-          el.src = el.src + symbol + "autoplay=1";
-        }
-      }, 300);
-    };
+    //       el.src = el.src + symbol + "autoplay=1";
+    //     }
+    //   }, 300);
+    // };
 
     // Mounted Function First time
     onMounted(() => {
@@ -371,17 +304,17 @@ export default {
     });
 
     return {
+      tabHelp,
       isLoadPractice,
       isHasHelp,
       isHasInstruction,
       instructionData,
-      isShowDialogLesson,
+      isDialogHelp,
       lessonList,
       selectedLesson,
       questionList,
       practiceData,
       funcSelectedQuestion,
-      playVideo,
       showLessonVideo,
       funcShowDialogHelp,
     };
@@ -397,7 +330,7 @@ export default {
 }
 
 .box-dialog-lesson {
-  max-width: 850px;
+  max-width: 600px;
   width: 90%;
   background-color: #2d3081;
   border-radius: 15px;
@@ -437,5 +370,30 @@ export default {
 
 .btn-selected {
   background-color: #48dbfc;
+}
+
+.box-content-lesson {
+  height: calc(100vh - 200px);
+  overflow-x: auto;
+}
+
+/* width */
+.box-content-lesson::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.box-content-lesson::-webkit-scrollbar-track {
+  background: #eaa02c;
+}
+
+/* Handle */
+.box-content-lesson::-webkit-scrollbar-thumb {
+  background: #e20418;
+}
+
+/* Handle on hover */
+.box-content-lesson::-webkit-scrollbar-thumb:hover {
+  background: #d30315;
 }
 </style>
