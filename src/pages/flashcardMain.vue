@@ -33,7 +33,7 @@
 <script>
 import flashcardPc from "../components/flashcard/flashcardPc";
 import flashcardMobile from "../components/flashcard/flashcardMobile";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, onUnmounted } from "vue";
 import axios from "axios";
 import { useQuasar } from "quasar";
 import { useRouter, useRoute } from "vue-router";
@@ -54,6 +54,7 @@ export default {
   setup() {
     // Initial
     const $q = useQuasar();
+    // Router
     const router = useRouter();
     const route = useRoute();
 
@@ -73,9 +74,11 @@ export default {
       const postData = {
         practiceListId: route.params.practiceListId,
       };
-
       const response = await axios.post(apiURL, postData);
-      flashcardList.value = response.data;
+      let sortFlashcard = response.data.sort((a, b) =>
+        a.vocab.toLowerCase() > b.vocab.toLowerCase() ? 1 : -1
+      );
+      flashcardList.value = sortFlashcard;
       isLoadPractice.value = true;
     };
 
@@ -89,23 +92,22 @@ export default {
     };
 
     // SnapSynchronize Data
-    const snapSynchronize = () => {
-      db.collection("synchronize")
-        .doc("test")
-        .onSnapshot((doc) => {
-          synchronizeData.value = doc.data();
-          if (doc.data().mode == "control") {
-            isSynchronize.value = true;
-            vocabDataList.value = flashcardList.value.filter(
-              (x) => x.id == doc.data().practiceId
-            )[0];
-            isShowDialogFlashcard.value = false;
-          } else {
-            isSynchronize.value = false;
-            vocabDataList.value = flashcardList.value;
-          }
-        });
-    };
+    const snapSynchronize = db
+      .collection("synchronize")
+      .doc("test")
+      .onSnapshot((doc) => {
+        synchronizeData.value = doc.data();
+        if (doc.data().mode == "control") {
+          isSynchronize.value = true;
+          vocabDataList.value = flashcardList.value.filter(
+            (x) => x.id == doc.data().practiceId
+          )[0];
+          isShowDialogFlashcard.value = false;
+        } else {
+          isSynchronize.value = false;
+          vocabDataList.value = flashcardList.value;
+        }
+      });
 
     // Close Flashcard Dialog
     const isShowDialogFlashcard = ref(false);
@@ -116,6 +118,10 @@ export default {
     // เรียกใช้งาน Function
     onMounted(async () => {
       await loadFlashcard();
+      snapSynchronize();
+    });
+
+    onUnmounted(() => {
       snapSynchronize();
     });
 
