@@ -12,7 +12,7 @@ const student = () => {
     let temp = [];
 
     getCourse.forEach((element) => {
-      temp.push(element.data());
+      temp.push({ ...element.data(), courseId: element.id });
     });
     temp.sort((a, b) => a.timestamp.seconds - b.timestamp.seconds);
     return temp;

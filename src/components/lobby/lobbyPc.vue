@@ -19,10 +19,15 @@
           style="max-width: 220px; width: 100%; margin-left: -25px"
           src="../../../public/images/lobby/box-name.png"
         >
-          <div class="transparent full-width absolute-center no-padding" style="top: 45%">
+          <div
+            class="transparent full-width absolute-center no-padding"
+            style="top: 45%"
+          >
             <div style="padding-left: 30px" class="q-px-xs">
               <div class="">
-                <span class="f16" style="line-height: 0">{{ characterData.name }}</span>
+                <span class="f16" style="line-height: 0">{{
+                  characterData.name
+                }}</span>
               </div>
               <div class="q-pr-md q-py-sm">
                 <div class="exp-bar relative-position">
@@ -173,8 +178,7 @@ import lobbyDay from "./lobbyDayPc";
 import lobbyNight from "./lobbyNightPc";
 import character from "components/character";
 import { useQuasar } from "quasar";
-import { ref, onMounted, reactive } from "vue";
-import { useRouter } from "vue-router";
+import { ref } from "vue";
 export default {
   components: {
     lobbyDay,

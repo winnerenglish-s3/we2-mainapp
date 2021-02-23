@@ -10,7 +10,6 @@
       style="max-height: fit-content; min-height: calc(100vh - 50px)"
     >
       <!-- รายการแบบฝึกหัด -->
-
       <div class="col self-center" align="center">
         <div class="row relative-position">
           <!-- ปุ่มกดย้อนกลับ -->
@@ -43,8 +42,6 @@
                 <q-select
                   v-model="selectLevel"
                   :options="levelList"
-                  map-options
-                  emit-value
                   dense=""
                   bg-color="amber-5"
                   round=""
@@ -90,7 +87,7 @@
                       ? 'content-success'
                       : 'content-default'
                   "
-                  v-for="i in totalUnit"
+                  v-for="i in selectLevel.unit"
                   @click="showPracticeList(i), (activeUnit = i)"
                   :key="i"
                 >
@@ -110,9 +107,15 @@
                   </div>
                   <div class="col self-center q-px-sm q-py-sm" align="left">
                     <span class="f16 q-py-sm" v-if="showPracticeListName(i)">
-                      {{ showPracticeListName(i).nameEng }}
-                      <br />
-                      {{ showPracticeListName(i).nameTh }}
+                      <div>
+                        {{ showPracticeListName(i).nameEng }}
+                      </div>
+                      <div class="q-py-xs">
+                        <q-separator></q-separator>
+                      </div>
+                      <div class="">
+                        {{ showPracticeListName(i).nameTh }}
+                      </div>
                     </span>
                   </div>
                   <div class="col-2 self-center" style="width: 60px">
@@ -375,11 +378,6 @@ export default {
   components: {
     appBar,
   },
-  method: {
-    testInput() {
-      console.log("1234");
-    },
-  },
   setup() {
     // Router
     const $q = useQuasar();
@@ -437,9 +435,10 @@ export default {
           unit: Number(
             allLevel.filter((x) => x.level == element.level)[0].unit
           ),
+          courseId: element.courseId,
         });
       });
-      selectLevel.value = levelList.value[0].value;
+      selectLevel.value = levelList.value[0];
       totalUnit.value = levelList.value[0].unit;
     };
 
@@ -481,25 +480,26 @@ export default {
     watch(selectSkill, (newValue, oldValue) => {
       getPractice();
     });
-    const practiceLog = ref([]);
 
+    const practiceLog = ref([]);
     const getPractice = async () => {
       $q.loading.show({
         delay: 0,
       });
+
       // Get Practice List
       practiceList.value = await practiceHooks
-        .practice(selectLevel.value)
+        .practice(selectLevel.value.value)
         .practiceList();
 
       // Get Practice Name
       practiceName.value = await practiceHooks
-        .practice(selectLevel.value)
+        .practice(selectLevel.value.value)
         .practiceName();
 
       // Get PracticeLog
       practiceLog.value = await practiceHooks
-        .practice(selectLevel.value)
+        .practice(selectLevel.value.value)
         .log(uid);
       $q.loading.hide();
     };
@@ -508,14 +508,14 @@ export default {
     const showPracticeListName = (unit) => {
       let totalPractice = practiceList.value.filter(
         (x) =>
-          x.level == selectLevel.value.toString() &&
+          x.level == selectLevel.value.value.toString() &&
           x.unit == unit.toString() &&
           x.skill == selectSkill.value
       ).length;
 
       let filter = practiceName.value.filter(
         (x) =>
-          x.level == selectLevel.value.toString() &&
+          x.level == selectLevel.value.value.toString() &&
           x.unit == unit.toString() &&
           x.skill == selectSkill.value
       )[0];
@@ -530,7 +530,7 @@ export default {
     const showNumberOfAllPracticeInLevel = () => {
       let totalPracticeInLevel = practiceList.value.filter(
         (x) =>
-          x.level == selectLevel.value.toString() &&
+          x.level == selectLevel.value.value.toString() &&
           x.skill == selectSkill.value
       ).length;
       return totalPracticeInLevel;
@@ -541,7 +541,7 @@ export default {
       let result =
         practiceLog.value.filter(
           (x) =>
-            x.level == selectLevel.value &&
+            x.level == selectLevel.value.value &&
             x.skill == selectSkill.value &&
             x.unit == unit
         ).length || 0;
@@ -552,7 +552,8 @@ export default {
     const showAllPassedPractice = () => {
       let result =
         practiceLog.value.filter(
-          (x) => x.level == selectLevel.value && x.skill == selectSkill.value
+          (x) =>
+            x.level == selectLevel.value.value && x.skill == selectSkill.value
         ).length || 0;
       return result;
     };
@@ -565,7 +566,7 @@ export default {
 
       temp = practiceList.value.filter(
         (x) =>
-          x.level == selectLevel.value.toString() &&
+          x.level == selectLevel.value.value.toString() &&
           x.unit == unit.toString() &&
           x.skill == selectSkill.value
       );
@@ -670,8 +671,7 @@ export default {
       showNumberOfAllPracticeInLevel,
       nextSkill,
       previousSkill,
-
-      //
+      // Level , Unit
       levelList,
       unitCompleteList,
       activeUnit,
