@@ -3,13 +3,12 @@
     <div class="col self-start row">
       <div class="col-12 relative-position" style="margin-top: -52px">
         <div class="absolute full-width" style="top: 51px">
-          <header-bar></header-bar>
+          <header-bar :practiceData="practiceData"></header-bar>
         </div>
         <theme-animation
           :themeSync="themeSync"
           :isSendAnswer="isSendAnswer"
           :isCorrectAnswer="isCorrectAnswer"
-          :practiceData="practiceData"
         ></theme-animation>
       </div>
       <div class="col-12 box-question q-pa-lg" align="center">
@@ -67,11 +66,26 @@
             ></q-img>
           </div>
           <div class="f16 q-px-md">
-            <div class="q-pa-md row" align="left">
-              <div class="col-2" style="width: 150px">คำตอบที่ถูกต้อง คือ</div>
-              <div class="col">
+            <div class="q-pa-md" align="left">
+              <div class="q-mb-sm" v-if="!isCorrectAnswer">
+                <span class="text-red">{{
+                  `"${
+                    practiceData.choices.filter((x) => x.index == currentAnswer)[0].choice
+                  }" `
+                }}</span>
+                <span>เป็นคำตอบที่ผิด</span>
+              </div>
+
+              <div class="">
+                <span>คำตอบที่ถูกต้อง คือ</span>
                 <span class="text-green-6">{{
-                  practiceData.choices[currentAnswer].choice
+                  `
+                  "${
+                    practiceData.choices.filter(
+                      (x) => x.index == practiceData.correctAnswer
+                    )[0].choice
+                  }"
+                `
                 }}</span>
               </div>
               <div class="col-12 q-mt-md" align="left">
@@ -79,19 +93,14 @@
               </div>
             </div>
 
-            <div align="left" class="row q-pa-md">
-              <div class="col-2" style="width: 50px">
-                <span>อ้างอิง:</span>
-              </div>
-              <div class="col">
-                <div>
-                  <u
-                    @click="$emit('callback-showdialoghelp', { ref: '3' })"
-                    class="cursor-pointer text-indigo-5"
-                    >#Content1</u
-                  >
-                </div>
-              </div>
+            <div align="left" class="row q-px-md">
+              <q-btn
+                label="อ้างอิง"
+                rounded
+                class="bg-blue text-white"
+                push
+                @click="$emit('callback-showdialoghelp', practiceData.refs)"
+              ></q-btn>
             </div>
           </div>
           <div class="q-my-md" align="center">
@@ -116,16 +125,15 @@
         <span class="absolute-center f16"> คำศัพท์เสริม </span>
       </div>
       <div class="box-content-extravocab q-py-sm">
-        <div v-for="i in practiceData.extravocab" :key="i">
-          <div class="q-py-sm">
-            <div class="q-px-md">
-              <span>ENG !!!!!!!!!</span>
+        <div>
+          <div v-for="(item, index) in practiceData.extraVocab">
+            <div class="q-px-md q-py-xs">
+              {{ item.vocab }}
+              <br />
+              {{ item.meaning }}
             </div>
-            <div class="q-px-md">
-              <span>ไทย !!!!!!!!!</span>
-            </div>
+            <hr style="border: 1px solid #ffc177" />
           </div>
-          <hr style="border: 1px solid #ffc177" />
         </div>
       </div>
     </div>
@@ -197,8 +205,6 @@ export default {
 
     const sendAnswer = (choiceIndex) => {
       isSendAnswer.value = true;
-
-      console.log(choiceIndex);
 
       currentAnswer.value = choiceIndex;
 
