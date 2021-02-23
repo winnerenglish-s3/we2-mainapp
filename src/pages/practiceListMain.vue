@@ -108,8 +108,8 @@
                       {{ i }}
                     </span>
                   </div>
-                  <div class="col self-center q-px-sm" align="left">
-                    <span class="f16" v-if="showPracticeListName(i)">
+                  <div class="col self-center q-px-sm q-py-sm" align="left">
+                    <span class="f16 q-py-sm" v-if="showPracticeListName(i)">
                       {{ showPracticeListName(i).nameEng }}
                       <br />
                       {{ showPracticeListName(i).nameTh }}
@@ -343,7 +343,9 @@
                     align="left"
                   >
                     <div align="center">
-                      <span>{{ `${index + 1}. ${"เลือกคำศัพท์"} ` }}</span>
+                      <span>{{
+                        `${index + 1}. ${item.practiceTypeThai} `
+                      }}</span>
                     </div>
                   </div>
                 </q-img>
