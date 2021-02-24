@@ -539,14 +539,12 @@ export default {
     const practiceListShow = ref([]);
     const showPracticeList = (unit) => {
       let temp = [];
-
       temp = practiceList.value.filter(
         (x) =>
           x.level == selectLevel.value.value.toString() &&
           x.unit == unit.toString() &&
           x.skill == selectSkill.value
       );
-
       temp.sort((a, b) => a.order - b.order);
       practiceListShow.value = temp;
 
@@ -565,7 +563,6 @@ export default {
       } else if (type == "multiplechoices") {
         nameImage = require("../../public/images/practicelist/multiple-btn-star0.png");
       }
-
       return nameImage;
     };
     // route to แบบฝึกหัด
@@ -591,6 +588,8 @@ export default {
         routerName = "/readingmultiple/";
       } else if (data.practiceType == "translation") {
         routerName = "/translation/";
+      } else if (data.practiceType == "clozetest") {
+        routerName = "/clozeTest/";
       }
 
       router.push(routerName + data.practiceListId);
