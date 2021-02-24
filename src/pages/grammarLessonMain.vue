@@ -1,7 +1,7 @@
 <template>
   <q-page>
-    <app-bar></app-bar>
-    <div class="box-container-main">
+    <app-bar :learningMode="learningMode"></app-bar>
+    <div class="box-container-main" v-if="isLoaded">
       <div class="row row-height">
         <div
           v-if="$q.platform.is.desktop && !isSynchronizeMode"
@@ -16,27 +16,26 @@
             <div
               v-for="(item, index) in grammarList"
               :key="index"
-              :class="{ 'q-pt-md': index != 0 }"
+              class="q-pt-md"
               align="center"
             >
               <q-btn
                 @click="clickGrammarList(index)"
                 no-caps
                 style="width: 93%; margin: auto"
-                class="shadow-1"
+                class="shadow-1 q-py-md"
                 :class="activeGrammarList == index ? 'bg-info' : 'bg-white'"
               >
                 <q-badge
                   color="orange"
                   class="q-pa-xs"
-                  v-if="item.isNew"
+                  v-if="item.isNewData"
                   text-color="black"
                   floating
                   label="NEW"
                 ></q-badge>
                 <div class="row fit" align="left">
-                  <div class="col-12 f16">{{ item.titleEn }}</div>
-                  <div class="col-12 f14 text-color">{{ item.titleTh }}</div>
+                  <div class="col-12 f16">{{ item.name }}</div>
                 </div>
 
                 <div
@@ -57,24 +56,20 @@
         >
           <!-- IMG -->
           <div v-if="typeSelect == 'slide'" class="col-12">
-            <q-img :src="grammarList[activeGrammarList].imgURL"></q-img>
+            <q-img :src="grammarList[activeGrammarList].imageUrl"></q-img>
           </div>
           <!-- VIDEO -->
           <div v-else class="col-12">
             <iframe
-              :src="grammarList[activeGrammarList].vdoURL + '&autoplay=1'"
+              :src="grammarList[activeGrammarList].vdoLink"
               frameborder="0"
-              style="width: 100%; height: 50vw"
+              style="width: 100%; height: 47vw"
               allow="autoplay"
             ></iframe>
           </div>
 
           <!-- Mobile Next Button -->
-          <q-page-sticky
-            position="bottom-right"
-            :offset="[18, 18]"
-            class="mobile-only"
-          >
+          <q-page-sticky position="bottom-right" :offset="[18, 18]" class="mobile-only">
             <q-btn
               @click="nextGrammar()"
               round
@@ -92,11 +87,7 @@
           </q-page-sticky>
 
           <!-- Mobile Previous Button -->
-          <q-page-sticky
-            position="bottom-left"
-            :offset="[18, 18]"
-            class="mobile-only"
-          >
+          <q-page-sticky position="bottom-left" :offset="[18, 18]" class="mobile-only">
             <q-btn
               @click="previousGrammar()"
               round
@@ -105,20 +96,14 @@
               style="width: 50px; height: 50px"
               :disable="activeGrammarList == 0"
             >
-              <q-icon
-                size="xl"
-                name="fas fa-caret-left "
-                style="right: 6px"
-              ></q-icon>
+              <q-icon size="xl" name="fas fa-caret-left " style="right: 6px"></q-icon>
             </q-btn>
           </q-page-sticky>
 
           <div
             class="q-pt-md col-12 row self-end"
             v-if="!isSynchronizeMode"
-            :class="
-              $q.platform.is.desktop ? 'justify-between' : ' justify-center'
-            "
+            :class="$q.platform.is.desktop ? 'justify-between' : ' justify-center'"
           >
             <!-- left button -->
             <div v-if="$q.platform.is.desktop">
@@ -130,11 +115,7 @@
                 style="width: 50px; height: 50px"
                 :disable="activeGrammarList == 0"
               >
-                <q-icon
-                  size="xl"
-                  name="fas fa-caret-left "
-                  style="right: 6px"
-                ></q-icon>
+                <q-icon size="xl" name="fas fa-caret-left " style="right: 6px"></q-icon>
               </q-btn>
             </div>
             <!-- Radio select -->
@@ -191,9 +172,18 @@
 import appBar from "../components/app-bar";
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { db } from "src/router";
+import { useRoute, useRouter } from "vue-router";
+import { useQuasar } from "quasar";
+import axios from "axios";
 export default {
   components: { appBar },
   setup() {
+    // Route
+    const route = useRoute();
+    const router = useRouter();
+    // Qusar
+    const $q = useQuasar();
+
     // scroll style
     const thumbStyle = {
       right: "4px",
@@ -210,27 +200,27 @@ export default {
       opacity: 0.2,
     };
     const grammarList = ref([
-      {
-        titleEn: "Cover",
-        titleTh: "หน้าปก",
-        isNew: true,
-        imgURL: require("../../public/grammar-test-only/grammar-test.png"),
-        vdoURL: "https://www.youtube.com/embed/k3_tw44QsZQ?rel=0",
-      },
-      {
-        titleEn: "Adjectives",
-        titleTh: "คำคุณศัพท์",
-        isNew: true,
-        imgURL: require("../../public/grammar-test-only/grammar-test2.png"),
-        vdoURL: "https://www.youtube.com/embed/8IW56tzL4CQ?rel=0",
-      },
-      {
-        titleEn: "Adjectives",
-        titleTh: "คำคุณศัพท์",
-        isNew: true,
-        imgURL: require("../../public/grammar-test-only/grammar-test3.png"),
-        vdoURL: "https://www.youtube.com/embed/LBHUmp8c9Ew?rel=0",
-      },
+      // {
+      //   titleEn: "Cover",
+      //   titleTh: "หน้าปก",
+      //   isNewData: true,
+      //   imgURL: require("../../public/grammar-test-only/grammar-test.png"),
+      //   vdoLink: "https://www.youtube.com/embed/k3_tw44QsZQ?rel=0",
+      // },
+      // {
+      //   titleEn: "Adjectives",
+      //   titleTh: "คำคุณศัพท์",
+      //   isNewData: true,
+      //   imgURL: require("../../public/grammar-test-only/grammar-test2.png"),
+      //   vdoLink: "https://www.youtube.com/embed/8IW56tzL4CQ?rel=0",
+      // },
+      // {
+      //   titleEn: "Adjectives",
+      //   titleTh: "คำคุณศัพท์",
+      //   isNewData: true,
+      //   imgURL: require("../../public/grammar-test-only/grammar-test3.png"),
+      //   vdoLink: "https://www.youtube.com/embed/LBHUmp8c9Ew?rel=0",
+      // },
     ]);
 
     // Grammar List ปัจจุบันที่คลิกอยู่
@@ -243,6 +233,23 @@ export default {
       if (!passedGrammarList.value.includes(index)) {
         passedGrammarList.value.push(index);
       }
+    };
+
+    const isLoaded = ref(false);
+    const getGrammarList = async () => {
+      $q.loading.show();
+      const apiURL =
+        "https://us-central1-winnerenglish2-e0f1b.cloudfunctions.net/wfunctions/getPracticeData";
+
+      const postData = {
+        practiceListId: route.params.practiceListId,
+      };
+      const response = await axios.post(apiURL, postData);
+      isLoaded.value = true;
+
+      let sortData = response.data.sort((a, b) => a.order - b.order);
+      grammarList.value = sortData;
+      $q.loading.hide();
     };
 
     // Type select between video and slide
@@ -260,6 +267,8 @@ export default {
     const isSynchronizeMode = ref(false);
     // const synchronizeMode = ref("vdo"); //vdo or slide
 
+    const learningMode = ref("");
+
     const listenSynchronize = db
       .collection("synchronize")
       .doc("test")
@@ -268,10 +277,16 @@ export default {
           isSynchronizeMode.value = true;
           typeSelect.value = data.data().grammar.mode;
           activeGrammarList.value = data.data().grammar.currentLessonIndex;
+          learningMode.value = "control";
         } else {
           isSynchronizeMode.value = false;
+          learningMode.value = "selfLearning";
         }
       });
+
+    onMounted(() => {
+      getGrammarList();
+    });
 
     onBeforeUnmount(() => {
       listenSynchronize();
@@ -288,6 +303,8 @@ export default {
       nextGrammar,
       previousGrammar,
       isSynchronizeMode,
+      learningMode,
+      isLoaded,
     };
   },
 };
