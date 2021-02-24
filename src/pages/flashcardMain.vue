@@ -74,10 +74,14 @@ export default {
       const postData = {
         practiceListId: route.params.practiceListId,
       };
+
       const response = await axios.post(apiURL, postData);
+
       let sortFlashcard = response.data.sort((a, b) =>
         a.vocab.toLowerCase() > b.vocab.toLowerCase() ? 1 : -1
       );
+
+      vocabDataList.value = sortFlashcard;
       flashcardList.value = sortFlashcard;
       isLoadPractice.value = true;
     };
@@ -96,6 +100,7 @@ export default {
       .collection("synchronize")
       .doc("test")
       .onSnapshot((doc) => {
+        console.log("onSnapshot");
         synchronizeData.value = doc.data();
         if (doc.data().mode == "control") {
           isSynchronize.value = true;
@@ -118,9 +123,9 @@ export default {
     // เรียกใช้งาน Function
     onMounted(async () => {
       await loadFlashcard();
-      snapSynchronize();
     });
 
+    // Unmount Synchronize
     onUnmounted(() => {
       snapSynchronize();
     });
