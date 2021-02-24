@@ -58,39 +58,63 @@
           ></q-img>
         </div>
         <div class="f14 q-pa-sm">
-          <div class="q-pa-md row" align="left">
-            <div class="col-2" style="width: 150px">คำตอบที่ถูกต้อง คือ</div>
-            <div class="col">
-              <span class="text-green-6">{{
-                practiceData.choices[currentAnswer].choice
+          <div class="q-pa-md" align="left">
+            <div class="q-mb-sm" v-if="!isCorrectAnswer">
+              <span class="text-red">{{
+                `"${
+                  practiceData.choices.filter((x) => x.index == currentAnswer)[0].choice
+                }" `
               }}</span>
+              <span>เป็นคำตอบที่ผิด</span>
             </div>
-            <div class="col-12 q-mt-md" align="left">
-              <span>{{ practiceData.description }}</span>
+            <div>
+              <span> คำตอบที่ถูกต้อง คือ </span>
+              <span
+                class="text-green-6"
+                v-html="
+                  `  &nbsp;&quot;${
+                    practiceData.choices.filter(
+                      (x) => x.index == practiceData.correctAnswer
+                    )[0].choice
+                  }&quot; `
+                "
+              ></span>
+            </div>
+            <div class="q-mt-md full-width" align="left">
+              <span v-html="practiceData.description"></span>
             </div>
           </div>
-          <div align="left" class="row q-pa-md">
-            <div class="col-2" style="width: 50px">
-              <span>อ้างอิง:</span>
-            </div>
-            <div class="col">
-              <div>
-                <u
-                  @click="$emit('callback-showdialoghelp', { ref: '3' })"
-                  class="cursor-pointer text-indigo-5"
-                  >#Content1</u
-                >
-              </div>
-            </div>
+          <div align="left" class="row q-px-md">
+            <q-btn
+              label="อ้างอิง"
+              rounded
+              class="bg-blue text-white"
+              push
+              @click="$emit('callback-showdialoghelp', practiceData.refs)"
+            ></q-btn>
           </div>
           <div class="q-pa-sm row" align="left"></div>
         </div>
         <div class="q-my-md" align="center">
           <q-img
+            v-if="
+              isSendAnswer &&
+              practiceData.totalQuestion != practiceData.currentQuestion + 1
+            "
             @click="nextQuestion()"
             class="cursor-pointer"
             width="200px"
             src="../../../public/images/next-question-btn.png"
+          ></q-img>
+          <q-img
+            v-if="
+              isSendAnswer &&
+              practiceData.totalQuestion == practiceData.currentQuestion + 1
+            "
+            @click="$emit('callback-finishpractice')"
+            class="cursor-pointer"
+            width="200px"
+            src="../../../public/images/success-btn.png"
           ></q-img>
         </div>
       </div>
@@ -115,7 +139,8 @@ export default {
       default: () => {},
     },
   },
-  setup(props) {
+  emits: ["callback-finishpractice"],
+  setup(props, { emit }) {
     const activeBy = ref("answer");
 
     const setTheme = ref([

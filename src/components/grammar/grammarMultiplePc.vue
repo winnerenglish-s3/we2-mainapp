@@ -12,7 +12,7 @@
         ></theme-animation>
       </div>
       <div class="col-12 box-question q-pa-lg" align="center">
-        <span class="f16"> {{ practiceData.question }} </span>
+        <span class="f16" v-html="practiceData.question"> </span>
       </div>
 
       <div class="col-12 q-mt-md" align="center" v-if="activeBy == 'answer'">
@@ -43,7 +43,7 @@
                 style="width: 90%; height: 70%; top: 5px; left: 11%"
                 align="left"
               >
-                <div class="absolute-center" style="left: 7%">
+                <div class="absolute-center" style="width: 95%">
                   <span class="text-black" style="font-size: max(1vw, 14px)">{{
                     `${item.choice}`
                   }}</span>
@@ -89,7 +89,7 @@
                 }}</span>
               </div>
               <div class="col-12 q-mt-md" align="left">
-                <span>{{ practiceData.description }}</span>
+                <span v-html="practiceData.description"></span>
               </div>
             </div>
 
@@ -105,10 +105,24 @@
           </div>
           <div class="q-my-md" align="center">
             <q-img
+              v-if="
+                isSendAnswer &&
+                practiceData.totalQuestion != practiceData.currentQuestion + 1
+              "
               @click="nextQuestion()"
               class="cursor-pointer"
               width="200px"
               src="../../../public/images/next-question-btn.png"
+            ></q-img>
+            <q-img
+              v-if="
+                isSendAnswer &&
+                practiceData.totalQuestion == practiceData.currentQuestion + 1
+              "
+              @click="$emit('callback-finishpractice')"
+              class="cursor-pointer"
+              width="200px"
+              src="../../../public/images/success-btn.png"
             ></q-img>
           </div>
         </div>
@@ -160,7 +174,7 @@ export default {
       default: () => {},
     },
   },
-  emits: ["callback-showdialoghelp"],
+  emits: ["callback-showdialoghelp", "callback-finishpractice"],
   setup(props, { emit }) {
     const activeBy = ref("answer");
     const activeHover = ref(null);

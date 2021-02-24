@@ -20,13 +20,16 @@
       :themeSync="themeSync"
       @callback-nextquestion="funcSelectedQuestion"
       @callback-showdialoghelp="funcShowDialogHelp"
+      @callback-finishpractice="isFinishPractice = true"
       v-if="$q.platform.is.desktop && isLoadPractice"
     ></grammar-multiple-pc>
+
     <grammar-multiple-mobile
       :practiceData="practiceData"
       :themeSync="themeSync"
       @callback-nextquestion="funcSelectedQuestion"
       @callback-showdialoghelp="funcShowDialogHelp"
+      @callback-finishpractice="isFinishPractice = true"
       v-if="$q.platform.is.mobile && isLoadPractice"
     ></grammar-multiple-mobile>
 
@@ -57,8 +60,30 @@
               <q-tab-panels v-model="tabHelp" animated class="no-padding">
                 <q-tab-panel name="content" class="no-padding">
                   <div class="box-content-lesson">
-                    <div class="q-pa-sm" v-for="(item, index) in showLessonVideo">
-                      <q-img fit="contain" :src="item.imageUrl"></q-img>
+                    <div
+                      :style="$q.platform.is.desktop ? '' : 'overflow: hidden'"
+                      v-for="(item, index) in showLessonVideo"
+                    >
+                      <div>
+                        <q-img
+                          fit="contain"
+                          :style="
+                            $q.platform.is.desktop
+                              ? 'width: 100%'
+                              : 'width: 200%;left:-2px;'
+                          "
+                          :src="item.imageUrl"
+                        ></q-img>
+                      </div>
+                      <div class="q-my-sm">
+                        <q-img
+                          class="relative-position"
+                          fit="contain"
+                          style="width: 200%; left: -100%"
+                          v-if="$q.platform.is.mobile"
+                          :src="item.imageUrl"
+                        ></q-img>
+                      </div>
                     </div>
                   </div>
                 </q-tab-panel>
@@ -93,12 +118,15 @@
         </q-card-section>
       </q-card>
     </q-dialog>
+
+    <finish-practice-dialog :isFinishPractice="isFinishPractice"></finish-practice-dialog>
   </q-page>
 </template>
 
 <script>
 import grammarMultiplePc from "../components/grammar/grammarMultiplePc";
 import grammarMultipleMobile from "../components/grammar/grammarMultipleMobile";
+import finishPracticeDialog from "../components/finishPracticeDialog";
 import appBar from "../components/app-bar";
 import { ref, onMounted, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -109,6 +137,7 @@ export default {
   components: {
     grammarMultiplePc,
     grammarMultipleMobile,
+    finishPracticeDialog,
     appBar,
   },
   props: {
@@ -150,7 +179,7 @@ export default {
     const lessonList = ref([]);
     const showLessonVideo = ref([]);
     const refContent = ref([]);
-
+    const isFinishPractice = ref(false);
     const isLoadPractice = ref(false);
 
     // ------------------------ Function Load Practice
@@ -194,8 +223,14 @@ export default {
         const response = await axios.post(apiURL, postData);
 
         // Question List : Set Question
-        questionList.value = response.data;
-        questionList.value.sort(() => Math.random() - 0.5);
+        let setQuestion = response.data;
+        setQuestion = [...setQuestion];
+
+        setQuestion.sort(() => Math.random() - 0.5);
+
+        setQuestion = setQuestion.slice(0, practiceData.totalQuestion);
+
+        questionList.value = setQuestion;
 
         // Function : เลือกแบบฝึกหัด แล้วส่งค่า true ไปบอกว่านี้คือการโหลดครั้งแรก
         funcSelectedQuestion(true);
@@ -260,7 +295,7 @@ export default {
 
       if (refContent.value.length) {
         refContent.value.forEach((res) => {
-          let findLess = lessonList.value.filter((x) => x.id == res.value);
+          let findLess = lessonList.value.filter((x) => x.id == res.id);
 
           tempArr.push(...findLess);
         });
@@ -317,6 +352,7 @@ export default {
       funcSelectedQuestion,
       showLessonVideo,
       funcShowDialogHelp,
+      isFinishPractice,
     };
   },
 };
@@ -330,7 +366,7 @@ export default {
 }
 
 .box-dialog-lesson {
-  max-width: 600px;
+  max-width: 800px;
   width: 90%;
   background-color: #2d3081;
   border-radius: 15px;
@@ -373,13 +409,13 @@ export default {
 }
 
 .box-content-lesson {
-  height: calc(100vh - 200px);
+  height: calc(100vh - 150px);
   overflow-x: auto;
 }
 
 /* width */
 .box-content-lesson::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
 }
 
 /* Track */
