@@ -6,13 +6,13 @@
           <div class="col-6">
             <q-btn
               icon="fas fa-home"
-              v-if="!isShowDialogFlashcard && learningMode == 'selfLearning'"
+              v-if="!isShowDialogFlashcard && isShowHome"
               class="shadow-2 btn-header q-mr-md btn-width-mobile"
               @click="$router.push('/lobby')"
             ></q-btn>
             <q-btn
               icon="fas fa-pause"
-              v-if="learningMode != 'control'"
+              v-if="isShowPuase"
               class="shadow-2 btn-header q-mr-md btn-width-mobile"
               @click="isShowSetting = true"
             ></q-btn>
@@ -257,6 +257,14 @@ import { ref, reactive, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 export default {
   props: {
+    isShowHome: {
+      type: Boolean,
+      default: () => false,
+    },
+    isShowPause: {
+      type: Boolean,
+      default: () => false,
+    },
     isShowDialogFlashcard: {
       type: Boolean,
       default: () => false,
