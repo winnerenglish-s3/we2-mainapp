@@ -29,6 +29,8 @@ const practice = (level) => {
           result = "เคล็ดลับภาษา";
         } else if (type == "matching") {
           result = "จับคู่";
+        } else if (type == "clozetest") {
+          result = "เนื้องเรื่องเติมคำ";
         } else {
           result = type;
         }
