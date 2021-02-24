@@ -1,6 +1,9 @@
 <template>
   <q-page>
-    <app-bar :learningMode="learningMode"></app-bar>
+    <app-bar
+      :isShowHome="learningMode == 'selfLearning' ? true : false"
+      :isShowPause="learningMode == 'selfLearning' ? true : false"
+    ></app-bar>
     <div class="box-container-main" v-if="isLoaded">
       <div class="row row-height">
         <div

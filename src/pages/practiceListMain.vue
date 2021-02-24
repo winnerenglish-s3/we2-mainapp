@@ -1,7 +1,7 @@
 <template>
   <q-page class="full-height" :class="{ row: $q.platform.is.desktop }">
     <div class="col-12 self-start">
-      <app-bar learningMode="control"></app-bar>
+      <app-bar :isShowHome="true"></app-bar>
     </div>
 
     <!-- DESKTOP -->
