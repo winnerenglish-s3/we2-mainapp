@@ -10,7 +10,8 @@
         :isHasHelp="isHasHelp"
         :instructionData="instructionData"
         :isLoadPractice="isLoadPractice"
-        :learningMode="learningMode"
+        :isShowHome="false"
+        :isShowPause="learningMode == 'control' ? false : true"
         @callback-showdialoghelp="funcShowDialogHelp"
       ></app-bar>
     </div>
