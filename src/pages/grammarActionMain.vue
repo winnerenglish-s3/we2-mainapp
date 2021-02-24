@@ -3,7 +3,10 @@
     :class="$q.platform.is.desktop ? 'bg-grammaraction' : 'bg-mobile'"
     :theme="themeSync"
   >
-    <app-bar></app-bar>
+    <app-bar
+      :isShowHome="learningMode == 'selfLearning' ? true : false"
+      :isShowPause="learningMode == 'selfLearning' ? true : false"
+    ></app-bar>
     <div v-if="isLoaded">
       <div align="center" class="q-pa-md">
         <div v-if="$q.platform.is.desktop">
