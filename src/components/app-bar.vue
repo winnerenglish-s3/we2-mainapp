@@ -12,7 +12,7 @@
             ></q-btn>
             <q-btn
               icon="fas fa-pause"
-              v-if="isShowPuase"
+              v-if="isShowPause"
               class="shadow-2 btn-header q-mr-md btn-width-mobile"
               @click="isShowSetting = true"
             ></q-btn>
