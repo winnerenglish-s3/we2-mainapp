@@ -162,7 +162,7 @@
 </template>
 
 <script>
-import questionNumber from "../components/btn-current-choices";
+import questionNumber from "../components/button/btn-current-choices";
 import appBar from "../components/app-bar";
 import finishPractice from "../components/finishPracticeDialog.vue";
 import headerBar from "../components/header-time-progress";
