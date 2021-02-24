@@ -2,7 +2,11 @@
   <q-layout view="lHh Lpr lFf">
     <!-- Layout Page -->
     <q-page-container>
-      <router-view :themeSync="themeSync" />
+      <router-view
+        @courseChanged="getCourseId"
+        :courseId="courseId"
+        :themeSync="themeSync"
+      />
     </q-page-container>
   </q-layout>
 </template>
@@ -13,7 +17,13 @@ export default {
   setup(props) {
     const themeSync = ref(1);
 
-    return { themeSync };
+    const courseId = ref("");
+
+    const getCourseId = (val) => {
+      courseId.value = val;
+    };
+
+    return { themeSync, courseId, getCourseId };
   },
 };
 </script>

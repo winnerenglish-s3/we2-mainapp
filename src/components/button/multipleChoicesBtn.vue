@@ -3,7 +3,7 @@
     <q-btn
       class="btn-choice q-px-md relative-position row cursor-pointer"
       :class="isDisable ? 'btn-diable-bg' : 'btn-bg'"
-      style="width: 100%"
+      style="width: 100%; max-width: 1000px"
       no-caps
       align="left"
     >
@@ -29,7 +29,7 @@
         :class="isDisable ? 'choice-star-bg-disable' : 'choice-star-bg'"
       ></q-icon>
       <span class="q-pl-md" :class="{ f20: $q.platform.is.desktop }">
-        {{ choice }}
+        <span v-html="choice"> </span>
       </span>
 
       <div class="absolute-right circle-1" style="top: 10px; right: 10px"></div>
@@ -63,7 +63,7 @@ export default {
 <style lang="scss" scoped>
 .btn-choice {
   border-radius: 10px;
-  box-shadow: 2px 3px 0px 0px #4e3801;
+  box-shadow: 2px 3px 0px 0px #4935018f;
   height: 50px;
 }
 .btn-bg {

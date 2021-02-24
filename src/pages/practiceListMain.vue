@@ -38,6 +38,7 @@
                   bg-color="amber-5"
                   round=""
                   outlined=""
+                  @update:modelValue="(val) => $emit('courseChanged', val.courseId)"
                 />
               </div>
             </div>
@@ -341,6 +342,7 @@
         </q-card-section>
       </q-card>
     </q-dialog>
+    {{ courseId }}
   </q-page>
 </template>
 
@@ -357,11 +359,15 @@ export default {
       type: Array,
       default: () => [],
     },
+    courseId: {
+      type: String,
+      default: "",
+    },
   },
   components: {
     appBar,
   },
-  setup() {
+  setup(props, { emit }) {
     // Router
     const $q = useQuasar();
     const router = useRouter();
@@ -419,6 +425,7 @@ export default {
         });
       });
       selectLevel.value = levelList.value[0];
+      emit("courseChanged", levelList.value[0].courseId);
       totalUnit.value = levelList.value[0].unit;
     };
 
@@ -630,6 +637,7 @@ export default {
     ]);
 
     return {
+      // test
       // Course Data
       selectLevel,
       totalUnit,

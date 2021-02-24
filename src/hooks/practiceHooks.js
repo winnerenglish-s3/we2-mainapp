@@ -1,6 +1,7 @@
 import { db } from "src/router";
 
 const practice = (level) => {
+  // GET PRACTICE LIST FROM LEVEL
   const practiceList = async () => {
     try {
       let getPractice = await db
@@ -52,6 +53,7 @@ const practice = (level) => {
     }
   };
 
+  // GET PRACTICE NAME
   const practiceName = async () => {
     try {
       let getPractice = await db
@@ -73,12 +75,12 @@ const practice = (level) => {
   };
 
   // Get Practice Log
-  const log = async (uid) => {
+  const log = async (courseId) => {
     const getPracticeList = await practiceList();
 
     let practiceLog = await db
       .collection("practiceLog")
-      .where("studentId", "==", uid)
+      .where("courseId", "==", courseId)
       .get();
 
     let getPracticeData = (practiceListId) => {
@@ -103,6 +105,7 @@ const practice = (level) => {
   return { practiceList, practiceName, log };
 };
 
+// Get All Level
 const level = async () => {
   try {
     let getLevel = await db.collection("level").get();
@@ -119,5 +122,8 @@ const level = async () => {
     return;
   }
 };
+
+// Save Practice Log
+const savePracticeLog = async (courseId) => {};
 
 export default { practice, level };

@@ -43,25 +43,19 @@
                   <br />
                   <span>ระดับที่ 5 - บทที่ 12</span>
                   <div class="q-mt-md">
-                    <span>จำนวนครั้งในการทำ : {{ numberOfPractice }}/2</span>
+                    <span>จำนวนครั้งในการทำ : {{ numOfPractice }}/2</span>
                   </div>
                 </div>
 
                 <div v-else align="center">
-                  <span style="font-size: max(1vw, 24px)"
-                    >คะแนนไม่ผ่านเกณฑ์</span
-                  >
+                  <span style="font-size: max(1vw, 24px)">คะแนนไม่ผ่านเกณฑ์</span>
                 </div>
               </div>
             </div>
             <div align="center">
               <q-btn-group
                 spread
-                style="
-                  width: 292px;
-                  height: 40px;
-                  border-radius: 0px 0px 5px 5px;
-                "
+                style="width: 292px; height: 40px; border-radius: 0px 0px 5px 5px"
               >
                 <!-- ปุ่ม Reset -->
                 <q-btn
@@ -75,7 +69,7 @@
                 <q-btn
                   v-if="!isNotProgress"
                   push
-                  @click="$emit('finish')"
+                  @click="$router.push('/practicemain')"
                   label="จบแบบฝึกหัด"
                   style="background-color: #ffbd13"
                 />
@@ -88,10 +82,7 @@
               </q-btn-group>
             </div>
             <div style="" v-if="!isNotProgress">
-              <q-img
-                width="350px"
-                src="../../public/images/flower_2.png"
-              ></q-img>
+              <q-img width="350px" src="../../public/images/flower_2.png"></q-img>
             </div>
           </div>
         </q-card-section>

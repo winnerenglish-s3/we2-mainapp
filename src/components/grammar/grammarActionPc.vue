@@ -14,30 +14,45 @@
         v-if="currentStep == 1 || currentStep == 2"
       >
         <div :class="{ 'border-dash q-py-md q-px-xl': $q.platform.is.desktop }">
-          <div class="row">
+          <div class="row q-gutter-sm">
             <div class="col-auto" v-for="i in totalQuestion" :key="i">
-              <q-img
-                width="45px"
-                :src="
-                  require(`../../../public/images/question-${
-                    currentQuestion + 1 == i ? 'current' : 'default'
-                  }.png`)
-                "
+              <div
+                class="btn-no relative-position"
+                :class="{
+                  'btn-no-correct': question.isCorrect,
+                  'btn-no-current': i - 1 == currentQuestion,
+                  'btn-no-incorrect': question.isCorrect == false,
+                }"
               >
                 <div
-                  class="transparent absolute-center no-padding text-black"
-                  style="height: 65%"
-                >
-                  <span>{{ i }}</span>
-                </div>
-              </q-img>
+                  class="absolute"
+                  style="
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background-color: white;
+                    top: 7px;
+                    left: 3px;
+                  "
+                ></div>
+                <div
+                  class="absolute"
+                  style="
+                    width: 4px;
+                    height: 4px;
+                    border-radius: 50%;
+                    background-color: white;
+                    top: 3px;
+                    left: 8px;
+                  "
+                ></div>
+                <div class="absolute-center" style="left: 13px">{{ i }}</div>
+              </div>
             </div>
           </div>
 
           <div class="q-mt-lg box-question q-pa-md" align="center">
-            <span class="f20">
-              {{ question.question }}
-            </span>
+            <span class="f20" v-html="question.question"> </span>
           </div>
 
           <div class="q-mt-lg">
@@ -73,10 +88,7 @@
           'absolute-center full-width': $q.platform.is.mobile,
         }"
       >
-        <div
-          class="q-pa-md q-px-xl"
-          :class="{ 'border-dash': $q.platform.is.desktop }"
-        >
+        <div class="q-pa-md q-px-xl" :class="{ 'border-dash': $q.platform.is.desktop }">
           <div
             class="row justify-center"
             style="min-height: calc(100vh - 400px); max-height: fit-content"
@@ -110,9 +122,7 @@
             class="row center"
             style="margin-top: 120px"
             :class="
-              $q.platform.is.desktop
-                ? 'q-pa-md justify-center'
-                : 'q-pa-xs justify-around'
+              $q.platform.is.desktop ? 'q-pa-md justify-center' : 'q-pa-xs justify-around'
             "
           >
             <div
@@ -129,14 +139,8 @@
                 :style="$q.platform.is.desktop ? 'width:100px' : 'width:60px'"
               >
                 <div class="absolute-top" style="top: -90px">
-                  <q-img
-                    width="60px"
-                    src="../../../public/images/grammar/img-score.png"
-                  >
-                    <div
-                      class="transparent absolute-center shadow-0"
-                      style="top: 40%"
-                    >
+                  <q-img width="60px" src="../../../public/images/grammar/img-score.png">
+                    <div class="transparent absolute-center shadow-0" style="top: 40%">
                       <span class="text-black f24 text-bold">10</span>
                     </div></q-img
                   >
@@ -189,27 +193,28 @@
               "
             ></q-img>
           </div>
-        </div>
 
-        <div v-if="learningMode != 'control'">
-          <q-btn
-            label="คำอธิบาย"
-            class="custom-btn"
-            @click="$emit('goToDescription')"
-          >
-            <div class="absolute-left" style="top: 5px; left: 5px">
-              <div
-                style="width: 10px; height: 10px; border-radius: 50%"
-                class="bg-white"
-              ></div>
-            </div>
-            <div class="absolute-left" style="top: 7px; left: 18px">
-              <div
-                style="width: 6px; height: 6px; border-radius: 50%"
-                class="bg-white"
-              ></div>
-            </div>
-          </q-btn>
+          <div v-if="learningMode != 'control'">
+            <q-btn
+              label="คำอธิบาย"
+              class="custom-btn"
+              style="width: 200px"
+              @click="$emit('goToDescription')"
+            >
+              <div class="absolute-left" style="top: 5px; left: 5px">
+                <div
+                  style="width: 10px; height: 10px; border-radius: 50%"
+                  class="bg-white"
+                ></div>
+              </div>
+              <div class="absolute-left" style="top: 7px; left: 18px">
+                <div
+                  style="width: 6px; height: 6px; border-radius: 50%"
+                  class="bg-white"
+                ></div>
+              </div>
+            </q-btn>
+          </div>
         </div>
       </div>
 
@@ -241,9 +246,7 @@
 
           <div class="q-py-md box-show-answer relative-position">
             <div class="q-mt-lg box-question q-pa-md" align="center">
-              <span class="f20">
-                {{ question.question }}
-              </span>
+              <span class="f20" v-html="question.question"> </span>
             </div>
 
             <div class="q-mt-lg box-description" align="center">
@@ -261,7 +264,7 @@
                 class="bg-white flex flex-center"
                 style="min-height: 150px; border-radius: 0px 0px 10px 10px"
               >
-                {{ question.description }}
+                <span v-html="question.description"> </span>
               </div>
             </div>
           </div>
@@ -270,6 +273,7 @@
             <q-btn
               label="ข้อต่อไป"
               class="custom-btn"
+              style="width: 200px"
               @click="$emit('nextQuestion')"
             >
               <div class="absolute-left" style="top: 5px; left: 5px">
@@ -295,10 +299,12 @@
 <script>
 import waiting from "../waiting";
 import multiplechoiceBtn from "../../components/button/multipleChoicesBtn";
+import btnNo from "../../components/button/btn-current-choices";
 export default {
   components: {
     waiting,
     multiplechoiceBtn,
+    btnNo,
   },
   props: {
     currentQuestion: {

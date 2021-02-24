@@ -58,6 +58,9 @@
         <q-btn :disable="mode == 'selfLearning'" @click="grammarActionSync(5)">
           <div>Step5 คำอธิบาย</div>
         </q-btn>
+        <q-btn :disable="mode == 'selfLearning'" @click="nextQuestionAction()">
+          <div>ข้อถัดไป</div>
+        </q-btn>
       </div>
     </q-expansion-item>
 
@@ -146,13 +149,26 @@ export default {
         });
     };
 
+    const currentQuestion = ref(0);
     const grammarActionSync = (index) => {
       db.collection("synchronize")
         .doc("test")
         .update({
           grammarAction: {
-            currentQuestion: 0,
+            currentQuestion: currentQuestion.value,
             currentStep: index,
+          },
+        });
+    };
+
+    const nextQuestionAction = () => {
+      currentQuestion.value++;
+      db.collection("synchronize")
+        .doc("test")
+        .update({
+          grammarAction: {
+            currentQuestion: currentQuestion.value,
+            currentStep: 1,
           },
         });
     };
@@ -167,6 +183,7 @@ export default {
       grammarMode,
       changeGrammarLesson,
       grammarActionSync,
+      nextQuestionAction,
     };
   },
 };
