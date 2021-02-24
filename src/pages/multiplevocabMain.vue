@@ -5,6 +5,8 @@
         :isHasHelp="isHasHelp"
         :isHasInstruction="isHasInstruction"
         :instructionData="instructionData"
+        :isShowHome="false"
+        :isShowPause="true"
       ></app-bar>
     </div>
 

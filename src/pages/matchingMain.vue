@@ -1,7 +1,11 @@
 <template>
   <q-page class="bg-matching">
     <div>
-      <app-bar :instructionData="instructionData"></app-bar>
+      <app-bar
+        :instructionData="instructionData"
+        :isShowHome="false"
+        :isShowPause="true"
+      ></app-bar>
     </div>
 
     <div class="absolute-center" v-if="!isLoadPractice">
