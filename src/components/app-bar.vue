@@ -219,7 +219,7 @@
                 <div class="q-mt-lg q-pa-xs" align="center">
                   <q-img
                     class="cursor-pointer"
-                    @click="isShowSetting = false"
+                    v-close-popup
                     src="../../public/images/btn-continue.png"
                     width="210px"
                     alt=""
@@ -227,6 +227,8 @@
                 </div>
                 <div class="q-pa-xs q-mt-xs" align="center">
                   <q-img
+                    v-close-popup
+                    @click="$emit('callback-restart')"
                     class="cursor-pointer"
                     src="../../public/images/btn-restart.png"
                     width="210px"
@@ -298,7 +300,7 @@ export default {
       default: "",
     },
   },
-  emits: ["callback-showdialoghelp"],
+  emits: ["callback-showdialoghelp", "callback-restart"],
   setup(props, { emit }) {
     // Set Router
     const route = useRoute();

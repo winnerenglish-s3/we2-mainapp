@@ -5,6 +5,7 @@
         :instructionData="instructionData"
         :isShowHome="false"
         :isShowPause="true"
+        @callback-restart="reStart"
       ></app-bar>
     </div>
 
@@ -99,7 +100,10 @@
       :th="instructionData.th"
     ></instruction-dialog>
 
-    <finish-practice-dialog :isFinishPractice="isFinishPractice"></finish-practice-dialog>
+    <finish-practice-dialog
+      :isFinishPractice="isFinishPractice"
+      @reStart="reStart"
+    ></finish-practice-dialog>
   </q-page>
 </template>
 
@@ -332,6 +336,7 @@ export default {
         practiceData.question = questionList.value;
       }
     };
+
     // ----------------------------------------- Use Platform Desktop
 
     // TODO : แสดงปุ่มตัวช่วยถ้ามี
@@ -346,6 +351,19 @@ export default {
 
     // TODO : แสดง Dialog จบแบบฝึกหัด
     const isFinishPractice = ref(false);
+
+    const reStart = () => {
+      isFinishPractice.value = false;
+      isLoadPractice.value = false;
+
+      practiceData.totalQuestion = 0;
+      practiceData.totalStar = 0;
+      practiceData.question = [];
+      practiceData.choices = [];
+      practiceData.currentQuestion = 0;
+
+      funcLoadPractice();
+    };
 
     onMounted(async () => {
       if (isHasHelp) {
@@ -369,6 +387,7 @@ export default {
       isLoadPractice,
       isFinishPractice,
       funcSelectedPractice,
+      reStart,
     };
   },
 };

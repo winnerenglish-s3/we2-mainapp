@@ -7,6 +7,7 @@
         :instructionData="instructionData"
         :isShowHome="false"
         :isShowPause="true"
+        @callback-restart="reStart"
       ></app-bar>
     </div>
 
@@ -113,14 +114,17 @@
       </q-card>
     </q-dialog>
 
-    <finish-practice-dialog :isFinishPractice="isFinishPractice"></finish-practice-dialog>
-
     <instruction-dialog
       v-if="isLoadPractice"
       :isShowDialogInstruction="true"
       :en="instructionData.eng"
       :th="instructionData.th"
     ></instruction-dialog>
+
+    <finish-practice-dialog
+      :isFinishPractice="isFinishPractice"
+      @reStart="reStart"
+    ></finish-practice-dialog>
   </q-page>
 </template>
 
@@ -247,8 +251,6 @@ export default {
         // เก็บข้อมูลแบบฝึกหัดทั้งหมด
         questionList.value = setPracticeList;
 
-        console.log(questionList.value);
-
         // เลือกแบบฝึกหัดเมื่อโหลดครั้งแรก
         funcSelectedQuestion(true);
 
@@ -286,8 +288,23 @@ export default {
         questionList.value[practiceData.currentQuestion].correctAnswer;
     };
 
+    const reStart = () => {
+      isFinishPractice.value = false;
+      isLoadPractice.value = false;
+
+      practiceData.totalQuestion = 0;
+      practiceData.totalStar = 0;
+      practiceData.question = [];
+      practiceData.choices = [];
+      practiceData.currentQuestion = 0;
+
+      funcLoadPractice();
+    };
+
     // Mounted Load Practice
-    onMounted(funcLoadPractice);
+    onMounted(() => {
+      funcLoadPractice();
+    });
 
     return {
       practiceData,
@@ -298,71 +315,8 @@ export default {
       isHasHelp,
       isHasInstruction,
       fucnSendAnswer,
+      reStart,
     };
-  },
-  data() {
-    return {
-      tab: "vocab",
-      instruction: {
-        th: "เลือกคำต้องที่ถูกต้อง",
-        en: "Choose the best correct answer",
-      },
-      vocabList: [
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-        {
-          vocab: "test",
-          meaning: "ทดสอบ",
-        },
-      ],
-
-      isHasHelp: true,
-      isHasInstruction: true,
-    };
-  },
-
-  mounted() {
-    if (this.isHasHelp) {
-      this.$emit("isShowButtonHelp");
-    }
-
-    if (this.isHasInstruction) {
-      this.$emit("isShowButtonInstruction");
-    }
   },
 };
 </script>

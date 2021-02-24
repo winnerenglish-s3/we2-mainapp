@@ -13,6 +13,7 @@
         :isShowHome="false"
         :isShowPause="learningMode == 'control' ? false : true"
         @callback-showdialoghelp="funcShowDialogHelp"
+        @callback-restart="reStart"
       ></app-bar>
     </div>
 
@@ -121,7 +122,10 @@
       </q-card>
     </q-dialog>
 
-    <finish-practice-dialog :isFinishPractice="isFinishPractice"></finish-practice-dialog>
+    <finish-practice-dialog
+      :isFinishPractice="isFinishPractice"
+      @reStart="reStart"
+    ></finish-practice-dialog>
   </q-page>
 </template>
 
@@ -350,6 +354,19 @@ export default {
         }
       });
 
+    const reStart = () => {
+      isFinishPractice.value = false;
+      isLoadPractice.value = false;
+
+      practiceData.totalQuestion = 0;
+      practiceData.totalStar = 0;
+      practiceData.question = [];
+      practiceData.choices = [];
+      practiceData.currentQuestion = 0;
+
+      funcLoadPractice();
+    };
+
     // Mounted Function First time
     onMounted(() => {
       funcLoadPractice();
@@ -372,6 +389,7 @@ export default {
       isFinishPractice,
       synchronize,
       learningMode,
+      reStart,
     };
   },
 };
