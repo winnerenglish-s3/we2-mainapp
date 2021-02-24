@@ -560,8 +560,10 @@ export default {
         nameImage = require("../../public/images/practicelist/teaching-btn-default.png");
       } else if (type == "matching") {
         nameImage = require("../../public/images/practicelist/matching-btn-star0.png");
-      } else if (type == "multiplechoices") {
+      } else if (type.includes("multiplechoices")) {
         nameImage = require("../../public/images/practicelist/multiple-btn-star0.png");
+      } else if (type == "clozetest") {
+        nameImage = require("../../public/images/practicelist/writing-btn-star0.png");
       }
       return nameImage;
     };
