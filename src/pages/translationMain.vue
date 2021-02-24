@@ -150,7 +150,7 @@ export default {
 
 <style lang="scss" scoped>
 .bg-translation {
-  background-image: url("../../public/images/translation/bg-clozetest.png");
+  background-image: url("../../public/images/translation/bg-translation.png");
   background-size: cover;
 }
 
@@ -164,7 +164,7 @@ export default {
 .box-content-answer {
   max-width: 600px;
   width: 100%;
-  background-image: url("../../public/images/translation/bg-clozetest-content.png");
+  background-image: url("../../public/images/translation/bg-translation-content.png");
   background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;

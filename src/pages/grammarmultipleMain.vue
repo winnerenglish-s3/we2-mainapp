@@ -10,6 +10,7 @@
         :isHasHelp="isHasHelp"
         :instructionData="instructionData"
         :isLoadPractice="isLoadPractice"
+        :learningMode="learningMode"
         @callback-showdialoghelp="funcShowDialogHelp"
       ></app-bar>
     </div>
@@ -333,6 +334,21 @@ export default {
     //   }, 300);
     // };
 
+    // Listen Synchronize
+    const learningMode = ref(0);
+    const synchronize = db
+      .collection("synchronize")
+      .doc("test")
+      .onSnapshot((data) => {
+        if (data.data().mode == "control") {
+          practiceData.currentQuestion = data.data().practiceData.currentQuestion;
+          // currentStep.value = data.data().grammarAction.currentStep;
+          learningMode.value = "control";
+        } else {
+          learningMode.value = "selfLearning";
+        }
+      });
+
     // Mounted Function First time
     onMounted(() => {
       funcLoadPractice();
@@ -353,6 +369,8 @@ export default {
       showLessonVideo,
       funcShowDialogHelp,
       isFinishPractice,
+      synchronize,
+      learningMode,
     };
   },
 };
