@@ -6,10 +6,17 @@
           <div class="col-6">
             <q-btn
               icon="fas fa-home"
-              v-if="!isShowDialogFlashcard"
+              v-if="!isShowDialogFlashcard && learningMode == 'selfLearning'"
               class="shadow-2 btn-header q-mr-md btn-width-mobile"
               @click="$router.push('/lobby')"
             ></q-btn>
+            <q-btn
+              icon="fas fa-pause"
+              v-if="learningMode == 'control'"
+              class="shadow-2 btn-header q-mr-md btn-width-mobile"
+              @click="isShowSetting = true"
+            ></q-btn>
+
             <q-btn
               icon="fas fa-arrow-left"
               v-if="
@@ -184,10 +191,10 @@
                   </div>
                   <q-space></q-space>
                   <div class="q-pr-sm">
-                    <toggle-button
-                      :value="true"
-                      color="#427B00"
-                      :labels="{ checked: 'เปิด', unchecked: 'ปิด' }"
+                    <q-toggle
+                      v-model="settingBgSound"
+                      :color="settingBgSound ? 'green' : 'grey'"
+                      keep-color
                     />
                   </div>
                 </div>
@@ -202,15 +209,15 @@
                   </div>
                   <q-space></q-space>
                   <div class="q-px-sm">
-                    <toggle-button
-                      :value="true"
-                      color="#427B00"
-                      :labels="{ checked: 'เปิด', unchecked: 'ปิด' }"
+                    <q-toggle
+                      v-model="settingMusicSound"
+                      :color="settingMusicSound ? 'green' : 'grey'"
+                      keep-color
                     />
                   </div>
                 </div>
                 <div class="q-mt-lg q-pa-xs" align="center">
-                  <img
+                  <q-img
                     class="cursor-pointer"
                     @click="isShowSetting = false"
                     src="../../public/images/btn-continue.png"
@@ -219,7 +226,7 @@
                   />
                 </div>
                 <div class="q-pa-xs q-mt-xs" align="center">
-                  <img
+                  <q-img
                     class="cursor-pointer"
                     src="../../public/images/btn-restart.png"
                     width="210px"
@@ -227,11 +234,12 @@
                   />
                 </div>
                 <div class="q-pa-xs q-mt-xs" align="center">
-                  <img
+                  <q-img
                     class="cursor-pointer"
                     src="../../public/images/btn-out-practice.png"
                     width="210px"
                     alt=""
+                    @click="$router.push('/practicemain')"
                   />
                 </div>
               </div>
@@ -277,6 +285,10 @@ export default {
       type: Boolean,
       default: () => false,
     },
+    learningMode: {
+      type: String,
+      default: "",
+    },
   },
   emits: ["callback-showdialoghelp"],
   setup(props, { emit }) {
@@ -287,6 +299,10 @@ export default {
     const returnCloseDialog = () => {
       emit("showDialogFlashcard");
     };
+
+    // Initial Data
+    const settingBgSound = ref(false);
+    const settingMusicSound = ref(false);
 
     // เซ็ทสีของ Theme ที่ใช้
     const colorTheme = ref(getColorTheme);
@@ -372,6 +388,8 @@ export default {
       resetBtn,
       finishBtn,
       isShowSetting,
+      settingBgSound,
+      settingMusicSound,
     };
   },
 };
