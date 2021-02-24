@@ -176,6 +176,13 @@ const routes = [
         component: () => import("pages/translationMain.vue"),
         name: "translation",
       },
+
+      // Cloze Test
+      {
+        path: "/clozeTest/:practiceListId?",
+        component: () => import("pages/clozeTestMain.vue"),
+        name: "clozeTest",
+      },
     ],
   },
 
