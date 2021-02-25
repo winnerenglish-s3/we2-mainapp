@@ -2,7 +2,6 @@
   <div>
     <q-header :class="$route.name == 'flashcard' ? 'z-top' : ''">
       <q-toolbar :style="themeColor">
-        {{ isHasHelp }}
         <div class="row header-container">
           <div class="col-6">
             <q-btn

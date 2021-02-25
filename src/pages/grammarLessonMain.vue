@@ -202,29 +202,7 @@ export default {
       width: "9px",
       opacity: 0.2,
     };
-    const grammarList = ref([
-      // {
-      //   titleEn: "Cover",
-      //   titleTh: "หน้าปก",
-      //   isNewData: true,
-      //   imgURL: require("../../public/grammar-test-only/grammar-test.png"),
-      //   vdoLink: "https://www.youtube.com/embed/k3_tw44QsZQ?rel=0",
-      // },
-      // {
-      //   titleEn: "Adjectives",
-      //   titleTh: "คำคุณศัพท์",
-      //   isNewData: true,
-      //   imgURL: require("../../public/grammar-test-only/grammar-test2.png"),
-      //   vdoLink: "https://www.youtube.com/embed/8IW56tzL4CQ?rel=0",
-      // },
-      // {
-      //   titleEn: "Adjectives",
-      //   titleTh: "คำคุณศัพท์",
-      //   isNewData: true,
-      //   imgURL: require("../../public/grammar-test-only/grammar-test3.png"),
-      //   vdoLink: "https://www.youtube.com/embed/LBHUmp8c9Ew?rel=0",
-      // },
-    ]);
+    const grammarList = ref([]);
 
     // Grammar List ปัจจุบันที่คลิกอยู่
     const activeGrammarList = ref(0);
