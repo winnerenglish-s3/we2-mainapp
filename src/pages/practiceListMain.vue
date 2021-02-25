@@ -588,7 +588,7 @@ export default {
           routerName = "/grammarmultiple/";
         } else if (data.skill == "Phonics") {
           routerName = "/phonicsMultiple/";
-        } else if (data.skill == "reading") {
+        } else if (data.skill == "Reading") {
           routerName = "/readingmultiple/";
         }
       } else if (data.practiceType == "spellingbee") {
