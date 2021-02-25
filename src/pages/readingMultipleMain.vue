@@ -2,7 +2,6 @@
   <q-page class="bg-reading">
     <app-bar
       :isShowPause="learningMode == 'selfLearning' ? true : false"
-      :isShowHome="learningMode == 'selfLearning' ? true : false"
       :isHasHelp="true"
       :isLoadPractice="isLoadQuestion"
       @callback-showdialoghelp="isOpenHelp = true"
@@ -17,7 +16,10 @@
           <div class="relative-position">
             <header-bar
               :setFontSize="fontSize"
-              :practiceData="practiceData"
+              :practiceData="{
+                totalQuestion: questionList.length,
+                currentQuestion: currentQuestion,
+              }"
               @decreaseFont="decreaseFont"
               @increaseFont="increaseFont"
               @playSound="playSound"
