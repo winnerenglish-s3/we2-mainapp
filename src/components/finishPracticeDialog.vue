@@ -41,7 +41,7 @@
                 <div align="center" v-if="!isNotProgress">
                   <span>จบแบบฝึกหัด</span>
                   <br />
-                  <span>ระดับที่ 5 - บทที่ 12</span>
+                  <span>ระดับที่ 1 - บทที่ 1</span>
                   <div class="q-mt-md">
                     <span>จำนวนครั้งในการทำ : {{ numOfPractice }}/2</span>
                   </div>

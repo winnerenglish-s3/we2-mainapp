@@ -1,13 +1,10 @@
 <template>
   <div class="row relative-position q-pt-sm">
-    <div
-      class="col-3 self-center row q-py-sm q-pb-md"
-      style="max-width: 300px; width: 60%"
-    >
+    <div class="self-center row q-py-sm q-pb-md" style="max-width: 250px; width: 45%">
       <div class="box-current-question self-center q-mx-md">
-        <span class="text-white" style="font-size: max(1.1vw, 14px)">{{
-          `${practiceData.currentQuestion + 1}/${practiceData.totalQuestion}`
-        }}</span>
+        <span class="text-white" style="font-size: max(1.1vw, 14px)">
+          {{ `${practiceData.currentQuestion + 1}/${practiceData.totalQuestion}` }}
+        </span>
       </div>
       <div class="box-start self-center" align="center">
         <q-rating
@@ -22,16 +19,8 @@
       </div>
     </div>
     <q-space></q-space>
-    <div
-      class="col-3 self-center q-pb-sm"
-      style="max-width: 200px; width: 40%"
-      align="right"
-    >
-      <div
-        v-if="
-          $route.name != 'readingmultiple' && $route.name != 'grammaraction'
-        "
-      >
+    <div class="self-center q-pb-sm" style="max-width: 200px; width: 45%" align="right">
+      <div v-if="$route.name != 'readingmultiple' && $route.name != 'grammaraction'">
         <time-progress
           style="margin-top: 7px"
           align="right"
@@ -104,9 +93,9 @@ export default {
     //   default: () => false,
     //   type: Boolean,
     // },
-    practiceData:{
-      type:Object,
-      default: () => {}
+    practiceData: {
+      type: Object,
+      default: () => {},
     },
     setFontSize: {
       type: Number,

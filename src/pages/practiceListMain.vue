@@ -581,11 +581,15 @@ export default {
         routerName = "/flashcard/";
       } else if (data.practiceType == "matching") {
         routerName = "/matching/";
-      } else if (data.practiceType == "multiplechoices") {
+      } else if (data.practiceType.includes("multiplechoices")) {
         if (data.skill == "Vocabulary") {
           routerName = "/multiplevocab/";
         } else if (data.skill == "Grammar") {
           routerName = "/grammarmultiple/";
+        } else if (data.skill == "Phonics") {
+          routerName = "/phonicsMultiple/";
+        } else if (data.skill == "reading") {
+          routerName = "/readingmultiple/";
         }
       } else if (data.practiceType == "spellingbee") {
         routerName = "/spellingbee/";
@@ -593,8 +597,6 @@ export default {
         routerName = "/grammarLesson/";
       } else if (data.practiceType == "grammaraction") {
         routerName = "/grammarAction/";
-      } else if (data.practiceType == "readingmultiplechoices") {
-        routerName = "/readingmultiple/";
       } else if (data.practiceType == "translation") {
         routerName = "/translation/";
       } else if (data.practiceType == "clozetest") {
