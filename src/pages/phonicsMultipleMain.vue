@@ -1,13 +1,36 @@
 <template>
   <q-page class="bg-phonics">
+    <div>
+      <app-bar
+        :isHasInstruction="true"
+        :isHasHelp="true"
+        :isShowHome="false"
+        :isShowPause="learningMode == 'control' ? false : true"
+        :isLoadPractice="isLoadPractice"
+        @callback-showdialoghelp="isShowDialogHelp = true"
+        @callback-restart="reStart"
+      ></app-bar>
+    </div>
+
+    <div class="absolute-center" v-if="!isLoadPractice">
+      <q-spinner color="primary" size="100px" />
+    </div>
+
     <phonics-multi-pc
+      :practiceData="practiceData"
       :themeSync="themeSync"
+      @callback-nextquestion="funcSelectedQuestion"
+      @callback-finishpractice="isFinishPractice = true"
       class="box-container-main"
-      v-if="$q.platform.is.desktop"
+      v-if="$q.platform.is.desktop && isLoadPractice"
     ></phonics-multi-pc>
+
     <phonics-multi-mobile
+      :practiceData="practiceData"
       :themeSync="themeSync"
-      v-if="$q.platform.is.mobile"
+      @callback-nextquestion="funcSelectedQuestion"
+      @callback-finishpractice="isFinishPractice = true"
+      v-if="$q.platform.is.mobile && isLoadPractice"
     ></phonics-multi-mobile>
 
     <!-- Help Popup -->
@@ -51,19 +74,19 @@
                     >
                       <!-- Desktop -->
                       <div
-                        v-for="i in 15"
+                        v-for="(item, index) in lessonList"
                         v-if="$q.platform.is.desktop"
-                        :key="i"
+                        :key="index"
                         v-ripple
                         class="relative-position cursor-pointer q-py-sm q-px-sm rounded-borders q-mb-sm box-choices"
                         :style="
-                          selectHelp == i
+                          selectLesson == item.vdoLink
                             ? 'background-color:#48DBFC'
                             : 'background-coor:#fff;'
                         "
-                        @click="selectHelp = i"
+                        @click="selectLesson = item.vdoLink"
                       >
-                        {{ `การออกเสียงอักษรต้นผสม ch การ ออกเสียงอักษรต้นผสม  ch #2` }}
+                        {{ item.name }}
                       </div>
 
                       <div v-if="$q.platform.is.mobile" align="center">
@@ -72,8 +95,10 @@
                           filled
                           borderless=""
                           class="rounded-borders"
-                          v-model="testSelect"
-                          :options="[]"
+                          v-model="selectLesson"
+                          :options="lessonList"
+                          map-options
+                          emit-value
                         ></q-select>
                       </div>
                     </div>
@@ -84,12 +109,12 @@
                       class="row"
                     >
                       <div class="col-12" :class="$q.platform.is.mobile ? '' : 'q-pa-sm'">
-                        <video
-                          style="width: 100%; border: 1px solid #000"
-                          src="../../public/video/example.mp4"
-                          controls
-                          controlsList="nodownload"
-                        ></video>
+                        <q-video
+                          :ratio="16 / 9"
+                          :src="
+                            lessonList.filter((x) => x.vdoLink == selectLesson)[0].vdoLink
+                          "
+                        ></q-video>
                         <div class="row q-mt-md">
                           <div>
                             <q-img
@@ -99,13 +124,7 @@
                             ></q-img>
                           </div>
                           <q-space></q-space>
-                          <div class="self-center">
-                            <q-img
-                              class="cursor-pointer btn-hover"
-                              width="150px"
-                              src="../../public/images/phonicsmulti/btn-play-video.png"
-                            ></q-img>
-                          </div>
+
                           <q-space></q-space>
                           <div>
                             <q-img
@@ -127,7 +146,7 @@
                           style="border-radius: 0px 0px 7px 7px"
                         >
                           <q-img
-                            @click="closeHelpBtn()"
+                            v-close-popup
                             class="cursor-pointer"
                             style="width: 200px"
                             src="../../public/images/close-help-btn-pc.png"
@@ -143,14 +162,14 @@
                     <div
                       class="row justify-around q-pa-sm q-px-lg"
                       style="border-bottom: 1px solid #c4c4c4"
-                      v-for="i in 20"
+                      v-for="(item, index) in practiceData.extraSound"
                     >
-                      <div>{{ i }}</div>
+                      <div>{{ item.vocab }}</div>
                       <div>
                         <span>เทียบเสียงไทย</span>
                       </div>
                       <div>
-                        {{ "ท" }}
+                        {{ item.alphabets }}
                       </div>
                     </div>
                   </div>
@@ -159,7 +178,7 @@
             </div>
             <div v-if="$q.platform.is.mobile">
               <q-img
-                @click="closeHelpBtn()"
+                v-close-popup
                 class="cursor-pointer"
                 src="../../public/images/close-help-btn-mobile.png"
               ></q-img>
@@ -168,16 +187,30 @@
         </q-card-section>
       </q-card>
     </q-dialog>
+
+    <finish-practice-dialog
+      :isFinishPractice="isFinishPractice"
+      @reStart="reStart"
+    ></finish-practice-dialog>
   </q-page>
 </template>
 
 <script>
 import phonicsMultiPc from "../components/phonicsmultiple/phonicsMultiplePc";
 import phonicsMultiMobile from "../components/phonicsmultiple/phonicsMultipleMobile";
+import finishPracticeDialog from "../components/finishPracticeDialog";
+import appBar from "../components/app-bar";
+import lessonHooks from "../hooks/lessonHooks";
+import { ref, reactive, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { db } from "src/router";
+import axios from "axios";
 export default {
   components: {
+    appBar,
     phonicsMultiPc,
     phonicsMultiMobile,
+    finishPracticeDialog,
   },
   props: {
     isStartPractice: {
@@ -193,30 +226,247 @@ export default {
       default: 0,
     },
   },
-  data() {
-    return {
-      tab: "video",
-      selectHelp: 1,
+  setup(props) {
+    // Initial Data
+    const route = useRoute();
+    const router = useRouter();
+    const tab = ref("video");
 
-      isHasHelp: true,
-      isHasInstruction: true,
+    // Practice Data
+    const questionList = ref([]);
+    const practiceData = reactive({
+      totalQuestion: 0,
+      currentQuestion: 0,
+      question: "",
+      choices: [],
+      correctAnswer: 0,
+      extraSound: [],
+    });
+    const selectLesson = ref("");
+    const isLoadPractice = ref(false);
+    const isFinishPractice = ref(false);
+    const learningMode = ref("");
+    const lessonList = ref([]);
+    const extraSound = reactive([
+      {
+        vocab: "A",
+        alphabets: "แ",
+      },
+      {
+        vocab: "B",
+        alphabets: "บ",
+      },
+      {
+        vocab: "C",
+        alphabets: "ซ, ค",
+      },
+      {
+        vocab: "D",
+        alphabets: "ด",
+      },
+      {
+        vocab: "E",
+        alphabets: "เ, อี",
+      },
+      {
+        vocab: "F",
+        alphabets: "ฟ",
+      },
+      {
+        vocab: "G",
+        alphabets: "ก",
+      },
+      {
+        vocab: "H",
+        alphabets: "ฮ",
+      },
+      {
+        vocab: "I",
+        alphabets: "อิ, ไ",
+      },
+      {
+        vocab: "J",
+        alphabets: "จ",
+      },
+      {
+        vocab: "K",
+        alphabets: "ค, ก",
+      },
+      {
+        vocab: "L",
+        alphabets: "ล",
+      },
+      {
+        vocab: "M",
+        alphabets: "ม",
+      },
+      {
+        vocab: "N",
+        alphabets: "น",
+      },
+      {
+        vocab: "O",
+        alphabets: "โ, อ",
+      },
+      {
+        vocab: "P",
+        alphabets: "พ",
+      },
+      {
+        vocab: "Q",
+        alphabets: "คว",
+      },
+      {
+        vocab: "R",
+        alphabets: "ร",
+      },
+      {
+        vocab: "S",
+        alphabets: "ซ, ส",
+      },
+      {
+        vocab: "T",
+        alphabets: "ท",
+      },
+      {
+        vocab: "U",
+        alphabets: "อั, อิว, อู",
+      },
+      {
+        vocab: "V",
+        alphabets: "ว",
+      },
+      {
+        vocab: "W",
+        alphabets: "ว",
+      },
+      {
+        vocab: "X",
+        alphabets: "กซ",
+      },
+      {
+        vocab: "Y",
+        alphabets: "ย, วี, อาย",
+      },
+      {
+        vocab: "Z",
+        alphabets: "ซ",
+      },
+    ]);
 
-      testSelect: "",
+    const funcLoadPractice = async () => {
+      console.clear();
+
+      try {
+        let multipleList = [];
+
+        // เก็บ practice list id จาก router
+        let practiceListId = route.params.practiceListId;
+
+        // ดึงข้อมูล practice list
+        let getData = await db.collection("practiceList").doc(practiceListId).get();
+
+        // เก็บจำนวนข้อของแบบฝึกหัดตามที่เลือกไว้ใน backend
+        practiceData.totalQuestion = getData.data().numOfPractice;
+
+        try {
+          let getLesson = await lessonHooks
+            .lesson()
+            .phonics(getData.data().level, getData.data().unit);
+
+          lessonList.value = getLesson;
+
+          selectLesson.value = lessonList.value[0].vdoLink;
+        } catch (error) {
+          console.log(`${error} : Get Hooks Grammar lesson`);
+        }
+
+        // Get Api
+        const apiURL =
+          "https://us-central1-winnerenglish2-e0f1b.cloudfunctions.net/wfunctions/getPracticeData";
+        const postData = {
+          practiceListId: practiceListId,
+        };
+        const response = await axios.post(apiURL, postData);
+
+        // เก็บข้อมูลที่ได้จาก axios
+        multipleList = response.data;
+
+        // copy แบบฝึกหัด
+        let setPracticeList = [...multipleList];
+
+        // เก็บข้อมูลคำศัพท์เสริม
+        practiceData.extraSound = extraSound;
+
+        // สุ่มคำตอบของแต่ละข้อ
+        setPracticeList = setPracticeList.map((x) => {
+          let choices = x.choices.sort(() => Math.random() - 0.5);
+          x.choices = choices;
+          return x;
+        });
+
+        // สุ่มแบบฝึกหัด
+        setPracticeList = setPracticeList.sort(() => Math.random() - 0.5);
+
+        // ตัดจำนวนแบบฝึกหัดให้เท่ากับจำนวน TotalQuestion
+        setPracticeList = setPracticeList.slice(0, practiceData.totalQuestion);
+
+        // เก็บข้อมูลแบบฝึกหัดทั้งหมด
+        questionList.value = setPracticeList;
+
+        // เลือกแบบฝึกหัดเมื่อโหลดครั้งแรก
+        funcSelectedQuestion(true);
+
+        isLoadPractice.value = true;
+      } catch (error) {
+        console.log(`${error} : Function Load Practice`);
+      }
     };
-  },
-  methods: {
-    closeHelpBtn() {
-      this.$emit("closeHelp");
-    },
-  },
-  mounted() {
-    if (this.isHasHelp) {
-      this.$emit("isShowButtonHelp");
-    }
 
-    if (this.isHasInstruction) {
-      this.$emit("isShowButtonInstruction");
-    }
+    const funcSelectedQuestion = (firsttime) => {
+      firsttime = firsttime || false;
+
+      if (!firsttime) {
+        practiceData.currentQuestion++;
+      }
+
+      // Practice Data : Show Question
+      practiceData.question = questionList.value[practiceData.currentQuestion].question;
+
+      // Practice Data : Show Choice
+      practiceData.choices = questionList.value[practiceData.currentQuestion].choices;
+
+      // Practice Data : Correct Answer
+      practiceData.correctAnswer =
+        questionList.value[practiceData.currentQuestion].correctAnswer;
+    };
+
+    const reStart = () => {
+      isFinishPractice.value = false;
+      isLoadPractice.value = false;
+
+      practiceData.totalQuestion = 0;
+      practiceData.totalStar = 0;
+      practiceData.question = "";
+      practiceData.choices = [];
+      practiceData.currentQuestion = 0;
+
+      funcLoadPractice();
+    };
+
+    onMounted(funcLoadPractice);
+
+    return {
+      practiceData,
+      isLoadPractice,
+      funcSelectedQuestion,
+      isFinishPractice,
+      reStart,
+      lessonList,
+      learningMode,
+      selectLesson,
+      tab,
+    };
   },
 };
 </script>

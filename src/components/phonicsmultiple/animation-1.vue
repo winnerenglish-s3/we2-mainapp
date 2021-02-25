@@ -660,7 +660,7 @@
         </g>
         <g
           id="glass-set-4-4"
-          :class="isSendAnswer && selectAnswer == 4 ? 'glass-move-on' : null"
+          :class="isSendAnswer && selectAnswer == 3 ? 'glass-move-on' : null"
           filter="url(#filter2_d)"
         >
           <path
@@ -925,7 +925,7 @@
         </g>
         <g
           id="glass-set-4-3"
-          :class="isSendAnswer && selectAnswer == 3 ? 'glass-move-on' : null"
+          :class="isSendAnswer && selectAnswer == 2 ? 'glass-move-on' : null"
           filter="url(#filter5_d)"
         >
           <path
@@ -1190,7 +1190,7 @@
         </g>
         <g
           id="glass-set-4-2"
-          :class="isSendAnswer && selectAnswer == 2 ? 'glass-move-on' : null"
+          :class="isSendAnswer && selectAnswer == 1 ? 'glass-move-on' : null"
           filter="url(#filter8_d)"
         >
           <path
@@ -1455,7 +1455,7 @@
         </g>
         <g
           id="glass-set-4-1"
-          :class="isSendAnswer && selectAnswer == 1 ? 'glass-move-on' : null"
+          :class="isSendAnswer && selectAnswer == 0 ? 'glass-move-on' : null"
           filter="url(#filter11_d)"
         >
           <path
@@ -1664,34 +1664,10 @@
               r="5.04274"
               fill="#FEFEFE"
             />
-            <circle
-              id="correct_20"
-              cx="860.333"
-              cy="204.342"
-              r="4.03419"
-              fill="black"
-            />
-            <circle
-              id="correct_21"
-              cx="870.923"
-              cy="208.88"
-              r="1.51282"
-              fill="#C10000"
-            />
-            <circle
-              id="correct_22"
-              cx="875.966"
-              cy="208.88"
-              r="1.51282"
-              fill="#C10000"
-            />
-            <circle
-              id="correct_23"
-              cx="886.556"
-              cy="204.342"
-              r="4.03419"
-              fill="black"
-            />
+            <circle id="correct_20" cx="860.333" cy="204.342" r="4.03419" fill="black" />
+            <circle id="correct_21" cx="870.923" cy="208.88" r="1.51282" fill="#C10000" />
+            <circle id="correct_22" cx="875.966" cy="208.88" r="1.51282" fill="#C10000" />
+            <circle id="correct_23" cx="886.556" cy="204.342" r="4.03419" fill="black" />
             <path
               id="correct_24"
               d="M862.268 193.724C867.249 198.552 868.759 198.713 870.419 199.035C867.521 200.193 863.174 197.264 861.363 195.655C857.378 192.952 853.061 196.782 851.401 199.035L852.306 194.689L848.231 195.655C854.389 188.703 860.155 191.471 862.268 193.724Z"
@@ -1723,7 +1699,7 @@
         </g>
         <g
           id="glass-set-3-3"
-          :class="isSendAnswer && selectAnswer == 3 ? 'glass-move-on' : null"
+          :class="isSendAnswer && selectAnswer == 2 ? 'glass-move-on' : null"
           filter="url(#filter14_d)"
         >
           <path
@@ -1988,7 +1964,7 @@
         </g>
         <g
           id="glass-set-3-2"
-          :class="isSendAnswer && selectAnswer == 2 ? 'glass-move-on' : null"
+          :class="isSendAnswer && selectAnswer == 1 ? 'glass-move-on' : null"
           filter="url(#filter17_d)"
         >
           <path
@@ -2253,7 +2229,7 @@
         </g>
         <g
           id="glass-set-3-1"
-          :class="isSendAnswer && selectAnswer == 1 ? 'glass-move-on' : null"
+          :class="isSendAnswer && selectAnswer == 0 ? 'glass-move-on' : null"
           filter="url(#filter20_d)"
         >
           <path
@@ -2520,7 +2496,7 @@
         </g>
         <g
           id="glass-set-2-2"
-          :class="isSendAnswer && selectAnswer == 2 ? 'glass-move-on' : null"
+          :class="isSendAnswer && selectAnswer == 1 ? 'glass-move-on' : null"
           filter="url(#filter23_d)"
         >
           <path
@@ -2785,7 +2761,7 @@
         </g>
         <g
           id="glass-set-2-1"
-          :class="isSendAnswer && selectAnswer == 1 ? 'glass-move-on' : null"
+          :class="isSendAnswer && selectAnswer == 0 ? 'glass-move-on' : null"
           filter="url(#filter26_d)"
         >
           <path
@@ -2842,11 +2818,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2875,11 +2847,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2908,11 +2876,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2941,11 +2905,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2974,11 +2934,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3007,11 +2963,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3040,11 +2992,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3073,11 +3021,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3106,11 +3050,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3139,11 +3079,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3172,11 +3108,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3205,11 +3137,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3238,11 +3166,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3271,11 +3195,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3304,11 +3224,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3337,11 +3253,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3370,11 +3282,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3403,11 +3311,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3436,11 +3340,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3469,11 +3369,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3502,11 +3398,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3535,11 +3427,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3568,11 +3456,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3601,11 +3485,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3634,11 +3514,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3667,11 +3543,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3700,11 +3572,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3823,21 +3691,21 @@ export default {
   props: {
     choicesLength: {
       type: Number,
-      default: 0
+      default: 0,
     },
     selectAnswer: {
       type: Number,
-      default: 0
+      default: 0,
     },
     isCorrect: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     isSendAnswer: {
       type: Boolean,
-      default: () => false
-    }
-  }
+      default: () => false,
+    },
+  },
 };
 </script>
 
