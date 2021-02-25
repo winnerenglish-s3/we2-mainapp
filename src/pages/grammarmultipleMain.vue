@@ -195,7 +195,6 @@ export default {
         // Set Level and Unit and Skill
         let level = 0;
         let unit = 0;
-        let skill = "";
 
         // Set Practice ID
         let practiceListId = route.params.practiceListId;
@@ -208,7 +207,6 @@ export default {
 
         level = getData.data().level;
         unit = getData.data().unit;
-        skill = getData.data().skill;
 
         try {
           let getLesson = await lessonHooks.lesson().grammar(level, unit);
@@ -340,7 +338,7 @@ export default {
     // };
 
     // Listen Synchronize
-    const learningMode = ref(0);
+    const learningMode = ref("");
     const synchronize = db
       .collection("synchronize")
       .doc("test")

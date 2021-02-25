@@ -2,12 +2,12 @@
   <div class="row">
     <div class="bg-phonics-multi relative-position col row">
       <div class="absolute-top">
-        <header-bar></header-bar>
+        <header-bar :practiceData="practiceData"></header-bar>
       </div>
       <div class="col-12 self-start row">
         <div class="col-12 bg-animation">
           <theme-animation
-            :choicesLength="choicesLength"
+            :choicesLength="practiceData.choices.length"
             :isSendAnswer="isSendAnswer"
             :selectAnswer="selectAnswer"
             :isCorrect="isCorrect"
@@ -25,11 +25,10 @@
               v-if="!isQuestionSound"
             >
               <div class="col self-center" align="center">
-                <span style="font-size: max(1.2vw, 18px)"
-                  >Listen and choose the word with the /er/ sound.
-                  <br />
-                  ฟังและเลือกคำที่มีเสียง /er/</span
-                >
+                <span
+                  style="font-size: max(1.2vw, 18px)"
+                  v-html="practiceData.question"
+                ></span>
               </div>
             </div>
             <div v-else>
@@ -50,24 +49,24 @@
           <div
             class="col-3 self-center q-pa-xs"
             align="center"
-            v-for="i in choicesLength"
-            :key="i"
+            v-for="(item, index) in practiceData.choices"
+            :key="index"
           >
             <q-img
               style="max-width: 260px; width: 100%"
               :class="isSendAnswer ? null : 'cursor-pointer'"
-              @click="isSendAnswer ? null : (selectAnswer = i)"
+              @click="isSendAnswer ? null : (selectAnswer = index)"
               :src="
                 require(`../../../public/images/phonicsmulti/button-theme/phonics-choices-${themeSync}-${
                   isSendAnswer
-                    ? selectAnswer == i
+                    ? selectAnswer == index
                       ? isCorrect
                         ? 'correct'
                         : 'incorrect'
-                      : correctAnswer == i
+                      : correctAnswer == index
                       ? 'correct'
                       : 'default'
-                    : selectAnswer == i
+                    : selectAnswer == index
                     ? 'active'
                     : 'default'
                 }.png`)
@@ -78,12 +77,12 @@
                 style="font-size: max(1.2vw, 20px); top: 45%"
               >
                 <span v-if="isQuestionSound">
-                  {{ i }}
+                  {{ index }}
                 </span>
                 <span v-else>
                   <q-icon name="fas fa-volume-up"></q-icon>
                   <div v-if="isSendAnswer">
-                    <span>{{ i }}</span>
+                    <span>{{ index }}</span>
                   </div>
                 </span>
               </div>
@@ -93,7 +92,7 @@
             <q-img
               width="200px"
               :class="selectAnswer == null ? null : 'cursor-pointer'"
-              @click="selectAnswer == null ? null : sendAnswer()"
+              @click="selectAnswer == null ? null : funcSendAnswer()"
               :src="
                 require(`../../../public/images/send-answer-btn${
                   selectAnswer == null ? '-noactive' : ''
@@ -103,11 +102,25 @@
             ></q-img>
 
             <q-img
-              @click="nextQuestion()"
+              @click="funcNextQuestion()"
               width="200px"
-              v-else
+              v-if="
+                isSendAnswer &&
+                practiceData.currentQuestion + 1 != practiceData.totalQuestion
+              "
               class="cursor-pointer"
               src="../../../public/images/next-question-btn.png"
+            ></q-img>
+
+            <q-img
+              v-if="
+                isSendAnswer &&
+                practiceData.currentQuestion + 1 == practiceData.totalQuestion
+              "
+              @click="$emit('callback-finishpractice')"
+              width="200px"
+              class="cursor-pointer"
+              src="../../../public/images/success-btn.png"
             ></q-img>
           </div>
         </div>
@@ -126,12 +139,18 @@
         <div
           class="row justify-around q-py-sm q-px-lg"
           style="border-bottom: 1px solid #c4c4c4; font-size: max(0.95vw, 12px)"
-          v-for="i in 35"
-          :key="i"
+          v-for="(item, index) in practiceData.extraSound"
+          :key="index"
         >
-          <span>a</span>
-          <span>เทียบได้กับสระ</span>
-          <span>1</span>
+          <div class="col" align="center">
+            <span>{{ item.vocab }}</span>
+          </div>
+          <div class="col-6" align="center">
+            <span>เทียบได้กับสระ</span>
+          </div>
+          <div class="col" align="center">
+            <span>{{ item.alphabets }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -141,46 +160,73 @@
 <script>
 import headerBar from "../header-time-progress";
 import themeAnimation from "../phonicsmultiple/theme-animation";
+import { ref } from "vue";
 export default {
   components: {
     headerBar,
-    themeAnimation
+    themeAnimation,
   },
   props: {
     themeSync: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
+    practiceData: {
+      type: Object,
+      defulat: () => {},
+    },
   },
-  data() {
-    return {
-      isQuestionSound: false,
-      choicesLength: 4,
-      selectAnswer: null,
-      correctAnswer: 0,
+  emits: ["callback-finishpractice"],
+  setup(props, { emit }) {
+    const selectAnswer = ref(null);
+    const isQuestionSound = ref(false);
+    const isSendAnswer = ref(false);
+    const isCorrectAnswer = ref(false);
 
-      isSendAnswer: false,
-      isCorrect: false
+    const funcSendAnswer = () => {
+      isSendAnswer.value = true;
+      let choiceIndex = selectAnswer.value;
+
+      if (Number(props.practiceData.correctAnswer) == choiceIndex) {
+        console.log("pass");
+        isCorrectAnswer.value = true;
+      } else {
+        console.log("fails");
+        isCorrectAnswer.value = false;
+      }
+    };
+
+    const funcNextQuestion = () => {
+      isSendAnswer.value = false;
+      selectAnswer.value = null;
+
+      emit("callback-nextquestion");
+    };
+
+    return {
+      selectAnswer,
+      isQuestionSound,
+      isSendAnswer,
+      isCorrectAnswer,
+      funcSendAnswer,
+      funcNextQuestion,
     };
   },
-  methods: {
-    sendAnswer() {
-      this.isSendAnswer = true;
 
-      let randomAnswer = Math.ceil(Math.random() * this.choicesLength);
+  // methods: {
+  //   sendAnswer() {
+  //     this.isSendAnswer = true;
 
-      this.correctAnswer = randomAnswer;
-
-      if (this.correctAnswer == this.selectAnswer) {
-        this.isCorrect = true;
-      }
-    },
-    nextQuestion() {
-      this.isSendAnswer = false;
-      this.selectAnswer = null;
-      this.isCorrect = false;
-    }
-  }
+  //     if (this.correctAnswer == this.selectAnswer) {
+  //       this.isCorrect = true;
+  //     }
+  //   },
+  //   nextQuestion() {
+  //     this.isSendAnswer = false;
+  //     this.selectAnswer = null;
+  //     this.isCorrect = false;
+  //   },
+  // },
 };
 </script>
 

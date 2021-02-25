@@ -8,8 +8,8 @@
       <q-spinner color="primary" size="100px" />
     </div>
 
-    <div class="box-container-main" v-if="isLoadPractice">
-      <div class="row">
+    <div class="box-container-main row" v-if="isLoadPractice">
+      <div class="col-12 bg-white row">
         <div class="col-12 bg-white" align="center">
           <div class="relative-position">
             <header-bar
@@ -20,68 +20,51 @@
               :practiceData="practiceData"
             ></header-bar>
           </div>
-          <div class="box-container-reading brx">
+          <div class="box-container-reading">
             <div class="" align="center">
-              <span class="f24">{{ practiceData.question }} sss </span>
+              <span class="f24" v-html="practiceData.nameEng"> </span>
             </div>
-            <div class="q-mt-sm q-py-md box-content q-px-lg" align="left">xx</div>
+            <div class="q-mt-sm q-py-md box-content q-px-lg" align="left">
+              <span
+                class="f18"
+                v-html="`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${practiceData.question}`"
+              ></span>
+            </div>
           </div>
         </div>
+      </div>
+
+      <div class="col self-end brx">
         <div
           class="col-12 row items-center justify-center q-py-md"
           :class="{ 'q-px-lg': $q.platform.is.mobile }"
           align="center"
         >
           <div class="col">
-            <div class="box-question" align="left">
-              <question-number :practiceData="practiceData"></question-number>
-            </div>
-            <div class="box-container-content">
-              <div
-                class="q-my-md row q-col-gutter-md justify-between"
-                v-if="!isShowDescription"
-              >
-                <div
-                  class="col-xs-12 col-sm-6 q-px-sm"
-                  v-for="(item, index) in practiceData.choices"
-                  :key="index"
-                >
-                  <q-btn
-                    @click="checkAnswer(item.index)"
-                    align="left"
-                    class="custom-btn"
-                    no-caps
-                    style="width: 100%"
-                    :style="$q.platform.is.desktop ? ' height: 60px' : 'height:40px'"
-                  >
-                    <div class="absolute-left" style="top: 5px; left: 5px">
-                      <div
-                        style="width: 10px; height: 10px; border-radius: 50%"
-                        class="bg-white"
-                      ></div>
-                    </div>
-                    <div class="absolute-left" style="top: 7px; left: 18px">
-                      <div
-                        style="width: 6px; height: 6px; border-radius: 50%"
-                        class="bg-white"
-                      ></div>
-                    </div>
-
-                    <div class="q-pl-md">{{ item.choice }}</div>
-                  </q-btn>
-                </div>
+            <div class="box-question q-pa-sm row" align="left">
+              <div class="q-mx-xs" v-for="(item, index) in practiceData.totalQuestion">
+                <question-number
+                  :no="index + 1"
+                  :currentQuestion="practiceData.currentQuestion + 1"
+                ></question-number>
               </div>
+            </div>
+            <div class="box-container-content row" v-if="!isShowDescription">
+              <div
+                class="col-6 q-pa-sm"
+                v-for="(item, index) in practiceData.choices"
+                :key="index"
+              >
+                <multiple-choices :choice="item"></multiple-choices>
+              </div>
+            </div>
 
-              <!-- Description -->
-              <div class="q-my-md" align="left" v-else>
+            <!-- <div class="">
+              <div class="q-my-md" align="left">
                 <div class="bg-white q-pa-md shadow-1 rounded-borders">
                   <div>
                     คำตอบที่ถูกต้อง คือ
-                    <!-- <span class="text-green-4">{{
-                      questionList[currentQuestion].choices[
-                        questionList[currentQuestion].correctAnswer
-                      ].choice
-                    }}</span> -->
+                   
                   </div>
                   <div class="q-my-md">
                     <span v-html="questionList[currentQuestion].description"></span>
@@ -119,12 +102,10 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
-
-      <div class="brx"></div>
     </div>
 
     <!-- Answer Animation -->
@@ -163,24 +144,37 @@
 
 <script>
 import questionNumber from "../components/button/btn-current-choices";
+import multipleChoices from "../components/button/multipleChoicesBtn";
 import appBar from "../components/app-bar";
 import finishPractice from "../components/finishPracticeDialog.vue";
 import headerBar from "../components/header-time-progress";
+import practiceHooks from "../hooks/practiceHooks";
 import { ref, computed, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { db } from "src/router";
+import axios from "axios";
 export default {
   components: {
     questionNumber,
     appBar,
     headerBar,
     finishPractice,
+    multipleChoices,
   },
   setup(props) {
     // Initial Data
+    const route = useRoute();
+    const router = useRouter();
+
     const practiceData = {
       totalQuestion: 10,
       currentQuestion: 0,
       question: "",
-      choices: [],
+      choices: [{ choice: "1" }, { choice: "2" }, { choice: "3" }, { choice: "4" }],
+      correctAnswer: 0,
+      nameEng: "",
+      nameTh: "",
+      answer: [],
     };
 
     const isLoadPractice = ref(false);
@@ -194,73 +188,82 @@ export default {
     const increaseFont = () => {
       fontSize.value--;
     };
-    // Reading Content
-    const readingContent = ref({
-      contentTh: "",
-      contentEn:
-        "<p>The White House has been the home at the American President and his family for over 200 years. It was built in 1790 in Washington, D.C. The location was chosen by George Washington who was the President at that time. However, he was the only President who never lived in the White House.</p><p>When it was finished in 1800, the new President, John Adams, and his wife moved into the White House. Since then, every American President and his family have lived in the White House.</p><p>The first White House was burned down during the 1812 war and another one was built after the war. The original White House had 62 rooms, but it was later expanded and an office space, which is called the West Wing now, was added. In 1948, President Truman added more rooms. The White House now has 132 rooms, 35 bathrooms, 3 elevators, 412 doors and 147 windows! It also has a swimming pool, a bowling alley, a movie theatre, a doctor's clinic and barbershop. So the President can do a lot of things without leaving home.</p>",
-      titleTh: "ทำเนียบขาว",
-      titleEn: "The White House",
-      soundURL: "",
-    });
 
     // Question List
-    const questionList = ref([
-      {
-        question: "AAA",
-        choices: [
-          {
-            choice: "A",
-            index: 0,
-          },
-          {
-            choice: "B",
-            index: 1,
-          },
-          {
-            choice: "C",
-            index: 2,
-          },
-          {
-            choice: "D",
-            index: 3,
-          },
-        ],
-        correctAnswer: 0,
-        highLightList: [
-          "The White House has been the home at the American President and his family for over 200 years.",
-          "However, he was the only President who never lived in the White House",
-        ],
-        description: "คำอธิบาย",
-      },
-      {
-        question: "BBB",
-        choices: [
-          {
-            choice: "A",
-            index: 0,
-          },
-          {
-            choice: "B",
-            index: 1,
-          },
-          {
-            choice: "C",
-            index: 2,
-          },
-          {
-            choice: "D",
-            index: 3,
-          },
-        ],
-        correctAnswer: 1,
-        highLightList: ["D.C. The location was chosen by George Washington"],
-        description: "คำอธิบาย",
-      },
-    ]);
+    const questionList = ref([]);
 
-    const funcLoadPractice = () => {
-      isLoadPractice.value = true;
+    const funcLoadPractice = async () => {
+      console.clear();
+
+      try {
+        // Set Practice ID
+        let practiceListId = route.params.practiceListId;
+
+        // Get Practice List
+        let getData = await db.collection("practiceList").doc(practiceListId).get();
+
+        // Practice Data : Show Total Question
+        practiceData.totalQuestion = getData.data().numOfPractice;
+
+        // Get Practice Name
+        let getPracticenName = await practiceHooks
+          .practice(getData.data().level)
+          .practiceName();
+
+        // Filter Level and Unit
+        getPracticenName = getPracticenName.filter(
+          (x) => x.unit == getData.data().unit && x.skill == "Writing"
+        )[0];
+
+        practiceData.nameEng = getPracticenName.nameEng;
+        practiceData.nameTh = getPracticenName.nameTh;
+
+        // Get Practice Data
+        const apiURL =
+          "https://us-central1-winnerenglish2-e0f1b.cloudfunctions.net/wfunctions/getPracticeData";
+
+        const postData = {
+          practiceListId: practiceListId,
+        };
+
+        const response = await axios.post(apiURL, postData);
+
+        // Question List : Set Question
+        questionList.value = response.data[0];
+
+        // console.log(questionList.value);
+
+        funcSelectedQuestion(true);
+
+        isLoadPractice.value = true;
+      } catch (error) {
+        console.log(`${error} : Function Load Practice`);
+      }
+    };
+
+    const funcSelectedQuestion = (firsttime) => {
+      firsttime = firsttime || false;
+
+      if (!firsttime) {
+        practiceData.currentQuestion++;
+      }
+
+      // Practice Data : Show Total Question
+      practiceData.totalQuestion = questionList.value.answer.length;
+
+      console.log(questionList.value);
+
+      // Practice Data : Show Choices
+      practiceData.choices =
+        questionList.value.answer[practiceData.currentQuestion].choice;
+
+      let setQuestionArr = questionList.value.sentenceEng.match(
+        /<s*u[^>]*>(.*?)<\/s*u>/g
+      );
+
+      console.log(setQuestionArr);
+
+      practiceData.question = questionList.value.sentenceEng;
     };
 
     // แสดงผลหน้าอธิบายคำตอบ
@@ -354,13 +357,14 @@ export default {
       practiceData,
       isLoadPractice,
       isShowDescription,
+      decreaseFont,
+      increaseFont,
+
       //   readingContent,
       //   questionList,
       //   currentQuestion,
       //   fontSize,
       //   nextQuestion,
-      //   decreaseFont,
-      //   increaseFont,
       //   isShowDescription,
       //   checkAnswer,
       //   isShowAnswerAnimation,
