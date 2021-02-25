@@ -64,6 +64,29 @@
       </div>
     </q-expansion-item>
 
+    <q-expansion-item label="Reading action" class="col-12 brx q-pa-md" group="skill">
+      <div class="flex q-gutter-lg">
+        <q-btn :disable="mode == 'selfLearning'" @click="readingActionSync(1)">
+          <div>Step1 ครูอธิบายโจทย์</div>
+        </q-btn>
+        <q-btn :disable="mode == 'selfLearning'" @click="readingActionSync(2)">
+          <div>Step2 เลือกคำตอบ</div>
+        </q-btn>
+        <q-btn :disable="mode == 'selfLearning'" @click="readingActionSync(3)">
+          <div>Step3 กราฟ</div>
+        </q-btn>
+        <q-btn :disable="mode == 'selfLearning'" @click="readingActionSync(4)">
+          <div>Step4 เฉลยถูก / ผิด</div>
+        </q-btn>
+        <q-btn :disable="mode == 'selfLearning'" @click="readingActionSync(5)">
+          <div>Step5 คำอธิบาย</div>
+        </q-btn>
+        <q-btn :disable="mode == 'selfLearning'" @click="nextQuestionReading()">
+          <div>ข้อถัดไป</div>
+        </q-btn>
+      </div>
+    </q-expansion-item>
+
     <div class="col-12 q-py-md text-h5" align="center">
       <q-radio label="control" val="control" v-model="mode"> </q-radio>
       <q-radio label="self learning" val="selfLearning" v-model="mode"> </q-radio>
@@ -173,6 +196,28 @@ export default {
         });
     };
 
+    const readingActionSync = (index) => {
+      db.collection("synchronize")
+        .doc("test")
+        .update({
+          readingAction: {
+            currentQuestion: currentQuestion.value,
+            currentStep: index,
+          },
+        });
+    };
+    const nextQuestionReading = () => {
+      currentQuestion.value++;
+      db.collection("synchronize")
+        .doc("test")
+        .update({
+          readingAction: {
+            currentQuestion: currentQuestion.value,
+            currentStep: 1,
+          },
+        });
+    };
+
     onMounted(() => {
       loadFlashcard();
     });
@@ -184,6 +229,8 @@ export default {
       changeGrammarLesson,
       grammarActionSync,
       nextQuestionAction,
+      readingActionSync,
+      nextQuestionReading,
     };
   },
 };

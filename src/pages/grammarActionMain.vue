@@ -88,7 +88,7 @@
           </div>
         </div>
 
-        <!-- Show Score -->
+        <!-- Show Score Graph -->
         <div
           class="box-content-main row"
           :class="$q.platform.is.desktop ? 'q-pa-sm q-my-lg ' : 'absolute-bottom'"
@@ -235,7 +235,8 @@
 
               <div class="q-mt-lg box-description" align="center">
                 <div
-                  class="f16 shadow-3"
+                  class="shadow-3"
+                  :class="{ f20: $q.platform.is.desktop, f16: $q.platform.is.mobile }"
                   style="
                     border-radius: 10px 10px 0px 0px;
                     background-color: #30416b;
@@ -248,7 +249,11 @@
                   class="bg-white flex flex-center"
                   style="min-height: 150px; border-radius: 0px 0px 10px 10px"
                 >
-                  <span v-html="questionList[currentQuestion].description"> </span>
+                  <span
+                    :class="{ f20: $q.platform.is.desktop, f16: $q.platform.is.mobile }"
+                    v-html="questionList[currentQuestion].description"
+                  >
+                  </span>
                 </div>
               </div>
             </div>
@@ -379,10 +384,10 @@ export default {
       }
       if (questionList.value[currentQuestion.value].correctAnswer == val.index) {
         questionList.value[currentQuestion.value].isCorrect = true;
-        console.log("ตอบถูก");
+        // console.log("ตอบถูก");
       } else {
         questionList.value[currentQuestion.value].isCorrect = false;
-        console.log("ตอบผิด");
+        // console.log("ตอบผิด");
       }
     };
     const isShowFinishPractice = ref(false);
@@ -557,18 +562,6 @@ export default {
   height: 35px;
   border-radius: 50%;
   border: 5px solid #662707;
-}
-.btn-no-correct {
-  background-image: linear-gradient(#90ff9c, #00b912);
-}
-.btn-no-current {
-  background-image: linear-gradient(#85f0ff, #0085ff);
-}
-.btn-no-disable {
-  background-image: linear-gradient(#fefefe, #a8a8a8);
-}
-.btn-no-incorrect {
-  background-image: linear-gradient(#fd323a, #fd323a);
 }
 
 .graph-mobile {
