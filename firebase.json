@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "target" : "we2-mainapp",
+    "public": "./dist/pwa",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
