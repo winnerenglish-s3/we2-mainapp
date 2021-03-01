@@ -7,6 +7,7 @@
         :isShowHome="false"
         :isShowPause="isSynchronize ? false : true"
         :isLoadPractice="isLoadPractice"
+        :themeSync="themeSync"
         @callback-showdialoghelp="isShowDialogHelp = true"
         @callback-restart="reStart"
       ></app-bar>
@@ -225,7 +226,7 @@ export default {
     },
     themeSync: {
       type: Number,
-      default: 0,
+      default: 1,
     },
     isSynchronize: {
       type: Boolean,

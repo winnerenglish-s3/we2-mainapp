@@ -101,7 +101,7 @@ export default {
     },
     themeSync: {
       type: Number,
-      default: 0,
+      default: 1,
     },
   },
   data() {
