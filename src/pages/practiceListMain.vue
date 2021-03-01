@@ -601,7 +601,11 @@ export default {
         } else if (data.skill == "Reading") {
           routerName = "/readingmultiple/";
         } else if (data.skill == "Listening & Speaking") {
-          routerName = "/languagetipmultiple/";
+          if (data.practiceType == "multiplechoices(answersound)") {
+            routerName = "/conversationmultiple/";
+          } else {
+            routerName = "/languagetipmultiple/";
+          }
         }
       } else if (data.practiceType == "spellingbee") {
         routerName = "/spellingbee/";
