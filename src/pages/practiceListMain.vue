@@ -290,7 +290,7 @@
       </div>
     </div>
 
-    <!-- Sohw Practice Dialog Mobile -->
+    <!-- Show Practice Dialog Mobile -->
     <q-dialog
       v-model="isShowPracticeDialogMobile"
       persistent
@@ -464,9 +464,9 @@ export default {
     };
 
     // Skill changed (Mobile)
-    watch(selectSkill, (newValue, oldValue) => {
-      getPractice();
-    });
+    // watch(selectSkill, (newValue, oldValue) => {
+    // getPractice();
+    // });
 
     const practiceLog = ref([]);
     const getPractice = async () => {

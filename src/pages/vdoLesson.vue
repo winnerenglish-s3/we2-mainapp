@@ -60,12 +60,15 @@
           </div>
           <!-- VIDEO -->
           <div v-else class="col-12">
-            <iframe
-              :src="lessonList[activeLessonList].vdoLink + '?rel=0'"
-              frameborder="0"
-              style="width: 100%; height: calc(100vh * 9 / 16)"
-              allow="autoplay"
-            ></iframe>
+            <div v-if="lessonList[activeLessonList]">
+              <iframe
+                :src="lessonList[activeLessonList].vdoLink + '?rel=0'"
+                frameborder="0"
+                style="width: 100%; height: calc(100vh * 9 / 16)"
+                allow="autoplay"
+              ></iframe>
+            </div>
+            <div v-else>DATA NOT FOUND</div>
           </div>
 
           <!-- Mobile Next Button -->
@@ -225,14 +228,11 @@ export default {
       try {
         const response = await axios.post(apiURL, postData);
         isLoaded.value = true;
-
         let sortData = response.data.sort((a, b) => a.order - b.order);
-
         lessonList.value = sortData;
       } catch (error) {
         console.log(error);
       }
-
       $q.loading.hide();
     };
 
@@ -250,9 +250,7 @@ export default {
     // Synchronize
     const isSynchronizeMode = ref(false);
     // const synchronizeMode = ref("vdo"); //vdo or slide
-
     const learningMode = ref("");
-
     const listenSynchronize = db
       .collection("synchronize")
       .doc("test")
