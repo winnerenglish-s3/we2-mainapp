@@ -11,7 +11,7 @@
         :instructionData="instructionData"
         :isLoadPractice="isLoadPractice"
         :isShowHome="false"
-        :isShowPause="learningMode == 'control' ? false : true"
+        :isShowPause="isSynchronize ? false : true"
         @callback-showdialoghelp="funcShowDialogHelp"
         @callback-restart="reStart"
       ></app-bar>
@@ -150,6 +150,10 @@ export default {
     themeSync: {
       type: Number,
       default: 0,
+    },
+    isSynchronize: {
+      type: Boolean,
+      default: () => false,
     },
   },
   emits: [],
@@ -312,46 +316,6 @@ export default {
       selectedLesson.value = showLessonVideo.value[0].value;
     };
 
-    // const playVideo = () => {
-    //   console.clear();
-    //   let el = document.getElementById("myVideo");
-
-    //   el.click();
-
-    //   setTimeout(() => {
-    //     let hasAutoplay = el.src.indexOf("?autoplay=1");
-
-    //     hasAutoplay = hasAutoplay == -1 ? 0 : 1;
-
-    //     if (hasAutoplay) {
-    //       let newLink = el.src.split("?");
-
-    //       newLink = newLink[0];
-
-    //       el.src = newLink;
-    //     } else {
-    //       var symbol = el.src.indexOf("?") > -1 ? "&" : "?";
-
-    //       el.src = el.src + symbol + "autoplay=1";
-    //     }
-    //   }, 300);
-    // };
-
-    // Listen Synchronize
-    const learningMode = ref("");
-    const synchronize = db
-      .collection("synchronize")
-      .doc("test")
-      .onSnapshot((data) => {
-        if (data.data().mode == "control") {
-          practiceData.currentQuestion = data.data().practiceData.currentQuestion;
-          // currentStep.value = data.data().grammarAction.currentStep;
-          learningMode.value = "control";
-        } else {
-          learningMode.value = "selfLearning";
-        }
-      });
-
     const reStart = () => {
       isFinishPractice.value = false;
       isLoadPractice.value = false;
@@ -385,8 +349,6 @@ export default {
       showLessonVideo,
       funcShowDialogHelp,
       isFinishPractice,
-      synchronize,
-      learningMode,
       reStart,
     };
   },
