@@ -9,8 +9,8 @@
           <theme-animation
             :choicesLength="practiceData.choices.length"
             :isSendAnswer="isSendAnswer"
-            :selectAnswer="selectAnswer"
-            :isCorrect="isCorrect"
+            :currentAnswer="currentAnswer"
+            :isCorrectAnswer="isCorrectAnswer"
             :themeSync="themeSync"
           ></theme-animation>
         </div>
@@ -55,18 +55,20 @@
             <q-img
               style="max-width: 260px; width: 100%"
               :class="isSendAnswer ? null : 'cursor-pointer'"
-              @click="isSendAnswer ? null : (selectAnswer = index)"
+              @click="
+                isSendAnswer
+                  ? null
+                  : ((currentAnswer = index), $emit('callback-playsound', item.soundUrl))
+              "
               :src="
                 require(`../../../public/images/phonicsmulti/button-theme/phonics-choices-${themeSync}-${
                   isSendAnswer
-                    ? selectAnswer == index
-                      ? isCorrect
+                    ? currentAnswer == index
+                      ? isCorrectAnswer
                         ? 'correct'
                         : 'incorrect'
-                      : correctAnswer == index
-                      ? 'correct'
                       : 'default'
-                    : selectAnswer == index
+                    : currentAnswer == index
                     ? 'active'
                     : 'default'
                 }.png`)
@@ -82,7 +84,7 @@
                 <span v-else>
                   <q-icon name="fas fa-volume-up"></q-icon>
                   <div v-if="isSendAnswer">
-                    <span>{{ index }}</span>
+                    <span>{{ item.choice }}</span>
                   </div>
                 </span>
               </div>
@@ -91,20 +93,20 @@
           <div class="col-12 self-end q-pa-md" align="center">
             <q-img
               width="200px"
-              :class="selectAnswer == null ? null : 'cursor-pointer'"
-              @click="selectAnswer == null ? null : funcSendAnswer()"
+              :class="currentAnswer == null ? null : 'cursor-pointer'"
+              @click="currentAnswer == null ? null : funcSendAnswer()"
               :src="
                 require(`../../../public/images/send-answer-btn${
-                  selectAnswer == null ? '-noactive' : ''
+                  currentAnswer == null ? '-noactive' : ''
                 }.png`)
               "
-              v-if="!isSendAnswer"
+              v-show="!isSendAnswer"
             ></q-img>
 
             <q-img
               @click="funcNextQuestion()"
               width="200px"
-              v-if="
+              v-show="
                 isSendAnswer &&
                 practiceData.currentQuestion + 1 != practiceData.totalQuestion
               "
@@ -113,7 +115,7 @@
             ></q-img>
 
             <q-img
-              v-if="
+              v-show="
                 isSendAnswer &&
                 practiceData.currentQuestion + 1 == practiceData.totalQuestion
               "
@@ -176,35 +178,34 @@ export default {
       defulat: () => {},
     },
   },
-  emits: ["callback-finishpractice"],
+  emits: ["callback-finishpractice", "callback-playsound"],
   setup(props, { emit }) {
-    const selectAnswer = ref(null);
+    const currentAnswer = ref(null);
     const isQuestionSound = ref(false);
     const isSendAnswer = ref(false);
     const isCorrectAnswer = ref(false);
 
     const funcSendAnswer = () => {
       isSendAnswer.value = true;
-      let choiceIndex = selectAnswer.value;
+
+      let choiceIndex = props.practiceData.choices[currentAnswer.value].index;
 
       if (Number(props.practiceData.correctAnswer) == choiceIndex) {
-        console.log("pass");
         isCorrectAnswer.value = true;
       } else {
-        console.log("fails");
         isCorrectAnswer.value = false;
       }
     };
 
     const funcNextQuestion = () => {
       isSendAnswer.value = false;
-      selectAnswer.value = null;
+      currentAnswer.value = null;
 
       emit("callback-nextquestion");
     };
 
     return {
-      selectAnswer,
+      currentAnswer,
       isQuestionSound,
       isSendAnswer,
       isCorrectAnswer,

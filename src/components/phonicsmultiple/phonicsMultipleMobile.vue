@@ -37,18 +37,20 @@
           <q-img
             style="max-width: 320px; width: 100%"
             :class="isSendAnswer ? null : 'cursor-pointer'"
-            @click="isSendAnswer ? null : (selectAnswer = index)"
+            @click="
+              isSendAnswer
+                ? null
+                : ((currentAnswer = index), $emit('callback-playsound', item.soundUrl))
+            "
             :src="
               require(`../../../public/images/phonicsmulti/button-theme/phonics-choices-${themeSync}-${
                 isSendAnswer
-                  ? selectAnswer == index
-                    ? isCorrect
+                  ? currentAnswer == index
+                    ? isCorrectAnswer
                       ? 'correct'
                       : 'incorrect'
-                    : correctAnswer == index
-                    ? 'correct'
                     : 'default'
-                  : selectAnswer == index
+                  : currentAnswer == index
                   ? 'active'
                   : 'default'
               }-mobile.png`)
@@ -72,11 +74,11 @@
     <div class="col-12 self-end q-pa-md" align="center">
       <q-img
         width="200px"
-        :class="selectAnswer == null ? null : 'cursor-pointer'"
-        @click="selectAnswer == null ? null : funcSendAnswer()"
+        :class="currentAnswer == null ? null : 'cursor-pointer'"
+        @click="currentAnswer == null ? null : funcSendAnswer()"
         :src="
           require(`../../../public/images/send-answer-btn${
-            selectAnswer == null ? '-noactive' : ''
+            currentAnswer == null ? '-noactive' : ''
           }.png`)
         "
         v-if="!isSendAnswer"
@@ -106,12 +108,10 @@
 
 <script>
 import headerBar from "../header-time-progress";
-import animationPhonicsmulti from "../phonicsmultiple/animation-phonicsmulti";
 import { ref } from "vue";
 export default {
   components: {
     headerBar,
-    animationPhonicsmulti,
   },
 
   props: {
@@ -124,35 +124,34 @@ export default {
       defulat: () => {},
     },
   },
-  emits: ["callback-finishpractice"],
+  emits: ["callback-finishpractice", "callback-playsound"],
   setup(props, { emit }) {
-    const selectAnswer = ref(null);
+    const currentAnswer = ref(null);
     const isQuestionSound = ref(false);
     const isSendAnswer = ref(false);
     const isCorrectAnswer = ref(false);
 
     const funcSendAnswer = () => {
       isSendAnswer.value = true;
-      let choiceIndex = selectAnswer.value;
+
+      let choiceIndex = props.practiceData.choices[currentAnswer.value].index;
 
       if (Number(props.practiceData.correctAnswer) == choiceIndex) {
-        console.log("pass");
         isCorrectAnswer.value = true;
       } else {
-        console.log("fails");
         isCorrectAnswer.value = false;
       }
     };
 
     const funcNextQuestion = () => {
       isSendAnswer.value = false;
-      selectAnswer.value = null;
+      currentAnswer.value = null;
 
       emit("callback-nextquestion");
     };
 
     return {
-      selectAnswer,
+      currentAnswer,
       isQuestionSound,
       isSendAnswer,
       isCorrectAnswer,

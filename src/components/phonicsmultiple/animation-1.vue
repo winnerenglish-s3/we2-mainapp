@@ -428,7 +428,7 @@
       </g>
       <g v-if="choicesLength == 4">
         <g id="answer-set-4-4">
-          <g id="incorrect-set-4-4" v-if="!isCorrect" filter="url(#filter0_d)">
+          <g id="incorrect-set-4-4" v-if="!isCorrectAnswer" filter="url(#filter0_d)">
             <path
               id="incorrect-set-4-4_2"
               d="M994.207 262.603L981.922 282H1030.41L1046.58 256.784L1018.13 251.612L994.207 262.603Z"
@@ -660,7 +660,7 @@
         </g>
         <g
           id="glass-set-4-4"
-          :class="isSendAnswer && selectAnswer == 3 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 3 ? 'glass-move-on' : null"
           filter="url(#filter2_d)"
         >
           <path
@@ -693,7 +693,7 @@
           />
         </g>
         <g id="answer-set-4-3">
-          <g id="incorrect-set-4-3" v-if="!isCorrect" filter="url(#filter3_d)">
+          <g id="incorrect-set-4-3" v-if="!isCorrectAnswer" filter="url(#filter3_d)">
             <path
               id="incorrect-set-4-3_2"
               d="M741.207 262.603L728.922 282H777.414L793.578 256.784L765.129 251.612L741.207 262.603Z"
@@ -925,7 +925,7 @@
         </g>
         <g
           id="glass-set-4-3"
-          :class="isSendAnswer && selectAnswer == 2 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 2 ? 'glass-move-on' : null"
           filter="url(#filter5_d)"
         >
           <path
@@ -958,7 +958,7 @@
           />
         </g>
         <g id="answer-set-4-2">
-          <g id="incorrect-set-4-2" v-if="!isCorrect" filter="url(#filter6_d)">
+          <g id="incorrect-set-4-2" v-if="!isCorrectAnswer" filter="url(#filter6_d)">
             <path
               id="incorrect-set-4-2_2"
               d="M488.207 262.603L475.922 282H524.414L540.578 256.784L512.129 251.612L488.207 262.603Z"
@@ -1190,7 +1190,7 @@
         </g>
         <g
           id="glass-set-4-2"
-          :class="isSendAnswer && selectAnswer == 1 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 1 ? 'glass-move-on' : null"
           filter="url(#filter8_d)"
         >
           <path
@@ -1223,7 +1223,7 @@
           />
         </g>
         <g id="answer-set-4-1">
-          <g id="incorrect-set-4-1" v-if="!isCorrect" filter="url(#filter9_d)">
+          <g id="incorrect-set-4-1" v-if="!isCorrectAnswer" filter="url(#filter9_d)">
             <path
               id="incorrect-set-4-1_2"
               d="M235.207 263.603L222.922 283H271.414L287.578 257.784L259.129 252.612L235.207 263.603Z"
@@ -1455,7 +1455,7 @@
         </g>
         <g
           id="glass-set-4-1"
-          :class="isSendAnswer && selectAnswer == 0 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 0 ? 'glass-move-on' : null"
           filter="url(#filter11_d)"
         >
           <path
@@ -1491,7 +1491,7 @@
 
       <g v-if="choicesLength == 3">
         <g id="answer-set-3-3">
-          <g id="incorrect-set-3-3" v-if="!isCorrect" filter="url(#filter12_d)">
+          <g id="incorrect-set-3-3" v-if="!isCorrectAnswer" filter="url(#filter12_d)">
             <path
               id="incorrect"
               d="M869.207 262.603L856.922 282H905.414L921.578 256.784L893.129 251.612L869.207 262.603Z"
@@ -1699,7 +1699,7 @@
         </g>
         <g
           id="glass-set-3-3"
-          :class="isSendAnswer && selectAnswer == 2 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 2 ? 'glass-move-on' : null"
           filter="url(#filter14_d)"
         >
           <path
@@ -1732,7 +1732,7 @@
           />
         </g>
         <g id="answer-set-3-2">
-          <g id="incorrect-set-3-2" v-if="!isCorrect" filter="url(#filter15_d)">
+          <g id="incorrect-set-3-2" v-if="!isCorrectAnswer" filter="url(#filter15_d)">
             <path
               id="incorrect-set-3-2_2"
               d="M616.207 262.603L603.922 282H652.414L668.578 256.784L640.129 251.612L616.207 262.603Z"
@@ -1964,7 +1964,7 @@
         </g>
         <g
           id="glass-set-3-2"
-          :class="isSendAnswer && selectAnswer == 1 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 1 ? 'glass-move-on' : null"
           filter="url(#filter17_d)"
         >
           <path
@@ -1997,7 +1997,7 @@
           />
         </g>
         <g id="answer-set-3-1">
-          <g id="incorrect-set-3-1" v-if="!isCorrect" filter="url(#filter18_d)">
+          <g id="incorrect-set-3-1" v-if="!isCorrectAnswer" filter="url(#filter18_d)">
             <path
               id="incorrect-set-3-1_2"
               d="M362.207 262.603L349.922 282H398.414L414.578 256.784L386.129 251.612L362.207 262.603Z"
@@ -2229,7 +2229,7 @@
         </g>
         <g
           id="glass-set-3-1"
-          :class="isSendAnswer && selectAnswer == 0 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 0 ? 'glass-move-on' : null"
           filter="url(#filter20_d)"
         >
           <path
@@ -2264,7 +2264,7 @@
       </g>
       <g v-if="choicesLength == 2">
         <g id="answer-set-2-2">
-          <g id="incorrect-set-2-2" v-if="!isCorrect" filter="url(#filter21_d)">
+          <g id="incorrect-set-2-2" v-if="!isCorrectAnswer" filter="url(#filter21_d)">
             <path
               id="incorrect-set-2-2_2"
               d="M742.207 262.603L729.922 282H778.414L794.578 256.784L766.129 251.612L742.207 262.603Z"
@@ -2496,7 +2496,7 @@
         </g>
         <g
           id="glass-set-2-2"
-          :class="isSendAnswer && selectAnswer == 1 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 1 ? 'glass-move-on' : null"
           filter="url(#filter23_d)"
         >
           <path
@@ -2529,7 +2529,7 @@
           />
         </g>
         <g id="answer-set-2-1">
-          <g id="incorrect-set-2-1" v-if="!isCorrect" filter="url(#filter24_d)">
+          <g id="incorrect-set-2-1" v-if="!isCorrectAnswer" filter="url(#filter24_d)">
             <path
               id="incorrect-set-2-1_2"
               d="M490.207 262.603L477.922 282H526.414L542.578 256.784L514.129 251.612L490.207 262.603Z"
@@ -2761,7 +2761,7 @@
         </g>
         <g
           id="glass-set-2-1"
-          :class="isSendAnswer && selectAnswer == 0 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 0 ? 'glass-move-on' : null"
           filter="url(#filter26_d)"
         >
           <path
@@ -3693,11 +3693,11 @@ export default {
       type: Number,
       default: 0,
     },
-    selectAnswer: {
+    currentAnswer: {
       type: Number,
       default: 0,
     },
-    isCorrect: {
+    isCorrectAnswer: {
       type: Boolean,
       default: () => false,
     },
