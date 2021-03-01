@@ -6,13 +6,15 @@
         @courseChanged="getCourseId"
         :courseId="courseId"
         :themeSync="themeSync"
+        :isSynchronize="isSynchronize"
       />
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { db } from "src/router";
 export default {
   setup(props) {
     const themeSync = ref(1);
@@ -23,7 +25,26 @@ export default {
       courseId.value = val;
     };
 
-    return { themeSync, courseId, getCourseId };
+    // SnapSynchronize Data
+    const isSynchronize = ref(false);
+    const snapSynchronize = () => {
+      db.collection("synchronize")
+        .doc("test")
+        .onSnapshot((doc) => {
+          console.log("onSnapshot");
+          if (doc.data().mode == "control") {
+            isSynchronize.value = true;
+          } else {
+            isSynchronize.value = false;
+          }
+        });
+    };
+
+    onMounted(() => {
+      snapSynchronize();
+    });
+
+    return { themeSync, courseId, getCourseId, isSynchronize };
   },
 };
 </script>

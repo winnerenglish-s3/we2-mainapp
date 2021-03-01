@@ -295,10 +295,6 @@ export default {
       type: Boolean,
       default: () => false,
     },
-    learningMode: {
-      type: String,
-      default: "",
-    },
   },
   emits: ["callback-showdialoghelp", "callback-restart"],
   setup(props, { emit }) {

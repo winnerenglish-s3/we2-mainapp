@@ -4,7 +4,7 @@
       <app-bar
         :instructionData="instructionData"
         :isShowHome="false"
-        :isShowPause="true"
+        :isShowPause="isSynchronize ? false : true"
         @callback-restart="reStart"
       ></app-bar>
     </div>
@@ -125,6 +125,10 @@ export default {
       require: true,
     },
     isShowDialogHelp: {
+      type: Boolean,
+      default: () => false,
+    },
+    isSynchronize: {
       type: Boolean,
       default: () => false,
     },

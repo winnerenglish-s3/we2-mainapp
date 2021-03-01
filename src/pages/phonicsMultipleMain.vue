@@ -5,7 +5,7 @@
         :isHasInstruction="true"
         :isHasHelp="true"
         :isShowHome="false"
-        :isShowPause="learningMode == 'control' ? false : true"
+        :isShowPause="isSynchronize ? false : true"
         :isLoadPractice="isLoadPractice"
         @callback-showdialoghelp="isShowDialogHelp = true"
         @callback-restart="reStart"
@@ -21,6 +21,7 @@
       :themeSync="themeSync"
       @callback-nextquestion="funcSelectedQuestion"
       @callback-finishpractice="isFinishPractice = true"
+      @callback-playsound="funcPlaySound"
       class="box-container-main"
       v-if="$q.platform.is.desktop && isLoadPractice"
     ></phonics-multi-pc>
@@ -30,6 +31,7 @@
       :themeSync="themeSync"
       @callback-nextquestion="funcSelectedQuestion"
       @callback-finishpractice="isFinishPractice = true"
+      @callback-playsound="funcPlaySound"
       v-if="$q.platform.is.mobile && isLoadPractice"
     ></phonics-multi-mobile>
 
@@ -225,6 +227,10 @@ export default {
       type: Number,
       default: 0,
     },
+    isSynchronize: {
+      type: Boolean,
+      default: () => false,
+    },
   },
   setup(props) {
     // Initial Data
@@ -243,9 +249,9 @@ export default {
       extraSound: [],
     });
     const selectLesson = ref("");
+    const selectAudioSound = ref(null);
     const isLoadPractice = ref(false);
     const isFinishPractice = ref(false);
-    const learningMode = ref("");
     const lessonList = ref([]);
     const extraSound = reactive([
       {
@@ -399,7 +405,11 @@ export default {
         practiceData.extraSound = extraSound;
 
         // สุ่มคำตอบของแต่ละข้อ
-        setPracticeList = setPracticeList.map((x) => {
+        setPracticeList = setPracticeList.map((x, index) => {
+          x.choices.map((xx, index) => {
+            xx.index = index + 1;
+          });
+
           let choices = x.choices.sort(() => Math.random() - 0.5);
           x.choices = choices;
           return x;
@@ -454,18 +464,29 @@ export default {
       funcLoadPractice();
     };
 
+    const funcPlaySound = (url) => {
+      if (selectAudioSound.value != null) {
+        selectAudioSound.value.pause();
+      }
+
+      selectAudioSound.value = new Audio(url);
+      selectAudioSound.value.play();
+    };
+
     onMounted(funcLoadPractice);
 
     return {
       practiceData,
       isLoadPractice,
-      funcSelectedQuestion,
       isFinishPractice,
-      reStart,
       lessonList,
-      learningMode,
       selectLesson,
       tab,
+
+      // Function
+      reStart,
+      funcSelectedQuestion,
+      funcPlaySound,
     };
   },
 };

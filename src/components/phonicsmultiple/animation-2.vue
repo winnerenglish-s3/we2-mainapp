@@ -1588,7 +1588,7 @@
       </g>
       <g v-if="choicesLength == 4">
         <g id="answer-set-4-4">
-          <g id="incorrect-set-4-4" v-if="!isCorrect" filter="url(#filter0_d)">
+          <g id="incorrect-set-4-4" v-if="!isCorrectAnswer" filter="url(#filter0_d)">
             <path
               id="incorrect-set-4-4_2"
               d="M994.207 262.603L981.922 282H1030.41L1046.58 256.784L1018.13 251.612L994.207 262.603Z"
@@ -1633,23 +1633,13 @@
               d="M991 221C991 217.134 994.134 214 998 214H1002C1005.87 214 1009 217.134 1009 221V221H991V221Z"
               fill="#FFCF0D"
             />
-            <circle
-              id="Ellipse 1065"
-              cx="999.5"
-              cy="209.5"
-              r="5.5"
-              fill="#FFCF0D"
-            />
+            <circle id="Ellipse 1065" cx="999.5" cy="209.5" r="5.5" fill="#FFCF0D" />
             <path
               id="Rectangle 3554"
               d="M968 221C968 220.448 968.448 220 969 220H973C973.552 220 974 220.448 974 221V262H968V221Z"
               fill="#FFCF0D"
             />
-            <path
-              id="Rectangle 3560"
-              d="M970 220H971V262H970V220Z"
-              fill="#F5A50C"
-            />
+            <path id="Rectangle 3560" d="M970 220H971V262H970V220Z" fill="#F5A50C" />
             <path
               id="Rectangle 3557"
               d="M980 221C980 220.448 980.448 220 981 220H985C985.552 220 986 220.448 986 221V262H980V221Z"
@@ -1700,21 +1690,9 @@
               transform="matrix(1 0 0 -1 1000 252)"
               fill="#1E684F"
             />
-            <path
-              id="Rectangle 3561"
-              d="M982 220H983V262H982V220Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="Rectangle 3562"
-              d="M1017 220H1018V262H1017V220Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="Rectangle 3563"
-              d="M1029 220H1030V262H1029V220Z"
-              fill="#F5A50C"
-            />
+            <path id="Rectangle 3561" d="M982 220H983V262H982V220Z" fill="#F5A50C" />
+            <path id="Rectangle 3562" d="M1017 220H1018V262H1017V220Z" fill="#F5A50C" />
+            <path id="Rectangle 3563" d="M1029 220H1030V262H1029V220Z" fill="#F5A50C" />
             <rect
               id="Rectangle 3564"
               x="998"
@@ -1735,7 +1713,7 @@
         </g>
         <g
           id="glass-set-4-4"
-          :class="isSendAnswer && selectAnswer == 4 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 3 ? 'glass-move-on' : null"
           filter="url(#filter2_d)"
         >
           <path
@@ -1768,7 +1746,7 @@
           />
         </g>
         <g id="answer-set-4-3">
-          <g id="incorrect-set-4-3" v-if="!isCorrect" filter="url(#filter3_d)">
+          <g id="incorrect-set-4-3" v-if="!isCorrectAnswer" filter="url(#filter3_d)">
             <path
               id="incorrect-set-4-3_2"
               d="M741.207 262.603L728.922 282H777.414L793.578 256.784L765.129 251.612L741.207 262.603Z"
@@ -1794,41 +1772,11 @@
               height="19"
               fill="#F5A50C"
             />
-            <circle
-              id="correct-set-4-3_3"
-              cx="745"
-              cy="273"
-              r="4"
-              fill="#1E684F"
-            />
-            <circle
-              id="correct-set-4-3_4"
-              cx="720"
-              cy="273"
-              r="4"
-              fill="#1E684F"
-            />
-            <circle
-              id="correct-set-4-3_5"
-              cx="733"
-              cy="273"
-              r="2"
-              fill="white"
-            />
-            <circle
-              id="correct-set-4-3_6"
-              cx="758"
-              cy="273"
-              r="2"
-              fill="white"
-            />
-            <circle
-              id="correct-set-4-3_7"
-              cx="770"
-              cy="273"
-              r="4"
-              fill="#1E684F"
-            />
+            <circle id="correct-set-4-3_3" cx="745" cy="273" r="4" fill="#1E684F" />
+            <circle id="correct-set-4-3_4" cx="720" cy="273" r="4" fill="#1E684F" />
+            <circle id="correct-set-4-3_5" cx="733" cy="273" r="2" fill="white" />
+            <circle id="correct-set-4-3_6" cx="758" cy="273" r="2" fill="white" />
+            <circle id="correct-set-4-3_7" cx="770" cy="273" r="4" fill="#1E684F" />
             <rect
               id="correct-set-4-3_8"
               x="697"
@@ -1855,11 +1803,7 @@
               d="M713 222C713 221.448 713.448 221 714 221H718C718.552 221 719 221.448 719 222V263H713V222Z"
               fill="#FFCF0D"
             />
-            <path
-              id="correct-set-4-3_12"
-              d="M715 221H716V263H715V221Z"
-              fill="#F5A50C"
-            />
+            <path id="correct-set-4-3_12" d="M715 221H716V263H715V221Z" fill="#F5A50C" />
             <path
               id="correct-set-4-3_13"
               d="M725 222C725 221.448 725.448 221 726 221H730C730.552 221 731 221.448 731 222V263H725V222Z"
@@ -1910,21 +1854,9 @@
               transform="matrix(1 0 0 -1 745 253)"
               fill="#1E684F"
             />
-            <path
-              id="correct-set-4-3_22"
-              d="M727 221H728V263H727V221Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="correct-set-4-3_23"
-              d="M762 221H763V263H762V221Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="correct-set-4-3_24"
-              d="M774 221H775V263H774V221Z"
-              fill="#F5A50C"
-            />
+            <path id="correct-set-4-3_22" d="M727 221H728V263H727V221Z" fill="#F5A50C" />
+            <path id="correct-set-4-3_23" d="M762 221H763V263H762V221Z" fill="#F5A50C" />
+            <path id="correct-set-4-3_24" d="M774 221H775V263H774V221Z" fill="#F5A50C" />
             <rect
               id="correct-set-4-3_25"
               x="743"
@@ -1945,7 +1877,7 @@
         </g>
         <g
           id="glass-set-4-3"
-          :class="isSendAnswer && selectAnswer == 3 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 2 ? 'glass-move-on' : null"
           filter="url(#filter5_d)"
         >
           <path
@@ -1978,7 +1910,7 @@
           />
         </g>
         <g id="answer-set-4-2">
-          <g id="incorrect-set-4-2" v-if="!isCorrect" filter="url(#filter6_d)">
+          <g id="incorrect-set-4-2" v-if="!isCorrectAnswer" filter="url(#filter6_d)">
             <path
               id="incorrect-set-4-2_2"
               d="M488.207 262.603L475.922 282H524.414L540.578 256.784L512.129 251.612L488.207 262.603Z"
@@ -2004,41 +1936,11 @@
               height="19"
               fill="#F5A50C"
             />
-            <circle
-              id="correct-set-4-2_3"
-              cx="494"
-              cy="273"
-              r="4"
-              fill="#1E684F"
-            />
-            <circle
-              id="correct-set-4-2_4"
-              cx="469"
-              cy="273"
-              r="4"
-              fill="#1E684F"
-            />
-            <circle
-              id="correct-set-4-2_5"
-              cx="482"
-              cy="273"
-              r="2"
-              fill="white"
-            />
-            <circle
-              id="correct-set-4-2_6"
-              cx="507"
-              cy="273"
-              r="2"
-              fill="white"
-            />
-            <circle
-              id="correct-set-4-2_7"
-              cx="519"
-              cy="273"
-              r="4"
-              fill="#1E684F"
-            />
+            <circle id="correct-set-4-2_3" cx="494" cy="273" r="4" fill="#1E684F" />
+            <circle id="correct-set-4-2_4" cx="469" cy="273" r="4" fill="#1E684F" />
+            <circle id="correct-set-4-2_5" cx="482" cy="273" r="2" fill="white" />
+            <circle id="correct-set-4-2_6" cx="507" cy="273" r="2" fill="white" />
+            <circle id="correct-set-4-2_7" cx="519" cy="273" r="4" fill="#1E684F" />
             <rect
               id="correct-set-4-2_8"
               x="446"
@@ -2065,11 +1967,7 @@
               d="M462 222C462 221.448 462.448 221 463 221H467C467.552 221 468 221.448 468 222V263H462V222Z"
               fill="#FFCF0D"
             />
-            <path
-              id="correct-set-4-2_12"
-              d="M464 221H465V263H464V221Z"
-              fill="#F5A50C"
-            />
+            <path id="correct-set-4-2_12" d="M464 221H465V263H464V221Z" fill="#F5A50C" />
             <path
               id="correct-set-4-2_13"
               d="M474 222C474 221.448 474.448 221 475 221H479C479.552 221 480 221.448 480 222V263H474V222Z"
@@ -2120,21 +2018,9 @@
               transform="matrix(1 0 0 -1 494 253)"
               fill="#1E684F"
             />
-            <path
-              id="correct-set-4-2_22"
-              d="M476 221H477V263H476V221Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="correct-set-4-2_23"
-              d="M511 221H512V263H511V221Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="correct-set-4-2_24"
-              d="M523 221H524V263H523V221Z"
-              fill="#F5A50C"
-            />
+            <path id="correct-set-4-2_22" d="M476 221H477V263H476V221Z" fill="#F5A50C" />
+            <path id="correct-set-4-2_23" d="M511 221H512V263H511V221Z" fill="#F5A50C" />
+            <path id="correct-set-4-2_24" d="M523 221H524V263H523V221Z" fill="#F5A50C" />
             <rect
               id="correct-set-4-2_25"
               x="492"
@@ -2155,7 +2041,7 @@
         </g>
         <g
           id="glass-set-4-2"
-          :class="isSendAnswer && selectAnswer == 2 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 1 ? 'glass-move-on' : null"
           filter="url(#filter8_d)"
         >
           <path
@@ -2188,7 +2074,7 @@
           />
         </g>
         <g id="answer-set-4-1">
-          <g id="incorrect-set-4-1" v-if="!isCorrect" filter="url(#filter9_d)">
+          <g id="incorrect-set-4-1" v-if="!isCorrectAnswer" filter="url(#filter9_d)">
             <path
               id="incorrect-set-4-1_2"
               d="M235.207 263.603L222.922 283H271.414L287.578 257.784L259.129 252.612L235.207 263.603Z"
@@ -2214,41 +2100,11 @@
               height="19"
               fill="#F5A50C"
             />
-            <circle
-              id="correct-set-4-1_3"
-              cx="241"
-              cy="273"
-              r="4"
-              fill="#1E684F"
-            />
-            <circle
-              id="correct-set-4-1_4"
-              cx="216"
-              cy="273"
-              r="4"
-              fill="#1E684F"
-            />
-            <circle
-              id="correct-set-4-1_5"
-              cx="229"
-              cy="273"
-              r="2"
-              fill="white"
-            />
-            <circle
-              id="correct-set-4-1_6"
-              cx="254"
-              cy="273"
-              r="2"
-              fill="white"
-            />
-            <circle
-              id="correct-set-4-1_7"
-              cx="266"
-              cy="273"
-              r="4"
-              fill="#1E684F"
-            />
+            <circle id="correct-set-4-1_3" cx="241" cy="273" r="4" fill="#1E684F" />
+            <circle id="correct-set-4-1_4" cx="216" cy="273" r="4" fill="#1E684F" />
+            <circle id="correct-set-4-1_5" cx="229" cy="273" r="2" fill="white" />
+            <circle id="correct-set-4-1_6" cx="254" cy="273" r="2" fill="white" />
+            <circle id="correct-set-4-1_7" cx="266" cy="273" r="4" fill="#1E684F" />
             <rect
               id="correct-set-4-1_8"
               x="193"
@@ -2275,11 +2131,7 @@
               d="M209 222C209 221.448 209.448 221 210 221H214C214.552 221 215 221.448 215 222V263H209V222Z"
               fill="#FFCF0D"
             />
-            <path
-              id="correct-set-4-1_12"
-              d="M211 221H212V263H211V221Z"
-              fill="#F5A50C"
-            />
+            <path id="correct-set-4-1_12" d="M211 221H212V263H211V221Z" fill="#F5A50C" />
             <path
               id="correct-set-4-1_13"
               d="M221 222C221 221.448 221.448 221 222 221H226C226.552 221 227 221.448 227 222V263H221V222Z"
@@ -2330,21 +2182,9 @@
               transform="matrix(1 0 0 -1 241 253)"
               fill="#1E684F"
             />
-            <path
-              id="correct-set-4-1_22"
-              d="M223 221H224V263H223V221Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="correct-set-4-1_23"
-              d="M258 221H259V263H258V221Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="correct-set-4-1_24"
-              d="M270 221H271V263H270V221Z"
-              fill="#F5A50C"
-            />
+            <path id="correct-set-4-1_22" d="M223 221H224V263H223V221Z" fill="#F5A50C" />
+            <path id="correct-set-4-1_23" d="M258 221H259V263H258V221Z" fill="#F5A50C" />
+            <path id="correct-set-4-1_24" d="M270 221H271V263H270V221Z" fill="#F5A50C" />
             <rect
               id="correct-set-4-1_25"
               x="239"
@@ -2365,7 +2205,7 @@
         </g>
         <g
           id="glass-set-4-1"
-          :class="isSendAnswer && selectAnswer == 1 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 0 ? 'glass-move-on' : null"
           filter="url(#filter11_d)"
         >
           <path
@@ -2401,7 +2241,7 @@
 
       <g v-if="choicesLength == 3">
         <g id="answer-set-3-3">
-          <g id="incorrect-set-3-3" v-if="!isCorrect" filter="url(#filter12_d)">
+          <g id="incorrect-set-3-3" v-if="!isCorrectAnswer" filter="url(#filter12_d)">
             <path
               id="incorrect"
               d="M869.207 262.603L856.922 282H905.414L921.578 256.784L893.129 251.612L869.207 262.603Z"
@@ -2427,41 +2267,11 @@
               height="19"
               fill="#F5A50C"
             />
-            <circle
-              id="correct-set-3-3_3"
-              cx="873"
-              cy="272"
-              r="4"
-              fill="#1E684F"
-            />
-            <circle
-              id="correct-set-3-3_4"
-              cx="848"
-              cy="272"
-              r="4"
-              fill="#1E684F"
-            />
-            <circle
-              id="correct-set-3-3_5"
-              cx="861"
-              cy="272"
-              r="2"
-              fill="white"
-            />
-            <circle
-              id="correct-set-3-3_6"
-              cx="886"
-              cy="272"
-              r="2"
-              fill="white"
-            />
-            <circle
-              id="correct-set-3-3_7"
-              cx="898"
-              cy="272"
-              r="4"
-              fill="#1E684F"
-            />
+            <circle id="correct-set-3-3_3" cx="873" cy="272" r="4" fill="#1E684F" />
+            <circle id="correct-set-3-3_4" cx="848" cy="272" r="4" fill="#1E684F" />
+            <circle id="correct-set-3-3_5" cx="861" cy="272" r="2" fill="white" />
+            <circle id="correct-set-3-3_6" cx="886" cy="272" r="2" fill="white" />
+            <circle id="correct-set-3-3_7" cx="898" cy="272" r="4" fill="#1E684F" />
             <rect
               id="correct-set-3-3_8"
               x="825"
@@ -2488,11 +2298,7 @@
               d="M841 221C841 220.448 841.448 220 842 220H846C846.552 220 847 220.448 847 221V262H841V221Z"
               fill="#FFCF0D"
             />
-            <path
-              id="correct-set-3-3_12"
-              d="M843 220H844V262H843V220Z"
-              fill="#F5A50C"
-            />
+            <path id="correct-set-3-3_12" d="M843 220H844V262H843V220Z" fill="#F5A50C" />
             <path
               id="correct-set-3-3_13"
               d="M853 221C853 220.448 853.448 220 854 220H858C858.552 220 859 220.448 859 221V262H853V221Z"
@@ -2543,21 +2349,9 @@
               transform="matrix(1 0 0 -1 873 252)"
               fill="#1E684F"
             />
-            <path
-              id="correct-set-3-3_22"
-              d="M855 220H856V262H855V220Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="correct-set-3-3_23"
-              d="M890 220H891V262H890V220Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="correct-set-3-3_24"
-              d="M902 220H903V262H902V220Z"
-              fill="#F5A50C"
-            />
+            <path id="correct-set-3-3_22" d="M855 220H856V262H855V220Z" fill="#F5A50C" />
+            <path id="correct-set-3-3_23" d="M890 220H891V262H890V220Z" fill="#F5A50C" />
+            <path id="correct-set-3-3_24" d="M902 220H903V262H902V220Z" fill="#F5A50C" />
             <rect
               id="correct-set-3-3_25"
               x="871"
@@ -2578,7 +2372,7 @@
         </g>
         <g
           id="glass-set-3-3"
-          :class="isSendAnswer && selectAnswer == 3 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 2 ? 'glass-move-on' : null"
           filter="url(#filter14_d)"
         >
           <path
@@ -2611,7 +2405,7 @@
           />
         </g>
         <g id="answer-set-3-2">
-          <g id="incorrect-set-3-2" v-if="!isCorrect" filter="url(#filter15_d)">
+          <g id="incorrect-set-3-2" v-if="!isCorrectAnswer" filter="url(#filter15_d)">
             <path
               id="incorrect-set-3-2_2"
               d="M616.207 262.603L603.922 282H652.414L668.578 256.784L640.129 251.612L616.207 262.603Z"
@@ -2637,41 +2431,11 @@
               height="19"
               fill="#F5A50C"
             />
-            <circle
-              id="correct-set-3-2_3"
-              cx="621"
-              cy="272"
-              r="4"
-              fill="#1E684F"
-            />
-            <circle
-              id="correct-set-3-2_4"
-              cx="596"
-              cy="272"
-              r="4"
-              fill="#1E684F"
-            />
-            <circle
-              id="correct-set-3-2_5"
-              cx="609"
-              cy="272"
-              r="2"
-              fill="white"
-            />
-            <circle
-              id="correct-set-3-2_6"
-              cx="634"
-              cy="272"
-              r="2"
-              fill="white"
-            />
-            <circle
-              id="correct-set-3-2_7"
-              cx="646"
-              cy="272"
-              r="4"
-              fill="#1E684F"
-            />
+            <circle id="correct-set-3-2_3" cx="621" cy="272" r="4" fill="#1E684F" />
+            <circle id="correct-set-3-2_4" cx="596" cy="272" r="4" fill="#1E684F" />
+            <circle id="correct-set-3-2_5" cx="609" cy="272" r="2" fill="white" />
+            <circle id="correct-set-3-2_6" cx="634" cy="272" r="2" fill="white" />
+            <circle id="correct-set-3-2_7" cx="646" cy="272" r="4" fill="#1E684F" />
             <rect
               id="correct-set-3-2_8"
               x="573"
@@ -2698,11 +2462,7 @@
               d="M589 221C589 220.448 589.448 220 590 220H594C594.552 220 595 220.448 595 221V262H589V221Z"
               fill="#FFCF0D"
             />
-            <path
-              id="correct-set-3-2_12"
-              d="M591 220H592V262H591V220Z"
-              fill="#F5A50C"
-            />
+            <path id="correct-set-3-2_12" d="M591 220H592V262H591V220Z" fill="#F5A50C" />
             <path
               id="correct-set-3-2_13"
               d="M601 221C601 220.448 601.448 220 602 220H606C606.552 220 607 220.448 607 221V262H601V221Z"
@@ -2753,21 +2513,9 @@
               transform="matrix(1 0 0 -1 621 252)"
               fill="#1E684F"
             />
-            <path
-              id="correct-set-3-2_22"
-              d="M603 220H604V262H603V220Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="correct-set-3-2_23"
-              d="M638 220H639V262H638V220Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="correct-set-3-2_24"
-              d="M650 220H651V262H650V220Z"
-              fill="#F5A50C"
-            />
+            <path id="correct-set-3-2_22" d="M603 220H604V262H603V220Z" fill="#F5A50C" />
+            <path id="correct-set-3-2_23" d="M638 220H639V262H638V220Z" fill="#F5A50C" />
+            <path id="correct-set-3-2_24" d="M650 220H651V262H650V220Z" fill="#F5A50C" />
             <rect
               id="correct-set-3-2_25"
               x="619"
@@ -2788,7 +2536,7 @@
         </g>
         <g
           id="glass-set-3-2"
-          :class="isSendAnswer && selectAnswer == 2 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 1 ? 'glass-move-on' : null"
           filter="url(#filter17_d)"
         >
           <path
@@ -2821,7 +2569,7 @@
           />
         </g>
         <g id="answer-set-3-1">
-          <g id="incorrect-set-3-1" v-if="!isCorrect" filter="url(#filter18_d)">
+          <g id="incorrect-set-3-1" v-if="!isCorrectAnswer" filter="url(#filter18_d)">
             <path
               id="incorrect-set-3-1_2"
               d="M362.207 262.603L349.922 282H398.414L414.578 256.784L386.129 251.612L362.207 262.603Z"
@@ -2847,41 +2595,11 @@
               height="19"
               fill="#F5A50C"
             />
-            <circle
-              id="correct-set-3-1_3"
-              cx="366"
-              cy="272"
-              r="4"
-              fill="#1E684F"
-            />
-            <circle
-              id="correct-set-3-1_4"
-              cx="341"
-              cy="272"
-              r="4"
-              fill="#1E684F"
-            />
-            <circle
-              id="correct-set-3-1_5"
-              cx="354"
-              cy="272"
-              r="2"
-              fill="white"
-            />
-            <circle
-              id="correct-set-3-1_6"
-              cx="379"
-              cy="272"
-              r="2"
-              fill="white"
-            />
-            <circle
-              id="correct-set-3-1_7"
-              cx="391"
-              cy="272"
-              r="4"
-              fill="#1E684F"
-            />
+            <circle id="correct-set-3-1_3" cx="366" cy="272" r="4" fill="#1E684F" />
+            <circle id="correct-set-3-1_4" cx="341" cy="272" r="4" fill="#1E684F" />
+            <circle id="correct-set-3-1_5" cx="354" cy="272" r="2" fill="white" />
+            <circle id="correct-set-3-1_6" cx="379" cy="272" r="2" fill="white" />
+            <circle id="correct-set-3-1_7" cx="391" cy="272" r="4" fill="#1E684F" />
             <rect
               id="correct-set-3-1_8"
               x="318"
@@ -2908,11 +2626,7 @@
               d="M334 221C334 220.448 334.448 220 335 220H339C339.552 220 340 220.448 340 221V262H334V221Z"
               fill="#FFCF0D"
             />
-            <path
-              id="correct-set-3-1_12"
-              d="M336 220H337V262H336V220Z"
-              fill="#F5A50C"
-            />
+            <path id="correct-set-3-1_12" d="M336 220H337V262H336V220Z" fill="#F5A50C" />
             <path
               id="correct-set-3-1_13"
               d="M346 221C346 220.448 346.448 220 347 220H351C351.552 220 352 220.448 352 221V262H346V221Z"
@@ -2963,21 +2677,9 @@
               transform="matrix(1 0 0 -1 366 252)"
               fill="#1E684F"
             />
-            <path
-              id="correct-set-3-1_22"
-              d="M348 220H349V262H348V220Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="correct-set-3-1_23"
-              d="M383 220H384V262H383V220Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="correct-set-3-1_24"
-              d="M395 220H396V262H395V220Z"
-              fill="#F5A50C"
-            />
+            <path id="correct-set-3-1_22" d="M348 220H349V262H348V220Z" fill="#F5A50C" />
+            <path id="correct-set-3-1_23" d="M383 220H384V262H383V220Z" fill="#F5A50C" />
+            <path id="correct-set-3-1_24" d="M395 220H396V262H395V220Z" fill="#F5A50C" />
             <rect
               id="correct-set-3-1_25"
               x="364"
@@ -2998,7 +2700,7 @@
         </g>
         <g
           id="glass-set-3-1"
-          :class="isSendAnswer && selectAnswer == 1 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 0 ? 'glass-move-on' : null"
           filter="url(#filter20_d)"
         >
           <path
@@ -3034,7 +2736,7 @@
 
       <g v-if="choicesLength == 2">
         <g id="answer-set-2-2">
-          <g id="incorrect-set-2-2" v-if="!isCorrect" filter="url(#filter21_d)">
+          <g id="incorrect-set-2-2" v-if="!isCorrectAnswer" filter="url(#filter21_d)">
             <path
               id="incorrect-set-2-2_2"
               d="M742.207 262.603L729.922 282H778.414L794.578 256.784L766.129 251.612L742.207 262.603Z"
@@ -3060,41 +2762,11 @@
               height="19"
               fill="#F5A50C"
             />
-            <circle
-              id="correct-set-2-2_3"
-              cx="747"
-              cy="272"
-              r="4"
-              fill="#1E684F"
-            />
-            <circle
-              id="correct-set-2-2_4"
-              cx="722"
-              cy="272"
-              r="4"
-              fill="#1E684F"
-            />
-            <circle
-              id="correct-set-2-2_5"
-              cx="735"
-              cy="272"
-              r="2"
-              fill="white"
-            />
-            <circle
-              id="correct-set-2-2_6"
-              cx="760"
-              cy="272"
-              r="2"
-              fill="white"
-            />
-            <circle
-              id="correct-set-2-2_7"
-              cx="772"
-              cy="272"
-              r="4"
-              fill="#1E684F"
-            />
+            <circle id="correct-set-2-2_3" cx="747" cy="272" r="4" fill="#1E684F" />
+            <circle id="correct-set-2-2_4" cx="722" cy="272" r="4" fill="#1E684F" />
+            <circle id="correct-set-2-2_5" cx="735" cy="272" r="2" fill="white" />
+            <circle id="correct-set-2-2_6" cx="760" cy="272" r="2" fill="white" />
+            <circle id="correct-set-2-2_7" cx="772" cy="272" r="4" fill="#1E684F" />
             <rect
               id="correct-set-2-2_8"
               x="699"
@@ -3121,11 +2793,7 @@
               d="M715 221C715 220.448 715.448 220 716 220H720C720.552 220 721 220.448 721 221V262H715V221Z"
               fill="#FFCF0D"
             />
-            <path
-              id="correct-set-2-2_12"
-              d="M717 220H718V262H717V220Z"
-              fill="#F5A50C"
-            />
+            <path id="correct-set-2-2_12" d="M717 220H718V262H717V220Z" fill="#F5A50C" />
             <path
               id="correct-set-2-2_13"
               d="M727 221C727 220.448 727.448 220 728 220H732C732.552 220 733 220.448 733 221V262H727V221Z"
@@ -3176,21 +2844,9 @@
               transform="matrix(1 0 0 -1 747 252)"
               fill="#1E684F"
             />
-            <path
-              id="correct-set-2-2_22"
-              d="M729 220H730V262H729V220Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="correct-set-2-2_23"
-              d="M764 220H765V262H764V220Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="correct-set-2-2_24"
-              d="M776 220H777V262H776V220Z"
-              fill="#F5A50C"
-            />
+            <path id="correct-set-2-2_22" d="M729 220H730V262H729V220Z" fill="#F5A50C" />
+            <path id="correct-set-2-2_23" d="M764 220H765V262H764V220Z" fill="#F5A50C" />
+            <path id="correct-set-2-2_24" d="M776 220H777V262H776V220Z" fill="#F5A50C" />
             <rect
               id="correct-set-2-2_25"
               x="745"
@@ -3211,7 +2867,7 @@
         </g>
         <g
           id="glass-set-2-2"
-          :class="isSendAnswer && selectAnswer == 2 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 1 ? 'glass-move-on' : null"
           filter="url(#filter23_d)"
         >
           <path
@@ -3244,7 +2900,7 @@
           />
         </g>
         <g id="answer-set-2-1">
-          <g id="incorrect-set-2-1" v-if="!isCorrect" filter="url(#filter24_d)">
+          <g id="incorrect-set-2-1" v-if="!isCorrectAnswer" filter="url(#filter24_d)">
             <path
               id="incorrect-set-2-1_2"
               d="M490.207 262.603L477.922 282H526.414L542.578 256.784L514.129 251.612L490.207 262.603Z"
@@ -3270,41 +2926,11 @@
               height="19"
               fill="#F5A50C"
             />
-            <circle
-              id="correct-set-2-1_3"
-              cx="494"
-              cy="269"
-              r="4"
-              fill="#1E684F"
-            />
-            <circle
-              id="correct-set-2-1_4"
-              cx="469"
-              cy="269"
-              r="4"
-              fill="#1E684F"
-            />
-            <circle
-              id="correct-set-2-1_5"
-              cx="482"
-              cy="269"
-              r="2"
-              fill="white"
-            />
-            <circle
-              id="correct-set-2-1_6"
-              cx="507"
-              cy="269"
-              r="2"
-              fill="white"
-            />
-            <circle
-              id="correct-set-2-1_7"
-              cx="519"
-              cy="269"
-              r="4"
-              fill="#1E684F"
-            />
+            <circle id="correct-set-2-1_3" cx="494" cy="269" r="4" fill="#1E684F" />
+            <circle id="correct-set-2-1_4" cx="469" cy="269" r="4" fill="#1E684F" />
+            <circle id="correct-set-2-1_5" cx="482" cy="269" r="2" fill="white" />
+            <circle id="correct-set-2-1_6" cx="507" cy="269" r="2" fill="white" />
+            <circle id="correct-set-2-1_7" cx="519" cy="269" r="4" fill="#1E684F" />
             <rect
               id="correct-set-2-1_8"
               x="446"
@@ -3331,11 +2957,7 @@
               d="M462 218C462 217.448 462.448 217 463 217H467C467.552 217 468 217.448 468 218V259H462V218Z"
               fill="#FFCF0D"
             />
-            <path
-              id="correct-set-2-1_12"
-              d="M464 217H465V259H464V217Z"
-              fill="#F5A50C"
-            />
+            <path id="correct-set-2-1_12" d="M464 217H465V259H464V217Z" fill="#F5A50C" />
             <path
               id="correct-set-2-1_13"
               d="M474 218C474 217.448 474.448 217 475 217H479C479.552 217 480 217.448 480 218V259H474V218Z"
@@ -3386,21 +3008,9 @@
               transform="matrix(1 0 0 -1 494 249)"
               fill="#1E684F"
             />
-            <path
-              id="correct-set-2-1_22"
-              d="M476 217H477V259H476V217Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="correct-set-2-1_23"
-              d="M511 217H512V259H511V217Z"
-              fill="#F5A50C"
-            />
-            <path
-              id="correct-set-2-1_24"
-              d="M523 217H524V259H523V217Z"
-              fill="#F5A50C"
-            />
+            <path id="correct-set-2-1_22" d="M476 217H477V259H476V217Z" fill="#F5A50C" />
+            <path id="correct-set-2-1_23" d="M511 217H512V259H511V217Z" fill="#F5A50C" />
+            <path id="correct-set-2-1_24" d="M523 217H524V259H523V217Z" fill="#F5A50C" />
             <rect
               id="correct-set-2-1_25"
               x="492"
@@ -3421,7 +3031,7 @@
         </g>
         <g
           id="glass-set-2-1"
-          :class="isSendAnswer && selectAnswer == 1 ? 'glass-move-on' : null"
+          :class="isSendAnswer && currentAnswer == 0 ? 'glass-move-on' : null"
           filter="url(#filter26_d)"
         >
           <path
@@ -3478,11 +3088,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3511,11 +3117,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3544,11 +3146,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3577,11 +3175,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3610,11 +3204,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3643,11 +3233,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3676,11 +3262,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3709,11 +3291,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3742,11 +3320,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3775,11 +3349,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3808,11 +3378,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3841,11 +3407,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3874,11 +3436,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3907,11 +3465,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3940,11 +3494,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3973,11 +3523,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4006,11 +3552,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4039,11 +3581,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4072,11 +3610,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4105,11 +3639,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4138,11 +3668,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4171,11 +3697,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4204,11 +3726,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4237,11 +3755,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4270,11 +3784,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4303,11 +3813,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4336,11 +3842,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4459,21 +3961,21 @@ export default {
   props: {
     choicesLength: {
       type: Number,
-      default: 0
+      default: 0,
     },
-    selectAnswer: {
+    currentAnswer: {
       type: Number,
-      default: 0
+      default: 0,
     },
-    isCorrect: {
+    isCorrectAnswer: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     isSendAnswer: {
       type: Boolean,
-      default: () => false
-    }
-  }
+      default: () => false,
+    },
+  },
 };
 </script>
 
