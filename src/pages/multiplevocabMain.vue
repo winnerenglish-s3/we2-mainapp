@@ -6,7 +6,7 @@
         :isHasInstruction="isHasInstruction"
         :instructionData="instructionData"
         :isShowHome="false"
-        :isShowPause="true"
+        :isShowPause="isSynchronize ? false : true"
         @callback-restart="reStart"
       ></app-bar>
     </div>
@@ -157,6 +157,10 @@ export default {
     },
     themeSync: {
       type: Number,
+      default: () => false,
+    },
+    isSynchronize: {
+      type: Boolean,
       default: () => false,
     },
   },
