@@ -73,10 +73,6 @@ export default {
   },
   emits: ["increaseFont", "decreaseFont", "playSound"],
   props: {
-    // currentQuestion: {
-    //   default: 0,
-    //   type: Number,
-    // },
     // totalQuestion: {
     //   default: 0,
     //   type: Number,

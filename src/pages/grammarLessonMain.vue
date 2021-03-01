@@ -1,9 +1,6 @@
 <template>
   <q-page>
-    <app-bar
-      :isShowHome="learningMode == 'selfLearning' ? true : false"
-      :isShowPause="learningMode == 'selfLearning' ? true : false"
-    ></app-bar>
+    <app-bar :isShowHome="learningMode == 'selfLearning' ? true : false"></app-bar>
     <div class="box-container-main" v-if="isLoaded">
       <div class="row row-height">
         <div
@@ -64,9 +61,9 @@
           <!-- VIDEO -->
           <div v-else class="col-12">
             <iframe
-              :src="grammarList[activeGrammarList].vdoLink"
+              :src="grammarList[activeGrammarList].vdoLink + '?rel=0'"
               frameborder="0"
-              style="width: 100%; height: 47vw"
+              style="width: 100%; height: calc(100vh * 9 / 16)"
               allow="autoplay"
             ></iframe>
           </div>
@@ -229,7 +226,9 @@ export default {
       isLoaded.value = true;
 
       let sortData = response.data.sort((a, b) => a.order - b.order);
+
       grammarList.value = sortData;
+
       $q.loading.hide();
     };
 
