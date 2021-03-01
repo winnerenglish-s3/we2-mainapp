@@ -295,6 +295,10 @@ export default {
       type: Boolean,
       default: () => false,
     },
+    themeSync: {
+      type: Number,
+      default: 0,
+    },
   },
   emits: ["callback-showdialoghelp", "callback-restart"],
   setup(props, { emit }) {
@@ -312,10 +316,8 @@ export default {
 
     // เซ็ทสีของ Theme ที่ใช้
     const colorTheme = ref(getColorTheme);
-    const setTheme = ref(1);
-
     const themeColor = computed(() => {
-      return `background-color:${colorTheme.value[setTheme.value - 1].hex}`;
+      return `background-color:${colorTheme.value[props.themeSync - 1].hex}`;
     });
 
     const instruction = reactive({
