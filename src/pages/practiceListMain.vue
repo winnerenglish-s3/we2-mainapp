@@ -563,7 +563,12 @@ export default {
     // แสดงผลไอคอนแบบฝึกหัด
     const showIconPractice = (type) => {
       let nameImage = require("../../public/images/practicelist/action-btn-star0.png");
-      if (type == "flashcard" || type == "grammarlesson") {
+      if (
+        type == "flashcard" ||
+        type == "grammarlesson" ||
+        type == "phonicslesson" ||
+        type == "languagetips"
+      ) {
         nameImage = require("../../public/images/practicelist/teaching-btn-default.png");
       } else if (type == "matching") {
         nameImage = require("../../public/images/practicelist/matching-btn-star0.png");
@@ -577,6 +582,7 @@ export default {
     // route to แบบฝึกหัด
     const gotoPractice = (data) => {
       let routerName = "";
+
       if (data.practiceType == "flashcard") {
         routerName = "/flashcard/";
       } else if (data.practiceType == "matching") {
@@ -590,11 +596,17 @@ export default {
           routerName = "/phonicsMultiple/";
         } else if (data.skill == "Reading") {
           routerName = "/readingmultiple/";
+        } else if (data.skill == "Listening & Speaking") {
+          routerName = "/languagetipmultiple/";
         }
       } else if (data.practiceType == "spellingbee") {
         routerName = "/spellingbee/";
-      } else if (data.practiceType == "grammarlesson") {
-        routerName = "/grammarLesson/";
+      } else if (
+        data.practiceType == "grammarlesson" ||
+        data.practiceType == "phonicslesson" ||
+        data.practiceType == "languagetips"
+      ) {
+        routerName = "/vdoLesson/";
       } else if (data.practiceType == "grammaraction") {
         routerName = "/grammarAction/";
       } else if (data.practiceType == "translation") {

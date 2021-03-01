@@ -165,9 +165,9 @@ const routes = [
       },
       // Grammar Lesson
       {
-        path: "/grammarLesson/:practiceListId?",
-        component: () => import("pages/grammarLessonMain.vue"),
-        name: "grammarLesson",
+        path: "/vdoLesson/:practiceListId?",
+        component: () => import("pages/vdoLesson.vue"),
+        name: "vdoLesson",
       },
 
       // Translation
@@ -182,6 +182,13 @@ const routes = [
         path: "/clozeTest/:practiceListId?",
         component: () => import("pages/clozeTestMain.vue"),
         name: "clozeTest",
+      },
+
+      //Phonics Lesson
+      {
+        path: "/phonicsLesson/:practiceListId?",
+        component: () => import("pages/phonicsLessonMain.vue"),
+        name: "phonicsLesson",
       },
     ],
   },

@@ -14,17 +14,17 @@
             style="width: 100%; height: 100%"
           >
             <div
-              v-for="(item, index) in grammarList"
+              v-for="(item, index) in lessonList"
               :key="index"
               class="q-pt-md"
               align="center"
             >
               <q-btn
-                @click="clickGrammarList(index)"
+                @click="clickLessonList(index)"
                 no-caps
                 style="width: 93%; margin: auto"
                 class="shadow-1 q-py-md"
-                :class="activeGrammarList == index ? 'bg-info' : 'bg-white'"
+                :class="activeLessonList == index ? 'bg-info' : 'bg-white'"
               >
                 <q-badge
                   color="orange"
@@ -41,7 +41,7 @@
                 <div
                   class="absolute-right"
                   style="top: 15px; right: 20px"
-                  v-if="passedGrammarList.includes(index)"
+                  v-if="passedlessonList.includes(index)"
                 >
                   <q-icon color="teal" name="far fa-check-circle"></q-icon>
                 </div>
@@ -56,12 +56,12 @@
         >
           <!-- IMG -->
           <div v-if="typeSelect == 'slide'" class="col-12">
-            <q-img :src="grammarList[activeGrammarList].imageUrl"></q-img>
+            <q-img :src="lessonList[activeLessonList].imageUrl"></q-img>
           </div>
           <!-- VIDEO -->
           <div v-else class="col-12">
             <iframe
-              :src="grammarList[activeGrammarList].vdoLink + '?rel=0'"
+              :src="lessonList[activeLessonList].vdoLink + '?rel=0'"
               frameborder="0"
               style="width: 100%; height: calc(100vh * 9 / 16)"
               allow="autoplay"
@@ -71,12 +71,12 @@
           <!-- Mobile Next Button -->
           <q-page-sticky position="bottom-right" :offset="[18, 18]" class="mobile-only">
             <q-btn
-              @click="nextGrammar()"
+              @click="nextlesson()"
               round
               color="amber"
               class="text-white relative-position"
               style="width: 50px; height: 50px"
-              :disable="activeGrammarList == grammarList.length - 1"
+              :disable="activeLessonList == lessonList.length - 1"
             >
               <q-icon
                 size="xl"
@@ -89,12 +89,12 @@
           <!-- Mobile Previous Button -->
           <q-page-sticky position="bottom-left" :offset="[18, 18]" class="mobile-only">
             <q-btn
-              @click="previousGrammar()"
+              @click="previouslesson()"
               round
               color="amber"
               class="text-white relative-position"
               style="width: 50px; height: 50px"
-              :disable="activeGrammarList == 0"
+              :disable="activeLessonList == 0"
             >
               <q-icon size="xl" name="fas fa-caret-left " style="right: 6px"></q-icon>
             </q-btn>
@@ -108,12 +108,12 @@
             <!-- left button -->
             <div v-if="$q.platform.is.desktop">
               <q-btn
-                @click="previousGrammar()"
+                @click="previouslesson()"
                 round
                 color="amber"
                 class="text-white relative-position"
                 style="width: 50px; height: 50px"
-                :disable="activeGrammarList == 0"
+                :disable="activeLessonList == 0"
               >
                 <q-icon size="xl" name="fas fa-caret-left " style="right: 6px"></q-icon>
               </q-btn>
@@ -147,12 +147,12 @@
             <!-- Right Button -->
             <div v-if="$q.platform.is.desktop">
               <q-btn
-                @click="nextGrammar()"
+                @click="nextlesson()"
                 round
                 color="amber"
                 class="text-white relative-position"
                 style="width: 50px; height: 50px"
-                :disable="activeGrammarList == grammarList.length - 1"
+                :disable="activeLessonList == lessonList.length - 1"
               >
                 <q-icon
                   size="xl"
@@ -199,22 +199,22 @@ export default {
       width: "9px",
       opacity: 0.2,
     };
-    const grammarList = ref([]);
+    const lessonList = ref([]);
 
-    // Grammar List ปัจจุบันที่คลิกอยู่
-    const activeGrammarList = ref(0);
+    // lesson List ปัจจุบันที่คลิกอยู่
+    const activeLessonList = ref(0);
     // เก็บค่า List ที่เคยกดไปแล้ว
-    const passedGrammarList = ref([0]);
-    // กด Grammar List
-    const clickGrammarList = (index) => {
-      activeGrammarList.value = index;
-      if (!passedGrammarList.value.includes(index)) {
-        passedGrammarList.value.push(index);
+    const passedlessonList = ref([0]);
+    // กด lesson List
+    const clickLessonList = (index) => {
+      activeLessonList.value = index;
+      if (!passedlessonList.value.includes(index)) {
+        passedlessonList.value.push(index);
       }
     };
 
     const isLoaded = ref(false);
-    const getGrammarList = async () => {
+    const getlessonList = async () => {
       $q.loading.show();
       const apiURL =
         "https://us-central1-winnerenglish2-e0f1b.cloudfunctions.net/wfunctions/getPracticeData";
@@ -222,12 +222,16 @@ export default {
       const postData = {
         practiceListId: route.params.practiceListId,
       };
-      const response = await axios.post(apiURL, postData);
-      isLoaded.value = true;
+      try {
+        const response = await axios.post(apiURL, postData);
+        isLoaded.value = true;
 
-      let sortData = response.data.sort((a, b) => a.order - b.order);
+        let sortData = response.data.sort((a, b) => a.order - b.order);
 
-      grammarList.value = sortData;
+        lessonList.value = sortData;
+      } catch (error) {
+        console.log(error);
+      }
 
       $q.loading.hide();
     };
@@ -235,12 +239,12 @@ export default {
     // Type select between video and slide
     const typeSelect = ref("vdo");
     // next vdo / slice
-    const nextGrammar = () => {
-      activeGrammarList.value++;
-      clickGrammarList(activeGrammarList.value);
+    const nextlesson = () => {
+      activeLessonList.value++;
+      clickLessonList(activeLessonList.value);
     };
-    const previousGrammar = () => {
-      activeGrammarList.value--;
+    const previouslesson = () => {
+      activeLessonList.value--;
     };
 
     // Synchronize
@@ -255,8 +259,8 @@ export default {
       .onSnapshot((data) => {
         if (data.data().mode == "control") {
           isSynchronizeMode.value = true;
-          typeSelect.value = data.data().grammar.mode;
-          activeGrammarList.value = data.data().grammar.currentLessonIndex;
+          typeSelect.value = data.data().lesson.mode;
+          activeLessonList.value = data.data().lesson.currentLessonIndex;
           learningMode.value = "control";
         } else {
           isSynchronizeMode.value = false;
@@ -265,7 +269,7 @@ export default {
       });
 
     onMounted(() => {
-      getGrammarList();
+      getlessonList();
     });
 
     onBeforeUnmount(() => {
@@ -273,15 +277,15 @@ export default {
     });
 
     return {
-      grammarList,
-      activeGrammarList,
-      clickGrammarList,
-      passedGrammarList,
+      lessonList,
+      activeLessonList,
+      clickLessonList,
+      passedlessonList,
       thumbStyle,
       barStyle,
       typeSelect,
-      nextGrammar,
-      previousGrammar,
+      nextlesson,
+      previouslesson,
       isSynchronizeMode,
       learningMode,
       isLoaded,
