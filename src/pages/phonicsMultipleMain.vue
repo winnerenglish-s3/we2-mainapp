@@ -5,7 +5,7 @@
         :isHasInstruction="true"
         :isHasHelp="true"
         :isShowHome="false"
-        :isShowPause="learningMode == 'control' ? false : true"
+        :isShowPause="isSynchronize ? false : true"
         :isLoadPractice="isLoadPractice"
         @callback-showdialoghelp="isShowDialogHelp = true"
         @callback-restart="reStart"
@@ -227,6 +227,10 @@ export default {
       type: Number,
       default: 0,
     },
+    isSynchronize: {
+      type: Boolean,
+      default: () => false,
+    },
   },
   setup(props) {
     // Initial Data
@@ -248,7 +252,6 @@ export default {
     const selectAudioSound = ref(null);
     const isLoadPractice = ref(false);
     const isFinishPractice = ref(false);
-    const learningMode = ref("");
     const lessonList = ref([]);
     const extraSound = reactive([
       {
@@ -477,7 +480,6 @@ export default {
       isLoadPractice,
       isFinishPractice,
       lessonList,
-      learningMode,
       selectLesson,
       tab,
 
