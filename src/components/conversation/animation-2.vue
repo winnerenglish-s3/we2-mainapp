@@ -10,13 +10,7 @@
     <g id="animation" clip-path="url(#clip0)">
       <g id="background">
         <g id="Group 2252">
-          <rect
-            id="Rectangle 3746"
-            y="53"
-            width="1600"
-            height="297"
-            fill="#ACEEFF"
-          />
+          <rect id="Rectangle 3746" y="53" width="1600" height="297" fill="#ACEEFF" />
           <g id="Group 2245">
             <rect
               id="Rectangle 3538"
@@ -274,16 +268,8 @@
               d="M1409 244L1368 261V290H1409V244Z"
               fill="#70B1E6"
             />
-            <path
-              id="Rectangle 3769"
-              d="M540 244L499 261V290H540V244Z"
-              fill="#70B1E6"
-            />
-            <path
-              id="Rectangle 3753"
-              d="M910 185L869 202V231H910V185Z"
-              fill="#70B1E6"
-            />
+            <path id="Rectangle 3769" d="M540 244L499 261V290H540V244Z" fill="#70B1E6" />
+            <path id="Rectangle 3753" d="M910 185L869 202V231H910V185Z" fill="#70B1E6" />
             <path
               id="Rectangle 3770"
               d="M41 185L-9.53674e-07 202V231H41V185Z"
@@ -635,51 +621,15 @@
             d="M220.5 152H236V174H210L220.5 152Z"
             fill="#C99D7A"
           />
-          <path
-            id="Rectangle 3743"
-            d="M202 181V189H204L202 181Z"
-            fill="#C18A65"
-          />
-          <path
-            id="Rectangle 3745"
-            d="M206 166V174H208L206 166Z"
-            fill="#C18A65"
-          />
-          <path
-            id="Rectangle 3747_2"
-            d="M219 124V132H221L219 124Z"
-            fill="#C18A65"
-          />
-          <path
-            id="Rectangle 3748_2"
-            d="M253 124V132H251L253 124Z"
-            fill="#C18A65"
-          />
-          <path
-            id="Rectangle 3749_2"
-            d="M236 98V132H222L236 98Z"
-            fill="#C18A65"
-          />
-          <path
-            id="Rectangle 3753_2"
-            d="M236 90V94H235L236 90Z"
-            fill="#C18A65"
-          />
-          <path
-            id="Rectangle 3750_2"
-            d="M236 98V132H250L236 98Z"
-            fill="#C18A65"
-          />
-          <path
-            id="Rectangle 3754_2"
-            d="M236 90V94H237L236 90Z"
-            fill="#C18A65"
-          />
-          <path
-            id="Rectangle 3746_2"
-            d="M266 166V174H264L266 166Z"
-            fill="#C18A65"
-          />
+          <path id="Rectangle 3743" d="M202 181V189H204L202 181Z" fill="#C18A65" />
+          <path id="Rectangle 3745" d="M206 166V174H208L206 166Z" fill="#C18A65" />
+          <path id="Rectangle 3747_2" d="M219 124V132H221L219 124Z" fill="#C18A65" />
+          <path id="Rectangle 3748_2" d="M253 124V132H251L253 124Z" fill="#C18A65" />
+          <path id="Rectangle 3749_2" d="M236 98V132H222L236 98Z" fill="#C18A65" />
+          <path id="Rectangle 3753_2" d="M236 90V94H235L236 90Z" fill="#C18A65" />
+          <path id="Rectangle 3750_2" d="M236 98V132H250L236 98Z" fill="#C18A65" />
+          <path id="Rectangle 3754_2" d="M236 90V94H237L236 90Z" fill="#C18A65" />
+          <path id="Rectangle 3746_2" d="M266 166V174H264L266 166Z" fill="#C18A65" />
           <path
             id="Rectangle 3724"
             d="M251.5 152H236V174H262L251.5 152Z"
@@ -763,14 +713,7 @@
             d="M217 309C217 307.895 217.895 307 219 307V307C220.105 307 221 307.895 221 309V329H217V309Z"
             fill="#A0784C"
           />
-          <rect
-            id="Rectangle 3716"
-            x="217"
-            y="180"
-            width="4"
-            height="8"
-            fill="#836340"
-          />
+          <rect id="Rectangle 3716" x="217" y="180" width="4" height="8" fill="#836340" />
           <rect
             id="Rectangle 3704"
             x="238"
@@ -785,14 +728,7 @@
             d="M238 309C238 307.895 238.895 307 240 307V307C241.105 307 242 307.895 242 309V329H238V309Z"
             fill="#A0784C"
           />
-          <rect
-            id="Rectangle 3717"
-            x="238"
-            y="180"
-            width="4"
-            height="8"
-            fill="#836340"
-          />
+          <rect id="Rectangle 3717" x="238" y="180" width="4" height="8" fill="#836340" />
           <rect
             id="Rectangle 3702"
             x="224"
@@ -807,70 +743,14 @@
             d="M224 309C224 307.895 224.895 307 226 307V307C227.105 307 228 307.895 228 309V329H224V309Z"
             fill="#A0784C"
           />
-          <rect
-            id="Rectangle 3718"
-            x="224"
-            y="180"
-            width="4"
-            height="8"
-            fill="#836340"
-          />
-          <rect
-            id="Rectangle 3735"
-            x="223"
-            y="138"
-            width="2"
-            height="8"
-            fill="#836340"
-          />
-          <rect
-            id="Rectangle 3737"
-            x="231"
-            y="138"
-            width="2"
-            height="8"
-            fill="#836340"
-          />
-          <rect
-            id="Rectangle 3739"
-            x="239"
-            y="138"
-            width="2"
-            height="8"
-            fill="#836340"
-          />
-          <rect
-            id="Rectangle 3736"
-            x="227"
-            y="138"
-            width="2"
-            height="8"
-            fill="#836340"
-          />
-          <rect
-            id="Rectangle 3738"
-            x="235"
-            y="138"
-            width="2"
-            height="8"
-            fill="#836340"
-          />
-          <rect
-            id="Rectangle 3740"
-            x="243"
-            y="138"
-            width="2"
-            height="8"
-            fill="#836340"
-          />
-          <rect
-            id="Rectangle 3741"
-            x="247"
-            y="138"
-            width="2"
-            height="8"
-            fill="#836340"
-          />
+          <rect id="Rectangle 3718" x="224" y="180" width="4" height="8" fill="#836340" />
+          <rect id="Rectangle 3735" x="223" y="138" width="2" height="8" fill="#836340" />
+          <rect id="Rectangle 3737" x="231" y="138" width="2" height="8" fill="#836340" />
+          <rect id="Rectangle 3739" x="239" y="138" width="2" height="8" fill="#836340" />
+          <rect id="Rectangle 3736" x="227" y="138" width="2" height="8" fill="#836340" />
+          <rect id="Rectangle 3738" x="235" y="138" width="2" height="8" fill="#836340" />
+          <rect id="Rectangle 3740" x="243" y="138" width="2" height="8" fill="#836340" />
+          <rect id="Rectangle 3741" x="247" y="138" width="2" height="8" fill="#836340" />
           <rect
             id="Rectangle 3705"
             x="245"
@@ -885,14 +765,7 @@
             d="M245 309C245 307.895 245.895 307 247 307V307C248.105 307 249 307.895 249 309V329H245V309Z"
             fill="#A0784C"
           />
-          <rect
-            id="Rectangle 3719"
-            x="245"
-            y="180"
-            width="4"
-            height="8"
-            fill="#836340"
-          />
+          <rect id="Rectangle 3719" x="245" y="180" width="4" height="8" fill="#836340" />
           <rect
             id="Rectangle 3703"
             x="231"
@@ -907,14 +780,7 @@
             d="M231 309C231 307.895 231.895 307 233 307V307C234.105 307 235 307.895 235 309V329H231V309Z"
             fill="#A0784C"
           />
-          <rect
-            id="Rectangle 3720"
-            x="231"
-            y="180"
-            width="4"
-            height="8"
-            fill="#836340"
-          />
+          <rect id="Rectangle 3720" x="231" y="180" width="4" height="8" fill="#836340" />
           <rect
             id="Rectangle 3706"
             x="252"
@@ -929,14 +795,7 @@
             d="M252 309C252 307.895 252.895 307 254 307V307C255.105 307 256 307.895 256 309V329H252V309Z"
             fill="#A0784C"
           />
-          <rect
-            id="Rectangle 3721"
-            x="252"
-            y="180"
-            width="4"
-            height="8"
-            fill="#836340"
-          />
+          <rect id="Rectangle 3721" x="252" y="180" width="4" height="8" fill="#836340" />
           <rect
             id="Rectangle 3699"
             x="204"
@@ -963,14 +822,7 @@
           <circle id="Ellipse 1204" cx="249" cy="210" r="1" fill="#717171" />
           <circle id="Ellipse 1205" cx="249" cy="233" r="1" fill="#717171" />
           <circle id="Ellipse 1206" cx="224" cy="233" r="1" fill="#717171" />
-          <rect
-            id="Rectangle 3713"
-            x="235"
-            y="213"
-            width="2"
-            height="8"
-            fill="black"
-          />
+          <rect id="Rectangle 3713" x="235" y="213" width="2" height="8" fill="black" />
           <rect
             id="Rectangle 3714"
             x="249"
@@ -1097,22 +949,8 @@
             height="44"
             fill="#C18A65"
           />
-          <rect
-            id="Rectangle 3918"
-            x="122"
-            y="320"
-            width="1"
-            height="9"
-            fill="#BA8446"
-          />
-          <rect
-            id="Rectangle 3919"
-            x="103"
-            y="320"
-            width="1"
-            height="9"
-            fill="#BA8446"
-          />
+          <rect id="Rectangle 3918" x="122" y="320" width="1" height="9" fill="#BA8446" />
+          <rect id="Rectangle 3919" x="103" y="320" width="1" height="9" fill="#BA8446" />
           <rect
             id="Rectangle 3864"
             x="179"
@@ -1129,102 +967,18 @@
             height="44"
             fill="#C18A65"
           />
-          <rect
-            id="Rectangle 3897"
-            x="182"
-            y="275"
-            width="1"
-            height="8"
-            fill="#A0784C"
-          />
-          <rect
-            id="Rectangle 3920"
-            x="145"
-            y="275"
-            width="1"
-            height="8"
-            fill="#A0784C"
-          />
-          <rect
-            id="Rectangle 3923"
-            x="78"
-            y="275"
-            width="1"
-            height="8"
-            fill="#A0784C"
-          />
-          <rect
-            id="Rectangle 3926"
-            x="41"
-            y="275"
-            width="1"
-            height="8"
-            fill="#A0784C"
-          />
-          <rect
-            id="Rectangle 3898"
-            x="184"
-            y="275"
-            width="1"
-            height="8"
-            fill="#A0784C"
-          />
-          <rect
-            id="Rectangle 3921"
-            x="147"
-            y="275"
-            width="1"
-            height="8"
-            fill="#A0784C"
-          />
-          <rect
-            id="Rectangle 3924"
-            x="80"
-            y="275"
-            width="1"
-            height="8"
-            fill="#A0784C"
-          />
-          <rect
-            id="Rectangle 3927"
-            x="43"
-            y="275"
-            width="1"
-            height="8"
-            fill="#A0784C"
-          />
-          <rect
-            id="Rectangle 3899"
-            x="186"
-            y="275"
-            width="1"
-            height="8"
-            fill="#A0784C"
-          />
-          <rect
-            id="Rectangle 3922"
-            x="149"
-            y="275"
-            width="1"
-            height="8"
-            fill="#A0784C"
-          />
-          <rect
-            id="Rectangle 3925"
-            x="82"
-            y="275"
-            width="1"
-            height="8"
-            fill="#A0784C"
-          />
-          <rect
-            id="Rectangle 3928"
-            x="45"
-            y="275"
-            width="1"
-            height="8"
-            fill="#A0784C"
-          />
+          <rect id="Rectangle 3897" x="182" y="275" width="1" height="8" fill="#A0784C" />
+          <rect id="Rectangle 3920" x="145" y="275" width="1" height="8" fill="#A0784C" />
+          <rect id="Rectangle 3923" x="78" y="275" width="1" height="8" fill="#A0784C" />
+          <rect id="Rectangle 3926" x="41" y="275" width="1" height="8" fill="#A0784C" />
+          <rect id="Rectangle 3898" x="184" y="275" width="1" height="8" fill="#A0784C" />
+          <rect id="Rectangle 3921" x="147" y="275" width="1" height="8" fill="#A0784C" />
+          <rect id="Rectangle 3924" x="80" y="275" width="1" height="8" fill="#A0784C" />
+          <rect id="Rectangle 3927" x="43" y="275" width="1" height="8" fill="#A0784C" />
+          <rect id="Rectangle 3899" x="186" y="275" width="1" height="8" fill="#A0784C" />
+          <rect id="Rectangle 3922" x="149" y="275" width="1" height="8" fill="#A0784C" />
+          <rect id="Rectangle 3925" x="82" y="275" width="1" height="8" fill="#A0784C" />
+          <rect id="Rectangle 3928" x="45" y="275" width="1" height="8" fill="#A0784C" />
           <rect
             id="Rectangle 3867"
             x="38"
@@ -1351,13 +1105,7 @@
           />
         </g>
         <g id="Group 2407">
-          <rect
-            id="Rectangle 3833"
-            y="329"
-            width="1598"
-            height="21"
-            fill="#BCBCBC"
-          />
+          <rect id="Rectangle 3833" y="329" width="1598" height="21" fill="#BCBCBC" />
           <g id="Rectangle 3845" filter="url(#filter0_d)">
             <rect y="50" width="1598" height="21" fill="#BCBCBC" />
           </g>
@@ -1379,13 +1127,7 @@
             height="258"
             fill="#BCBCBC"
           />
-          <rect
-            id="Rectangle 3846"
-            y="50"
-            width="19.975"
-            height="300"
-            fill="#BCBCBC"
-          />
+          <rect id="Rectangle 3846" y="50" width="19.975" height="300" fill="#BCBCBC" />
           <rect
             id="Rectangle 3847"
             x="1580.03"
@@ -1481,21 +1223,14 @@
         id="doll"
         :class="
           isSendAnswer
-            ? isCorrect
+            ? isCorrectAnswer
               ? 'correct-move'
               : 'incorrect-move'
             : 'start-doll'
         "
         filter="url(#filter2_d)"
       >
-        <rect
-          id="doll_2"
-          x="353"
-          y="259"
-          width="64"
-          height="19"
-          fill="#F5A50C"
-        />
+        <rect id="doll_2" x="353" y="259" width="64" height="19" fill="#F5A50C" />
         <circle id="doll_3" cx="385" cy="269" r="4" fill="#1E684F" />
         <circle id="doll_4" cx="360" cy="269" r="4" fill="#1E684F" />
         <circle id="doll_5" cx="373" cy="269" r="2" fill="white" />
@@ -1542,59 +1277,20 @@
           d="M376 219C376 217.895 376.895 217 378 217H392C393.105 217 394 217.895 394 219V259H376V219Z"
           fill="#FFCF0D"
         />
-        <circle
-          id="doll_17"
-          r="2"
-          transform="matrix(1 0 0 -1 385 217)"
-          fill="#1E684F"
-        />
-        <circle
-          id="doll_18"
-          r="2"
-          transform="matrix(1 0 0 -1 385 225)"
-          fill="white"
-        />
-        <circle
-          id="doll_19"
-          r="2"
-          transform="matrix(1 0 0 -1 385 233)"
-          fill="#1E684F"
-        />
-        <circle
-          id="doll_20"
-          r="2"
-          transform="matrix(1 0 0 -1 385 241)"
-          fill="white"
-        />
-        <circle
-          id="doll_21"
-          r="2"
-          transform="matrix(1 0 0 -1 385 249)"
-          fill="#1E684F"
-        />
+        <circle id="doll_17" r="2" transform="matrix(1 0 0 -1 385 217)" fill="#1E684F" />
+        <circle id="doll_18" r="2" transform="matrix(1 0 0 -1 385 225)" fill="white" />
+        <circle id="doll_19" r="2" transform="matrix(1 0 0 -1 385 233)" fill="#1E684F" />
+        <circle id="doll_20" r="2" transform="matrix(1 0 0 -1 385 241)" fill="white" />
+        <circle id="doll_21" r="2" transform="matrix(1 0 0 -1 385 249)" fill="#1E684F" />
         <path id="doll_22" d="M367 217H368V259H367V217Z" fill="#F5A50C" />
         <path id="doll_23" d="M402 217H403V259H402V217Z" fill="#F5A50C" />
         <path id="doll_24" d="M414 217H415V259H414V217Z" fill="#F5A50C" />
-        <rect
-          id="doll_25"
-          x="383"
-          y="189"
-          width="3"
-          height="13"
-          fill="#F5A50C"
-        />
-        <rect
-          id="doll_26"
-          x="381"
-          y="192"
-          width="7"
-          height="3"
-          fill="#F5A50C"
-        />
+        <rect id="doll_25" x="383" y="189" width="3" height="13" fill="#F5A50C" />
+        <rect id="doll_26" x="381" y="192" width="7" height="3" fill="#F5A50C" />
       </g>
       <g
         id="correct"
-        :class="isSendAnswer ? (isCorrect ? 'give-correct' : null) : null"
+        :class="isSendAnswer ? (isCorrectAnswer ? 'give-correct' : null) : null"
       >
         <rect id="correct_2" x="1112" width="10" height="70" fill="#3F3F3F" />
         <g id="correct_3" filter="url(#filter4_d)">
@@ -1625,13 +1321,7 @@
           />
         </g>
         <g id="correct_10">
-          <circle
-            id="correct_11"
-            cx="1117.08"
-            cy="77.873"
-            r="14.873"
-            fill="#3F3F3F"
-          />
+          <circle id="correct_11" cx="1117.08" cy="77.873" r="14.873" fill="#3F3F3F" />
           <rect
             id="correct_12"
             width="9.88888"
@@ -1664,13 +1354,7 @@
             transform="matrix(0.971431 -0.237324 -0.237324 -0.971431 1086.32 122.063)"
             fill="#3F3F3F"
           />
-          <circle
-            id="correct_16"
-            cx="1117.08"
-            cy="77.873"
-            r="8.49886"
-            fill="#CDCDCD"
-          />
+          <circle id="correct_16" cx="1117.08" cy="77.873" r="8.49886" fill="#CDCDCD" />
           <circle
             id="correct_17"
             cx="1148.84"
@@ -1831,7 +1515,7 @@
           id="conveyor"
           :class="
             isSendAnswer
-              ? isCorrect
+              ? isCorrectAnswer
                 ? 'start-conveyor correct-conveyor'
                 : 'start-conveyor incorrect-conveyor'
               : 'paused-conveyor'
@@ -1856,24 +1540,10 @@
         />
         <circle id="Ellipse 1010" cx="281" cy="302" r="18" fill="#0D0D0D" />
         <circle id="Ellipse 1012" cx="1196" cy="302" r="18" fill="#0D0D0D" />
-        <ellipse
-          id="Ellipse 1016"
-          cx="737.5"
-          cy="302"
-          rx="18.5"
-          ry="18"
-          fill="#0D0D0D"
-        />
+        <ellipse id="Ellipse 1016" cx="737.5" cy="302" rx="18.5" ry="18" fill="#0D0D0D" />
         <circle id="Ellipse 1011" cx="281" cy="302" r="11" fill="#7D0000" />
         <circle id="Ellipse 1013" cx="1196" cy="302" r="11" fill="#7D0000" />
-        <ellipse
-          id="Ellipse 1017"
-          cx="737.5"
-          cy="302"
-          rx="11.5"
-          ry="11"
-          fill="#7D0000"
-        />
+        <ellipse id="Ellipse 1017" cx="737.5" cy="302" rx="11.5" ry="11" fill="#7D0000" />
       </g>
     </g>
     <defs>
@@ -1898,11 +1568,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -1962,11 +1628,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -1995,11 +1657,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2028,11 +1686,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2061,11 +1715,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2083,22 +1733,22 @@
 <script>
 export default {
   props: {
-    isCorrect: {
+    isCorrectAnswer: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     isSendAnswer: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     themeSync: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   data() {
     return {};
-  }
+  },
 };
 </script>
 

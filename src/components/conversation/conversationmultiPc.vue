@@ -1,5 +1,5 @@
 <template>
-  <div class="row relative-position bg-container-main ">
+  <div class="row relative-position bg-container-main">
     <div class="col-12 box-content-main">
       <div
         style="height: 50px; margin-top: -101px"
@@ -7,10 +7,10 @@
       ></div>
       <div class="relative-position">
         <div class="absolute-top" style="top: 50px">
-          <header-bar></header-bar>
+          <header-bar :practiceData="practiceData"></header-bar>
         </div>
         <theme-animation
-          :isCorrect="isCorrect"
+          :isCorrectAnswer="isCorrectAnswer"
           :isSendAnswer="isSendAnswer"
           :themeSync="themeSync"
         ></theme-animation>
@@ -18,37 +18,40 @@
     </div>
     <div class="col-12" align="center">
       <div class="box-question q-pa-md">
-        <span style="font-size: max(1.15vw, 16px)"
-          >Where is Sue going for hoilday?</span
-        >
+        <span style="font-size: max(1.15vw, 16px)" v-html="practiceData.question"></span>
       </div>
     </div>
-    <div class="col-12 relative-position row items-center justify-center  ">
+    <div class="col-12 relative-position row items-center justify-center">
       <div class="col-8 row">
-        <div class="col-4 q-pa-lg" v-for="i in choices" :key="i">
+        <div
+          class="col-4 q-pa-lg"
+          v-for="(item, index) in practiceData.choices"
+          :key="index"
+        >
           <q-img
-            @click="isSendAnswer ? null : (selectActive = i)"
+            @click="
+              isSendAnswer
+                ? null
+                : ((selectAnswer = index), $emit('callback-playsound', item.soundUrl))
+            "
             :class="isSendAnswer ? null : 'cursor-pointer'"
             :src="
               require(`../../../public/images/conversation/choice-${
                 isSendAnswer
-                  ? selectActive == i
-                    ? isCorrect
+                  ? selectAnswer == index
+                    ? isCorrectAnswer
                       ? 'correct'
                       : 'incorrect'
-                    : correctAnswer == i
+                    : currentAnswer == item.index
                     ? 'correct'
                     : 'default'
-                  : selectActive == i
+                  : selectAnswer == index
                   ? 'active'
                   : 'default'
               }-conver.png`)
             "
           >
-            <div
-              class="text-white transparent absolute-center"
-              style="top: 45%"
-            >
+            <div class="text-white transparent absolute-center" style="top: 45%">
               <q-icon size="30px" name="fas fa-volume-up"></q-icon>
             </div>
           </q-img>
@@ -58,23 +61,34 @@
 
     <div class="col-12 self-end q-pa-md" align="center">
       <q-img
-        v-if="!isSendAnswer"
+        v-show="!isSendAnswer"
         width="200px"
-        @click="selectActive == null ? null : sendAnswer()"
-        :class="selectActive == null ? null : 'cursor-pointer'"
+        @click="isSendAnswer ? null : funcSendAnswer()"
+        :class="isSendAnswer ? null : 'cursor-pointer'"
         :src="
           require(`../../../public/images/send-answer-btn${
-            selectActive != null ? '' : '-noactive'
+            selectAnswer != null ? '' : '-noactive'
           }.png`)
         "
       ></q-img>
 
       <q-img
-        v-else
+        v-show="
+          isSendAnswer && practiceData.currentQuestion + 1 != practiceData.totalQuestion
+        "
         width="200px"
         class="cursor-pointer"
-        @click="nextQuestion()"
+        @click="funcNextQuestion()"
         :src="require(`../../../public/images/next-question-btn.png`)"
+      ></q-img>
+      <q-img
+        v-show="
+          isSendAnswer && practiceData.currentQuestion + 1 == practiceData.totalQuestion
+        "
+        width="200px"
+        class="cursor-pointer"
+        @click="$emit('callback-finishpractice')"
+        :src="require(`../../../public/images/success-btn.png`)"
       ></q-img>
     </div>
   </div>
@@ -83,46 +97,66 @@
 <script>
 import headerBar from "../header-time-progress";
 import themeAnimation from "../conversation/theme-animation";
+import { ref } from "vue";
 export default {
   components: {
     headerBar,
-    themeAnimation
+    themeAnimation,
   },
   props: {
     themeSync: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
+    practiceData: {
+      type: Object,
+      default: () => {},
+    },
   },
-  data() {
-    return {
-      correctAnswer: 0,
-      selectActive: null,
-      choices: 3,
-      isSendAnswer: false,
+  emits: ["callback-finishpractice", "callback-playsound"],
+  setup(props, { emit }) {
+    // Initial Data
+    const isSendAnswer = ref(false);
+    const selectAnswer = ref(null);
+    const currentAnswer = ref(null);
+    const isCorrectAnswer = ref(false);
+    const isDescription = ref(false);
 
-      isCorrect: false
+    const funcSendAnswer = () => {
+      isSendAnswer.value = true;
+
+      let choiceIndex = props.practiceData.choices[selectAnswer.value].index;
+
+      currentAnswer.value = props.practiceData.correctAnswer;
+
+      if (choiceIndex == Number(props.practiceData.correctAnswer)) {
+        isCorrectAnswer.value = true;
+      } else {
+        isCorrectAnswer.value = false;
+      }
+
+      setTimeout(() => {
+        isDescription.value = true;
+      }, 500);
+    };
+
+    const funcNextQuestion = () => {
+      isSendAnswer.value = false;
+      selectAnswer.value = null;
+      currentAnswer.value = null;
+
+      emit("callback-nextquestion");
+    };
+
+    return {
+      isSendAnswer,
+      isCorrectAnswer,
+      currentAnswer,
+      selectAnswer,
+      funcSendAnswer,
+      funcNextQuestion,
     };
   },
-  methods: {
-    nextQuestion() {
-      this.isSendAnswer = false;
-      this.selectActive = null;
-    },
-    sendAnswer() {
-      this.isSendAnswer = true;
-
-      let randomAnswer = Math.ceil(Math.random() * this.choices);
-
-      this.correctAnswer = randomAnswer;
-
-      if (this.correctAnswer == this.selectActive) {
-        this.isCorrect = true;
-      } else {
-        this.isCorrect = false;
-      }
-    }
-  }
 };
 </script>
 

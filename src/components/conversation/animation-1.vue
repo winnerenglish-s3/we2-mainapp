@@ -7972,7 +7972,7 @@
       <g
         id="doll"
         :class="
-          isSendAnswer ? (isCorrect ? 'correct-move' : 'incorrect-move') : 'start-doll'
+          isSendAnswer ? (isCorrectAnswer ? 'correct-move' : 'incorrect-move') : 'start-doll'
         "
         filter="url(#filter2_d)"
       >
@@ -8139,7 +8139,7 @@
           stroke-linecap="round"
         />
       </g>
-      <g id="correct" :class="isSendAnswer ? (isCorrect ? 'give-correct' : null) : null">
+      <g id="correct" :class="isSendAnswer ? (isCorrectAnswer ? 'give-correct' : null) : null">
         <rect id="correct_2" x="1112" width="10" height="70" fill="#3F3F3F" />
         <g id="correct_3" filter="url(#filter4_d)">
           <path
@@ -8363,7 +8363,7 @@
           id="conveyor"
           :class="
             isSendAnswer
-              ? isCorrect
+              ? isCorrectAnswer
                 ? 'start-conveyor correct-conveyor'
                 : 'start-conveyor incorrect-conveyor'
               : 'paused-conveyor'
@@ -8581,7 +8581,7 @@
 <script>
 export default {
   props: {
-    isCorrect: {
+    isCorrectAnswer: {
       type: Boolean,
       default: () => false,
     },

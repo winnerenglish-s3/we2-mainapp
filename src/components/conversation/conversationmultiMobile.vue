@@ -1,31 +1,40 @@
 <template>
   <div class="box-container row">
     <div class="col-12">
-      <header-bar></header-bar>
+      <header-bar :practiceData="practiceData"></header-bar>
       <div align="center">
         <div class="box-content-question row q-px-sm" align="center">
           <div class="col self-center" align="center">
-            <span style="font-size: 14px">Where is Sue going for hoilday?</span>
+            <span style="font-size: 14px" v-html="practiceData.question"></span>
           </div>
         </div>
       </div>
       <div class="q-my-md q-pa-sm">
-        <div v-for="i in choicesLength" :key="i" class="q-mb-sm" align="center">
+        <div
+          v-for="(item, index) in practiceData.choices"
+          :key="index"
+          class="q-mb-sm"
+          align="center"
+        >
           <q-img
-            style="max-width: 320px; width: 100%"
+            style="max-width: 400px; width: 95%"
             :class="isSendAnswer ? null : 'cursor-pointer'"
-            @click="isSendAnswer ? null : (selectAnswer = i)"
+            @click="
+              isSendAnswer
+                ? null
+                : ((selectAnswer = index), $emit('callback-playsound', item.soundUrl))
+            "
             :src="
               require(`../../../public/images/conversation/choice-${
                 isSendAnswer
-                  ? selectAnswer == i
-                    ? isCorrect
+                  ? selectAnswer == index
+                    ? isCorrectAnswer
                       ? 'correct'
                       : 'incorrect'
-                    : correctAnswer == i
+                    : currentAnswer == item.index
                     ? 'correct'
                     : 'default'
-                  : selectAnswer == i
+                  : selectAnswer == index
                   ? 'active'
                   : 'default'
               }-conver-mobile.png`)
@@ -36,7 +45,7 @@
               style="font-size: 16px; top: 45%"
             >
               <span>
-                <span v-if="isSendAnswer" class="q-mr-md">{{ i }}</span>
+                <span v-if="isSendAnswer" class="q-mr-md" v-html="item.choice"></span>
                 <q-icon name="fas fa-volume-up"></q-icon>
               </span></div
           ></q-img>
@@ -47,7 +56,7 @@
       <q-img
         width="200px"
         :class="selectAnswer == null ? null : 'cursor-pointer'"
-        @click="selectAnswer == null ? null : sendAnswer()"
+        @click="isSendAnswer ? null : funcSendAnswer()"
         :src="
           require(`../../../public/images/send-answer-btn${
             selectAnswer == null ? '-noactive' : ''
@@ -57,11 +66,22 @@
       ></q-img>
 
       <q-img
-        @click="nextQuestion()"
+        v-show="
+          isSendAnswer && practiceData.currentQuestion + 1 != practiceData.totalQuestion
+        "
         width="200px"
-        v-else
         class="cursor-pointer"
-        src="../../../public/images/next-question-btn.png"
+        @click="funcNextQuestion()"
+        :src="require(`../../../public/images/next-question-btn.png`)"
+      ></q-img>
+      <q-img
+        v-show="
+          isSendAnswer && practiceData.currentQuestion + 1 == practiceData.totalQuestion
+        "
+        width="200px"
+        class="cursor-pointer"
+        @click="$emit('callback-finishpractice')"
+        :src="require(`../../../public/images/success-btn.png`)"
       ></q-img>
     </div>
   </div>
@@ -69,37 +89,64 @@
 
 <script>
 import headerBar from "../header-time-progress";
+import { ref } from "vue";
 export default {
+  props: {
+    themeSync: {
+      type: Number,
+      default: 1,
+    },
+    practiceData: {
+      type: Object,
+      default: () => {},
+    },
+  },
   components: {
     headerBar,
   },
-  data() {
-    return {
-      choicesLength: 3,
-      selectAnswer: null,
-      correctAnswer: 0,
+  emits: ["callback-finishpractice", "callback-playsound"],
+  setup(props, { emit }) {
+    // Initial Data
+    const isSendAnswer = ref(false);
+    const selectAnswer = ref(null);
+    const currentAnswer = ref(null);
+    const isCorrectAnswer = ref(false);
+    const isDescription = ref(false);
 
-      isSendAnswer: false,
-      isCorrect: false,
-    };
-  },
-  methods: {
-    sendAnswer() {
-      this.isSendAnswer = true;
+    const funcSendAnswer = () => {
+      isSendAnswer.value = true;
 
-      let randomAnswer = Math.ceil(Math.random() * this.choicesLength);
+      let choiceIndex = props.practiceData.choices[selectAnswer.value].index;
 
-      this.correctAnswer = randomAnswer;
+      currentAnswer.value = props.practiceData.correctAnswer;
 
-      if (this.correctAnswer == this.selectAnswer) {
-        this.isCorrect = true;
+      if (choiceIndex == Number(props.practiceData.correctAnswer)) {
+        isCorrectAnswer.value = true;
+      } else {
+        isCorrectAnswer.value = false;
       }
-    },
-    nextQuestion() {
-      this.isSendAnswer = false;
-      this.selectAnswer = null;
-      this.isCorrect = false;
-    },
+
+      setTimeout(() => {
+        isDescription.value = true;
+      }, 500);
+    };
+
+    const funcNextQuestion = () => {
+      isSendAnswer.value = false;
+      selectAnswer.value = null;
+      currentAnswer.value = null;
+
+      emit("callback-nextquestion");
+    };
+
+    return {
+      isSendAnswer,
+      isCorrectAnswer,
+      currentAnswer,
+      selectAnswer,
+      funcSendAnswer,
+      funcNextQuestion,
+    };
   },
 };
 </script>

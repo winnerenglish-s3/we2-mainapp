@@ -1,13 +1,13 @@
 <template>
-  <div style="margin-bottom:-6px;background-color:#667ea2;">
+  <div style="margin-bottom: -6px; background-color: #667ea2">
     <animation-1
       v-if="themeSync == 1"
-      :isCorrect="isCorrect"
+      :isCorrectAnswer="isCorrectAnswer"
       :isSendAnswer="isSendAnswer"
     ></animation-1>
     <animation-2
       v-if="themeSync == 2"
-      :isCorrect="isCorrect"
+      :isCorrectAnswer="isCorrectAnswer"
       :isSendAnswer="isSendAnswer"
     ></animation-2>
   </div>
@@ -20,21 +20,21 @@ export default {
   props: {
     themeSync: {
       type: Number,
-      default: 0
+      default: 0,
     },
-    isCorrect: {
+    isCorrectAnswer: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     isSendAnswer: {
       type: Boolean,
-      default: () => false
-    }
+      default: () => false,
+    },
   },
   components: {
     animation1,
-    animation2
-  }
+    animation2,
+  },
 };
 </script>
 
