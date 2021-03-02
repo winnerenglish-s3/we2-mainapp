@@ -1,7 +1,7 @@
 <template>
   <q-page class="bg-clozetest">
     <div>
-      <app-bar></app-bar>
+      <app-bar :themeSync="themeSync"></app-bar>
     </div>
 
     <div class="absolute-center" v-if="!isLoadPractice">
@@ -25,120 +25,105 @@
               <span class="f24" v-html="practiceData.nameEng"> </span>
             </div>
             <div class="q-mt-sm q-py-md box-content q-px-lg" align="left">
-              <span
-                class="f18"
-                v-html="`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${practiceData.question}`"
-              ></span>
+              <span class="f18" v-html="`${practiceData.question}`"></span>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col self-end brx">
+      <div class="col-12">
         <div
           class="col-12 row items-center justify-center q-py-md"
           :class="{ 'q-px-lg': $q.platform.is.mobile }"
           align="center"
         >
-          <div class="col">
-            <div class="box-question q-pa-sm row" align="left">
+          <div class="col q-pa-md">
+            <!-- <div class="box-question q-pa-sm row" align="left">
               <div class="q-mx-xs" v-for="(item, index) in practiceData.totalQuestion">
                 <question-number
                   :no="index + 1"
                   :currentQuestion="practiceData.currentQuestion + 1"
                 ></question-number>
               </div>
-            </div>
-            <div class="box-container-content row" v-if="!isShowDescription">
+            </div> -->
+            <div class="box-container-content row" v-show="!isDescription">
               <div
                 class="col-6 q-pa-sm"
                 v-for="(item, index) in practiceData.choices"
                 :key="index"
+                @click="isSendAnswer ? null : funcSendAnswer(item, index)"
               >
-                <multiple-choices :choice="item"></multiple-choices>
+                <multiple-choices
+                  :isDisable="isSendAnswer"
+                  :choice="item.choice"
+                ></multiple-choices>
               </div>
             </div>
 
-            <!-- <div class="">
-              <div class="q-my-md" align="left">
-                <div class="bg-white q-pa-md shadow-1 rounded-borders">
-                  <div>
-                    คำตอบที่ถูกต้อง คือ
-                   
+            <div class="box-description q-my-md" v-show="isDescription">
+              <div class="q-pa-md" :style="themeColor"></div>
+              <div class="f16 q-px-md">
+                <div class="q-pa-md row" align="left">
+                  <div class="col-12 row q-py-xs" v-if="isSendAnswer && !isCorrectAnswer">
+                    <div
+                      class="text-red"
+                      v-html="practiceData.choices[currentAnswer].choice"
+                    ></div>
+                    <div class="col q-mx-md">เป็นคำตอบที่ผิด</div>
                   </div>
-                  <div class="q-my-md">
-                    <span v-html="questionList[currentQuestion].description"></span>
-                  </div>
-
-                  <div
-                    class="q-my-md"
-                    v-for="(ref, index) in questionList[currentQuestion].highLightList"
-                  >
-                    อ้างอิง#{{ index + 1 }} : {{ ref }}
-                  </div>
-
-                  <div class="q-mt-lg" align="center">
-                    <q-btn
-                      @click="nextQuestion()"
-                      align="center"
-                      class="custom-btn"
-                      no-caps
-                      style="width: 200px; height: 40px"
-                    >
-                      <div class="absolute-left" style="top: 5px; left: 5px">
-                        <div
-                          style="width: 10px; height: 10px; border-radius: 50%"
-                          class="bg-white"
-                        ></div>
+                  <div class="col-12 row">
+                    <div class="col-2">คำตอบที่ถูกต้อง คือ</div>
+                    <div class="col">
+                      <span
+                        class="text-green-6"
+                        v-html="
+                          practiceData.choices.filter(
+                            (x) => x.index == practiceData.correctAnswer
+                          )[0].choice
+                        "
+                      ></span>
+                      <div>
+                        <span v-html="practiceData.description"></span>
                       </div>
-                      <div class="absolute-left" style="top: 7px; left: 18px">
-                        <div
-                          style="width: 6px; height: 6px; border-radius: 50%"
-                          class="bg-white"
-                        ></div>
-                      </div>
-                      <div class="f16" align="center">ข้อต่อไป</div>
-                    </q-btn>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div> -->
+              <div class="q-my-md" align="center">
+                <q-img
+                  v-show="
+                    isSendAnswer &&
+                    practiceData.currentQuestion + 1 != practiceData.totalQuestion
+                  "
+                  @click="funcNextQuestion()"
+                  class="cursor-pointer"
+                  width="200px"
+                  src="../../public/images/next-question-btn.png"
+                ></q-img>
+                <q-img
+                  v-show="
+                    isSendAnswer &&
+                    practiceData.currentQuestion + 1 == practiceData.totalQuestion
+                  "
+                  @click="isFinishPractice = true"
+                  class="cursor-pointer"
+                  width="200px"
+                  src="../../public/images/success-btn.png"
+                ></q-img>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <div class="col-12"></div>
     </div>
 
-    <!-- Answer Animation -->
-    <q-dialog maximized v-model="isShowAnswerAnimation">
-      <q-card class="transparent shadow-0">
-        <q-card-section class="fit">
-          <div class="flex flex-center fit">
-            <q-img
-              style="max-width: 350px; width: 100%"
-              src="../../public/images/light-answer.png"
-              class="animation-rotate"
-            ></q-img>
-            <q-img
-              class="absolute"
-              style="max-width: 167.92px; width: 100%"
-              :src="
-                require(`../../public/images/icon-${
-                  questionList[currentQuestion].isCorrect ? 'correct' : 'incorrect'
-                }-answer.png`)
-              "
-            >
-            </q-img>
-          </div>
-        </q-card-section>
-      </q-card>
-    </q-dialog>
-
-    <!-- <finish-practice
-      :isFinishPractice="isShowFinishPractice"
-      :totalStar="star.summaryStar"
+    <finish-practice
+      :isFinishPractice="isFinishPractice"
       @reStart="reStart"
       @finish="finish"
-    ></finish-practice> -->
+    ></finish-practice>
   </q-page>
 </template>
 
@@ -149,6 +134,7 @@ import appBar from "../components/app-bar";
 import finishPractice from "../components/finishPracticeDialog.vue";
 import headerBar from "../components/header-time-progress";
 import practiceHooks from "../hooks/practiceHooks";
+import getColorTheme from "../../public/themeColor.json";
 import { ref, computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { db } from "src/router";
@@ -161,24 +147,35 @@ export default {
     finishPractice,
     multipleChoices,
   },
+  props: {
+    themeSync: {
+      type: Number,
+      default: 1,
+    },
+  },
   setup(props) {
     // Initial Data
     const route = useRoute();
     const router = useRouter();
 
+    // Initial Color Theme
+    const colorTheme = ref(getColorTheme);
+    const themeColor = computed(() => {
+      return `background-color:${colorTheme.value[props.themeSync - 1].hex}`;
+    });
+
     const practiceData = {
       totalQuestion: 10,
-      currentQuestion: 0,
+      currentQuestion: 1,
       question: "",
-      choices: [{ choice: "1" }, { choice: "2" }, { choice: "3" }, { choice: "4" }],
+      answer: "",
+      choices: [],
       correctAnswer: 0,
       nameEng: "",
       nameTh: "",
-      answer: [],
     };
 
     const isLoadPractice = ref(false);
-    const isShowDescription = ref(false);
 
     // Font Size
     const fontSize = ref(16);
@@ -196,6 +193,8 @@ export default {
       console.clear();
 
       try {
+        let tempPractice = [];
+
         // Set Practice ID
         let practiceListId = route.params.practiceListId;
 
@@ -228,10 +227,59 @@ export default {
 
         const response = await axios.post(apiURL, postData);
 
-        // Question List : Set Question
-        questionList.value = response.data[0];
+        // เก็บข้อมูลที่ได้จาก axios
+        tempPractice = response.data;
 
-        // console.log(questionList.value);
+        // copy แบบฝึกหัด
+        let setPracticeList = tempPractice[0];
+
+        setPracticeList.answer = setPracticeList.answer.map((x) => {
+          let newChoice = x.choice.map((xx, index) => {
+            let newData = {
+              choice: xx,
+              index: null,
+            };
+
+            newData.index = index;
+
+            xx = { ...newData };
+
+            return xx;
+          });
+
+          let choices = newChoice.sort(() => Math.random() - 0.5);
+
+          x.choice = choices;
+
+          return x;
+        });
+
+        // สุ่มแบบฝึกหัด
+        // setPracticeList = setPracticeList.sort(() => Math.random() - 0.5);
+
+        questionList.value = setPracticeList;
+
+        practiceData.answer = questionList.value.sentenceEng;
+
+        practiceData.question = questionList.value.sentenceEng;
+
+        let setQuestionArr = questionList.value.sentenceEng.match(
+          /<s*u[^>]*>(.*?)<\/s*u>/gm
+        );
+
+        for (let i = 0; i < setQuestionArr.length; i++) {
+          practiceData.question = practiceData.question.replace(
+            /<s*u[^>]*>(.*?)<\/s*u>/,
+            `<span class="relative-position" style="display:inline-block;border-bottom:1px solid;width:100px;text-align:center;">${
+              i + 1
+            }</span>`
+          );
+
+          practiceData.answer = practiceData.answer.replace(
+            /<s*u[^>]*>(.*?)<\/s*u>/,
+            /<s*span[^>]* style='background-color:#64A74A'>(.*?)<\/s*span>/
+          );
+        }
 
         funcSelectedQuestion(true);
 
@@ -251,129 +299,78 @@ export default {
       // Practice Data : Show Total Question
       practiceData.totalQuestion = questionList.value.answer.length;
 
-      console.log(questionList.value);
-
       // Practice Data : Show Choices
       practiceData.choices =
         questionList.value.answer[practiceData.currentQuestion].choice;
 
-      let setQuestionArr = questionList.value.sentenceEng.match(
-        /<s*u[^>]*>(.*?)<\/s*u>/g
-      );
-
-      console.log(setQuestionArr);
-
-      practiceData.question = questionList.value.sentenceEng;
+      practiceData.description =
+        questionList.value.answer[practiceData.currentQuestion].description || "";
     };
 
-    // แสดงผลหน้าอธิบายคำตอบ
+    const funcNextQuestion = () => {
+      isSendAnswer.value = false;
+      isDescription.value = false;
 
-    // // แสดงผล animation ตรวจคำตอบ
-    // const isShowAnswerAnimation = ref(false);
-    // var timeoutAnimation;
-    // // ตรวจคำตอบ
-    // const checkAnswer = (index) => {
-    //   clearTimeout(timeoutAnimation);
-    //   if (index == questionList.value[currentQuestion.value].correctAnswer) {
-    //     console.log("ตอบถูก");
-    //     questionList.value[currentQuestion.value].isCorrect = true;
-    //   } else {
-    //     console.log("ตอบผิด");
-    //     questionList.value[currentQuestion.value].isCorrect = false;
-    //   }
-    //   isShowDescription.value = true;
-    //   isShowAnswerAnimation.value = true;
-    //   timeoutAnimation = setTimeout(() => {
-    //     isShowAnswerAnimation.value = false;
-    //   }, 700);
-    // };
+      funcSelectedQuestion();
+    };
 
-    // // Current Question
-    // const currentQuestion = ref(0);
-    // const isShowFinishPractice = ref(false);
-    // // Next Question
-    // const nextQuestion = () => {
-    //   if (currentQuestion.value < questionList.value.length - 1) {
-    //     isShowDescription.value = false;
-    //     currentQuestion.value++;
-    //   } else {
-    //     // alert("จบแบบฝึกหัด");
-    //     isShowFinishPractice.value = true;
-    //   }
-    // };
+    const isSendAnswer = ref(false);
+    const isDescription = ref(false);
+    const isCorrectAnswer = ref(false);
+    const currentAnswer = ref(null);
+    const isFinishPractice = ref(false);
 
-    // // Star Calculation
-    // const star = computed(() => {
-    //   let score = questionList.value.filter((x) => x.isCorrect);
-    //   score = (score.length / questionList.value.length) * 100;
-    //   let summaryStar;
-    //   if (score >= 80) {
-    //     summaryStar = 3;
-    //   } else if (score >= 65) {
-    //     summaryStar = 2;
-    //   } else if (score >= 50) {
-    //     summaryStar = 1;
-    //   }
-    //   return { score, summaryStar };
-    // });
+    const funcSendAnswer = (item, index) => {
+      isSendAnswer.value = true;
 
-    // // Highlight Text In Content
-    // const highLightText = computed(() => {
-    //   if (isShowDescription.value) {
-    //     let highLight = questionList.value[currentQuestion.value].highLightList;
-    //     let content = readingContent.value.contentEn;
+      currentAnswer.value = index;
 
-    //     highLight.forEach((element) => {
-    //       content = content.replace(
-    //         element,
-    //         `<span style='background-color:rgba(255,170,46,0.3)'>${element}</span>`
-    //       );
-    //     });
-    //     return content;
-    //   } else {
-    //     return readingContent.value.contentEn;
-    //   }
-    // });
+      if (practiceData.correctAnswer == item.index) {
+        isCorrectAnswer.value = true;
+      } else {
+        isCorrectAnswer.value = false;
+      }
 
-    // // Re Start Practice
-    // const reStart = () => {
-    //   console.log("restart");
-    // };
-    // // Finish Practice
-    // const finish = () => {
-    //   console.log("finish");
-    // };
+      isDescription.value = true;
+    };
 
-    // // Play Reading Sound
-    // const playSound = () => {
-    //   console.log("play sound");
-    //   let audio = new Audio(readingContent.value.soundURL);
-    //   audio.play();
-    // };
+    const funcFinishPractice = () => {};
+
+    const reStart = () => {
+      isFinishPractice.value = false;
+      isLoadPractice.value = false;
+      isSendAnswer.value = false;
+      isDescription.value = false;
+
+      practiceData.totalQuestion = 0;
+      practiceData.totalStar = 0;
+      practiceData.question = "";
+      practiceData.choices = [];
+      practiceData.currentQuestion = 0;
+
+      funcLoadPractice();
+    };
 
     onMounted(funcLoadPractice);
 
     return {
+      themeColor,
       practiceData,
-      isLoadPractice,
-      isShowDescription,
       decreaseFont,
       increaseFont,
+      currentAnswer,
 
-      //   readingContent,
-      //   questionList,
-      //   currentQuestion,
-      //   fontSize,
-      //   nextQuestion,
-      //   isShowDescription,
-      //   checkAnswer,
-      //   isShowAnswerAnimation,
-      //   highLightText,
-      //   playSound,
-      //   isShowFinishPractice,
-      //   star,
-      //   reStart,
-      //   finish,
+      //
+      isLoadPractice,
+      isSendAnswer,
+      isCorrectAnswer,
+      isDescription,
+      isFinishPractice,
+
+      // Function
+      funcSendAnswer,
+      funcNextQuestion,
+      reStart,
     };
   },
 };
@@ -420,5 +417,13 @@ export default {
   to {
     transform: rotate(360deg);
   }
+}
+
+.box-description {
+  max-width: 1000px;
+  width: 95%;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
 }
 </style>

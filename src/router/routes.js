@@ -60,11 +60,6 @@ const routes = [
 
   // ---------------- PAGE ------------------------
   {
-    path: "/character",
-    component: () => import("pages/character.vue"),
-    name: "character",
-  },
-  {
     path: "/dashboard",
     component: () => import("pages/dashboard.vue"),
     name: "dashboard",
@@ -78,6 +73,11 @@ const routes = [
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
+      {
+        path: "/character",
+        component: () => import("pages/character.vue"),
+        name: "character",
+      },
       {
         path: "/lobby",
         component: () => import("pages/lobby.vue"),
@@ -189,6 +189,13 @@ const routes = [
         path: "/phonicsLesson/:practiceListId?",
         component: () => import("pages/phonicsLessonMain.vue"),
         name: "phonicsLesson",
+      },
+
+      //Phonics Lesson
+      {
+        path: "/conversationLesson/:practiceListId?",
+        component: () => import("pages/conversationLessonMain.vue"),
+        name: "conversationLesson",
       },
     ],
   },

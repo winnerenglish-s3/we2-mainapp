@@ -1,18 +1,44 @@
 <template>
   <q-page class="bg-translation">
     <div>
-      <app-bar></app-bar>
+      <app-bar :themeSync="themeSync" :isShowHome="true"></app-bar>
     </div>
 
     <div class="absolute-center" v-if="!isLoadPractice">
       <q-spinner color="primary" size="100px" />
     </div>
 
-    <div class="box-container-main row relative-position" v-if="isLoadPractice">
-      <div class="col-12 absolute-top" align="center">
-        <header-bar :practiceData="practiceData"></header-bar>
+    <div class="box-container-main relative-position" v-if="isLoadPractice">
+      <div>
+        <div>
+          <header-bar :practiceData="practiceData"></header-bar>
+        </div>
       </div>
-      <div class="col relative-position q-pa-md">
+      <div align="center">
+        <div class="box-question q-pa-md">
+          <span v-html="practiceData.questionTh"></span>
+        </div>
+        <div class="box-content-question q-pb-xl q-pa-md row">
+          <!-- @start="drag = true"
+            @end="drag = false" -->
+          <div class="q-ma-xs" v-for="(item, index) in testQuestion">
+            <div class="self-end f18" v-html="item.answer"></div>
+          </div>
+        </div>
+
+        <div class="box-content-answer q-pa-md q-mt-lg row">
+          <div class="q-ma-sm" v-for="(item, index) in testChoices">
+            <div align="center">
+              <q-btn push class="bg-amber shadow-1">{{ item }}</q-btn>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="col-12 absolute-top" align="center">
+        <header-bar :practiceData="practiceData"></header-bar>
+      </div> -->
+      <!-- <div class="col relative-position q-pa-md">
         <q-card class="absolute-center box-content-question shadow-5" square>
           <q-card-section>
             <div class="q-pa-md">
@@ -20,13 +46,11 @@
             </div>
           </q-card-section>
         </q-card>
-      </div>
-      <div class="col-6 box-content-answer q-pt-md">
+      </div> -->
+      <!-- <div class="col-6 box-content-question q-pt-md">
         <div class="q-mt-xl q-pa-lg">
           <div class="box-question q-pa-md">
-            <span class="f16">
-              {{ practiceData.questionTh }}
-            </span>
+            <span class="f16" v-html="practiceData.questionTh"> </span>
           </div>
 
           <div class="box-answer q-mb-xl q-mt-lg">
@@ -43,12 +67,13 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </q-page>
 </template>
 
 <script>
+import { VueDraggableNext } from "vue-draggable-next";
 import appBar from "../components/app-bar";
 import headerBar from "../components/header-time-progress";
 import { ref, reactive, onMounted } from "vue";
@@ -59,6 +84,13 @@ export default {
   components: {
     appBar,
     headerBar,
+    draggable: VueDraggableNext,
+  },
+  props: {
+    themeSync: {
+      type: Number,
+      default: 1,
+    },
   },
   setup(props) {
     // Initial Route
@@ -70,7 +102,7 @@ export default {
     const practiceData = reactive({
       totalQuestion: 0,
       totalStar: 0,
-      currentQuestion: 0,
+      currentQuestion: 2,
       question: "",
       choices: [],
       questionTh: "",
@@ -103,7 +135,12 @@ export default {
 
         // Question List : Set Question
         questionList.value = response.data;
-        questionList.value.sort(() => Math.random() - 0.5);
+
+        // เรียงแบบฝึกหัด
+        questionList.value.sort((a, b) => a.order - b.order);
+
+        // สุ่มแบบฝึกหัด
+        // questionList.value.sort(() => Math.random() - 0.5);
 
         funcSelectedQuestion(true);
 
@@ -113,6 +150,9 @@ export default {
       }
     };
 
+    const testQuestion = ref([]);
+    const testChoices = ref([]);
+
     const funcSelectedQuestion = (firsttime) => {
       firsttime = firsttime || false;
 
@@ -121,11 +161,34 @@ export default {
       }
 
       // Practice Data : Show Question
-      let newQuestion = questionList.value[
-        practiceData.currentQuestion
-      ].sentenceEng.replace(/<s*u>(.*?)<s*\/u>/g, "____________");
+      let newQuestion = questionList.value[practiceData.currentQuestion].sentenceEng;
 
+      newQuestion = newQuestion.split(" ");
+
+      newQuestion = newQuestion.map((x) => {
+        let newData = {
+          isAnswer: false,
+          answer: x,
+          currentAnswer: "",
+        };
+
+        let tagMatch = x.match(/<s*u>(.*>?)<s*\/u>/gm) || 0;
+
+        if (tagMatch.length) {
+          newData.isAnswer = true;
+          newData.answer = newData.answer.replace(
+            /<s*u>(.*>?)<s*\/u>/g,
+            `<div class="relative-position" style="width:100px;height:40px;border-radius:10px;background-color:#A9A9A9;box-shadow:0px 1px 3px #000;"></div>`
+          );
+        }
+
+        return newData;
+      });
+
+      // Practice Data : Show Question
       practiceData.question = newQuestion;
+
+      testQuestion.value = newQuestion;
 
       // Practice Data : Show Question Th
       practiceData.questionTh =
@@ -135,7 +198,7 @@ export default {
       practiceData.choices =
         questionList.value[practiceData.currentQuestion].sentenceExtra;
 
-      console.log(questionList.value);
+      testChoices.value = questionList.value[practiceData.currentQuestion].sentenceExtra;
     };
 
     // Mounted
@@ -143,15 +206,16 @@ export default {
       funcLoadPractice();
     });
 
-    return { practiceData, isLoadPractice };
+    return { practiceData, isLoadPractice, testQuestion, testChoices };
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .bg-translation {
-  background-image: url("../../public/images/translation/bg-translation.png");
+  // background-image: url("../../public/images/translation/bg-translation.png");
   background-size: cover;
+  background-color: #fff;
 }
 
 .box-content-question {
@@ -161,21 +225,20 @@ export default {
   min-height: calc(100vh - 30%);
 }
 
-.box-content-answer {
-  max-width: 600px;
-  width: 100%;
+.box-content-question {
+  width: 800px;
   background-image: url("../../public/images/translation/bg-translation-content.png");
   background-size: cover;
-  background-position: bottom;
-  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.box-content-answer {
+  width: 800px;
 }
 
 .box-question {
+  width: 800px;
   background-color: #fff;
-  border: 5px solid #a36112;
-  border-radius: 10px;
-}
-
-.box-answer {
+  border: 4px solid #895200;
 }
 </style>

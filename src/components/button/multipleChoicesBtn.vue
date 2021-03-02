@@ -1,32 +1,32 @@
 <template>
   <div>
     <q-btn
-      class="btn-choice q-px-md relative-position row cursor-pointer"
-      :class="isDisable ? 'btn-diable-bg' : 'btn-bg'"
+      class="btn-choice q-px-md relative-position row"
+      :class="isDisable ? 'btn-diable-bg no-pointer-events' : 'btn-bg cursor-pointer'"
       style="width: 100%; max-width: 1000px"
       no-caps
       align="left"
     >
       <div
         class="choice-circle"
-        :class="isDisable ? 'choice-circle-bg-disable' : 'choice-circle-bg'"
+        :class="isDisable ? 'choice-circle-bg-disable ' : 'choice-circle-bg'"
         v-if="index == 0"
       ></div>
       <div
         class="choice-square"
-        :class="isDisable ? 'choice-square-bg-disable' : 'choice-square-bg'"
+        :class="isDisable ? 'choice-square-bg-disable ' : 'choice-square-bg'"
         v-if="index == 1"
       ></div>
       <div
         class="choice-triangle"
-        :class="isDisable ? 'choice-triangle-bg-disable' : 'choice-triangle-bg'"
+        :class="isDisable ? 'choice-triangle-bg-disable ' : 'choice-triangle-bg'"
         v-if="index == 2"
       ></div>
       <q-icon
         name="fas fa-star"
         v-if="index == 3"
         class="choice-star"
-        :class="isDisable ? 'choice-star-bg-disable' : 'choice-star-bg'"
+        :class="isDisable ? 'choice-star-bg-disable ' : 'choice-star-bg'"
       ></q-icon>
       <span class="q-pl-md" :class="{ f20: $q.platform.is.desktop }">
         <span v-html="choice"> </span>
