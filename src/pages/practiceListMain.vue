@@ -622,7 +622,7 @@ export default {
       } else if (data.practiceType == "clozetest") {
         routerName = "/clozeTest/";
       } else if (data.practiceType == "conversationlesson") {
-        routerName = "/conversationLesson";
+        routerName = "/conversationLesson/";
       }
 
       router.push(routerName + data.practiceListId);
