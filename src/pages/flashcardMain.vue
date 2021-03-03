@@ -4,6 +4,7 @@
       <app-bar
         :isShowDialogFlashcard="isShowDialogFlashcard"
         @showDialogFlashcard="isShowDialogFlashcard = false"
+        :themeSync="themeSync"
       ></app-bar>
     </div>
 
@@ -17,6 +18,7 @@
       @playSound="(val) => playSound(val)"
       v-if="$q.platform.is.desktop && isLoadPractice"
       :isSynchronize="isSynchronize"
+      @closeDialog="closeDialog"
     ></flashcard-pc>
 
     <flashcard-mobile
@@ -38,7 +40,8 @@ import axios from "axios";
 import { useQuasar } from "quasar";
 import { useRouter, useRoute } from "vue-router";
 import appBar from "../components/app-bar";
-import { db } from "src/router";
+import { auth, db } from "src/router";
+import practiceHooks from "../hooks/practiceHooks.js";
 export default {
   components: {
     flashcardPc,
@@ -68,6 +71,7 @@ export default {
 
     // โหลดข้อมูล Flashcard
     const loadFlashcard = async () => {
+      $q.loading.show();
       const apiURL =
         "https://us-central1-winnerenglish2-e0f1b.cloudfunctions.net/wfunctions/getPracticeData";
 
@@ -84,14 +88,25 @@ export default {
       vocabDataList.value = sortFlashcard;
       flashcardList.value = sortFlashcard;
       isLoadPractice.value = true;
+      $q.loading.hide();
     };
 
     // ส่งข้อมูลเข้าไปที่ Component Vocab
     const vocabDataList = ref([]);
 
+    //closeDialog
+    const closeDialog = () => {
+      console.log("closed");
+    };
+
     // Play sound
+    const tempAudio = ref("");
     const playSound = (url) => {
+      if (tempAudio.value) {
+        tempAudio.value.pause();
+      }
       let audio = new Audio(url);
+      tempAudio.value = audio;
       audio.play();
     };
 
@@ -100,7 +115,6 @@ export default {
       .collection("synchronize")
       .doc("test")
       .onSnapshot((doc) => {
-        console.log("onSnapshot");
         synchronizeData.value = doc.data();
         if (doc.data().mode == "control") {
           isSynchronize.value = true;
@@ -120,8 +134,25 @@ export default {
       isShowDialogFlashcard.value = false;
     };
 
+    // Save PracticeLog ตอนเข้ามาที่ Flashcard
+    const savePracticeLog = async () => {
+      // UID
+      const uid = await auth.currentUser.uid;
+      const url =
+        "http://localhost:5000/winnerenglish2-e0f1b/us-central1/wfunctions/saveLog";
+      const practiceLogData = {
+        practiceListId: route.params.practiceListId,
+        studentId: uid,
+        score: 100,
+        star: 0,
+        coin: 0,
+      };
+      const response = await axios.post(url, practiceLogData);
+    };
+
     // เรียกใช้งาน Function
     onMounted(async () => {
+      await savePracticeLog();
       await loadFlashcard();
     });
 
@@ -139,6 +170,8 @@ export default {
       closeDialogFlashcard,
       synchronizeData,
       isSynchronize,
+      tempAudio,
+      closeDialog,
     };
   },
 };

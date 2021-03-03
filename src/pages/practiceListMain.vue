@@ -342,7 +342,6 @@
         </q-card-section>
       </q-card>
     </q-dialog>
-    {{ courseId }}
   </q-page>
 </template>
 
@@ -353,6 +352,7 @@ import practiceHooks from "../hooks/practiceHooks";
 import { useQuasar } from "quasar";
 import { useRouter } from "vue-router";
 import appBar from "../components/app-bar";
+import { auth, db } from "src/router/index.js";
 export default {
   props: {
     unitList: {
@@ -377,13 +377,16 @@ export default {
     const router = useRouter();
 
     // UID
-    const uid = $q.sessionStorage.getItem("uid");
 
     // Course Data
     const selectLevel = ref("");
 
     // level changed
-    watch(selectLevel, (newValue, oldValue) => {
+    watch(selectLevel, async (newValue, oldValue) => {
+      let uid = await auth.currentUser.uid;
+      await db.collection("student").doc(uid).update({
+        currentCourseId: newValue.courseId,
+      });
       getPractice();
     });
 
@@ -418,19 +421,24 @@ export default {
     const levelList = ref([]);
     // Get Course
     const getCourse = async () => {
-      let course = await studentHooks.student().course();
-      let allLevel = await practiceHooks.level();
-      course.forEach(async (element) => {
-        levelList.value.push({
-          label: "ระดับ" + allLevel.filter((x) => x.level == element.level)[0].level,
-          value: allLevel.filter((x) => x.level == element.level)[0].level,
-          unit: Number(allLevel.filter((x) => x.level == element.level)[0].unit),
-          courseId: element.courseId,
+      try {
+        let uid = await auth.currentUser.uid;
+        let course = await studentHooks.student(uid).course();
+        let allLevel = await practiceHooks.level();
+        course.forEach(async (element) => {
+          levelList.value.push({
+            label: "ระดับ" + allLevel.filter((x) => x.level == element.level)[0].level,
+            value: allLevel.filter((x) => x.level == element.level)[0].level,
+            unit: Number(allLevel.filter((x) => x.level == element.level)[0].unit),
+            courseId: element.courseId,
+          });
         });
-      });
-      selectLevel.value = levelList.value[0];
-      emit("courseChanged", levelList.value[0].courseId);
-      totalUnit.value = levelList.value[0].unit;
+        selectLevel.value = levelList.value[0];
+        emit("courseChanged", levelList.value[0].courseId);
+        totalUnit.value = levelList.value[0].unit;
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     // Practice Data
@@ -474,23 +482,30 @@ export default {
 
     const practiceLog = ref([]);
     const getPractice = async () => {
-      $q.loading.show({
-        delay: 0,
-      });
+      try {
+        let uid = await auth.currentUser.uid;
+        $q.loading.show({
+          delay: 0,
+        });
 
-      // Get Practice List
-      practiceList.value = await practiceHooks
-        .practice(selectLevel.value.value)
-        .practiceList();
+        // Get Practice List
+        practiceList.value = await practiceHooks
+          .practice(selectLevel.value.value)
+          .practiceList();
 
-      // Get Practice Name
-      practiceName.value = await practiceHooks
-        .practice(selectLevel.value.value)
-        .practiceName();
+        // Get Practice Name
+        practiceName.value = await practiceHooks
+          .practice(selectLevel.value.value)
+          .practiceName();
 
-      // Get PracticeLog
-      practiceLog.value = await practiceHooks.practice(selectLevel.value.value).log(uid);
-      $q.loading.hide();
+        // Get PracticeLog
+        practiceLog.value = await practiceHooks
+          .practice(selectLevel.value.value)
+          .log(uid);
+        $q.loading.hide();
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     // โชว์ชื่อยูนิต

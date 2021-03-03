@@ -1,8 +1,7 @@
-import { db } from "src/router";
+import { db,auth } from "src/router";
 
-const student = () => {
-  let uid = sessionStorage.getItem("uid").split("|")[1];
-
+const student =  (uid) => {
+ 
   const course = async () => {
     let getCourse = await db
       .collection("course")

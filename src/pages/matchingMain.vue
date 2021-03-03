@@ -2,6 +2,7 @@
   <q-page class="bg-matching">
     <div>
       <app-bar
+        :themeSync="themeSync"
         :instructionData="instructionData"
         :isShowHome="false"
         :isShowPause="isSynchronize ? false : true"
@@ -18,7 +19,7 @@
       :practiceData="practiceData"
       @callback-sendanswer=""
       @callback-nextquestion="funcSelectedPractice()"
-      @callback-finishpractice="isFinishPractice = true"
+      @callback-finishpractice="finishPractice"
       class="box-container-main"
       v-if="$q.platform.is.desktop && isLoadPractice"
     ></matching-pc>
@@ -27,7 +28,7 @@
       :practiceData="practiceData"
       @callback-sendanswer=""
       @callback-nextquestion="funcSelectedPractice()"
-      @callback-finishpractice="isFinishPractice = true"
+      @callback-finishpractice="finishPractice"
       v-if="$q.platform.is.mobile && isLoadPractice"
     ></matching-mobile>
 
@@ -115,9 +116,10 @@ import { useRouter, useRoute } from "vue-router";
 import { useQuasar } from "quasar";
 import instructionDialog from "../components/instructionDialog";
 import finishPracticeDialog from "../components/finishPracticeDialog";
+import practiceHooks from "../hooks/practiceHooks";
 import appBar from "../components/app-bar";
 import axios from "axios";
-import { db } from "src/router";
+import { auth, db } from "src/router";
 export default {
   props: {
     themeSync: {
@@ -168,11 +170,10 @@ export default {
 
     // Load Practice Data
     const funcLoadPractice = async () => {
+      await checkPracticePermission();
       console.clear();
-
       try {
         let flashcardList = [];
-
         let getFlashId = await db
           .collection("practiceList")
           .doc(route.params.practiceListId)
@@ -296,7 +297,7 @@ export default {
       await funcSelectedPractice(true);
     };
     // สุ่มคำจอบไม่ให้ตรงกับตำถาม
-    const funcRandomPractuce = () => {
+    const funcRandomPractice = () => {
       dataAnswerList.value[practiceData.currentQuestion].sort(() => Math.random() - 0.5);
 
       let setAnswer = [...dataAnswerList.value[practiceData.currentQuestion]];
@@ -318,7 +319,7 @@ export default {
       }
 
       if (tempBoolean.every((x) => x)) {
-        funcRandomPractuce();
+        funcRandomPractice();
       }
 
       practiceData.choices = tempAnswer;
@@ -334,7 +335,7 @@ export default {
       }
 
       if ($q.platform.is.desktop) {
-        funcRandomPractuce();
+        funcRandomPractice();
       } else {
         practiceData.choices = answerList.value;
         practiceData.question = questionList.value;
@@ -356,7 +357,7 @@ export default {
     // TODO : แสดง Dialog จบแบบฝึกหัด
     const isFinishPractice = ref(false);
 
-    const reStart = () => {
+    const reStart = async () => {
       isFinishPractice.value = false;
       isLoadPractice.value = false;
 
@@ -365,11 +366,54 @@ export default {
       practiceData.question = [];
       practiceData.choices = [];
       practiceData.currentQuestion = 0;
-
+      await checkPracticePermission();
       funcLoadPractice();
     };
 
+    const finishPractice = async (val) => {
+      isFinishPractice.value = true;
+      $q.loading.show();
+      // UID
+      try {
+        const uid = await auth.currentUser.uid;
+        const url =
+          "http://localhost:5000/winnerenglish2-e0f1b/us-central1/wfunctions/saveLog";
+        const practiceLogData = {
+          practiceListId: route.params.practiceListId,
+          studentId: uid,
+          score: val.score,
+          star: val.star,
+          coin: 0,
+        };
+        try {
+          const response = await axios.post(url, practiceLogData);
+        } catch (error) {
+          console.log(error);
+        }
+
+        $q.loading.hide();
+      } catch (error) {
+        $q.loading.hide();
+      }
+    };
+
+    const checkPracticePermission = async () => {
+      try {
+        const uid = await auth.currentUser.uid;
+        const courseId = await practiceHooks.getCourseId(uid);
+        const permission = await practiceHooks.checkPracticePermission(courseId);
+        if (!permission) {
+          alert("แบบฝึกหัดทำครบกำหนดแล้ว");
+          router.push("/practicemain");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     onMounted(async () => {
+      await funcLoadPractice();
+
       if (isHasHelp) {
         emit("isShowButtonHelp");
       }
@@ -377,8 +421,6 @@ export default {
       if (isHasInstruction) {
         emit("isShowButtonInstruction");
       }
-
-      await funcLoadPractice();
     });
 
     return {
@@ -392,6 +434,7 @@ export default {
       isFinishPractice,
       funcSelectedPractice,
       reStart,
+      finishPractice,
     };
   },
 };

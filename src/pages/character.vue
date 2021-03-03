@@ -1,7 +1,5 @@
 <template>
-  <div
-    :class="$q.platform.is.desktop ? 'bg-character-pc' : 'bg-character-mobile'"
-  >
+  <div :class="$q.platform.is.desktop ? 'bg-character-pc' : 'bg-character-mobile'">
     <div class="absolute-right q-pa-md">
       <q-btn size="17px" round class="bg-warning" push dense>
         <q-icon name="logout" />
@@ -32,7 +30,7 @@ import { useQuasar } from "quasar";
 import { useRouter, useRoute } from "vue-router";
 import game from "../hooks/gameHooks.js";
 import { ref, onMounted, reactive } from "vue";
-import { ts, db } from "src/router";
+import { ts, db, auth } from "src/router";
 export default {
   props: ["text"],
   components: {
@@ -47,7 +45,8 @@ export default {
     const route = useRoute();
 
     // ********************** uid **********************
-    const uid = $q.sessionStorage.getItem("uid");
+
+    const uid = auth.currentUser.uid;
 
     // Initial Data
     const equipment = reactive({

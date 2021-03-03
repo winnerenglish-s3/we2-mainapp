@@ -197,7 +197,7 @@
         "
         class="cursor-pointer"
         width="200px"
-        @click="$emit('callback-finishpractice')"
+        @click="$emit('callback-finishpractice', { star: star, score: score })"
         src="../../../public/images/finish-btn.png"
       ></q-img>
     </div>
@@ -220,7 +220,7 @@ export default {
       default: () => {},
     },
   },
-  emits: ["callback-finishpractice"],
+  emits: ["callback-finishpractice", "callback-nextquestion"],
   setup(props, { emit }) {
     const isDrop = ref(false);
     const isCorrectAnswer = ref(false);
@@ -238,10 +238,29 @@ export default {
       if (answerAll) {
         return true;
       }
-
       return false;
     });
 
+    // จำนวนคำที่ตอบถูก
+    const countTotalCorrect = ref(0);
+    // คะแนน
+    // สูตร = math round (จำนวนคำที่ถูก / จำนวนคำทั้งหมด * 100)
+    const score = ref(0);
+    // ดาวที่ได้รับ
+
+    const star = computed(() => {
+      let result = 0;
+      if (score.value >= 80) {
+        result = 3;
+      } else if (score.value >= 65) {
+        result = 2;
+      } else if (score.value >= 50) {
+        result = 1;
+      }
+      return result;
+    });
+
+    // ฟังก์ชันการส่งคำตอบ
     const funcSendAnswer = () => {
       isSendAnswer.value = true;
 
@@ -251,8 +270,23 @@ export default {
 
       if (checkAnswerCorrrect) {
         isCorrectAnswer.value = true;
+        countTotalCorrect.value += 3;
       } else {
+        const mapQuestion = props.practiceData.question.map((x) => x[0].vocab);
+        for (let i = 0; i < mapQuestion.length; i++) {
+          if (mapQuestion[i] == answerList.value[i][0].vocab) {
+            countTotalCorrect.value++;
+          }
+        }
         isCorrectAnswer.value = false;
+      }
+      score.value = Math.round(
+        (countTotalCorrect.value / (props.practiceData.totalQuestion * 3)) * 100
+      );
+
+      if (props.practiceData.currentQuestion + 1 == props.practiceData.totalQuestion) {
+        // console.log("บันทึกคะแนน");
+        emit("callback-finishpractice", { star: star.value, score: score.value });
       }
     };
 
@@ -280,6 +314,8 @@ export default {
 
       // Send Answer
       funcSendAnswer,
+      score,
+      star,
 
       // Next Question
       funcNextQuestion,

@@ -1,6 +1,9 @@
 <template>
   <q-page>
-    <app-bar :isShowHome="learningMode == 'selfLearning' ? true : false"></app-bar>
+    <app-bar
+      :themeSync="2"
+      :isShowHome="learningMode == 'selfLearning' ? true : false"
+    ></app-bar>
     <div class="box-container-main" v-if="isLoaded">
       <div class="row row-height">
         <div
@@ -20,7 +23,7 @@
               align="center"
             >
               <q-btn
-                @click="clickLessonList(index)"
+                @click="clickLessonList(index, item)"
                 no-caps
                 style="width: 93%; margin: auto"
                 class="shadow-1 q-py-md"
@@ -56,7 +59,25 @@
         >
           <!-- IMG -->
           <div v-if="typeSelect == 'slide'" class="col-12">
-            <q-img :src="lessonList[activeLessonList].imageUrl"></q-img>
+            <q-img :src="lessonList[activeLessonList].imageUrl">
+              <div class="absolute-bottom-right bg-transparent">
+                <q-btn
+                  push
+                  round
+                  icon="fas fa-volume-up"
+                  v-if="practiceSkill != 'Grammar'"
+                  style="animation-duration: 2s"
+                  :class="
+                    isAudioPaying
+                      ? 'bg-green text-white animate__animated animate__flash animate__infinite'
+                      : 'volume-btn text-black'
+                  "
+                  size="lg"
+                  @click="playAudio()"
+                >
+                </q-btn>
+              </div>
+            </q-img>
           </div>
           <!-- VIDEO -->
           <div v-else class="col-12">
@@ -70,59 +91,13 @@
             </div>
             <div v-else>DATA NOT FOUND</div>
           </div>
-
-          <!-- Mobile Next Button -->
-          <q-page-sticky position="bottom-right" :offset="[18, 18]" class="mobile-only">
-            <q-btn
-              @click="nextlesson()"
-              round
-              color="amber"
-              class="text-white relative-position"
-              style="width: 50px; height: 50px"
-              :disable="activeLessonList == lessonList.length - 1"
-            >
-              <q-icon
-                size="xl"
-                name="fas fa-caret-right absolute"
-                style="left: 6px"
-              ></q-icon>
-            </q-btn>
-          </q-page-sticky>
-
-          <!-- Mobile Previous Button -->
-          <q-page-sticky position="bottom-left" :offset="[18, 18]" class="mobile-only">
-            <q-btn
-              @click="previouslesson()"
-              round
-              color="amber"
-              class="text-white relative-position"
-              style="width: 50px; height: 50px"
-              :disable="activeLessonList == 0"
-            >
-              <q-icon size="xl" name="fas fa-caret-left " style="right: 6px"></q-icon>
-            </q-btn>
-          </q-page-sticky>
-
           <div
             class="q-pt-md col-12 row self-end"
-            v-if="!isSynchronizeMode"
+            v-if="!isSynchronizeMode && !isShowRadioSelect"
             :class="$q.platform.is.desktop ? 'justify-between' : ' justify-center'"
           >
-            <!-- left button -->
-            <div v-if="$q.platform.is.desktop">
-              <q-btn
-                @click="previouslesson()"
-                round
-                color="amber"
-                class="text-white relative-position"
-                style="width: 50px; height: 50px"
-                :disable="activeLessonList == 0"
-              >
-                <q-icon size="xl" name="fas fa-caret-left " style="right: 6px"></q-icon>
-              </q-btn>
-            </div>
             <!-- Radio select -->
-            <div style="top: 45px">
+            <div style="top: 45px" align="center" class="col">
               <div
                 class="bg-white row justify-center"
                 style="width: 200px; border-radius: 10px"
@@ -146,23 +121,6 @@
                   ></q-radio>
                 </div>
               </div>
-            </div>
-            <!-- Right Button -->
-            <div v-if="$q.platform.is.desktop">
-              <q-btn
-                @click="nextlesson()"
-                round
-                color="amber"
-                class="text-white relative-position"
-                style="width: 50px; height: 50px"
-                :disable="activeLessonList == lessonList.length - 1"
-              >
-                <q-icon
-                  size="xl"
-                  name="fas fa-caret-right absolute"
-                  style="left: 6px"
-                ></q-icon>
-              </q-btn>
             </div>
           </div>
         </div>
@@ -206,16 +164,31 @@ export default {
 
     // lesson List ปัจจุบันที่คลิกอยู่
     const activeLessonList = ref(0);
+
     // เก็บค่า List ที่เคยกดไปแล้ว
     const passedlessonList = ref([0]);
+
     // กด lesson List
-    const clickLessonList = (index) => {
+    const clickLessonList = (index, item) => {
+      isAudioPaying.value = false;
+      if (tempAudio.value) {
+        tempAudio.value.pause();
+      }
+
+      if (item.soundUrl) {
+        // กรณีเป็นเสียง
+        typeSelect.value = "slide";
+      } else {
+        // กรณีเป็น VDO
+        typeSelect.value = "vdo";
+      }
       activeLessonList.value = index;
       if (!passedlessonList.value.includes(index)) {
         passedlessonList.value.push(index);
       }
     };
 
+    // Get Lesson List
     const isLoaded = ref(false);
     const getlessonList = async () => {
       $q.loading.show();
@@ -238,18 +211,10 @@ export default {
 
     // Type select between video and slide
     const typeSelect = ref("vdo");
-    // next vdo / slice
-    const nextlesson = () => {
-      activeLessonList.value++;
-      clickLessonList(activeLessonList.value);
-    };
-    const previouslesson = () => {
-      activeLessonList.value--;
-    };
 
     // Synchronize
     const isSynchronizeMode = ref(false);
-    // const synchronizeMode = ref("vdo"); //vdo or slide
+
     const learningMode = ref("");
     const listenSynchronize = db
       .collection("synchronize")
@@ -257,7 +222,7 @@ export default {
       .onSnapshot((data) => {
         if (data.data().mode == "control") {
           isSynchronizeMode.value = true;
-          typeSelect.value = data.data().lesson.mode;
+          typeSelect.value = data.data().mode;
           activeLessonList.value = data.data().lesson.currentLessonIndex;
           learningMode.value = "control";
         } else {
@@ -266,8 +231,43 @@ export default {
         }
       });
 
-    onMounted(() => {
-      getlessonList();
+    const isShowRadioSelect = ref(false);
+    const practiceSkill = ref("");
+
+    // Check Practice Skill
+    const checkSkill = async () => {
+      let response = await db
+        .collection("practiceList")
+        .doc(route.params.practiceListId)
+        .get();
+      practiceSkill.value = response.data().skill;
+
+      if (response.data().skill != "Grammar") {
+        isShowRadioSelect.value = true;
+      }
+    };
+
+    // Play Audio
+    const tempAudio = ref("");
+    const isAudioPaying = ref(false);
+    const playAudio = () => {
+      if (tempAudio.value) {
+        tempAudio.value.pause();
+      }
+      let soundUrl = lessonList.value[activeLessonList.value].soundUrl;
+      let audio = new Audio(soundUrl);
+      tempAudio.value = audio;
+      audio.play();
+      isAudioPaying.value = true;
+      // On Video End
+      audio.onended = () => {
+        isAudioPaying.value = false;
+      };
+    };
+
+    onMounted(async () => {
+      await checkSkill();
+      await getlessonList();
     });
 
     onBeforeUnmount(() => {
@@ -275,6 +275,7 @@ export default {
     });
 
     return {
+      isAudioPaying,
       lessonList,
       activeLessonList,
       clickLessonList,
@@ -282,11 +283,12 @@ export default {
       thumbStyle,
       barStyle,
       typeSelect,
-      nextlesson,
-      previouslesson,
       isSynchronizeMode,
       learningMode,
       isLoaded,
+      isShowRadioSelect,
+      practiceSkill,
+      playAudio,
     };
   },
 };
@@ -309,5 +311,8 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+.volume-btn {
+  background-image: linear-gradient(#ffd158, #ffbb0c);
 }
 </style>

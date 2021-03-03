@@ -1,4 +1,5 @@
-import { db } from "src/router";
+import axios from "src/boot/axios";
+import { db, auth } from "src/router";
 
 const practice = (level) => {
   // GET PRACTICE LIST FROM LEVEL
@@ -123,7 +124,37 @@ const level = async () => {
   }
 };
 
-// Save Practice Log
-const savePracticeLog = async (courseId) => {};
+// GET PRACTICE INFOMATION
+const practiceListInfo = async (practiceListId) => {
+  let response = await db.collection("practiceList").doc(practiceListId).get();
+  let result = response.data();
+  return result;
+};
 
-export default { practice, level };
+const getCourseId = async (uid) => {
+  const getCourseId = await db.collection("student").doc(uid).get();
+  const courseId = getCourseId.data().currentCourseId;
+  return courseId;
+};
+
+const checkPracticePermission = async (courseId) => {
+  const response = await db.collection("practiceLog")
+    .where("courseId", "==", courseId)
+    .get()
+  
+  if (response.docs[0].data().counter >= 2) {
+    return false
+  } else {
+  return true  
+  }
+  
+  
+};
+
+export default {
+  practice,
+  level,
+  practiceListInfo,
+  checkPracticePermission,
+  getCourseId,
+};

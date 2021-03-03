@@ -22,11 +22,7 @@
     ></lobby-mobile>
 
     <!-- dialog questionnaire -->
-    <q-dialog
-      persistent
-      v-model="isShowPopupQuestionnaire"
-      data-cy="dialog-question"
-    >
+    <q-dialog persistent v-model="isShowPopupQuestionnaire" data-cy="dialog-question">
       <q-card flat class="bg-transparent" style="width: 320px; height: 370px">
         <q-card-section class="bg-transparent text-dark no-padding">
           <!-- รูปพื้นหลัง Error -->
@@ -39,10 +35,7 @@
               >
                 อย่าลืม! ทำแบบสอบถาม
               </div>
-              <div
-                align="center"
-                class="text-dark relative-position q-px-md q-mt-md"
-              >
+              <div align="center" class="text-dark relative-position q-px-md q-mt-md">
                 คุณสามารถเข้าทำแบบสอบถาม
                 <br />ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ค. 2563
               </div>
@@ -84,10 +77,7 @@
               >
                 หัวข้อการสอบที่ครูตั้ง
               </div>
-              <div
-                align="center"
-                class="text-dark relative-position q-px-md q-mt-md"
-              >
+              <div align="center" class="text-dark relative-position q-px-md q-mt-md">
                 คุณสามารถเข้าสอบก่อนเรียน
                 <br />
                 ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ย. 2563
@@ -124,15 +114,10 @@
               >
                 อย่าลืม! สอบก่อนเรียน
               </div>
-              <div
-                align="center"
-                class="text-dark relative-position q-px-md q-mt-md"
-              >
+              <div align="center" class="text-dark relative-position q-px-md q-mt-md">
                 คุณสามารถเข้าสอบก่อนเรียน
                 <br class="" />
-                <div class="q-my-sm">
-                  ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ค. 2563
-                </div>
+                <div class="q-my-sm">ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ค. 2563</div>
               </div>
             </div>
             <div
@@ -159,11 +144,7 @@
     </q-dialog>
 
     <!-- dialog psottest -->
-    <q-dialog
-      persistent
-      v-model="isShowPopupPosttest"
-      data-cy="dialog-posttest"
-    >
+    <q-dialog persistent v-model="isShowPopupPosttest" data-cy="dialog-posttest">
       <q-card flat class="bg-transparent" style="width: 320px; height: 370px">
         <q-card-section class="bg-transparent text-dark no-padding">
           <!-- รูปพื้นหลัง Error -->
@@ -176,10 +157,7 @@
               >
                 อย่าลืม! ทดสอบหลังเรียน
               </div>
-              <div
-                align="center"
-                class="text-dark relative-position q-px-md q-mt-md"
-              >
+              <div align="center" class="text-dark relative-position q-px-md q-mt-md">
                 คุณสามารถเข้าทำแบบทดสอบหลังเรียน
                 <br />ได้ตั้งแต่วันนี้จนถึงวันที่ 16 พ.ค. 2563
               </div>
@@ -217,6 +195,7 @@ import game from "../hooks/gameHooks.js";
 import { useQuasar } from "quasar";
 import { ref, onMounted, reactive } from "vue";
 import { useRouter } from "vue-router";
+import { auth } from "src/router";
 export default {
   setup() {
     // Initial Data
@@ -251,10 +230,11 @@ export default {
     const loadingHide = () => {
       $q.loading.hide();
     };
+
     // Router
     const router = useRouter();
     // uid
-    const uid = $q.sessionStorage.getItem("uid");
+    const uid = auth.currentUser.uid;
     // Character Data
     const characterData = ref({});
     const getCharacterData = async () => {
