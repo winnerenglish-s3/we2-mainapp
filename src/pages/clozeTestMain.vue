@@ -26,12 +26,12 @@
             </div>
             <div class="q-mt-sm box-content q-px-lg" align="left">
               <span
-                class="f18"
+                :style="`font-size:${fontSize}px;`"
                 v-html="`${practiceData.question}`"
                 v-if="!isShowContentAnswer"
               ></span>
               <span
-                class="f18"
+                :style="`font-size:${fontSize}px;`"
                 v-html="`${practiceData.contentEng}`"
                 v-if="isShowContentAnswer"
               ></span>
@@ -41,27 +41,14 @@
       </div>
 
       <div class="col-12">
-        <div
-          class="col-12 row items-center justify-center"
-          :class="{ 'q-px-lg': $q.platform.is.mobile }"
-          align="center"
-        >
+        <div class="col-12 row items-center justify-center" align="center">
           <div class="col q-pa-md">
-            <!-- <div class="box-question q-pa-sm row" align="left">
-              <div class="q-mx-xs" v-for="(item, index) in practiceData.totalQuestion">
-                <question-number
-                  :no="index + 1"
-                  :currentQuestion="practiceData.currentQuestion + 1"
-                ></question-number>
-              </div>
-            </div> -->
-
             <div
               class="box-container-content row"
               v-show="!isDescription && !isShowContentAnswer"
             >
               <div
-                class="col-6 q-pa-sm"
+                class="col-sm-6 col-xs-12 q-pa-sm"
                 v-for="(item, index) in practiceData.choices"
                 :key="index"
                 @click="isSendAnswer ? null : funcSendAnswer(item, index)"
@@ -82,15 +69,15 @@
                 <div class="f16 q-px-md">
                   <div class="q-pa-md row" align="left">
                     <div class="col-12 row q-py-xs" v-if="!isCorrectAnswer">
-                      <div
+                      <span
                         class="text-red"
                         v-html="practiceData.choices[currentAnswer].choice"
-                      ></div>
-                      <div class="col q-mx-md">เป็นคำตอบที่ผิด</div>
+                      ></span>
+                      <span> &nbsp;&nbsp;เป็นคำตอบที่ผิด </span>
                     </div>
                     <div class="col-12 row">
-                      <div class="col-2">คำตอบที่ถูกต้อง คือ</div>
                       <div class="col">
+                        <span>คำตอบที่ถูกต้อง คือ &nbsp;&nbsp;</span>
                         <span
                           class="text-green-6"
                           v-html="
@@ -109,10 +96,10 @@
               </div>
 
               <div v-else class="q-pt-md">
-                <div class="q-pa-md q-pb-lg">
+                <div class="q-pa-md q-pb-lg" align="center">
                   <span class="f20" v-html="practiceData.nameTh"> </span>
                 </div>
-                <div class="q-pa-md">
+                <div class="q-pa-md" align="left">
                   <span
                     class="f16"
                     v-html="`${practiceData.contentTh}`"
@@ -402,6 +389,7 @@ export default {
       decreaseFont,
       increaseFont,
       currentAnswer,
+      fontSize,
 
       //
       isLoadPractice,
@@ -437,7 +425,6 @@ export default {
 
 .box-container-reading {
   max-width: 1000px;
-  margin-top: -15px;
 }
 
 .box-content {
@@ -466,7 +453,7 @@ export default {
 
 .box-description {
   max-width: 1000px;
-  width: 95%;
+  width: 100%;
   border-radius: 10px;
   overflow: hidden;
   background-color: #fff;

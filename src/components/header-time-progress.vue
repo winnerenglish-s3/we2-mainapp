@@ -20,7 +20,13 @@
     </div>
     <q-space></q-space>
     <div class="self-center q-pb-sm" style="max-width: 200px; width: 45%" align="right">
-      <div v-if="$route.name != 'readingmultiple' && $route.name != 'grammaraction'">
+      <div
+        v-if="
+          $route.name != 'readingmultiple' &&
+          $route.name != 'grammaraction' &&
+          $route.name != 'clozeTest'
+        "
+      >
         <time-progress
           style="margin-top: 7px"
           align="right"
@@ -29,7 +35,11 @@
         ></time-progress>
       </div>
 
-      <div v-if="$route.name == 'readingmultiple'" align="right">
+      <div
+        v-if="$route.name == 'readingmultiple' || $route.name == 'clozeTest'"
+        align="right"
+        class="q-px-md q-mt-sm"
+      >
         <q-btn-group rounded>
           <q-btn
             @click="$emit('increaseFont')"
@@ -50,8 +60,9 @@
         </q-btn-group>
 
         <q-btn
+          v-if="$route.name == 'readingmultiple'"
           :padding="$q.platform.is.mobile ? '1vw 12px' : '7px 16px'"
-          class="bg-button q-ml-md q-mr-sm"
+          class="bg-button q-ml-md"
           style="border-radius: 7px"
           @click="$emit('playSound')"
         >
