@@ -9,8 +9,8 @@
     </div>
 
     <div class="box-container-main row" v-if="isLoadPractice">
-      <div class="col-12 bg-white row">
-        <div class="col-12 bg-white" align="center">
+      <div class="col-12 self-start bg-white row q-pb-lg">
+        <div class="col-12 bg-white q-pb-md" align="center">
           <div class="relative-position">
             <header-bar
               :setFontSize="fontSize"
@@ -21,11 +21,20 @@
             ></header-bar>
           </div>
           <div class="box-container-reading">
-            <div class="" align="center">
+            <div class="q-pb-md" align="center">
               <span class="f24" v-html="practiceData.nameEng"> </span>
             </div>
-            <div class="q-mt-sm q-py-md box-content q-px-lg" align="left">
-              <span class="f18" v-html="`${practiceData.question}`"></span>
+            <div class="q-mt-sm box-content q-px-lg" align="left">
+              <span
+                class="f18"
+                v-html="`${practiceData.question}`"
+                v-if="!isShowContentAnswer"
+              ></span>
+              <span
+                class="f18"
+                v-html="`${practiceData.contentEng}`"
+                v-if="isShowContentAnswer"
+              ></span>
             </div>
           </div>
         </div>
@@ -33,7 +42,7 @@
 
       <div class="col-12">
         <div
-          class="col-12 row items-center justify-center q-py-md"
+          class="col-12 row items-center justify-center"
           :class="{ 'q-px-lg': $q.platform.is.mobile }"
           align="center"
         >
@@ -46,7 +55,11 @@
                 ></question-number>
               </div>
             </div> -->
-            <div class="box-container-content row" v-show="!isDescription">
+
+            <div
+              class="box-container-content row"
+              v-show="!isDescription && !isShowContentAnswer"
+            >
               <div
                 class="col-6 q-pa-sm"
                 v-for="(item, index) in practiceData.choices"
@@ -60,55 +73,68 @@
               </div>
             </div>
 
-            <div class="box-description q-my-md" v-show="isDescription">
-              <div class="q-pa-md" :style="themeColor"></div>
-              <div class="f16 q-px-md">
-                <div class="q-pa-md row" align="left">
-                  <div class="col-12 row q-py-xs" v-if="isSendAnswer && !isCorrectAnswer">
-                    <div
-                      class="text-red"
-                      v-html="practiceData.choices[currentAnswer].choice"
-                    ></div>
-                    <div class="col q-mx-md">เป็นคำตอบที่ผิด</div>
-                  </div>
-                  <div class="col-12 row">
-                    <div class="col-2">คำตอบที่ถูกต้อง คือ</div>
-                    <div class="col">
-                      <span
-                        class="text-green-6"
-                        v-html="
-                          practiceData.choices.filter(
-                            (x) => x.index == practiceData.correctAnswer
-                          )[0].choice
-                        "
-                      ></span>
-                      <div>
-                        <span v-html="practiceData.description"></span>
+            <div
+              class="box-description q-my-md"
+              v-show="isDescription || isShowContentAnswer"
+            >
+              <div v-if="isSendAnswer">
+                <div class="q-pa-md" :style="themeColor"></div>
+                <div class="f16 q-px-md">
+                  <div class="q-pa-md row" align="left">
+                    <div class="col-12 row q-py-xs" v-if="!isCorrectAnswer">
+                      <div
+                        class="text-red"
+                        v-html="practiceData.choices[currentAnswer].choice"
+                      ></div>
+                      <div class="col q-mx-md">เป็นคำตอบที่ผิด</div>
+                    </div>
+                    <div class="col-12 row">
+                      <div class="col-2">คำตอบที่ถูกต้อง คือ</div>
+                      <div class="col">
+                        <span
+                          class="text-green-6"
+                          v-html="
+                            practiceData.choices.filter(
+                              (x) => x.index == practiceData.correctAnswer
+                            )[0].choice
+                          "
+                        ></span>
+                        <div>
+                          <span v-html="practiceData.description"></span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="q-my-md" align="center">
+
+              <div v-else class="q-pt-md">
+                <div class="q-pa-md q-pb-lg">
+                  <span class="f20" v-html="practiceData.nameTh"> </span>
+                </div>
+                <div class="q-pa-md">
+                  <span
+                    class="f16"
+                    v-html="`${practiceData.contentTh}`"
+                    v-if="isShowContentAnswer"
+                  ></span>
+                </div>
+                <div class="q-py-md">
+                  <q-img
+                    @click="isFinishPractice = true"
+                    class="cursor-pointer"
+                    width="200px"
+                    src="../../public/images/finish-btn.png"
+                  ></q-img>
+                </div>
+              </div>
+
+              <div class="q-my-md" align="center" v-show="isSendAnswer">
                 <q-img
-                  v-show="
-                    isSendAnswer &&
-                    practiceData.currentQuestion + 1 != practiceData.totalQuestion
-                  "
                   @click="funcNextQuestion()"
                   class="cursor-pointer"
                   width="200px"
                   src="../../public/images/next-question-btn.png"
-                ></q-img>
-                <q-img
-                  v-show="
-                    isSendAnswer &&
-                    practiceData.currentQuestion + 1 == practiceData.totalQuestion
-                  "
-                  @click="isFinishPractice = true"
-                  class="cursor-pointer"
-                  width="200px"
-                  src="../../public/images/success-btn.png"
                 ></q-img>
               </div>
             </div>
@@ -135,7 +161,7 @@ import finishPractice from "../components/finishPracticeDialog.vue";
 import headerBar from "../components/header-time-progress";
 import practiceHooks from "../hooks/practiceHooks";
 import getColorTheme from "../../public/themeColor.json";
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { db } from "src/router";
 import axios from "axios";
@@ -164,24 +190,27 @@ export default {
       return `background-color:${colorTheme.value[props.themeSync - 1].hex}`;
     });
 
-    const practiceData = {
+    const practiceData = reactive({
       totalQuestion: 10,
-      currentQuestion: 1,
+      currentQuestion: 0,
       question: "",
-      answer: "",
+      contentEng: "",
+      contentTh: "",
       choices: [],
       correctAnswer: 0,
       nameEng: "",
       nameTh: "",
-    };
+    });
 
     const isLoadPractice = ref(false);
 
     // Font Size
     const fontSize = ref(16);
+
     const decreaseFont = () => {
       fontSize.value++;
     };
+
     const increaseFont = () => {
       fontSize.value--;
     };
@@ -215,6 +244,7 @@ export default {
         )[0];
 
         practiceData.nameEng = getPracticenName.nameEng;
+
         practiceData.nameTh = getPracticenName.nameTh;
 
         // Get Practice Data
@@ -259,7 +289,9 @@ export default {
 
         questionList.value = setPracticeList;
 
-        practiceData.answer = questionList.value.sentenceEng;
+        practiceData.contentEng = questionList.value.sentenceEng;
+
+        practiceData.contentTh = questionList.value.sentenceTh;
 
         practiceData.question = questionList.value.sentenceEng;
 
@@ -275,9 +307,13 @@ export default {
             }</span>`
           );
 
-          practiceData.answer = practiceData.answer.replace(
+          setQuestionArr[i] = setQuestionArr[i]
+            .replace(/<s*u[^>]*>/gm, "")
+            .replace(/<\/s*u>/, "");
+
+          practiceData.contentEng = practiceData.contentEng.replace(
             /<s*u[^>]*>(.*?)<\/s*u>/,
-            /<s*span[^>]* style='background-color:#64A74A'>(.*?)<\/s*span>/
+            `<span style="background-color:#9CDC83;padding:0px 5px;">${setQuestionArr[i]}</span>`
           );
         }
 
@@ -307,9 +343,17 @@ export default {
         questionList.value.answer[practiceData.currentQuestion].description || "";
     };
 
+    const isShowContentAnswer = ref(false);
+
     const funcNextQuestion = () => {
       isSendAnswer.value = false;
       isDescription.value = false;
+
+      if (practiceData.currentQuestion + 1 == practiceData.totalQuestion) {
+        console.log("xx");
+        isShowContentAnswer.value = true;
+        return;
+      }
 
       funcSelectedQuestion();
     };
@@ -334,13 +378,12 @@ export default {
       isDescription.value = true;
     };
 
-    const funcFinishPractice = () => {};
-
     const reStart = () => {
       isFinishPractice.value = false;
       isLoadPractice.value = false;
       isSendAnswer.value = false;
       isDescription.value = false;
+      isShowContentAnswer.value = false;
 
       practiceData.totalQuestion = 0;
       practiceData.totalStar = 0;
@@ -366,6 +409,7 @@ export default {
       isCorrectAnswer,
       isDescription,
       isFinishPractice,
+      isShowContentAnswer,
 
       // Function
       funcSendAnswer,
@@ -393,6 +437,7 @@ export default {
 
 .box-container-reading {
   max-width: 1000px;
+  margin-top: -15px;
 }
 
 .box-content {
