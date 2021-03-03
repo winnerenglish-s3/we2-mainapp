@@ -346,7 +346,7 @@
 </template>
 
 <script>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, onBeforeUnmount } from "vue";
 import studentHooks from "../hooks/studentHooks.js";
 import practiceHooks from "../hooks/practiceHooks";
 import { useQuasar } from "quasar";
@@ -368,6 +368,7 @@ export default {
       default: 1,
     },
   },
+  emits: ["courseChanged"],
   components: {
     appBar,
   },
@@ -383,7 +384,7 @@ export default {
 
     // level changed
     watch(selectLevel, async (newValue, oldValue) => {
-      let uid = await auth.currentUser.uid;
+      let uid = auth.currentUser.uid;
       await db.collection("student").doc(uid).update({
         currentCourseId: newValue.courseId,
       });
@@ -420,9 +421,8 @@ export default {
     const totalUnit = ref(0);
     const levelList = ref([]);
     // Get Course
-    const getCourse = async () => {
+    const getCourse = async (uid) => {
       try {
-        let uid = await auth.currentUser.uid;
         let course = await studentHooks.student(uid).course();
         let allLevel = await practiceHooks.level();
         course.forEach(async (element) => {
@@ -474,11 +474,6 @@ export default {
         selectSkill.value = "Phonics";
       }
     };
-
-    // Skill changed (Mobile)
-    // watch(selectSkill, (newValue, oldValue) => {
-    // getPractice();
-    // });
 
     const practiceLog = ref([]);
     const getPractice = async () => {
@@ -643,13 +638,30 @@ export default {
       router.push(routerName + data.practiceListId);
     };
 
-    onMounted(async () => {
-      $q.loading.show({
-        delay: 0,
+    var authListen = "";
+
+    const loadInitialData = async () => {
+      $q.loading.show();
+      authListen = auth.onAuthStateChanged(async function (user) {
+        if (user) {
+          // User is signed in.
+          await getCourse(user.uid);
+          await getPractice();
+          $q.loading.hide();
+        } else {
+          // User is signed out.
+          $q.router.push("/");
+          $q.loading.hide();
+        }
       });
-      await getCourse();
-      await getPractice();
-      $q.loading.hide();
+    };
+
+    onMounted(() => {
+      loadInitialData();
+    });
+
+    onBeforeUnmount(() => {
+      authListen();
     });
 
     // --------------------------------------------
