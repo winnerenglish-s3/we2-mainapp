@@ -530,7 +530,7 @@ export default {
 
         // Get PracticeLog
         practiceLog.value = await practiceHooks.practice(selectLevel.value.value).log();
-
+        showPracticeList(activeUnit.value);
         $q.loading.hide();
       } catch (error) {
         console.log(error);
@@ -711,7 +711,7 @@ export default {
 
     // --------------------------------------------
 
-    const activeUnit = ref(null);
+    const activeUnit = ref(1);
 
     const unitCompleteList = ref([
       false,
