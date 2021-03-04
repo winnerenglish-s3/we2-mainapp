@@ -52,8 +52,7 @@
                       class="progress-bar"
                       :style="
                         'width:' +
-                        (showAllPassedPractice() / showNumberOfAllPracticeInLevel()) *
-                          100 +
+                        (showAllPassedPractice / showNumberOfAllPracticeInLevel) * 100 +
                         '%'
                       "
                     ></div>
@@ -61,8 +60,8 @@
                 </div>
                 <div class="col-2" style="width: 50px">
                   <span class="f16"
-                    >{{ showAllPassedPractice() }}/{{
-                      showNumberOfAllPracticeInLevel()
+                    >{{ showAllPassedPractice }}/{{
+                      showNumberOfAllPracticeInLevel
                     }}</span
                   >
                 </div>
@@ -228,7 +227,7 @@
           </div>
           <div class="col-2 offset-1" style="width: 50px">
             <span class="f16"
-              >{{ showAllPassedPractice() }}/{{ showNumberOfAllPracticeInLevel() }}</span
+              >{{ showAllPassedPractice }}/{{ showNumberOfAllPracticeInLevel }}</span
             >
           </div>
         </div>
@@ -346,7 +345,7 @@
 </template>
 
 <script>
-import { ref, onMounted, watch, onBeforeUnmount } from "vue";
+import { ref, onMounted, watch, onBeforeUnmount, computed } from "vue";
 import studentHooks from "../hooks/studentHooks.js";
 import practiceHooks from "../hooks/practiceHooks";
 import { useQuasar } from "quasar";
@@ -494,9 +493,8 @@ export default {
           .practiceName();
 
         // Get PracticeLog
-        practiceLog.value = await practiceHooks
-          .practice(selectLevel.value.value)
-          .log(uid);
+        practiceLog.value = await practiceHooks.practice(selectLevel.value.value).log();
+
         $q.loading.hide();
       } catch (error) {
         console.log(error);
@@ -526,13 +524,13 @@ export default {
     };
 
     // โชว์จำนวนแบบฝึกหัดที่มีทั้งหมดภายในเลเวล-ทักษะ
-    const showNumberOfAllPracticeInLevel = () => {
+    const showNumberOfAllPracticeInLevel = computed(() => {
       let totalPracticeInLevel = practiceList.value.filter(
         (x) =>
           x.level == selectLevel.value.value.toString() && x.skill == selectSkill.value
       ).length;
       return totalPracticeInLevel;
-    };
+    });
 
     // โชว์จำนวนแบบฝึกหัดที่ทำไปแล้ว ภายใน เลเวล ยูนิต ทักษะ
     const showPassedPracticeNumber = (unit) => {
@@ -547,13 +545,13 @@ export default {
     };
 
     // โชว์จำนวนแบบฝึกหัดที่ทำไปแล้วทั้งหมด ภายในเลเวล
-    const showAllPassedPractice = () => {
+    const showAllPassedPractice = computed(() => {
       let result =
         practiceLog.value.filter(
           (x) => x.level == selectLevel.value.value && x.skill == selectSkill.value
         ).length || 0;
       return result;
-    };
+    });
 
     // โชว์แบบฝึกหัด ที่ถูกเลือกจากลิสท์ด้านซ้าย
     const isShowPracticeDialogMobile = ref(false);
@@ -634,7 +632,6 @@ export default {
       } else if (data.practiceType == "conversationlesson") {
         routerName = "/conversationLesson/";
       }
-
       router.push(routerName + data.practiceListId);
     };
 
@@ -715,6 +712,7 @@ export default {
       activeUnit,
       // mobile dialog
       isShowPracticeDialogMobile,
+      practiceLog,
     };
   },
 };
