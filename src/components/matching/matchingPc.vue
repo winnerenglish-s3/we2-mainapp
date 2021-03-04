@@ -58,9 +58,11 @@
               style="width: 100%; height: 100px"
               no-caps
             >
+              <div class="brx border-dash-top-right"></div>
               <div class="absolute-center f18 full-width" align="center">
                 <span class=""> {{ data.vocab }}</span>
               </div>
+              <div class="brx border-dash-bottom-right"></div>
             </div>
           </div>
         </draggable>
@@ -344,23 +346,39 @@ export default {
 
 .box-selected {
   position: relative;
-  border: 3px dashed #000;
-  overflow: hidden;
+  border: 3px dashed #512a08;
   box-sizing: border-box;
+  overflow: hidden;
 }
+
+// .box-selected::before {
+//   content: "";
+//   position: absolute;
+//   right: -25px;
+//   top: 50%;
+//   transform: translate(0%, -50%);
+//   width: 50px;
+//   height: 50px;
+//   border-radius: 50%;
+//   border-right: transparent;
+//   border: 3px dashed #512a08;
+// }
 
 .box-move {
   position: relative;
   background-color: #5dddff;
   opacity: 0.5;
-  border: 3px dashed #000;
+  border: 3px dashed #512a08;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .box-content-answer {
   position: relative;
   border: 3px solid #512a08;
-  overflow: hidden;
+  border-right: transparent;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .span-circle {
@@ -396,7 +414,39 @@ export default {
 }
 
 .answer-default {
-  background: linear-gradient(180deg, #ffd362 0%, #ffb701 100%);
+  position: absolute;
+  box-sizing: border-box;
+}
+
+.answer-default::before {
+  content: "";
+  position: absolute;
+  right: -25px;
+  top: 50%;
+  transform: translate(0%, -50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-right: transparent;
+  box-shadow: 0px 100px 0px 500px #f8be2b;
+  border: 3px dashed #512a08;
+}
+
+.border-dash-top-right {
+  position: absolute;
+  right: -1px;
+  top: -3px;
+  border: 2px dashed #512a08;
+  height: 30%;
+  box-sizing: border-box;
+}
+.border-dash-bottom-right {
+  position: absolute;
+  right: -1px;
+  bottom: -3px;
+  border: 2px dashed #512a08;
+  height: 30%;
+  box-sizing: border-box;
 }
 
 .answer-correct {
