@@ -7,10 +7,14 @@
     <!-- DESKTOP -->
     <div
       class="col-12 row bg-practice-main desktop-only"
-      style="max-height: fit-content; min-height: calc(100vh - 50px)"
+      style="max-height: fit-content; min-height: calc(100vh - 50px); overflow: hidden"
     >
       <!-- รายการแบบฝึกหัด -->
-      <div class="col self-center" align="center">
+      <div
+        class="col self-center animate__animated animate__bounceInLeft"
+        style="animation-duration: 2s"
+        align="center"
+      >
         <div class="row relative-position">
           <!-- ปุ่มกดย้อนกลับ -->
           <div class="col self-center">
@@ -72,54 +76,54 @@
                   v-ripple
                   class="relative-position row q-mr-sm q-mb-md bg-white box-content cursor-pointer"
                   :class="
-                    activeUnit == i
+                    activeUnit == unit
                       ? 'content-current'
-                      : unitCompleteList[i - 1]
+                      : unitCompleteList[unit - 1]
                       ? 'content-success'
                       : 'content-default'
                   "
-                  v-for="i in selectLevel.unit"
-                  @click="showPracticeList(i), (activeUnit = i)"
-                  :key="i"
+                  v-for="unit in selectLevel.unit"
+                  @click="showPracticeList(unit), (activeUnit = unit)"
+                  :key="unit"
                 >
                   <div
                     class="col-2 q-pa-sm"
                     :class="
-                      activeUnit == i
+                      activeUnit == unit
                         ? 'bg-current'
-                        : unitCompleteList[i - 1]
+                        : unitCompleteList[unit - 1]
                         ? 'bg-success text-white'
                         : 'bg-default'
                     "
                   >
                     <span class="f24 text-bold">
-                      {{ i }}
+                      {{ unit }}
                     </span>
                   </div>
                   <div class="col self-center q-px-sm q-py-sm" align="left">
-                    <span class="f16 q-py-sm" v-if="showPracticeListName(i)">
+                    <span class="f16 q-py-sm" v-if="showPracticeListName(unit)">
                       <div>
-                        {{ showPracticeListName(i).nameEng }}
+                        {{ showPracticeListName(unit).nameEng }}
                       </div>
                       <div class="q-py-xs">
                         <q-separator></q-separator>
                       </div>
                       <div class="">
-                        {{ showPracticeListName(i).nameTh }}
+                        {{ showPracticeListName(unit).nameTh }}
                       </div>
                     </span>
                   </div>
                   <div class="col-2 self-center" style="width: 60px">
                     <q-icon
-                      v-if="unitCompleteList[i - 1]"
+                      v-if="unitCompleteList[unit - 1]"
                       size="22px"
                       name="fas fa-check"
                       class="text-success"
                     ></q-icon>
                     <span v-else class="f16">
-                      <span v-if="showPracticeListName(i)">{{
-                        `${showPassedPracticeNumber(i)}/${
-                          showPracticeListName(i).totalPractice
+                      <span v-if="showPracticeListName(unit)">{{
+                        `${showPassedPracticeNumber(unit)}/${
+                          showPracticeListName(unit).totalPractice
                         }`
                       }}</span>
                     </span>
@@ -142,15 +146,19 @@
         </div>
       </div>
       <!-- แบบฝึกหัดต่างๆ -->
-      <div class="col self-start row bg-map full-height justify-center">
+      <div
+        class="col self-start row bg-map full-height justify-center"
+        style="overflow: hidden"
+      >
         <div class="self-center col" align="center">
           <q-img
-            style="max-width: 800px; width: 100%"
+            style="max-width: 800px; width: 100%; animation-duration: 2s"
             src="../../public/images/practicelist/bg-map-theme-1.png"
+            class="animate__animated animate__bounceInRight"
           >
             <div
               class="transparent absolute-center row box-content-menu justify-center items-center"
-              style="max-width: 800px; width: 50%"
+              style="max-width: 800px; width: 50%; overflow: hidden"
             >
               <div
                 class="col-6 self-center"
@@ -158,7 +166,7 @@
                 v-for="(item, index) in practiceListShow"
                 :key="index"
               >
-                <div class="">
+                <div>
                   <q-img
                     contain=""
                     style="max-width: 150px"
@@ -176,6 +184,21 @@
                       </div>
                     </div>
                   </q-img>
+
+                  <div
+                    class="relative-position"
+                    style="bottom: 5px"
+                    :class="
+                      item.practiceType != 'flashcard' &&
+                      item.practiceType != 'grammarlesson'
+                        ? ''
+                        : 'invisible'
+                    "
+                  >
+                    <q-badge color="black">
+                      {{ showPassedPracticeCounter(item.practiceListId) }} / 2
+                    </q-badge>
+                  </div>
                 </div>
               </div>
             </div>
@@ -335,6 +358,16 @@
                     </div>
                   </div>
                 </q-img>
+
+                <div
+                  class="relative-position"
+                  style="bottom: 10px"
+                  :class="item.practiceType != 'flashcard' ? '' : 'invisible'"
+                >
+                  <q-badge color="black">
+                    {{ showPassedPracticeCounter(item.practiceListId) }} / 2
+                  </q-badge>
+                </div>
               </div>
             </div>
           </div>
@@ -447,6 +480,7 @@ export default {
 
     // Next skill (Desktop)
     const nextSkill = () => {
+      practiceListShow.value = [];
       if (selectSkill.value == "Vocabulary") {
         selectSkill.value = "Grammar";
       } else if (selectSkill.value == "Grammar") {
@@ -458,9 +492,11 @@ export default {
       } else if (selectSkill.value == "Phonics") {
         selectSkill.value = "Listening & Speaking";
       }
+      showPracticeList(activeUnit.value);
     };
 
     const previousSkill = () => {
+      practiceListShow.value = [];
       if (selectSkill.value == "Grammar") {
         selectSkill.value = "Vocabulary";
       } else if (selectSkill.value == "Reading") {
@@ -472,12 +508,12 @@ export default {
       } else if (selectSkill.value == "Listening & Speaking") {
         selectSkill.value = "Phonics";
       }
+      showPracticeList(activeUnit.value);
     };
 
     const practiceLog = ref([]);
     const getPractice = async () => {
       try {
-        let uid = await auth.currentUser.uid;
         $q.loading.show({
           delay: 0,
         });
@@ -572,6 +608,17 @@ export default {
       }
     };
 
+    // โชว์จำนวนครั้งที่ทำแบบฝึกหัดไป
+
+    const showPassedPracticeCounter = (practiceListId) => {
+      let result = practiceLog.value.filter((x) => x.practiceListId == practiceListId);
+      if (result.length) {
+        return result[0].counter;
+      } else {
+        return 0;
+      }
+    };
+
     // แสดงผลไอคอนแบบฝึกหัด
     const showIconPractice = (type) => {
       let nameImage = require("../../public/images/practicelist/action-btn-star0.png");
@@ -635,6 +682,7 @@ export default {
       router.push(routerName + data.practiceListId);
     };
 
+    // Initial Data
     var authListen = "";
 
     const loadInitialData = async () => {
@@ -699,6 +747,7 @@ export default {
       showIconPractice,
       gotoPractice,
       showPassedPracticeNumber,
+      showPassedPracticeCounter,
       // SKill select for mobile
       selectSkill,
       skillOptions,
