@@ -13,14 +13,14 @@
       </div>
     </div>
 
-    <div class="col-12 relative-position" align='center' style="height: fit-content">
+    <div class="col-12 relative-position" align="center" style="height: fit-content">
       <div
-        class="box-choices row no-wrap q-py-sm " 
+        class="box-choices row no-wrap q-py-sm"
         :class="practiceData.choices.length == 1 ? 'justify-center' : ''"
       >
         <div class="col-2" style="width: 70px"></div>
         <section
-          class="relative-position col-8 section "
+          class="relative-position col-8 section"
           :class="index == currentAnswer ? null : 'section-notactive '"
           align="center"
           v-for="(item, index) in practiceData.choices"
@@ -53,7 +53,7 @@
                         : 'text-red'
                       : 'text-black'
                   "
-                  style="font-size: max(3vw,16px)"
+                  style="font-size: max(3vw, 16px)"
                   >{{ `${item.vocab}` }}</span
                 >
                 <div
@@ -103,7 +103,7 @@
 
 <script>
 import headerBar from "../header-time-progress";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 export default {
   components: {
     headerBar,
@@ -118,7 +118,7 @@ export default {
       default: () => {},
     },
   },
-  emits: ["callback-finishpractice"],
+  emits: ["callback-finishpractice", "callback-sendanswer"],
   setup(props, { emit }) {
     // ดึงข้อมูลจาก Props เป็นข้อมูล Practice
 
