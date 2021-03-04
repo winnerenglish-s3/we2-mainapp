@@ -76,9 +76,13 @@ const practice = (level) => {
   };
 
   // Get Practice Log
-  const log = async (courseId) => {
+  const log = async () => {
     const getPracticeList = await practiceList();
-
+    const uid = firebase.auth().currentUser.uid
+    const getCourseId = await db.collection("student")
+      .doc(uid)
+      .get()
+    const courseId = getCourseId.data().currentCourseId
     let practiceLog = await db
       .collection("practiceLog")
       .where("courseId", "==", courseId)
@@ -137,18 +141,25 @@ const getCourseId = async (uid) => {
   return courseId;
 };
 
-const checkPracticePermission = async (courseId) => {
-  const response = await db.collection("practiceLog")
+const checkPracticePermission = async (courseId, practiceListId) => {
+  const response = await db
+    .collection("practiceLog")
     .where("courseId", "==", courseId)
-    .get()
-  
-  if (response.docs[0].data().counter >= 2) {
-    return false
+    .where("practiceListId", "==", practiceListId)
+    .get();
+
+  // console.log(response.docs[0].data());
+
+  if (response.size) {
+    console.log(response.docs[0].data());
+    if (response.docs[0].data().counter >= 2) {
+      return false;
+    } else {
+      return true;
+    }
   } else {
-  return true  
+    return true;
   }
-  
-  
 };
 
 export default {
