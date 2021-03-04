@@ -171,7 +171,6 @@ export default {
     // Load Practice Data
     const funcLoadPractice = async () => {
       await checkPracticePermission();
-      console.clear();
       try {
         let flashcardList = [];
         let getFlashId = await db
@@ -401,9 +400,12 @@ export default {
       try {
         const uid = await auth.currentUser.uid;
         const courseId = await practiceHooks.getCourseId(uid);
-        const permission = await practiceHooks.checkPracticePermission(courseId);
+        const permission = await practiceHooks.checkPracticePermission(
+          courseId,
+          route.params.practiceListId
+        );
         if (!permission) {
-          alert("แบบฝึกหัดทำครบกำหนดแล้ว");
+          console.log("ทำแบบฝึกหัดครบจำนวนแล้ว");
           router.push("/practicemain");
         }
       } catch (error) {
@@ -411,16 +413,23 @@ export default {
       }
     };
 
-    onMounted(async () => {
-      await funcLoadPractice();
+    onMounted(() => {
+      auth.onAuthStateChanged(async function (user) {
+        if (user) {
+          // User is signed in.
+          await funcLoadPractice();
 
-      if (isHasHelp) {
-        emit("isShowButtonHelp");
-      }
+          if (isHasHelp) {
+            emit("isShowButtonHelp");
+          }
 
-      if (isHasInstruction) {
-        emit("isShowButtonInstruction");
-      }
+          if (isHasInstruction) {
+            emit("isShowButtonInstruction");
+          }
+        } else {
+          // User is signed out.
+        }
+      });
     });
 
     return {
