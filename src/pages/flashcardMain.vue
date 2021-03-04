@@ -137,17 +137,19 @@ export default {
     // Save PracticeLog ตอนเข้ามาที่ Flashcard
     const savePracticeLog = async () => {
       // UID
-      const uid = await auth.currentUser.uid;
-      const url =
-        "http://localhost:5000/winnerenglish2-e0f1b/us-central1/wfunctions/saveLog";
-      const practiceLogData = {
-        practiceListId: route.params.practiceListId,
-        studentId: uid,
-        score: 100,
-        star: 0,
-        coin: 0,
-      };
-      const response = await axios.post(url, practiceLogData);
+      try {
+        const uid = await auth.currentUser.uid;
+        const url =
+          "http://localhost:5000/winnerenglish2-e0f1b/us-central1/wfunctions/saveLog";
+        const practiceLogData = {
+          practiceListId: route.params.practiceListId,
+          studentId: uid,
+          score: 100,
+          star: 0,
+          coin: 0,
+        };
+        const response = await axios.post(url, practiceLogData);
+      } catch (error) {}
     };
 
     // เรียกใช้งาน Function
