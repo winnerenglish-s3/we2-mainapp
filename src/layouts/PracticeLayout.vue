@@ -31,7 +31,6 @@ export default {
       db.collection("synchronize")
         .doc("test")
         .onSnapshot((doc) => {
-          console.log("onSnapshot");
           if (doc.data().mode == "control") {
             isSynchronize.value = true;
           } else {

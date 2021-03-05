@@ -8,6 +8,7 @@
         :isShowHome="false"
         :isShowPause="isSynchronize ? false : true"
         @callback-restart="reStart"
+        :themeSync="themeSync"
       ></app-bar>
     </div>
 

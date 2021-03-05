@@ -530,7 +530,11 @@ export default {
 
         // Get PracticeLog
         practiceLog.value = await practiceHooks.practice(selectLevel.value.value).log();
-        showPracticeList(activeUnit.value);
+        if ($q.platform.is.desktop) {
+          activeUnit.value = 1;
+          showPracticeList(activeUnit.value);
+        }
+
         $q.loading.hide();
       } catch (error) {
         console.log(error);
@@ -640,6 +644,14 @@ export default {
     };
     // route to แบบฝึกหัด
     const gotoPractice = (data) => {
+      let checkCounter = showPassedPracticeCounter(data.practiceListId);
+
+      if (data.practiceType != "flashcard") {
+        if (checkCounter >= 2) {
+          return;
+        }
+      }
+
       let routerName = "";
 
       if (data.practiceType == "flashcard") {
@@ -711,7 +723,7 @@ export default {
 
     // --------------------------------------------
 
-    const activeUnit = ref(1);
+    const activeUnit = ref(null);
 
     const unitCompleteList = ref([
       false,
