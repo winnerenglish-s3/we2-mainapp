@@ -33,13 +33,15 @@
         <div class="row justify-center q-pb-xl">
           <div class="col-3 q-pa-sm" style="max-width: 350px; width: 50%" align="center">
             <q-img
-              width="100%"
+              width="300px"
+              height="300px"
               src="../../public/images/conversation/speaking-1.png"
             ></q-img>
           </div>
           <div class="col-3 q-pa-sm" style="max-width: 350px; width: 50%" align="center">
             <q-img
-              width="100%"
+              width="300px"
+              height="300px"
               src="../../public/images/conversation/speaking-2.png"
             ></q-img>
           </div>
