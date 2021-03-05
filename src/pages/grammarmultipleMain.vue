@@ -14,6 +14,7 @@
         :isShowPause="isSynchronize ? false : true"
         @callback-showdialoghelp="funcShowDialogHelp"
         @callback-restart="reStart"
+        :themeSync="themeSync"
       ></app-bar>
     </div>
 
@@ -149,7 +150,7 @@ export default {
   props: {
     themeSync: {
       type: Number,
-      default: 0,
+      default: 1,
     },
     isSynchronize: {
       type: Boolean,

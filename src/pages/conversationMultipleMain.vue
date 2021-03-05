@@ -3,7 +3,7 @@
     <div>
       <app-bar
         :isHasInstruction="true"
-        :isHasHelp="true"
+        :isHasHelp="false"
         :isShowHome="false"
         :isShowPause="isSynchronize ? false : true"
         :isLoadPractice="isLoadPractice"

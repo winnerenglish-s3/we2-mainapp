@@ -5,6 +5,7 @@
       :isHasHelp="true"
       :isLoadPractice="isLoadQuestion"
       @callback-showdialoghelp="isOpenHelp = true"
+      :themeSync="themeSync"
     ></app-bar>
     <!-- Question and Choices -->
     <div
@@ -271,7 +272,9 @@
     <!-- Show Answer Correct And Incorrect -->
     <div align="center">
       <div
-        :class="{ 'box-content-main q-pa-sm absolute-center': $q.platform.is.desktop }"
+        :class="{
+          'box-content-main q-pa-sm absolute-center': $q.platform.is.desktop,
+        }"
         v-if="currentStep == 4"
       >
         <div class="q-pa-xl" :class="{ 'border-dash': $q.platform.is.desktop }">
@@ -416,6 +419,12 @@ export default {
     finishPractice,
     multiplechoiceBtn,
     waiting,
+  },
+  props: {
+    themeSync: {
+      type: Number,
+      default: 1,
+    },
   },
   setup(props) {
     // Route

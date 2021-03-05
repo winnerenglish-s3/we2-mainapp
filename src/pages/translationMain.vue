@@ -1,5 +1,7 @@
 <template>
-  <q-page class="bg-translation">
+  <q-page
+    :class="!isSynchronize ? 'bg-translation' : `bg-translation-theme-${themeSync}`"
+  >
     <div>
       <app-bar :themeSync="themeSync" :isShowHome="true"></app-bar>
     </div>
@@ -8,74 +10,24 @@
       <q-spinner color="primary" size="100px" />
     </div>
 
-    <div class="box-container-main relative-position" v-if="isLoadPractice">
-      <div>
-        <div>
-          <header-bar :practiceData="practiceData"></header-bar>
-        </div>
-      </div>
-      <div align="center">
-        <div class="box-question q-pa-md">
-          <span v-html="practiceData.questionTh"></span>
-        </div>
-        <div class="box-content-question q-pb-xl q-pa-md row">
-          <!-- @start="drag = true"
-            @end="drag = false" -->
-          <div class="q-ma-xs" v-for="(item, index) in testQuestion">
-            <div class="self-end f18" v-html="item.answer"></div>
-          </div>
-        </div>
+    <translation-pc
+      :themeSync="themeSync"
+      :practiceData="practiceData"
+      v-if="$q.platform.is.desktop && isLoadPractice"
+    ></translation-pc>
 
-        <div class="box-content-answer q-pa-md q-mt-lg row">
-          <div class="q-ma-sm" v-for="(item, index) in testChoices">
-            <div align="center">
-              <q-btn push class="bg-amber shadow-1">{{ item }}</q-btn>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- <div class="col-12 absolute-top" align="center">
-        <header-bar :practiceData="practiceData"></header-bar>
-      </div> -->
-      <!-- <div class="col relative-position q-pa-md">
-        <q-card class="absolute-center box-content-question shadow-5" square>
-          <q-card-section>
-            <div class="q-pa-md">
-              <span v-html="practiceData.question"></span>
-            </div>
-          </q-card-section>
-        </q-card>
-      </div> -->
-      <!-- <div class="col-6 box-content-question q-pt-md">
-        <div class="q-mt-xl q-pa-lg">
-          <div class="box-question q-pa-md">
-            <span class="f16" v-html="practiceData.questionTh"> </span>
-          </div>
-
-          <div class="box-answer q-mb-xl q-mt-lg">
-            <div class="q-my-md row justify-center">
-              <div v-for="(item, index) in practiceData.choices">
-                <q-btn
-                  no-caps
-                  :label="item"
-                  push
-                  rounded
-                  class="bg-amber-7 f16 q-ma-sm"
-                ></q-btn>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-    </div>
+    <translation-mobile
+      :themeSync="themeSync"
+      :practiceData="practiceData"
+      v-if="$q.platform.is.mobile && isLoadPractice"
+    ></translation-mobile>
   </q-page>
 </template>
 
 <script>
-import { VueDraggableNext } from "vue-draggable-next";
 import appBar from "../components/app-bar";
-import headerBar from "../components/header-time-progress";
+import translationPc from "../components/translation/translationPc";
+import translationMobile from "../components/translation/translationMobile";
 import { ref, reactive, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
@@ -83,13 +35,17 @@ import { db } from "src/router";
 export default {
   components: {
     appBar,
-    headerBar,
-    draggable: VueDraggableNext,
+    translationPc,
+    translationMobile,
   },
   props: {
     themeSync: {
       type: Number,
       default: 1,
+    },
+    isSynchronize: {
+      type: Boolean,
+      default: () => false,
     },
   },
   setup(props) {
@@ -150,9 +106,6 @@ export default {
       }
     };
 
-    const testQuestion = ref([]);
-    const testChoices = ref([]);
-
     const funcSelectedQuestion = (firsttime) => {
       firsttime = firsttime || false;
 
@@ -163,23 +116,24 @@ export default {
       // Practice Data : Show Question
       let newQuestion = questionList.value[practiceData.currentQuestion].sentenceEng;
 
-      newQuestion = newQuestion.split(" ");
+      newQuestion = newQuestion
+        .replace(/,/g, " , ")
+        .replace(/&nbsp;/g, " ")
+        .split(" ");
 
-      newQuestion = newQuestion.map((x) => {
+      newQuestion = newQuestion.map((x, index) => {
         let newData = {
           isAnswer: false,
           answer: x,
           currentAnswer: "",
+          index: index,
         };
 
-        let tagMatch = x.match(/<s*u>(.*>?)<s*\/u>/gm) || 0;
+        let tagMatch = x.match(/<s*u>(.*?)<s*\/u>/gm) || 0;
 
         if (tagMatch.length) {
           newData.isAnswer = true;
-          newData.answer = newData.answer.replace(
-            /<s*u>(.*>?)<s*\/u>/g,
-            `<div class="relative-position" style="width:100px;height:40px;border-radius:10px;background-color:#A9A9A9;box-shadow:0px 1px 3px #000;"></div>`
-          );
+          newData.answer = newData.answer.replace(/<s*u>(.*?)<s*\/u>/g, "");
         }
 
         return newData;
@@ -188,8 +142,6 @@ export default {
       // Practice Data : Show Question
       practiceData.question = newQuestion;
 
-      testQuestion.value = newQuestion;
-
       // Practice Data : Show Question Th
       practiceData.questionTh =
         questionList.value[practiceData.currentQuestion].sentenceTh;
@@ -197,8 +149,6 @@ export default {
       // Practice Data : Show Choices
       practiceData.choices =
         questionList.value[practiceData.currentQuestion].sentenceExtra;
-
-      testChoices.value = questionList.value[practiceData.currentQuestion].sentenceExtra;
     };
 
     // Mounted
@@ -206,39 +156,29 @@ export default {
       funcLoadPractice();
     });
 
-    return { practiceData, isLoadPractice, testQuestion, testChoices };
+    return { practiceData, isLoadPractice };
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .bg-translation {
-  // background-image: url("../../public/images/translation/bg-translation.png");
+  background-image: url("../../public/images/translation/bg-translation.png");
   background-size: cover;
   background-color: #fff;
 }
 
-.box-content-question {
-  max-width: 800px;
-  width: 90%;
-  max-height: fit-content;
-  min-height: calc(100vh - 30%);
-}
-
-.box-content-question {
-  width: 800px;
-  background-image: url("../../public/images/translation/bg-translation-content.png");
+.bg-translation-theme-1 {
+  background-image: url("../../public/images/action/bg-action-theme-1.png");
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 }
 
-.box-content-answer {
-  width: 800px;
-}
-
-.box-question {
-  width: 800px;
-  background-color: #fff;
-  border: 4px solid #895200;
+.bg-translation-theme-2 {
+  background-image: url("../../public/images/action/bg-action-theme-2.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 </style>
