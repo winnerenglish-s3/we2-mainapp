@@ -1,8 +1,9 @@
 <template>
-  <q-page>
+  <q-page class="right-col-bg">
     <app-bar
       :themeSync="2"
       :isShowHome="learningMode == 'selfLearning' ? true : false"
+      :isShowPause="true"
     ></app-bar>
     <div class="box-container-main" v-if="isLoaded">
       <div class="row row-height">
@@ -54,7 +55,7 @@
         </div>
 
         <div
-          class="q-py-md q-px-lg right-col-bg relative-position row"
+          class="q-py-md q-px-lg relative-position row"
           :class="isSynchronizeMode ? 'col-12' : 'col-md-8 col-xs-12'"
         >
           <!-- IMG -->
@@ -66,7 +67,6 @@
                   round
                   icon="fas fa-volume-up"
                   v-if="practiceSkill != 'Grammar'"
-                  style="animation-duration: 2s"
                   :class="
                     isAudioPaying
                       ? 'bg-green text-white animate__animated animate__flash animate__infinite'
@@ -91,13 +91,13 @@
             </div>
             <div v-else>DATA NOT FOUND</div>
           </div>
-          <div
+          <!-- <div
             class="q-pt-md col-12 row self-end"
             v-if="!isSynchronizeMode && !isShowRadioSelect"
             :class="$q.platform.is.desktop ? 'justify-between' : ' justify-center'"
-          >
-            <!-- Radio select -->
-            <div style="top: 45px" align="center" class="col">
+          > -->
+          <!-- Radio select -->
+          <!-- <div style="top: 45px" align="center" class="col">
               <div
                 class="bg-white row justify-center"
                 style="width: 200px; border-radius: 10px"
@@ -121,8 +121,8 @@
                   ></q-radio>
                 </div>
               </div>
-            </div>
-          </div>
+            </div> -->
+          <!-- </div> -->
         </div>
       </div>
     </div>

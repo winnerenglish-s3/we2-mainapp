@@ -1,7 +1,7 @@
 <template>
   <q-page class="bg-clozetest">
     <div>
-      <app-bar :themeSync="themeSync"></app-bar>
+      <app-bar :themeSync="themeSync" :isShowPause="true"></app-bar>
     </div>
 
     <div class="absolute-center" v-if="!isLoadPractice">

@@ -3,7 +3,7 @@
     :class="!isSynchronize ? 'bg-translation' : `bg-translation-theme-${themeSync}`"
   >
     <div>
-      <app-bar :themeSync="themeSync" :isShowHome="true"></app-bar>
+      <app-bar :themeSync="themeSync" :isShowHome="true" :isShowPause="true"></app-bar>
     </div>
 
     <div class="absolute-center" v-if="!isLoadPractice">

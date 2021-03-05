@@ -166,7 +166,10 @@
                 v-for="(item, index) in practiceListShow"
                 :key="index"
               >
-                <div>
+                <div
+                  class="animate__animated animate__zoomInDown"
+                  style="animation-duration: 1s"
+                >
                   <q-img
                     contain=""
                     style="max-width: 150px"
@@ -190,7 +193,10 @@
                     style="bottom: 5px"
                     :class="
                       item.practiceType != 'flashcard' &&
-                      item.practiceType != 'grammarlesson'
+                      item.practiceType != 'grammarlesson' &&
+                      item.practiceType != 'conversationlesson' &&
+                      item.practiceType != 'languagetips' &&
+                      item.practiceType != 'phonicslesson'
                         ? ''
                         : 'invisible'
                     "
@@ -335,18 +341,19 @@
         <q-card-section>
           <div class="row">
             <div
-              class="col-6 self-center"
+              class="col-6 self-center animate__animated animate__zoomInDown"
               align="center"
               v-for="(item, index) in practiceListShow"
               :key="index"
+              style="animation-duration: 1s"
             >
               <div class="">
                 <q-img
                   contain=""
-                  style="max-width: 150px"
-                  class="cursor-pointer"
                   :src="showIconPractice(item.practiceType)"
                   @click="gotoPractice(item)"
+                  class="cursor-pointer"
+                  style="max-width: 150px"
                 >
                   <div
                     class="transparent absolute-bottom no-padding"
@@ -362,7 +369,15 @@
                 <div
                   class="relative-position"
                   style="bottom: 10px"
-                  :class="item.practiceType != 'flashcard' ? '' : 'invisible'"
+                  :class="
+                    item.practiceType != 'flashcard' &&
+                    item.practiceType != 'grammarlesson' &&
+                    item.practiceType != 'conversationlesson' &&
+                    item.practiceType != 'languagetips' &&
+                    item.practiceType != 'phonicslesson'
+                      ? ''
+                      : 'invisible'
+                  "
                 >
                   <q-badge color="black">
                     {{ showPassedPracticeCounter(item.practiceListId) }} / 2
@@ -492,7 +507,9 @@ export default {
       } else if (selectSkill.value == "Phonics") {
         selectSkill.value = "Listening & Speaking";
       }
-      showPracticeList(activeUnit.value);
+      setTimeout(() => {
+        showPracticeList(activeUnit.value);
+      }, 1);
     };
 
     const previousSkill = () => {
@@ -508,7 +525,9 @@ export default {
       } else if (selectSkill.value == "Listening & Speaking") {
         selectSkill.value = "Phonics";
       }
-      showPracticeList(activeUnit.value);
+      setTimeout(() => {
+        showPracticeList(activeUnit.value);
+      }, 1);
     };
 
     const practiceLog = ref([]);
@@ -597,6 +616,7 @@ export default {
     const isShowPracticeDialogMobile = ref(false);
     const practiceListShow = ref([]);
     const showPracticeList = (unit) => {
+      practiceListShow.value = [];
       let temp = [];
       temp = practiceList.value.filter(
         (x) =>
@@ -630,7 +650,8 @@ export default {
         type == "flashcard" ||
         type == "grammarlesson" ||
         type == "phonicslesson" ||
-        type == "languagetips"
+        type == "languagetips" ||
+        type == "conversationlesson"
       ) {
         nameImage = require("../../public/images/practicelist/teaching-btn-default.png");
       } else if (type == "matching") {
@@ -640,7 +661,8 @@ export default {
       } else if (type == "clozetest") {
         nameImage = require("../../public/images/practicelist/writing-btn-star0.png");
       }
-      return nameImage;
+      let random = Math.random();
+      return `${nameImage}?r=${random}`;
     };
     // route to แบบฝึกหัด
     const gotoPractice = (data) => {
