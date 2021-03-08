@@ -2,16 +2,12 @@
   <div class="row" :style="themeBGColor">
     <div class="col-12 box-header" align="center">
       <div>
-        <header-bar
-          :currentQuestion="currentQuestion"
-          :totalQuestion="totalQuestion"
-          :totalStar="totalStar"
-          :practiceTime="practiceTime"
-          :isPracticeTimeout="isPracticeTimeout"
-        ></header-bar>
+        <header-bar :practiceData="{ totalQuestion: 5, currentQuestion: 0 }"></header-bar>
       </div>
       <div class="box-question" :style="themeQuestion">
-        <span style="font-size: max(1.3vw, 20px)"> {{ currentQuestionTh }} </span>
+        <span style="font-size: max(1.3vw, 20px)">
+          {{ currentQuestionTh }}
+        </span>
       </div>
       <div class="q-my-lg row justify-center" align="center">
         <q-btn

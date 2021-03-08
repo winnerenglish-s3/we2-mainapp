@@ -1,7 +1,5 @@
 <template>
-  <q-page
-    :class="!isSynchronize ? 'bg-translation' : `bg-translation-theme-${themeSync}`"
-  >
+  <q-page :class="!isSynchronize ? 'bg-translation' : `bg-translation-action`">
     <div>
       <app-bar :themeSync="themeSync" :isShowHome="true" :isShowPause="true"></app-bar>
     </div>
@@ -13,14 +11,21 @@
     <translation-pc
       :themeSync="themeSync"
       :practiceData="practiceData"
-      v-if="$q.platform.is.desktop && isLoadPractice"
+      v-if="$q.platform.is.desktop && !isSynchronize && isLoadPractice"
     ></translation-pc>
 
     <translation-mobile
       :themeSync="themeSync"
       :practiceData="practiceData"
-      v-if="$q.platform.is.mobile && isLoadPractice"
+      v-if="$q.platform.is.mobile && !isSynchronize && isLoadPractice"
     ></translation-mobile>
+
+    <translation-action-pc
+      :themeSync="themeSync"
+      :practiceData="practiceData"
+      class="box-container-main"
+      v-if="$q.platform.is.desktop && isSynchronize && isLoadPractice"
+    ></translation-action-pc>
   </q-page>
 </template>
 
@@ -28,6 +33,8 @@
 import appBar from "../components/app-bar";
 import translationPc from "../components/translation/translationPc";
 import translationMobile from "../components/translation/translationMobile";
+import translationActionPc from "../components/translation/translationActionPc";
+// import translationActionMobile from "../components/translation/translationActionMobile";
 import { ref, reactive, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
@@ -37,6 +44,8 @@ export default {
     appBar,
     translationPc,
     translationMobile,
+    translationActionPc,
+    // translationActionMobile,
   },
   props: {
     themeSync: {
@@ -117,7 +126,7 @@ export default {
       let newQuestion = questionList.value[practiceData.currentQuestion].sentenceEng;
 
       newQuestion = newQuestion
-        .replace(/,/g, " , ")
+        .replace(/,/g, ", ")
         .replace(/&nbsp;/g, " ")
         .split(" ");
 
@@ -127,13 +136,20 @@ export default {
           answer: x,
           currentAnswer: "",
           index: index,
+          correctAnswer: "",
         };
 
         let tagMatch = x.match(/<s*u>(.*?)<s*\/u>/gm) || 0;
 
         if (tagMatch.length) {
+          console.log(newData.answer);
+
+          let correctAnswer = newData.answer
+            .replace(/<s*u>/g, "")
+            .replace(/<s*\/u>/g, "");
           newData.isAnswer = true;
           newData.answer = newData.answer.replace(/<s*u>(.*?)<s*\/u>/g, "");
+          newData.correctAnswer = correctAnswer;
         }
 
         return newData;
@@ -146,9 +162,20 @@ export default {
       practiceData.questionTh =
         questionList.value[practiceData.currentQuestion].sentenceTh;
 
+      let tempChoices = questionList.value[practiceData.currentQuestion].sentenceExtra;
+      // .map((x, index) => {
+      //   let newData = {
+      //     index: index,
+      //     answer: x,
+      //   };
+
+      //   return newData;
+      // });
+
+      tempChoices.sort(() => Math.random() - 0.5);
+
       // Practice Data : Show Choices
-      practiceData.choices =
-        questionList.value[practiceData.currentQuestion].sentenceExtra;
+      practiceData.choices = tempChoices;
     };
 
     // Mounted
@@ -168,15 +195,8 @@ export default {
   background-color: #fff;
 }
 
-.bg-translation-theme-1 {
-  background-image: url("../../public/images/action/bg-action-theme-1.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.bg-translation-theme-2 {
-  background-image: url("../../public/images/action/bg-action-theme-2.png");
+.bg-translation-action {
+  background-image: url("../../public/images/translation/bg-translation-action.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
