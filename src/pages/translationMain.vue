@@ -23,6 +23,7 @@
     <translation-action-pc
       :themeSync="themeSync"
       :practiceData="practiceData"
+      @callback-nextquestion="funcSelectedQuestion()"
       class="box-container-main"
       v-if="$q.platform.is.desktop && isSynchronize && isLoadPractice"
     ></translation-action-pc>
@@ -67,11 +68,12 @@ export default {
     const practiceData = reactive({
       totalQuestion: 0,
       totalStar: 0,
-      currentQuestion: 2,
+      currentQuestion: 0,
       question: "",
       choices: [],
       questionTh: "",
     });
+
     const isLoadPractice = ref(false);
 
     // Function : Load Practice
@@ -147,6 +149,7 @@ export default {
           let correctAnswer = newData.answer
             .replace(/<s*u>/g, "")
             .replace(/<s*\/u>/g, "");
+
           newData.isAnswer = true;
           newData.answer = newData.answer.replace(/<s*u>(.*?)<s*\/u>/g, "");
           newData.correctAnswer = correctAnswer;
@@ -183,7 +186,7 @@ export default {
       funcLoadPractice();
     });
 
-    return { practiceData, isLoadPractice };
+    return { practiceData, isLoadPractice, funcSelectedQuestion };
   },
 };
 </script>

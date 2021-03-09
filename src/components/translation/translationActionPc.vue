@@ -1,8 +1,13 @@
 <template>
   <div align="center">
     <div class="box-content">
-      <div align="left" class="q-pa-md">
-        <current-button-choices></current-button-choices>
+      <div align="left" class="q-pa-md row">
+        <current-button-choices
+          class="q-ma-xs"
+          :no="index + 1"
+          :currentQuestion="practiceData.currentQuestion + 1"
+          v-for="(item, index) in practiceData.totalQuestion"
+        ></current-button-choices>
       </div>
       <div>
         <div class="box-question q-pa-md bg-white row justify-center" align="left">
@@ -58,7 +63,13 @@
       <div class="q-my-md q-pa-lg" align="center">
         <q-img
           width="180px"
-          src="../../../public/images/send-answer-btn-noactive.png"
+          :class="allChooseAnswer ? 'cursor-pointer' : 'no-pointer-events'"
+          @click="$emit('callback-nextquestion')"
+          :src="
+            require(`../../../public/images/send-answer-btn${
+              allChooseAnswer ? '' : '-noactive'
+            }.png`)
+          "
         ></q-img>
       </div>
     </div>
@@ -67,7 +78,8 @@
 
 <script>
 import currentButtonChoices from "../button/btn-current-choices";
-import { ref, computed } from "vue";
+import { ref, computed, reactive } from "vue";
+import { useRouter, useRoute } from "vue-router";
 export default {
   components: {
     currentButtonChoices,
@@ -78,63 +90,73 @@ export default {
       default: () => {},
     },
   },
+  emits: ["callback-nextquestion"],
   setup(props) {
+    // Initial Router
+    const route = useRoute();
+    const router = useRouter();
+
     const selectedBoxAnswer = ref(0);
 
     const currentSelectAnswerBox = computed(() => {
       let nextAnswer = props.practiceData.question.filter(
         (x) => x.currentAnswer == "" && x.isAnswer
-      )[0].index;
+      );
 
-      console.log(nextAnswer);
-
-      return nextAnswer;
+      if (nextAnswer.length) {
+        return nextAnswer[0].index;
+      } else {
+        return null;
+      }
     });
 
     const useRandomFakeChoice = computed(() => {
       let setRandom = 3;
+
       let setFilter = props.practiceData.question.filter(
         (x) => x.currentAnswer == "" && x.isAnswer
       );
-      let totalAnswerLength = setFilter.length;
-      let correctAnswer = setFilter[0].correctAnswer;
-      let currentChoiceIndex = props.practiceData.choices.indexOf(correctAnswer);
 
-      let tempRandom = [];
+      if (setFilter.length) {
+        let totalAnswerLength = props.practiceData.choices.length;
 
-      if (totalAnswerLength == 1) {
-        return;
-      }
+        let correctAnswer = setFilter[0].correctAnswer;
+        let currentChoiceIndex = props.practiceData.choices.indexOf(correctAnswer);
 
-      console.log(totalAnswerLength);
+        let tempRandom = [];
 
-      const reRandom = () => {
-        tempRandom = [currentChoiceIndex];
+        const reRandom = () => {
+          tempRandom = [currentChoiceIndex];
 
-        try {
-          for (let i = 0; i < setRandom - 1; i++) {
-            let fakeRandom = Math.floor(Math.random() * totalAnswerLength);
-
-            if (tempRandom.includes(fakeRandom)) {
-              reRandom();
-              break;
-            } else {
-              tempRandom.push(fakeRandom);
-            }
+          if (totalAnswerLength <= setRandom) {
+            setRandom = totalAnswerLength - 1 || 1;
           }
-        } catch (error) {
-          reRandom();
-          console.log(error);
-        }
-      };
 
-      reRandom();
+          try {
+            for (let i = 0; i < setRandom - 1; i++) {
+              let fakeRandom = Math.floor(Math.random() * totalAnswerLength);
 
-      console.log(tempRandom);
+              if (tempRandom.includes(fakeRandom)) {
+                reRandom();
+                break;
+              } else {
+                tempRandom.push(fakeRandom);
+              }
+            }
+          } catch (error) {
+            reRandom();
+            console.log(error);
+          }
+        };
 
-      tempRandom.sort(() => Math.random() - 0.5);
+        reRandom();
 
-      return tempRandom;
+        tempRandom.sort(() => Math.random() - 0.5);
+
+        return tempRandom;
+      } else {
+        return [];
+      }
     });
 
     const funcSelectedAnswer = (data, index) => {
@@ -146,16 +168,28 @@ export default {
     };
 
     const funcSelectedBackAnswer = (data, index) => {
-      console.log(index);
       props.practiceData.choices.push(data);
 
       props.practiceData.question[index].currentAnswer = "";
     };
 
+    const allChooseAnswer = computed(() => {
+      let finish = props.practiceData.question.filter(
+        (x) => x.isAnswer && x.currentAnswer == ""
+      );
+
+      if (finish.length) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+
     return {
       selectedBoxAnswer,
       useRandomFakeChoice,
       currentSelectAnswerBox,
+      allChooseAnswer,
       funcSelectedAnswer,
       funcSelectedBackAnswer,
     };
@@ -198,6 +232,21 @@ export default {
   border-radius: 7px;
   transition: 0.2s;
   transform: scale(1);
+}
+
+.btn-has-answer::before {
+  content: "x";
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  font-size: 10px;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  background-color: #7c451e;
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0px 1px 7px rgba(85, 85, 85, 0.521);
 }
 
 .btn-has-answer:active {
