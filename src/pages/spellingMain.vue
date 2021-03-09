@@ -9,6 +9,7 @@
     </div>
 
     <spelling-pc
+      :practiceData="practiceData"
       :boggle="boggle"
       :selectValue="selectValue"
       :currentQuestionText="currentQuestionText"
@@ -28,6 +29,7 @@
       v-if="$q.platform.is.desktop"
     ></spelling-pc>
     <spelling-mobile
+      :practiceData="practiceData"
       :boggle="boggle"
       :selectValue="selectValue"
       :currentQuestionText="currentQuestionText"
@@ -120,7 +122,7 @@ import spellingPc from "../components/spellingbee/spellingbeePc";
 import spellingMobile from "../components/spellingbee/spellingbeeMobile";
 import appBar from "../components/app-bar";
 import { useQuasar } from "quasar";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
 import { useRouter, useRoute } from "vue-router";
 export default {
   components: {
@@ -142,6 +144,11 @@ export default {
     // Initial Data
     const $q = useQuasar();
     const isCorrectAnswer = ref(false);
+    const practiceData = reactive({
+      totalQuestion: 0,
+      currentQuestion: 0,
+      question: "",
+    });
 
     let currentQuestion = ref(0);
     const boggle = ref([
@@ -628,6 +635,7 @@ export default {
     });
 
     return {
+      practiceData,
       boggle,
       nextQuestion,
       selectedBox,
@@ -649,13 +657,6 @@ export default {
         en: "xxx",
         th: "ปปป",
       },
-
-      isPracticeTimeout: false,
-      funcPracticeTime: "",
-
-      // For Practice Layout
-      isHasHelp: true,
-      isHasInstruction: true,
     };
   },
   methods: {
