@@ -35,11 +35,12 @@ const practice = (level) => {
           result = "เนื้องเรื่องเติมคำ";
         } else if (type == "conversationlesson") {
           result = "บทสนทนา"
+        }else if (type == "spellingbee"){
+          result = "สะกดคำ"
         }
         else {
           result = type;
         }
-
         return result;
       };
 
@@ -50,7 +51,6 @@ const practice = (level) => {
           practiceTypeThai: convertPracticeTypeToThai(res.data().practiceType),
         });
       });
-
       return temp;
     } catch (error) {
       return error;

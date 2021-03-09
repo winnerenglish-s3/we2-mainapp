@@ -2,13 +2,7 @@
   <div class="row" :style="themeBGColor">
     <div class="col-12 box-header" align="center">
       <div>
-        <header-bar
-          :currentQuestion="currentQuestion"
-          :totalQuestion="totalQuestion"
-          :totalStar="totalStar"
-          :practiceTime="practiceTime"
-          :isPracticeTimeout="isPracticeTimeout"
-        ></header-bar>
+        <header-bar :practiceData="practiceData"></header-bar>
       </div>
       <div class="box-question" :style="themeQuestion">
         <span style="font-size: max(1.3vw, 20px)"> {{ currentQuestionTh }} </span>
@@ -179,7 +173,7 @@
 <script>
 import headerBar from "../header-time-progress";
 import getColorTheme from "../../../public/themeColor.json";
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, reactive } from "vue";
 export default {
   components: {
     headerBar,
@@ -302,6 +296,15 @@ export default {
       emit("sendNextQuestion");
     };
 
+    const practiceData = reactive({
+      totalQuestion: 0,
+      currentQuestion: 0,
+      question: "",
+      choices: [],
+      correctAnswer: 0,
+      extraSound: [],
+    });
+
     return {
       currentAnswerList,
       isSendAnswer,
@@ -317,6 +320,7 @@ export default {
       sendAnswer,
       showAnswerBtn,
       nextQuestion,
+      practiceData,
     };
   },
 };

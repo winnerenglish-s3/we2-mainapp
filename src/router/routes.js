@@ -21,6 +21,11 @@ const routes = [
     component: () => import("pages/testMatching.vue"),
     name: "testMatching",
   },
+  {
+    path: "/testTranslation",
+    component: () => import("pages/testTranslation.vue"),
+    name: "testTranslation",
+  },
   // ---------------- ADVENTURE SCHOOL ------------------------
   {
     path: "/splash/:uid",
@@ -93,6 +98,11 @@ const routes = [
         path: "/practicemain",
         component: () => import("pages/practiceListMain.vue"),
         name: "practicemain",
+      },
+      {
+        path: "/practicemainNew",
+        component: () => import("pages/practiceListMainNew.vue"),
+        name: "practicemainNew",
       },
       // Flashcard Main
       {

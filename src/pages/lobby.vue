@@ -193,9 +193,8 @@ import lobbyMobile from "../components/lobby/lobbyMobile";
 import character from "../components/character";
 import game from "../hooks/gameHooks.js";
 import { useQuasar } from "quasar";
-import { ref, onMounted, reactive } from "vue";
+import { ref, onMounted, reactive, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
-import { auth } from "src/router";
 export default {
   setup() {
     // Initial Data
@@ -233,11 +232,10 @@ export default {
 
     // Router
     const router = useRouter();
-    // uid
-    const uid = auth.currentUser.uid;
+
     // Character Data
     const characterData = ref({});
-    const getCharacterData = async () => {
+    const getCharacterData = async (uid) => {
       loadingShow();
       try {
         characterData.value = await game.characterInfomation(uid);
@@ -249,7 +247,7 @@ export default {
       loadingHide();
     };
 
-    const checkCharacter = async () => {
+    const checkCharacter = async (uid) => {
       $q.loading.show();
       let response = await game.characterInfomation(uid);
       if (response) {
@@ -260,10 +258,22 @@ export default {
       }
       $q.loading.hide();
     };
-
+    var authListen;
     onMounted(() => {
-      getCharacterData();
-      checkCharacter();
+      authListen = firebase.auth().onAuthStateChanged(async function (user) {
+        if (user) {
+          const uid = user.uid;
+          getCharacterData(user.uid);
+          checkCharacter(user.uid);
+        } else {
+          // User is signed out.
+          router.push("/");
+        }
+      });
+    });
+
+    onBeforeUnmount(() => {
+      authListen();
     });
 
     return {
@@ -276,7 +286,6 @@ export default {
       isShowPopupPosttest,
       isShowPopupExam,
       isShowPopupQuestionnaire,
-
       // equipment
       isShowCharacter,
       equipment,
@@ -288,57 +297,6 @@ export default {
     lobbyMobile,
     character,
   },
-
-  // methods: {
-  //   closeBtn() {
-  //     this.show = false;
-  //   },
-  //   toPretest() {
-  //     window.open(
-  //       "http://localhost:8081/pretest",
-  //       "__blank",
-  //       "resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1200,height=700"
-  //     );
-  //   },
-  //   toPosttest() {
-  //     window.open(
-  //       "http://localhost:8081/posttest",
-  //       "__blank",
-  //       "resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1200,height=700"
-  //     );
-  //   },
-  //   toExam() {
-  //     window.open(
-  //       "http://localhost:8084/",
-  //       "__blank",
-  //       "resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1200,height=700"
-  //     );
-  //   },
-  //   toQuestionnaire() {
-  //     window.open(
-  //       "http://localhost:8083/",
-  //       "__blank",
-  //       "resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1200,height=700"
-  //     );
-  //   },
-  // },
-  // created() {
-  //   let config = this.$q.sessionStorage.getItem("config");
-
-  //   if (config.includes("exam")) {
-  //     this.isShowPopupExam = true;
-  //   }
-  //   if (config.includes("questionnaire")) {
-  //     this.isShowPopupQuestionnaire = true;
-  //   }
-
-  //   if (config.includes("pretest")) {
-  //     this.isShowPopupPretest = true;
-  //   }
-  //   if (config.includes("posttest")) {
-  //     this.isShowPopupPosttest = true;
-  //   }
-  // },
 };
 </script>
 

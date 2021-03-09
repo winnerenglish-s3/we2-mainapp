@@ -5,7 +5,7 @@
     :class="mode ? 'bg-lobby-day ' : 'bg-lobby-night'"
   >
     <div class="col-12 self-start row z-top">
-      <div class="col-7 self-start row q-px-xs q-pt-sm ">
+      <div class="col-7 self-start row q-px-xs q-pt-sm">
         <q-img
           fit="contain"
           style="max-width: 120px; width: 30%; font-size: 100%; z-index: 2"
@@ -39,7 +39,7 @@
           </div>
         </q-img>
 
-        <div class="col-12 self-center " align="left">
+        <div class="col-12 self-center" align="left">
           <q-img
             fit="contain"
             style="width: max(20vw, 115px)"
@@ -53,7 +53,7 @@
           </q-img>
         </div>
 
-        <div class="col-12 self-center ">
+        <div class="col-12 self-center">
           <q-img
             fit="contain"
             style="width: max(20vw, 115px)"
@@ -68,29 +68,29 @@
         </div>
       </div>
 
-      <div align="right" class="q-pt-md col q-pr-xs ">
+      <div align="right" class="q-pt-md col q-pr-xs">
         <q-img
-          style="width: max(calc(18vw * 9/16), 45px)"
-          class="cursor-pointer btn-active" 
+          style="width: max(calc(18vw * 9 / 16), 45px)"
+          class="cursor-pointer btn-active"
           src="../../../public/images/lobby/noti-btn.png"
           v-if="!isNews"
         >
         </q-img>
         <q-img
           v-else
-          style="width: max(calc(18vw * 9/16), 45px)"
-          class="cursor-pointer btn-active" 
+          style="width: max(calc(18vw * 9 / 16), 45px)"
+          class="cursor-pointer btn-active"
           src="../../../public/images/lobby/noti-have-btn.png"
         >
         </q-img>
         <q-img
-          style="width: max(calc(18vw * 9/16), 45px)"
-          class="cursor-pointer  btn-active q-mx-xs"
+          style="width: max(calc(18vw * 9 / 16), 45px)"
+          class="cursor-pointer btn-active q-mx-xs"
           src="../../../public/images/lobby/setting-btn.png"
         ></q-img>
         <q-img
-          style="width: max(calc(18vw * 9/16), 45px)"
-          class="cursor-pointer btn-active" 
+          style="width: max(calc(18vw * 9 / 16), 45px)"
+          class="cursor-pointer btn-active"
           src="../../../public/images/lobby/logout-btn.png"
         ></q-img>
 
@@ -131,7 +131,7 @@
       </div>
     </div>
 
-    <div class="col-12 self-end row " style="z-index: 2">
+    <div class="col-12 self-end row" style="z-index: 2">
       <div class="col-12 self-end" align="center">
         <character
           :equipment="equipment"
@@ -141,10 +141,10 @@
       </div>
     </div>
 
-    <div class="col-12 self-end q-pb-md row justify-center z-top ">
-      <div class="self-end " align="center">
+    <div class="col-12 self-end q-pb-md row justify-center z-top">
+      <div class="self-end" align="center">
         <q-img
-          style="width: max(calc(45vw * 9/16), 130px)"
+          style="width: max(calc(45vw * 9 / 16), 130px)"
           fit="contain"
           class="cursor-pointer btn-active"
           src="../../../public/images/lobby/boss-btn.png"
@@ -152,11 +152,11 @@
       </div>
       <div class="self-end q-mx-lg" align="center">
         <q-img
-          style="width: max(calc(45vw * 9/16), 130px)"
+          style="width: max(calc(45vw * 9 / 16), 130px)"
           fit="contain"
           class="cursor-pointer btn-active"
           src="../../../public/images/lobby/leaning-btn.png"
-          @click="$router.push('/practicemain')"
+          @click="$router.push('/practicemainNew')"
         ></q-img>
       </div>
     </div>
@@ -251,8 +251,8 @@ export default {
   overflow: hidden;
 }
 
-.btn-active:active{
+.btn-active:active {
   transition: 0.1s;
-  transform: scale(.90);
+  transform: scale(0.9);
 }
 </style>

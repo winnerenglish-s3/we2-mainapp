@@ -1,7 +1,11 @@
 <template>
   <q-page class="bg-seplling">
     <div>
-      <app-bar :instructionData="instructionData"></app-bar>
+      <app-bar
+        :isShowPause="true"
+        :themeSync="themeSync"
+        :instructionData="instructionData"
+      ></app-bar>
     </div>
 
     <spelling-pc
@@ -186,13 +190,9 @@ export default {
       "Z",
     ];
 
-    const currentQuestionText = ref(
-      vocabularyList[currentQuestion.value].vocab
-    );
+    const currentQuestionText = ref(vocabularyList[currentQuestion.value].vocab);
 
-    const currentQuestionTh = ref(
-      vocabularyList[currentQuestion.value].meaning
-    );
+    const currentQuestionTh = ref(vocabularyList[currentQuestion.value].meaning);
 
     const selectedLetter = ref([]);
 
@@ -252,9 +252,7 @@ export default {
             let randomCol = Math.floor(Math.random() * 5); //random 0-4
             //   ตัวแรก
             boggle.value[randomRow][randomCol] = {
-              letter: vocabularyList[currentQuestion.value].vocab[
-                counter
-              ].toUpperCase(),
+              letter: vocabularyList[currentQuestion.value].vocab[counter].toUpperCase(),
             };
 
             selectedLetter.value.push(
