@@ -1,7 +1,14 @@
 <template>
   <q-page :class="!isSynchronize ? 'bg-translation' : `bg-translation-action`">
     <div>
-      <app-bar :themeSync="themeSync" :isShowHome="true" :isShowPause="true"></app-bar>
+      <app-bar
+        :isHasHelp="true"
+        :isHasInstruction="true"
+        :themeSync="themeSync"
+        :isShowHome="true"
+        :isShowPause="true"
+        :isLoadPractice="isLoadPractice"
+      ></app-bar>
     </div>
 
     <div class="absolute-center" v-if="!isLoadPractice">
@@ -106,6 +113,10 @@ export default {
         // เรียงแบบฝึกหัด
         questionList.value.sort((a, b) => a.order - b.order);
 
+        questionList.value = questionList.value.filter((x) => !x.except);
+
+        questionList.value = questionList.value.slice(0, practiceData.totalQuestion);
+
         // สุ่มแบบฝึกหัด
         // questionList.value.sort(() => Math.random() - 0.5);
 
@@ -127,10 +138,14 @@ export default {
       // Practice Data : Show Question
       let newQuestion = questionList.value[practiceData.currentQuestion].sentenceEng;
 
+      let findTag = questionList.value[practiceData.currentQuestion].sentenceEng.match(
+        /<s*u>(.*?)<s*\/u>/gm
+      );
+
       newQuestion = newQuestion
         .replace(/,/g, ", ")
         .replace(/&nbsp;/g, " ")
-        .split(" ");
+        .split(/<s*u>(.*?)<s*\/u>/gm);
 
       newQuestion = newQuestion.map((x, index) => {
         let newData = {
@@ -138,21 +153,21 @@ export default {
           answer: x,
           currentAnswer: "",
           index: index,
-          correctAnswer: "",
+          correctAnswer: false,
         };
 
-        let tagMatch = x.match(/<s*u>(.*?)<s*\/u>/gm) || 0;
+        let moveArrUnderline = null;
 
-        if (tagMatch.length) {
-          console.log(newData.answer);
+        for (let i = 0; i < findTag.length; i++) {
+          let newTag = findTag[i].replace(/<u>/g, "").replace(/<\/u>/g, "");
 
-          let correctAnswer = newData.answer
-            .replace(/<s*u>/g, "")
-            .replace(/<s*\/u>/g, "");
+          if (newData.answer == newTag) {
+            moveArrUnderline = i;
 
-          newData.isAnswer = true;
-          newData.answer = newData.answer.replace(/<s*u>(.*?)<s*\/u>/g, "");
-          newData.correctAnswer = correctAnswer;
+            findTag.splice(moveArrUnderline, 1);
+            newData.isAnswer = true;
+            break;
+          }
         }
 
         return newData;

@@ -29,7 +29,7 @@ export default {
     const isSynchronize = ref(false);
     const snapSynchronize = () => {
       db.collection("synchronize")
-        .doc("test")
+        .doc("armTest")
         .onSnapshot((doc) => {
           if (doc.data().mode == "control") {
             isSynchronize.value = true;

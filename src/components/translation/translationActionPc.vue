@@ -1,76 +1,107 @@
 <template>
   <div align="center">
     <div class="box-content">
-      <div align="left" class="q-pa-md row">
-        <current-button-choices
-          class="q-ma-xs"
-          :no="index + 1"
-          :currentQuestion="practiceData.currentQuestion + 1"
-          v-for="(item, index) in practiceData.totalQuestion"
-        ></current-button-choices>
-      </div>
-      <div>
-        <div class="box-question q-pa-md bg-white row justify-center" align="left">
-          <span class="f16" v-html="practiceData.questionTh"></span>
+      <!-- Step : 0 -->
+      <div v-if="currentStep == 0">
+        <div align="left" class="q-pa-md row">
+          <current-button-choices
+            class="q-ma-xs"
+            :no="index + 1"
+            :currentQuestion="practiceData.currentQuestion + 1"
+            v-for="(item, index) in practiceData.totalQuestion"
+          ></current-button-choices>
         </div>
-        <div class="box-content-writing q-pa-md bg-white row q-py-xl">
-          <div
-            class="self-center relative-position"
-            v-for="(item, index) in practiceData.question"
-            @click="selectedBoxAnswer = index"
-          >
-            <div class="f18 q-mx-xs" v-html="item.answer" v-if="!item.isAnswer"></div>
+        <div>
+          <div class="box-question q-pa-md bg-white row justify-center" align="left">
+            <span class="f16" v-html="practiceData.questionTh"></span>
+          </div>
+          <div class="box-content-writing q-pa-md bg-white row q-py-xl">
             <div
-              v-if="item.isAnswer"
-              class="q-my-sm q-mx-sm"
-              @click="
-                item.currentAnswer != ''
-                  ? funcSelectedBackAnswer(item.currentAnswer, index)
-                  : null
-              "
-              :class="
-                currentSelectAnswerBox == index
-                  ? 'btn-selected-answer bg-amber-4'
-                  : item.currentAnswer != ''
-                  ? 'btn-has-answer cursor-pointer'
-                  : 'btn-not-selected-answer'
-              "
+              class="self-center relative-position"
+              v-for="(item, index) in practiceData.question"
+              @click="selectedBoxAnswer = index"
             >
-              {{ item.currentAnswer }}
+              <div class="f18 q-mx-xs" v-html="item.answer" v-if="!item.isAnswer"></div>
+              <div
+                v-if="item.isAnswer"
+                class="q-my-sm q-mx-sm"
+                @click="
+                  item.currentAnswer != ''
+                    ? funcSelectedBackAnswer(item.currentAnswer, index)
+                    : null
+                "
+                :class="
+                  currentSelectAnswerBox == index
+                    ? 'btn-selected-answer bg-amber-4'
+                    : item.currentAnswer != ''
+                    ? 'btn-has-answer cursor-pointer'
+                    : 'btn-not-selected-answer'
+                "
+              >
+                {{ item.currentAnswer }}
+              </div>
             </div>
           </div>
         </div>
+
+        <!-- BOX : Answer -->
+        <div class="q-my-lg">
+          <q-btn
+            push
+            class="q-ma-sm"
+            :class="
+              allChooseAnswer ? 'bg-grey-5 no-pointer-events' : 'bg-amber cursor-pointer'
+            "
+            v-for="(item, index) in practiceData.choices"
+            @click="funcSelectedAnswer(item, index)"
+            no-caps
+            >{{ item }}</q-btn
+          >
+        </div>
+
+        <!-- BOX : BUTTON ANSWER -->
+        <div class="q-my-md q-pa-lg" align="center">
+          <q-img
+            width="180px"
+            :class="allChooseAnswer ? 'cursor-pointer' : 'no-pointer-events'"
+            @click="$emit('callback-nextquestion'), (currentStep = 1)"
+            :src="
+              require(`../../../public/images/send-answer-btn${
+                allChooseAnswer ? '' : '-noactive'
+              }.png`)
+            "
+          ></q-img>
+        </div>
       </div>
 
-      <!-- BOX : Answer -->
-      <div class="q-my-lg">
-        <q-btn
-          push
-          class="q-ma-sm"
-          v-for="(item, index) in practiceData.choices"
-          :class="
-            !useRandomFakeChoice.includes(index)
-              ? 'bg-grey-5 no-pointer-events'
-              : 'bg-amber cursor-pointer'
-          "
-          @click="funcSelectedAnswer(item, index)"
-          no-caps
-          >{{ item }}</q-btn
+      <div v-if="currentStep == 1" class="q-py-lg">
+        <div
+          :class="{
+            'box-content-main q-pa-sm absolute-center': $q.platform.is.desktop,
+            'absolute-center full-width': $q.platform.is.mobile,
+          }"
         >
-      </div>
-
-      <!-- BOX : BUTTON ANSWER -->
-      <div class="q-my-md q-pa-lg" align="center">
-        <q-img
-          width="180px"
-          :class="allChooseAnswer ? 'cursor-pointer' : 'no-pointer-events'"
-          @click="$emit('callback-nextquestion')"
-          :src="
-            require(`../../../public/images/send-answer-btn${
-              allChooseAnswer ? '' : '-noactive'
-            }.png`)
-          "
-        ></q-img>
+          <div
+            class="q-pa-md q-px-xl relative-position"
+            :class="{ 'border-dash': $q.platform.is.desktop }"
+          >
+            <div
+              class="row justify-center"
+              style="min-height: calc(100vh - 400px); max-height: fit-content"
+            >
+              <div class="self-center" style="max-width: 500px; width: 100%">
+                <waiting></waiting>
+                <div align="center" class="q-py-sm">
+                  <span
+                    class="f36 text-brown-8 text-bold"
+                    style="font-size: max(1.7vw, 20px)"
+                    >รอเพื่อนก่อนนะ</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -78,11 +109,13 @@
 
 <script>
 import currentButtonChoices from "../button/btn-current-choices";
+import waiting from "../waiting";
 import { ref, computed, reactive } from "vue";
 import { useRouter, useRoute } from "vue-router";
 export default {
   components: {
     currentButtonChoices,
+    waiting,
   },
   props: {
     practiceData: {
@@ -95,6 +128,9 @@ export default {
     // Initial Router
     const route = useRoute();
     const router = useRouter();
+
+    // Initial Data
+    const currentStep = 0;
 
     const selectedBoxAnswer = ref(0);
 
@@ -120,8 +156,8 @@ export default {
       if (setFilter.length) {
         let totalAnswerLength = props.practiceData.choices.length;
 
-        let correctAnswer = setFilter[0].correctAnswer;
-        let currentChoiceIndex = props.practiceData.choices.indexOf(correctAnswer);
+        let answer = setFilter[0].answer;
+        let currentChoiceIndex = props.practiceData.choices.indexOf(answer);
 
         let tempRandom = [];
 
@@ -186,6 +222,7 @@ export default {
     });
 
     return {
+      currentStep,
       selectedBoxAnswer,
       useRandomFakeChoice,
       currentSelectAnswerBox,
@@ -258,5 +295,37 @@ export default {
   width: 100px;
   height: 35px;
   border-bottom: 1px solid;
+}
+
+.btn-correct {
+  min-width: 50px;
+  width: fit-content;
+  padding: 10px;
+  height: 40px;
+  background: #95ecdc;
+  box-shadow: 0px 3px 0px #32b59d;
+  border-radius: 7px;
+}
+
+.btn-incorrect {
+  min-width: 50px;
+  width: fit-content;
+  padding: 10px;
+  height: 40px;
+  background: #ff6b71;
+  box-shadow: 0px 3px 0px #ff0711;
+  border-radius: 7px;
+}
+
+.box-content-main {
+  max-width: 1000px;
+  width: 100%;
+  background-color: #eabd94;
+  border-radius: 10px;
+  box-shadow: 0 10px 0px #a07751;
+}
+
+.border-dash {
+  border: 1px dashed;
 }
 </style>

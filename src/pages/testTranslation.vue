@@ -7,8 +7,13 @@
     </div>
 
     <div class="q-pt-lg">
-      <span v-html="showString"> </span>
-      <!-- <span v-for="(item, index) in showString" :key="index" v-html="item"> </span> -->
+      <!-- <span v-html="showString"> </span> -->
+      <span v-for="(item, index) in testQuestion" :key="index">
+        <q-btn class="bg-red" v-if="item.isAnswer" @click="removeWord(item)">{{
+          item.currentAnswer
+        }}</q-btn>
+        <span v-else>{{ item.answer }}</span>
+      </span>
     </div>
 
     <div class="q-gutter-md q-pt-lg">
@@ -16,7 +21,7 @@
         color="amber"
         text-color="black"
         v-for="(item, index) in questionList[currentQuestion].sentenceExtra"
-        @click="clickAnswer(item)"
+        @click="clickAnswer(item, index)"
       >
         {{ item }}
       </q-btn>
@@ -51,6 +56,7 @@ export default {
     const isLoad = ref(false);
     const currentBucketArray = ref([]);
     const currentPosition = ref(0);
+    const testQuestion = ref([]);
 
     const getPractice = async () => {
       $q.loading.show();
@@ -59,6 +65,7 @@ export default {
       const postData = {
         practiceListId: "OWCKBt5W8oKVmhffxnx4",
       };
+
       let response = await axios.post(apiURL, postData);
       response.data.sort((a, b) => a.order - b.order);
       questionList.value = response.data;
@@ -72,31 +79,68 @@ export default {
       $q.loading.hide();
     };
 
-    const clickAnswer = (item) => {
-      currentBucketArray.value[currentPosition.value] = item;
-      currentPosition.value++;
-      let findRemoveIndex = questionList.value[
-        currentQuestion.value
-      ].sentenceExtra.indexOf(item);
-      questionList.value[currentQuestion.value].sentenceExtra.splice(findRemoveIndex, 1);
+    const clickAnswer = (item, index) => {
+      let findAnswer = testQuestion.value.filter(
+        (x) => x.isAnswer && x.currentAnswer == ""
+      )[0];
+
+      testQuestion.value[findAnswer.index].currentAnswer = item;
+
+      questionList.value[currentQuestion.value].sentenceExtra.splice(index, 1);
     };
-    const showString = computed(() => {
+
+    const removeWord = (data) => {
+      questionList.value[currentQuestion.value].sentenceExtra.push(data.currentAnswer);
+      testQuestion.value[data.index].currentAnswer = "";
+    };
+
+    const funcShowString = () => {
+      console.clear();
+
       if (isLoad.value) {
         let findUnderline = questionList.value[currentQuestion.value].sentenceEng.match(
           /<s*u>(.*?)<s*\/u>/gm
         );
+
         let replacedString = questionList.value[currentQuestion.value].sentenceEng;
 
-        for (let i = 0; i < findUnderline.length; i++) {
-          replacedString = replacedString.replace(
-            findUnderline[i],
-            `<button>${currentBucketArray.value[i] || "_______"}</button>`
-          );
-        }
+        replacedString = replacedString.replace(/&nbsp;/g, "");
 
-        return replacedString;
+        replacedString = replacedString.split(/<s*u>(.*?)<s*\/u>/gm);
+
+        replacedString = replacedString.map((res, index) => {
+          let newData = {
+            answer: res,
+            isAnswer: false,
+            currentAnswer: "",
+            index: index,
+          };
+
+          let moveArrUnderline = null;
+
+          for (let i = 0; i < findUnderline.length; i++) {
+            let newTag = findUnderline[i].replace(/<u>/g, "").replace(/<\/u>/g, "");
+
+            if (newData.answer == newTag) {
+              moveArrUnderline = i;
+
+              findUnderline.splice(moveArrUnderline, 1);
+              newData.isAnswer = true;
+              break;
+            }
+          }
+
+          return newData;
+        });
+
+        // replacedString = replacedString.replace(
+        //   newTag,
+        //   `<button>${currentBucketArray.value[i] || "_______"}</button>`
+        // );
+
+        testQuestion.value = replacedString;
       }
-    });
+    };
 
     const nextQuestion = () => {
       currentPosition.value = 0;
@@ -104,18 +148,20 @@ export default {
       currentBucketArray.value = [];
     };
 
-    onMounted(() => {
-      getPractice();
+    onMounted(async () => {
+      await getPractice();
+      await funcShowString();
     });
 
     return {
       questionList,
       currentQuestion,
       isLoad,
-      showString,
       clickAnswer,
       currentBucketArray,
       currentPosition,
+      testQuestion,
+      removeWord,
       nextQuestion,
     };
   },
