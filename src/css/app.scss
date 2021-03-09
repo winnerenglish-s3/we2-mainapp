@@ -1,17 +1,17 @@
 // app global css in SCSS form
 @font-face {
-  font-family: Sarabun-r;
-  src: url("../../public/fonts/Sarabun-Regular.ttf");
+  font-family: Mali-R;
+  src: url("../../public/fonts/Mali-Regular.ttf");
 }
 
 @font-face {
-  font-family: Sarabun-m;
-  src: url("../../public/fonts/Sarabun-Medium.ttf");
+  font-family: Mali-M;
+  src: url("../../public/fonts/Mali-Medium.ttf");
 }
 
 @font-face {
-  font-family: prompt-black;
-  src: url("../../public/fonts/Prompt-Black.ttf");
+  font-family: Mali-Bold;
+  src: url("../../public/fonts/Mali-Bold.ttf");
 }
 
 .f12 {
@@ -51,12 +51,12 @@
 }
 
 body {
-  font-family: Sarabun-r;
+  font-family: Mali-R;
   box-sizing: border-box;
 }
 
 .font-medium {
-  font-family: Sarabun-m;
+  font-family: Mali-M;
 }
 
 .brx {
