@@ -1,5 +1,8 @@
 <template>
-  <q-page class="bg-seplling">
+  <q-page class="bg-seplling relative-position">
+    <div id="background"></div>
+    <div id="midground"></div>
+    <div id="foreground"></div>
     <div>
       <app-bar
         :isShowPause="true"
@@ -28,6 +31,7 @@
       class="box-container-main"
       v-if="$q.platform.is.desktop"
     ></spelling-pc>
+
     <spelling-mobile
       :practiceData="practiceData"
       :boggle="boggle"
@@ -671,10 +675,63 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@keyframes STAR-MOVE {
+  to {
+    left: -10000px;
+    top: -2000px;
+  }
+}
+
+#background {
+  // background: black url(../../public/images/spellingbee/background-star.png) repeat 5% 5%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+
+  -webkit-animation-name: STAR-MOVE;
+  -webkit-animation-duration: 1000s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+#midground {
+  background: url(../../public/images/spellingbee/midground-star.png) repeat 0% 0%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+
+  -webkit-animation-name: STAR-MOVE;
+  -webkit-animation-duration: 500s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+#foreground {
+  background: url(../../public/images/spellingbee/foreground-star.png) repeat 0% 0%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+
+  -webkit-animation-name: STAR-MOVE;
+  -webkit-animation-duration: 300s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
 .bg-seplling {
-  background-image: url("../../public/images/spellingbee/bg-spellingbee.png");
+  // background-image: url("../../public/images/spellingbee/bg-spellingbee.png");
   background-size: cover;
   background-position: center;
+  background-color: #252a52;
 }
 .box-extravocab-pc {
   max-width: 600px;
