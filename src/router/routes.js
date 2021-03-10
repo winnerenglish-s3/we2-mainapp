@@ -99,11 +99,6 @@ const routes = [
         component: () => import("pages/practiceListMain.vue"),
         name: "practicemain",
       },
-      {
-        path: "/practicemainNew",
-        component: () => import("pages/practiceListMainNew.vue"),
-        name: "practicemainNew",
-      },
       // Flashcard Main
       {
         path: "/flashcard/:practiceListId?",

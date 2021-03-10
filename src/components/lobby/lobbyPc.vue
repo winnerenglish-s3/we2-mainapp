@@ -160,7 +160,7 @@
             @mouseenter="activeMenu = 'leaning'"
             @mouseleave="activeMenu = null"
             src="../../../public/images/lobby/leaning-btn.png"
-            @click="$router.push('/practicemainNew')"
+            @click="$router.push('/practicemain')"
           ></q-img>
         </div>
       </div>

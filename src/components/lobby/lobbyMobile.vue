@@ -156,7 +156,7 @@
           fit="contain"
           class="cursor-pointer btn-active"
           src="../../../public/images/lobby/leaning-btn.png"
-          @click="$router.push('/practicemainNew')"
+          @click="$router.push('/practicemain')"
         ></q-img>
       </div>
     </div>

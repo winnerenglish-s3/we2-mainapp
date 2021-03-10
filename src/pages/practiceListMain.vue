@@ -1,536 +1,461 @@
 <template>
-  <q-page class="full-height" :class="{ row: $q.platform.is.desktop }">
-    <div class="col-12 self-start">
-      <app-bar :themeSync="themeSync" :isShowHome="true"></app-bar>
-    </div>
+  <q-page
+    :style="mode ? 'background-color:#694532' : 'background-color:#1E263B'"
+    :class="{ 'bg-practice-img': $q.platform.is.mobile }"
+  >
+    <app-bar :themeSync="$attrs.themeSync" :isShowHome="true"></app-bar>
 
-    <!-- DESKTOP -->
-    <div
-      class="col-12 row bg-practice-main desktop-only"
-      style="max-height: fit-content; min-height: calc(100vh - 50px); overflow: hidden"
-    >
-      <!-- รายการแบบฝึกหัด -->
+    <!-- DESKTOP Will Show BACKGROUND IMAGE -->
+    <div class="fit" v-if="$q.platform.is.desktop">
+      <lobby-day class="absolute-top fit" v-if="mode"></lobby-day>
+      <lobby-night class="absolute-top fit" v-else> </lobby-night>
       <div
-        class="col self-center animate__animated animate__bounceInLeft"
-        style="animation-duration: 2s"
-        align="center"
+        v-if="isLoad"
+        class="absolute-center"
+        style="width: 90%; height: 70%; min-height: fit-content; max-width: 1200px"
       >
-        <div class="row relative-position">
-          <!-- ปุ่มกดย้อนกลับ -->
-          <div class="col self-center">
-            <q-img
-              v-if="selectSkill != 'Vocabulary'"
-              @click="previousSkill()"
-              class="cursor-pointer"
-              width="40px"
-              src="../../public/images/practicelist/previous-list-btn.png"
-            ></q-img>
-          </div>
-          <!-- รายละเอียด Unit ทั้งหมด -->
-
-          <div class="col-6 box-container-pracitcelist">
-            <div class="row box-content-practicelist q-py-sm q-px-md">
-              <div class="col-3 self-center" style="width: 100px" algin="center"></div>
-              <div class="col self-center" algin="center">
-                <span class="f20 text-amber-5">{{ selectSkill }}</span>
-              </div>
-              <div class="col-3 self-center" style="width: 100px" algin="center">
+        <div
+          class="bg-practice-img row animate__animated animate__bounceInDown"
+          style="
+            animation-duration: 2s;
+            border-radius: 40px;
+            border: 10px solid #f68a14;
+            background-color: #fff1d6;
+            overflow: hidden;
+          "
+        >
+          <div class="col-6 q-py-md q-px-xl" style="box-shadow: 1px 1px 5px">
+            <div class="row" style="width: 100%; margin: auto">
+              <!-- Level Dropdown -->
+              <div style="width: 85px">
                 <q-select
-                  v-model="selectLevel"
-                  :options="levelList"
-                  dense=""
-                  bg-color="amber-5"
-                  round=""
-                  outlined=""
-                  @update:modelValue="(val) => $emit('courseChanged', val.courseId)"
-                />
+                  outlined
+                  dense
+                  borderless
+                  v-model="levelSelected"
+                  :options="levelOptions"
+                  bg-color="amber"
+                ></q-select>
+              </div>
+              <!-- unit Dropdown -->
+              <div class="q-pl-md col">
+                <q-select
+                  style="width: 100%; border: 1px solid #4e1617; border-radius: 5px"
+                  borderless
+                  outlined
+                  dense
+                  bg-color="white"
+                  v-model="unitSelected"
+                  :options="unitOptions"
+                ></q-select>
               </div>
             </div>
 
-            <div class="q-pl-lg q-pt-md q-pb-sm q-pr-md">
-              <!-- Progress bar -->
-              <div class="row">
-                <div class="col self-center">
-                  <div class="box-content-progress-practice" align="left">
-                    <div
-                      class="progress-bar"
-                      :style="
-                        'width:' +
-                        (showAllPassedPractice / showNumberOfAllPracticeInLevel) * 100 +
-                        '%'
-                      "
-                    ></div>
-                  </div>
-                </div>
-                <div class="col-2" style="width: 50px">
-                  <span class="f16"
-                    >{{ showAllPassedPractice }}/{{
-                      showNumberOfAllPracticeInLevel
-                    }}</span
-                  >
-                </div>
+            <!-- Vocabulary -->
+            <div class="q-pt-lg">
+              <div class="text-weight-bold text-brown">คำศัพท์</div>
+              <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+                ({{ showPracticeName("Vocabulary").nameEng }})
               </div>
-              <!-- Show Practice List -->
-              <div class="q-my-md box-content-practice-list">
+              <div class="flex q-gutter-md">
                 <div
-                  v-ripple
-                  class="relative-position row q-mr-sm q-mb-md bg-white box-content cursor-pointer"
-                  :class="
-                    activeUnit == unit
-                      ? 'content-current'
-                      : unitCompleteList[unit - 1]
-                      ? 'content-success'
-                      : 'content-default'
-                  "
-                  v-for="unit in selectLevel.unit"
-                  @click="showPracticeList(unit), (activeUnit = unit)"
-                  :key="unit"
-                >
-                  <div
-                    class="col-2 q-pa-sm"
-                    :class="
-                      activeUnit == unit
-                        ? 'bg-current'
-                        : unitCompleteList[unit - 1]
-                        ? 'bg-success text-white'
-                        : 'bg-default'
-                    "
-                  >
-                    <span class="f24 text-bold">
-                      {{ unit }}
-                    </span>
-                  </div>
-                  <div class="col self-center q-px-sm q-py-sm" align="left">
-                    <span class="f16 q-py-sm" v-if="showPracticeListName(unit)">
-                      <div>
-                        {{ showPracticeListName(unit).nameEng }}
-                      </div>
-                      <div class="q-py-xs">
-                        <q-separator></q-separator>
-                      </div>
-                      <div class="">
-                        {{ showPracticeListName(unit).nameTh }}
-                      </div>
-                    </span>
-                  </div>
-                  <div class="col-2 self-center" style="width: 60px">
-                    <q-icon
-                      v-if="unitCompleteList[unit - 1]"
-                      size="22px"
-                      name="fas fa-check"
-                      class="text-success"
-                    ></q-icon>
-                    <span v-else class="f16">
-                      <span v-if="showPracticeListName(unit)">{{
-                        `${showPassedPracticeNumber(unit)}/${
-                          showPracticeListName(unit).totalPractice
-                        }`
-                      }}</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- ปุ่มกดไปข้างหน้า -->
-
-          <div class="col self-center" align="center">
-            <q-img
-              v-if="selectSkill != 'Listening & Speaking'"
-              @click="nextSkill()"
-              class="cursor-pointer"
-              width="40px"
-              src="../../public/images/practicelist/next-list-btn.png"
-            ></q-img>
-          </div>
-        </div>
-      </div>
-      <!-- แบบฝึกหัดต่างๆ -->
-      <div
-        class="col self-start row bg-map full-height justify-center"
-        style="overflow: hidden"
-      >
-        <div class="self-center col" align="center">
-          <q-img
-            style="max-width: 800px; width: 100%; animation-duration: 2s"
-            src="../../public/images/practicelist/bg-map-theme-1.png"
-            class="animate__animated animate__bounceInRight"
-          >
-            <div
-              class="transparent absolute-center row box-content-menu justify-center items-center"
-              style="max-width: 800px; width: 50%; overflow: hidden"
-            >
-              <div
-                class="col-6 self-center"
-                align="center"
-                v-for="(item, index) in practiceListShow"
-                :key="index"
-              >
-                <div
-                  class="animate__animated animate__zoomInDown"
-                  style="animation-duration: 1s"
+                  v-for="(item, index) in vocabPracticeList"
+                  :key="index"
+                  class="practice-btn"
                 >
                   <q-img
-                    contain=""
-                    style="max-width: 150px"
-                    class="cursor-pointer"
-                    :src="showIconPractice(item.practiceType)"
                     @click="gotoPractice(item)"
-                  >
-                    <div
-                      class="transparent absolute-bottom no-padding"
-                      style="width: 80%; bottom: 15px; margin: auto"
-                      align="left"
-                    >
-                      <div class="" align="center">
-                        <span>{{ `${index + 1}. ${item.practiceTypeThai} ` }}</span>
-                      </div>
-                    </div>
-                  </q-img>
-
-                  <div
-                    class="relative-position"
-                    style="bottom: 5px"
-                    :class="
-                      item.practiceType != 'flashcard' &&
-                      item.practiceType != 'grammarlesson' &&
-                      item.practiceType != 'conversationlesson' &&
-                      item.practiceType != 'languagetips' &&
-                      item.practiceType != 'phonicslesson'
-                        ? ''
-                        : 'invisible'
-                    "
-                  >
-                    <q-badge color="black">
-                      {{ showPassedPracticeCounter(item.practiceListId) }} / 2
-                    </q-badge>
-                  </div>
+                    style="width: 90px"
+                    :src="showPracticeIcon(item)"
+                  ></q-img>
                 </div>
               </div>
             </div>
-          </q-img>
-        </div>
-      </div>
-    </div>
 
-    <!-- Mobile -->
-    <div style="background-color: #ffe6cf" v-if="$q.platform.is.mobile">
-      <div class="q-pt-md row q-px-md">
-        <div style="width: 100px" algin="center">
-          <q-select
-            v-model="selectLevel"
-            :options="levelList"
-            map-options
-            emit-value
-            dense=""
-            bg-color="amber-5"
-            round=""
-            outlined=""
-          />
-        </div>
-        <div class="col q-pl-md">
-          <q-select
-            v-model="selectSkill"
-            bg-color="white"
-            round
-            outlined
-            emit-value
-            map-options
-            dense
-            :options="skillOptions"
-          >
-            <template v-slot:selected>
-              <div class="absolute-center">
-                {{ skillOptions.filter((x) => x.value == selectSkill)[0].label }}
-              </div>
-            </template>
-          </q-select>
-        </div>
-      </div>
-      <div class="q-pl-lg q-pt-md q-pb-sm q-pr-md">
-        <div class="row">
-          <div class="col self-center">
-            <div class="box-content-progress-practice" align="left">
-              <div class="progress-bar" style="width: 80%"></div>
+            <div class="q-py-md">
+              <hr style="border-top: 3px dashed #eeae5c" />
             </div>
-          </div>
-          <div class="col-2 offset-1" style="width: 50px">
-            <span class="f16"
-              >{{ showAllPassedPractice }}/{{ showNumberOfAllPracticeInLevel }}</span
-            >
-          </div>
-        </div>
-        <div class="q-my-md">
-          <div
-            v-ripple
-            class="relative-position row q-mr-sm q-mb-md bg-white box-content cursor-pointer"
-            :class="
-              activeUnit == i
-                ? 'content-current'
-                : unitCompleteList[i - 1]
-                ? 'content-success'
-                : 'content-default'
-            "
-            v-for="i in totalUnit"
-            @click="showPracticeList(i), (activeUnit = i)"
-            :key="i"
-          >
-            <div
-              class="col-2 q-pa-sm"
-              :class="
-                activeUnit == i
-                  ? 'bg-current'
-                  : unitCompleteList[i - 1]
-                  ? 'bg-success text-white'
-                  : 'bg-default'
-              "
-            >
-              <div align="center">
-                <span class="f24 text-bold">
-                  {{ i }}
-                </span>
-              </div>
-            </div>
-            <div class="col self-center q-px-sm" align="left">
-              <div class="q-py-sm">
-                <span class="f16" v-if="showPracticeListName(i)">
-                  {{ showPracticeListName(i).nameEng }}
-                </span>
-              </div>
-            </div>
-            <div class="col-2 self-center" style="width: 60px">
-              <q-icon
-                v-if="unitCompleteList[i - 1]"
-                size="22px"
-                name="fas fa-check"
-                class="text-success"
-              ></q-icon>
-              <span v-else class="f16">
-                <span v-if="showPracticeListName(i)">{{
-                  `${showPassedPracticeNumber(i)}/${
-                    showPracticeListName(i).totalPractice
-                  }`
-                }}</span>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Show Practice Dialog Mobile -->
-    <q-dialog
-      v-model="isShowPracticeDialogMobile"
-      persistent
-      maximized
-      transition-show="slide-left"
-      transition-hide="slide-right"
-    >
-      <q-card class="bg-mobile-practice">
-        <q-toolbar style="background-color: #9f220c">
-          <div class="row header-container">
-            <div class="col-6">
-              <q-btn
-                v-close-popup
-                icon="fas fa-arrow-left"
-                class="shadow-2 btn-header btn-width-mobile"
-              ></q-btn>
-            </div>
-          </div>
-        </q-toolbar>
-        <q-card-section>
-          <div class="row">
-            <div
-              class="col-6 self-center animate__animated animate__zoomInDown"
-              align="center"
-              v-for="(item, index) in practiceListShow"
-              :key="index"
-              style="animation-duration: 1s"
-            >
-              <div class="">
-                <q-img
-                  contain=""
-                  :src="showIconPractice(item.practiceType)"
-                  @click="gotoPractice(item)"
-                  class="cursor-pointer"
-                  style="max-width: 150px"
-                >
-                  <div
-                    class="transparent absolute-bottom no-padding"
-                    style="width: 80%; bottom: 13px; margin: auto"
-                    align="left"
-                  >
-                    <div align="center">
-                      <span>{{ `${index + 1}. ${item.practiceTypeThai} ` }}</span>
-                    </div>
-                  </div>
-                </q-img>
-
+            <!-- Grammar -->
+            <div>
+              <div class="text-weight-bold text-brown">ไวยากรณ์</div>
+              <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+                ({{ showPracticeName("Grammar").nameEng }})
+              </div>
+              <div class="flex q-gutter-md">
                 <div
-                  class="relative-position"
-                  style="bottom: 10px"
-                  :class="
-                    item.practiceType != 'flashcard' &&
-                    item.practiceType != 'grammarlesson' &&
-                    item.practiceType != 'conversationlesson' &&
-                    item.practiceType != 'languagetips' &&
-                    item.practiceType != 'phonicslesson'
-                      ? ''
-                      : 'invisible'
-                  "
+                  v-for="(item, index) in grammarPracticeList"
+                  :key="index"
+                  class="practice-btn"
                 >
-                  <q-badge color="black">
-                    {{ showPassedPracticeCounter(item.practiceListId) }} / 2
-                  </q-badge>
+                  <q-img
+                    @click="gotoPractice(item)"
+                    style="width: 90px"
+                    :src="showPracticeIcon(item)"
+                  ></q-img>
                 </div>
               </div>
             </div>
+
+            <div class="q-py-md">
+              <hr style="border-top: 3px dashed #eeae5c" />
+            </div>
+
+            <!-- Reading -->
+            <div>
+              <div class="text-weight-bold text-brown">การอ่าน</div>
+              <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+                ({{ showPracticeName("Reading").nameEng }})
+              </div>
+              <div class="flex q-gutter-md">
+                <div
+                  v-for="(item, index) in readingPracticeList"
+                  :key="index"
+                  class="practice-btn"
+                >
+                  <q-img
+                    @click="gotoPractice(item)"
+                    style="width: 90px"
+                    :src="showPracticeIcon(item)"
+                  ></q-img>
+                </div>
+              </div>
+              <div class="q-py-md">
+                <hr style="border-top: 3px dashed #eeae5c" />
+              </div>
+            </div>
           </div>
-        </q-card-section>
-      </q-card>
-    </q-dialog>
+          <div class="col-6 q-py-md q-px-xl">
+            <div style="height: 65px"></div>
+            <!-- Writing -->
+            <div>
+              <div class="text-weight-bold text-brown">การเขียน</div>
+              <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+                ({{ showPracticeName("Writing").nameEng }})
+              </div>
+              <div class="flex q-gutter-md">
+                <div
+                  v-for="(item, index) in writingPracticeList"
+                  :key="index"
+                  class="practice-btn"
+                >
+                  <q-img
+                    @click="gotoPractice(item)"
+                    style="width: 90px"
+                    :src="showPracticeIcon(item)"
+                  ></q-img>
+                </div>
+              </div>
+            </div>
+            <div class="q-py-md">
+              <hr style="border-top: 3px dashed #eeae5c" />
+            </div>
+
+            <!-- Phonics -->
+            <div>
+              <div class="text-weight-bold text-brown">การออกเสียง</div>
+              <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+                ({{ showPracticeName("Phonics").nameEng }})
+              </div>
+              <div class="flex q-gutter-md">
+                <div
+                  v-for="(item, index) in phonicsPracticeList"
+                  :key="index"
+                  class="practice-btn"
+                >
+                  <q-img
+                    @click="gotoPractice(item)"
+                    style="width: 90px"
+                    :src="showPracticeIcon(item)"
+                  ></q-img>
+                </div>
+              </div>
+            </div>
+            <div class="q-py-md">
+              <hr style="border-top: 3px dashed #eeae5c" />
+            </div>
+
+            <!-- Listening & Speaking -->
+            <div>
+              <div class="text-weight-bold text-brown">การฟังและการพูด</div>
+
+              <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+                ({{ showPracticeName("Listening & Speaking").nameEng }})
+              </div>
+
+              <div class="flex q-gutter-md">
+                <div
+                  v-for="(item, index) in listeningPracticeList"
+                  :key="index"
+                  class="practice-btn"
+                >
+                  <q-img
+                    @click="gotoPractice(item)"
+                    style="width: 90px"
+                    :src="showPracticeIcon(item)"
+                  ></q-img>
+                </div>
+              </div>
+            </div>
+            <div class="q-py-md">
+              <hr style="border-top: 3px dashed #eeae5c" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ************************************** Mobile ************************************** -->
+    <div
+      class="mobile-only q-pa-md animate__animated animate__bounceInDown"
+      style="animation-duration: 2s"
+      v-if="isLoad"
+    >
+      <div class="row" style="max-width: 400px; margin: auto">
+        <!-- Level Dropdown -->
+        <div style="width: 85px">
+          <q-select
+            outlined
+            dense
+            borderless
+            v-model="levelSelected"
+            :options="levelOptions"
+            bg-color="amber"
+            glossy
+          ></q-select>
+        </div>
+        <!-- unit Dropdown -->
+        <div class="q-pl-md col">
+          <q-select
+            style="width: 100%; border: 1px solid #4e1617; border-radius: 5px"
+            borderless
+            outlined
+            dense
+            bg-color="white"
+            v-model="unitSelected"
+            :options="unitOptions"
+          ></q-select>
+        </div>
+      </div>
+
+      <!-- Vocabulary List -->
+      <div class="q-pt-lg">
+        <div class="text-weight-bold text-brown">คำศัพท์</div>
+        <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+          ({{ showPracticeName("Vocabulary").nameEng }})
+        </div>
+        <div class="flex q-gutter-md">
+          <div v-for="(item, index) in vocabPracticeList" :key="index">
+            <q-img
+              @click="gotoPractice(item)"
+              style="width: 70px"
+              :src="showPracticeIcon(item)"
+            ></q-img>
+          </div>
+        </div>
+      </div>
+      <div class="q-py-md">
+        <!-- <q-separator /> -->
+        <hr style="border-top: 3px dashed #eeae5c" />
+      </div>
+
+      <!-- Grammar List -->
+      <div>
+        <div class="text-weight-bold text-brown">ไวยากรณ์</div>
+        <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+          ({{ showPracticeName("Grammar").nameEng }})
+        </div>
+        <div class="flex q-gutter-md">
+          <div v-for="(item, index) in grammarPracticeList" :key="index">
+            <q-img
+              @click="gotoPractice(item)"
+              style="width: 70px"
+              :src="showPracticeIcon(item)"
+            ></q-img>
+          </div>
+        </div>
+      </div>
+      <div class="q-py-md">
+        <!-- <q-separator /> -->
+        <hr style="border-top: 3px dashed #eeae5c" />
+      </div>
+
+      <!-- Reading List -->
+      <div>
+        <div class="text-weight-bold text-brown">การอ่าน</div>
+        <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+          ({{ showPracticeName("Reading").nameEng }})
+        </div>
+        <div class="flex q-gutter-md">
+          <div v-for="(item, index) in readingPracticeList" :key="index">
+            <q-img
+              @click="gotoPractice(item)"
+              style="width: 70px"
+              :src="showPracticeIcon(item)"
+            ></q-img>
+          </div>
+        </div>
+      </div>
+      <div class="q-py-md">
+        <!-- <q-separator /> -->
+        <hr style="border-top: 3px dashed #eeae5c" />
+      </div>
+
+      <!-- "Writing" List -->
+      <div>
+        <div class="text-weight-bold text-brown">การเขียน</div>
+        <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+          ({{ showPracticeName("Writing").nameEng }})
+        </div>
+        <div class="flex q-gutter-md">
+          <div v-for="(item, index) in writingPracticeList" :key="index">
+            <q-img
+              @click="gotoPractice(item)"
+              style="width: 70px"
+              :src="showPracticeIcon(item)"
+            ></q-img>
+          </div>
+        </div>
+      </div>
+      <div class="q-py-md">
+        <!-- <q-separator /> -->
+        <hr style="border-top: 3px dashed #eeae5c" />
+      </div>
+
+      <!-- "Phonics" List -->
+      <div>
+        <div class="text-weight-bold text-brown">การฟัง</div>
+        <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+          ({{ showPracticeName("Phonics").nameEng }})
+        </div>
+        <div class="flex q-gutter-md">
+          <div v-for="(item, index) in phonicsPracticeList" :key="index">
+            <q-img
+              @click="gotoPractice(item)"
+              style="width: 70px"
+              :src="showPracticeIcon(item)"
+            ></q-img>
+          </div>
+        </div>
+      </div>
+      <div class="q-py-md">
+        <!-- <q-separator /> -->
+        <hr style="border-top: 3px dashed #eeae5c" />
+      </div>
+
+      <!-- "Listening" List -->
+      <div>
+        <div class="text-weight-bold text-brown">การพูด</div>
+        <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+          ({{ showPracticeName("Listening & Speaking").nameEng }})
+        </div>
+        <div class="flex q-gutter-md">
+          <div v-for="(item, index) in listeningPracticeList" :key="index">
+            <q-img
+              @click="gotoPractice(item)"
+              style="width: 70px"
+              :src="showPracticeIcon(item)"
+            ></q-img>
+          </div>
+        </div>
+      </div>
+      <div class="q-py-md">
+        <!-- <q-separator /> -->
+        <hr style="border-top: 3px dashed #eeae5c" />
+      </div>
+    </div>
+
+    <!-- Mobile  -->
   </q-page>
 </template>
 
 <script>
-import { ref, onMounted, watch, onBeforeUnmount, computed } from "vue";
+import lobbyDay from "../components/lobby/lobbyDayPc";
+import lobbyNight from "../components/lobby/lobbyNightPc";
+import appBar from "../components/app-bar";
+import { ref, onMounted, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { useQuasar } from "quasar";
 import studentHooks from "../hooks/studentHooks.js";
 import practiceHooks from "../hooks/practiceHooks";
-import { useQuasar } from "quasar";
-import { useRouter } from "vue-router";
-import appBar from "../components/app-bar";
-import { auth, db } from "src/router/index.js";
 export default {
-  props: {
-    unitList: {
-      type: Array,
-      default: () => [],
-    },
-    courseId: {
-      type: String,
-      default: "",
-    },
-    themeSync: {
-      type: Number,
-      default: 1,
-    },
-  },
-  emits: ["courseChanged"],
   components: {
+    lobbyDay,
+    lobbyNight,
     appBar,
   },
-  setup(props, { emit }) {
+  setup() {
+    // background mode
+    const mode = ref(false);
     // Router
-    const $q = useQuasar();
     const router = useRouter();
+    const route = useRoute();
+    // Quasar
+    const $q = useQuasar();
+    // Level Selected
+    const levelOptions = ref([]);
+    const levelSelected = ref("");
+    // unit Selected
+    const unitOptions = ref([]);
+    const unitSelected = ref("");
 
-    // UID
+    // Load Practice
+    const practiceLog = ref([]);
+    const practiceList = ref([]);
+    const practiceName = ref([]);
+    const isLoad = ref(false);
 
-    // Course Data
-    const selectLevel = ref("");
+    const vocabPracticeList = ref([]);
+    const grammarPracticeList = ref([]);
+    const readingPracticeList = ref([]);
+    const writingPracticeList = ref([]);
+    const phonicsPracticeList = ref([]);
+    const listeningPracticeList = ref([]);
+    const filterPracticeList = () => {
+      // Vocab Practice List
+      vocabPracticeList.value = practiceList.value.filter(
+        (x) => x.skill == "Vocabulary" && x.unit == unitSelected.value.value
+      );
+      vocabPracticeList.value.sort((a, b) => a.order - b.order);
 
-    // level changed
-    watch(selectLevel, async (newValue, oldValue) => {
-      let uid = auth.currentUser.uid;
-      await db.collection("student").doc(uid).update({
-        currentCourseId: newValue.courseId,
-      });
+      // Grammar Practice List
+      grammarPracticeList.value = practiceList.value.filter(
+        (x) => x.skill == "Grammar" && x.unit == unitSelected.value.value
+      );
+      grammarPracticeList.value.sort((a, b) => a.order - b.order);
+
+      // Reading Practice List
+      readingPracticeList.value = practiceList.value.filter(
+        (x) => x.skill == "Reading" && x.unit == unitSelected.value.value
+      );
+      readingPracticeList.value.sort((a, b) => a.order - b.order);
+
+      // Writing Practice List
+      writingPracticeList.value = practiceList.value.filter(
+        (x) => x.skill == "Writing" && x.unit == unitSelected.value.value
+      );
+      writingPracticeList.value.sort((a, b) => a.order - b.order);
+
+      // Phonics Practice List
+      phonicsPracticeList.value = practiceList.value.filter(
+        (x) => x.skill == "Phonics" && x.unit == unitSelected.value.value
+      );
+      phonicsPracticeList.value.sort((a, b) => a.order - b.order);
+
+      // Listening Practice List
+      listeningPracticeList.value = practiceList.value.filter(
+        (x) => x.skill == "Listening & Speaking" && x.unit == unitSelected.value.value
+      );
+      listeningPracticeList.value.sort((a, b) => a.order - b.order);
+    };
+
+    watch(unitSelected, async (newValue, oldValue) => {
+      getPractice();
+    });
+    watch(levelSelected, async (newValue, oldValue) => {
       getPractice();
     });
 
-    const skillOptions = [
-      {
-        label: "คำศัพท์",
-        value: "Vocabulary",
-      },
-      {
-        label: "ไวยากรณ์",
-        value: "Grammar",
-      },
-      {
-        label: "การอ่าน",
-        value: "Reading",
-      },
-      {
-        label: "การเขียน",
-        value: "Writing",
-      },
-      {
-        label: "การออกเสียง",
-        value: "Phonics",
-      },
-      {
-        label: "การฟังและการพูด",
-        value: "Listening & Speaking",
-      },
-    ];
-
-    const totalUnit = ref(0);
-    const levelList = ref([]);
-    // Get Course
-    const getCourse = async (uid) => {
-      try {
-        let course = await studentHooks.student(uid).course();
-        let allLevel = await practiceHooks.level();
-        course.forEach(async (element) => {
-          levelList.value.push({
-            label: "ระดับ" + allLevel.filter((x) => x.level == element.level)[0].level,
-            value: allLevel.filter((x) => x.level == element.level)[0].level,
-            unit: Number(allLevel.filter((x) => x.level == element.level)[0].unit),
-            courseId: element.courseId,
-          });
-        });
-        selectLevel.value = levelList.value[0];
-        emit("courseChanged", levelList.value[0].courseId);
-        totalUnit.value = levelList.value[0].unit;
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    // Practice Data
-    const practiceList = ref([]);
-    const practiceName = ref([]);
-    const selectSkill = ref("Vocabulary");
-
-    // Next skill (Desktop)
-    const nextSkill = () => {
-      practiceListShow.value = [];
-      if (selectSkill.value == "Vocabulary") {
-        selectSkill.value = "Grammar";
-      } else if (selectSkill.value == "Grammar") {
-        selectSkill.value = "Reading";
-      } else if (selectSkill.value == "Reading") {
-        selectSkill.value = "Writing";
-      } else if (selectSkill.value == "Writing") {
-        selectSkill.value = "Phonics";
-      } else if (selectSkill.value == "Phonics") {
-        selectSkill.value = "Listening & Speaking";
-      }
-      setTimeout(() => {
-        showPracticeList(activeUnit.value);
-      }, 1);
-    };
-
-    const previousSkill = () => {
-      practiceListShow.value = [];
-      if (selectSkill.value == "Grammar") {
-        selectSkill.value = "Vocabulary";
-      } else if (selectSkill.value == "Reading") {
-        selectSkill.value = "Grammar";
-      } else if (selectSkill.value == "Writing") {
-        selectSkill.value = "Reading";
-      } else if (selectSkill.value == "Phonics") {
-        selectSkill.value = "Writing";
-      } else if (selectSkill.value == "Listening & Speaking") {
-        selectSkill.value = "Phonics";
-      }
-      setTimeout(() => {
-        showPracticeList(activeUnit.value);
-      }, 1);
-    };
-
-    const practiceLog = ref([]);
     const getPractice = async () => {
       try {
         $q.loading.show({
@@ -539,113 +464,77 @@ export default {
 
         // Get Practice List
         practiceList.value = await practiceHooks
-          .practice(selectLevel.value.value)
+          .practice(levelSelected.value.value)
           .practiceList();
+        filterPracticeList();
 
         // Get Practice Name
         practiceName.value = await practiceHooks
-          .practice(selectLevel.value.value)
+          .practice(levelSelected.value.value)
           .practiceName();
 
         // Get PracticeLog
-        practiceLog.value = await practiceHooks.practice(selectLevel.value.value).log();
-        if ($q.platform.is.desktop) {
-          activeUnit.value = 1;
-          showPracticeList(activeUnit.value);
-        }
+        practiceLog.value = await practiceHooks.practice(levelSelected.value.value).log();
+        // if ($q.platform.is.desktop) {
+        //   activeUnit.value = 1;
+        //   showPracticeList(activeUnit.value);
+        // }
 
         $q.loading.hide();
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
 
-    // โชว์ชื่อยูนิต
-    const showPracticeListName = (unit) => {
-      let totalPractice = practiceList.value.filter(
-        (x) =>
-          x.level == selectLevel.value.value.toString() &&
-          x.unit == unit.toString() &&
-          x.skill == selectSkill.value
-      ).length;
+    // Level List
+    // Get Course
+    const getCourse = async (uid) => {
+      try {
+        let course = await studentHooks.student(uid).course();
+        let allLevel = await practiceHooks.level();
+        course.forEach(async (element) => {
+          levelOptions.value.push({
+            label: "ระดับ" + allLevel.filter((x) => x.level == element.level)[0].level,
+            value: allLevel.filter((x) => x.level == element.level)[0].level,
+            unit: Number(allLevel.filter((x) => x.level == element.level)[0].unit),
+            courseId: element.courseId,
+          });
+        });
 
-      let filter = practiceName.value.filter(
-        (x) =>
-          x.level == selectLevel.value.value.toString() &&
-          x.unit == unit.toString() &&
-          x.skill == selectSkill.value
-      )[0];
+        levelSelected.value = levelOptions.value[0];
+        const totalUnit = levelOptions.value[0].unit;
 
-      if (filter) {
-        filter.totalPractice = totalPractice;
-        return filter;
+        let tempUnit = [];
+        for (let unit = 0; unit < totalUnit; unit++) {
+          tempUnit.push({
+            label: "บทที่" + (unit + 1),
+            value: unit + 1,
+          });
+        }
+        unitOptions.value = tempUnit;
+        unitSelected.value = tempUnit[0];
+      } catch (error) {
+        console.error(error);
       }
     };
 
-    // โชว์จำนวนแบบฝึกหัดที่มีทั้งหมดภายในเลเวล-ทักษะ
-    const showNumberOfAllPracticeInLevel = computed(() => {
-      let totalPracticeInLevel = practiceList.value.filter(
-        (x) =>
-          x.level == selectLevel.value.value.toString() && x.skill == selectSkill.value
-      ).length;
-      return totalPracticeInLevel;
-    });
+    const showPracticeIcon = (item) => {
+      let type = item.practiceType;
 
-    // โชว์จำนวนแบบฝึกหัดที่ทำไปแล้ว ภายใน เลเวล ยูนิต ทักษะ
-    const showPassedPracticeNumber = (unit) => {
-      let result =
-        practiceLog.value.filter(
-          (x) =>
-            x.level == selectLevel.value.value &&
-            x.skill == selectSkill.value &&
-            x.unit == unit
-        ).length || 0;
-      return result;
-    };
+      let star = 0;
 
-    // โชว์จำนวนแบบฝึกหัดที่ทำไปแล้วทั้งหมด ภายในเลเวล
-    const showAllPassedPractice = computed(() => {
-      let result =
-        practiceLog.value.filter(
-          (x) => x.level == selectLevel.value.value && x.skill == selectSkill.value
-        ).length || 0;
-      return result;
-    });
-
-    // โชว์แบบฝึกหัด ที่ถูกเลือกจากลิสท์ด้านซ้าย
-    const isShowPracticeDialogMobile = ref(false);
-    const practiceListShow = ref([]);
-    const showPracticeList = (unit) => {
-      practiceListShow.value = [];
-      let temp = [];
-      temp = practiceList.value.filter(
-        (x) =>
-          x.level == selectLevel.value.value.toString() &&
-          x.unit == unit.toString() &&
-          x.skill == selectSkill.value
+      let findStar = practiceLog.value.filter(
+        (x) => x.practiceListId == item.practiceListId
       );
-      temp.sort((a, b) => a.order - b.order);
-      practiceListShow.value = temp;
 
-      if ($q.platform.is.mobile) {
-        isShowPracticeDialogMobile.value = true;
+      let learningImg = require("../../public/images/practicelist/learning.png");
+
+      if (findStar.length) {
+        star = findStar[0].star;
+        learningImg = require("../../public/images/practicelist/learning-1.png");
       }
-    };
 
-    // โชว์จำนวนครั้งที่ทำแบบฝึกหัดไป
-
-    const showPassedPracticeCounter = (practiceListId) => {
-      let result = practiceLog.value.filter((x) => x.practiceListId == practiceListId);
-      if (result.length) {
-        return result[0].counter;
-      } else {
-        return 0;
-      }
-    };
-
-    // แสดงผลไอคอนแบบฝึกหัด
-    const showIconPractice = (type) => {
-      let nameImage = require("../../public/images/practicelist/action-btn-star0.png");
+      let nameImage;
       if (
         type == "flashcard" ||
         type == "grammarlesson" ||
@@ -653,26 +542,39 @@ export default {
         type == "languagetips" ||
         type == "conversationlesson"
       ) {
-        nameImage = require("../../public/images/practicelist/teaching-btn-default.png");
+        nameImage = learningImg;
       } else if (type == "matching") {
-        nameImage = require("../../public/images/practicelist/matching-btn-star0.png");
-      } else if (type.includes("multiplechoices")) {
-        nameImage = require("../../public/images/practicelist/multiple-btn-star0.png");
-      } else if (type == "clozetest") {
-        nameImage = require("../../public/images/practicelist/writing-btn-star0.png");
+        nameImage = require(`../../public/images/practicelist/matching-btn-${star}.png`);
+      } else if (type.includes("multi")) {
+        nameImage = require(`../../public/images/practicelist/multi-btn-${star}.png`);
+      } else if (type == "clozetest" || type == "translation") {
+        nameImage = require(`../../public/images/practicelist/writing-btn-${star}.png`);
+      } else if (type == "spellingbee") {
+        nameImage = require(`../../public/images/practicelist/spell-btn-${star}.png`);
+      } else if (type == "grammaraction") {
+        nameImage = require(`../../public/images/practicelist/action-btn-${star}.png`);
       }
       let random = Math.random();
-      return `${nameImage}?r=${random}`;
-    };
-    // route to แบบฝึกหัด
-    const gotoPractice = (data) => {
-      let checkCounter = showPassedPracticeCounter(data.practiceListId);
 
-      if (data.practiceType != "flashcard") {
-        if (checkCounter >= 2) {
-          return;
-        }
-      }
+      return `${nameImage}`;
+    };
+
+    const showPracticeName = (skill) => {
+      let res = practiceName.value.filter(
+        (x) => x.skill == skill && x.unit == unitSelected.value.value.toString()
+      );
+
+      return res ? res[0] : "";
+    };
+
+    const gotoPractice = (data) => {
+      // let checkCounter = showPassedPracticeCounter(data.practiceListId);
+
+      // if (data.practiceType != "flashcard") {
+      //   if (checkCounter >= 2) {
+      //     return;
+      //   }
+      // }
 
       let routerName = "";
 
@@ -716,228 +618,56 @@ export default {
       router.push(routerName + data.practiceListId);
     };
 
-    // Initial Data
-    var authListen = "";
-
-    const loadInitialData = async () => {
-      $q.loading.show();
-      authListen = auth.onAuthStateChanged(async function (user) {
+    onMounted(() => {
+      firebase.auth().onAuthStateChanged(async function (user) {
         if (user) {
           // User is signed in.
           await getCourse(user.uid);
           await getPractice();
-          $q.loading.hide();
+          isLoad.value = true;
         } else {
           // User is signed out.
-          $q.router.push("/");
-          $q.loading.hide();
+          router.push("/");
         }
       });
-    };
-
-    onMounted(() => {
-      loadInitialData();
     });
-
-    onBeforeUnmount(() => {
-      authListen();
-    });
-
-    // --------------------------------------------
-
-    const activeUnit = ref(null);
-
-    const unitCompleteList = ref([
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-    ]);
 
     return {
-      // test
-      // Course Data
-      selectLevel,
-      totalUnit,
-
-      // Practice Data
-      selectSkill,
+      mode,
+      levelOptions,
+      levelSelected,
+      unitOptions,
+      unitSelected,
       practiceList,
-      showPracticeListName,
-      showPracticeList,
-      practiceListShow,
-      showIconPractice,
-      gotoPractice,
-      showPassedPracticeNumber,
-      showPassedPracticeCounter,
-      // SKill select for mobile
-      selectSkill,
-      skillOptions,
-      showAllPassedPractice,
-      showNumberOfAllPracticeInLevel,
-      nextSkill,
-      previousSkill,
-      // Level , Unit
-      levelList,
-      unitCompleteList,
-      activeUnit,
-      // mobile dialog
-      isShowPracticeDialogMobile,
+      practiceName,
       practiceLog,
+      vocabPracticeList,
+      grammarPracticeList,
+      readingPracticeList,
+      writingPracticeList,
+      phonicsPracticeList,
+      listeningPracticeList,
+      showPracticeIcon,
+      gotoPractice,
+      isLoad,
+      showPracticeName,
     };
   },
 };
 </script>
 
-<style scoped>
-.bg-mobile-practice {
-  background-image: url("../../public/images/practicelist/bg-map-theme-1.png");
+<style lang="scss" scoped>
+.level-select-color {
+  background-image: linear-gradient(#ffcb54, #f2a81e);
+}
+.bg-practice-img {
+  background-image: url("../../public/images/practicelist/bg-practice.png");
+  background-repeat: repeat-x;
+  background-size: cover;
   background-position: center;
 }
-.btn-header {
-  border: 1px solid#FFC52E;
-  background-color: #6d4300;
-  border-radius: 10px;
-  color: #ffc52e;
-}
-
-.bg-practice-main {
-  background-image: url("../../public/images/practicelist/bg-practicelist.png");
-}
-
-.bg-map {
-  background-color: #d2ecff;
-  background-size: contain;
-}
-
-.box-container-pracitcelist {
-  max-width: 450px;
-  width: 75%;
-  background-color: #ffe6cf;
-  border-radius: 10px;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-}
-
-.box-content-practicelist {
-  background-color: #9f220c;
-}
-
-.box-content-progress-practice {
-  background-color: #fff;
-  border: 2px solid #7b6060;
-  border-radius: 20px;
-  height: 15px;
-  overflow: hidden;
-}
-
-.progress-bar {
-  height: 100%;
-  background-color: #e57373;
-  border-radius: 5px;
-}
-
-.box-content-practice-list {
-  height: calc(100vh - 300px);
-  min-height: fit-content;
-  overflow-y: scroll;
-}
-
-/* width */
-.box-content-practice-list::-webkit-scrollbar {
-  width: 8px;
-}
-
-/* Track */
-.box-content-practice-list::-webkit-scrollbar-track {
-  background: #7b6060;
-  border-radius: 20px;
-}
-
-/* Handle */
-.box-content-practice-list::-webkit-scrollbar-thumb {
-  background: #e57373;
-  border-radius: 20px;
-}
-
-/* Handle on hover */
-.box-content-practice-list::-webkit-scrollbar-thumb:hover {
-  background: rgb(197, 111, 111);
-}
-
-.box-content {
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.content-success {
-  box-shadow: 0 3px 0px #428c25;
-}
-
-.content-default {
-  box-shadow: 0 3px 0px #db8200;
-}
-
-.content-current {
-  box-shadow: 0 3px 0px #55aabe;
-}
-
-.text-success {
-  color: #428c25;
-}
-
-.bg-success {
-  background-color: #64a74a;
-}
-.bg-default {
-  background-color: #ffaa2e;
-}
-.bg-current {
-  background-color: #4adcfe;
-}
-
-.box-content-menu {
-  height: 90%;
-  overflow-y: auto;
-}
-
-.bg-r-img {
-  background-image: url("../../public/images/practicelist/bg-map-theme-1.png");
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-/* width */
-.box-content-menu::-webkit-scrollbar {
-  width: 8px;
-}
-
-/* Track */
-.box-content-menu::-webkit-scrollbar-track {
-  background: #7b6060;
-  border-radius: 20px;
-}
-
-/* Handle */
-.box-content-menu::-webkit-scrollbar-thumb {
-  background: #e57373;
-  border-radius: 20px;
-}
-
-/* Handle on hover */
-.box-content-menu::-webkit-scrollbar-thumb:hover {
-  background: rgb(197, 111, 111);
+.practice-btn:hover {
+  transform: scale(0.95);
+  cursor: pointer;
 }
 </style>
