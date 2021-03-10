@@ -10,36 +10,184 @@
       <lobby-day class="absolute-top fit" v-if="mode"></lobby-day>
       <lobby-night class="absolute-top fit" v-else> </lobby-night>
       <div
-        class="absolute-center bg-practice-img"
-        style="
-          border-radius: 40px;
-          border: 10px solid #f68a14;
-          max-width: 1200px;
-          width: 90%;
-          height: 80%;
-          background-color: #fff1d6;
-        "
-      ></div>
+        v-if="isLoad"
+        class="absolute-center"
+        style="width: 90%; height: 70%; min-height: fit-content; max-width: 1200px"
+      >
+        <div
+          class="bg-practice-img row animate__animated animate__bounceInDown"
+          style="
+            animation-duration: 2s;
+            border-radius: 40px;
+            border: 10px solid #f68a14;
+            background-color: #fff1d6;
+          "
+        >
+          <div class="col-6 q-py-md q-px-xl" style="box-shadow: 1px 1px 5px">
+            <div class="row" style="width: 100%; margin: auto">
+              <!-- Level Dropdown -->
+              <div style="width: 85px">
+                <q-select
+                  outlined
+                  dense
+                  borderless
+                  v-model="levelSelected"
+                  :options="levelOptions"
+                  bg-color="amber"
+                  glossy
+                ></q-select>
+              </div>
+              <!-- unit Dropdown -->
+              <div class="q-pl-md col">
+                <q-select
+                  style="width: 100%; border: 1px solid #4e1617; border-radius: 5px"
+                  borderless
+                  outlined
+                  dense
+                  bg-color="white"
+                  v-model="unitSelected"
+                  :options="unitOptions"
+                ></q-select>
+              </div>
+            </div>
+
+            <!-- Vocabulary -->
+            <div class="q-pt-lg">
+              <div class="q-pb-sm text-weight-bold text-brown">คำศัพท์</div>
+              <div class="flex q-gutter-md">
+                <div v-for="(item, index) in vocabPracticeList" :key="index">
+                  <q-img
+                    @click="gotoPractice(item)"
+                    style="width: 70px"
+                    :src="showPracticeIcon(item)"
+                  ></q-img>
+                </div>
+              </div>
+            </div>
+
+            <div class="q-py-md">
+              <hr style="border-top: 3px dashed #eeae5c" />
+            </div>
+
+            <!-- Grammar -->
+            <div>
+              <div class="q-pb-sm text-weight-bold text-brown">ไวยากรณ์</div>
+              <div class="flex q-gutter-md">
+                <div v-for="(item, index) in grammarPracticeList" :key="index">
+                  <q-img
+                    @click="gotoPractice(item)"
+                    style="width: 70px"
+                    :src="showPracticeIcon(item)"
+                  ></q-img>
+                </div>
+              </div>
+            </div>
+
+            <div class="q-py-md">
+              <hr style="border-top: 3px dashed #eeae5c" />
+            </div>
+
+            <!-- Reading -->
+            <div>
+              <div class="q-pb-sm text-weight-bold text-brown">การอ่าน</div>
+              <div class="flex q-gutter-md">
+                <div v-for="(item, index) in readingPracticeList" :key="index">
+                  <q-img
+                    @click="gotoPractice(item)"
+                    style="width: 70px"
+                    :src="showPracticeIcon(item)"
+                  ></q-img>
+                </div>
+              </div>
+              <div class="q-py-md">
+                <hr style="border-top: 3px dashed #eeae5c" />
+              </div>
+            </div>
+          </div>
+          <div class="col-6 q-py-md q-px-xl">
+            <div style="height: 65px"></div>
+            <!-- Writing -->
+            <div>
+              <div class="q-pb-sm text-weight-bold text-brown">การเขียน</div>
+              <div class="flex q-gutter-md">
+                <div v-for="(item, index) in writingPracticeList" :key="index">
+                  <q-img
+                    @click="gotoPractice(item)"
+                    style="width: 70px"
+                    :src="showPracticeIcon(item)"
+                  ></q-img>
+                </div>
+              </div>
+            </div>
+            <div class="q-py-md">
+              <hr style="border-top: 3px dashed #eeae5c" />
+            </div>
+
+            <!-- Phonics -->
+            <div>
+              <div class="q-pb-sm text-weight-bold text-brown">การเขียน</div>
+              <div class="flex q-gutter-md">
+                <div v-for="(item, index) in phonicsPracticeList" :key="index">
+                  <q-img
+                    @click="gotoPractice(item)"
+                    style="width: 70px"
+                    :src="showPracticeIcon(item)"
+                  ></q-img>
+                </div>
+              </div>
+            </div>
+            <div class="q-py-md">
+              <hr style="border-top: 3px dashed #eeae5c" />
+            </div>
+
+            <!-- Listening & Speaking -->
+            <div>
+              <div class="q-pb-sm text-weight-bold text-brown">การฟังและการพูด</div>
+              <div class="flex q-gutter-md">
+                <div v-for="(item, index) in writingPracticeList" :key="index">
+                  <q-img
+                    @click="gotoPractice(item)"
+                    style="width: 70px"
+                    :src="showPracticeIcon(item)"
+                  ></q-img>
+                </div>
+              </div>
+            </div>
+            <div class="q-py-md">
+              <hr style="border-top: 3px dashed #eeae5c" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Mobile -->
-    <div class="mobile-only q-pa-md">
+    <!-- ************************************** Mobile ************************************** -->
+    <div
+      class="mobile-only q-pa-md animate__animated animate__bounceInDown"
+      style="animation-duration: 2s"
+      v-if="isLoad"
+    >
       <div class="row" style="max-width: 400px; margin: auto">
         <!-- Level Dropdown -->
         <div style="width: 85px">
           <q-select
             outlined
             dense
+            borderless
             v-model="levelSelected"
             :options="levelOptions"
+            bg-color="amber"
+            glossy
           ></q-select>
         </div>
-        <!-- Skill Dropdown -->
+        <!-- unit Dropdown -->
         <div class="q-pl-md col">
           <q-select
-            style="width: 100%"
+            style="width: 100%; border: 1px solid #4e1617; border-radius: 5px"
+            borderless
             outlined
             dense
+            bg-color="white"
             v-model="unitSelected"
             :options="unitOptions"
           ></q-select>
@@ -54,7 +202,7 @@
             <q-img
               @click="gotoPractice(item)"
               style="width: 70px"
-              :src="showPracticeIcon(item.practiceType)"
+              :src="showPracticeIcon(item)"
             ></q-img>
           </div>
         </div>
@@ -72,7 +220,7 @@
             <q-img
               @click="gotoPractice(item)"
               style="width: 70px"
-              :src="showPracticeIcon(item.practiceType)"
+              :src="showPracticeIcon(item)"
             ></q-img>
           </div>
         </div>
@@ -90,7 +238,7 @@
             <q-img
               @click="gotoPractice(item)"
               style="width: 70px"
-              :src="showPracticeIcon(item.practiceType)"
+              :src="showPracticeIcon(item)"
             ></q-img>
           </div>
         </div>
@@ -108,7 +256,7 @@
             <q-img
               @click="gotoPractice(item)"
               style="width: 70px"
-              :src="showPracticeIcon(item.practiceType)"
+              :src="showPracticeIcon(item)"
             ></q-img>
           </div>
         </div>
@@ -126,7 +274,7 @@
             <q-img
               @click="gotoPractice(item)"
               style="width: 70px"
-              :src="showPracticeIcon(item.practiceType)"
+              :src="showPracticeIcon(item)"
             ></q-img>
           </div>
         </div>
@@ -144,7 +292,7 @@
             <q-img
               @click="gotoPractice(item)"
               style="width: 70px"
-              :src="showPracticeIcon(item.practiceType)"
+              :src="showPracticeIcon(item)"
             ></q-img>
           </div>
         </div>
@@ -193,6 +341,7 @@ export default {
     const practiceLog = ref([]);
     const practiceList = ref([]);
     const practiceName = ref([]);
+    const isLoad = ref(false);
 
     const vocabPracticeList = ref([]);
     const grammarPracticeList = ref([]);
@@ -307,7 +456,19 @@ export default {
       }
     };
 
-    const showPracticeIcon = (type) => {
+    const showPracticeIcon = (item) => {
+      let type = item.practiceType;
+
+      let star = 0;
+
+      let findStar = practiceLog.value.filter(
+        (x) => x.practiceListId == item.practiceListId
+      );
+
+      if (findStar.length) {
+        star = findStar[0].star;
+      }
+
       let nameImage;
       if (
         type == "flashcard" ||
@@ -318,15 +479,15 @@ export default {
       ) {
         nameImage = require("../../public/images/practicelist/learning.png");
       } else if (type == "matching") {
-        nameImage = require("../../public/images/practicelist/matching-btn-0.png");
-      } else if (type.includes("multiplechoices")) {
-        nameImage = require("../../public/images/practicelist/multi-btn-0.png");
+        nameImage = require(`../../public/images/practicelist/matching-btn-${star}.png`);
+      } else if (type.includes("multi")) {
+        nameImage = require(`../../public/images/practicelist/multi-btn-${star}.png`);
       } else if (type == "clozetest" || type == "translation") {
-        nameImage = require("../../public/images/practicelist/writing-btn-0.png");
+        nameImage = require(`../../public/images/practicelist/writing-btn-${star}.png`);
       } else if (type == "spellingbee") {
-        nameImage = require("../../public/images/practicelist/spell-btn-0.png");
+        nameImage = require(`../../public/images/practicelist/spell-btn-${star}.png`);
       } else if (type == "grammaraction") {
-        nameImage = require("../../public/images/practicelist/action-btn-0.png");
+        nameImage = require(`../../public/images/practicelist/action-btn-${star}.png`);
       }
       let random = Math.random();
 
@@ -390,6 +551,7 @@ export default {
           // User is signed in.
           await getCourse(user.uid);
           await getPractice();
+          isLoad.value = true;
         } else {
           // User is signed out.
           router.push("/");
@@ -414,12 +576,16 @@ export default {
       listeningPracticeList,
       showPracticeIcon,
       gotoPractice,
+      isLoad,
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.level-select-color {
+  background-image: linear-gradient(#ffcb54, #f2a81e);
+}
 .bg-practice-img {
   background-image: url("../../public/images/practicelist/bg-practice.png");
   background-repeat: repeat-x;
