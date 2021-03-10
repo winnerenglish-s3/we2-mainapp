@@ -21,6 +21,7 @@
             border-radius: 40px;
             border: 10px solid #f68a14;
             background-color: #fff1d6;
+            overflow: hidden;
           "
         >
           <div class="col-6 q-py-md q-px-xl" style="box-shadow: 1px 1px 5px">
@@ -34,7 +35,6 @@
                   v-model="levelSelected"
                   :options="levelOptions"
                   bg-color="amber"
-                  glossy
                 ></q-select>
               </div>
               <!-- unit Dropdown -->
@@ -53,12 +53,19 @@
 
             <!-- Vocabulary -->
             <div class="q-pt-lg">
-              <div class="q-pb-sm text-weight-bold text-brown">คำศัพท์</div>
+              <div class="text-weight-bold text-brown">คำศัพท์</div>
+              <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+                ({{ showPracticeName("Vocabulary").nameEng }})
+              </div>
               <div class="flex q-gutter-md">
-                <div v-for="(item, index) in vocabPracticeList" :key="index">
+                <div
+                  v-for="(item, index) in vocabPracticeList"
+                  :key="index"
+                  class="practice-btn"
+                >
                   <q-img
                     @click="gotoPractice(item)"
-                    style="width: 70px"
+                    style="width: 90px"
                     :src="showPracticeIcon(item)"
                   ></q-img>
                 </div>
@@ -71,12 +78,19 @@
 
             <!-- Grammar -->
             <div>
-              <div class="q-pb-sm text-weight-bold text-brown">ไวยากรณ์</div>
+              <div class="text-weight-bold text-brown">ไวยากรณ์</div>
+              <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+                ({{ showPracticeName("Grammar").nameEng }})
+              </div>
               <div class="flex q-gutter-md">
-                <div v-for="(item, index) in grammarPracticeList" :key="index">
+                <div
+                  v-for="(item, index) in grammarPracticeList"
+                  :key="index"
+                  class="practice-btn"
+                >
                   <q-img
                     @click="gotoPractice(item)"
-                    style="width: 70px"
+                    style="width: 90px"
                     :src="showPracticeIcon(item)"
                   ></q-img>
                 </div>
@@ -89,12 +103,19 @@
 
             <!-- Reading -->
             <div>
-              <div class="q-pb-sm text-weight-bold text-brown">การอ่าน</div>
+              <div class="text-weight-bold text-brown">การอ่าน</div>
+              <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+                ({{ showPracticeName("Reading").nameEng }})
+              </div>
               <div class="flex q-gutter-md">
-                <div v-for="(item, index) in readingPracticeList" :key="index">
+                <div
+                  v-for="(item, index) in readingPracticeList"
+                  :key="index"
+                  class="practice-btn"
+                >
                   <q-img
                     @click="gotoPractice(item)"
-                    style="width: 70px"
+                    style="width: 90px"
                     :src="showPracticeIcon(item)"
                   ></q-img>
                 </div>
@@ -108,12 +129,19 @@
             <div style="height: 65px"></div>
             <!-- Writing -->
             <div>
-              <div class="q-pb-sm text-weight-bold text-brown">การเขียน</div>
+              <div class="text-weight-bold text-brown">การเขียน</div>
+              <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+                ({{ showPracticeName("Writing").nameEng }})
+              </div>
               <div class="flex q-gutter-md">
-                <div v-for="(item, index) in writingPracticeList" :key="index">
+                <div
+                  v-for="(item, index) in writingPracticeList"
+                  :key="index"
+                  class="practice-btn"
+                >
                   <q-img
                     @click="gotoPractice(item)"
-                    style="width: 70px"
+                    style="width: 90px"
                     :src="showPracticeIcon(item)"
                   ></q-img>
                 </div>
@@ -125,12 +153,19 @@
 
             <!-- Phonics -->
             <div>
-              <div class="q-pb-sm text-weight-bold text-brown">การเขียน</div>
+              <div class="text-weight-bold text-brown">การออกเสียง</div>
+              <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+                ({{ showPracticeName("Phonics").nameEng }})
+              </div>
               <div class="flex q-gutter-md">
-                <div v-for="(item, index) in phonicsPracticeList" :key="index">
+                <div
+                  v-for="(item, index) in phonicsPracticeList"
+                  :key="index"
+                  class="practice-btn"
+                >
                   <q-img
                     @click="gotoPractice(item)"
-                    style="width: 70px"
+                    style="width: 90px"
                     :src="showPracticeIcon(item)"
                   ></q-img>
                 </div>
@@ -142,12 +177,21 @@
 
             <!-- Listening & Speaking -->
             <div>
-              <div class="q-pb-sm text-weight-bold text-brown">การฟังและการพูด</div>
+              <div class="text-weight-bold text-brown">การฟังและการพูด</div>
+
+              <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+                ({{ showPracticeName("Listening & Speaking").nameEng }})
+              </div>
+
               <div class="flex q-gutter-md">
-                <div v-for="(item, index) in writingPracticeList" :key="index">
+                <div
+                  v-for="(item, index) in listeningPracticeList"
+                  :key="index"
+                  class="practice-btn"
+                >
                   <q-img
                     @click="gotoPractice(item)"
-                    style="width: 70px"
+                    style="width: 90px"
                     :src="showPracticeIcon(item)"
                   ></q-img>
                 </div>
@@ -196,7 +240,10 @@
 
       <!-- Vocabulary List -->
       <div class="q-pt-lg">
-        <div class="q-pb-sm text-weight-bold text-brown">คำศัพท์</div>
+        <div class="text-weight-bold text-brown">คำศัพท์</div>
+        <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+          ({{ showPracticeName("Vocabulary").nameEng }})
+        </div>
         <div class="flex q-gutter-md">
           <div v-for="(item, index) in vocabPracticeList" :key="index">
             <q-img
@@ -214,7 +261,10 @@
 
       <!-- Grammar List -->
       <div>
-        <div class="q-pb-sm text-weight-bold text-brown">ไวยากรณ์</div>
+        <div class="text-weight-bold text-brown">ไวยากรณ์</div>
+        <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+          ({{ showPracticeName("Grammar").nameEng }})
+        </div>
         <div class="flex q-gutter-md">
           <div v-for="(item, index) in grammarPracticeList" :key="index">
             <q-img
@@ -232,7 +282,10 @@
 
       <!-- Reading List -->
       <div>
-        <div class="q-pb-sm text-weight-bold text-brown">การอ่าน</div>
+        <div class="text-weight-bold text-brown">การอ่าน</div>
+        <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+          ({{ showPracticeName("Reading").nameEng }})
+        </div>
         <div class="flex q-gutter-md">
           <div v-for="(item, index) in readingPracticeList" :key="index">
             <q-img
@@ -250,7 +303,10 @@
 
       <!-- "Writing" List -->
       <div>
-        <div class="q-pb-sm text-weight-bold text-brown">การเขียน</div>
+        <div class="text-weight-bold text-brown">การเขียน</div>
+        <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+          ({{ showPracticeName("Writing").nameEng }})
+        </div>
         <div class="flex q-gutter-md">
           <div v-for="(item, index) in writingPracticeList" :key="index">
             <q-img
@@ -268,7 +324,10 @@
 
       <!-- "Phonics" List -->
       <div>
-        <div class="q-pb-sm text-weight-bold text-brown">การฟัง</div>
+        <div class="text-weight-bold text-brown">การฟัง</div>
+        <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+          ({{ showPracticeName("Phonics").nameEng }})
+        </div>
         <div class="flex q-gutter-md">
           <div v-for="(item, index) in phonicsPracticeList" :key="index">
             <q-img
@@ -286,7 +345,10 @@
 
       <!-- "Listening" List -->
       <div>
-        <div class="q-pb-sm text-weight-bold text-brown">การพูด</div>
+        <div class="text-weight-bold text-brown">การพูด</div>
+        <div style="color: #a95d00" class="text-weight-bolder q-pb-sm">
+          ({{ showPracticeName("Listening & Speaking").nameEng }})
+        </div>
         <div class="flex q-gutter-md">
           <div v-for="(item, index) in listeningPracticeList" :key="index">
             <q-img
@@ -465,8 +527,11 @@ export default {
         (x) => x.practiceListId == item.practiceListId
       );
 
+      let learningImg = require("../../public/images/practicelist/learning.png");
+
       if (findStar.length) {
         star = findStar[0].star;
+        learningImg = require("../../public/images/practicelist/learning-1.png");
       }
 
       let nameImage;
@@ -477,7 +542,7 @@ export default {
         type == "languagetips" ||
         type == "conversationlesson"
       ) {
-        nameImage = require("../../public/images/practicelist/learning.png");
+        nameImage = learningImg;
       } else if (type == "matching") {
         nameImage = require(`../../public/images/practicelist/matching-btn-${star}.png`);
       } else if (type.includes("multi")) {
@@ -492,6 +557,14 @@ export default {
       let random = Math.random();
 
       return `${nameImage}`;
+    };
+
+    const showPracticeName = (skill) => {
+      let res = practiceName.value.filter(
+        (x) => x.skill == skill && x.unit == unitSelected.value.value.toString()
+      );
+
+      return res ? res[0] : "";
     };
 
     const gotoPractice = (data) => {
@@ -577,6 +650,7 @@ export default {
       showPracticeIcon,
       gotoPractice,
       isLoad,
+      showPracticeName,
     };
   },
 };
@@ -591,5 +665,9 @@ export default {
   background-repeat: repeat-x;
   background-size: cover;
   background-position: center;
+}
+.practice-btn:hover {
+  transform: scale(0.95);
+  cursor: pointer;
 }
 </style>
