@@ -18,6 +18,7 @@
     <translation-pc
       :themeSync="themeSync"
       :practiceData="practiceData"
+      @callback-nextquestion="funcSelectedQuestion()"
       v-if="$q.platform.is.desktop && !isSynchronize && isLoadPractice"
     ></translation-pc>
 
@@ -79,6 +80,8 @@ export default {
       question: "",
       choices: [],
       questionTh: "",
+      nameTh: "",
+      nameEng: "",
     });
 
     const isLoadPractice = ref(false);
@@ -96,6 +99,20 @@ export default {
 
         // Practice Data : Show Total Question
         practiceData.totalQuestion = getData.data().numOfPractice;
+
+        try {
+          let getPracticeName = await db
+            .collection("practiceListName")
+            .where("level", "==", getData.data().level)
+            .where("unit", "==", getData.data().unit)
+            .where("skill", "==", "Writing")
+            .get();
+
+          practiceData.nameEng = getPracticeName.docs[0].data().nameEng;
+          practiceData.nameTh = getPracticeName.docs[0].data().nameTh;
+        } catch (error) {
+          console.log(`${error} : Get Load Practice List Name`);
+        }
 
         // Get Practice Data
         const apiURL =
@@ -179,6 +196,9 @@ export default {
       // Practice Data : Show Question Th
       practiceData.questionTh =
         questionList.value[practiceData.currentQuestion].sentenceTh;
+
+      practiceData.questionEng =
+        questionList.value[practiceData.currentQuestion].sentenceEng;
 
       let tempChoices = questionList.value[practiceData.currentQuestion].sentenceExtra;
       // .map((x, index) => {

@@ -144,19 +144,20 @@
               "
             ></q-img>
 
-            <q-img
+            <!-- <q-img
               v-if="isSendAnswer"
               style="max-width: 200px; z-index: 2"
               class="cursor-pointer"
               @click="nextQuestion()"
               src="../../../public/images/next-question-btn.png"
-            ></q-img>
+            ></q-img> -->
           </div>
         </div>
       </div>
       <!-- <div class="col-2 bg-well-right"></div> -->
     </div>
 
+    <!-- Show Dialog Answer -->
     <q-dialog
       maximized
       v-model="isDialogAnswer"
@@ -198,6 +199,7 @@
               <q-space></q-space>
               <div class="self-center">
                 <q-btn
+                  @click="isSendAnswer ? nextQuestion() : null"
                   v-close-popup
                   class="text-white rounded-borders"
                   style="background-color: #58a700; width: 200px"
@@ -336,7 +338,6 @@ export default {
 
     const nextQuestion = () => {
       isSendAnswer.value = false;
-      console.log(currentAnswerList.value);
 
       emit("sendNextQuestion");
     };

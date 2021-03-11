@@ -1,89 +1,149 @@
 <template>
   <div>
-    <div class="box-container-main relative-position">
-      <div>
+    <div class="relative-position">
+      <div class="col-12">
         <div>
           <header-bar :practiceData="practiceData"></header-bar>
         </div>
       </div>
-      <div align="center">
-        <div class="box-question q-pa-md">
-          <span v-html="practiceData.questionTh"></span>
+    </div>
+
+    <div class="row q-px-xl justify-center q-py-md">
+      <div class="col-6 self-start q-py-md" align="center">
+        <div class="box-question q-pa-sm">
+          <span class="f20 text-bold" v-html="practiceData.nameEng"></span>
         </div>
-        <div class="box-content-question q-pb-xl q-pa-lg row">
-          <div class="self-center" v-for="(item, index) in practiceData.question">
-            <div class="f18 q-ma-xs" v-html="item.answer" v-if="!item.isAnswer"></div>
+        <div class="box-content-question q-pb-xl q-pa-lg">
+          <div class="row">
             <div
-              v-if="item.isAnswer"
-              :data-selected="selectedBoxAnswer == index ? true : false"
-              class="relative-position cursor-pointer q-ma-xs q-my-sm btn-selected-answer row items-center justify-center q-pa-xs"
-              :class="selectedBoxAnswer == index ? 'bg-cyan-3' : 'bg-grey-6'"
+              class="self-center"
+              v-for="(item, index) in practiceData.question"
               @click="selectedBoxAnswer = index"
             >
-              <div class="col-12 absolute-center" style="top: -0px">
-                <q-icon
-                  v-if="selectedBoxAnswer == index"
-                  name="fas fa-caret-down"
-                  class="text-red-10"
-                  size="36px"
-                ></q-icon>
+              <div class="self-center relative-position">
+                <div class="f18 q-mx-xs" v-html="item.answer" v-if="!item.isAnswer"></div>
+                <div
+                  v-if="item.isAnswer"
+                  class="q-my-sm q-mx-sm"
+                  @click="
+                    item.currentAnswer != ''
+                      ? funcSelectedBackAnswer(item.currentAnswer, index)
+                      : null
+                  "
+                  :class="
+                    currentSelectAnswerBox == index
+                      ? 'btn-selected-answer bg-amber-4'
+                      : item.currentAnswer != ''
+                      ? 'btn-has-answer cursor-pointer'
+                      : 'btn-not-selected-answer'
+                  "
+                >
+                  {{ item.currentAnswer }}
+                </div>
               </div>
-              <div>
-                <span>{{ item.answer }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="box-content-answer q-pa-md q-mt-lg row">
-          <div class="q-ma-sm" v-for="(item, index) in practiceData.choices">
-            <div align="center">
-              <q-btn no-caps push class="bg-amber shadow-1">{{ item }}</q-btn>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- <div class="col-12 absolute-top" align="center">
-        <header-bar :practiceData="practiceData"></header-bar>
-      </div> -->
-      <!-- <div class="col relative-position q-pa-md">
-        <q-card class="absolute-center box-content-question shadow-5" square>
-          <q-card-section>
-            <div class="q-pa-md">
-              <span v-html="practiceData.question"></span>
-            </div>
-          </q-card-section>
-        </q-card>
-      </div> -->
-      <!-- <div class="col-6 box-content-question q-pt-md">
-        <div class="q-mt-xl q-pa-lg">
-          <div class="box-question q-pa-md">
-            <span class="f16" v-html="practiceData.questionTh"> </span>
+      <div class="col-1" style="width: 50px"></div>
+      <div class="col-5 q-py-md" align="center">
+        <div class="box-content-answer">
+          <div class="box-content-th q-pa-md row justify-center" align="left">
+            <span class="f16" v-html="practiceData.questionTh"></span>
           </div>
+          <div class="q-px-md q-pb-xl q-pt-sm" align="left">
+            <q-btn
+              push
+              class="q-ma-sm"
+              :class="
+                allChooseAnswer
+                  ? 'bg-grey-5 no-pointer-events'
+                  : 'bg-amber cursor-pointer'
+              "
+              v-for="(item, index) in practiceData.choices"
+              @click="funcSelectedAnswer(item, index)"
+              no-caps
+              >{{ item }}</q-btn
+            >
+          </div>
+        </div>
 
-          <div class="box-answer q-mb-xl q-mt-lg">
-            <div class="q-my-md row justify-center">
-              <div v-for="(item, index) in practiceData.choices">
+        <div class="q-my-md q-pa-lg" align="center">
+          <q-img
+            width="200px"
+            :class="allChooseAnswer ? 'cursor-pointer' : 'no-pointer-events'"
+            @click="$emit('callback-nextquestion')"
+            :src="
+              require(`../../../public/images/send-answer-btn${
+                allChooseAnswer ? '' : '-noactive'
+              }.png`)
+            "
+          ></q-img>
+        </div>
+      </div>
+    </div>
+
+    <q-dialog
+      maximized
+      v-model="isDialogAnswer"
+      position="bottom"
+      seamless
+      no-esc-dismiss
+      transition-show="slide-up"
+      transition-hide="slide-down"
+    >
+      <q-card class="transparent shadow-0">
+        <q-card-section class="no-padding">
+          <div class="row justify-center relative-position">
+            <div class="col-6 relative-position">
+              <q-img
+                style="
+                  margin-bottom: -80px;
+                  margin-left: -50px;
+                  transform: rotate(-10deg);
+                "
+                width="200px"
+                src="../../../public/images/spellingbee/octopus.gif"
+              />
+            </div>
+          </div>
+          <div
+            align="center"
+            class="q-pa-md row justify-center"
+            style="height: 120px; background-color: #d7ffb8"
+          >
+            <div class="col-6 row" style="width: 600px">
+              <div class="self-center">
+                <q-icon size="4em" color="green" name="far fa-check-circle"></q-icon>
+              </div>
+              <div class="self-center q-px-md text-green">
+                <span class="text-bold f20"> ถูกต้อง</span>
+                <br />
+                <span class="f16">RABBIT</span>
+              </div>
+              <q-space></q-space>
+              <div class="self-center">
                 <q-btn
-                  no-caps
-                  :label="item"
-                  push
-                  rounded
-                  class="bg-amber-7 f16 q-ma-sm"
-                ></q-btn>
+                  @click="isSendAnswer ? nextQuestion() : null"
+                  v-close-popup
+                  class="text-white rounded-borders"
+                  style="background-color: #58a700; width: 200px"
+                >
+                  ข้อต่อไป
+                </q-btn>
               </div>
             </div>
           </div>
-        </div>
-      </div> -->
-    </div>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
 <script>
 import headerBar from "../../components/header-time-progress";
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 export default {
   props: {
     practiceData: {
@@ -94,39 +154,179 @@ export default {
   components: {
     headerBar,
   },
+  emits: ["callback-nextquestion"],
   setup(props) {
-    const selectedBoxAnswer = ref(
-      props.practiceData.question.filter((x) => x.answer == "")[0].index
-    );
+    // Initial Router
+    const route = useRoute();
+    const router = useRouter();
 
-    return { selectedBoxAnswer };
+    // Initial Data
+    const selectedBoxAnswer = ref(0);
+    const isDialogAnswer = ref(false);
+    const isSendAnswer = ref(false);
+
+    const currentSelectAnswerBox = computed(() => {
+      let nextAnswer = props.practiceData.question.filter(
+        (x) => x.currentAnswer == "" && x.isAnswer
+      );
+
+      if (nextAnswer.length) {
+        return nextAnswer[0].index;
+      } else {
+        return null;
+      }
+    });
+
+    const useRandomFakeChoice = computed(() => {
+      let setRandom = 3;
+
+      let setFilter = props.practiceData.question.filter(
+        (x) => x.currentAnswer == "" && x.isAnswer
+      );
+
+      if (setFilter.length) {
+        let totalAnswerLength = props.practiceData.choices.length;
+
+        let answer = setFilter[0].answer;
+        let currentChoiceIndex = props.practiceData.choices.indexOf(answer);
+
+        let tempRandom = [];
+
+        const reRandom = () => {
+          tempRandom = [currentChoiceIndex];
+
+          if (totalAnswerLength <= setRandom) {
+            setRandom = totalAnswerLength - 1 || 1;
+          }
+
+          try {
+            for (let i = 0; i < setRandom - 1; i++) {
+              let fakeRandom = Math.floor(Math.random() * totalAnswerLength);
+
+              if (tempRandom.includes(fakeRandom)) {
+                reRandom();
+                break;
+              } else {
+                tempRandom.push(fakeRandom);
+              }
+            }
+          } catch (error) {
+            reRandom();
+            console.log(error);
+          }
+        };
+
+        reRandom();
+
+        tempRandom.sort(() => Math.random() - 0.5);
+
+        return tempRandom;
+      } else {
+        return [];
+      }
+    });
+
+    const funcSelectedAnswer = (data, index) => {
+      props.practiceData.question.filter(
+        (x) => x.currentAnswer == "" && x.isAnswer
+      )[0].currentAnswer = data;
+
+      props.practiceData.choices.splice(index, 1);
+    };
+
+    const funcSelectedBackAnswer = (data, index) => {
+      props.practiceData.choices.push(data);
+
+      props.practiceData.question[index].currentAnswer = "";
+    };
+
+    const allChooseAnswer = computed(() => {
+      let finish = props.practiceData.question.filter(
+        (x) => x.isAnswer && x.currentAnswer == ""
+      );
+
+      if (finish.length) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+
+    return {
+      isSendAnswer,
+      selectedBoxAnswer,
+      useRandomFakeChoice,
+      currentSelectAnswerBox,
+      allChooseAnswer,
+      funcSelectedAnswer,
+      funcSelectedBackAnswer,
+      isDialogAnswer,
+    };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.box-content-question {
+.box-question {
   max-width: 800px;
-  width: 90%;
-  max-height: fit-content;
-  min-height: calc(100vh - 30%);
+  width: 100%;
+  background-color: #7c451e;
+  border-radius: 10px 10px 0px 0px;
+  color: #fff;
 }
 
 .box-content-question {
-  width: 800px;
+  max-width: 800px;
+  width: 100%;
+  min-height: 55vh;
+  max-height: fit-content;
   background-image: url("../../../public/images/translation/bg-translation-content.png");
   background-size: cover;
   background-position: center;
+  border-radius: 0px 0px 10px 10px;
+  overflow-y: auto;
+}
+
+/* width */
+.box-content-question::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+.box-content-question::-webkit-scrollbar-track {
+  background: #eaa02c;
+}
+
+/* Handle */
+.box-content-question::-webkit-scrollbar-thumb {
+  background: #9f220c;
+}
+
+/* Handle on hover */
+.box-content-question::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .box-content-answer {
-  width: 800px;
+  max-width: 800px;
+  width: 100%;
+  min-height: calc(50vh);
+  max-height: fit-content;
+  background-color: #7c451e;
+  border-radius: 10px;
+  box-shadow: 0px 3px 5px rgba(33, 33, 33, 0.5);
+  overflow: hidden;
 }
 
-.box-question {
-  width: 800px;
-  background-color: #fff;
-  border: 4px solid #895200;
+.box-content-th {
+  background-color: #f9f1df;
+  border: 4px solid #7c451e;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.box-content-writing {
+  border: 5px solid #a36112;
+  border-radius: 0px 0px 7px 7px;
 }
 
 .btn-selected-answer {
@@ -134,13 +334,76 @@ export default {
   width: 100px;
   height: 40px;
   border-radius: 10px;
-  box-shadow: 0px 1px 3px #000;
+  border: 1px dashed #ad7301;
+}
+
+.btn-has-answer {
+  min-width: 50px;
+  width: fit-content;
+  padding: 10px;
+  height: 40px;
+  background: linear-gradient(180deg, #ffd058 0%, #ffbb0c 100%);
+  box-shadow: 0px 3px 0px #d6af4a;
+  border-radius: 7px;
   transition: 0.2s;
   transform: scale(1);
 }
 
-.btn-selected-answer:active {
+.btn-has-answer::before {
+  content: "x";
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  font-size: 10px;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  background-color: #7c451e;
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0px 1px 7px rgba(85, 85, 85, 0.521);
+}
+
+.btn-has-answer:active {
   transition: 0.2s;
-  transform: scale(0.95);
+  transform: scale(0.9);
+}
+
+.btn-not-selected-answer {
+  width: 100px;
+  height: 35px;
+  border-bottom: 1px solid;
+}
+
+.btn-correct {
+  min-width: 50px;
+  width: fit-content;
+  padding: 10px;
+  height: 40px;
+  background: #95ecdc;
+  box-shadow: 0px 3px 0px #32b59d;
+  border-radius: 7px;
+}
+
+.btn-incorrect {
+  min-width: 50px;
+  width: fit-content;
+  padding: 10px;
+  height: 40px;
+  background: #ff6b71;
+  box-shadow: 0px 3px 0px #ff0711;
+  border-radius: 7px;
+}
+
+.box-content-main {
+  max-width: 1000px;
+  width: 100%;
+  background-color: #eabd94;
+  border-radius: 10px;
+  box-shadow: 0 10px 0px #a07751;
+}
+
+.border-dash {
+  border: 1px dashed;
 }
 </style>
