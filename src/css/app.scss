@@ -38,6 +38,11 @@
   font-size: 24px;
 }
 
+.f30 {
+  font-size: 30px;
+}
+
+
 .f32 {
   font-size: 32px;
 }
@@ -183,7 +188,7 @@ body {
 
 .box-container-main {
   max-width: 1600px;
-  width: 100%;
+  // width: 100%;
   min-height: calc(100vh - 50px);
   max-height: fit-content;
   margin: auto;

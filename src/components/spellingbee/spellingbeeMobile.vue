@@ -1,32 +1,21 @@
 <template>
-  <div class="row">
+  <div class="row relative-position" style="background-color: #252a52">
+    <div id="background"></div>
+    <div id="midground"></div>
+    <div id="foreground"></div>
     <div class="col-12 row" align="center">
       <div class="col-12" style="margin-top: -10px">
         <div>
           <header-bar
-            :currentQuestion="currentQuestion"
-            :totalQuestion="totalQuestion"
-            :totalStar="totalStar"
-            :practiceTime="practiceTime"
-            :isPracticeTimeout="isPracticeTimeout"
+            :practiceData="{ totalQuestion: 5, currentQuestion: 0 }"
           ></header-bar>
         </div>
         <div class="q-px-md">
-          <div class="box-question" :style="themeQuestion">
-            <span style="font-size: max(1.5vw, 18px)"> {{ currentQuestionTh }} </span>
+          <div class="box-question">
+            <span class="f24"> {{ currentQuestionTh }} </span>
           </div>
         </div>
         <div class="q-mt-lg row justify-center" align="center">
-          <q-btn
-            v-if="!isSendAnswer"
-            push
-            round
-            :style="themeButton"
-            class="text-white"
-            icon="fas fa-volume-up"
-            size="14px"
-          ></q-btn>
-
           <q-icon
             v-if="isSendAnswer"
             :name="!isCorrectAnswer ? 'far fa-times-circle' : 'far fa-check-circle'"
@@ -44,12 +33,12 @@
 
       <div class="col-12">
         <div
-          class="row justify-center q-py-md"
+          class="row justify-center q-pt-md"
           style="font-size: max(1.5vw, 18px)"
           align="center"
         >
           <div
-            class="box-show-answer self-end"
+            class="box-show-answer self-end f24"
             :class="{ 'border-show-answer': isSendAnswer && !isCorrectAnswer }"
             v-for="(item, index) in currentQuestionText.length"
             :key="index"
@@ -62,108 +51,111 @@
                 : ""
             }}
           </div>
-        </div>
-      </div>
-
-      <div class="col-12 q-mt-sm">
-        <div
-          class="box-content-answer row justify-between items-center"
-          v-if="currentAnswerList.length"
-          v-for="(item, row) in boggle"
-          :key="row"
-        >
-          <div
-            class="relative-position"
-            style="width: 18%"
-            v-for="(item2, col) in item"
-            :key="col"
-          >
-            <q-img
-              fit="contain"
-              @click="
-                isSendAnswer ||
-                (!(checkBottom.row == row && checkBottom.col == col) &&
-                  !(checkTop.row == row && checkTop.col == col) &&
-                  !(checkLeft.row == row && checkLeft.col == col) &&
-                  !(checkRight.row == row && checkRight.col == col))
-                  ? null
-                  : chooseLineMove(row, col, item2.letter)
-              "
-              :src="
-                isCorrectAnswer &&
-                currentAnswerList.filter((x) => x.row == row && x.col == col).length &&
-                isSendAnswer
-                  ? require(`../../../public/images/spellingbee/button-theme-${themeSync}/btn-choices-correct.png`)
-                  : !isCorrectAnswer &&
-                    currentAnswerList.filter((x) => x.row == row && x.col == col)
-                      .length &&
-                    isSendAnswer
-                  ? require(`../../../public/images/spellingbee/button-theme-${themeSync}/btn-choices-incorrect.png`)
-                  : currentAnswerList.filter((x) => x.row == row && x.col == col).length
-                  ? require(`../../../public/images/spellingbee/button-theme-${themeSync}/btn-choices-active.png`)
-                  : require(`../../../public/images/spellingbee/button-theme-${themeSync}/btn-choices-default.png`)
-              "
-              style="z-index: 2"
-              :class="
-                !(checkBottom.row == row && checkBottom.col == col) &&
-                !(checkTop.row == row && checkTop.col == col) &&
-                !(checkLeft.row == row && checkLeft.col == col) &&
-                !(checkRight.row == row && checkRight.col == col) &&
-                !currentAnswerList.filter((x) => x.row == row && x.col == col).length &&
-                currentAnswerList.length != currentQuestionText.length
-                  ? 'cursor-not-allowed disabled'
-                  : currentAnswerList.length == currentQuestionText.length &&
-                    !currentAnswerList.filter((x) => x.row == row && x.col == col).length
-                  ? 'cursor-not-allowed'
-                  : 'cursor-pointer'
-              "
-            >
-              <div
-                class="absolute-center text-black text-bold transparent"
-                style="top: 40%"
-              >
-                <span
-                  :class="{
-                    'text-white': currentAnswerList.filter(
-                      (x) => x.row == row && x.col == col
-                    ).length,
-                  }"
-                  style="font-size: max(1.5vw, 14px)"
-                  >{{ item2.letter }}</span
-                >
-              </div></q-img
-            >
-            <div
-              v-if="currentAnswerList.filter((x) => x.row == row && x.col == col).length"
-              :class="`link-answer-${
-                currentAnswerList.filter((x) => x.row == row && x.col == col)[0].lineMove
-              }`"
-            ></div>
+          <div class="self-center">
+            <q-btn
+              v-if="!isSendAnswer"
+              push
+              round
+              style="background-color: #ff5f01"
+              class="text-white q-ml-sm"
+              icon="fas fa-volume-up"
+              size="14px"
+            ></q-btn>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-12 self-end q-py-sm" align="center">
-      <q-img
-        v-if="!isSendAnswer"
-        style="max-width: 200px; width: 50%"
-        :class="showAnswerBtn ? 'cursor-pointer' : null"
-        @click="showAnswerBtn ? sendAnswer() : null"
-        :src="
-          showAnswerBtn
-            ? require(`../../../public/images/send-answer-btn.png`)
-            : require(`../../../public/images/send-answer-btn-noactive.png`)
-        "
-      ></q-img>
+      <div class="col-12">
+        <div class="box-content-answer q-pa-md">
+          <div
+            class="justify-between row q-mt-xs box-answer"
+            v-if="currentAnswerList.length"
+            v-for="(item, row) in boggle"
+            :key="row"
+          >
+            <div
+              class="relative-position"
+              style="width: 19%"
+              v-for="(item2, col) in item"
+              :key="col"
+            >
+              <q-btn
+                round
+                size="16px"
+                @click="
+                  isSendAnswer ||
+                  (!(checkBottom.row == row && checkBottom.col == col) &&
+                    !(checkTop.row == row && checkTop.col == col) &&
+                    !(checkLeft.row == row && checkLeft.col == col) &&
+                    !(checkRight.row == row && checkRight.col == col))
+                    ? null
+                    : chooseLineMove(row, col, item2.letter)
+                "
+                :class="
+                  isCorrectAnswer &&
+                  currentAnswerList.filter((x) => x.row == row && x.col == col).length &&
+                  isSendAnswer
+                    ? 'bg-teal-3 text-black'
+                    : !isCorrectAnswer &&
+                      currentAnswerList.filter((x) => x.row == row && x.col == col)
+                        .length &&
+                      isSendAnswer
+                    ? 'bg-red-3 text-black'
+                    : currentAnswerList.filter((x) => x.row == row && x.col == col).length
+                    ? 'bg-amber text-black'
+                    : !(checkBottom.row == row && checkBottom.col == col) &&
+                      !(checkTop.row == row && checkTop.col == col) &&
+                      !(checkLeft.row == row && checkLeft.col == col) &&
+                      !(checkRight.row == row && checkRight.col == col) &&
+                      !currentAnswerList.filter((x) => x.row == row && x.col == col)
+                        .length &&
+                      currentAnswerList.length != currentQuestionText.length
+                    ? 'cursor-not-allowed bg-black disabled'
+                    : currentAnswerList.length == currentQuestionText.length &&
+                      !currentAnswerList.filter((x) => x.row == row && x.col == col)
+                        .length
+                    ? 'cursor-not-allowed bg-black'
+                    : 'cursor-pointer bg-purple'
+                "
+                class="text-bold text-white q-ma-xs"
+                style="z-index: 2"
+                ><span class="text-bold f24">{{ item2.letter }}</span>
+              </q-btn>
+              <div
+                v-if="
+                  currentAnswerList.filter((x) => x.row == row && x.col == col).length
+                "
+                :class="`link-answer-${
+                  currentAnswerList.filter((x) => x.row == row && x.col == col)[0]
+                    .lineMove
+                }`"
+              ></div>
+            </div>
+          </div>
+        </div>
 
-      <q-img
-        v-if="isSendAnswer"
-        style="max-width: 200px; width: 50%"
-        class="cursor-pointer"
-        @click="nextQuestion()"
-        src="../../../public/images/next-question-btn.png"
-      ></q-img>
+        <div class="col q-py-sm q-mt-sm" align="center">
+          <q-img
+            v-if="!isSendAnswer"
+            style="max-width: 200px; width: 50%; z-index: 2"
+            :class="showAnswerBtn ? 'cursor-pointer' : null"
+            @click="showAnswerBtn ? sendAnswer() : null"
+            :src="
+              showAnswerBtn
+                ? require(`../../../public/images/send-answer-btn.png`)
+                : require(`../../../public/images/send-answer-btn-noactive.png`)
+            "
+          ></q-img>
+
+          <q-img
+            v-if="isSendAnswer"
+            style="max-width: 200px; width: 50%; z-index: 2"
+            class="cursor-pointer"
+            @click="nextQuestion()"
+            src="../../../public/images/next-question-btn.png"
+          ></q-img>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -197,8 +189,8 @@ export default {
       type: Number,
       defalut: 0,
     },
-    currentQuestionTh:{
-         type: String,
+    currentQuestionTh: {
+      type: String,
       default: "",
     },
     totalQuestion: {
@@ -316,24 +308,30 @@ export default {
 
 <style lang="scss" scoped>
 .box-question {
+  position: relative;
   max-width: 400px;
-  width: 100%;
-  background-color: #fff;
+  background-color: #fee9d4;
   border-width: 5px;
   border-style: solid;
-  border-radius: 10px;
-  padding: 7px;
+  border-color: #d14e29;
+  border-radius: 40px;
+  padding: 10px;
+  // margin-top: -25px;
+  font-weight: bold;
+  z-index: 2;
 }
 
 .box-show-answer {
   width: 25px;
-  margin: 0px 3px;
-  border-bottom: 3px solid #000;
+  margin: 0px 5px;
+  border-bottom: 3px solid #fff;
+  font-weight: bold;
+  color: #fff;
 }
 
 .box-content-answer {
   max-width: 400px;
-  width: 85%;
+  width: 100%;
 }
 
 .border-show-answer {
@@ -343,43 +341,95 @@ export default {
 // Line Move Background Color
 .link-answer-top {
   position: absolute;
-  bottom: 15px;
+  bottom: 50%;
   left: 50%;
   transform: translate(-50%);
-  background-color: #ffaa2e;
-  width: 30%;
-  height: 120%;
+  background-color: #ff5f01;
+  width: 40%;
+  height: 100%;
   z-index: 1;
 }
 
 .link-answer-bottom {
   position: absolute;
-  top: 1px;
+  top: 50%;
   left: 50%;
   transform: translate(-50%);
-  background-color: #ffaa2e;
-  width: 30%;
-  height: 120%;
+  background-color: #ff5f01;
+  width: 40%;
+  height: 100%;
   z-index: 1;
 }
 
 .link-answer-left {
   position: absolute;
-  top: 40%;
-  left: 15%;
+  top: 50%;
+  left: 50%;
   transform: translate(0%, -50%);
-  background-color: #ffaa2e;
-  width: 130%;
-  height: 25%;
+  background-color: #ff5f01;
+  width: 100%;
+  height: 40%;
 }
 
 .link-answer-right {
   position: absolute;
-  top: 40%;
-  right: 15%;
+  top: 50%;
+  right: 50%;
   transform: translate(0%, -50%);
-  background-color: #ffaa2e;
-  width: 130%;
-  height: 25%;
+  background-color: #ff5f01;
+  width: 100%;
+  height: 40%;
+}
+
+@keyframes STAR-MOVE {
+  to {
+    left: -10000px;
+    top: -2000px;
+  }
+}
+
+#background {
+  // background: black url(../../public/images/spellingbee/background-star.png) repeat 5% 5%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+
+  -webkit-animation-name: STAR-MOVE;
+  -webkit-animation-duration: 1000s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+#midground {
+  background: url(../../../public/images/spellingbee/midground-star.png) repeat 0% 0%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+
+  -webkit-animation-name: STAR-MOVE;
+  -webkit-animation-duration: 500s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+#foreground {
+  background: url(../../../public/images/spellingbee/foreground-star.png) repeat 0% 0%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+
+  -webkit-animation-name: STAR-MOVE;
+  -webkit-animation-duration: 300s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
 }
 </style>
