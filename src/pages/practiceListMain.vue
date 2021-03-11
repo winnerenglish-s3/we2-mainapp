@@ -126,7 +126,6 @@
             </div>
           </div>
           <div class="col-6 q-py-md q-px-xl">
-            <div style="height: 65px"></div>
             <!-- Writing -->
             <div>
               <div class="text-weight-bold text-brown">การเขียน</div>
@@ -553,6 +552,9 @@ export default {
         nameImage = require(`../../public/images/practicelist/spell-btn-${star}.png`);
       } else if (type == "grammaraction") {
         nameImage = require(`../../public/images/practicelist/action-btn-${star}.png`);
+      } else {
+        // audio record and evaluation
+        nameImage = require(`../../public/images/practicelist/action-btn-${star}.png`);
       }
       let random = Math.random();
 
@@ -614,6 +616,8 @@ export default {
         routerName = "/clozeTest/";
       } else if (data.practiceType == "conversationlesson") {
         routerName = "/conversationLesson/";
+      } else if (data.practiceType == "roleplay") {
+        routerName = "/roleplay/";
       }
       router.push(routerName + data.practiceListId);
     };

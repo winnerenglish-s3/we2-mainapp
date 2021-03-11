@@ -203,6 +203,12 @@ const routes = [
         component: () => import("pages/conversationLessonMain.vue"),
         name: "conversationLesson",
       },
+      //rolePlay Lesson
+      {
+        path: "/rolePlay/:practiceListId?",
+        component: () => import("pages/rolePlayMain.vue"),
+        name: "rolePlay",
+      },
     ],
   },
 
