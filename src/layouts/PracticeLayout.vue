@@ -5,7 +5,6 @@
       <router-view
         @courseChanged="getCourseId"
         :courseId="courseId"
-        :themeSync="themeSync"
         :isSynchronize="isSynchronize"
       />
     </q-page-container>
@@ -17,8 +16,6 @@ import { ref, onMounted } from "vue";
 import { db } from "src/router";
 export default {
   setup(props) {
-    const themeSync = ref(1);
-
     const courseId = ref("");
 
     const getCourseId = (val) => {
@@ -43,7 +40,7 @@ export default {
       snapSynchronize();
     });
 
-    return { themeSync, courseId, getCourseId, isSynchronize };
+    return { courseId, getCourseId, isSynchronize };
   },
 };
 </script>

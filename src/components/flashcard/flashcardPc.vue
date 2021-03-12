@@ -48,7 +48,7 @@
         <div v-else align="center" class="q-pa-lg q-my-md">
           <div
             class="box-dialog-details shadow-1"
-            :style="`border-color:${colorTheme[themeSync - 1].hex}`"
+            :style="`border-color:#752123`"
             v-if="vocabDataList"
           >
             <div class="row q-pa-xl">
@@ -59,7 +59,7 @@
                 <span style="font-size: max(3.5vw, 20px)">{{ vocabDataList.vocab }}</span>
                 <span style="font-size: max(1.2vw, 16px)" class="q-ml-xs"
                   >(
-                  <span v-html="vocabDataList.partOfSpeech.partOfSpeech"> </span>
+                  <!-- <span v-html="vocabDataList.partOfSpeech.partOfSpeech"> </span> -->
                   )</span
                 >
                 <br />
@@ -233,14 +233,12 @@
 </template>
 
 <script>
-import getColorTheme from "../../../public/themeColor.json";
 import { ref } from "vue";
 export default {
   props: ["vocabDataList", "isSynchronize", "themeSync"],
   emits: ["playSound", "closeDialog"],
 
   setup(props) {
-    const colorTheme = ref(getColorTheme);
     const currentFlashcardIndex = ref(0);
     const isShowDetails = ref(false);
 
@@ -251,7 +249,6 @@ export default {
     };
 
     return {
-      colorTheme: colorTheme,
       currentFlashcardIndex: currentFlashcardIndex,
       isShowDetails: isShowDetails,
       openFlashcardDetails: openFlashcardDetails,

@@ -5,10 +5,16 @@
     <div id="foreground"></div>
     <div>
       <app-bar
+        :isLoadPractice="isLoadPractice"
+        :isHasInstruction="true"
         :isShowPause="true"
         :themeSync="themeSync"
         :instructionData="instructionData"
       ></app-bar>
+    </div>
+
+    <div class="absolute-center" v-if="!isLoadPractice">
+      <q-spinner color="primary" size="100px" />
     </div>
 
     <spelling-pc
@@ -16,20 +22,15 @@
       :boggle="boggle"
       :selectValue="selectValue"
       :currentQuestionText="currentQuestionText"
-      :currentQuestion="currentQuestion"
       :selectedLetter="selectedLetter"
-      :totalQuestion="totalQuestion"
-      :totalStar="totalStar"
-      :practiceTime="practiceTime"
-      :isPracticeTimeout="isPracticeTimeout"
       :isCorrectAnswer="isCorrectAnswer"
-      :themeSync="themeSync"
       :currentQuestionTh="currentQuestionTh"
       @chooseBtn="selectedBox"
-      @sendCallBack="sendAnswer"
-      @sendNextQuestion="nextQuestion"
+      @callback-sendanswer="sendAnswer"
+      @callback-nextquestion="funcNextQuestion"
+      @callback-finishpractice="funcFinishPractice()"
       class="box-container-main"
-      v-if="$q.platform.is.desktop"
+      v-if="$q.platform.is.desktop && isLoadPractice"
     ></spelling-pc>
 
     <spelling-mobile
@@ -37,93 +38,28 @@
       :boggle="boggle"
       :selectValue="selectValue"
       :currentQuestionText="currentQuestionText"
-      :currentQuestion="currentQuestion"
-      :selectedLetter="selectedLetter"
-      :totalQuestion="totalQuestion"
-      :totalStar="totalStar"
-      :practiceTime="practiceTime"
-      :isPracticeTimeout="isPracticeTimeout"
-      :isCorrectAnswer="isCorrectAnswer"
-      :themeSync="themeSync"
       :currentQuestionTh="currentQuestionTh"
+      :selectedLetter="selectedLetter"
+      :isCorrectAnswer="isCorrectAnswer"
       @chooseBtn="selectedBox"
-      @sendCallBack="sendAnswer"
-      @sendNextQuestion="nextQuestion"
-      v-if="$q.platform.is.mobile"
+      @callback-sendanswer="sendAnswer"
+      @callback-nextquestion="funcNextQuestion"
+      @callback-finishpractice="funcFinishPractice()"
+      v-if="$q.platform.is.mobile && isLoadPractice"
       class="box-container-main"
     ></spelling-mobile>
 
-    <!-- Help Popup -->
-    <!-- <q-dialog maximized v-model="isShowDialogHelp" persistent>
-      <q-card class="transparent shadow-0">
-        <q-card-section class="fit">
-          <div
-            class="absolute-center q-pa-md"
-            :class="
-              $q.platform.is.desktop ? 'box-extravocab-pc' : 'box-extravocab-mobile'
-            "
-          >
-            <q-tabs
-              v-model="tab"
-              shrink
-              dense
-              class="box-header-extravocab"
-              indicator-color="warning"
-              align="justify"
-            >
-              <q-tab class="q-pa-sm" name="vocab" label="ตัวช่วย" />
-            </q-tabs>
-            <div class="bg-white">
-              <q-tab-panels v-model="tab" animated>
-                <q-tab-panel class="no-padding" name="vocab">
-                  <div class="row">
-                    <div
-                      :class="$q.platform.is.desktop ? 'col-6' : 'col-12'"
-                      :style="index % 2 == 0 ? 'border-right:1px solid #C4C4C4' : ''"
-                      style="border-bottom: 1px solid #c4c4c4"
-                      v-for="(item, index) in vocabList"
-                      :key="index"
-                    >
-                      <div class="q-pa-sm">
-                        <span>{{ item.vocab }}</span>
-                        <br />
-                        <span>{{ item.meaning }}</span>
-                      </div>
-                    </div>
-                  </div>
-                </q-tab-panel>
-              </q-tab-panels>
-            </div>
-            <div
-              v-if="$q.platform.is.desktop"
-              align="center"
-              class="q-pa-md bg-white"
-              style="border-radius: 0px 0px 7px 7px"
-            >
-              <q-img
-                @click="closeHelpBtn()"
-                class="cursor-pointer"
-                style="width: 200px"
-                src="../../public/images/close-help-btn-pc.png"
-              ></q-img>
-            </div>
-            <div v-if="$q.platform.is.mobile">
-              <q-img
-                @click="closeHelpBtn()"
-                class="cursor-pointer"
-                src="../../public/images/close-help-btn-mobile.png"
-              ></q-img>
-            </div>
-          </div>
-        </q-card-section>
-      </q-card>
-    </q-dialog> -->
+    <finish-practice
+      :isFinishPractice="isFinishPractice"
+      @reStart="reStart"
+    ></finish-practice>
   </q-page>
 </template>
 
 <script>
 import spellingPc from "../components/spellingbee/spellingbeePc";
 import spellingMobile from "../components/spellingbee/spellingbeeMobile";
+import finishPractice from "../components/finishPracticeDialog";
 import appBar from "../components/app-bar";
 import { useQuasar } from "quasar";
 import { ref, onMounted, reactive } from "vue";
@@ -133,6 +69,7 @@ export default {
     spellingPc,
     spellingMobile,
     appBar,
+    finishPractice,
   },
   props: {
     themeSync: {
@@ -154,7 +91,8 @@ export default {
       question: "",
     });
 
-    let currentQuestion = ref(0);
+    const isLoadPractice = ref(false);
+
     const boggle = ref([
       ["", "", "", "", ""],
       ["", "", "", "", ""],
@@ -164,12 +102,12 @@ export default {
     ]);
 
     const vocabularyList = [
-      { vocab: "Alligator", meaning: "จรเข้" },
+      { vocab: "Little Penguinss", meaning: "เพนกวินสีน้ำเงิน" },
+      { vocab: "Alligator", meaning: "จระเข้" },
       { vocab: "Ant", meaning: "มด" },
       { vocab: "King Cobra", meaning: "งูจงอาง" },
       { vocab: "King Crab", meaning: "ปูยักษ์" },
       { vocab: "Leopard Cat", meaning: "แมวดาว" },
-      { vocab: "Little Penguin", meaning: "เพนกวินสีน้ำเงิน" },
     ];
 
     const letter = [
@@ -201,9 +139,9 @@ export default {
       "Z",
     ];
 
-    const currentQuestionText = ref(vocabularyList[currentQuestion.value].vocab);
+    const currentQuestionText = ref(vocabularyList[practiceData.currentQuestion].vocab);
 
-    const currentQuestionTh = ref(vocabularyList[currentQuestion.value].meaning);
+    const currentQuestionTh = ref(vocabularyList[practiceData.currentQuestion].meaning);
 
     const selectedLetter = ref([]);
 
@@ -235,7 +173,6 @@ export default {
     };
 
     const resetBoggle = () => {
-      console.log("reset");
       selectValue.value = [];
       selectedLetter.value = [];
       counter = 0;
@@ -257,17 +194,19 @@ export default {
 
     const shuffleLetters = (counter) => {
       try {
-        if (counter < vocabularyList[currentQuestion.value].vocab.length) {
+        if (counter < vocabularyList[practiceData.currentQuestion].vocab.length) {
           if (counter == 0) {
             let randomRow = Math.floor(Math.random() * 5); //random 0-4
             let randomCol = Math.floor(Math.random() * 5); //random 0-4
             //   ตัวแรก
             boggle.value[randomRow][randomCol] = {
-              letter: vocabularyList[currentQuestion.value].vocab[counter].toUpperCase(),
+              letter: vocabularyList[practiceData.currentQuestion].vocab[
+                counter
+              ].toUpperCase(),
             };
 
             selectedLetter.value.push(
-              vocabularyList[currentQuestion.value].vocab[counter].toUpperCase()
+              vocabularyList[practiceData.currentQuestion].vocab[counter].toUpperCase()
             );
 
             rowBefore = randomRow;
@@ -470,7 +409,7 @@ export default {
                 let [row, col] = shuffleArr[0];
                 if (boggle.value[row][col] == "") {
                   boggle.value[row][col] = {
-                    letter: vocabularyList[currentQuestion.value].vocab[
+                    letter: vocabularyList[practiceData.currentQuestion].vocab[
                       counter
                     ].toUpperCase(),
                   };
@@ -485,12 +424,10 @@ export default {
                     findNearestColumn();
                   } else {
                     countError = 0;
-                    console.log(boggle.value);
                     resetBoggle();
                   }
                 }
               } catch (error) {
-                console.log(error);
                 resetBoggle();
               }
             };
@@ -510,7 +447,6 @@ export default {
           isFinishBoggle.value = true;
         }
       } catch (error) {
-        console.log("error out");
         resetBoggle();
       }
     };
@@ -521,8 +457,6 @@ export default {
         (x) => x.row == item.row && x.col == item.col
       ).length;
 
-      console.log(sameAnswer);
-
       // กรณีครั้งแรกห้ามกดตัวซ้ำ
       if (sameAnswer && selectValue.value.length == 1) {
         return;
@@ -531,8 +465,6 @@ export default {
       if (selectValue.value.length > 1) {
         // เก็บค่า Index หลังจากกด Back กลับไป
         let backAnswer = selectValue.value[selectValue.value.length - 2];
-
-        console.log(backAnswer);
 
         // เช็คค่า Back หลังจากกดกลับไป ว่าค่า Index ตรงกับที่กดมาหรือไม่
         if (backAnswer.row == item.row && backAnswer.col == item.col) {
@@ -558,16 +490,6 @@ export default {
         }
       }
 
-      let newData = {
-        setAround: {
-          left: null,
-          right: null,
-          center: null,
-          top: null,
-          bottom: null,
-        },
-      };
-
       selectValue.value.push({
         row: item.row,
         col: item.col,
@@ -591,7 +513,6 @@ export default {
       });
 
       if (item.row == selectValue.value[selectValue.value.length - 2].row) {
-        console.log("Same Row");
         if (item.col > selectValue.value[selectValue.value.length - 2].col) {
           selectValue.value[selectValue.value.length - 1].lineMove = "right";
         } else {
@@ -623,35 +544,69 @@ export default {
       resetBoggle();
     };
 
-    const showVocab = ref(vocabularyList[currentQuestion.value]);
-
-    const nextQuestion = () => {
-      currentQuestion.value++;
+    const funcNextQuestion = () => {
+      practiceData.currentQuestion++;
       selectValue.value = [];
-      showVocab.value = vocabularyList[currentQuestion.value];
-      currentQuestionText.value = showVocab.value.vocab;
-      currentQuestionTh.value = showVocab.value.meaning;
+      currentQuestionText.value = vocabularyList[practiceData.currentQuestion].vocab;
+      currentQuestionTh.value = vocabularyList[practiceData.currentQuestion].meaning;
       resetBoggle();
     };
 
+    const isFinishPractice = ref(false);
+
+    const funcFinishPractice = () => {
+      setTimeout(() => {
+        isFinishPractice.value = true;
+      }, 100);
+    };
+
+    const funcLoadPractice = () => {
+      practiceData.totalQuestion = vocabularyList.length;
+      currentQuestionText.value = vocabularyList[practiceData.currentQuestion].vocab;
+      currentQuestionTh.value = vocabularyList[practiceData.currentQuestion].meaning;
+
+      setTimeout(() => {
+        shuffleLetters(counter);
+
+        isLoadPractice.value = true;
+      }, 1500);
+    };
+
+    const reStart = async () => {
+      isFinishPractice.value = false;
+      isLoadPractice.value = false;
+
+      practiceData.totalQuestion = 0;
+      practiceData.currentQuestion = 0;
+      practiceData.totalStar = 0;
+
+      // await checkPracticePermission();
+      funcLoadPractice();
+    };
+
     onMounted(() => {
-      shuffleLetters(counter);
+      funcLoadPractice();
     });
 
     return {
       practiceData,
       boggle,
-      nextQuestion,
+      funcNextQuestion,
       selectedBox,
       selectValue,
       reset,
-      showVocab,
       isFinishBoggle,
       selectedLetter,
       currentQuestionText,
       currentQuestionTh,
       sendAnswer,
       isCorrectAnswer,
+      isLoadPractice,
+      funcFinishPractice,
+      finishPractice,
+      isFinishPractice,
+      funcLoadPractice,
+      reStart,
     };
   },
   data() {

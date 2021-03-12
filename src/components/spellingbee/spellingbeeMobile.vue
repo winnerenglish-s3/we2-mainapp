@@ -1,74 +1,40 @@
 <template>
   <div class="row relative-position" style="background-color: #252a52">
-    <div id="background"></div>
-    <div id="midground"></div>
-    <div id="foreground"></div>
     <div class="col-12 row" align="center">
       <div class="col-12" style="margin-top: -10px">
-        <div>
-          <header-bar
-            :practiceData="{ totalQuestion: 5, currentQuestion: 0 }"
-          ></header-bar>
+        <div style="z-index: 2">
+          <header-bar :practiceData="practiceData"></header-bar>
         </div>
+      </div>
+
+      <div class="col-12 q-py-md" style="">
         <div class="q-px-md">
           <div class="box-question">
             <span class="f24"> {{ currentQuestionTh }} </span>
           </div>
         </div>
-        <div class="q-mt-lg row justify-center" align="center">
-          <q-icon
-            v-if="isSendAnswer"
-            :name="!isCorrectAnswer ? 'far fa-times-circle' : 'far fa-check-circle'"
-            :class="!isCorrectAnswer ? 'text-red-7' : 'text-green-7'"
-            size="42px"
-          ></q-icon>
-          <span
-            v-if="isSendAnswer && !isCorrectAnswer"
-            class="relative-position q-mx-md"
-            style="font-size: 24px"
-            >คำตอบที่ถูกต้อง คือ</span
-          >
-        </div>
-      </div>
-
-      <div class="col-12">
-        <div
-          class="row justify-center q-pt-md"
-          style="font-size: max(1.5vw, 18px)"
-          align="center"
-        >
+        <div class="row justify-center q-py-lg" align="center">
           <div
-            class="box-show-answer self-end f24"
-            :class="{ 'border-show-answer': isSendAnswer && !isCorrectAnswer }"
+            class="box-show-answer self-end f20"
             v-for="(item, index) in currentQuestionText.length"
             :key="index"
           >
-            {{
-              isSendAnswer
-                ? currentQuestionText[index].toLocaleUpperCase()
-                : currentAnswerList[index]
-                ? selectedLetter[index]
-                : ""
-            }}
-          </div>
-          <div class="self-center">
-            <q-btn
-              v-if="!isSendAnswer"
-              push
-              round
-              style="background-color: #ff5f01"
-              class="text-white q-ml-sm"
-              icon="fas fa-volume-up"
-              size="14px"
-            ></q-btn>
+            {{ selectedLetter[index] }}
           </div>
         </div>
-      </div>
+        <div class="col-12 self-center">
+          <q-btn
+            push
+            round
+            style="background-color: #ff5f01; z-index: 2"
+            class="text-white q-ml-sm"
+            icon="fas fa-volume-up"
+          ></q-btn>
+        </div>
 
-      <div class="col-12">
         <div class="box-content-answer q-pa-md">
           <div
-            class="justify-between row q-mt-xs box-answer"
+            class="justify-between row q-mt-xs q-px-md"
             v-if="currentAnswerList.length"
             v-for="(item, row) in boggle"
             :key="row"
@@ -81,6 +47,7 @@
             >
               <q-btn
                 round
+                push
                 size="16px"
                 @click="
                   isSendAnswer ||
@@ -132,43 +99,59 @@
               ></div>
             </div>
           </div>
-        </div>
 
-        <div class="col q-py-sm q-mt-sm" align="center">
-          <q-img
-            v-if="!isSendAnswer"
-            style="max-width: 200px; width: 50%; z-index: 2"
-            :class="showAnswerBtn ? 'cursor-pointer' : null"
-            @click="showAnswerBtn ? sendAnswer() : null"
-            :src="
-              showAnswerBtn
-                ? require(`../../../public/images/send-answer-btn.png`)
-                : require(`../../../public/images/send-answer-btn-noactive.png`)
-            "
-          ></q-img>
+          <div class="q-pa-md" align="right">
+            <q-img
+              @click="undo()"
+              width="60px"
+              style="z-index: 2"
+              class="btn-active"
+              src="../../../public/images/backspace-btn.png"
+            ></q-img>
+          </div>
 
-          <q-img
-            v-if="isSendAnswer"
-            style="max-width: 200px; width: 50%; z-index: 2"
-            class="cursor-pointer"
-            @click="nextQuestion()"
-            src="../../../public/images/next-question-btn.png"
-          ></q-img>
+          <div class="q-pb-sm" align="center">
+            <q-img
+              v-if="!isSendAnswer"
+              style="max-width: 200px; z-index: 2"
+              :class="showAnswerBtn ? 'cursor-pointer btn-active' : null"
+              @click="showAnswerBtn ? sendAnswer() : null"
+              :src="
+                showAnswerBtn
+                  ? require(`../../../public/images/send-answer-btn.png`)
+                  : require(`../../../public/images/send-answer-btn-noactive.png`)
+              "
+            ></q-img>
+          </div>
         </div>
       </div>
     </div>
+
+    <answer-action
+      :isCorrectAnswer="isCorrectAnswer"
+      :answer="currentQuestionText"
+      :isAnswerAction="isSendAnswer"
+      :isFinishPractice="isFinishPractice"
+      @callback-nextquestion="funcNextQuestion()"
+      @callback-finishpractice="$emit('callback-finishpractice')"
+    ></answer-action>
   </div>
 </template>
 
 <script>
 import headerBar from "../header-time-progress";
-import getColorTheme from "../../../public/themeColor.json";
+import answerAction from "../answer-action-mobile";
 import { ref, computed, watch } from "vue";
 export default {
   components: {
     headerBar,
+    answerAction,
   },
   props: {
+    practiceData: {
+      type: Object,
+      default: () => {},
+    },
     boggle: {
       type: Array,
       default: () => [],
@@ -185,45 +168,21 @@ export default {
       type: String,
       default: "",
     },
-    currentQuestion: {
-      type: Number,
-      defalut: 0,
-    },
     currentQuestionTh: {
       type: String,
       default: "",
-    },
-    totalQuestion: {
-      type: Number,
-      default: 0,
-    },
-    totalStar: {
-      type: Number,
-      default: 0,
-    },
-    practiceTime: {
-      type: Number,
-      default: 0,
-    },
-    isPracticeTimeout: {
-      type: Boolean,
-      default: () => false,
     },
     isCorrectAnswer: {
       type: Boolean,
       default: () => null,
     },
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
   },
+  emits: ["callback-nextquestion"],
   setup(props, { emit }) {
     // Initial Data
     const currentAnswerList = ref(props.selectValue);
     const isSendAnswer = ref(false);
-    const colorTheme = ref(getColorTheme);
-    const bgColorTheme = ref(["#FFE6A2", "#B0DEFF"]);
+    const isDialogAnswer = ref(false);
 
     const checkBottom = computed(() => {
       return currentAnswerList.value[currentAnswerList.value.length - 1].bottom;
@@ -241,27 +200,27 @@ export default {
       return currentAnswerList.value[currentAnswerList.value.length - 1].right;
     });
 
-    const themeBGColor = computed(() => {
-      return `background-color:${bgColorTheme.value[props.themeSync - 1]}`;
-    });
-
-    const themeButton = computed(() => {
-      return `background-color:${colorTheme.value[props.themeSync - 1].hex}`;
-    });
-
-    const themeQuestion = computed(() => {
-      return `border-color:rgba(${
-        colorTheme.value[props.themeSync - 1].rgb
-      },.95);box-shadow: 0px 4px 0px ${colorTheme.value[props.themeSync - 1].hex}`;
-    });
-
     const chooseLineMove = (row, col, val) => {
       emit("chooseBtn", { row: row, col: col, val: val });
     };
 
+    const undo = () => {
+      if (currentAnswerList.value.length > 1) {
+        let getLastData = currentAnswerList.value[currentAnswerList.value.length - 2];
+        emit("chooseBtn", { row: getLastData.row, col: getLastData.col });
+      }
+    };
+
+    const isFinishPractice = ref(false);
+
     const sendAnswer = () => {
       isSendAnswer.value = true;
-      emit("sendCallBack");
+
+      if (props.practiceData.totalQuestion == props.practiceData.currentQuestion + 1) {
+        isFinishPractice.value = true;
+      }
+
+      emit("callback-sendanswer");
     };
 
     const showAnswerBtn = computed(() => {
@@ -279,20 +238,15 @@ export default {
       }
     );
 
-    const nextQuestion = () => {
+    const funcNextQuestion = () => {
       isSendAnswer.value = false;
-      console.log(currentAnswerList.value);
 
-      emit("sendNextQuestion");
+      emit("callback-nextquestion");
     };
 
     return {
       currentAnswerList,
       isSendAnswer,
-      colorTheme,
-      themeBGColor,
-      themeQuestion,
-      themeButton,
       checkBottom,
       checkTop,
       checkLeft,
@@ -300,7 +254,9 @@ export default {
       chooseLineMove,
       sendAnswer,
       showAnswerBtn,
-      nextQuestion,
+      funcNextQuestion,
+      isFinishPractice,
+      undo,
     };
   },
 };
@@ -322,9 +278,9 @@ export default {
 }
 
 .box-show-answer {
-  width: 25px;
-  margin: 0px 5px;
-  border-bottom: 3px solid #fff;
+  width: 18px;
+  margin: 0px 2px;
+  border-bottom: 2px solid #fff;
   font-weight: bold;
   color: #fff;
 }
@@ -332,6 +288,7 @@ export default {
 .box-content-answer {
   max-width: 400px;
   width: 100%;
+  z-index: 2;
 }
 
 .border-show-answer {
@@ -381,55 +338,11 @@ export default {
   height: 40%;
 }
 
-@keyframes STAR-MOVE {
-  to {
-    left: -10000px;
-    top: -2000px;
-  }
+.btn-active {
+  transform: scale(1);
 }
 
-#background {
-  // background: black url(../../public/images/spellingbee/background-star.png) repeat 5% 5%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-
-  -webkit-animation-name: STAR-MOVE;
-  -webkit-animation-duration: 1000s;
-  -webkit-animation-timing-function: linear;
-  -webkit-animation-iteration-count: infinite;
-}
-
-#midground {
-  background: url(../../../public/images/spellingbee/midground-star.png) repeat 0% 0%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-
-  -webkit-animation-name: STAR-MOVE;
-  -webkit-animation-duration: 500s;
-  -webkit-animation-timing-function: linear;
-  -webkit-animation-iteration-count: infinite;
-}
-
-#foreground {
-  background: url(../../../public/images/spellingbee/foreground-star.png) repeat 0% 0%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-
-  -webkit-animation-name: STAR-MOVE;
-  -webkit-animation-duration: 300s;
-  -webkit-animation-timing-function: linear;
-  -webkit-animation-iteration-count: infinite;
+.btn-active:active {
+  transform: scale(0.9);
 }
 </style>
