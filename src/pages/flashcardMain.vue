@@ -1,10 +1,9 @@
 <template>
-  <q-page :class="`bg-theme-${themeSync}`">
+  <q-page :class="`bg-flashcard`">
     <div class="col-12 self-start">
       <app-bar
         :isShowDialogFlashcard="isShowDialogFlashcard"
         @showDialogFlashcard="isShowDialogFlashcard = false"
-        :themeSync="themeSync"
       ></app-bar>
     </div>
 
@@ -180,14 +179,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bg-theme-1 {
+.bg-flashcard {
   background-image: url("../../public/images/flashcard/flashcard-theme-1.png");
-  background-size: cover;
-  background-position: center;
-}
-
-.bg-theme-2 {
-  background-image: url("../../public/images/flashcard/flashcard-theme-2.png");
   background-size: cover;
   background-position: center;
 }

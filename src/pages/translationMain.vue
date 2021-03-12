@@ -2,9 +2,8 @@
   <q-page :class="!isSynchronize ? 'bg-translation' : `bg-translation-action`">
     <div>
       <app-bar
-        :isHasHelp="true"
+        :isHasHelp="false"
         :isHasInstruction="true"
-        :themeSync="themeSync"
         :isShowHome="true"
         :isShowPause="true"
         :isLoadPractice="isLoadPractice"
@@ -16,25 +15,32 @@
     </div>
 
     <translation-pc
-      :themeSync="themeSync"
       :practiceData="practiceData"
       @callback-nextquestion="funcSelectedQuestion()"
+      @callback-finishpractice="funcFinishPractice()"
+      class="box-container-main"
       v-if="$q.platform.is.desktop && !isSynchronize && isLoadPractice"
     ></translation-pc>
 
     <translation-mobile
-      :themeSync="themeSync"
       :practiceData="practiceData"
+      @callback-nextquestion="funcSelectedQuestion()"
+      @callback-finishpractice="funcFinishPractice()"
       v-if="$q.platform.is.mobile && !isSynchronize && isLoadPractice"
     ></translation-mobile>
 
     <translation-action-pc
-      :themeSync="themeSync"
       :practiceData="practiceData"
       @callback-nextquestion="funcSelectedQuestion()"
       class="box-container-main"
       v-if="$q.platform.is.desktop && isSynchronize && isLoadPractice"
     ></translation-action-pc>
+
+    <!-- Finish Practice -->
+    <finish-practice-dialog
+      :isFinishPractice="isFinishPractice"
+      @reStart="reStart"
+    ></finish-practice-dialog>
   </q-page>
 </template>
 
@@ -44,6 +50,7 @@ import translationPc from "../components/translation/translationPc";
 import translationMobile from "../components/translation/translationMobile";
 import translationActionPc from "../components/translation/translationActionPc";
 // import translationActionMobile from "../components/translation/translationActionMobile";
+import finishPracticeDialog from "../components/finishPracticeDialog";
 import { ref, reactive, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
@@ -55,12 +62,9 @@ export default {
     translationMobile,
     translationActionPc,
     // translationActionMobile,
+    finishPracticeDialog,
   },
   props: {
-    themeSync: {
-      type: Number,
-      default: 1,
-    },
     isSynchronize: {
       type: Boolean,
       default: () => false,
@@ -83,6 +87,8 @@ export default {
       nameTh: "",
       nameEng: "",
     });
+
+    const isFinishPractice = ref(false);
 
     const isLoadPractice = ref(false);
 
@@ -170,7 +176,7 @@ export default {
           answer: x,
           currentAnswer: "",
           index: index,
-          correctAnswer: false,
+          isCorrectAnswer: false,
         };
 
         let moveArrUnderline = null;
@@ -216,19 +222,46 @@ export default {
       practiceData.choices = tempChoices;
     };
 
+    const funcFinishPractice = () => {
+      setTimeout(() => {
+        isFinishPractice.value = true;
+      }, 100);
+    };
+
+    const reStart = async () => {
+      isFinishPractice.value = false;
+      isLoadPractice.value = false;
+
+      practiceData.totalQuestion = 0;
+      practiceData.totalStar = 0;
+      practiceData.question = [];
+      practiceData.choices = [];
+      practiceData.currentQuestion = 0;
+
+      // await checkPracticePermission();
+      funcLoadPractice();
+    };
+
     // Mounted
     onMounted(() => {
       funcLoadPractice();
     });
 
-    return { practiceData, isLoadPractice, funcSelectedQuestion };
+    return {
+      practiceData,
+      isLoadPractice,
+      isFinishPractice,
+      funcSelectedQuestion,
+      funcFinishPractice,
+      reStart,
+    };
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .bg-translation {
-  background-image: url("../../public/images/translation/bg-translation.png");
+  background-image: url("../../public/images/translation/bg-writing.png");
   background-size: cover;
   background-color: #fff;
 }

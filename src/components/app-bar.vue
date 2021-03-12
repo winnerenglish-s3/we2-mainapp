@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-header :class="$route.name == 'flashcard' ? 'z-top' : ''">
-      <q-toolbar :style="themeColor">
+      <q-toolbar class="bg-appbar">
         <div class="row header-container">
           <div class="col-6">
             <q-btn
@@ -254,7 +254,6 @@
 </template>
 
 <script>
-import getColorTheme from "../../public/themeColor.json";
 import { ref, reactive, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 export default {
@@ -295,10 +294,6 @@ export default {
       type: Boolean,
       default: () => false,
     },
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
   },
   emits: ["callback-showdialoghelp", "callback-restart"],
   setup(props, { emit }) {
@@ -313,12 +308,6 @@ export default {
     // Initial Data
     const settingBgSound = ref(false);
     const settingMusicSound = ref(false);
-
-    // เซ็ทสีของ Theme ที่ใช้
-    const colorTheme = ref(getColorTheme);
-    const themeColor = computed(() => {
-      return `background-color:${colorTheme.value[props.themeSync - 1].hex}`;
-    });
 
     const instruction = reactive({
       en: "Eng ?????????????????????????????????",
@@ -389,8 +378,6 @@ export default {
     const isShowSetting = ref(false);
 
     return {
-      colorTheme,
-      themeColor,
       returnCloseDialog,
       isShowDialogInstruction,
       resetBtn,
@@ -478,5 +465,9 @@ export default {
 
 .btn-header-color {
   color: #a36112;
+}
+
+.bg-appbar {
+  background-color: #9f220c;
 }
 </style>

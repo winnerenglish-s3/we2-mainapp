@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <div class="row q-px-xl justify-center q-py-md">
+    <div class="row justify-center q-py-md">
       <div class="col-6 self-start q-py-md" align="center">
         <div class="box-question q-pa-sm">
           <span class="f20 text-bold" v-html="practiceData.nameEng"></span>
@@ -26,16 +26,22 @@
                   v-if="item.isAnswer"
                   class="q-my-sm q-mx-sm"
                   @click="
-                    item.currentAnswer != ''
-                      ? funcSelectedBackAnswer(item.currentAnswer, index)
-                      : null
+                    !isSendAnswer
+                      ? item.currentAnswer != ''
+                        ? funcRemoveAnswer(item.currentAnswer, index)
+                        : null
+                      : ''
                   "
                   :class="
-                    currentSelectAnswerBox == index
-                      ? 'btn-selected-answer bg-amber-4'
-                      : item.currentAnswer != ''
-                      ? 'btn-has-answer cursor-pointer'
-                      : 'btn-not-selected-answer'
+                    !isSendAnswer
+                      ? currentSelectAnswerBox == index
+                        ? 'btn-selected-answer bg-amber-4'
+                        : item.currentAnswer != ''
+                        ? 'btn-has-answer cursor-pointer'
+                        : 'btn-not-selected-answer'
+                      : item.isCorrectAnswer
+                      ? 'btn-correct'
+                      : 'btn-incorrect'
                   "
                 >
                   {{ item.currentAnswer }}
@@ -57,7 +63,7 @@
               class="q-ma-sm"
               :class="
                 allChooseAnswer
-                  ? 'bg-grey-5 no-pointer-events'
+                  ? 'bg-disable no-pointer-events'
                   : 'bg-amber cursor-pointer'
               "
               v-for="(item, index) in practiceData.choices"
@@ -70,9 +76,10 @@
 
         <div class="q-my-md q-pa-lg" align="center">
           <q-img
+            v-show="!isSendAnswer"
             width="200px"
             :class="allChooseAnswer ? 'cursor-pointer' : 'no-pointer-events'"
-            @click="$emit('callback-nextquestion')"
+            @click="!isSendAnswer ? funcSendAnswer() : null"
             :src="
               require(`../../../public/images/send-answer-btn${
                 allChooseAnswer ? '' : '-noactive'
@@ -83,65 +90,20 @@
       </div>
     </div>
 
-    <q-dialog
-      maximized
-      v-model="isDialogAnswer"
-      position="bottom"
-      seamless
-      no-esc-dismiss
-      transition-show="slide-up"
-      transition-hide="slide-down"
-    >
-      <q-card class="transparent shadow-0">
-        <q-card-section class="no-padding">
-          <div class="row justify-center relative-position">
-            <div class="col-6 relative-position">
-              <q-img
-                style="
-                  margin-bottom: -80px;
-                  margin-left: -50px;
-                  transform: rotate(-10deg);
-                "
-                width="200px"
-                src="../../../public/images/spellingbee/octopus.gif"
-              />
-            </div>
-          </div>
-          <div
-            align="center"
-            class="q-pa-md row justify-center"
-            style="height: 120px; background-color: #d7ffb8"
-          >
-            <div class="col-6 row" style="width: 600px">
-              <div class="self-center">
-                <q-icon size="4em" color="green" name="far fa-check-circle"></q-icon>
-              </div>
-              <div class="self-center q-px-md text-green">
-                <span class="text-bold f20"> ถูกต้อง</span>
-                <br />
-                <span class="f16">RABBIT</span>
-              </div>
-              <q-space></q-space>
-              <div class="self-center">
-                <q-btn
-                  @click="isSendAnswer ? nextQuestion() : null"
-                  v-close-popup
-                  class="text-white rounded-borders"
-                  style="background-color: #58a700; width: 200px"
-                >
-                  ข้อต่อไป
-                </q-btn>
-              </div>
-            </div>
-          </div>
-        </q-card-section>
-      </q-card>
-    </q-dialog>
+    <answer-action
+      :isAnswerAction="isSendAnswer"
+      :isCorrectAnswer="isCorrectAnswer"
+      :answer="showQuestionEng"
+      :isFinishPractice="isFinishPractice"
+      @callback-nextquestion="funcNextQuestion()"
+      @callback-finishpractice="$emit('callback-finishpractice')"
+    ></answer-action>
   </div>
 </template>
 
 <script>
 import headerBar from "../../components/header-time-progress";
+import answerAction from "../answer-action-pc";
 import { ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 export default {
@@ -153,9 +115,10 @@ export default {
   },
   components: {
     headerBar,
+    answerAction,
   },
-  emits: ["callback-nextquestion"],
-  setup(props) {
+  emits: ["callback-finishpractice"],
+  setup(props, { emit }) {
     // Initial Router
     const route = useRoute();
     const router = useRouter();
@@ -164,6 +127,8 @@ export default {
     const selectedBoxAnswer = ref(0);
     const isDialogAnswer = ref(false);
     const isSendAnswer = ref(false);
+    const isCorrectAnswer = ref(false);
+    const isFinishPractice = ref(false);
 
     const currentSelectAnswerBox = computed(() => {
       let nextAnswer = props.practiceData.question.filter(
@@ -234,11 +199,19 @@ export default {
       props.practiceData.choices.splice(index, 1);
     };
 
-    const funcSelectedBackAnswer = (data, index) => {
+    const funcRemoveAnswer = (data, index) => {
       props.practiceData.choices.push(data);
 
       props.practiceData.question[index].currentAnswer = "";
     };
+
+    const showQuestionEng = computed(() => {
+      let newSetQuestion = props.practiceData.questionEng
+        .split(/<s*u>(.*?)<s*\/u>/gm)
+        .join(" ");
+
+      return newSetQuestion;
+    });
 
     const allChooseAnswer = computed(() => {
       let finish = props.practiceData.question.filter(
@@ -252,14 +225,45 @@ export default {
       }
     });
 
+    const funcSendAnswer = () => {
+      isSendAnswer.value = true;
+
+      let getAllAnswer = props.practiceData.question.filter((x) => x.isAnswer);
+
+      let checkAllAnswer = getAllAnswer.map((x) => {
+        if (x.currentAnswer == x.answer) {
+          x.isCorrectAnswer = true;
+        }
+        return x;
+      });
+
+      if (props.practiceData.currentQuestion + 1 == props.practiceData.totalQuestion) {
+        isFinishPractice.value = true;
+      }
+
+      isCorrectAnswer.value = checkAllAnswer.every((x) => x.isCorrectAnswer);
+    };
+
+    const funcNextQuestion = () => {
+      isSendAnswer.value = false;
+
+      emit("callback-nextquestion");
+    };
+
     return {
       isSendAnswer,
+      isFinishPractice,
+      isCorrectAnswer,
       selectedBoxAnswer,
       useRandomFakeChoice,
       currentSelectAnswerBox,
       allChooseAnswer,
       funcSelectedAnswer,
-      funcSelectedBackAnswer,
+      funcRemoveAnswer,
+      funcSendAnswer,
+      funcNextQuestion,
+
+      showQuestionEng,
       isDialogAnswer,
     };
   },
@@ -405,5 +409,9 @@ export default {
 
 .border-dash {
   border: 1px dashed;
+}
+
+.bg-disable {
+  background-color: #ecdcbe;
 }
 </style>
