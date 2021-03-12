@@ -106,24 +106,25 @@
                     v-if="isShowContentAnswer"
                   ></span>
                 </div>
-                <div class="q-py-md">
-                  <q-img
-                    @click="isFinishPractice = true"
-                    class="cursor-pointer"
-                    width="200px"
-                    src="../../public/images/finish-btn.png"
-                  ></q-img>
-                </div>
               </div>
 
-              <div class="q-my-md" align="center" v-show="isSendAnswer">
+              <div class="q-py-md brx" v-if="isShowContent">
+                <q-img
+                  @click="isFinishPractice = true"
+                  class="cursor-pointer"
+                  width="200px"
+                  src="../../public/images/finish-btn.png"
+                ></q-img>
+              </div>
+
+              <!-- <div class="q-my-md" align="center" v-show="isSendAnswer">
                 <q-img
                   @click="funcNextQuestion()"
                   class="cursor-pointer"
                   width="200px"
                   src="../../public/images/next-question-btn.png"
                 ></q-img>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -131,6 +132,28 @@
 
       <div class="col-12"></div>
     </div>
+
+    <!-- show answer platfom desktop -->
+    <answer-action-pc
+      v-if="$q.platform.is.desktop"
+      :isAnswerAction="isSendAnswer"
+      :isCorrectAnswer="isCorrectAnswer"
+      :answer="showAnswer"
+      :isFinishPractice="isFinishPractice"
+      @callback-nextquestion="funcNextQuestion()"
+      @callback-finishpractice="isShowContent = true"
+    ></answer-action-pc>
+
+    <!-- show answer platfom mobile -->
+    <answer-action-mobile
+      v-if="$q.platform.is.mobile"
+      :isAnswerAction="isSendAnswer"
+      :isCorrectAnswer="isCorrectAnswer"
+      :answer="showAnswer"
+      :isFinishPractice="isFinishPractice"
+      @callback-nextquestion="funcNextQuestion()"
+      @callback-finishpractice="isShowContent = true"
+    ></answer-action-mobile>
 
     <finish-practice
       :isFinishPractice="isFinishPractice"
@@ -148,6 +171,8 @@ import finishPractice from "../components/finishPracticeDialog.vue";
 import headerBar from "../components/header-time-progress";
 import practiceHooks from "../hooks/practiceHooks";
 import getColorTheme from "../../public/themeColor.json";
+import answerActionPc from "../components/answer-action-pc";
+import answerActionMobile from "../components/answer-action-mobile";
 import { ref, computed, onMounted, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { db } from "src/router";
@@ -159,6 +184,8 @@ export default {
     headerBar,
     finishPractice,
     multipleChoices,
+    answerActionPc,
+    answerActionMobile,
   },
   props: {
     themeSync: {
@@ -176,6 +203,8 @@ export default {
     const themeColor = computed(() => {
       return `background-color:${colorTheme.value[props.themeSync - 1].hex}`;
     });
+
+    const showContent = ref(false);
 
     const practiceData = reactive({
       totalQuestion: 10,
@@ -337,7 +366,6 @@ export default {
       isDescription.value = false;
 
       if (practiceData.currentQuestion + 1 == practiceData.totalQuestion) {
-        console.log("xx");
         isShowContentAnswer.value = true;
         return;
       }
@@ -351,6 +379,8 @@ export default {
     const currentAnswer = ref(null);
     const isFinishPractice = ref(false);
 
+    const showAnswer = ref("");
+
     const funcSendAnswer = (item, index) => {
       isSendAnswer.value = true;
 
@@ -362,7 +392,11 @@ export default {
         isCorrectAnswer.value = false;
       }
 
-      isDescription.value = true;
+      showAnswer.value = practiceData.choices.filter(
+        (x) => x.index == practiceData.correctAnswer
+      )[0].choice;
+
+      // isDescription.value = true;
     };
 
     const reStart = () => {
@@ -390,6 +424,8 @@ export default {
       increaseFont,
       currentAnswer,
       fontSize,
+      showAnswer,
+      showContent,
 
       //
       isLoadPractice,

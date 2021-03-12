@@ -6,9 +6,9 @@
       </div>
     </div>
 
-    <div class="" align="center">
+    <div class="" align="center" v-if="!isShowContent">
       <div class="box-header-question row justify-center q-px-md q-py-sm" align="left">
-        <span class="f14" v-html="practiceData.questionTh"></span>
+        <span class="f18" v-html="practiceData.questionTh"></span>
       </div>
       <div class="box-content-question q-pa-md" align="left">
         <div class="row">
@@ -18,7 +18,7 @@
             @click="selectedBoxAnswer = index"
           >
             <div class="self-center relative-position">
-              <div class="f14 q-mx-xs" v-html="item.answer" v-if="!item.isAnswer"></div>
+              <div class="f16 q-mx-xs" v-html="item.answer" v-if="!item.isAnswer"></div>
               <div
                 v-if="item.isAnswer"
                 class="q-my-sm q-mx-sm"
@@ -80,13 +80,47 @@
       </div>
     </div>
 
+    <div v-if="isShowContent">
+      <div class="box-header-question row justify-center q-px-md q-py-sm" align="left">
+        <span class="f18" v-html="practiceData.nameEng"></span>
+      </div>
+      <div class="box-content-question q-pa-md" align="left">
+        <div>
+          <span class="f16" v-html="practiceData.contentEng"></span>
+        </div>
+      </div>
+      <div
+        class="box-header-question row justify-center q-px-md q-py-sm border-radius-inherit"
+        align="left"
+        style="border-radius: 0px"
+      >
+        <span class="f18" v-html="practiceData.nameTh"></span>
+      </div>
+      <div class="box-content-question q-pa-md" align="left">
+        <div>
+          <span class="f16" v-html="practiceData.contentTh"></span>
+        </div>
+      </div>
+
+      <div class="q-py-md" align="center">
+        <q-btn
+          label="ออกจากแบบฝึกหัด"
+          push
+          @click="$emit('callback-finishpractice')"
+          class="bg-amber"
+          no-caps
+          style="width: 200px"
+        ></q-btn>
+      </div>
+    </div>
+
     <answer-action
       :isAnswerAction="isSendAnswer"
       :isCorrectAnswer="isCorrectAnswer"
       :answer="showQuestionEng"
       :isFinishPractice="isFinishPractice"
       @callback-nextquestion="funcNextQuestion()"
-      @callback-finishpractice="$emit('callback-finishpractice')"
+      @callback-finishpractice="isShowContent = true"
     ></answer-action>
   </div>
 </template>
@@ -119,6 +153,7 @@ export default {
     const isSendAnswer = ref(false);
     const isCorrectAnswer = ref(false);
     const isFinishPractice = ref(false);
+    const isShowContent = ref(false);
 
     const currentSelectAnswerBox = computed(() => {
       let nextAnswer = props.practiceData.question.filter(
@@ -256,7 +291,7 @@ export default {
       funcRemoveAnswer,
       funcSendAnswer,
       funcNextQuestion,
-
+      isShowContent,
       showQuestionEng,
       isDialogAnswer,
     };

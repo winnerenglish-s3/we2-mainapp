@@ -4,7 +4,7 @@
       <app-bar
         :isHasHelp="false"
         :isHasInstruction="true"
-        :isShowHome="true"
+        :isShowHome="false"
         :isShowPause="true"
         :isLoadPractice="isLoadPractice"
       ></app-bar>
@@ -86,6 +86,8 @@ export default {
       questionTh: "",
       nameTh: "",
       nameEng: "",
+      contentEng: "",
+      contentTh: "",
     });
 
     const isFinishPractice = ref(false);
@@ -95,6 +97,8 @@ export default {
     // Function : Load Practice
     const funcLoadPractice = async () => {
       console.clear();
+
+      let tempContent = [];
 
       try {
         // Set Practice ID
@@ -131,12 +135,26 @@ export default {
         const response = await axios.post(apiURL, postData);
 
         // Question List : Set Question
-        questionList.value = response.data;
+        tempContent = response.data;
 
         // เรียงแบบฝึกหัด
-        questionList.value.sort((a, b) => a.order - b.order);
+        tempContent.sort((a, b) => a.order - b.order);
 
-        questionList.value = questionList.value.filter((x) => !x.except);
+        let setNewContentEng = "";
+        let setNewContentTh = "";
+
+        tempContent.forEach((x) => {
+          setNewContentEng +=
+            x.sentenceEng.split(/<s*u>(.*?)<s*\/u>/gm).join(" ") + "<br><br>";
+          setNewContentTh += x.sentenceTh + "<br><br>";
+        });
+
+        practiceData.contentEng = setNewContentEng
+          .replace(/&nbsp;/g, "")
+          .replace(/" , "/g, ", ");
+        practiceData.contentTh = setNewContentTh;
+
+        questionList.value = tempContent.filter((x) => !x.except);
 
         questionList.value = questionList.value.slice(0, practiceData.totalQuestion);
 

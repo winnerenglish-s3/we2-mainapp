@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <div class="row justify-center q-py-md">
+    <div class="row justify-center q-py-md" v-if="!isShowContent">
       <div class="col-6 self-start q-py-md" align="center">
         <div class="box-question q-pa-sm">
           <span class="f20 text-bold" v-html="practiceData.nameEng"></span>
@@ -90,13 +90,50 @@
       </div>
     </div>
 
+    <!-- Finish Show Content -->
+    <div class="row justify-center q-py-md" v-if="isShowContent">
+      <div class="col q-px-md">
+        <div class="box-question q-pa-sm" align="center">
+          <span class="f20 text-bold" v-html="practiceData.nameEng"></span>
+        </div>
+        <div class="box-content-question q-pa-lg">
+          <div>
+            <span class="f20" v-html="practiceData.contentEng"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col q-px-md">
+        <div class="box-question q-pa-sm" align="center">
+          <span class="f20 text-bold" v-html="practiceData.nameTh"></span>
+        </div>
+        <div class="box-content-question q-pa-lg">
+          <div>
+            <span class="f20" v-html="practiceData.contentTh"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 q-pa-xl" align="center">
+        <q-btn
+          label="ออกจากแบบฝึกหัด"
+          push
+          @click="$emit('callback-finishpractice')"
+          class="bg-amber"
+          no-caps
+          style="width: 200px"
+        >
+        </q-btn>
+      </div>
+    </div>
+
     <answer-action
       :isAnswerAction="isSendAnswer"
       :isCorrectAnswer="isCorrectAnswer"
       :answer="showQuestionEng"
       :isFinishPractice="isFinishPractice"
       @callback-nextquestion="funcNextQuestion()"
-      @callback-finishpractice="$emit('callback-finishpractice')"
+      @callback-finishpractice="isShowContent = true"
     ></answer-action>
   </div>
 </template>
@@ -129,6 +166,7 @@ export default {
     const isSendAnswer = ref(false);
     const isCorrectAnswer = ref(false);
     const isFinishPractice = ref(false);
+    const isShowContent = ref(false);
 
     const currentSelectAnswerBox = computed(() => {
       let nextAnswer = props.practiceData.question.filter(
@@ -253,6 +291,7 @@ export default {
     return {
       isSendAnswer,
       isFinishPractice,
+      isShowContent,
       isCorrectAnswer,
       selectedBoxAnswer,
       useRandomFakeChoice,
