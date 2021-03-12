@@ -1,78 +1,48 @@
 <template>
-  <div class="row relative-position bg-content-main">
-    <div class="col row relative-position">
-      <div class="col-12 absolute">
+  <div class="row relative-position">
+    <!-- Col แบบฝึกหัด -->
+    <div class="col bg-repeat-img relative-position">
+      <div class="absolute" style="width: 100%">
         <header-bar :practiceData="practiceData"></header-bar>
       </div>
-      <div class="col-12 self-start" align="center">
-        <theme-animation
-          :themeSync="themeSync"
-          :isSendAnswer="isSendAnswer"
-          :isCorrectAnswer="isCorrectAnswer"
-        ></theme-animation>
+
+      <theme-animation
+        :themeSync="themeSync"
+        :isSendAnswer="isSendAnswer"
+        :isCorrectAnswer="isCorrectAnswer"
+      ></theme-animation>
+
+      <div align="center" class="relative-position">
         <div class="box-question q-pa-lg font-content">
           <span v-html="practiceData.question"></span>
         </div>
-      </div>
-      <div class="col-12">
-        <div class="box-answer row justify-center items-center q-px-md">
-          <div
-            v-if="activeBy == 'answer'"
-            class="relative-position col self-center q-pa-md cursor-pointer"
-            align="center"
-            v-for="(item, index) in practiceData.choices"
-            :key="index"
-            @click="isSendAnswer ? null : sendAnswer(item.index)"
-          >
-            <img
-              style="width: 100%"
-              @mouseenter="activeHover = index"
-              @mouseout="activeHover = null"
-              :src="
-                require(`../../../public/images/multiplevocab/button-theme/multiplevocab-theme-${themeSync}-choices-${
-                  isSendAnswer
-                    ? currentAnswer == item.index
-                      ? isCorrectAnswer
-                        ? 'correct'
-                        : 'incorrect'
-                      : 'default'
-                    : activeHover != index
-                    ? 'default'
-                    : 'hover'
-                }.png`)
-              "
-            />
-            <div
-              class="absolute-center font-content no-pointer-events"
-              style="width: 80%"
-              align="center"
-            >
-              <div v-if="isSendAnswer && currentAnswer == item.index">
-                <q-icon
-                  :name="isCorrectAnswer ? 'far fa-check-circle' : 'far fa-times-circle'"
-                  size="30px"
-                  :class="
-                    isCorrectAnswer
-                      ? setTheme[themeSync - 1].colorIcon.correct
-                      : setTheme[themeSync - 1].colorIcon.incorrect
-                  "
-                ></q-icon>
-              </div>
 
-              <span
-                :class="
-                  isSendAnswer
-                    ? currentAnswer == index
-                      ? setTheme[themeSync - 1].colorText
-                      : null
-                    : null
-                "
-                v-html="item.choice"
+        <div class="q-px-md bg-choices-img">
+          <!-- Choices -->
+          <div class="row" style="padding-top: 17%">
+            <div
+              v-if="activeBy == 'answer'"
+              @click="isSendAnswer ? null : sendAnswer(item.index)"
+              class="col-6 q-pa-md btn-choice"
+              align="center"
+              v-for="(item, index) in practiceData.choices"
+              :key="index"
+              style="font-size: 2.5vh"
+            >
+              <div
+                style="height: 8vh; width: 90%"
+                align="center"
+                class="relative-position cursor-pointer bg-btn"
               >
-              </span>
+                <span class="absolute-center" v-html="item.choice"></span>
+
+                <div class="absolute-left circle-1" style="top: 10px; left: 10px"></div>
+                <div class="absolute-left circle-2" style="top: 23px; left: 12px"></div>
+              </div>
             </div>
           </div>
 
+          <!-- Description -->
           <div v-if="activeBy == 'description'" class="col-10">
             <div class="box-container-description shadow-5">
               <div class="q-px-sm" :class="setTheme[themeSync - 1].description.bgColor">
@@ -138,18 +108,26 @@
         </div>
       </div>
     </div>
+
+    <!-- Col ศัพท์เสริม -->
     <div class="col-4 box-header-extravocab">
-      <div class="header-extravocab">
-        <span class="absolute-center">คำศัพท์เสริม</span>
+      <div class="header-extravocab q-pa-sm">
+        <div
+          class="fit flex flex-center"
+          align="center"
+          style="border: 2px dashed #945f20"
+        >
+          <span class="">คำศัพท์เสริม</span>
+        </div>
       </div>
       <div class="box-content-extravocab">
         <div v-for="(item, index) in practiceData.extraVocab" :key="index">
           <div class="q-py-xs q-px-md">
             <span>
               <span v-html="item.vocab"></span>
-              <!-- <span class="relative-position q-mx-xs">{{
+              <span class="relative-position q-mx-xs">{{
                 `(${item.partOfSpeech.partOfSpeech})`
-              }}</span> -->
+              }}</span>
             </span>
             <br />
             <span v-html="item.meaning"></span>
@@ -166,11 +144,13 @@ import headerBar from "../header-time-progress";
 import themeAnimation from "./theme-animation.vue";
 import boxAnswer from "./box-answer";
 import { ref } from "vue";
+import multiplechoiceBtn from "../../components/button/multipleChoicesBtn";
 export default {
   components: {
     boxAnswer,
     themeAnimation,
     headerBar,
+    multiplechoiceBtn,
   },
   props: {
     themeSync: {
@@ -277,12 +257,12 @@ export default {
 
 .box-header-extravocab {
   width: 25%;
-  background-color: #fff0da;
+  background-color: #ffe5c6;
 }
 
 .header-extravocab {
   position: relative;
-  background-color: #014270;
+  background-color: #593000;
   color: #fff;
   height: 70px;
   font-size: 16px;
@@ -315,6 +295,36 @@ export default {
 }
 
 .font-content {
-  font-size: 16px;
+  font-size: 2.5vh;
+}
+.bg-choices-img {
+  background-image: url("../../../public/images/multiplevocab/new-bg.png");
+}
+.bg-repeat-img {
+  background-image: url("../../../public/images/multiplevocab/bg-repeat.png");
+}
+
+.bg-btn {
+  background-image: linear-gradient(#ffd057, #ffa601);
+  box-shadow: 0px 3px 3px 0px #db8200;
+  border-radius: 20px;
+}
+
+.circle-1 {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 1px 1px 1px;
+}
+.circle-2 {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 1px 1px 1px;
+}
+.btn-choice:hover {
+  transform: scale(0.97);
 }
 </style>

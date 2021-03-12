@@ -220,7 +220,6 @@
             v-model="levelSelected"
             :options="levelOptions"
             bg-color="amber"
-            glossy
           ></q-select>
         </div>
         <!-- unit Dropdown -->
@@ -244,17 +243,16 @@
           ({{ showPracticeName("Vocabulary").nameEng }})
         </div>
         <div class="flex q-gutter-md">
-          <div v-for="(item, index) in vocabPracticeList" :key="index">
-            <q-img
-              @click="gotoPractice(item)"
-              style="width: 70px"
-              :src="showPracticeIcon(item)"
-            ></q-img>
+          <div
+            v-for="(item, index) in vocabPracticeList"
+            :key="index"
+            @click="gotoPractice(item)"
+          >
+            <q-img style="width: 70px" :src="showPracticeIcon(item)"></q-img>
           </div>
         </div>
       </div>
       <div class="q-py-md">
-        <!-- <q-separator /> -->
         <hr style="border-top: 3px dashed #eeae5c" />
       </div>
 
@@ -265,17 +263,16 @@
           ({{ showPracticeName("Grammar").nameEng }})
         </div>
         <div class="flex q-gutter-md">
-          <div v-for="(item, index) in grammarPracticeList" :key="index">
-            <q-img
-              @click="gotoPractice(item)"
-              style="width: 70px"
-              :src="showPracticeIcon(item)"
-            ></q-img>
+          <div
+            v-for="(item, index) in grammarPracticeList"
+            :key="index"
+            @click="gotoPractice(item)"
+          >
+            <q-img style="width: 70px" :src="showPracticeIcon(item)"></q-img>
           </div>
         </div>
       </div>
       <div class="q-py-md">
-        <!-- <q-separator /> -->
         <hr style="border-top: 3px dashed #eeae5c" />
       </div>
 
@@ -286,12 +283,12 @@
           ({{ showPracticeName("Reading").nameEng }})
         </div>
         <div class="flex q-gutter-md">
-          <div v-for="(item, index) in readingPracticeList" :key="index">
-            <q-img
-              @click="gotoPractice(item)"
-              style="width: 70px"
-              :src="showPracticeIcon(item)"
-            ></q-img>
+          <div
+            v-for="(item, index) in readingPracticeList"
+            :key="index"
+            @click="gotoPractice(item)"
+          >
+            <q-img style="width: 70px" :src="showPracticeIcon(item)"></q-img>
           </div>
         </div>
       </div>
@@ -307,12 +304,12 @@
           ({{ showPracticeName("Writing").nameEng }})
         </div>
         <div class="flex q-gutter-md">
-          <div v-for="(item, index) in writingPracticeList" :key="index">
-            <q-img
-              @click="gotoPractice(item)"
-              style="width: 70px"
-              :src="showPracticeIcon(item)"
-            ></q-img>
+          <div
+            v-for="(item, index) in writingPracticeList"
+            :key="index"
+            @click="gotoPractice(item)"
+          >
+            <q-img style="width: 70px" :src="showPracticeIcon(item)"></q-img>
           </div>
         </div>
       </div>
@@ -328,12 +325,12 @@
           ({{ showPracticeName("Phonics").nameEng }})
         </div>
         <div class="flex q-gutter-md">
-          <div v-for="(item, index) in phonicsPracticeList" :key="index">
-            <q-img
-              @click="gotoPractice(item)"
-              style="width: 70px"
-              :src="showPracticeIcon(item)"
-            ></q-img>
+          <div
+            v-for="(item, index) in phonicsPracticeList"
+            :key="index"
+            @click="gotoPractice(item)"
+          >
+            <q-img style="width: 70px" :src="showPracticeIcon(item)"></q-img>
           </div>
         </div>
       </div>
@@ -349,12 +346,12 @@
           ({{ showPracticeName("Listening & Speaking").nameEng }})
         </div>
         <div class="flex q-gutter-md">
-          <div v-for="(item, index) in listeningPracticeList" :key="index">
-            <q-img
-              @click="gotoPractice(item)"
-              style="width: 70px"
-              :src="showPracticeIcon(item)"
-            ></q-img>
+          <div
+            v-for="(item, index) in listeningPracticeList"
+            :key="index"
+            @click="gotoPractice(item)"
+          >
+            <q-img style="width: 70px" :src="showPracticeIcon(item)"></q-img>
           </div>
         </div>
       </div>
