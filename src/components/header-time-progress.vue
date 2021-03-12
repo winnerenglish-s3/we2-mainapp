@@ -19,7 +19,7 @@
       </div>
     </div>
     <q-space></q-space>
-    <div class="self-center q-pb-sm" style="max-width: 200px; width: 45%" align="right">
+    <div class="self-center q-pb-sm" style="max-width: 200px; width: 55%" align="right">
       <div
         v-if="
           $route.name != 'readingmultiple' &&

@@ -1,5 +1,10 @@
 <template>
-  <q-page class="bg-reading">
+  <q-page
+    :class="{
+      'bg-reading': $q.platform.is.desktop,
+      'bg-color-mobile': $q.platform.is.mobile,
+    }"
+  >
     <app-bar
       :isShowPause="learningMode == 'selfLearning' ? true : false"
       :isHasHelp="true"
@@ -11,158 +16,189 @@
     <div
       class="box-container-main"
       v-if="(currentStep == 1 || currentStep == 2) && currentStep != 7"
+      align="center"
     >
-      <div class="row">
-        <div class="col-12 bg-white" align="center">
-          <div class="relative-position">
-            <header-bar
-              :setFontSize="fontSize"
-              :practiceData="{
-                totalQuestion: questionList.length,
-                currentQuestion: currentQuestion,
-              }"
-              @decreaseFont="decreaseFont"
-              @increaseFont="increaseFont"
-              @playSound="playSound"
-            ></header-bar>
+      <!-- Header Bar -->
+      <div class="" align="center">
+        <div class="relative-position">
+          <header-bar
+            :setFontSize="fontSize"
+            :practiceData="{
+              totalQuestion: questionList.length,
+              currentQuestion: currentQuestion,
+              totalStar: 2,
+            }"
+            @decreaseFont="decreaseFont"
+            @increaseFont="increaseFont"
+            @playSound="playSound"
+          ></header-bar>
+        </div>
+      </div>
+
+      <div class="relative-position" align="center">
+        <q-img
+          src="../../public/images/reading/title-board.png"
+          style="width: 100%; max-width: 320px"
+        >
+          <div align="center" class="absolute-center transparent" style="width: 100%">
+            <span class="f24">{{ readingContent.titleEng }} </span>
           </div>
-          <div class="box-container-reading" v-if="isLoadContent">
-            <div class="" align="center">
-              <span class="f24">{{ readingContent.titleEng }} </span>
-            </div>
-            <div class="q-mt-sm q-py-md box-content q-px-lg" align="left">
-              <span :style="`font-size:${fontSize}px;`" v-html="highLightText"> </span>
-            </div>
+        </q-img>
+      </div>
+
+      <div
+        class="box-container-reading relative-position"
+        :class="{
+          'bg-my-brown': $q.platform.is.desktop,
+          ' q-pa-sm': $q.platform.is.desktop,
+        }"
+        v-if="isLoadContent"
+        align="center"
+        style="margin-top: 20px"
+      >
+        <!-- Reading Content -->
+        <div class="bg-white q-pa-md">
+          <div>
+            <q-img
+              style="width: 50%"
+              src="../../public/images/reading/RTHp7VUMTneSHBFQY1IN.jpg"
+            ></q-img>
+          </div>
+          <div class="q-mt-sm q-py-md box-content q-px-lg" align="left">
+            <span :style="`font-size:${fontSize}px;`" v-html="highLightText"> </span>
           </div>
         </div>
-        <div
-          class="col-12 row items-center justify-center q-py-md"
-          :class="{ 'q-px-lg': $q.platform.is.mobile }"
-          align="center"
-          v-if="isLoadQuestion"
-        >
-          <div class="col">
-            <div class="box-question q-pa-md">
-              <span class="f20" v-html="questionList[currentQuestion].question"> </span>
-            </div>
-            <div class="box-container-content">
-              <div class="q-my-md row justify-between" v-if="!isShowDescription">
-                <!-- Choice Self Learning -->
-                <div v-if="learningMode == 'selfLearning'" class="row col-12">
-                  <div
-                    class="q-px-sm q-pt-md col-sm-6 col-xs-12"
-                    v-for="(item, index) in questionList[currentQuestion].choices"
-                    :key="index"
-                  >
-                    <q-btn
-                      @click="checkAnswer(item.index)"
-                      align="left"
-                      class="custom-btn"
-                      no-caps
-                      style="width: 100%"
-                      :style="$q.platform.is.desktop ? ' height: 60px' : 'height:40px'"
-                    >
-                      <div class="absolute-left" style="top: 5px; left: 5px">
-                        <div
-                          style="width: 10px; height: 10px; border-radius: 50%"
-                          class="bg-white"
-                        ></div>
-                      </div>
-                      <div class="absolute-left" style="top: 7px; left: 18px">
-                        <div
-                          style="width: 6px; height: 6px; border-radius: 50%"
-                          class="bg-white"
-                        ></div>
-                      </div>
 
-                      <div class="q-pl-md">
-                        <span v-html="item.choice"></span>
-                      </div>
-                    </q-btn>
-                  </div>
-                </div>
-                <!-- control mode -->
-                <div v-else class="row col-12">
-                  <div
-                    class="q-px-sm q-pt-md col-sm-6 col-xs-12"
-                    v-for="(item, index) in questionList[currentQuestion].choices"
-                    :key="index"
-                  >
-                    <multiplechoice-btn
-                      @click="checkAnswer(item.index)"
-                      :choice="item.choice"
-                      :index="index"
-                      :isDisable="currentStep == 1 && learningMode == 'control'"
-                      :class="{
-                        'disabled cursor-not-allowed ':
-                          currentStep == 1 && learningMode == 'control',
-                      }"
-                    />
-                  </div>
-                </div>
+        <div class="row" :class="{ 'bg-my-brown': $q.platform.is.mobile }">
+          <div
+            class="col-12 row items-center justify-center q-py-md"
+            :class="{ 'q-px-lg': $q.platform.is.mobile }"
+            align="center"
+            v-if="isLoadQuestion"
+          >
+            <div class="col">
+              <div class="box-question q-pa-md">
+                <span class="f20" v-html="questionList[currentQuestion].question"> </span>
               </div>
-
-              <!-- Description -->
-              <div class="q-my-md" align="left" v-else>
-                <div class="bg-white q-pa-md shadow-1 rounded-borders">
-                  <div v-if="!questionList[currentQuestion].isCorrect">
-                    <span
-                      class="text-red"
-                      v-html="
-                        questionList[currentQuestion].choices[
-                          questionList[currentQuestion].userAnswer - 1
-                        ].choice
-                      "
-                    ></span>
-                    เป็นคำตอบที่ ผิด
-                  </div>
-                  <div
-                    :class="!questionList[currentQuestion].isCorrect ? 'q-pt-md' : null"
-                  >
-                    คำตอบที่ถูกต้อง คือ
-                    <span
-                      class="text-green-4"
-                      v-html="
-                        questionList[currentQuestion].choices[
-                          questionList[currentQuestion].correctAnswer - 1
-                        ].choice
-                      "
+              <div class="box-container-content">
+                <div class="q-my-md row justify-between" v-if="!isShowDescription">
+                  <!-- Choice Self Learning -->
+                  <div v-if="learningMode == 'selfLearning'" class="row col-12">
+                    <div
+                      class="q-px-sm q-pt-md col-sm-6 col-xs-12"
+                      v-for="(item, index) in questionList[currentQuestion].choices"
+                      :key="index"
                     >
-                    </span>
-                  </div>
-                  <div class="q-my-md">
-                    <span v-html="questionList[currentQuestion].description"></span>
-                  </div>
+                      <q-btn
+                        @click="checkAnswer(item.index)"
+                        align="left"
+                        class="custom-btn f20"
+                        no-caps
+                        style="width: 100%"
+                        :style="$q.platform.is.desktop ? ' height: 60px' : 'height:40px'"
+                      >
+                        <div class="absolute-left" style="top: 5px; left: 5px">
+                          <div
+                            style="width: 10px; height: 10px; border-radius: 50%"
+                            class="bg-white"
+                          ></div>
+                        </div>
+                        <div class="absolute-left" style="top: 7px; left: 18px">
+                          <div
+                            style="width: 6px; height: 6px; border-radius: 50%"
+                            class="bg-white"
+                          ></div>
+                        </div>
 
-                  <div
-                    class="q-my-md"
-                    v-for="(ref, index) in questionList[currentQuestion].refs"
-                  >
-                    อ้างอิง#{{ index + 1 }} : <span v-html="ref"></span>
+                        <div class="q-pl-md">
+                          <span v-html="item.choice"></span>
+                        </div>
+                      </q-btn>
+                    </div>
                   </div>
-
-                  <div class="q-mt-lg" align="center">
-                    <q-btn
-                      @click="nextQuestion()"
-                      align="center"
-                      class="custom-btn"
-                      no-caps
-                      style="width: 200px; height: 40px"
+                  <!-- control mode -->
+                  <div v-else class="row col-12">
+                    <div
+                      class="q-px-sm q-pt-md col-sm-6 col-xs-12"
+                      v-for="(item, index) in questionList[currentQuestion].choices"
+                      :key="index"
                     >
-                      <div class="absolute-left" style="top: 5px; left: 5px">
-                        <div
-                          style="width: 10px; height: 10px; border-radius: 50%"
-                          class="bg-white"
-                        ></div>
-                      </div>
-                      <div class="absolute-left" style="top: 7px; left: 18px">
-                        <div
-                          style="width: 6px; height: 6px; border-radius: 50%"
-                          class="bg-white"
-                        ></div>
-                      </div>
-                      <div class="f16" align="center">ข้อต่อไป</div>
-                    </q-btn>
+                      <multiplechoice-btn
+                        @click="checkAnswer(item.index)"
+                        :choice="item.choice"
+                        :index="index"
+                        :isDisable="currentStep == 1 && learningMode == 'control'"
+                        :class="{
+                          'disabled cursor-not-allowed ':
+                            currentStep == 1 && learningMode == 'control',
+                        }"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Description -->
+                <div class="q-my-md" align="left" v-else>
+                  <div class="bg-white q-pa-md shadow-1 rounded-borders">
+                    <div v-if="!questionList[currentQuestion].isCorrect">
+                      <span
+                        class="text-red"
+                        v-html="
+                          questionList[currentQuestion].choices[
+                            questionList[currentQuestion].userAnswer - 1
+                          ].choice
+                        "
+                      ></span>
+                      เป็นคำตอบที่ ผิด
+                    </div>
+                    <div
+                      :class="!questionList[currentQuestion].isCorrect ? 'q-pt-md' : null"
+                    >
+                      คำตอบที่ถูกต้อง คือ
+                      <span
+                        class="text-green-4"
+                        v-html="
+                          questionList[currentQuestion].choices[
+                            questionList[currentQuestion].correctAnswer - 1
+                          ].choice
+                        "
+                      >
+                      </span>
+                    </div>
+                    <div class="q-my-md">
+                      <span v-html="questionList[currentQuestion].description"></span>
+                    </div>
+
+                    <div
+                      class="q-my-md"
+                      v-for="(ref, index) in questionList[currentQuestion].refs"
+                    >
+                      อ้างอิง#{{ index + 1 }} : <span v-html="ref"></span>
+                    </div>
+
+                    <div class="q-mt-lg" align="center">
+                      <q-btn
+                        @click="nextQuestion()"
+                        align="center"
+                        class="custom-btn"
+                        no-caps
+                        style="width: 200px; height: 40px"
+                      >
+                        <div class="absolute-left" style="top: 5px; left: 5px">
+                          <div
+                            style="width: 10px; height: 10px; border-radius: 50%"
+                            class="bg-white"
+                          ></div>
+                        </div>
+                        <div class="absolute-left" style="top: 7px; left: 18px">
+                          <div
+                            style="width: 6px; height: 6px; border-radius: 50%"
+                            class="bg-white"
+                          ></div>
+                        </div>
+                        <div class="f16" align="center">ข้อต่อไป</div>
+                      </q-btn>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -648,6 +684,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.bg-color-mobile {
+  background-color: #fffcf6;
+}
 .bg-reading {
   background-image: url("../../public/images/reading/bg-reading.png");
   background-size: cover;
@@ -671,7 +710,11 @@ export default {
 }
 
 .box-container-reading {
-  max-width: 1000px;
+  max-width: 1200px;
+}
+
+.bg-my-brown {
+  background-color: #7c451e;
 }
 
 .box-content {
@@ -777,6 +820,10 @@ export default {
 .box-show-answer {
   min-height: calc(50vh);
   max-height: fit-content;
+}
+
+.bg-reading {
+  background-image: url("../../public/images/reading/bg-reading-1.png");
 }
 
 @keyframes rotateLight {
