@@ -18,7 +18,6 @@
       <video
         style="width: 100%; border: 5px solid #0063be"
         id="videoPlayer"
-        controls
         class="relative-position"
       >
         <source :src="vdoURL" type="video/mp4" />
@@ -26,10 +25,10 @@
       <!-- Sentence -->
       <q-card class="bg-white q-pa-md q-mt-md shadow-8">
         <q-card-section class="text-h5">
-          <div>
+          <div class="row justify-center" align="left">
             {{ rolePlayList[current].sentenceEng }}
           </div>
-          <div class="q-pt-md">
+          <div class="q-pt-md row justify-center" align="left">
             {{ rolePlayList[current].sentenceTh }}
           </div>
         </q-card-section>
@@ -72,34 +71,46 @@
             icon="fas fa-arrow-right"
             color="amber"
             class="text-black"
-            v-if="rolePlayList[current].isRecord"
           >
           </q-btn>
         </q-card-actions>
       </q-card>
 
-      <q-dialog v-model="isShowResult" seamless maximized position="bottom">
+      <q-dialog v-model="isShowResult" persistent maximized position="bottom">
         <q-card class="shadow-0 transparent">
-          <q-card-section class="fit bg-white">
+          <q-card-section
+            class="fit"
+            :class="{
+              'bg-correct': rolePlayList[current].score >= 0.5,
+              'bg-incorrect': rolePlayList[current].score < 0.5,
+            }"
+          >
             <div class="flex flex-center fit">
-              <!-- <q-img
-                style="max-width: 350px; width: 100%"
-                src="../../public/images/light-answer.png"
-                class="animation-rotate"
-              ></q-img> -->
-
               <q-img
-                style="width: 200px"
-                src="../../public/images/spellingbee/octopus.gif"
+                class="animate__animated animate__tada animate__infinite"
+                style="width: 200px; animation-duration: 2s"
+                src="../../public/images/listening/shell.png"
               ></q-img>
 
               <div
                 style="letter-spacing: 2px"
-                class="text-h5 text-weight-bolder text-teal bg-white q-pa-md rounded-borders"
+                class="text-h5 text-weight-bolder q-pa-md rounded-borders"
               >
-                <span v-if="rolePlayList[current].score > 0.7">PERFECT!!</span>
-                <span v-else-if="rolePlayList[current].score > 0.5">GREAT!!</span>
-                <span v-else-if="rolePlayList[current].score < 0.5">TRY AGAIN</span>
+                <span class="text-teal" v-if="rolePlayList[current].score > 0.7"
+                  >PERFECT!! เยี่ยมไปเลย
+                  <span class="desktop-only"> ลองฟังเสียงตัวเองดูนะ </span></span
+                >
+                <span class="text-teal" v-else-if="rolePlayList[current].score > 0.5"
+                  >GREAT!! ทำได้ดีมาก
+                  <span class="desktop-only"> ลองฟังเสียงตัวเองดูนะ </span>
+                </span>
+                <div
+                  class="text-red"
+                  align="center"
+                  v-else-if="rolePlayList[current].score < 0.5"
+                >
+                  TRY AGAIN<br /><br />ลองใหม่อีกครั้งนะ
+                </div>
               </div>
             </div>
           </q-card-section>
@@ -115,6 +126,7 @@ import { useQuasar } from "quasar";
 import { ref, onMounted, reactive } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import axios from "axios";
+
 export default {
   components: {
     appBar,
@@ -242,8 +254,9 @@ export default {
 
     const errorText = ref("");
     const speechText = ref("");
-    const isShowResult = ref(true);
-    // const comparasionScore = ref(0);
+    const isShowResult = ref(false);
+
+    let closeTimeout;
 
     const speechToText = () => {
       let result = "";
@@ -279,9 +292,15 @@ export default {
 
           clearTimeout(setTimeOut);
           setTimeOut = setTimeout(() => {
-            isShowResult.value = false;
             isRecording.value = false;
           }, 3000);
+
+          if ($q.platform.is.mobile) {
+            clearTimeout(closeTimeout);
+            closeTimeout = setTimeout(() => {
+              isShowResult.value = false;
+            }, 2000);
+          }
         };
       } catch (error2) {
         speechText.value = error2;
@@ -312,8 +331,7 @@ export default {
             audio.play();
 
             audio.onended = () => {
-              console.log("ended");
-              // isAudioPaying.value = false;
+              isShowResult.value = false;
             };
           });
 
@@ -420,5 +438,13 @@ export default {
   to {
     transform: rotate(360deg);
   }
+}
+
+.bg-correct {
+  background-color: #d7ffb8;
+}
+
+.bg-incorrect {
+  background-color: #ffdfe0;
 }
 </style>
