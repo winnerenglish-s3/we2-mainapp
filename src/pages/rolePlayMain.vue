@@ -15,11 +15,16 @@
         {{ errorText }}
       </div> -->
 
-      <video style="width: 100%" id="videoPlayer" controls class="relative-position">
+      <video
+        style="width: 100%; border: 5px solid #0063be"
+        id="videoPlayer"
+        controls
+        class="relative-position"
+      >
         <source :src="vdoURL" type="video/mp4" />
       </video>
       <!-- Sentence -->
-      <q-card class="bg-white q-pa-md q-mt-md">
+      <q-card class="bg-white q-pa-md q-mt-md shadow-8">
         <q-card-section class="text-h5">
           <div>
             {{ rolePlayList[current].sentenceEng }}
@@ -73,37 +78,33 @@
         </q-card-actions>
       </q-card>
 
-      <q-dialog maximized v-model="isShowResult">
-        <q-card class="transparent shadow-0">
-          <q-card-section class="fit">
+      <q-dialog v-model="isShowResult" seamless maximized position="bottom">
+        <q-card class="shadow-0 transparent">
+          <q-card-section class="fit bg-white">
             <div class="flex flex-center fit">
-              <q-img
+              <!-- <q-img
                 style="max-width: 350px; width: 100%"
                 src="../../public/images/light-answer.png"
                 class="animation-rotate"
+              ></q-img> -->
+
+              <q-img
+                style="width: 200px"
+                src="../../public/images/spellingbee/octopus.gif"
               ></q-img>
-              <!-- <q-img
-                class="absolute"
-                style="max-width: 167.92px; width: 100%"
-                :src="require(`../../public/images/icon-correct-answer.png`)"
-              >
-              </q-img> -->
+
               <div
                 style="letter-spacing: 2px"
-                class="absolute-center text-h5 text-weight-bolder text-teal"
+                class="text-h5 text-weight-bolder text-teal bg-white q-pa-md rounded-borders"
               >
-                <span v-if="rolePlayList[current].score > 0.7">PERFECT</span>
-                <span v-else-if="rolePlayList[current].score > 0.5">GREAT</span>
+                <span v-if="rolePlayList[current].score > 0.7">PERFECT!!</span>
+                <span v-else-if="rolePlayList[current].score > 0.5">GREAT!!</span>
                 <span v-else-if="rolePlayList[current].score < 0.5">TRY AGAIN</span>
               </div>
             </div>
           </q-card-section>
         </q-card>
       </q-dialog>
-
-      <!-- <div class="text-h5">
-        {{ speechText }}
-      </div> -->
     </div>
   </q-page>
 </template>
@@ -241,7 +242,7 @@ export default {
 
     const errorText = ref("");
     const speechText = ref("");
-    const isShowResult = ref(false);
+    const isShowResult = ref(true);
     // const comparasionScore = ref(0);
 
     const speechToText = () => {
@@ -404,7 +405,9 @@ export default {
 
 <style lang="scss" scoped>
 .bg-roleplay {
-  background-image: url("../../public/images/bg-character.png");
+  background-image: url("../../public/images/listening/bg-listening.jpg");
+  background-position: bottom;
+  background-size: cover;
 }
 
 .animation-rotate {

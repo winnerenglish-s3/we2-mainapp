@@ -61,6 +61,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.font-vh {
+  font-size: 2.5vh;
+}
 .btn-choice {
   border-radius: 10px;
   box-shadow: 2px 3px 0px 0px #4935018f;
