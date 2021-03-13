@@ -7,7 +7,6 @@
       <theme-animation
         :isCorrectAnswer="isCorrectAnswer"
         :isSendAnswer="isSendAnswer"
-        :themeSync="themeSync"
         style="margin-bottom: -5px; z-index: 3"
       ></theme-animation>
     </div>
@@ -213,10 +212,6 @@ import { ref, computed, watch } from "vue";
 import { VueDraggableNext } from "vue-draggable-next";
 export default {
   props: {
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
     practiceData: {
       type: Object,
       default: () => {},

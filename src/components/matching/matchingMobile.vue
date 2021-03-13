@@ -33,7 +33,7 @@
             style="max-width: 450px; width: 100%"
             @click="!isSendAnswer ? funcSendAnswer(index) : ''"
             :src="
-              require(`../../../public/images/matching/button-theme/matching-theme-${themeSync}-choices-${
+              require(`../../../public/images/matching/button-theme/matching-theme-1-choices-${
                 isSendAnswer && index == currentAnswer
                   ? isCorrectAnswer
                     ? 'correct'
@@ -109,10 +109,6 @@ export default {
     headerBar,
   },
   props: {
-    themeSync: {
-      type: Number,
-      require: true,
-    },
     practiceData: {
       tyoe: Array,
       default: () => {},
