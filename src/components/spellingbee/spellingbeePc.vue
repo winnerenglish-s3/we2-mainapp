@@ -53,14 +53,14 @@
           <div class="col-12 q-py-lg q-mt-sm">
             <div class="box-content-answer q-pa-md">
               <div
-                class="justify-between row q-mt-xs box-answer"
+                class="justify-center row q-mt-xs box-answer"
                 v-if="currentAnswerList.length"
                 v-for="(item, row) in boggle"
                 :key="row"
               >
                 <div
                   class="relative-position"
-                  style="width: 19%"
+                  :style="boggleNumber == 3 ? 'width:33%' : 'width:20%'"
                   v-for="(item2, col) in item"
                   :key="col"
                 >
@@ -166,6 +166,10 @@ export default {
     },
     boggle: {
       type: Array,
+      default: () => [],
+    },
+    boggleNumber: {
+      type: Number,
       default: () => [],
     },
     selectValue: {

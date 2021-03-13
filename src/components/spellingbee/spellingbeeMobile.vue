@@ -176,6 +176,10 @@ export default {
       type: Boolean,
       default: () => null,
     },
+    boggleNumber: {
+      type: Number,
+      default: () => [],
+    },
   },
   emits: ["callback-nextquestion"],
   setup(props, { emit }) {
