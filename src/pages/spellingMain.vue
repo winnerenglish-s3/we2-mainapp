@@ -31,6 +31,7 @@
       @callback-finishpractice="funcFinishPractice()"
       class="box-container-main"
       v-if="$q.platform.is.desktop && isLoadPractice"
+      :boggleNumber="boggleNumber"
     ></spelling-pc>
 
     <spelling-mobile
@@ -47,6 +48,7 @@
       @callback-finishpractice="funcFinishPractice()"
       v-if="$q.platform.is.mobile && isLoadPractice"
       class="box-container-main"
+      :boggleNumber="boggleNumber"
     ></spelling-mobile>
 
     <finish-practice
@@ -93,16 +95,10 @@ export default {
 
     const isLoadPractice = ref(false);
 
-    const boggle = ref([
-      ["", "", "", "", ""],
-      ["", "", "", "", ""],
-      ["", "", "", "", ""],
-      ["", "", "", "", ""],
-      ["", "", "", "", ""],
-    ]);
+    const boggle = ref([]);
 
     const vocabularyList = [
-      { vocab: "Little Penguinss", meaning: "เพนกวินสีน้ำเงิน" },
+      { vocab: "Penguin", meaning: "เพนกวินสีน้ำเงิน" },
       { vocab: "Alligator", meaning: "จระเข้" },
       { vocab: "Ant", meaning: "มด" },
       { vocab: "King Cobra", meaning: "งูจงอาง" },
@@ -145,6 +141,8 @@ export default {
 
     const selectedLetter = ref([]);
 
+    const boggleNumber = ref(3);
+
     let counter = 0;
 
     let rowBefore;
@@ -176,13 +174,25 @@ export default {
       selectValue.value = [];
       selectedLetter.value = [];
       counter = 0;
-      boggle.value = [
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-        ["", "", "", "", ""],
-      ];
+
+      if (boggleNumber.value == 5) {
+        boggle.value = [
+          ["", "", "", "", ""],
+          ["", "", "", "", ""],
+          ["", "", "", "", ""],
+          ["", "", "", "", ""],
+          ["", "", "", "", ""],
+        ];
+      } else {
+        boggle.value = [
+          ["", "", ""],
+          ["", "", ""],
+          ["", "", ""],
+          ["", "", ""],
+          ["", "", ""],
+        ];
+      }
+
       rowBefore = null;
       colBefore = null;
       shuffleLetters(counter);
@@ -197,7 +207,7 @@ export default {
         if (counter < vocabularyList[practiceData.currentQuestion].vocab.length) {
           if (counter == 0) {
             let randomRow = Math.floor(Math.random() * 5); //random 0-4
-            let randomCol = Math.floor(Math.random() * 5); //random 0-4
+            let randomCol = Math.floor(Math.random() * boggleNumber.value); //random 0-4
             //   ตัวแรก
             boggle.value[randomRow][randomCol] = {
               letter: vocabularyList[practiceData.currentQuestion].vocab[
@@ -236,7 +246,139 @@ export default {
             shuffleLetters(counter);
           } else {
             const findNearestColumn = () => {
-              try {
+              const try3 = () => {
+                let availablePosition;
+                if (rowBefore == 0) {
+                  if (colBefore == 0) {
+                    availablePosition = [
+                      [0, 1],
+                      [1, 0],
+                    ];
+                  } else if (colBefore == 1) {
+                    availablePosition = [
+                      [0, 0],
+                      [0, 2],
+                      [1, 1],
+                    ];
+                  } else if (colBefore == 2) {
+                    availablePosition = [
+                      [0, 1],
+                      [0, 3],
+                      [1, 2],
+                    ];
+                  }
+                } else if (rowBefore == 1) {
+                  if (colBefore == 0) {
+                    availablePosition = [
+                      [1, 1],
+                      [2, 0],
+                      [0, 0],
+                    ];
+                  } else if (colBefore == 1) {
+                    availablePosition = [
+                      [1, 0],
+                      [1, 2],
+                      [0, 1],
+                      [2, 1],
+                    ];
+                  } else if (colBefore == 2) {
+                    availablePosition = [
+                      [1, 1],
+                      [0, 2],
+                      [1, 3],
+                      [2, 2],
+                    ];
+                  }
+                } else if (rowBefore == 2) {
+                  if (colBefore == 0) {
+                    availablePosition = [
+                      [1, 0],
+                      [2, 1],
+                      [3, 0],
+                    ];
+                  } else if (colBefore == 1) {
+                    availablePosition = [
+                      [2, 0],
+                      [1, 1],
+                      [2, 2],
+                      [3, 1],
+                    ];
+                  } else if (colBefore == 2) {
+                    availablePosition = [
+                      [2, 1],
+                      [1, 2],
+                      [2, 3],
+                      [3, 2],
+                    ];
+                  }
+                } else if (rowBefore == 3) {
+                  if (colBefore == 0) {
+                    availablePosition = [
+                      [2, 0],
+                      [3, 1],
+                      [4, 0],
+                    ];
+                  } else if (colBefore == 1) {
+                    availablePosition = [
+                      [3, 0],
+                      [2, 1],
+                      [3, 2],
+                      [4, 1],
+                    ];
+                  } else if (colBefore == 2) {
+                    availablePosition = [
+                      [3, 1],
+                      [2, 2],
+                      [3, 3],
+                      [4, 2],
+                    ];
+                  }
+                } else if (rowBefore == 4) {
+                  if (colBefore == 0) {
+                    availablePosition = [
+                      [3, 0],
+                      [4, 1],
+                    ];
+                  } else if (colBefore == 1) {
+                    availablePosition = [
+                      [4, 0],
+                      [3, 1],
+                      [4, 2],
+                    ];
+                  } else if (colBefore == 2) {
+                    availablePosition = [
+                      [4, 1],
+                      [3, 2],
+                      [4, 3],
+                    ];
+                  }
+                }
+
+                let shuffleArr = shuffleArray(availablePosition);
+                let [row, col] = shuffleArr[0];
+                if (boggle.value[row][col] == "") {
+                  boggle.value[row][col] = {
+                    letter: vocabularyList[practiceData.currentQuestion].vocab[
+                      counter
+                    ].toUpperCase(),
+                  };
+                  counter++;
+                  rowBefore = row;
+                  colBefore = col;
+                  shuffleLetters(counter);
+                  countError = 0;
+                } else {
+                  countError++;
+                  if (countError < 100) {
+                    findNearestColumn();
+                  } else {
+                    countError = 0;
+                    resetBoggle();
+                  }
+                }
+              };
+
+              const try5 = () => {
                 let availablePosition;
                 if (rowBefore == 0) {
                   if (colBefore == 0) {
@@ -427,6 +569,13 @@ export default {
                     resetBoggle();
                   }
                 }
+              };
+              try {
+                if (boggleNumber.value == 3) {
+                  try3();
+                } else {
+                  try5();
+                }
               } catch (error) {
                 resetBoggle();
               }
@@ -607,6 +756,7 @@ export default {
       isFinishPractice,
       funcLoadPractice,
       reStart,
+      boggleNumber,
     };
   },
   data() {
