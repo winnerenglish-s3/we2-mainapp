@@ -23,7 +23,7 @@
               <img
                 style="width: 100%"
                 :src="
-                  require(`../../../public/images/multiplevocab/button-theme/multiplevocab-theme-${themeSync}-choices-${
+                  require(`../../../public/images/multiplevocab/button-theme/multiplevocab-theme-1-choices-${
                     isSendAnswer
                       ? currentAnswer == item.index
                         ? isCorrectAnswer
@@ -41,21 +41,13 @@
                       isCorrectAnswer ? 'far fa-check-circle' : 'far fa-times-circle'
                     "
                     size="30px"
-                    :class="
-                      isCorrectAnswer
-                        ? setTheme[themeSync - 1].colorIcon.correct
-                        : setTheme[themeSync - 1].colorIcon.incorrect
-                    "
+                    :class="isCorrectAnswer ? 'text-green' : 'text-red'"
                   ></q-icon>
                 </div>
 
                 <span
                   :class="
-                    isSendAnswer
-                      ? currentAnswer == index
-                        ? setTheme[themeSync - 1].colorText
-                        : null
-                      : null
+                    isSendAnswer ? (currentAnswer == index ? 'text-black' : null) : null
                   "
                   v-html="item.choice"
                 >
@@ -65,13 +57,13 @@
 
             <div v-if="activeBy == 'description'" class="col-12">
               <div class="box-container-description shadow-5">
-                <div :class="setTheme[themeSync - 1].description.bgColor">
+                <div class="bg-blue-10">
                   <div class="box-header-description">
                     <q-img
                       class="no-padding"
                       width="1000px"
                       :src="
-                        require(`../../../public/images/multiplevocab/multiplevocab-theme-${themeSync}-description.png`)
+                        require(`../../../public/images/multiplevocab/multiplevocab-theme-1-description.png`)
                       "
                     ></q-img>
                   </div>
@@ -140,10 +132,6 @@ export default {
     headerBar,
   },
   props: {
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
     practiceData: {
       type: Object,
       default: () => {},
@@ -154,29 +142,6 @@ export default {
     // Initial Data
     const activeBy = ref("answer");
     const activeHover = ref(null);
-
-    const setTheme = ref([
-      {
-        colorText: "text-black",
-        colorIcon: {
-          correct: "text-green",
-          incorrect: "text-red",
-        },
-        description: {
-          bgColor: "bg-blue-10",
-        },
-      },
-      {
-        colorText: "text-white",
-        colorIcon: {
-          correct: "text-white",
-          incorrect: "text-white",
-        },
-        description: {
-          bgColor: "bg-white",
-        },
-      },
-    ]);
 
     // Function Send Answer
     const isSendAnswer = ref(false);
@@ -212,7 +177,6 @@ export default {
     return {
       activeBy,
       activeHover,
-      setTheme,
       isSendAnswer,
       isCorrectAnswer,
       currentAnswer,

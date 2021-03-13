@@ -7,7 +7,6 @@
       </div>
 
       <theme-animation
-        :themeSync="themeSync"
         :isSendAnswer="isSendAnswer"
         :isCorrectAnswer="isCorrectAnswer"
       ></theme-animation>
@@ -45,13 +44,13 @@
           <!-- Description -->
           <div v-if="activeBy == 'description'" class="col-10">
             <div class="box-container-description shadow-5">
-              <div class="q-px-sm" :class="setTheme[themeSync - 1].description.bgColor">
+              <div class="q-px-sm bg-blue-10">
                 <div class="box-header-description">
                   <q-img
                     class="no-padding"
                     width="100%"
                     :src="
-                      require(`../../../public/images/multiplevocab/multiplevocab-theme-${themeSync}-description.png`)
+                      require(`../../../public/images/multiplevocab/multiplevocab-theme-1-description.png`)
                     "
                   ></q-img>
                 </div>
@@ -153,10 +152,6 @@ export default {
     multiplechoiceBtn,
   },
   props: {
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
     practiceData: {
       type: Object,
       default: () => {},

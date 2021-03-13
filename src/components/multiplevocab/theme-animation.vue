@@ -1,16 +1,14 @@
 <template>
   <div>
     <animation-1
-      v-if="themeSync == 1"
       :isSendAnswer="isSendAnswer"
       :isCorrectAnswer="isCorrectAnswer"
     ></animation-1>
 
-    <animation-2
-      v-if="themeSync == 2"
+    <!-- <animation-2
       :isSendAnswer="isSendAnswer"
       :isCorrectAnswer="isCorrectAnswer"
-    ></animation-2>
+    ></animation-2> -->
   </div>
 </template>
 
@@ -23,10 +21,7 @@ export default {
       type: Boolean,
       default: () => false,
     },
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
+
     isCorrectAnswer: {
       type: Boolean,
       default: () => fasle,
