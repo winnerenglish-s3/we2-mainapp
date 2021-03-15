@@ -825,4 +825,8 @@ export default {
     transform: rotate(360deg);
   }
 }
+
+.brx2 {
+  border: 1px solid #f00;
+}
 </style>
