@@ -35,6 +35,8 @@
         text-color="white"
       ></q-btn>
     </div>
+
+    <button onClick="test()">test</button>
   </div>
 </template>
 
@@ -43,12 +45,10 @@ import { ref, computed, onMounted } from "vue";
 import { useQuasar } from "quasar";
 import { axios } from "src/boot/axios";
 
-function test() {
-  console.log("1234");
-}
-
 export default {
   setup() {
+    console.log("in script");
+
     // Quasar
     const $q = useQuasar();
     const questionList = ref([]);
@@ -69,9 +69,9 @@ export default {
       let response = await axios.post(apiURL, postData);
       response.data.sort((a, b) => a.order - b.order);
       questionList.value = response.data;
-      let findUnderline = questionList.value[currentQuestion.value].sentenceEng.match(
-        /<s*u>(.*?)<s*\/u>/gm
-      );
+      let findUnderline = questionList.value[
+        currentQuestion.value
+      ].sentenceEng.match(/<s*u>(.*?)<s*\/u>/gm);
       for (let i = 0; i < findUnderline.length; i++) {
         currentBucketArray.value.push("_______");
       }
@@ -79,14 +79,16 @@ export default {
       $q.loading.hide();
     };
 
-    const clickAnswer = (item, index) => {
-      let findAnswer = testQuestion.value.filter(
-        (x) => x.isAnswer && x.currentAnswer == ""
-      )[0];
-
-      testQuestion.value[findAnswer.index].currentAnswer = item;
-
-      questionList.value[currentQuestion.value].sentenceExtra.splice(index, 1);
+    const clickAnswer = (item) => {
+      currentBucketArray.value[currentPosition.value] = item;
+      currentPosition.value++;
+      let findRemoveIndex = questionList.value[
+        currentQuestion.value
+      ].sentenceExtra.indexOf(item);
+      questionList.value[currentQuestion.value].sentenceExtra.splice(
+        findRemoveIndex,
+        1
+      );
     };
 
     const removeWord = (data) => {
@@ -98,13 +100,20 @@ export default {
       console.clear();
 
       if (isLoad.value) {
-        let findUnderline = questionList.value[currentQuestion.value].sentenceEng.match(
-          /<s*u>(.*?)<s*\/u>/gm
-        );
+        let findUnderline = questionList.value[
+          currentQuestion.value
+        ].sentenceEng.match(/<s*u>(.*?)<s*\/u>/gm);
+        let replacedString =
+          questionList.value[currentQuestion.value].sentenceEng;
 
-        let replacedString = questionList.value[currentQuestion.value].sentenceEng;
-
-        replacedString = replacedString.replace(/&nbsp;/g, "");
+        for (let i = 0; i < findUnderline.length; i++) {
+          replacedString = replacedString.replace(
+            findUnderline[i],
+            "<button onclick='alert(1234)'>" +
+              currentBucketArray.value[i] +
+              "</button>"
+          );
+        }
 
         replacedString = replacedString.split(/<s*u>(.*?)<s*\/u>/gm);
 

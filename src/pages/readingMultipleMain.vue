@@ -109,11 +109,10 @@
                           ></div>
                         </div>
 
-                        <div class="q-pl-md">
-                          <span v-html="item.choice"></span>
-                        </div>
-                      </q-btn>
-                    </div>
+                      <div class="q-pl-md">
+                        <span v-html="item.choice" class="f16"></span>
+                      </div>
+                    </q-btn>
                   </div>
                   <!-- control mode -->
                   <div v-else class="row col-12">
