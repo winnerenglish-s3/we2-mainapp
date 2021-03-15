@@ -11,7 +11,10 @@
     <div class="box-container-main row" v-if="isLoadPractice">
       <div class="col-12 self-start bg-white row q-pb-lg">
         <div class="col-12 bg-white q-pb-md" align="center">
-          <div class="relative-position">
+          <div
+            class="relative-position bg-white shadow-1"
+            style="position: sticky; top: 50px; z-index: 2"
+          >
             <header-bar
               :setFontSize="fontSize"
               @decreaseFont="decreaseFont"
@@ -21,15 +24,30 @@
             ></header-bar>
           </div>
           <div class="box-container-reading">
-            <div class="q-pb-md" align="center">
+            <div class="q-pb-md q-mt-md" align="center">
               <span class="f24" v-html="practiceData.nameEng"> </span>
             </div>
             <div class="q-mt-sm box-content q-px-lg" align="left">
               <span
-                :style="`font-size:${fontSize}px;`"
-                v-html="`${practiceData.question}`"
+                v-for="(item, index) in practiceData.question"
                 v-if="!isShowContentAnswer"
-              ></span>
+              >
+                <span
+                  :style="`font-size:${fontSize}px;`"
+                  v-html="item.text"
+                  v-if="!item.isAnswer"
+                ></span>
+                <span
+                  v-if="item.isAnswer"
+                  :class="
+                    practiceData.currentQuestion + 1 == item.indexCurrentQuestion &&
+                    item.isAnswer
+                      ? 'bg-red'
+                      : ''
+                  "
+                  v-html="item.html"
+                ></span>
+              </span>
               <span
                 :style="`font-size:${fontSize}px;`"
                 v-html="`${practiceData.contentEng}`"
@@ -297,29 +315,51 @@ export default {
 
         practiceData.contentTh = questionList.value.sentenceTh;
 
-        practiceData.question = questionList.value.sentenceEng;
-
-        let setQuestionArr = questionList.value.sentenceEng.match(
+        let setNewQuestion = questionList.value.sentenceEng.split(
           /<s*u[^>]*>(.*?)<\/s*u>/gm
         );
 
-        for (let i = 0; i < setQuestionArr.length; i++) {
-          practiceData.question = practiceData.question.replace(
-            /<s*u[^>]*>(.*?)<\/s*u>/,
-            `<span class="relative-position" style="display:inline-block;border-bottom:1px solid;width:100px;text-align:center;">${
-              i + 1
-            }</span>`
-          );
+        let findQuestionAnswer = questionList.value.sentenceEng.match(
+          /<s*u[^>]*>(.*?)<\/s*u>/gm
+        );
 
-          setQuestionArr[i] = setQuestionArr[i]
-            .replace(/<s*u[^>]*>/gm, "")
-            .replace(/<\/s*u>/, "");
+        let tempQuestion = [];
 
-          practiceData.contentEng = practiceData.contentEng.replace(
-            /<s*u[^>]*>(.*?)<\/s*u>/,
-            `<span style="background-color:#9CDC83;padding:0px 5px;">${setQuestionArr[i]}</span>`
-          );
+        let countAnswer = 0;
+
+        for (let i = 0; i < setNewQuestion.length; i++) {
+          let newData = {
+            isAnswer: false,
+            text: setNewQuestion[i],
+            currentAnswer: "",
+            html: "",
+            indexCurrentQuestion: 0,
+          };
+
+          for (let x = 0; x < findQuestionAnswer.length; x++) {
+            let removeTag = findQuestionAnswer[x]
+              .replace(/<s*u>/g, "")
+              .replace(/<s*\/u>/g, "");
+
+            practiceData.contentEng = practiceData.contentEng.replace(
+              /<s*u[^>]*>(.*?)<\/s*u>/,
+              `<span style="background-color:#9CDC83;padding:0px 5px;">${removeTag}</span>`
+            );
+
+            if (removeTag == setNewQuestion[i]) {
+              countAnswer++;
+              newData.indexCurrentQuestion = countAnswer;
+              newData.isAnswer = true;
+              newData.html = `<span class="relative-position" style="display:inline-block;border-bottom:1px solid;width:100px;text-align:center;">${countAnswer}</span>`;
+              findQuestionAnswer.splice(x, 1);
+              break;
+            }
+          }
+
+          tempQuestion.push(newData);
         }
+
+        practiceData.question = tempQuestion;
 
         funcSelectedQuestion(true);
 

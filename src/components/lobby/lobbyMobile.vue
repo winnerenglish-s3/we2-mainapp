@@ -1,7 +1,7 @@
 <template>
   <div
     class="row"
-    style="min-height: 100vh; max-height: fit-content"
+    style="height: calc(100vh - 60px)"
     :class="mode ? 'bg-lobby-day ' : 'bg-lobby-night'"
   >
     <div class="col-12 self-start row z-top">
@@ -39,7 +39,7 @@
           </div>
         </q-img>
 
-        <div class="col-12 self-center" align="left">
+        <!-- <div class="col-12 self-center" align="left">
           <q-img
             fit="contain"
             style="width: max(20vw, 115px)"
@@ -51,12 +51,12 @@
               </div>
             </div>
           </q-img>
-        </div>
+        </div> -->
 
-        <div class="col-12 self-center">
+        <div class="col-12 self-center q-mt-sm">
           <q-img
             fit="contain"
-            style="width: max(20vw, 115px)"
+            style="width: max(20vw, 130px)"
             src="../../../public/images/lobby/coin-bar.png"
           >
             <div class="transparent fit relative-position no-padding">
@@ -103,7 +103,7 @@
               src="../../../public/images/lobby/ranking-btn.png"
             ></q-img>
           </div>
-          <div>
+          <!-- <div>
             <q-img
               width="max(20vw,100px)"
               fit="contain"
@@ -126,22 +126,41 @@
               class="cursor-pointer btn-active"
               src="../../../public/images/lobby/equipment-btn.png"
             ></q-img>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
 
-    <div class="col-12 self-end row" style="z-index: 2">
-      <div class="col-12 self-end" align="center">
+    <div class="col-12 self-end" style="z-index: 2">
+      <div class="q-pa-sm" align="center">
         <character
           :equipment="equipment"
           :bodycolor="bodycolor"
           style="z-index: 1"
         ></character>
       </div>
+      <div class="row justify-center q-pa-md" align="center">
+        <!-- <div class="col self-end" align="center">
+          <q-img
+            style="width: max(calc(45vw * 9 / 16), 130px)"
+            fit="contain"
+            class="cursor-pointer btn-active"
+            src="../../../public/images/lobby/boss-btn.png"
+          ></q-img>
+        </div> -->
+        <div class="col self-end" align="center">
+          <q-img
+            style="width: max(calc(45vw * 9 / 16), 130px)"
+            fit="contain"
+            class="cursor-pointer btn-active"
+            src="../../../public/images/lobby/leaning-btn.png"
+            @click="$router.push('/practicemain')"
+          ></q-img>
+        </div>
+      </div>
     </div>
 
-    <div class="col-12 self-end q-pb-md row justify-center z-top">
+    <!-- <div class="col-12 self-end q-pb-md row justify-center z-top ">
       <div class="self-end" align="center">
         <q-img
           style="width: max(calc(45vw * 9 / 16), 130px)"
@@ -159,7 +178,7 @@
           @click="$router.push('/practicemain')"
         ></q-img>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

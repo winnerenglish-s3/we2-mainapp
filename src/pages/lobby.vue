@@ -12,6 +12,7 @@
       :mode="mode"
       v-if="$q.platform.is.desktop && isShowCharacter"
     ></lobby-pc>
+
     <lobby-mobile
       :characterData="characterData"
       :equipment="equipment"

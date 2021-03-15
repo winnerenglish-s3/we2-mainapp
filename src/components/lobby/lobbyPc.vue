@@ -36,7 +36,7 @@
           </div>
         </q-img>
 
-        <div class="self-center q-ml-lg" align="left">
+        <!-- <div class="self-center q-ml-lg" align="left">
           <q-img
             fit="contain"
             style="width: 150px"
@@ -48,9 +48,9 @@
               </div>
             </div>
           </q-img>
-        </div>
+        </div> -->
 
-        <div class="self-center">
+        <div class="self-center q-ml-md">
           <q-img
             fit="contain"
             style="width: 150px"
@@ -68,7 +68,7 @@
       <div align="right" class="col-3 q-pa-lg">
         <q-img
           style="width: max(3.2vw, 45px)"
-          class="cursor-pointer"
+          class="cursor-pointer btn-active"
           src="../../../public/images/lobby/noti-btn.png"
           v-if="!isNews"
         >
@@ -76,17 +76,17 @@
         <q-img
           v-else
           style="width: max(3.2vw, 45px)"
-          class="cursor-pointer"
+          class="cursor-pointer btn-active"
           src="../../../public/images/lobby/noti-have-btn.png"
         ></q-img>
         <q-img
           style="width: max(3.2vw, 45px)"
-          class="cursor-pointer q-mx-xs"
+          class="cursor-pointer btn-active q-mx-xs"
           src="../../../public/images/lobby/setting-btn.png"
         ></q-img>
         <q-img
           style="width: max(3.2vw, 45px)"
-          class="cursor-pointer"
+          class="cursor-pointer btn-active"
           src="../../../public/images/lobby/logout-btn.png"
         ></q-img>
       </div>
@@ -110,7 +110,7 @@
           @mouseleave="activeMenu = null"
           src="../../../public/images/lobby/ranking-btn.png"
         ></q-img>
-        <q-img
+        <!-- <q-img
           width="120px"
           fit="contain"
           class="cursor-pointer q-mx-xs"
@@ -136,11 +136,11 @@
           @mouseenter="activeMenu = 'equipment'"
           @mouseleave="activeMenu = null"
           src="../../../public/images/lobby/equipment-btn.png"
-        ></q-img>
+        ></q-img> -->
       </div>
       <q-space></q-space>
       <div class="row justify-center" align="center">
-        <div class="self-end col q-mx-md">
+        <!-- <div class="self-end col q-mx-md">
           <q-img
             style="width: 140px"
             fit="contain"
@@ -150,7 +150,7 @@
             @mouseleave="activeMenu = null"
             src="../../../public/images/lobby/boss-btn.png"
           ></q-img>
-        </div>
+        </div> -->
         <div class="self-end col q-mx-md">
           <q-img
             style="width: 140px"
@@ -243,5 +243,15 @@ export default {
   border-radius: 70px;
   height: 6px;
   overflow: hidden;
+}
+
+.btn-active {
+  transition: 0.1s;
+  transform: scale(1);
+}
+
+.btn-active:active {
+  transition: 0.1s;
+  transform: scale(0.95);
 }
 </style>
