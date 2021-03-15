@@ -39,7 +39,11 @@
           src="../../public/images/reading/title-board.png"
           style="width: 100%; max-width: 320px"
         >
-          <div align="center" class="absolute-center transparent" style="width: 100%">
+          <div
+            align="center"
+            class="absolute-center transparent"
+            style="width: 100%"
+          >
             <span class="f24">{{ readingContent.titleEng }} </span>
           </div>
         </q-img>
@@ -64,7 +68,8 @@
             ></q-img>
           </div>
           <div class="q-mt-sm q-py-md box-content q-px-lg" align="left">
-            <span :style="`font-size:${fontSize}px;`" v-html="highLightText"> </span>
+            <span :style="`font-size:${fontSize}px;`" v-html="highLightText">
+            </span>
           </div>
         </div>
 
@@ -77,15 +82,23 @@
           >
             <div class="col">
               <div class="box-question q-pa-md">
-                <span class="f20" v-html="questionList[currentQuestion].question"> </span>
+                <span
+                  class="f20"
+                  v-html="questionList[currentQuestion].question"
+                >
+                </span>
               </div>
               <div class="box-container-content">
-                <div class="q-my-md row justify-between" v-if="!isShowDescription">
+                <div
+                  class="q-my-md row justify-between"
+                  v-if="!isShowDescription"
+                >
                   <!-- Choice Self Learning -->
                   <div v-if="learningMode == 'selfLearning'" class="row col-12">
                     <div
                       class="q-px-sm q-pt-md col-sm-6 col-xs-12"
-                      v-for="(item, index) in questionList[currentQuestion].choices"
+                      v-for="(item, index) in questionList[currentQuestion]
+                        .choices"
                       :key="index"
                     >
                       <q-btn
@@ -94,11 +107,19 @@
                         class="custom-btn f20"
                         no-caps
                         style="width: 100%"
-                        :style="$q.platform.is.desktop ? ' height: 60px' : 'height:40px'"
+                        :style="
+                          $q.platform.is.desktop
+                            ? ' height: 60px'
+                            : 'height:40px'
+                        "
                       >
                         <div class="absolute-left" style="top: 5px; left: 5px">
                           <div
-                            style="width: 10px; height: 10px; border-radius: 50%"
+                            style="
+                              width: 10px;
+                              height: 10px;
+                              border-radius: 50%;
+                            "
                             class="bg-white"
                           ></div>
                         </div>
@@ -109,23 +130,27 @@
                           ></div>
                         </div>
 
-                      <div class="q-pl-md">
-                        <span v-html="item.choice" class="f16"></span>
-                      </div>
-                    </q-btn>
+                        <div class="q-pl-md">
+                          <span v-html="item.choice"></span>
+                        </div>
+                      </q-btn>
+                    </div>
                   </div>
                   <!-- control mode -->
                   <div v-else class="row col-12">
                     <div
                       class="q-px-sm q-pt-md col-sm-6 col-xs-12"
-                      v-for="(item, index) in questionList[currentQuestion].choices"
+                      v-for="(item, index) in questionList[currentQuestion]
+                        .choices"
                       :key="index"
                     >
                       <multiplechoice-btn
                         @click="checkAnswer(item.index)"
                         :choice="item.choice"
                         :index="index"
-                        :isDisable="currentStep == 1 && learningMode == 'control'"
+                        :isDisable="
+                          currentStep == 1 && learningMode == 'control'
+                        "
                         :class="{
                           'disabled cursor-not-allowed ':
                             currentStep == 1 && learningMode == 'control',
@@ -150,7 +175,11 @@
                       เป็นคำตอบที่ ผิด
                     </div>
                     <div
-                      :class="!questionList[currentQuestion].isCorrect ? 'q-pt-md' : null"
+                      :class="
+                        !questionList[currentQuestion].isCorrect
+                          ? 'q-pt-md'
+                          : null
+                      "
                     >
                       คำตอบที่ถูกต้อง คือ
                       <span
@@ -164,7 +193,9 @@
                       </span>
                     </div>
                     <div class="q-my-md">
-                      <span v-html="questionList[currentQuestion].description"></span>
+                      <span
+                        v-html="questionList[currentQuestion].description"
+                      ></span>
                     </div>
 
                     <div
@@ -184,7 +215,11 @@
                       >
                         <div class="absolute-left" style="top: 5px; left: 5px">
                           <div
-                            style="width: 10px; height: 10px; border-radius: 50%"
+                            style="
+                              width: 10px;
+                              height: 10px;
+                              border-radius: 50%;
+                            "
                             class="bg-white"
                           ></div>
                         </div>
@@ -215,7 +250,10 @@
         'full-width': $q.platform.is.mobile,
       }"
     >
-      <div class="q-pa-md q-px-xl" :class="{ 'border-dash': $q.platform.is.desktop }">
+      <div
+        class="q-pa-md q-px-xl"
+        :class="{ 'border-dash': $q.platform.is.desktop }"
+      >
         <div
           class="row justify-center"
           style="min-height: calc(100vh - 400px); max-height: fit-content"
@@ -223,7 +261,9 @@
           <div class="self-center" style="max-width: 400px; width: 100%">
             <waiting></waiting>
             <div align="center" class="q-py-md">
-              <span class="f36 text-brown-8 text-bold" style="font-size: max(1.7vw, 20px)"
+              <span
+                class="f36 text-brown-8 text-bold"
+                style="font-size: max(1.7vw, 20px)"
                 >รอเพื่อนก่อนนะ</span
               >
             </div>
@@ -236,7 +276,9 @@
     <div
       class="row box-content-main"
       :class="
-        $q.platform.is.desktop ? 'q-pa-sm q-my-lg absolute-center ' : 'absolute-bottom'
+        $q.platform.is.desktop
+          ? 'q-pa-sm q-my-lg absolute-center '
+          : 'absolute-bottom'
       "
       v-if="currentStep == 3"
     >
@@ -249,7 +291,9 @@
           class="row center"
           style="margin-top: 120px"
           :class="
-            $q.platform.is.desktop ? 'q-pa-md justify-center' : 'q-pa-xs justify-around'
+            $q.platform.is.desktop
+              ? 'q-pa-md justify-center'
+              : 'q-pa-xs justify-around'
           "
         >
           <div
@@ -267,8 +311,14 @@
               :class="$q.platform.is.desktop ? 'graph-desktop' : 'graph-mobile'"
             >
               <div class="absolute-top" style="top: -90px" align="center">
-                <q-img width="60px" src="../../public/images/grammar/img-score.png">
-                  <div class="transparent absolute-center shadow-0" style="top: 40%">
+                <q-img
+                  width="60px"
+                  src="../../public/images/grammar/img-score.png"
+                >
+                  <div
+                    class="transparent absolute-center shadow-0"
+                    style="top: 40%"
+                  >
                     <span class="text-black f24 text-bold">n</span>
                   </div></q-img
                 >
@@ -365,7 +415,9 @@
               style="max-width: 167.92px; width: 100%"
               :src="
                 require(`../../public/images/icon-${
-                  questionList[currentQuestion].isCorrect ? 'correct' : 'incorrect'
+                  questionList[currentQuestion].isCorrect
+                    ? 'correct'
+                    : 'incorrect'
                 }-answer.png`)
               "
             >
@@ -411,7 +463,12 @@
           </div>
         </q-card-section>
         <q-card-actions align="center">
-          <q-btn v-close-popup label="ปิด" class="custom-btn" style="width: 200px">
+          <q-btn
+            v-close-popup
+            label="ปิด"
+            class="custom-btn"
+            style="width: 200px"
+          >
             <div class="absolute-left" style="top: 5px; left: 5px">
               <div
                 style="width: 10px; height: 10px; border-radius: 50%"
@@ -823,9 +880,5 @@ export default {
   to {
     transform: rotate(360deg);
   }
-}
-
-.brx2 {
-  border: 1px solid #f00;
 }
 </style>
