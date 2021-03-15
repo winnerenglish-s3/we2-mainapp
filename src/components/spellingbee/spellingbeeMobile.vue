@@ -306,9 +306,8 @@ export default {
   left: 50%;
   transform: translate(-50%);
   background-color: #ff5f01;
-  width: 40%;
+  width: 27px;
   height: 100%;
-  z-index: 1;
 }
 
 .link-answer-bottom {
@@ -317,9 +316,8 @@ export default {
   left: 50%;
   transform: translate(-50%);
   background-color: #ff5f01;
-  width: 40%;
+  width: 27px;
   height: 100%;
-  z-index: 1;
 }
 
 .link-answer-left {
@@ -328,8 +326,8 @@ export default {
   left: 50%;
   transform: translate(0%, -50%);
   background-color: #ff5f01;
-  width: 100%;
-  height: 40%;
+  width: 150%;
+  height: 25px;
 }
 
 .link-answer-right {
@@ -338,8 +336,8 @@ export default {
   right: 50%;
   transform: translate(0%, -50%);
   background-color: #ff5f01;
-  width: 100%;
-  height: 40%;
+  width: 150%;
+  height: 25px;
 }
 
 .btn-active {
