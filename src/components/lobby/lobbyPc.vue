@@ -3,7 +3,7 @@
     <lobby-day class="absolute-top fit" v-if="mode"></lobby-day>
     <lobby-night class="absolute-top fit" v-else> </lobby-night>
 
-    <div class="col-12 self-start row z-top">
+    <div class="col-12 self-start row" style="z-index: 2">
       <div class="col self-start row q-px-xs q-pt-md">
         <q-img
           fit="contain"
@@ -67,6 +67,7 @@
 
       <div align="right" class="col-3 q-pa-lg">
         <q-img
+          @click="$emit('callback-dialog', 'notification')"
           style="width: max(3.2vw, 45px)"
           class="cursor-pointer btn-active"
           src="../../../public/images/lobby/noti-btn.png"
@@ -75,16 +76,19 @@
         </q-img>
         <q-img
           v-else
+          @click="$emit('callback-dialog', 'notification')"
           style="width: max(3.2vw, 45px)"
           class="cursor-pointer btn-active"
           src="../../../public/images/lobby/noti-have-btn.png"
         ></q-img>
         <q-img
+          @click="$emit('callback-dialog', 'setting')"
           style="width: max(3.2vw, 45px)"
           class="cursor-pointer btn-active q-mx-xs"
           src="../../../public/images/lobby/setting-btn.png"
         ></q-img>
         <q-img
+          @click="$emit('callback-dialog', 'logout')"
           style="width: max(3.2vw, 45px)"
           class="cursor-pointer btn-active"
           src="../../../public/images/lobby/logout-btn.png"
@@ -99,15 +103,13 @@
       </div>
     </div>
 
-    <div class="col-12 self-end q-py-lg row z-top">
+    <div class="col-12 self-end q-py-lg row" style="z-index: 2">
       <div class="col row self-end q-px-md">
         <q-img
+          @click="$emit('callback-dialog', 'ranking')"
           fit="contain"
           width="120px"
-          class="cursor-pointer q-mx-xs"
-          :class="activeMenu == 'ranking' ? 'hover-menu' : 'menu-icon'"
-          @mouseenter="activeMenu = 'ranking'"
-          @mouseleave="activeMenu = null"
+          class="cursor-pointer q-mx-xs btn-menu"
           src="../../../public/images/lobby/ranking-btn.png"
         ></q-img>
         <!-- <q-img
@@ -155,10 +157,7 @@
           <q-img
             style="width: 140px"
             fit="contain"
-            class="cursor-pointer"
-            :class="activeMenu == 'leaning' ? 'hover-menu' : 'menu-icon'"
-            @mouseenter="activeMenu = 'leaning'"
-            @mouseleave="activeMenu = null"
+            class="cursor-pointer btn-menu"
             src="../../../public/images/lobby/leaning-btn.png"
             @click="$router.push('/practicemain')"
           ></q-img>
@@ -198,6 +197,12 @@ export default {
       default: "",
     },
   },
+  emits: [
+    "callback-logout",
+    "callback-setting",
+    "callback-notification",
+    "callback-ranking",
+  ],
   setup(props) {
     // Initial Data
     const $q = useQuasar();
@@ -212,13 +217,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.hover-menu {
+.btn-menu {
+  transition: 0.3s;
+  transform: translateY(0px);
+}
+
+.btn-menu:hover {
   transition: 0.3s;
   transform: translateY(-10px);
 }
 
-.menu-icon {
-  transition: 0.3s;
+.btn-menu:active {
+  transition: 0.1s;
+  transform: scale(0.95);
 }
 
 .box-container-level {

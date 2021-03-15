@@ -71,6 +71,7 @@
       <div align="right" class="q-pt-md col q-pr-xs">
         <q-img
           style="width: max(calc(18vw * 9 / 16), 45px)"
+          @click="$emit('callback-dialog', 'notification')"
           class="cursor-pointer btn-active"
           src="../../../public/images/lobby/noti-btn.png"
           v-if="!isNews"
@@ -78,17 +79,20 @@
         </q-img>
         <q-img
           v-else
+          @click="$emit('callback-dialog', 'notification')"
           style="width: max(calc(18vw * 9 / 16), 45px)"
           class="cursor-pointer btn-active"
           src="../../../public/images/lobby/noti-have-btn.png"
         >
         </q-img>
         <q-img
+          @click="$emit('callback-dialog', 'setting')"
           style="width: max(calc(18vw * 9 / 16), 45px)"
           class="cursor-pointer btn-active q-mx-xs"
           src="../../../public/images/lobby/setting-btn.png"
         ></q-img>
         <q-img
+          @click="$emit('callback-dialog', 'logout')"
           style="width: max(calc(18vw * 9 / 16), 45px)"
           class="cursor-pointer btn-active"
           src="../../../public/images/lobby/logout-btn.png"
@@ -97,6 +101,7 @@
         <div align="right" class="absolute-right" style="top: 8%; z-index: 2">
           <div>
             <q-img
+              @click="$emit('callback-dialog', 'ranking')"
               fit="contain"
               width="max(20vw,100px)"
               class="cursor-pointer btn-active"

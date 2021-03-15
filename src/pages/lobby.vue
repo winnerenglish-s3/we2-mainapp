@@ -10,6 +10,7 @@
       :bodycolor="color"
       class=""
       :mode="mode"
+      @callback-dialog="callbackFunction"
       v-if="$q.platform.is.desktop && isShowCharacter"
     ></lobby-pc>
 
@@ -19,6 +20,7 @@
       :bodycolor="color"
       class=""
       :mode="mode"
+      @callback-dialog="callbackFunction"
       v-if="$q.platform.is.mobile && isShowCharacter"
     ></lobby-mobile>
 
@@ -185,6 +187,67 @@
         </q-card-section>
       </q-card>
     </q-dialog>
+
+    <!-- dialog Notification -->
+    <q-dialog maximized v-model="isShowNotification" data-cy="dialog-notification">
+      <q-card class="transparent shadow-0">
+        <q-card-section class="fit">
+          <div class="absolute-center">
+            <div class="box-container-notification q-pa-md relative-position">
+              <div class="icon-notification q-px-md q-pt-md">
+                <q-img
+                  class="q-mb-md"
+                  width="70px"
+                  src="../../public/images/lobby/icon-notification.png"
+                ></q-img>
+              </div>
+              <div class="q-mt-md q-pa-md q-px-sm">
+                <transition
+                  appear
+                  enter-active-class="animated slideInLeft"
+                  leave-active-class="animated slideOutRight"
+                  v-if="isActiveNotification == null"
+                >
+                  <div class="q-px-sm box-notification-list">
+                    <div class="q-mb-sm" v-for="i in 3">
+                      <q-img
+                        @click="isActiveNotification = i"
+                        fit="contain"
+                        class="cursor-pointer btn-active"
+                        :src="
+                          require(`../../public/images/lobby/test-notification${i}.png`)
+                        "
+                      ></q-img>
+                    </div>
+                  </div>
+                </transition>
+                <transition
+                  appear
+                  enter-active-class="animated slideInLeft"
+                  leave-active-class="animated slideOutRight"
+                  v-if="isActiveNotification == 1"
+                >
+                  <div class="box-notification-details" align="center">
+                    <q-img src="../../public/images/lobby/test-content.png"></q-img>
+                  </div>
+                </transition>
+              </div>
+
+              <div align="center" class="q-pt-md">
+                <q-btn
+                  style="width: 200px; border-radius: 7px"
+                  class="bg-amber"
+                  push
+                  v-close-popup
+                  @click="isActiveNotification = null"
+                  >ปิด</q-btn
+                >
+              </div>
+            </div>
+          </div>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -259,7 +322,19 @@ export default {
       }
       $q.loading.hide();
     };
+
+    // Dialog Show
+    const isShowNotification = ref(false);
+    const isActiveNotification = ref(null);
+
+    const callbackFunction = (type) => {
+      if (type == "notification") {
+        isShowNotification.value = true;
+      }
+    };
+
     var authListen;
+
     onMounted(() => {
       authListen = firebase.auth().onAuthStateChanged(async function (user) {
         if (user) {
@@ -291,6 +366,10 @@ export default {
       isShowCharacter,
       equipment,
       color,
+
+      callbackFunction,
+      isShowNotification,
+      isActiveNotification,
     };
   },
   components: {
@@ -342,5 +421,59 @@ export default {
   width: 70%;
   height: 35px;
   background-size: cover;
+}
+
+.box-container-notification {
+  width: 320px;
+  background-color: #f6f3d3;
+  border-radius: 10px;
+}
+
+.icon-notification {
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  background-color: #f6f3d3;
+  border-radius: 50%;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.box-notification-list {
+  height: 300px;
+  overflow-y: auto;
+}
+
+/* width */
+.box-notification-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+.box-notification-list::-webkit-scrollbar-track {
+  background: #fff;
+  border-radius: 20px;
+}
+
+/* Handle */
+.box-notification-list::-webkit-scrollbar-thumb {
+  background: #f7a006;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+.box-notification-list::-webkit-scrollbar-thumb:hover {
+  background: #e69305;
+}
+
+.btn-active {
+  transition: 0.1s;
+  transform: scale(1);
+}
+
+.btn-active:active {
+  transition: 0.1s;
+  transform: scale(0.9);
 }
 </style>
