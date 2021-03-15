@@ -1,7 +1,7 @@
 <template>
   <q-page class="full-height" :class="{ row: $q.platform.is.desktop }">
     <div class="col-12 self-start">
-      <app-bar :themeSync="themeSync" :isShowHome="true"></app-bar>
+      <app-bar :isShowHome="true"></app-bar>
     </div>
 
     <!-- DESKTOP -->
@@ -409,10 +409,6 @@ export default {
     courseId: {
       type: String,
       default: "",
-    },
-    themeSync: {
-      type: Number,
-      default: 1,
     },
   },
   emits: ["courseChanged"],

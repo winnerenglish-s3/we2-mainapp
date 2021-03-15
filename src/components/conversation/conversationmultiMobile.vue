@@ -92,10 +92,6 @@ import headerBar from "../header-time-progress";
 import { ref } from "vue";
 export default {
   props: {
-    themeSync: {
-      type: Number,
-      default: 1,
-    },
     practiceData: {
       type: Object,
       default: () => {},

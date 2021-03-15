@@ -11,7 +11,6 @@
             :isSendAnswer="isSendAnswer"
             :currentAnswer="currentAnswer"
             :isCorrectAnswer="isCorrectAnswer"
-            :themeSync="themeSync"
           ></theme-animation>
         </div>
       </div>
@@ -61,7 +60,7 @@
                   : ((currentAnswer = index), $emit('callback-playsound', item.soundUrl))
               "
               :src="
-                require(`../../../public/images/phonicsmulti/button-theme/phonics-choices-${themeSync}-${
+                require(`../../../public/images/phonicsmulti/button-theme/phonics-choices-1-${
                   isSendAnswer
                     ? currentAnswer == index
                       ? isCorrectAnswer
@@ -169,10 +168,6 @@ export default {
     themeAnimation,
   },
   props: {
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
     practiceData: {
       type: Object,
       defulat: () => {},

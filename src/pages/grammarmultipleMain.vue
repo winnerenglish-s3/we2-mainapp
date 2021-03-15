@@ -14,14 +14,12 @@
         :isShowPause="isSynchronize ? false : true"
         @callback-showdialoghelp="funcShowDialogHelp"
         @callback-restart="reStart"
-        :themeSync="themeSync"
       ></app-bar>
     </div>
 
     <grammar-multiple-pc
       :practiceData="practiceData"
       class="box-container-main"
-      :themeSync="themeSync"
       @callback-nextquestion="funcSelectedQuestion"
       @callback-showdialoghelp="funcShowDialogHelp"
       @callback-finishpractice="isFinishPractice = true"
@@ -30,7 +28,6 @@
 
     <grammar-multiple-mobile
       :practiceData="practiceData"
-      :themeSync="themeSync"
       @callback-nextquestion="funcSelectedQuestion"
       @callback-showdialoghelp="funcShowDialogHelp"
       @callback-finishpractice="isFinishPractice = true"
@@ -148,10 +145,6 @@ export default {
     appBar,
   },
   props: {
-    themeSync: {
-      type: Number,
-      default: 1,
-    },
     isSynchronize: {
       type: Boolean,
       default: () => false,

@@ -5,7 +5,6 @@
         <header-bar :practiceData="practiceData"></header-bar>
       </div>
       <theme-animation
-        :themeSync="themeSync"
         :isCorrectAnswer="isCorrectAnswer"
         :isSendAnswer="isSendAnswer"
       ></theme-animation>
@@ -46,7 +45,7 @@
     </div>
     <div class="col-12" v-show="isDescription" align="center">
       <div class="box-description">
-        <div class="q-pa-md" :style="themeColor"></div>
+        <div class="q-pa-md" style="background-color: #9f220c"></div>
         <div class="f16 q-px-md">
           <div class="q-pa-md row" align="left">
             <div class="col-12 row q-py-xs" v-if="isSendAnswer && !isCorrectAnswer">
@@ -104,7 +103,6 @@
 <script>
 import headerBar from "../header-time-progress";
 import themeAnimation from "./theme-animation";
-import getColorTheme from "../../../public/themeColor.json";
 import { ref, computed } from "vue";
 export default {
   components: {
@@ -112,10 +110,6 @@ export default {
     themeAnimation,
   },
   props: {
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
     practiceData: {
       type: Object,
       default: () => {},
@@ -123,12 +117,6 @@ export default {
   },
   emits: ["callback-finishpractice"],
   setup(props, { emit }) {
-    // Initial Color Theme
-    const colorTheme = ref(getColorTheme);
-    const themeColor = computed(() => {
-      return `background-color:${colorTheme.value[props.themeSync - 1].hex}`;
-    });
-
     const currentAnswer = ref(null);
     const isSendAnswer = ref(false);
     const isCorrectAnswer = ref(false);
@@ -163,9 +151,6 @@ export default {
     };
 
     return {
-      // Theme Color
-      themeColor,
-
       // Current Select Answer
       currentAnswer,
 

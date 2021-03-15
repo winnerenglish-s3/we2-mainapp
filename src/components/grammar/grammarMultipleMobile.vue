@@ -2,7 +2,6 @@
   <div>
     <div class="">
       <header-bar
-        :themeSync="themeSync"
         :isSendAnswer="isSendAnswer"
         :isCorrectAnswer="isCorrectAnswer"
         :practiceData="practiceData"
@@ -48,13 +47,11 @@
     </div>
     <div v-if="activeBy == 'description'" align="center" class="q-pa-md">
       <div class="box-description shadow-5">
-        <div :class="setTheme[themeSync - 1].description.bgColor" align="left">
+        <div class="bg-negative" align="left">
           <q-img
             class="no-padding"
             height="30px"
-            :src="
-              require(`../../../public/images/logo-description-theme-${themeSync}.png`)
-            "
+            :src="require(`../../../public/images/logo-description-theme-1.png`)"
           ></q-img>
         </div>
         <div class="f14 q-pa-sm">
@@ -130,10 +127,6 @@ export default {
     headerBar,
   },
   props: {
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
     practiceData: {
       type: Object,
       default: () => {},

@@ -1,11 +1,7 @@
 <template>
   <q-page class="bg-roleplay">
     <!-- APP BAR -->
-    <app-bar
-      :isShowPause="true"
-      :themeSync="themeSync"
-      :instructionData="instructionData"
-    ></app-bar>
+    <app-bar :isShowPause="true" :instructionData="instructionData"></app-bar>
     <!-- CONTENT -->
 
     <div align="center" class="q-pt-md" style="max-width: 1000px; margin: auto">
@@ -131,12 +127,7 @@ export default {
   components: {
     appBar,
   },
-  props: {
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
-  },
+  props: {},
   setup() {
     const $q = useQuasar();
     const router = useRouter();

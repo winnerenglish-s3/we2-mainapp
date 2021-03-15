@@ -9,7 +9,6 @@
         :isLoadPractice="isLoadPractice"
         @callback-showdialoghelp="isShowDialogHelp = true"
         @callback-restart="reStart"
-        :themeSync="themeSync"
       ></app-bar>
     </div>
 
@@ -18,7 +17,6 @@
     </div>
 
     <languagetip-pc
-      :themeSync="themeSync"
       :practiceData="practiceData"
       @callback-nextquestion="funcSelectedQuestion()"
       @callback-finishpractice="isFinishPractice = true"
@@ -27,7 +25,6 @@
     ></languagetip-pc>
 
     <languagetip-mobile
-      :themeSync="themeSync"
       :practiceData="practiceData"
       @callback-nextquestion="funcSelectedQuestion()"
       @callback-finishpractice="isFinishPractice = true"
@@ -58,10 +55,6 @@ export default {
     appBar,
   },
   props: {
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
     isSynchronize: {
       type: Boolean,
       default: () => false,

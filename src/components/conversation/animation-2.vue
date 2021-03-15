@@ -1741,10 +1741,6 @@ export default {
       type: Boolean,
       default: () => false,
     },
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
   },
   data() {
     return {};

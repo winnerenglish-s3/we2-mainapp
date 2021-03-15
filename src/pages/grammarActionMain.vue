@@ -1,12 +1,6 @@
 <template>
-  <q-page
-    :class="$q.platform.is.desktop ? 'bg-grammaraction' : 'bg-mobile'"
-    :theme="themeSync"
-  >
-    <app-bar
-      :themeSync="themeSync"
-      :isShowPause="learningMode == 'selfLearning' ? true : false"
-    ></app-bar>
+  <q-page :class="$q.platform.is.desktop ? 'bg-grammaraction' : 'bg-mobile'">
+    <app-bar :isShowPause="learningMode == 'selfLearning' ? true : false"></app-bar>
     <div v-if="isLoaded">
       <div align="center" class="q-pa-md">
         <div v-if="$q.platform.is.desktop">
@@ -306,12 +300,7 @@ import { useRouter, useRoute } from "vue-router";
 import { useQuasar } from "quasar";
 import axios from "axios";
 export default {
-  props: {
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
-  },
+  props: {},
   components: {
     grammarActionPc,
     grammarActionMobile,

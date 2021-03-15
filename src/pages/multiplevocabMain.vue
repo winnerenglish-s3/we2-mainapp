@@ -8,7 +8,6 @@
         :isShowHome="false"
         :isShowPause="isSynchronize ? false : true"
         @callback-restart="reStart"
-        :themeSync="themeSync"
       ></app-bar>
     </div>
 
@@ -18,7 +17,6 @@
 
     <multiplevocab-pc
       :practiceData="practiceData"
-      :themeSync="themeSync"
       @callback-sendanswer="fucnSendAnswer"
       @callback-nextquestion="funcSelectedQuestion"
       @callback-finishpractice="isFinishPractice = true"
@@ -28,7 +26,6 @@
 
     <multiplevocab-mobile
       :practiceData="practiceData"
-      :themeSync="themeSync"
       @callback-sendanswer="fucnSendAnswer"
       @callback-nextquestion="funcSelectedQuestion"
       @callback-finishpractice="isFinishPractice = true"
@@ -156,10 +153,7 @@ export default {
       type: Boolean,
       default: () => false,
     },
-    themeSync: {
-      type: Number,
-      default: () => false,
-    },
+
     isSynchronize: {
       type: Boolean,
       default: () => false,

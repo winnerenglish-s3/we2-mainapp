@@ -4,7 +4,6 @@
       <app-bar
         :isShowPause="isSynchronize ? false : true"
         :isLoadPractice="isLoadPractice"
-        :themeSync="themeSync"
         @callback-showdialoghelp="isShowDialogHelp = true"
         @callback-restart="reStart"
       ></app-bar>
@@ -90,10 +89,6 @@ export default {
     appBar,
   },
   props: {
-    themeSync: {
-      type: Number,
-      default: 1,
-    },
     isSynchronize: {
       type: Boolean,
       default: () => false,

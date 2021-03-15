@@ -1,7 +1,6 @@
 <template>
   <q-page class="right-col-bg">
     <app-bar
-      :themeSync="2"
       :isShowHome="learningMode == 'selfLearning' ? true : false"
       :isShowPause="true"
     ></app-bar>

@@ -7,7 +7,6 @@
         :isShowHome="false"
         :isShowPause="isSynchronize ? false : true"
         :isLoadPractice="isLoadPractice"
-        :themeSync="themeSync"
         @callback-showdialoghelp="isShowDialogHelp = true"
         @callback-restart="reStart"
       ></app-bar>
@@ -19,7 +18,6 @@
 
     <phonics-multi-pc
       :practiceData="practiceData"
-      :themeSync="themeSync"
       @callback-nextquestion="funcSelectedQuestion"
       @callback-finishpractice="isFinishPractice = true"
       @callback-playsound="funcPlaySound"
@@ -29,7 +27,6 @@
 
     <phonics-multi-mobile
       :practiceData="practiceData"
-      :themeSync="themeSync"
       @callback-nextquestion="funcSelectedQuestion"
       @callback-finishpractice="isFinishPractice = true"
       @callback-playsound="funcPlaySound"
@@ -224,10 +221,7 @@ export default {
       type: Boolean,
       default: () => false,
     },
-    themeSync: {
-      type: Number,
-      default: 1,
-    },
+
     isSynchronize: {
       type: Boolean,
       default: () => false,

@@ -1,7 +1,7 @@
 <template>
   <q-page class="bg-clozetest">
     <div>
-      <app-bar :themeSync="themeSync" :isShowPause="true"></app-bar>
+      <app-bar :isShowPause="true"></app-bar>
     </div>
 
     <div class="absolute-center" v-if="!isLoadPractice">
@@ -65,7 +65,7 @@
               v-show="isDescription || isShowContentAnswer"
             >
               <div v-if="isSendAnswer">
-                <div class="q-pa-md" :style="themeColor"></div>
+                <div class="q-pa-md" style="background-color: #9f220c"></div>
                 <div class="f16 q-px-md">
                   <div class="q-pa-md row" align="left">
                     <div class="col-12 row q-py-xs" v-if="!isCorrectAnswer">
@@ -170,7 +170,6 @@ import appBar from "../components/app-bar";
 import finishPractice from "../components/finishPracticeDialog.vue";
 import headerBar from "../components/header-time-progress";
 import practiceHooks from "../hooks/practiceHooks";
-import getColorTheme from "../../public/themeColor.json";
 import answerActionPc from "../components/answer-action-pc";
 import answerActionMobile from "../components/answer-action-mobile";
 import { ref, computed, onMounted, reactive } from "vue";
@@ -187,22 +186,11 @@ export default {
     answerActionPc,
     answerActionMobile,
   },
-  props: {
-    themeSync: {
-      type: Number,
-      default: 1,
-    },
-  },
+  props: {},
   setup(props) {
     // Initial Data
     const route = useRoute();
     const router = useRouter();
-
-    // Initial Color Theme
-    const colorTheme = ref(getColorTheme);
-    const themeColor = computed(() => {
-      return `background-color:${colorTheme.value[props.themeSync - 1].hex}`;
-    });
 
     const showContent = ref(false);
 
@@ -418,7 +406,6 @@ export default {
     onMounted(funcLoadPractice);
 
     return {
-      themeColor,
       practiceData,
       decreaseFont,
       increaseFont,

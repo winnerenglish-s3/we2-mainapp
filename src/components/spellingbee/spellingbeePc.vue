@@ -60,7 +60,13 @@
               >
                 <div
                   class="relative-position"
-                  :style="boggleNumber == 3 ? 'width:33%' : 'width:20%'"
+                  :style="
+                    boggleNumber == 3
+                      ? 'width:33%'
+                      : boggleNumber == 4
+                      ? 'width:25%;'
+                      : 'width:20%'
+                  "
                   v-for="(item2, col) in item"
                   :key="col"
                 >
@@ -357,9 +363,8 @@ export default {
   left: 50%;
   transform: translate(-50%);
   background-color: #ff5f01;
-  width: 40%;
+  width: 30px;
   height: 100%;
-  z-index: 1;
 }
 
 .link-answer-bottom {
@@ -368,29 +373,28 @@ export default {
   left: 50%;
   transform: translate(-50%);
   background-color: #ff5f01;
-  width: 40%;
+  width: 30px;
   height: 100%;
-  z-index: 1;
 }
 
 .link-answer-left {
   position: absolute;
   top: 50%;
-  left: 15%;
+  left: 50%;
   transform: translate(0%, -50%);
   background-color: #ff5f01;
-  width: 130%;
-  height: 40%;
+  width: 100%;
+  height: 30px;
 }
 
 .link-answer-right {
   position: absolute;
   top: 50%;
-  right: 15%;
+  right: 50%;
   transform: translate(0%, -50%);
   background-color: #ff5f01;
-  width: 130%;
-  height: 40%;
+  width: 100%;
+  height: 30px;
 }
 
 .btn-active {

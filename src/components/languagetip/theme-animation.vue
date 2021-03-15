@@ -1,6 +1,6 @@
 <template>
   <svg
-    style="width:100%;height:100%;"
+    style="width: 100%; height: 100%"
     width="1600"
     height="300"
     viewBox="0 0 1600 300"
@@ -11,84 +11,18 @@
       <rect width="1600" height="300" fill="white" />
       <g id="bg">
         <rect id="Rectangle 3840" width="336" height="300" fill="#FF6464" />
-        <rect
-          id="Rectangle 3851"
-          x="293"
-          width="3"
-          height="300"
-          fill="#FF4A4A"
-        />
-        <rect
-          id="Rectangle 3852"
-          x="259"
-          width="3"
-          height="300"
-          fill="#FF4A4A"
-        />
-        <rect
-          id="Rectangle 3853"
-          x="225"
-          width="3"
-          height="300"
-          fill="#FF4A4A"
-        />
-        <rect
-          id="Rectangle 3854"
-          x="191"
-          width="3"
-          height="300"
-          fill="#FF4A4A"
-        />
-        <rect
-          id="Rectangle 3855"
-          x="157"
-          width="3"
-          height="300"
-          fill="#FF4A4A"
-        />
-        <rect
-          id="Rectangle 3856"
-          x="123"
-          width="3"
-          height="300"
-          fill="#FF4A4A"
-        />
-        <rect
-          id="Rectangle 3857"
-          x="89"
-          width="3"
-          height="300"
-          fill="#FF4A4A"
-        />
-        <rect
-          id="Rectangle 3858"
-          x="55"
-          width="3"
-          height="300"
-          fill="#FF4A4A"
-        />
-        <rect
-          id="Rectangle 3859"
-          x="21"
-          width="3"
-          height="300"
-          fill="#FF4A4A"
-        />
+        <rect id="Rectangle 3851" x="293" width="3" height="300" fill="#FF4A4A" />
+        <rect id="Rectangle 3852" x="259" width="3" height="300" fill="#FF4A4A" />
+        <rect id="Rectangle 3853" x="225" width="3" height="300" fill="#FF4A4A" />
+        <rect id="Rectangle 3854" x="191" width="3" height="300" fill="#FF4A4A" />
+        <rect id="Rectangle 3855" x="157" width="3" height="300" fill="#FF4A4A" />
+        <rect id="Rectangle 3856" x="123" width="3" height="300" fill="#FF4A4A" />
+        <rect id="Rectangle 3857" x="89" width="3" height="300" fill="#FF4A4A" />
+        <rect id="Rectangle 3858" x="55" width="3" height="300" fill="#FF4A4A" />
+        <rect id="Rectangle 3859" x="21" width="3" height="300" fill="#FF4A4A" />
         <rect id="Rectangle 3860" width="336" height="49" fill="#540072" />
-        <rect
-          id="Rectangle 3861"
-          y="252"
-          width="336"
-          height="48"
-          fill="#540072"
-        />
-        <rect
-          id="Rectangle 3850"
-          x="322"
-          width="14"
-          height="300"
-          fill="white"
-        />
+        <rect id="Rectangle 3861" y="252" width="336" height="48" fill="#540072" />
+        <rect id="Rectangle 3850" x="322" width="14" height="300" fill="white" />
         <rect
           id="Rectangle 3841"
           x="336"
@@ -352,344 +286,7 @@
       </g>
 
       <g
-        id="doll-theme-2"
-        v-if="themeSync == 2"
-        :class="isSendAnswer ? (isCorrectAnswer ? 'doll-correct' : '') : null"
-      >
-        <g id="doll-theme-2-number6" filter="url(#filter30_d)">
-          <rect
-            id="doll-theme-2-number6_2"
-            x="1315.84"
-            y="67.5968"
-            width="21.3768"
-            height="41.5143"
-            rx="7"
-            fill="black"
-          />
-          <rect
-            id="doll-theme-2-number6_3"
-            x="1309.33"
-            y="46.8397"
-            width="34.3887"
-            height="41.5143"
-            rx="12"
-            fill="#E80000"
-          />
-          <rect
-            id="doll-theme-2-number6_4"
-            x="1315.84"
-            y="14"
-            width="21.3768"
-            height="32.8397"
-            rx="10.6884"
-            fill="black"
-          />
-          <path
-            id="doll-theme-2-number6_5"
-            d="M1315.84 37.2356H1337.22C1337.22 42.5398 1332.92 46.8396 1327.61 46.8396H1325.44C1320.14 46.8396 1315.84 42.5398 1315.84 37.2356Z"
-            fill="#FFD1A6"
-          />
-          <circle
-            id="doll-theme-2-number6_6"
-            cx="1326.68"
-            cy="56.4437"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="doll-theme-2-number6_7"
-            cx="1326.68"
-            cy="65.738"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="doll-theme-2-number6_8"
-            cx="1326.68"
-            cy="75.0322"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-        </g>
-        <g id="doll-theme-2-number5" filter="url(#filter31_d)">
-          <rect
-            id="doll-theme-2-number5_2"
-            x="1296.28"
-            y="124.375"
-            width="21.3768"
-            height="41.5143"
-            rx="7"
-            fill="black"
-          />
-          <rect
-            id="doll-theme-2-number5_3"
-            x="1289.78"
-            y="103.618"
-            width="34.3887"
-            height="41.5143"
-            rx="12"
-            fill="#E80000"
-          />
-          <rect
-            id="doll-theme-2-number5_4"
-            x="1296.28"
-            y="70.7778"
-            width="21.3768"
-            height="32.8397"
-            rx="10.6884"
-            fill="black"
-          />
-          <path
-            id="doll-theme-2-number5_5"
-            d="M1296.28 94.0134H1317.66C1317.66 99.3176 1313.36 103.617 1308.06 103.617H1305.89C1300.58 103.617 1296.28 99.3176 1296.28 94.0134Z"
-            fill="#FFD1A6"
-          />
-          <circle
-            id="doll-theme-2-number5_6"
-            cx="1307.13"
-            cy="113.222"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="doll-theme-2-number5_7"
-            cx="1307.13"
-            cy="122.516"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="doll-theme-2-number5_8"
-            cx="1307.13"
-            cy="131.81"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-        </g>
-        <g id="doll-theme-2-number4" filter="url(#filter32_d)">
-          <rect
-            id="doll-theme-2-number4_2"
-            x="1315.84"
-            y="187.486"
-            width="21.3768"
-            height="41.5143"
-            rx="7"
-            fill="black"
-          />
-          <rect
-            id="doll-theme-2-number4_3"
-            x="1309.33"
-            y="166.729"
-            width="34.3887"
-            height="41.5143"
-            rx="12"
-            fill="#E80000"
-          />
-          <rect
-            id="doll-theme-2-number4_4"
-            x="1315.84"
-            y="133.889"
-            width="21.3768"
-            height="32.8397"
-            rx="10.6884"
-            fill="black"
-          />
-          <path
-            id="doll-theme-2-number4_5"
-            d="M1315.84 157.125H1337.22C1337.22 162.429 1332.92 166.729 1327.61 166.729H1325.44C1320.14 166.729 1315.84 162.429 1315.84 157.125Z"
-            fill="#FFD1A6"
-          />
-          <circle
-            id="doll-theme-2-number4_6"
-            cx="1326.68"
-            cy="176.333"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="doll-theme-2-number4_7"
-            cx="1326.68"
-            cy="185.627"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="doll-theme-2-number4_8"
-            cx="1326.68"
-            cy="194.921"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-        </g>
-        <g id="doll-theme-2-number3" filter="url(#filter33_d)">
-          <rect
-            id="doll-theme-2-number3_2"
-            x="1257.17"
-            y="88.819"
-            width="21.3768"
-            height="41.5143"
-            rx="7"
-            fill="black"
-          />
-          <rect
-            id="doll-theme-2-number3_3"
-            x="1250.67"
-            y="68.0619"
-            width="34.3887"
-            height="41.5143"
-            rx="12"
-            fill="#E80000"
-          />
-          <rect
-            id="doll-theme-2-number3_4"
-            x="1257.17"
-            y="35.2222"
-            width="21.3768"
-            height="32.8397"
-            rx="10.6884"
-            fill="black"
-          />
-          <path
-            id="doll-theme-2-number3_5"
-            d="M1257.17 58.4578H1278.55C1278.55 63.7619 1274.25 68.0618 1268.95 68.0618H1266.78C1261.47 68.0618 1257.17 63.7619 1257.17 58.4578Z"
-            fill="#FFD1A6"
-          />
-          <circle
-            id="doll-theme-2-number3_6"
-            cx="1268.02"
-            cy="77.6659"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="doll-theme-2-number3_7"
-            cx="1268.02"
-            cy="86.9602"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="doll-theme-2-number3_8"
-            cx="1268.02"
-            cy="96.2544"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-        </g>
-        <g id="doll-theme-2-number2" filter="url(#filter34_d)">
-          <rect
-            id="doll-theme-2-number2_2"
-            x="1257.17"
-            y="151.93"
-            width="21.3768"
-            height="41.5143"
-            rx="7"
-            fill="black"
-          />
-          <rect
-            id="doll-theme-2-number2_3"
-            x="1250.67"
-            y="131.173"
-            width="34.3887"
-            height="41.5143"
-            rx="12"
-            fill="#E80000"
-          />
-          <rect
-            id="doll-theme-2-number2_4"
-            x="1257.17"
-            y="98.3333"
-            width="21.3768"
-            height="32.8397"
-            rx="10.6884"
-            fill="black"
-          />
-          <path
-            id="doll-theme-2-number2_5"
-            d="M1257.17 121.569H1278.55C1278.55 126.873 1274.25 131.173 1268.95 131.173H1266.78C1261.47 131.173 1257.17 126.873 1257.17 121.569Z"
-            fill="#FFD1A6"
-          />
-          <circle
-            id="doll-theme-2-number2_6"
-            cx="1268.02"
-            cy="140.777"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="doll-theme-2-number2_7"
-            cx="1268.02"
-            cy="150.071"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="doll-theme-2-number2_8"
-            cx="1268.02"
-            cy="159.365"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-        </g>
-        <g id="doll-theme-2-number1" filter="url(#filter35_d)">
-          <rect
-            id="doll-theme-2-number1_2"
-            x="1214.51"
-            y="108.375"
-            width="21.3768"
-            height="41.5143"
-            rx="7"
-            fill="black"
-          />
-          <rect
-            id="doll-theme-2-number1_3"
-            x="1208"
-            y="87.6176"
-            width="34.3887"
-            height="41.5143"
-            rx="12"
-            fill="#E80000"
-          />
-          <rect
-            id="doll-theme-2-number1_4"
-            x="1214.51"
-            y="54.7778"
-            width="21.3768"
-            height="32.8397"
-            rx="10.6884"
-            fill="black"
-          />
-          <path
-            id="doll-theme-2-number1_5"
-            d="M1214.51 78.0134H1235.88C1235.88 83.3176 1231.58 87.6175 1226.28 87.6175H1224.11C1218.81 87.6175 1214.51 83.3176 1214.51 78.0134Z"
-            fill="#FFD1A6"
-          />
-          <circle
-            id="doll-theme-2-number1_6"
-            cx="1225.35"
-            cy="97.2215"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="doll-theme-2-number1_7"
-            cx="1225.35"
-            cy="106.516"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="doll-theme-2-number1_8"
-            cx="1225.35"
-            cy="115.81"
-            r="1.85885"
-            fill="#FFAA2E"
-          />
-        </g>
-      </g>
-      <g
         id="doll-theme-1"
-        v-if="themeSync == 1"
         :class="isSendAnswer ? (isCorrectAnswer ? 'doll-correct' : '') : null"
       >
         <g id="doll-theme-1-number6" filter="url(#filter36_d)">
@@ -742,20 +339,8 @@
             height="12"
             fill="#DB8200"
           />
-          <circle
-            id="doll-theme-1-number6_8"
-            cx="1322"
-            cy="38"
-            r="1"
-            fill="#353535"
-          />
-          <circle
-            id="doll-theme-1-number6_9"
-            cx="1329"
-            cy="38"
-            r="1"
-            fill="#353535"
-          />
+          <circle id="doll-theme-1-number6_8" cx="1322" cy="38" r="1" fill="#353535" />
+          <circle id="doll-theme-1-number6_9" cx="1329" cy="38" r="1" fill="#353535" />
         </g>
         <g id="doll-theme-1-number5" filter="url(#filter37_d)">
           <rect
@@ -807,20 +392,8 @@
             height="12"
             fill="#DB8200"
           />
-          <circle
-            id="doll-theme-1-number5_8"
-            cx="1302"
-            cy="95"
-            r="1"
-            fill="#353535"
-          />
-          <circle
-            id="doll-theme-1-number5_9"
-            cx="1309"
-            cy="95"
-            r="1"
-            fill="#353535"
-          />
+          <circle id="doll-theme-1-number5_8" cx="1302" cy="95" r="1" fill="#353535" />
+          <circle id="doll-theme-1-number5_9" cx="1309" cy="95" r="1" fill="#353535" />
         </g>
         <g id="doll-theme-1-number4" filter="url(#filter38_d)">
           <rect
@@ -872,20 +445,8 @@
             height="12"
             fill="#DB8200"
           />
-          <circle
-            id="doll-theme-1-number4_8"
-            cx="1322"
-            cy="158"
-            r="1"
-            fill="#353535"
-          />
-          <circle
-            id="doll-theme-1-number4_9"
-            cx="1329"
-            cy="158"
-            r="1"
-            fill="#353535"
-          />
+          <circle id="doll-theme-1-number4_8" cx="1322" cy="158" r="1" fill="#353535" />
+          <circle id="doll-theme-1-number4_9" cx="1329" cy="158" r="1" fill="#353535" />
         </g>
         <g id="doll-theme-1-number3" filter="url(#filter39_d)">
           <rect
@@ -937,20 +498,8 @@
             height="12"
             fill="#DB8200"
           />
-          <circle
-            id="doll-theme-1-number3_8"
-            cx="1266"
-            cy="59"
-            r="1"
-            fill="#353535"
-          />
-          <circle
-            id="doll-theme-1-number3_9"
-            cx="1273"
-            cy="59"
-            r="1"
-            fill="#353535"
-          />
+          <circle id="doll-theme-1-number3_8" cx="1266" cy="59" r="1" fill="#353535" />
+          <circle id="doll-theme-1-number3_9" cx="1273" cy="59" r="1" fill="#353535" />
         </g>
         <g id="doll-theme-1-number2" filter="url(#filter40_d)">
           <rect
@@ -1002,20 +551,8 @@
             height="12"
             fill="#DB8200"
           />
-          <circle
-            id="doll-theme-1-number2_8"
-            cx="1264"
-            cy="122"
-            r="1"
-            fill="#353535"
-          />
-          <circle
-            id="doll-theme-1-number2_9"
-            cx="1271"
-            cy="122"
-            r="1"
-            fill="#353535"
-          />
+          <circle id="doll-theme-1-number2_8" cx="1264" cy="122" r="1" fill="#353535" />
+          <circle id="doll-theme-1-number2_9" cx="1271" cy="122" r="1" fill="#353535" />
         </g>
         <g id="doll-theme-1-number1" filter="url(#filter41_d)">
           <rect
@@ -1067,398 +604,13 @@
             height="12"
             fill="#DB8200"
           />
-          <circle
-            id="doll-theme-1-number1_8"
-            cx="1221"
-            cy="79"
-            r="1"
-            fill="#353535"
-          />
-          <circle
-            id="doll-theme-1-number1_9"
-            cx="1228"
-            cy="79"
-            r="1"
-            fill="#353535"
-          />
+          <circle id="doll-theme-1-number1_8" cx="1221" cy="79" r="1" fill="#353535" />
+          <circle id="doll-theme-1-number1_9" cx="1228" cy="79" r="1" fill="#353535" />
         </g>
       </g>
-      <g
-        id="doll-theme-2-correct"
-        v-if="themeSync == 2"
-        class="doll-theme-default-hidden"
-        :class="isSendAnswer ? (isCorrectAnswer ? 'doll-correct-1' : '') : null"
-      >
-        <g id="doll-theme-2-correct-number6" filter="url(#filter42_d)">
-          <rect
-            id="Rectangle 3498"
-            x="1344.31"
-            y="66.886"
-            width="21.3768"
-            height="41.5143"
-            rx="7"
-            transform="rotate(26.445 1344.31 66.886)"
-            fill="black"
-          />
-          <rect
-            id="Rectangle 3499"
-            x="1347.73"
-            y="45.4034"
-            width="34.3887"
-            height="41.5143"
-            rx="12"
-            transform="rotate(26.445 1347.73 45.4034)"
-            fill="#E80000"
-          />
-          <rect
-            id="Rectangle 3500"
-            x="1368.18"
-            y="18.8973"
-            width="21.3768"
-            height="32.8397"
-            rx="10.6884"
-            transform="rotate(26.445 1368.18 18.8973)"
-            fill="black"
-          />
-          <path
-            id="Rectangle 3501"
-            d="M1357.83 39.7017L1376.97 49.2215V49.2215C1374.61 53.9707 1368.85 55.9058 1364.1 53.5436L1362.16 52.5778C1357.41 50.2157 1355.47 44.4508 1357.83 39.7017V39.7017Z"
-            fill="#FFD1A6"
-          />
-          <circle
-            id="Ellipse 1175"
-            cx="1358.99"
-            cy="61.7289"
-            r="1.85885"
-            transform="rotate(26.445 1358.99 61.7289)"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="Ellipse 1176"
-            cx="1354.85"
-            cy="70.0505"
-            r="1.85885"
-            transform="rotate(26.445 1354.85 70.0505)"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="Ellipse 1177"
-            cx="1350.71"
-            cy="78.3723"
-            r="1.85885"
-            transform="rotate(26.445 1350.71 78.3723)"
-            fill="#FFAA2E"
-          />
-        </g>
-        <g id="doll-theme-2-correct-number5" filter="url(#filter43_d)">
-          <rect
-            id="Rectangle 3498_2"
-            x="1362.53"
-            y="146.644"
-            width="21.3768"
-            height="41.5143"
-            rx="7"
-            transform="rotate(89.852 1362.53 146.644)"
-            fill="black"
-          />
-          <rect
-            id="Rectangle 3499_2"
-            x="1383.27"
-            y="140.085"
-            width="34.3887"
-            height="41.5143"
-            rx="12"
-            transform="rotate(89.852 1383.27 140.085)"
-            fill="#E80000"
-          />
-          <rect
-            id="Rectangle 3500_2"
-            x="1416.13"
-            y="146.506"
-            width="21.3768"
-            height="32.8397"
-            rx="10.6884"
-            transform="rotate(89.852 1416.13 146.506)"
-            fill="black"
-          />
-          <path
-            id="Rectangle 3501_2"
-            d="M1392.89 146.566L1392.95 167.943V167.943C1387.64 167.956 1383.33 163.668 1383.32 158.364L1383.31 156.195C1383.3 150.891 1387.59 146.58 1392.89 146.566V146.566Z"
-            fill="#FFD1A6"
-          />
-          <circle
-            id="Ellipse 1175_2"
-            cx="1373.71"
-            cy="157.459"
-            r="1.85885"
-            transform="rotate(89.852 1373.71 157.459)"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="Ellipse 1176_2"
-            cx="1364.42"
-            cy="157.483"
-            r="1.85885"
-            transform="rotate(89.852 1364.42 157.483)"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="Ellipse 1177_2"
-            cx="1355.12"
-            cy="157.507"
-            r="1.85885"
-            transform="rotate(89.852 1355.12 157.507)"
-            fill="#FFAA2E"
-          />
-        </g>
-        <g id="doll-theme-2-correct-number4" filter="url(#filter44_d)">
-          <rect
-            id="Rectangle 3498_3"
-            x="1385.51"
-            y="231.927"
-            width="21.3768"
-            height="41.5143"
-            rx="7"
-            transform="rotate(115.802 1385.51 231.927)"
-            fill="black"
-          />
-          <rect
-            id="Rectangle 3499_3"
-            x="1407.03"
-            y="235.105"
-            width="34.3887"
-            height="41.5143"
-            rx="12"
-            transform="rotate(115.802 1407.03 235.105)"
-            fill="#E80000"
-          />
-          <rect
-            id="Rectangle 3500_3"
-            x="1433.77"
-            y="255.256"
-            width="21.3768"
-            height="32.8397"
-            rx="10.6884"
-            transform="rotate(115.802 1433.77 255.256)"
-            fill="black"
-          />
-          <path
-            id="Rectangle 3501_3"
-            d="M1412.85 245.142L1403.54 264.388V264.388C1398.77 262.079 1396.77 256.336 1399.08 251.561L1400.02 249.609C1402.33 244.833 1408.07 242.834 1412.85 245.142V245.142Z"
-            fill="#FFD1A6"
-          />
-          <circle
-            id="Ellipse 1175_3"
-            cx="1390.83"
-            cy="246.544"
-            r="1.85885"
-            transform="rotate(115.802 1390.83 246.544)"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="Ellipse 1176_3"
-            cx="1382.47"
-            cy="242.499"
-            r="1.85885"
-            transform="rotate(115.802 1382.47 242.499)"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="Ellipse 1177_3"
-            cx="1374.1"
-            cy="238.453"
-            r="1.85885"
-            transform="rotate(115.802 1374.1 238.453)"
-            fill="#FFAA2E"
-          />
-        </g>
-        <g id="doll-theme-2-correct-number3" filter="url(#filter45_d)">
-          <rect
-            id="Rectangle 3498_4"
-            x="1292.32"
-            y="81.9966"
-            width="21.3768"
-            height="41.5143"
-            rx="7"
-            transform="rotate(45.8566 1292.32 81.9966)"
-            fill="black"
-          />
-          <rect
-            id="Rectangle 3499_4"
-            x="1302.69"
-            y="62.8715"
-            width="34.3887"
-            height="41.5143"
-            rx="12"
-            transform="rotate(45.8566 1302.69 62.8715)"
-            fill="#E80000"
-          />
-          <rect
-            id="Rectangle 3500_4"
-            x="1330.78"
-            y="44.6687"
-            width="21.3768"
-            height="32.8397"
-            rx="10.6884"
-            transform="rotate(45.8566 1330.78 44.6687)"
-            fill="black"
-          />
-          <path
-            id="Rectangle 3501_4"
-            d="M1314.11 60.8513L1329 76.1913V76.1913C1325.19 79.8854 1319.11 79.7945 1315.42 75.9882L1313.91 74.432C1310.21 70.6257 1310.3 64.5454 1314.11 60.8513V60.8513Z"
-            fill="#FFD1A6"
-          />
-          <circle
-            id="Ellipse 1175_4"
-            cx="1307.88"
-            cy="82.0101"
-            r="1.85885"
-            transform="rotate(45.8566 1307.88 82.0101)"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="Ellipse 1176_4"
-            cx="1301.21"
-            cy="88.4831"
-            r="1.85885"
-            transform="rotate(45.8566 1301.21 88.4831)"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="Ellipse 1177_4"
-            cx="1294.54"
-            cy="94.9562"
-            r="1.85885"
-            transform="rotate(45.8566 1294.54 94.9562)"
-            fill="#FFAA2E"
-          />
-        </g>
-        <g id="doll-theme-2-correct-number2" filter="url(#filter46_d)">
-          <rect
-            id="Rectangle 3498_5"
-            x="1313.77"
-            y="215.408"
-            width="21.3768"
-            height="41.5143"
-            rx="7"
-            transform="rotate(129.462 1313.77 215.408)"
-            fill="black"
-          />
-          <rect
-            id="Rectangle 3499_5"
-            x="1333.93"
-            y="223.578"
-            width="34.3887"
-            height="41.5143"
-            rx="12"
-            transform="rotate(129.462 1333.93 223.578)"
-            fill="#E80000"
-          />
-          <rect
-            id="Rectangle 3500_5"
-            x="1355.15"
-            y="249.473"
-            width="21.3768"
-            height="32.8397"
-            rx="10.6884"
-            transform="rotate(129.462 1355.15 249.473)"
-            fill="black"
-          />
-          <path
-            id="Rectangle 3501_5"
-            d="M1337.21 234.705L1323.63 251.209V251.209C1319.53 247.837 1318.94 241.785 1322.32 237.69L1323.69 236.015C1327.06 231.92 1333.12 231.334 1337.21 234.705V234.705Z"
-            fill="#FFD1A6"
-          />
-          <circle
-            id="Ellipse 1175_5"
-            cx="1315.49"
-            cy="230.868"
-            r="1.85885"
-            transform="rotate(129.462 1315.49 230.868)"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="Ellipse 1176_5"
-            cx="1308.32"
-            cy="224.961"
-            r="1.85885"
-            transform="rotate(129.462 1308.32 224.961)"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="Ellipse 1177_5"
-            cx="1301.14"
-            cy="219.054"
-            r="1.85885"
-            transform="rotate(129.462 1301.14 219.054)"
-            fill="#FFAA2E"
-          />
-        </g>
-        <g id="doll-theme-2-correct-number1" filter="url(#filter47_d)">
-          <rect
-            id="Rectangle 3498_6"
-            x="1274.68"
-            y="162.836"
-            width="21.3768"
-            height="41.5143"
-            rx="7"
-            transform="rotate(117.324 1274.68 162.836)"
-            fill="black"
-          />
-          <rect
-            id="Rectangle 3499_6"
-            x="1296.11"
-            y="166.584"
-            width="34.3887"
-            height="41.5143"
-            rx="12"
-            transform="rotate(117.324 1296.11 166.584)"
-            fill="#E80000"
-          />
-          <rect
-            id="Rectangle 3500_6"
-            x="1322.3"
-            y="187.438"
-            width="21.3768"
-            height="32.8397"
-            rx="10.6884"
-            transform="rotate(117.324 1322.3 187.438)"
-            fill="black"
-          />
-          <path
-            id="Rectangle 3501_6"
-            d="M1301.65 176.773L1291.84 195.764V195.764C1287.13 193.329 1285.28 187.536 1287.72 182.823L1288.71 180.897C1291.15 176.184 1296.94 174.338 1301.65 176.773V176.773Z"
-            fill="#FFD1A6"
-          />
-          <circle
-            id="Ellipse 1175_6"
-            cx="1279.61"
-            cy="177.589"
-            r="1.85885"
-            transform="rotate(117.324 1279.61 177.589)"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="Ellipse 1176_6"
-            cx="1271.36"
-            cy="173.323"
-            r="1.85885"
-            transform="rotate(117.324 1271.36 173.323)"
-            fill="#FFAA2E"
-          />
-          <circle
-            id="Ellipse 1177_6"
-            cx="1263.1"
-            cy="169.056"
-            r="1.85885"
-            transform="rotate(117.324 1263.1 169.056)"
-            fill="#FFAA2E"
-          />
-        </g>
-      </g>
+
       <g
         id="doll-theme-1-correct"
-        v-if="themeSync == 1"
         class="doll-theme-default-hidden"
         :class="isSendAnswer ? (isCorrectAnswer ? 'doll-correct-1' : '') : null"
       >
@@ -1899,11 +1051,7 @@
       <g
         id="ball"
         :class="
-          isSendAnswer
-            ? isCorrectAnswer
-              ? 'ball-correct'
-              : 'ball-incorrect'
-            : null
+          isSendAnswer ? (isCorrectAnswer ? 'ball-correct' : 'ball-incorrect') : null
         "
         filter="url(#filter26_d)"
       >
@@ -1971,11 +1119,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2004,11 +1148,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2037,11 +1177,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2070,11 +1206,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2103,11 +1235,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2136,11 +1264,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2262,11 +1386,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2388,11 +1508,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2452,11 +1568,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2485,11 +1597,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2611,11 +1719,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2737,11 +1841,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2801,11 +1901,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2927,11 +2023,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2960,11 +2052,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -2993,11 +2081,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3026,11 +2110,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3059,11 +2139,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3092,11 +2168,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3125,11 +2197,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3158,11 +2226,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3191,11 +2255,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3224,11 +2284,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3257,11 +2313,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3290,11 +2342,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3323,11 +2371,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3356,11 +2400,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3389,11 +2429,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3422,11 +2458,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3455,11 +2487,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3488,11 +2516,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3521,11 +2545,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3554,11 +2574,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3587,11 +2603,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3620,11 +2632,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3653,11 +2661,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3686,11 +2690,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -3809,17 +2809,13 @@ export default {
   props: {
     isSendAnswer: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     isCorrectAnswer: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
-    themeSync: {
-      type: Number,
-      default: 1
-    }
-  }
+  },
 };
 </script>
 

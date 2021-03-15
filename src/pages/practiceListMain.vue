@@ -3,7 +3,7 @@
     :style="mode ? 'background-color:#694532' : 'background-color:#1E263B'"
     :class="{ 'bg-practice-img': $q.platform.is.mobile }"
   >
-    <app-bar :themeSync="$attrs.themeSync" :isShowHome="true"></app-bar>
+    <app-bar :isShowHome="true"></app-bar>
 
     <!-- DESKTOP Will Show BACKGROUND IMAGE -->
     <div class="fit" v-if="$q.platform.is.desktop">

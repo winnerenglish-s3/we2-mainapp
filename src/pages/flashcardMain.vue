@@ -13,7 +13,6 @@
 
     <flashcard-pc
       :vocabDataList="vocabDataList"
-      :themeSync="themeSync"
       @playSound="(val) => playSound(val)"
       v-if="$q.platform.is.desktop && isLoadPractice"
       :isSynchronize="isSynchronize"
@@ -47,12 +46,7 @@ export default {
     flashcardMobile,
     appBar,
   },
-  props: {
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
-  },
+  props: {},
   setup() {
     // Initial
     const $q = useQuasar();

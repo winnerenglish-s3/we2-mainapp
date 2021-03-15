@@ -10,7 +10,6 @@
       :isHasHelp="true"
       :isLoadPractice="isLoadQuestion"
       @callback-showdialoghelp="isOpenHelp = true"
-      :themeSync="themeSync"
     ></app-bar>
     <!-- Question and Choices -->
     <div
@@ -456,12 +455,7 @@ export default {
     multiplechoiceBtn,
     waiting,
   },
-  props: {
-    themeSync: {
-      type: Number,
-      default: 1,
-    },
-  },
+  props: {},
   setup(props) {
     // Route
     const router = useRouter();

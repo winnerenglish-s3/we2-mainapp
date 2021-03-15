@@ -12,7 +12,6 @@
         <theme-animation
           :isCorrectAnswer="isCorrectAnswer"
           :isSendAnswer="isSendAnswer"
-          :themeSync="themeSync"
         ></theme-animation>
       </div>
     </div>
@@ -104,10 +103,6 @@ export default {
     themeAnimation,
   },
   props: {
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
     practiceData: {
       type: Object,
       default: () => {},

@@ -1,6 +1,6 @@
 <template>
   <svg
-    style="width:100%;height:100%;"
+    style="width: 100%; height: 100%"
     width="1240"
     height="347"
     viewBox="0 0 1240 347"
@@ -10,29 +10,9 @@
     <g id="Frame 1" clip-path="url(#clip0)">
       <g id="bg">
         <g id="Group 2795">
-          <rect
-            id="Rectangle 3952"
-            y="51"
-            width="1241"
-            height="299"
-            fill="#DDCCBD"
-          />
-          <rect
-            id="Rectangle 3953"
-            x="36"
-            y="51"
-            width="3"
-            height="299"
-            fill="#EADED4"
-          />
-          <rect
-            id="Rectangle 3954"
-            x="89"
-            y="51"
-            width="3"
-            height="299"
-            fill="#EADED4"
-          />
+          <rect id="Rectangle 3952" y="51" width="1241" height="299" fill="#DDCCBD" />
+          <rect id="Rectangle 3953" x="36" y="51" width="3" height="299" fill="#EADED4" />
+          <rect id="Rectangle 3954" x="89" y="51" width="3" height="299" fill="#EADED4" />
           <rect
             id="Rectangle 3955"
             x="142"
@@ -203,796 +183,8 @@
           />
         </g>
       </g>
-      <g id="label-theme-2" v-if="themeSync == 2">
-        <g id="label-theme-2_2" filter="url(#filter0_d)">
-          <g id="label-theme-2_3">
-            <rect
-              id="Rectangle 3432"
-              y="115.735"
-              width="57.861"
-              height="43.9834"
-              transform="rotate(-68.7469 0 115.735)"
-              fill="#2D3081"
-            />
-            <rect
-              id="Rectangle 3433"
-              x="15.6512"
-              y="121.822"
-              width="57.861"
-              height="11.1958"
-              transform="rotate(-68.7469 15.6512 121.822)"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3434"
-              x="49.8115"
-              y="109.005"
-              width="43.9834"
-              height="9.20516"
-              transform="rotate(-158.747 49.8115 109.005)"
-              fill="white"
-            />
-            <path
-              id="Vector 494"
-              d="M4.47186 117.474L0 115.735L2.38341 109.607L57.1215 75.8682L61.966 77.7524L59.8209 83.2676L4.47186 117.474Z"
-              fill="white"
-            />
-            <path
-              id="Vector 495"
-              d="M25.4472 63.5485L20.9753 61.8092L18.5919 67.9372L36.1489 129.794L40.9934 131.678L43.1385 126.163L25.4472 63.5485Z"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3435"
-              x="17.8875"
-              y="122.691"
-              width="57.861"
-              height="6.39759"
-              transform="rotate(-68.7469 17.8875 122.691)"
-              fill="#E34554"
-            />
-            <rect
-              id="Rectangle 3436"
-              x="50.526"
-              y="107.166"
-              width="43.9834"
-              height="5.26009"
-              transform="rotate(-158.747 50.526 107.166)"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 496"
-              d="M23.5167 101.6L0 115.735L2.98124 116.894L22.0867 105.277L23.5167 101.6Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 498"
-              d="M33.2052 105.368L40.9915 131.678L38.0102 130.518L31.7752 109.045L33.2052 105.368Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 497"
-              d="M28.7616 88.1189L20.9753 61.8092L23.9566 62.9688L30.1916 84.4422L28.7616 88.1189Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 499"
-              d="M38.4488 91.888L61.9656 77.7533L58.9843 76.5938L39.8789 88.2112L38.4488 91.888Z"
-              fill="#E34554"
-            />
-          </g>
-          <g id="label-theme-2_4">
-            <rect
-              id="Rectangle 3432_2"
-              x="77.0552"
-              y="140.817"
-              width="57.861"
-              height="43.9834"
-              transform="rotate(-79.5736 77.0552 140.817)"
-              fill="#2D3081"
-            />
-            <rect
-              id="Rectangle 3433_2"
-              x="93.5717"
-              y="143.857"
-              width="57.861"
-              height="11.1958"
-              transform="rotate(-79.5736 93.5717 143.857)"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3434_2"
-              x="124.716"
-              y="124.851"
-              width="43.9834"
-              height="9.20516"
-              transform="rotate(-169.574 124.716 124.851)"
-              fill="white"
-            />
-            <path
-              id="Vector 494_2"
-              d="M81.7741 141.686L77.0552 140.817L78.2451 134.351L125.671 90.9309L130.784 91.8716L129.713 97.6915L81.7741 141.686Z"
-              fill="white"
-            />
-            <path
-              id="Vector 495_2"
-              d="M92.247 84.7799L87.5281 83.9116L86.3382 90.3781L115.202 147.836L120.314 148.777L121.385 142.957L92.247 84.7799Z"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3435_2"
-              x="95.9303"
-              y="144.29"
-              width="57.861"
-              height="6.39759"
-              transform="rotate(-79.5736 95.9303 144.29)"
-              fill="#E34554"
-            />
-            <rect
-              id="Rectangle 3436_2"
-              x="125.072"
-              y="122.91"
-              width="43.9834"
-              height="5.26009"
-              transform="rotate(-169.574 125.072 122.91)"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 496_2"
-              d="M97.4983 122.517L77.0552 140.817L80.2012 141.396L96.7843 126.397L97.4983 122.517Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 498_2"
-              d="M107.723 124.398L120.312 148.777L117.167 148.198L107.009 128.278L107.723 124.398Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 497_2"
-              d="M100.118 108.29L87.5281 83.9116L90.6741 84.4905L100.832 104.41L100.118 108.29Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 499_2"
-              d="M110.341 110.173L130.784 91.8725L127.638 91.2936L111.055 106.293L110.341 110.173Z"
-              fill="#E34554"
-            />
-          </g>
-          <g id="label-theme-2_5">
-            <rect
-              id="Rectangle 3432_3"
-              x="156.021"
-              y="151"
-              width="57.861"
-              height="43.9834"
-              transform="rotate(-90.4787 156.021 151)"
-              fill="#2D3081"
-            />
-            <rect
-              id="Rectangle 3433_3"
-              x="172.814"
-              y="150.86"
-              width="57.861"
-              height="11.1958"
-              transform="rotate(-90.4787 172.814 150.86)"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3434_3"
-              x="199.8"
-              y="126.306"
-              width="43.9834"
-              height="9.20516"
-              transform="rotate(179.521 199.8 126.306)"
-              fill="white"
-            />
-            <path
-              id="Vector 494_3"
-              d="M160.819 150.96L156.021 151L155.966 144.425L194.322 92.8169L199.52 92.7735L199.569 98.6909L160.819 150.96Z"
-              fill="white"
-            />
-            <path
-              id="Vector 495_3"
-              d="M160.337 93.1009L155.539 93.141L155.594 99.7159L194.806 150.676L200.004 150.633L199.955 144.715L160.337 93.1009Z"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3435_3"
-              x="175.213"
-              y="150.839"
-              width="57.861"
-              height="6.39759"
-              transform="rotate(-90.4787 175.213 150.839)"
-              fill="#E34554"
-            />
-            <rect
-              id="Rectangle 3436_3"
-              x="199.783"
-              y="124.332"
-              width="43.9834"
-              height="5.26009"
-              transform="rotate(179.521 199.783 124.332)"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 496_3"
-              d="M172.633 129.163L156.021 151L159.22 150.973L172.666 133.107L172.633 129.163Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 498_3"
-              d="M183.028 129.075L200.003 150.632L196.804 150.658L183.061 133.02L183.028 129.075Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 497_3"
-              d="M172.513 114.698L155.539 93.141L158.738 93.1143L172.48 110.753L172.513 114.698Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 499_3"
-              d="M182.907 114.612L199.519 92.7745L196.321 92.8012L182.875 110.667L182.907 114.612Z"
-              fill="#E34554"
-            />
-          </g>
-          <g id="label-theme-2_6">
-            <rect
-              id="Rectangle 3432_4"
-              x="237.33"
-              y="147.027"
-              width="57.861"
-              height="43.9834"
-              transform="rotate(-99.5905 237.33 147.027)"
-              fill="#2D3081"
-            />
-            <rect
-              id="Rectangle 3433_4"
-              x="253.888"
-              y="144.229"
-              width="57.861"
-              height="11.1958"
-              transform="rotate(-99.5905 253.888 144.229)"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3434_4"
-              x="276.646"
-              y="115.711"
-              width="43.9834"
-              height="9.20516"
-              transform="rotate(170.409 276.646 115.711)"
-              fill="white"
-            />
-            <path
-              id="Vector 494_4"
-              d="M242.061 146.228L237.33 147.027L236.234 140.544L265.933 83.5129L271.058 82.6468L272.044 88.4817L242.061 146.228Z"
-              fill="white"
-            />
-            <path
-              id="Vector 495_4"
-              d="M232.422 89.1747L227.691 89.9741L228.787 96.4573L275.574 140.564L280.7 139.698L279.714 133.864L232.422 89.1747Z"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3435_4"
-              x="256.254"
-              y="143.829"
-              width="57.861"
-              height="6.39759"
-              transform="rotate(-99.5905 256.254 143.829)"
-              fill="#E34554"
-            />
-            <rect
-              id="Rectangle 3436_4"
-              x="276.316"
-              y="113.765"
-              width="43.9834"
-              height="5.26009"
-              transform="rotate(170.409 276.316 113.765)"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 496_4"
-              d="M250.274 122.834L237.33 147.027L240.484 146.494L250.931 126.724L250.274 122.834Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 498_4"
-              d="M260.524 121.102L280.698 139.698L277.544 140.231L261.181 124.992L260.524 121.102Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 497_4"
-              d="M247.865 108.571L227.691 89.9741L230.845 89.4411L247.208 104.681L247.865 108.571Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 499_4"
-              d="M258.115 106.84L271.058 82.6473L267.904 83.1802L257.457 102.95L258.115 106.84Z"
-              fill="#E34554"
-            />
-          </g>
-          <g id="label-theme-2_7">
-            <rect
-              id="Rectangle 3432_5"
-              x="323.676"
-              y="127.595"
-              width="57.861"
-              height="43.9834"
-              transform="rotate(-108.929 323.676 127.595)"
-              fill="#2D3081"
-            />
-            <rect
-              id="Rectangle 3433_5"
-              x="339.562"
-              y="122.148"
-              width="57.861"
-              height="11.1958"
-              transform="rotate(-108.929 339.562 122.148)"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3434_5"
-              x="357.39"
-              y="90.3157"
-              width="43.9834"
-              height="9.20516"
-              transform="rotate(161.071 357.39 90.3157)"
-              fill="white"
-            />
-            <path
-              id="Vector 494_5"
-              d="M328.215 126.039L323.676 127.595L321.543 121.375L341.595 60.2813L346.512 58.5951L348.431 64.1927L328.215 126.039Z"
-              fill="white"
-            />
-            <path
-              id="Vector 495_5"
-              d="M309.446 71.3063L304.907 72.8628L307.04 79.0823L360.365 115.013L365.282 113.327L363.362 107.729L309.446 71.3063Z"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3435_5"
-              x="341.83"
-              y="121.369"
-              width="57.861"
-              height="6.39759"
-              transform="rotate(-108.929 341.83 121.369)"
-              fill="#E34554"
-            />
-            <rect
-              id="Rectangle 3436_5"
-              x="356.75"
-              y="88.4491"
-              width="43.9834"
-              height="5.26009"
-              transform="rotate(161.071 356.75 88.4491)"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 496_5"
-              d="M332.523 101.623L323.676 127.595L326.702 126.557L333.803 105.355L332.523 101.623Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 498_5"
-              d="M342.356 98.2502L365.281 113.327L362.255 114.365L343.636 101.982L342.356 98.2502Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 497_5"
-              d="M327.831 87.9396L304.907 72.8628L307.933 71.8251L326.551 84.2079L327.831 87.9396Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 499_5"
-              d="M337.665 84.5684L346.512 58.5962L343.486 59.6338L336.385 80.8367L337.665 84.5684Z"
-              fill="#E34554"
-            />
-          </g>
-          <path
-            id="label-theme-2_8"
-            d="M1.1051 51C51.003 82.5355 192.952 126.685 361.567 51"
-            stroke="#6E3907"
-            stroke-width="3"
-            stroke-linecap="round"
-          />
-        </g>
-        <g id="label-theme-2_9" filter="url(#filter1_d)">
-          <g id="label-theme-2_10">
-            <rect
-              id="Rectangle 3432_6"
-              x="876"
-              y="115.735"
-              width="57.861"
-              height="43.9834"
-              transform="rotate(-68.7469 876 115.735)"
-              fill="#2D3081"
-            />
-            <rect
-              id="Rectangle 3433_6"
-              x="891.651"
-              y="121.822"
-              width="57.861"
-              height="11.1958"
-              transform="rotate(-68.7469 891.651 121.822)"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3434_6"
-              x="925.812"
-              y="109.005"
-              width="43.9834"
-              height="9.20516"
-              transform="rotate(-158.747 925.812 109.005)"
-              fill="white"
-            />
-            <path
-              id="Vector 494_6"
-              d="M880.472 117.474L876 115.735L878.383 109.607L933.121 75.8682L937.966 77.7524L935.821 83.2676L880.472 117.474Z"
-              fill="white"
-            />
-            <path
-              id="Vector 495_6"
-              d="M901.447 63.5485L896.975 61.8092L894.592 67.9372L912.149 129.794L916.993 131.678L919.138 126.163L901.447 63.5485Z"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3435_6"
-              x="893.887"
-              y="122.691"
-              width="57.861"
-              height="6.39759"
-              transform="rotate(-68.7469 893.887 122.691)"
-              fill="#E34554"
-            />
-            <rect
-              id="Rectangle 3436_6"
-              x="926.526"
-              y="107.166"
-              width="43.9834"
-              height="5.26009"
-              transform="rotate(-158.747 926.526 107.166)"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 496_6"
-              d="M899.517 101.6L876 115.735L878.981 116.894L898.087 105.277L899.517 101.6Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 498_6"
-              d="M909.205 105.368L916.991 131.678L914.01 130.518L907.775 109.045L909.205 105.368Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 497_6"
-              d="M904.762 88.1189L896.975 61.8092L899.957 62.9688L906.192 84.4422L904.762 88.1189Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 499_6"
-              d="M914.449 91.888L937.966 77.7533L934.984 76.5938L915.879 88.2112L914.449 91.888Z"
-              fill="#E34554"
-            />
-          </g>
-          <g id="label-theme-2_11">
-            <rect
-              id="Rectangle 3432_7"
-              x="953.055"
-              y="140.817"
-              width="57.861"
-              height="43.9834"
-              transform="rotate(-79.5736 953.055 140.817)"
-              fill="#2D3081"
-            />
-            <rect
-              id="Rectangle 3433_7"
-              x="969.572"
-              y="143.857"
-              width="57.861"
-              height="11.1958"
-              transform="rotate(-79.5736 969.572 143.857)"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3434_7"
-              x="1000.72"
-              y="124.851"
-              width="43.9834"
-              height="9.20516"
-              transform="rotate(-169.574 1000.72 124.851)"
-              fill="white"
-            />
-            <path
-              id="Vector 494_7"
-              d="M957.774 141.686L953.055 140.817L954.245 134.351L1001.67 90.9309L1006.78 91.8716L1005.71 97.6915L957.774 141.686Z"
-              fill="white"
-            />
-            <path
-              id="Vector 495_7"
-              d="M968.247 84.7799L963.528 83.9116L962.338 90.3781L991.202 147.836L996.314 148.777L997.385 142.957L968.247 84.7799Z"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3435_7"
-              x="971.93"
-              y="144.29"
-              width="57.861"
-              height="6.39759"
-              transform="rotate(-79.5736 971.93 144.29)"
-              fill="#E34554"
-            />
-            <rect
-              id="Rectangle 3436_7"
-              x="1001.07"
-              y="122.91"
-              width="43.9834"
-              height="5.26009"
-              transform="rotate(-169.574 1001.07 122.91)"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 496_7"
-              d="M973.499 122.517L953.055 140.817L956.201 141.396L972.785 126.397L973.499 122.517Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 498_7"
-              d="M983.723 124.398L996.313 148.777L993.167 148.198L983.009 128.278L983.723 124.398Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 497_7"
-              d="M976.118 108.29L963.528 83.9116L966.674 84.4905L976.832 104.41L976.118 108.29Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 499_7"
-              d="M986.341 110.173L1006.78 91.8725L1003.64 91.2936L987.055 106.293L986.341 110.173Z"
-              fill="#E34554"
-            />
-          </g>
-          <g id="label-theme-2_12">
-            <rect
-              id="Rectangle 3432_8"
-              x="1032.02"
-              y="151"
-              width="57.861"
-              height="43.9834"
-              transform="rotate(-90.4787 1032.02 151)"
-              fill="#2D3081"
-            />
-            <rect
-              id="Rectangle 3433_8"
-              x="1048.81"
-              y="150.86"
-              width="57.861"
-              height="11.1958"
-              transform="rotate(-90.4787 1048.81 150.86)"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3434_8"
-              x="1075.8"
-              y="126.306"
-              width="43.9834"
-              height="9.20516"
-              transform="rotate(179.521 1075.8 126.306)"
-              fill="white"
-            />
-            <path
-              id="Vector 494_8"
-              d="M1036.82 150.96L1032.02 151L1031.97 144.425L1070.32 92.8169L1075.52 92.7735L1075.57 98.6909L1036.82 150.96Z"
-              fill="white"
-            />
-            <path
-              id="Vector 495_8"
-              d="M1036.34 93.1009L1031.54 93.141L1031.59 99.7159L1070.81 150.676L1076 150.633L1075.95 144.715L1036.34 93.1009Z"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3435_8"
-              x="1051.21"
-              y="150.839"
-              width="57.861"
-              height="6.39759"
-              transform="rotate(-90.4787 1051.21 150.839)"
-              fill="#E34554"
-            />
-            <rect
-              id="Rectangle 3436_8"
-              x="1075.78"
-              y="124.332"
-              width="43.9834"
-              height="5.26009"
-              transform="rotate(179.521 1075.78 124.332)"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 496_8"
-              d="M1048.63 129.163L1032.02 151L1035.22 150.973L1048.67 133.107L1048.63 129.163Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 498_8"
-              d="M1059.03 129.075L1076 150.632L1072.8 150.658L1059.06 133.02L1059.03 129.075Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 497_8"
-              d="M1048.51 114.698L1031.54 93.141L1034.74 93.1143L1048.48 110.753L1048.51 114.698Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 499_8"
-              d="M1058.91 114.612L1075.52 92.7745L1072.32 92.8012L1058.87 110.667L1058.91 114.612Z"
-              fill="#E34554"
-            />
-          </g>
-          <g id="label-theme-2_13">
-            <rect
-              id="Rectangle 3432_9"
-              x="1113.33"
-              y="147.027"
-              width="57.861"
-              height="43.9834"
-              transform="rotate(-99.5905 1113.33 147.027)"
-              fill="#2D3081"
-            />
-            <rect
-              id="Rectangle 3433_9"
-              x="1129.89"
-              y="144.229"
-              width="57.861"
-              height="11.1958"
-              transform="rotate(-99.5905 1129.89 144.229)"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3434_9"
-              x="1152.65"
-              y="115.711"
-              width="43.9834"
-              height="9.20516"
-              transform="rotate(170.409 1152.65 115.711)"
-              fill="white"
-            />
-            <path
-              id="Vector 494_9"
-              d="M1118.06 146.228L1113.33 147.027L1112.23 140.544L1141.93 83.5129L1147.06 82.6468L1148.04 88.4817L1118.06 146.228Z"
-              fill="white"
-            />
-            <path
-              id="Vector 495_9"
-              d="M1108.42 89.1747L1103.69 89.9741L1104.79 96.4573L1151.57 140.564L1156.7 139.698L1155.71 133.864L1108.42 89.1747Z"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3435_9"
-              x="1132.25"
-              y="143.829"
-              width="57.861"
-              height="6.39759"
-              transform="rotate(-99.5905 1132.25 143.829)"
-              fill="#E34554"
-            />
-            <rect
-              id="Rectangle 3436_9"
-              x="1152.32"
-              y="113.765"
-              width="43.9834"
-              height="5.26009"
-              transform="rotate(170.409 1152.32 113.765)"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 496_9"
-              d="M1126.27 122.834L1113.33 147.027L1116.48 146.494L1126.93 126.724L1126.27 122.834Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 498_9"
-              d="M1136.52 121.102L1156.7 139.698L1153.54 140.231L1137.18 124.992L1136.52 121.102Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 497_9"
-              d="M1123.87 108.571L1103.69 89.9741L1106.85 89.4411L1123.21 104.681L1123.87 108.571Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 499_9"
-              d="M1134.11 106.84L1147.06 82.6473L1143.9 83.1802L1133.46 102.95L1134.11 106.84Z"
-              fill="#E34554"
-            />
-          </g>
-          <g id="label-theme-2_14">
-            <rect
-              id="Rectangle 3432_10"
-              x="1199.68"
-              y="127.595"
-              width="57.861"
-              height="43.9834"
-              transform="rotate(-108.929 1199.68 127.595)"
-              fill="#2D3081"
-            />
-            <rect
-              id="Rectangle 3433_10"
-              x="1215.56"
-              y="122.148"
-              width="57.861"
-              height="11.1958"
-              transform="rotate(-108.929 1215.56 122.148)"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3434_10"
-              x="1233.39"
-              y="90.3157"
-              width="43.9834"
-              height="9.20516"
-              transform="rotate(161.071 1233.39 90.3157)"
-              fill="white"
-            />
-            <path
-              id="Vector 494_10"
-              d="M1204.21 126.039L1199.68 127.595L1197.54 121.375L1217.59 60.2813L1222.51 58.5951L1224.43 64.1927L1204.21 126.039Z"
-              fill="white"
-            />
-            <path
-              id="Vector 495_10"
-              d="M1185.45 71.3063L1180.91 72.8628L1183.04 79.0823L1236.36 115.013L1241.28 113.327L1239.36 107.729L1185.45 71.3063Z"
-              fill="white"
-            />
-            <rect
-              id="Rectangle 3435_10"
-              x="1217.83"
-              y="121.369"
-              width="57.861"
-              height="6.39759"
-              transform="rotate(-108.929 1217.83 121.369)"
-              fill="#E34554"
-            />
-            <rect
-              id="Rectangle 3436_10"
-              x="1232.75"
-              y="88.4491"
-              width="43.9834"
-              height="5.26009"
-              transform="rotate(161.071 1232.75 88.4491)"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 496_10"
-              d="M1208.52 101.623L1199.68 127.595L1202.7 126.557L1209.8 105.355L1208.52 101.623Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 498_10"
-              d="M1218.36 98.2502L1241.28 113.327L1238.25 114.365L1219.64 101.982L1218.36 98.2502Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 497_10"
-              d="M1203.83 87.9396L1180.91 72.8628L1183.93 71.8251L1202.55 84.2079L1203.83 87.9396Z"
-              fill="#E34554"
-            />
-            <path
-              id="Vector 499_10"
-              d="M1213.66 84.5684L1222.51 58.5962L1219.49 59.6338L1212.39 80.8367L1213.66 84.5684Z"
-              fill="#E34554"
-            />
-          </g>
-          <path
-            id="label-theme-2_15"
-            d="M877.105 51C927.003 82.5355 1068.95 126.685 1237.57 51"
-            stroke="#6E3907"
-            stroke-width="3"
-            stroke-linecap="round"
-          />
-        </g>
-      </g>
-      <g id="label-theme-1" v-if="themeSync == 1">
+
+      <g id="label-theme-1">
         <g id="label-theme-1_2" filter="url(#filter2_d)">
           <g id="label-theme-1_3">
             <rect
@@ -1202,19 +394,9 @@
           />
         </g>
       </g>
-      <g
-        id="clamp"
-        :class="isSendAnswer ? 'clamp-start' : ''"
-        filter="url(#filter4_d)"
-      >
+      <g id="clamp" :class="isSendAnswer ? 'clamp-start' : ''" filter="url(#filter4_d)">
         <g id="Group 1446">
-          <circle
-            id="Ellipse 1055"
-            cx="620.92"
-            cy="109.069"
-            r="17.6733"
-            fill="#5F6D93"
-          />
+          <circle id="Ellipse 1055" cx="620.92" cy="109.069" r="17.6733" fill="#5F6D93" />
           <circle
             id="Ellipse 1056"
             cx="655.005"
@@ -1261,22 +443,9 @@
             transform="rotate(-134.878 634.685 165.58)"
             fill="#5F6D93"
           />
-          <circle
-            id="Ellipse 1058"
-            cx="620.5"
-            cy="108.5"
-            r="10.5"
-            fill="#7281A9"
-          />
+          <circle id="Ellipse 1058" cx="620.5" cy="108.5" r="10.5" fill="#7281A9" />
         </g>
-        <rect
-          id="Rectangle 3499"
-          x="617"
-          y="-70"
-          width="8"
-          height="166"
-          fill="#5F6D93"
-        />
+        <rect id="Rectangle 3499" x="617" y="-70" width="8" height="166" fill="#5F6D93" />
       </g>
       <g
         id="doll-fake"
@@ -4069,22 +3238,8 @@
         </g>
       </g>
       <g id="Lever" filter="url(#filter20_d)">
-        <ellipse
-          id="Ellipse 1166"
-          cx="521"
-          cy="335.5"
-          rx="25"
-          ry="9.5"
-          fill="black"
-        />
-        <rect
-          id="Rectangle 3524"
-          x="518"
-          y="306"
-          width="7"
-          height="32"
-          fill="#ADA8A8"
-        />
+        <ellipse id="Ellipse 1166" cx="521" cy="335.5" rx="25" ry="9.5" fill="black" />
+        <rect id="Rectangle 3524" x="518" y="306" width="7" height="32" fill="#ADA8A8" />
         <circle
           id="Ellipse 1167"
           cx="521.587"
@@ -4125,11 +3280,7 @@
           fill="white"
         />
       </g>
-      <g
-        id="correct"
-        v-if="isSendAnswer && isCorrectAnswer"
-        class="show-correct"
-      >
+      <g id="correct" v-if="isSendAnswer && isCorrectAnswer" class="show-correct">
         <rect
           id="backdrop"
           y="51"
@@ -4377,11 +3528,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4410,11 +3557,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4443,11 +3586,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4476,11 +3615,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4509,11 +3644,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4542,11 +3673,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4575,11 +3702,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4608,11 +3731,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4641,11 +3760,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4674,11 +3789,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4707,11 +3818,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4740,11 +3847,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4773,11 +3876,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4806,11 +3905,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4839,11 +3934,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4872,11 +3963,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4905,11 +3992,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4938,11 +4021,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -4971,11 +4050,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -5004,11 +4079,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -5037,11 +4108,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -5070,11 +4137,7 @@
           type="matrix"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
         />
-        <feBlend
-          mode="normal"
-          in2="BackgroundImageFix"
-          result="effect1_dropShadow"
-        />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
         <feBlend
           mode="normal"
           in="SourceGraphic"
@@ -5202,19 +4265,15 @@
 <script>
 export default {
   props: {
-    themeSync: {
-      type: Number,
-      default: 0
-    },
     isSendAnswer: {
       type: Boolean,
-      default: () => false
+      default: () => false,
     },
     isCorrectAnswer: {
       type: Boolean,
-      default: () => false
-    }
-  }
+      default: () => false,
+    },
+  },
 };
 </script>
 

@@ -6,7 +6,6 @@
           <header-bar :practiceData="practiceData"></header-bar>
         </div>
         <theme-animation
-          :themeSync="themeSync"
           :isSendAnswer="isSendAnswer"
           :isCorrectAnswer="isCorrectAnswer"
         ></theme-animation>
@@ -56,13 +55,11 @@
 
       <div class="col-12 q-my-md" v-if="activeBy == 'description'" align="center">
         <div class="box-description">
-          <div :class="setTheme[themeSync - 1].description.bgColor">
+          <div class="bg-header-description">
             <q-img
               class="no-padding"
               width="100%"
-              :src="
-                require(`../../../public/images/logo-description-theme-${themeSync}.png`)
-              "
+              src="../../../public/images/logo-description-theme-1.png"
             ></q-img>
           </div>
           <div class="f16 q-px-md">
@@ -131,9 +128,7 @@
     <div class="col-4 box-extravocab">
       <div
         class="box-header-extravocab relative-position"
-        :style="`background-color:${setColorTheme[themeSync - 1].bg};color:${
-          setColorTheme[themeSync - 1].color
-        }`"
+        style="background-color: #014270; color: #ffffff"
         align="center"
       >
         <span class="absolute-center f16"> คำศัพท์เสริม </span>
@@ -157,7 +152,6 @@
 <script>
 import headerBar from "../header-time-progress";
 import themeAnimation from "./themeAnimation";
-
 import { ref } from "vue";
 export default {
   components: {
@@ -165,10 +159,6 @@ export default {
     themeAnimation,
   },
   props: {
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
     practiceData: {
       type: Object,
       default: () => {},

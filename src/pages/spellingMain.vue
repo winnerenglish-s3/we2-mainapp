@@ -1,6 +1,5 @@
 <template>
   <q-page class="bg-seplling relative-position">
-    <div id="background"></div>
     <div id="midground"></div>
     <div id="foreground"></div>
     <div>
@@ -8,7 +7,6 @@
         :isLoadPractice="isLoadPractice"
         :isHasInstruction="true"
         :isShowPause="true"
-        :themeSync="themeSync"
         :instructionData="instructionData"
       ></app-bar>
     </div>
@@ -73,12 +71,7 @@ export default {
     appBar,
     finishPractice,
   },
-  props: {
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
-  },
+  props: {},
 
   setup(props) {
     // Router and Route
@@ -141,7 +134,7 @@ export default {
 
     const selectedLetter = ref([]);
 
-    const boggleNumber = ref(3);
+    const boggleNumber = ref(4);
 
     let counter = 0;
 
@@ -182,6 +175,14 @@ export default {
           ["", "", "", "", ""],
           ["", "", "", "", ""],
           ["", "", "", "", ""],
+        ];
+      } else if (boggleNumber.value == 4) {
+        boggle.value = [
+          ["", "", "", ""],
+          ["", "", "", ""],
+          ["", "", "", ""],
+          ["", "", "", ""],
+          ["", "", "", ""],
         ];
       } else {
         boggle.value = [
@@ -350,6 +351,171 @@ export default {
                       [4, 1],
                       [3, 2],
                       [4, 3],
+                    ];
+                  }
+                }
+
+                let shuffleArr = shuffleArray(availablePosition);
+                let [row, col] = shuffleArr[0];
+                if (boggle.value[row][col] == "") {
+                  boggle.value[row][col] = {
+                    letter: vocabularyList[practiceData.currentQuestion].vocab[
+                      counter
+                    ].toUpperCase(),
+                  };
+                  counter++;
+                  rowBefore = row;
+                  colBefore = col;
+                  shuffleLetters(counter);
+                  countError = 0;
+                } else {
+                  countError++;
+                  if (countError < 100) {
+                    findNearestColumn();
+                  } else {
+                    countError = 0;
+                    resetBoggle();
+                  }
+                }
+              };
+
+              const try4 = () => {
+                let availablePosition;
+                if (rowBefore == 0) {
+                  if (colBefore == 0) {
+                    availablePosition = [
+                      [0, 1],
+                      [1, 0],
+                    ];
+                  } else if (colBefore == 1) {
+                    availablePosition = [
+                      [0, 0],
+                      [0, 2],
+                      [1, 1],
+                    ];
+                  } else if (colBefore == 2) {
+                    availablePosition = [
+                      [0, 1],
+                      [0, 3],
+                      [1, 2],
+                    ];
+                  } else if (colBefore == 3) {
+                    availablePosition = [
+                      [0, 2],
+                      [0, 4],
+                      [1, 3],
+                    ];
+                  }
+                } else if (rowBefore == 1) {
+                  if (colBefore == 0) {
+                    availablePosition = [
+                      [1, 1],
+                      [2, 0],
+                      [0, 0],
+                    ];
+                  } else if (colBefore == 1) {
+                    availablePosition = [
+                      [1, 0],
+                      [1, 2],
+                      [0, 1],
+                      [2, 1],
+                    ];
+                  } else if (colBefore == 2) {
+                    availablePosition = [
+                      [1, 1],
+                      [0, 2],
+                      [1, 3],
+                      [2, 2],
+                    ];
+                  } else if (colBefore == 3) {
+                    availablePosition = [
+                      [1, 2],
+                      [0, 3],
+                      [1, 4],
+                      [2, 3],
+                    ];
+                  }
+                } else if (rowBefore == 2) {
+                  if (colBefore == 0) {
+                    availablePosition = [
+                      [1, 0],
+                      [2, 1],
+                      [3, 0],
+                    ];
+                  } else if (colBefore == 1) {
+                    availablePosition = [
+                      [2, 0],
+                      [1, 1],
+                      [2, 2],
+                      [3, 1],
+                    ];
+                  } else if (colBefore == 2) {
+                    availablePosition = [
+                      [2, 1],
+                      [1, 2],
+                      [2, 3],
+                      [3, 2],
+                    ];
+                  } else if (colBefore == 3) {
+                    availablePosition = [
+                      [2, 2],
+                      [1, 3],
+                      [2, 4],
+                      [3, 3],
+                    ];
+                  }
+                } else if (rowBefore == 3) {
+                  if (colBefore == 0) {
+                    availablePosition = [
+                      [2, 0],
+                      [3, 1],
+                      [4, 0],
+                    ];
+                  } else if (colBefore == 1) {
+                    availablePosition = [
+                      [3, 0],
+                      [2, 1],
+                      [3, 2],
+                      [4, 1],
+                    ];
+                  } else if (colBefore == 2) {
+                    availablePosition = [
+                      [3, 1],
+                      [2, 2],
+                      [3, 3],
+                      [4, 2],
+                    ];
+                  } else if (colBefore == 3) {
+                    availablePosition = [
+                      [3, 2],
+                      [2, 3],
+                      [3, 4],
+                      [4, 3],
+                    ];
+                  }
+                } else if (rowBefore == 4) {
+                  if (colBefore == 0) {
+                    availablePosition = [
+                      [3, 0],
+                      [4, 1],
+                    ];
+                  } else if (colBefore == 1) {
+                    availablePosition = [
+                      [4, 0],
+                      [3, 1],
+                      [4, 2],
+                    ];
+                  } else if (colBefore == 2) {
+                    availablePosition = [
+                      [4, 1],
+                      [3, 2],
+                      [4, 3],
+                    ];
+                  } else if (colBefore == 3) {
+                    availablePosition = [
+                      [4, 2],
+                      [3, 3],
+                      [4, 4],
                     ];
                   }
                 }
@@ -570,9 +736,12 @@ export default {
                   }
                 }
               };
+
               try {
                 if (boggleNumber.value == 3) {
                   try3();
+                } else if (boggleNumber.value == 4) {
+                  try4();
                 } else {
                   try5();
                 }
@@ -787,21 +956,6 @@ export default {
   }
 }
 
-#background {
-  // background: black url(../../public/images/spellingbee/background-star.png) repeat 5% 5%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-
-  -webkit-animation-name: STAR-MOVE;
-  -webkit-animation-duration: 1000s;
-  -webkit-animation-timing-function: linear;
-  -webkit-animation-iteration-count: infinite;
-}
-
 #midground {
   background: url(../../public/images/spellingbee/midground-star.png) repeat 0% 0%;
   position: absolute;
@@ -810,6 +964,11 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 1;
+
+  animation-name: STAR-MOVE;
+  animation-duration: 500s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 
   -webkit-animation-name: STAR-MOVE;
   -webkit-animation-duration: 500s;
@@ -825,6 +984,11 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 1;
+
+  animation-name: STAR-MOVE;
+  animation-duration: 300s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 
   -webkit-animation-name: STAR-MOVE;
   -webkit-animation-duration: 300s;

@@ -44,7 +44,7 @@
     </div>
     <div v-if="isDescription" align="center" class="q-pa-md">
       <div class="box-description shadow-5">
-        <div class="q-pa-md" :style="themeColor" align="left"></div>
+        <div class="q-pa-md" style="background-color: #9f220c" align="left"></div>
         <div class="f14 q-px-sm">
           <div class="q-pa-sm row" align="left">
             <div class="col-12 row q-py-xs" v-if="isSendAnswer && !isCorrectAnswer">
@@ -100,7 +100,6 @@
 <script>
 import headerBar from "../header-time-progress";
 import themeAnimation from "./theme-animation";
-import getColorTheme from "../../../public/themeColor.json";
 import { ref, computed } from "vue";
 export default {
   components: {
@@ -108,10 +107,6 @@ export default {
     themeAnimation,
   },
   props: {
-    themeSync: {
-      type: Number,
-      default: 0,
-    },
     practiceData: {
       type: Object,
       default: () => {},
@@ -119,12 +114,6 @@ export default {
   },
   emits: ["callback-finishpractice"],
   setup(props, { emit }) {
-    // Initial Color Theme
-    const colorTheme = ref(getColorTheme);
-    const themeColor = computed(() => {
-      return `background-color:${colorTheme.value[props.themeSync - 1].hex}`;
-    });
-
     const currentAnswer = ref(null);
     const isSendAnswer = ref(false);
     const isCorrectAnswer = ref(false);
@@ -159,9 +148,6 @@ export default {
     };
 
     return {
-      // Theme Color
-      themeColor,
-
       // Current Select Answer
       currentAnswer,
 

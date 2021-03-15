@@ -2,7 +2,6 @@
   <q-page class="bg-matching">
     <div>
       <app-bar
-        :themeSync="themeSync"
         :instructionData="instructionData"
         :isShowHome="false"
         :isShowPause="isSynchronize ? false : true"
@@ -15,7 +14,6 @@
     </div>
 
     <matching-pc
-      :themeSync="themeSync"
       :practiceData="practiceData"
       @callback-sendanswer=""
       @callback-nextquestion="funcSelectedPractice()"
@@ -24,7 +22,6 @@
       v-if="$q.platform.is.desktop && isLoadPractice"
     ></matching-pc>
     <matching-mobile
-      :themeSync="themeSync"
       :practiceData="practiceData"
       @callback-sendanswer=""
       @callback-nextquestion="funcSelectedPractice()"
@@ -122,10 +119,6 @@ import axios from "axios";
 import { auth, db } from "src/router";
 export default {
   props: {
-    themeSync: {
-      type: Number,
-      require: true,
-    },
     isShowDialogHelp: {
       type: Boolean,
       default: () => false,

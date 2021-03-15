@@ -235,7 +235,7 @@
 <script>
 import { ref } from "vue";
 export default {
-  props: ["vocabDataList", "isSynchronize", "themeSync"],
+  props: ["vocabDataList", "isSynchronize"],
   emits: ["playSound", "closeDialog"],
 
   setup(props) {
