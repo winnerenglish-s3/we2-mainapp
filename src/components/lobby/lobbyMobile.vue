@@ -4,7 +4,7 @@
     style="height: calc(100vh - 60px)"
     :class="mode ? 'bg-lobby-day ' : 'bg-lobby-night'"
   >
-    <div class="col-12 self-start row z-top">
+    <div class="col-12 self-start row" style="z-index: 2">
       <div class="col-7 self-start row q-px-xs q-pt-sm">
         <q-img
           fit="contain"
@@ -165,7 +165,7 @@
       </div>
     </div>
 
-    <!-- <div class="col-12 self-end q-pb-md row justify-center z-top ">
+    <!-- <div class="col-12 self-end q-pb-md row justify-center   style="z-index:2"">
       <div class="self-end" align="center">
         <q-img
           style="width: max(calc(45vw * 9 / 16), 130px)"
