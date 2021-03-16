@@ -263,11 +263,12 @@
       </q-card>
     </q-dialog>
 
+    <!-- dialog Setting -->
     <q-dialog maximized v-model="isShowSetting" no-esc-dismiss data-cy="dialog-setting">
       <q-card class="transparent shadow-0">
         <q-card-section class="fit">
-          <div class="absolute-center">
-            <div class="box-container-setting relative-position">
+          <div class="absolute-center box-container-setting">
+            <div class="relative-position">
               <div class="icon-dialog q-px-md q-pt-md q-mb-md">
                 <q-img
                   class="q-mb-sm"
@@ -384,6 +385,122 @@
         </q-card-section>
       </q-card>
     </q-dialog>
+
+    <!-- dialog Ranking -->
+    <q-dialog maximized v-model="isShowRanking" no-esc-dismiss data-cy="dialog-setting">
+      <q-card class="transparent shadow-0">
+        <q-card-section class="fit">
+          <div class="absolute-center box-container-ranking">
+            <div class="relative-position">
+              <div class="icon-dialog q-px-md q-pt-sm q-mb-md">
+                <q-img
+                  class="q-mb-md"
+                  width="70px"
+                  src="../../public/images/lobby/icon-ranking.png"
+                ></q-img>
+              </div>
+              <div class="q-pt-lg q-pb-lg q-px-sm" align="center">
+                <div class="row relative-position" style="max-width: 450px">
+                  <div class="col-md-4 self-end" align="center">
+                    <q-img
+                      fit="contain"
+                      src="../../public/images/lobby/ranking-two.png"
+                      width="100px"
+                    />
+                    <div class="">
+                      <span>Name Surname</span>
+                      <br />
+                      <span>160</span>
+                    </div>
+                  </div>
+                  <div class="col-md-4" style="padding-bottom: 50px" align="center">
+                    <q-img
+                      fit="contain"
+                      src="../../public/images/lobby/ranking-one.png"
+                      width="100px"
+                    />
+                    <div class="">
+                      <span>Name Surname</span>
+                      <br />
+                      <span>170</span>
+                    </div>
+                  </div>
+                  <div class="col-md-4 self-end" align="center">
+                    <q-img
+                      fit="contain"
+                      src="../../public/images/lobby/ranking-three.png"
+                      width="100px"
+                    />
+                    <div class="">
+                      <span>Name Surname</span>
+                      <br />
+                      <span>155</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row q-mt-sm box-ranking-list" style="width: 90%">
+                  <div class="col-6 q-px-md q-py-xs" v-for="i in 10">
+                    <div
+                      class="fit q-pa-xs row"
+                      style="border-radius: 25px; background-color: #f1d280"
+                      align="left"
+                    >
+                      <div
+                        class="bg-white relative-position"
+                        style="width: 40px; height: 40px; border-radius: 50%"
+                      >
+                        <span class="absolute-center">
+                          {{ i + 3 }}
+                        </span>
+                      </div>
+                      <div class="col self-center q-px-md">Name Surname</div>
+                      <div class="col-2 self-center" align="center" style="width: 50px">
+                        999
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row q-mt-md justify-center">
+                  <div
+                    class="col-5 q-pa-xs row"
+                    style="border-radius: 25px; background-color: #e28701"
+                    align="left"
+                  >
+                    <div
+                      class="bg-white relative-position"
+                      style="width: 40px; height: 40px; border-radius: 50%"
+                    >
+                      <span class="absolute-center"> 17 </span>
+                    </div>
+                    <div class="col text-white self-center q-px-md">Name Surname</div>
+                    <div
+                      class="col-2 text-white self-center"
+                      align="center"
+                      style="width: 50px"
+                    >
+                      999
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div align="center" class="q-pb-lg">
+                <q-btn
+                  style="width: 200px; border-radius: 7px"
+                  class="bg-amber"
+                  push
+                  v-close-popup
+                  @click="tabNotification = 'notificationList'"
+                  >ปิด</q-btn
+                >
+              </div>
+            </div>
+          </div>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -468,11 +585,15 @@ export default {
     const isSoundSystem = ref(true);
     const isSoundBackground = ref(true);
 
+    const isShowRanking = ref(false);
+
     const callbackFunction = (type) => {
       if (type == "notification") {
         isShowNotification.value = true;
       } else if (type == "setting") {
         isShowSetting.value = true;
+      } else if (type == "ranking") {
+        isShowRanking.value = true;
       }
     };
 
@@ -514,6 +635,7 @@ export default {
       tabNotification,
       isShowNotification,
       isShowSetting,
+      isShowRanking,
       isSoundSystem,
       isSoundBackground,
       isActiveNotification,
@@ -574,13 +696,15 @@ export default {
   width: 320px;
 }
 
-.box-container-setting {
+.box-container-setting,
+.box-container-ranking {
   max-width: 750px;
-  min-width: 340px;
+  width: 95%;
 }
 
 .box-container-notification,
-.box-container-setting {
+.box-container-setting,
+.box-container-ranking {
   background-color: #f6f3d3;
   border-radius: 10px;
 }
@@ -592,8 +716,6 @@ export default {
   transform: translate(-50%, 0%);
   background-color: #f6f3d3;
   border-radius: 50%;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
 }
 
 .box-notification-list,
@@ -601,29 +723,38 @@ export default {
   height: 300px;
 }
 
-.box-notification-list {
+.box-ranking-list {
+  height: 200px;
+}
+
+.box-notification-list,
+.box-ranking-list {
   overflow-y: auto;
 }
 
 /* width */
-.box-notification-list::-webkit-scrollbar {
+.box-notification-list::-webkit-scrollbar,
+.box-ranking-list::-webkit-scrollbar {
   width: 4px;
 }
 
 /* Track */
-.box-notification-list::-webkit-scrollbar-track {
+.box-notification-list::-webkit-scrollbar-track,
+.box-ranking-list::-webkit-scrollbar-track {
   background: #fff;
   border-radius: 20px;
 }
 
 /* Handle */
-.box-notification-list::-webkit-scrollbar-thumb {
+.box-notification-list::-webkit-scrollbar-thumb,
+.box-ranking-list::-webkit-scrollbar-thumb {
   background: #f7a006;
   border-radius: 20px;
 }
 
 /* Handle on hover */
-.box-notification-list::-webkit-scrollbar-thumb:hover {
+.box-notification-list::-webkit-scrollbar-thumb:hover,
+.box-ranking-list::-webkit-scrollbar-thumb:hover {
   background: #e69305;
 }
 
